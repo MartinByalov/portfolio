@@ -2190,10 +2190,36 @@ body.portfolio-mode .main-portfolio-content {
   gap: 10px;
 }
 .viz-nodes.split {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: stretch;
+  gap: 20px;
+  width: 100%;
+  margin: 10px auto;
+}
+.viz-nodes.split .viz-node {
+  flex: 1 1 200px;
+  max-width: 250px;
+  width: auto;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff;
+  padding: 14px 12px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.viz-nodes.split .viz-node-img {
+  width: 100%;
+}
+.viz-nodes.split .viz-node-img img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 .viz-node {
   width: 160px;

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Геометрична дъска</title>
+
+    <link
+        rel="stylesheet"
+        href="geometry.css"
+    >
+</head>
+
+<body>
+
+<main class="geometry-page">
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="geometry-header">
+
+        <div>
+            <h1>Геометрична дъска</h1>
+
+            <p>
+                Чертаене и построения по геометрия —
+                като на лист или на дъската.
+            </p>
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         TOOLBAR
+         ===================================================== -->
+
+    <section class="geometry-toolbar">
+
+        <div class="toolbar-group">
+
+            <span class="toolbar-label">
+                Чертане
+            </span>
+
+
+            <button
+                class="tool-button active"
+                data-tool="select"
+                title="Избери и премести"
+            >
+                <span class="tool-icon">↖</span>
+                <span>Избери</span>
+            </button>
+
+
+            <button
+                class="tool-button"
+                data-tool="point"
+                title="Точка"
+            >
+                <span class="tool-icon">•</span>
+                <span>Точка</span>
+            </button>
+
+
+            <button
+                class="tool-button"
+                data-tool="segment"
+                title="Отсечка"
+            >
+                <span class="tool-icon">╱</span>
+                <span>Отсечка</span>
+            </button>
+
+
+            <button
+                class="tool-button"
+                data-tool="line"
+                title="Права"
+            >
+                <span class="tool-icon">↔</span>
+                <span>Права</span>
+            </button>
+
+
+            <button
+                class="tool-button"
+                data-tool="ray"
+                title="Лъч"
+            >
+                <span class="tool-icon">→</span>
+                <span>Лъч</span>
+            </button>
+
+
+            <button
+                class="tool-button"
+                data-tool="circle"
+                title="Окръжност"
+            >
+                <span class="tool-icon">○</span>
+                <span>Окръжност</span>
+            </button>
+
+
+            <button
+                class="tool-button"
+                data-tool="arc"
+                title="Дъга"
+            >
+                <span class="tool-icon">◡</span>
+                <span>Дъга</span>
+            </button>
+
+
+            <button
+                class="tool-button"
+                data-tool="polygon"
+                title="Многоъгълник"
+            >
+                <span class="tool-icon">△</span>
+                <span>Многоъгълник</span>
+            </button>
+
+
+            <button
+                class="tool-button"
+                data-tool="pencil"
+                title="Молив"
+            >
+                <span class="tool-icon">✎</span>
+                <span>Молив</span>
+            </button>
+
+
+            <button
+                class="tool-button"
+                data-tool="eraser"
+                title="Гума"
+            >
+                <span class="tool-icon">⌫</span>
+                <span>Гума</span>
+            </button>
+
+        </div>
+
+
+        <div class="toolbar-divider"></div>
+
+
+        <div class="toolbar-group">
+
+            <span class="toolbar-label">
+                Изглед
+            </span>
+
+
+            <button
+                class="tool-button active"
+                id="gridButton"
+                title="Покажи/скрий мрежата"
+            >
+                <span class="tool-icon">▦</span>
+                <span>Мрежа</span>
+            </button>
+
+
+            <button
+                class="tool-button active"
+                id="labelsButton"
+                title="Покажи/скрий етикетите"
+            >
+                <span class="tool-icon">A</span>
+                <span>Етикети</span>
+            </button>
+
+        </div>
+
+
+        <div class="toolbar-divider"></div>
+
+
+        <div class="toolbar-group toolbar-actions">
+
+            <button
+                class="tool-button"
+                id="undoButton"
+                title="Отмени"
+            >
+                <span class="tool-icon">↶</span>
+                <span>Отмени</span>
+            </button>
+
+
+            <button
+                class="tool-button"
+                id="redoButton"
+                title="Повтори"
+            >
+                <span class="tool-icon">↷</span>
+                <span>Повтори</span>
+            </button>
+
+
+            <button
+                class="tool-button danger"
+                id="clearButton"
+                title="Изчисти дъската"
+            >
+                <span class="tool-icon">⌫</span>
+                <span>Изчисти</span>
+            </button>
+
+
+            <button
+                class="tool-button"
+                id="saveButton"
+                title="Запази като PNG"
+            >
+                <span class="tool-icon">↓</span>
+                <span>Запази</span>
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         BOARD
+         ===================================================== -->
+
+    <section class="board-wrapper">
+
+        <div
+            class="board"
+            id="board"
+        >
+
+            <svg
+                id="geometrySvg"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1400 800"
+                preserveAspectRatio="xMidYMid meet"
+            >
+
+                <!-- GRID -->
+
+                <defs>
+
+                    <pattern
+                        id="smallGrid"
+                        width="20"
+                        height="20"
+                        patternUnits="userSpaceOnUse"
+                    >
+
+                        <path
+                            d="M 20 0 L 0 0 0 20"
+                            fill="none"
+                            stroke="#ececf1"
+                            stroke-width="1"
+                        />
+
+                    </pattern>
+
+
+                    <pattern
+                        id="grid"
+                        width="100"
+                        height="100"
+                        patternUnits="userSpaceOnUse"
+                    >
+
+                        <rect
+                            width="100"
+                            height="100"
+                            fill="url(#smallGrid)"
+                        />
+
+                        <path
+                            d="M 100 0 L 0 0 0 100"
+                            fill="none"
+                            stroke="#dcdce5"
+                            stroke-width="1"
+                        />
+
+                    </pattern>
+
+                </defs>
+
+
+                <rect
+                    id="gridBackground"
+                    x="0"
+                    y="0"
+                    width="1400"
+                    height="800"
+                    fill="url(#grid)"
+                />
+
+
+                <!-- AXES -->
+
+                <line
+                    id="axisX"
+                    x1="0"
+                    y1="400"
+                    x2="1400"
+                    y2="400"
+                    stroke="#cfcfd8"
+                    stroke-width="1.5"
+                />
+
+
+                <line
+                    id="axisY"
+                    x1="700"
+                    y1="0"
+                    x2="700"
+                    y2="800"
+                    stroke="#cfcfd8"
+                    stroke-width="1.5"
+                />
+
+
+                <!-- OBJECTS -->
+
+                <g id="geometryObjects"></g>
+
+
+                <!-- POINTER -->
+
+                <g
+                    id="pointerLayer"
+                    pointer-events="none"
+                >
+
+                    <circle
+                        id="snapIndicator"
+                        cx="0"
+                        cy="0"
+                        r="7"
+                        fill="none"
+                        stroke="#f17a3e"
+                        stroke-width="2"
+                        opacity="0"
+                    />
+
+                </g>
+
+            </svg>
+
+
+            <!-- EMPTY STATE -->
+
+            <div
+                class="board-empty"
+                id="boardEmpty"
+            >
+
+                <div class="empty-icon">
+                    △
+                </div>
+
+                <strong>
+                    Започни да чертаеш
+                </strong>
+
+                <span>
+                    Избери инструмент отгоре.
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- STATUS BAR -->
+
+        <div class="board-status">
+
+            <div class="status-left">
+
+                <span id="currentToolText">
+                    Избери
+                </span>
+
+                <span class="status-separator">
+                    ·
+                </span>
+
+                <span id="cursorPosition">
+                    x: — &nbsp; y: —
+                </span>
+
+            </div>
+
+
+            <div class="status-right">
+
+                <span id="objectCount">
+                    0 обекта
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         HELP
+         ===================================================== -->
+
+    <section class="geometry-help">
+
+        <div class="help-item">
+            <strong>Избери</strong>
+            <span>
+                Кликни върху обект, за да го избереш и преместиш.
+            </span>
+        </div>
+
+
+        <div class="help-item">
+            <strong>Точка</strong>
+            <span>
+                Кликни върху дъската, за да поставиш точка.
+            </span>
+        </div>
+
+
+        <div class="help-item">
+            <strong>Отсечка</strong>
+            <span>
+                Кликни и издърпай или посочи начало и край.
+            </span>
+        </div>
+
+
+        <div class="help-item">
+            <strong>Окръжност</strong>
+            <span>
+                Кликни за център и издърпай до радиуса.
+            </span>
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="geometry.js"></script>
+<script type="module" src="/tools/embed.js"></script>
+
+</body>
+</html>

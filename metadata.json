@@ -1,0 +1,6 @@
+{
+  "name": "Учебна платформа",
+  "description": "Учебна платформа за уроци, курсове и интерактивни инструменти",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

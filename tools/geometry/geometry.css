@@ -1,0 +1,588 @@
+/* =========================================================
+   GEOMETRY BOARD
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: sans-serif;
+
+    background: #f4f4f9;
+    color: #1d1b31;
+}
+
+
+button,
+input {
+    font-family: inherit;
+}
+
+
+.geometry-page {
+    width: 100%;
+
+    max-width: 1500px;
+
+    margin: 0 auto;
+
+    padding: 30px 24px 50px;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.geometry-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 22px;
+}
+
+
+.geometry-header h1 {
+    margin: 0 0 7px;
+
+    font-size: 2rem;
+
+    color: #1d1b31;
+}
+
+
+.geometry-header p {
+    margin: 0;
+
+    color: #666;
+
+    font-size: 0.95rem;
+}
+
+
+/* =========================================================
+   TOOLBAR
+   ========================================================= */
+
+.geometry-toolbar {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 10px;
+
+    background: #fff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.05);
+
+    margin-bottom: 12px;
+
+    overflow-x: auto;
+}
+
+
+.toolbar-group {
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+    flex-shrink: 0;
+}
+
+
+.toolbar-label {
+    margin-right: 5px;
+
+    color: #999;
+
+    font-size: 0.72rem;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.05em;
+}
+
+
+.toolbar-divider {
+    width: 1px;
+    height: 34px;
+
+    background: #e5e7eb;
+
+    flex-shrink: 0;
+}
+
+
+.tool-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    min-height: 36px;
+
+    padding: 7px 10px;
+
+    border: 1px solid transparent;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: #555;
+
+    font-size: 0.82rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition:
+        background 0.15s,
+        color 0.15s,
+        border-color 0.15s;
+}
+
+
+.tool-button:hover {
+    background: #f3f4f6;
+
+    color: #1d1b31;
+}
+
+
+.tool-button.active {
+    background: #1d1b31;
+
+    color: #fff;
+
+    border-color: #1d1b31;
+}
+
+
+.tool-button.active:hover {
+    background: #2d2b41;
+
+    color: #fff;
+}
+
+
+.tool-button.danger:hover {
+    color: #d34e4e;
+
+    background: #fff2f2;
+}
+
+
+.tool-icon {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 17px;
+
+    font-size: 1rem;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   BOARD
+   ========================================================= */
+
+.board-wrapper {
+    width: 100%;
+}
+
+
+.board {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 1400 / 800;
+
+    min-height: 400px;
+
+    overflow: hidden;
+
+    background: #fff;
+
+    border: 1px solid #dfe0e7;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.07);
+}
+
+
+#geometrySvg {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    touch-action: none;
+
+    cursor: crosshair;
+}
+
+
+.board.select-mode
+#geometrySvg {
+    cursor: default;
+}
+
+
+.board.eraser-mode
+#geometrySvg {
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   EMPTY BOARD
+   ========================================================= */
+
+.board-empty {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 5px;
+
+    pointer-events: none;
+
+    color: #aaa;
+
+    text-align: center;
+
+    transition:
+        opacity 0.2s;
+}
+
+
+.board-empty.hidden {
+    opacity: 0;
+}
+
+
+.empty-icon {
+    margin-bottom: 3px;
+
+    font-size: 2.5rem;
+
+    color: #ddd;
+}
+
+
+.board-empty strong {
+    color: #777;
+
+    font-size: 0.95rem;
+}
+
+
+.board-empty span {
+    font-size: 0.82rem;
+}
+
+
+/* =========================================================
+   SVG OBJECTS
+   ========================================================= */
+
+.geometry-object {
+    vector-effect: non-scaling-stroke;
+}
+
+
+.geometry-point {
+    fill: #1d1b31;
+
+    stroke: #fff;
+
+    stroke-width: 2;
+
+    cursor: pointer;
+}
+
+
+.geometry-line {
+    fill: none;
+
+    stroke: #1d1b31;
+
+    stroke-width: 2.5;
+
+    stroke-linecap: round;
+
+    cursor: pointer;
+}
+
+
+.geometry-circle {
+    fill: rgba(241, 122, 62, 0.04);
+
+    stroke: #1d1b31;
+
+    stroke-width: 2.5;
+
+    cursor: pointer;
+}
+
+
+.geometry-polygon {
+    fill: rgba(241, 122, 62, 0.08);
+
+    stroke: #1d1b31;
+
+    stroke-width: 2.5;
+
+    stroke-linejoin: round;
+
+    cursor: pointer;
+}
+
+
+.geometry-pencil {
+    fill: none;
+
+    stroke: #1d1b31;
+
+    stroke-width: 2;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   SELECTED OBJECT
+   ========================================================= */
+
+.geometry-object.selected {
+    stroke: #f17a3e;
+
+    filter:
+        drop-shadow(
+            0 0 3px rgba(241, 122, 62, 0.35)
+        );
+}
+
+
+.geometry-point.selected {
+    fill: #f17a3e;
+}
+
+
+/* =========================================================
+   LABELS
+   ========================================================= */
+
+.geometry-label {
+    fill: #1d1b31;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    pointer-events: none;
+
+    user-select: none;
+}
+
+
+/* =========================================================
+   PREVIEW
+   ========================================================= */
+
+.geometry-preview {
+    fill: none;
+
+    stroke: #f17a3e;
+
+    stroke-width: 2;
+
+    stroke-dasharray: 7 6;
+
+    opacity: 0.9;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   STATUS BAR
+   ========================================================= */
+
+.board-status {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 38px;
+
+    padding: 0 12px;
+
+    color: #777;
+
+    font-size: 0.78rem;
+}
+
+
+.status-left,
+.status-right {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.status-separator {
+    color: #ccc;
+}
+
+
+/* =========================================================
+   HELP
+   ========================================================= */
+
+.geometry-help {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 12px;
+
+    margin-top: 14px;
+}
+
+
+.help-item {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding: 14px;
+
+    background: #fff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+}
+
+
+.help-item strong {
+    color: #1d1b31;
+
+    font-size: 0.85rem;
+}
+
+
+.help-item span {
+    color: #777;
+
+    font-size: 0.78rem;
+
+    line-height: 1.45;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .geometry-page {
+        padding:
+            24px 14px 40px;
+    }
+
+
+    .geometry-toolbar {
+        align-items: flex-start;
+    }
+
+
+    .geometry-help {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .geometry-header h1 {
+        font-size: 1.6rem;
+    }
+
+
+    .geometry-header p {
+        font-size: 0.85rem;
+    }
+
+
+    .geometry-help {
+        grid-template-columns: 1fr;
+    }
+
+
+    .board {
+        min-height: 300px;
+    }
+
+
+    .tool-button span:last-child {
+        display: none;
+    }
+
+
+    .toolbar-label {
+        display: none;
+    }
+
+}

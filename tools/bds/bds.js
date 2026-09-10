@@ -74,14 +74,37 @@ CHAR_MAP[' '] = { code: 'Space', shift: false };
 
 /* изграждане на редовете на клавиатурата (визуалът е от оригинала) */
 const keyboardEl = document.getElementById('keyboard');
+keyboardEl.innerHTML = '';
 const keyEls = {};
 
-function li(id, cls, label) {
+function attachKeyEvents(el, id, kObj) {
+    el.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        pressKeyVisual(id, false);
+        setTimeout(() => releaseKeyVisual(id, false), 220);
+
+        if (!targetText || position >= targetText.length) return;
+        const isShift = !!(keyEls.ShiftLeft?.classList.contains('active-pressed') || keyEls.ShiftRight?.classList.contains('active-pressed'));
+        let char = '';
+        if (id === 'Space') {
+            char = ' ';
+        } else if (kObj) {
+            char = isShift ? kObj.shift : kObj.base;
+        } else if (id === 'back') {
+            processKeyInput('Backspace', 'Backspace', null, false);
+            return;
+        }
+        processKeyInput(id, char, char, isShift);
+    });
+}
+
+function li(id, cls, label, kObj) {
     const el = document.createElement('li');
     el.id = id;
     el.className = cls;
     el.innerHTML = `<span>${label}</span>`;
     keyEls[id] = el;
+    attachKeyEvents(el, id, kObj);
     return el;
 }
 
@@ -93,27 +116,27 @@ function buildRow(cls) {
 
 // ред 0: цифри + BACK
 const r0 = buildRow('row-0');
-BDS_ROWS[0].forEach(k => r0.appendChild(li(k.id, fingerOf(k.id), k.base)));
+BDS_ROWS[0].forEach(k => r0.appendChild(li(k.id, fingerOf(k.id), k.base, k)));
 r0.appendChild(li('back', 'pinky fill-out-key', 'BACK'));
 keyboardEl.appendChild(r0);
 
 // ред 1: TAB + горен буквен ред
 const r1 = buildRow('row-1');
 r1.appendChild(li('tab', 'pinky fill-out-key', 'TAB'));
-BDS_ROWS[1].forEach(k => r1.appendChild(li(k.id, fingerOf(k.id), k.base)));
+BDS_ROWS[1].forEach(k => r1.appendChild(li(k.id, fingerOf(k.id), k.base.toUpperCase(), k)));
 keyboardEl.appendChild(r1);
 
 // ред 2: CAPS + среден буквен ред + ENTER
 const r2 = buildRow('row-2');
 r2.appendChild(li('caps', 'pinky fill-out-key', 'CAPS'));
-BDS_ROWS[2].forEach(k => r2.appendChild(li(k.id, fingerOf(k.id), k.base)));
+BDS_ROWS[2].forEach(k => r2.appendChild(li(k.id, fingerOf(k.id), k.base.toUpperCase(), k)));
 r2.appendChild(li('enter', 'pinky fill-out-key', 'ENT'));
 keyboardEl.appendChild(r2);
 
 // ред 3: SHIFT + долен буквен ред + SHIFT
 const r3 = buildRow('row-3');
 r3.appendChild(li('ShiftLeft', 'pinky', 'SHIFT'));
-BDS_ROWS[3].forEach(k => r3.appendChild(li(k.id, fingerOf(k.id), k.base)));
+BDS_ROWS[3].forEach(k => r3.appendChild(li(k.id, fingerOf(k.id), k.base.toUpperCase(), k)));
 r3.appendChild(li('ShiftRight', 'pinky', 'SHIFT'));
 keyboardEl.appendChild(r3);
 
@@ -130,11 +153,46 @@ const statProgress = document.getElementById('statProgress');
 const statWrong = document.getElementById('statWrong');
 const statAccuracy = document.getElementById('statAccuracy');
 
+const BUILTIN_BOOKS = [
+    {
+        title: "Иван Вазов — Под игото",
+        file: "builtin-1",
+        chapters: [
+            "Тая прохладна майска вечер чорбаджи Марко вечеряше с челядта си на двора. Господарят на къщата беше около петдесетгодишен мъж, с черно строго лице и с живи очи.",
+            "Той обичаше реда и трудолюбието. Децата слушаха всяка негова дума със страхопочитание и уважение. На трапезата цареше мир и сговор."
+        ]
+    },
+    {
+        title: "Антоан дьо Сент-Екзюпери — Малкият принц",
+        file: "builtin-2",
+        chapters: [
+            "Всички възрастни хора са били най-напред деца, но малцина от тях си спомнят това. Истински се вижда само със сърцето. Същественото е невидимо за очите.",
+            "Ако някой обича едно цвете, което съществува само в един екземпляр сред милиони и милиони звезди, това му стига, за да бъде щастлив, когато ги гледа."
+        ]
+    },
+    {
+        title: "Астрид Линдгрен — Пипи Дългото чорапче",
+        file: "builtin-3",
+        chapters: [
+            "В края на малкото градинско градче имаше една запустяла градина. В градината стоеше една стара къща, а в къщата живееше Пипи Дългото чорапче с маймунката си.",
+            "Пипи беше най-силното момиче на света. Тя можеше да вдигне цял кон на ръце, ако пожелае, и никой не можеше да я уплаши."
+        ]
+    }
+];
+
 let targetText = '';   // текст, който се преписва
 let position = 0;      // докъде сме стигнали
 let wrongCharacters = 0;
 let totalKeystrokes = 0;
-let books = [];        // [{ title, file, chapters: [текст…] }]
+let books = [...BUILTIN_BOOKS]; // стартира с вградените книги за мигновен старт
+let hasMistake = false;
+
+// Създаване на речник за бързо търсене код -> БДС знаци
+const CODE_TO_BDS = {};
+BDS_ROWS.flat().forEach(k => {
+    CODE_TO_BDS[k.id] = { base: k.base, shift: k.shift };
+});
+CODE_TO_BDS['Space'] = { base: ' ', shift: ' ' };
 
 function clearSelection() {
     document.querySelectorAll('.keyboard .selected').forEach(el => el.classList.remove('selected'));
@@ -149,8 +207,16 @@ function renderTarget() {
         storyParagraph.textContent = 'Няма зареден текст.';
         return;
     }
+    const typed = escapeHtml(targetText.slice(0, position));
+    const current = position < targetText.length ? escapeHtml(targetText[position]) : '';
+    const remaining = position + 1 < targetText.length ? escapeHtml(targetText.slice(position + 1)) : '';
+
+    const currentHtml = current === ' '
+        ? `<span class="current-char space-char" title="Интервал (Space)">␣</span>`
+        : (current ? `<span class="current-char">${current}</span>` : '');
+
     storyParagraph.innerHTML =
-        `<span class="highlight">${escapeHtml(targetText.slice(0, position))}</span>${escapeHtml(targetText.slice(position))}`;
+        `<span class="typed-text">${typed}</span>${currentHtml}<span class="remaining-text">${remaining}</span>`;
 }
 
 function updateStats() {
@@ -177,24 +243,63 @@ function showNextKey() {
         el.addEventListener('animationend', () => el.classList.remove('hit'), { once: true });
     }
     if (map.shift) {
-        keyEls.ShiftLeft.classList.add('selected');
-        keyEls.ShiftRight.classList.add('selected');
+        keyEls.ShiftLeft?.classList.add('selected');
+        keyEls.ShiftRight?.classList.add('selected');
     }
 }
 
-/* проверка на въвеждането — сравнява физическия клавиш + SHIFT спрямо БДС */
-storyTextArea.addEventListener('keydown', (event) => {
-    if (position >= targetText.length) return;
-    if (['Shift', 'Control', 'Alt', 'CapsLock', 'Meta'].includes(event.key)) return;
-    if (event.key === 'Backspace' || event.key === 'Tab' || event.key.startsWith('Arrow')) {
-        event.preventDefault();
+function pressKeyVisual(code, isShift) {
+    const pressed = keyEls[code];
+    if (pressed) {
+        pressed.classList.add('hit');
+        pressed.classList.add('active-pressed');
+        setTimeout(() => pressed.classList.remove('hit'), 220);
+    }
+    if (isShift || code === 'ShiftLeft' || code === 'ShiftRight') {
+        keyEls.ShiftLeft?.classList.add('active-pressed');
+        keyEls.ShiftRight?.classList.add('active-pressed');
+    }
+}
+
+function releaseKeyVisual(code, isShift) {
+    const released = keyEls[code];
+    if (released) {
+        released.classList.remove('active-pressed');
+    }
+    if (!isShift && code !== 'ShiftLeft' && code !== 'ShiftRight') {
+        keyEls.ShiftLeft?.classList.remove('active-pressed');
+        keyEls.ShiftRight?.classList.remove('active-pressed');
+    }
+}
+
+/* глобална обработка на въвеждането */
+function processKeyInput(code, key, explicitChar, isShift) {
+    if (!targetText || position >= targetText.length) return;
+    if (['Shift', 'Control', 'Alt', 'CapsLock', 'Meta', 'ContextMenu'].includes(key)) return;
+
+    // Backspace — връщане с един символ назад
+    if (key === 'Backspace' || code === 'Backspace') {
+        if (position > 0) {
+            position--;
+            storyTextArea.value = targetText.slice(0, position);
+            renderTarget();
+            updateStats();
+            showNextKey();
+        }
+        return;
+    }
+
+    if (key === 'Tab' || (typeof key === 'string' && key.startsWith('Arrow'))) {
         return;
     }
 
     const expected = targetText[position];
     const map = CHAR_MAP[expected] || CHAR_MAP[expected.toLowerCase()];
-    if (!map) { // символ извън БДС подредбата — преминава се напред
+
+    // Ако очакваният символ не е в БДС подредбата (редки символи), преминава напред
+    if (!map) {
         position++;
+        storyTextArea.value = targetText.slice(0, position);
         renderTarget();
         updateStats();
         showNextKey();
@@ -202,17 +307,28 @@ storyTextArea.addEventListener('keydown', (event) => {
     }
 
     totalKeystrokes++;
-    const pressed = keyEls[event.code];
-    if (pressed) {
-        pressed.classList.add('hit');
-        pressed.addEventListener('animationend', () => pressed.classList.remove('hit'), { once: true });
-    }
 
-    if (event.code === map.code && !!event.shiftKey === map.shift) {
+    // Определяне на въведения знак:
+    // 1) Явно предаден знак от екранния клавиш
+    // 2) ИЛИ съответствието от физическия клавиш спрямо БДС (CODE_TO_BDS)
+    // 3) ИЛИ въведения знак от системната клавиатура
+    const bdsChar = CODE_TO_BDS[code] ? (isShift ? CODE_TO_BDS[code].shift : CODE_TO_BDS[code].base) : null;
+    const candidate = explicitChar || bdsChar || key;
+
+    const codeMatch = map && (code === map.code && !isShift === !map.shift);
+    const charMatch = (candidate === expected) || (key === expected) || (bdsChar === expected);
+
+    if (codeMatch || charMatch) {
         position++;
+        storyTextArea.value = targetText.slice(0, position);
+        storyTextArea.scrollTop = storyTextArea.scrollHeight;
     } else {
         wrongCharacters++;
-        event.preventDefault();
+        const wrongEl = keyEls[code] || keyEls[CHAR_MAP[candidate]?.code];
+        if (wrongEl) {
+            wrongEl.classList.add('wrong-press');
+            setTimeout(() => wrongEl.classList.remove('wrong-press'), 300);
+        }
     }
 
     renderTarget();
@@ -220,11 +336,38 @@ storyTextArea.addEventListener('keydown', (event) => {
 
     if (position >= targetText.length) {
         clearSelection();
-        storyTextArea.value =
-            `Браво! Откъсът е преписан.\nГрешки: ${wrongCharacters} от ${totalKeystrokes} натискания.\nТочност: ${statAccuracy.textContent}.`;
+        storyTextArea.value = targetText +
+            `\n\n🎉 Браво! Откъсът е преписан успешно!\nГрешки: ${wrongCharacters} от ${totalKeystrokes} натискания.\nТочност: ${statAccuracy.textContent}.`;
+        storyTextArea.scrollTop = storyTextArea.scrollHeight;
         return;
     }
     showNextKey();
+}
+
+/* Слушане за натиснати клавиши — както в текстовото поле, така и на ниво прозорец */
+window.addEventListener('keydown', (event) => {
+    // Ако фокусът е върху падащото меню с книги, не прехващаме
+    if (event.target === bookSelect) return;
+
+    // Визуална реакция на клавиша винаги:
+    pressKeyVisual(event.code, event.shiftKey);
+
+    // Предотвратяваме стандартния скрол/въвеждане, за да гарантираме точно въвеждане в текстовото поле
+    if (typeof event.preventDefault === 'function') event.preventDefault();
+
+    processKeyInput(event.code, event.key, null, event.shiftKey);
+});
+
+window.addEventListener('keyup', (event) => {
+    releaseKeyVisual(event.code, event.shiftKey);
+});
+
+storyTextArea.addEventListener('keydown', (event) => {
+    // Вече се обработва от window listener-а
+    event.stopPropagation();
+    pressKeyVisual(event.code, event.shiftKey);
+    if (typeof event.preventDefault === 'function') event.preventDefault();
+    processKeyInput(event.code, event.key, null, event.shiftKey);
 });
 
 /* ============================ epub книги ============================ */
@@ -293,32 +436,43 @@ async function readBook(book) {
     }
 }
 
-async function loadBooks() {
-    try {
-        const res = await fetch('/tools/bds/books/books.json');
-        books = await res.json();
-    } catch (err) {
-        books = [];
-    }
+function populateBookSelect() {
     bookSelect.innerHTML = '';
-    if (!books.length) {
-        bookSelect.innerHTML = '<option value="">Няма добавени книги</option>';
-        return;
-    }
     books.forEach(b => {
         const opt = document.createElement('option');
         opt.value = b.file;
         opt.textContent = b.title;
         bookSelect.appendChild(opt);
     });
-    await readBook(books[0]);
+}
+
+async function loadBooks() {
+    // 1. Моментално стартиране с вградените класически текстове
+    populateBookSelect();
     loadRandomChapter();
+
+    // 2. Асинхронно добавяне на външните книги от books.json, ако са налични
+    try {
+        const res = await fetch('/tools/bds/books/books.json');
+        if (res.ok) {
+            const external = await res.json();
+            books = [...BUILTIN_BOOKS, ...external];
+            const currentVal = bookSelect.value;
+            populateBookSelect();
+            if (currentVal) bookSelect.value = currentVal;
+        }
+    } catch (err) {
+        // Вградените книги вече работят отлично
+    }
 }
 
 bookSelect.addEventListener('change', async () => {
     const book = books.find(b => b.file === bookSelect.value);
-    storyParagraph.textContent = 'Зареждане…';
-    await readBook(book);
+    if (!book) return;
+    if (!book.chapters || !book.chapters.length) {
+        storyParagraph.textContent = 'Зареждане…';
+        await readBook(book);
+    }
     loadRandomChapter();
 });
 document.getElementById('newChapterBtn').addEventListener('click', loadRandomChapter);

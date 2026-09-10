@@ -6,6 +6,8 @@
      <script type="module" src="/tools/embed.js"></script>
 */
 
+import '/scripts/clone-guard.js';
+
 const SITE_CSS = ['/styles/theme.css', '/styles/layout.css', '/styles/components.css'];
 const FONT_CSS = [
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css',

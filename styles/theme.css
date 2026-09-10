@@ -1,0 +1,55 @@
+/* styles/theme.css — design tokens for the lesson platform.
+   Pulled from the existing portfolio's lesson.css / layout.css so the
+   platform stays visually consistent with what you already had. */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+  --primary-color: #1d1b31;
+  --accent-orange: #f17a3e;
+  --accent-blue: #3498db;
+  --dark-bg: #1d1b31;
+  --light-gray: #f8fafc;
+  --background-color: #f0f0f0;
+  --header-color: #ffffff;
+  --glass-bg: rgba(0, 0, 0, 0.95);
+  --search-bg: rgba(255, 255, 255, 0.2);
+  --footer-bg: #111;
+  --footer-text: #ccc;
+  --footer-link: #f17a3e;
+  --success-bg: #d4edda;
+  --success-border: #28a745;
+  --success-text: #155724;
+  --error-bg: #f8d7da;
+  --error-border: #dc3545;
+  --error-text: #721c24;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--dark-bg);
+  overflow-x: hidden;
+}
+
+.component-heading {
+  font-size: 1.2rem;
+  margin: 32px 0 16px;
+  color: var(--dark-bg);
+}
+
+.loading-state,
+.error-state {
+  padding: 60px 40px;
+  text-align: center;
+  color: #777;
+}
+
+.error-state {
+  color: var(--error-text);
+}

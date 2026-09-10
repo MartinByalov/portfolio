@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="tool-title" content="WPM Тест">
+    <meta name="tool-icon" content="fa-solid fa-keyboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wpm</title>
+    <link rel="stylesheet" href="/tools/wpm/wpm.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+    <script src="/tools/wpm/lib/pdf.min.js" type="module"></script>
+    <script src="/tools/wpm/lib/pdf.worker.min.js" type="module"></script>
+    <script src="/tools/wpm/lib/mammoth.browser.min.js"></script>
+
+</head>
+
+<body>
+
+    <main>
+
+        <div class="controls-bar">
+
+            <div class="file-reset-group">
+
+                <div class="file-input-wrapper">
+                    <input type="file" id="fileUpload" accept=".txt,.docx,.pdf">
+                    <label for="fileUpload" title="Качи файл (.txt, .docx, .pdf)">⬆️</label>
+                </div>
+
+                <button id="stopButton" class="reset-top" title="Спри теста и запази резултата">⏹️</button>
+                <button id="resetButton" class="reset-top" title="Нулиране на теста">🔄</button>
+            </div>
+
+            <div class="word-count-display">
+                <label>Общо думи:</label>
+                <span id="wordCountDisplay">0</span>
+            </div>
+
+            <div class="timer-input-container">
+                <label for="timerInput">Таймер:</label>
+                <input type="text" id="timerInput" value="10:00"
+                    title="Въведете време в М:СС или '0' за без ограничение (♾️)">
+            </div>
+
+        </div>
+
+        <div class="reference-container">
+            <div id="referenceText" class="reference-text">
+            </div>
+        </div>
+
+        <div id="textInput" class="typing-input" contenteditable="false" spellcheck="false" tabindex="0"
+            data-placeholder="Качете текстов файл, за да започнете."></div>
+
+        <div class="stats-container">
+            <h2>📊 Статистика</h2>
+            <p>Статус: <span id="testStatus" class="status-running">Зареждане на текст...</span></p>
+            <p>Скорост (WPM): <span id="wpmCount">0.00</span></p>
+            <p>Коректни символи: <span id="correctCharCount">0</span></p>
+            <p>Общо въведени символи: <span id="charCount">0</span></p>
+            <p>Грешки: <span id="errorCount">0</span></p>
+            <button
+                id="downloadButton" class="download-btn" disabled style="display: none;">Word
+            </button>
+        </div>
+    </main>
+
+    <footer>
+
+    </footer>
+
+
+    <script src="/tools/wpm/wpm.js"></script>
+<script type="module" src="/tools/embed.js"></script>
+</body>
+
+</html>

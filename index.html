@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Учебна платформа — прототип</title>
+  <link rel="stylesheet" href="styles/theme.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/software.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link href="https://unpkg.com/boxicons@2.1.0/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+  <div id="header-root"></div>
+  <div id="sidebar-root"></div>
+
+  <div id="view-root"></div>
+
+  <div id="footer-root"></div>
+
+  <script type="module" src="app.js"></script>
+
+  <!-- UserWay Accessibility Widget — икона долу вдясно (data-position="br"),
+       интерфейс на български (data-language="bg"), стандартен син стил. -->
+  <script src="https://cdn.userway.org/widget.js" data-account="tKZSBrDiyh" data-language="bg" data-position="br" data-size="medium" crossorigin="anonymous"></script>
+  <style>
+    /* UserWay иконката — фиксирана долу вдясно, близо до ъгъла (стандартен син стил) */
+    .uwy,
+    #userwayAccessibilityIcon,
+    .userway-s3,
+    [class*="userway"] {
+      right: 8px !important;
+      left: auto !important;
+      top: auto !important;
+      bottom: 8px !important;
+      z-index: 999999 !important;
+    }
+  </style>
+</body>
+</html>

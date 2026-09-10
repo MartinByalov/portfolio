@@ -1,0 +1,666 @@
+/* styles/layout.css — header / sidebar drawer / footer / course-layout.
+   Ported from the current site's layout.css + sidebar.css so the
+   platform looks like the same product, just data-driven now. */
+
+/* ---------- header ---------- */
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 10000;
+}
+
+.main-header .logo {
+  display: flex;
+  align-items: center;
+  color: var(--header-color);
+}
+
+.main-header .logo .home-icon {
+  color: var(--header-color);
+  font-size: 20px;
+  margin-right: 15px;
+  text-decoration: none;
+  cursor: default; /* decorative icon — navigation is in the sidebar drawer */
+}
+
+.main-header .header-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 10001;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-right: 15px;
+}
+
+.search-input {
+  border: none;
+  background: var(--search-bg);
+  border-radius: 20px;
+  color: white;
+  font-size: 14px;
+  outline: none;
+  width: 0;
+  padding: 0;
+  opacity: 0;
+  transition: all 0.4s ease;
+  pointer-events: none;
+}
+
+.search-container.open .search-input {
+  width: 180px;
+  padding: 5px 15px;
+  opacity: 1;
+  margin-right: 10px;
+  pointer-events: auto;
+}
+
+#search-toggle,
+#menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  min-height: 32px;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.search-results-dropdown {
+  display: none;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: white;
+  width: 280px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  z-index: 100100;
+  overflow: hidden;
+  border: 1px solid #eee;
+}
+
+.search-result-item {
+  display: block;
+  padding: 12px 20px;
+  color: #333;
+  border-bottom: 1px solid #f5f5f5;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.search-result-item:hover {
+  background: #f8f9fa;
+  color: var(--footer-link);
+}
+
+.search-results-dropdown span {
+  display: block;
+  padding: 15px;
+  color: #888;
+  text-align: center;
+  font-size: 13px;
+}
+
+.flashcard-container {
+  position: absolute;
+  z-index: 100200;
+  width: 300px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  padding: 20px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.flashcard-container.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.flashcard-content h3 {
+  margin-bottom: 8px;
+  color: var(--dark-bg);
+}
+
+.flashcard-content p {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* ---------- sidebar drawer ---------- */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 260px;
+  z-index: 9999;
+  transition: all 0.5s ease;
+  background: rgba(17, 16, 29, 0.98);
+  backdrop-filter: blur(5px);
+  font-family: 'Poppins', sans-serif;
+  font-weight: bolder;
+}
+
+.sidebar.close {
+  right: -260px;
+  width: 260px;
+}
+
+.sidebar.open {
+  right: 0;
+  width: 260px;
+}
+
+.sidebar .logo-details {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 0 20px;
+}
+
+.sidebar .logo-details .logo_name {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  transition: 0.3s ease;
+  white-space: nowrap;
+}
+
+.sidebar .logo-details .fa-chalkboard-user {
+  font-size: 28px;
+  color: #fff;
+  min-width: 50px;
+  text-align: center;
+  line-height: 60px;
+}
+
+.sidebar .logo-details #bx-logout {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 22px;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  padding: 10px;
+  color: #fff;
+}
+
+.sidebar .nav-links {
+  height: calc(100% - 160px);
+  padding: 10px 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.sidebar .nav-links::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar .nav-links::-webkit-scrollbar-thumb {
+  background: #4e4e6d;
+  border-radius: 10px;
+}
+
+.sidebar .nav-links li {
+  list-style: none;
+}
+
+.sidebar .nav-links li:hover {
+  background: #1d1b31;
+}
+
+.sidebar .nav-links li a,
+.sidebar .nav-links li .iocn-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 10px 15px;
+  color: #fff;
+}
+
+.sidebar .nav-links li i {
+  min-width: 50px;
+  text-align: center;
+  line-height: 50px;
+  color: #fff;
+  font-size: 20px;
+}
+
+.sidebar .nav-links li a .link_name,
+.sidebar .nav-links li .iocn-link .link_name {
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.sidebar .nav-links li .iocn-link {
+  justify-content: space-between;
+}
+
+.sidebar .nav-links li i.arrow {
+  min-width: 50px;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sidebar .nav-links li.showMenu i.arrow {
+  transform: rotate(180deg);
+}
+
+.sidebar .nav-links li .sub-menu {
+  padding-left: 50px;
+  margin-top: -10px;
+  background: #1d1b31;
+  display: none;
+}
+
+.sidebar .nav-links li.showMenu .sub-menu {
+  display: block;
+}
+
+.sidebar .nav-links li .sub-menu a {
+  padding: 5px 0;
+  opacity: 0.8;
+}
+
+.sidebar .nav-links li .sub-menu a:hover {
+  opacity: 1;
+}
+
+.sidebar .nav-links li .sub-menu .link_name {
+  display: none;
+}
+
+.sidebar .nav-links li:last-child {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: #1d1b31;
+  padding: 12px 10px;
+}
+
+.sidebar .nav-links li:last-child .profile-details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.sidebar .nav-links li:last-child .profile-details .name-job {
+  margin-left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* равно вертикално разстояние между всички елементи: име → работа → </> → GitHub */
+  gap: 8px;
+  text-align: center;
+}
+
+.sidebar .nav-links li:last-child .profile-details .profile_name,
+.sidebar .nav-links li:last-child .profile-details .job {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  margin-bottom: 0;
+  line-height: 1.2;
+}
+
+.sidebar .nav-links li:last-child .profile-details .job {
+  font-size: 12px;
+  margin-bottom: 0;
+}
+
+.sidebar .nav-links li:last-child .profile-details .profile-role-separator {
+  color: #f17a3e;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
+.sidebar .nav-links li:last-child .profile-details .github-icon {
+  color: #f17a3e;
+  font-size: 32px;
+  font-weight: 400;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.2;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* ---------- page chrome / course layout ---------- */
+.home-section {
+  padding-top: 100px;
+  padding-bottom: 80px;
+  background-color: #f4f7f6;
+  min-height: calc(100vh - 220px);
+}
+
+/* Landing page: reduce padding between subject cards and news */
+body.landing-mode .home-section {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  min-height: auto;
+}
+body.landing-mode .home-section.subject-section {
+  padding-top: 64px;
+}
+
+.home-content {
+  width: 100%;
+  padding: 0 40px;
+}
+
+.course-layout {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.course-sidebar {
+  flex: 0 0 280px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid #edf2f7;
+  position: sticky;
+  top: 100px;
+  overflow: hidden;
+  padding-top: 50px;
+}
+
+.course-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.sidebar-badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--dark-bg);
+  color: #fff;
+  padding: 10px 25px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-bottom-right-radius: 15px;
+}
+
+.sidebar-badge-inline {
+  display: inline-block;
+  background: var(--dark-bg);
+  color: #fff;
+  padding: 6px 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.course-list-nav {
+  padding: 10px;
+}
+
+.course-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: var(--dark-bg);
+  font-weight: 600;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+.course-link i {
+  margin-right: 12px;
+}
+
+.course-link:hover {
+  background-color: var(--light-gray);
+  color: var(--accent-orange);
+}
+
+.course-link.active {
+  background-color: var(--dark-bg);
+  color: #fff;
+}
+
+.course-link-disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.course-header-info {
+  margin-bottom: 26px;
+}
+
+.course-header-info .page-description {
+  margin-bottom: 6px;
+}
+
+/* Разделите (accordion) в course изглед: заглавието и стрелката вертикално
+   подравнени на едно ниво (center) вътре в балончето на раздела. */
+.course-main .accordion-header {
+  align-items: center;
+  min-height: 64px;
+}
+
+/* margin: 0 занулява наследения margin-bottom:12px от .card-title
+   (components.css), който иначе измества заглавието нагоре спрямо стрелката.
+   В урока заглавията на разделите са подравнени ВЛЯВО, пример: "1. Компютърна система". */
+.course-main .accordion-header .card-title {
+  flex: 1;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  line-height: 1.35;
+}
+
+/* Стрелката за разгръщане стои на същото вертикално ниво като заглавието. */
+.course-main .accordion-header .card-icon-mini {
+  display: flex;
+  align-items: center;
+  align-self: center;
+}
+
+.page-title {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.page-description {
+  color: #555;
+}
+
+.lesson-links {
+  list-style: none;
+}
+
+.lesson-links li {
+  margin-bottom: 12px;
+}
+
+.lesson-links li a {
+  text-decoration: none;
+  color: #1e293b;
+  font-weight: 500;
+  transition: color 0.3s ease, font-weight 0.2s ease;
+}
+
+.lesson-links li a:hover {
+  color: var(--accent-orange);
+  font-weight: 700;
+}
+
+.lesson-link-disabled {
+  color: #b5bcc7;
+  cursor: default;
+}
+
+.lesson-link-disabled em {
+  font-style: normal;
+  font-size: 0.85em;
+}
+
+/* ---------- footer ---------- */
+.main-footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  padding: 50px 20px 20px;
+  border-top: 5px solid var(--primary-color);
+}
+
+.footer-row {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 30px;
+}
+
+.footer-col .col-title {
+  color: white;
+  border-bottom: 2px solid var(--footer-link);
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col li {
+  margin-bottom: 8px;
+}
+
+.footer-col a {
+  color: #ccc;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer-col a:hover {
+  color: var(--footer-link);
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-links a {
+  width: 40px;
+  height: 40px;
+  background: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 18px;
+}
+
+.map-widget {
+  margin-top: 20px;
+}
+
+.map-widget iframe {
+  width: 100%;
+  height: 150px;
+  border: 0;
+  border-radius: 8px;
+  display: block;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  font-size: 0.85rem;
+}
+
+.back-to-top {
+  color: var(--footer-link) !important;
+  font-weight: 600;
+}
+
+@media (max-width: 992px) {
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .col-social {
+    grid-column: span 2;
+    text-align: center;
+  }
+
+  .col-social .social-links {
+    justify-content: center;
+  }
+
+  .course-layout {
+    flex-direction: column;
+  }
+
+  .course-sidebar {
+    position: static;
+    width: 100%;
+    flex-basis: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-top {
+    grid-template-columns: 1fr;
+  }
+
+  .home-content {
+    padding: 0 16px;
+  }
+}

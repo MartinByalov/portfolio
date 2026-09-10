@@ -1,0 +1,66 @@
+╔══════════════════════════════════════════════════╗
+║ Tree Topology — Настройки                        ║
+╚══════════════════════════════════════════════════╝
+
+Описание:
+- Root: Router 2911
+- Access: два Switch 2960 (8p compact)
+- Leaves: PCs (по 4 на суич)
+
+Адресиране:
+- LAN_A: 192.168.10.0/24 (GW: 192.168.10.1)
+- LAN_B: 192.168.20.0/24 (GW: 192.168.20.1)
+
+Router 2911:
+connect Tree_Router_2911
+enable
+configure terminal
+hostname Tree_Router
+interface GigabitEthernet0/0
+ description TO_SWITCH_A
+ ip address 192.168.10.1 255.255.255.0
+ no shutdown
+exit
+interface GigabitEthernet0/1
+ description TO_SWITCH_B
+ ip address 192.168.20.1 255.255.255.0
+ no shutdown
+exit
+write memory
+
+Switch A (2960-8):
+connect Tree_Switch_A
+enable
+configure terminal
+hostname Tree_Switch_A
+interface range FastEthernet0/1-8
+ switchport mode access
+ no shutdown
+exit
+write memory
+
+Switch B (2960-8):
+connect Tree_Switch_B
+enable
+configure terminal
+hostname Tree_Switch_B
+interface range FastEthernet0/1-8
+ switchport mode access
+ no shutdown
+exit
+write memory
+
+PCs:
+connect Tree_PC_A1
+enable
+configure terminal
+ip address 192.168.10.11 255.255.255.0
+ip default-gateway 192.168.10.1
+dns-server 8.8.8.8
+end
+ipconfig
+(аналогично за останалите PCs към съответния сегмент)
+
+Проверки:
+ping 192.168.10.1 / 192.168.20.1
+show running-config

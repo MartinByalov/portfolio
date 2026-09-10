@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="tool-title" content="Планировчик">
+    <meta name="tool-icon" content="fa-solid fa-list-check">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Планировчик на Урока</title>
+    <link rel="stylesheet" href="/tools/planner/styles/planner.css">
+</head>
+<body>
+    <div id="app">
+        <div id="control-panel">
+            <input type="text" id="lesson-topic" placeholder="Тема на урока">
+            <select id="lesson-select-dropdown" class="lesson-select-dropdown is-hidden"
+                style="display: none;"></select>
+            <div class="timer-section">
+                <span id="main-timer-display">00:00</span>
+            </div>
+            <div id="plan-controls-container">
+                <div id="xlsx-buttons">
+                    <button id="download-template-btn" class="plan-control-icon-btn" title="Изтегли шаблон">⬇️</button>
+                    <button id="import-plan-btn" class="plan-control-icon-btn" title="Импорт от Excel">⬆️</button>
+                </div>
+                <input type="file" id="file-input" accept=".xlsx,.csv,.json,.docx" class="is-hidden">
+            </div>
+        </div>
+        <div class="timeline-container-centered" id="timeline-container-centered">
+            <div id="start-reset-container">
+                <button id="start-btn" disabled>СТАРТ</button>
+            </div>
+            <div class="timeline-line"></div>
+            <div id="timeline-progress"></div>
+            <div id="timeline-progress-info" class="is-hidden">
+                Изминало: <b id="elapsed-time-info">0 мин.</b> | Остават: <span id="remaining-time-info">0 мин.</span>
+            </div>
+            <button id="end-lesson-btn" style="display: none;">КРАЙ</button>
+            <div class="timeline-label label-end" id="label-end">КРАЙ</div>
+            <button id="add-activity-btn-single" title="Добави нова дейност">+</button>
+        </div>
+        <div id="activity-modal">
+            <div class="modal-content">
+                <h3 id="modal-title">Добавяне на Дейност</h3>
+                <div class="modal-form">
+                    <div class="modal-field">
+                        <label for="activity-template-select">Избери дейност</label>
+                        <select id="activity-template-select">
+                            <option value="custom">-- Избери шаблон --</option>
+                            <option value="exercise">Упражнение</option>
+                            <option value="practical_task">Практическа задача</option>
+                            <option value="group_task">Групова задача</option>
+                            <option value="custom">Персонализирана</option>
+                        </select>
+                    </div>
+                    <div class="modal-field">
+                        <label for="activity-title-input">Заглавие</label>
+                        <input type="text" id="activity-title-input" required>
+                    </div>
+                    <div class="modal-field">
+                        <label for="activity-duration-input">Продължителност (минути)</label>
+                        <input type="number" id="activity-duration-input" required min="1">
+                    </div>
+                    <div class="modal-field">
+                        <label for="activity-link-input">Връзка (линк)</label>
+                        <input type="text" id="activity-link-input" placeholder="https://...">
+                    </div>
+                    <div class="modal-field">
+                        <label for="activity-image-input">
+                            <span id="image-upload-btn-container" class="upload-btn-container"
+                                title="Качи изображение от компютъра">
+                                <span class="upload-btn">⬆️</span>
+                            </span>
+                            Изображение (URL)
+                        </label>
+                        <input type="text" id="activity-image-input" placeholder="Въведете URL или качете файл">
+                        <input type="file" id="image-upload-input" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+                <div class="modal-actions modal-footer">
+                    <button id="modal-save-btn" class="modal-btn">Запази</button>
+                    <button id="modal-cancel-btn" class="modal-btn">Отказ</button>
+                </div>
+            </div>
+        </div>
+        <div id="victory-screen">
+            <div>
+                <h2 class="trophy">🏆</h2>
+                <h2 style="color: white;">Урокът е завършен!</h2>
+                <p style="color: white;">Поздравления!</p>
+            </div>
+        </div>
+        <div id="lightbox">
+            <button id="lightbox-close-btn" class="lightbox-close-btn" title="Затвори (Esc)">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                    stroke="currentColor" class="h-8 w-8">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <img id="lightbox-img" src="" alt="Full size image">
+        </div>
+    </div>
+    <!-- Help Button and Panel -->
+    <button id="help-btn" title="Помощ за използване">❓</button>
+    <div id="help-overlay"></div>
+    <div id="help-panel">
+        <!-- Променете този ред в помощния панел: -->
+        <button id="close-help-btn" title="Затвори">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                stroke="currentColor" class="h-8 w-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <h2>Как да използвате Планировчика</h2>
+        <div class="help-section">
+            <h3>Създаване на план на урока</h3>
+            <ul>
+                <li>Въведете тема на урока в горното поле</li>
+                <li>Кликнете бутона "+", за да добавите нова дейност</li>
+                <li>Изберете тип дейност или създайте персонализирана</li>
+                <li>Попълнете заглавие, продължителност и ресурси</li>
+            </ul>
+        </div>
+        <div class="help-section">
+            <h3>Импорт/Експорт</h3>
+            <ul>
+                <li>⬇️ Изтеглете шаблон за Excel</li>
+                <li>⬆️ Импортирайте готов план от Excel</li>
+                <li>Можете да импортирате няколко урока наведнъж</li>
+            </ul>
+        </div>
+        <div class="help-section">
+            <h3>Провеждане на урока</h3>
+            <ul>
+                <li>Натиснете СТАРТ за да започнете урока</li>
+                <li>Дейностите се маркират автоматично като завършени</li>
+                <li>Можете ръчно да завършите дейност с бутона ✅</li>
+                <li>Бутонът ФИНАЛ показва края на урока</li>
+                <li>Бутонът КРАЙ нулира урока</li>
+            </ul>
+        </div>
+        <div class="help-section">
+            <h3>Други функции</h3>
+            <ul>
+                <li>↔️ Преместване на картите вляво/вдясно</li>
+                <li>🌐 Отваряне на външни линкове</li>
+                <li>✏️ Редактиране на дейности</li>
+                <li>❌ Изтриване на дейности</li>
+                <li>↕️ Вертикално плъзгане за промяна на реда на карта</li>
+            </ul>
+        </div>
+        <audio id="sound-start" src="/tools/planner/sounds/start-sound.mp3" preload="auto"></audio>
+        <audio id="sound-activity-complete" src="/tools/planner/sounds/activity-complete.mp3" preload="auto"></audio>
+        <audio id="sound-lesson-complete" src="/tools/planner/sounds/lesson-complete.mp3" preload="auto"></audio>
+        <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+        <script src="https://unpkg.com/tone@14.7.77/build/Tone.js"></script>
+        <script src="/tools/planner/scripts/planner.js"></script>
+<script type="module" src="/tools/embed.js"></script>
+</body>
+</html>

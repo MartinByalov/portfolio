@@ -1,0 +1,53 @@
+╔══════════════════════════════════════════════════╗
+║ Bus Topology — Настройки (Coax Backbone)         ║
+╚══════════════════════════════════════════════════╝
+
+Описание:
+- Последователна шинна линия чрез Coax Tap устройства (симулират T-конектори).
+- Между Tap устройствата се чертае гръбнак (In→Out), към Drop порта — PC.
+- Кабел: Coaxial (тип “Coaxial” в PockeTracer).
+
+Адресиране:
+- Мрежа: 192.168.50.0/24, Маска: 255.255.255.0
+- PC адреси: .11–.16 (локален сегмент, без Default Gateway)
+
+Свързване:
+- Влачете 4–6 Coax Tap в линия.
+- Свържете Tap_01 Out → Tap_02 In → Tap_03 In … (гръбнак последователно).
+- Свържете PC (Coax NIC) към съответния Tap Drop порт.
+
+Стъпки за изграждане:
+1) Постави Tap устройства линейно (Tap_01 … Tap_06).
+2) Избери кабел “Coaxial” и свържи:
+   - Tap_01 Out → Tap_02 In
+   - Tap_02 Out → Tap_03 In
+   - Tap_03 Out → Tap_04 In
+   - Tap_04 Out → Tap_05 In
+   - Tap_05 Out → Tap_06 In
+3) Свържи PCs (Coax NIC) към Drop портовете:
+   - Tap_01 Drop → Bus_PC_Coax_01 (Coax0)
+   - Tap_02 Drop → Bus_PC_Coax_02
+   - … и т.н.
+4) По желание: остави Tap_01 In и Tap_06 Out необвързани (крайни терминатори — симулирани).
+
+Конфигурация (за всеки PC):
+connect Bus_PC_Coax_XX
+enable
+configure terminal
+ip address 192.168.50.X 255.255.255.0
+dns-server 8.8.8.8
+end
+ipconfig
+
+Проверки:
+- ping между PCs (192.168.50.X)
+- show connections — всички връзки са “coaxial”
+
+Финален тест (пример от Bus_PC_Coax_01):
+connect Bus_PC_Coax_01
+enable
+configure terminal
+end
+ipconfig
+ping 192.168.50.12   ! към Bus_PC_Coax_02
+ping 192.168.50.16   ! към най-далечния PC

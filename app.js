@@ -1,0 +1,204 @@
+/* app.js
+   The whole "site" in one small router:
+     #/                          -> public landing (subject accents + news feed)
+     #/portfolio                 -> protected portfolio home (access code from #/about)
+     #/experience                -> protected professional experience view
+     #/course/{courseId}         -> section/lesson list for that course
+     #/lesson/{courseId}/{lessonId} -> a rendered lesson (via the Lesson Renderer)
+
+   Header, sidebar and footer are mounted once and never re-rendered;
+   only #view-root swaps content on navigation, same as a single-page app.
+*/
+
+import * as Header from './layout/header.js';
+import * as Sidebar from './layout/sidebar.js';
+import * as Footer from './layout/footer.js';
+import * as CourseShell from './layout/course-shell.js';
+import * as CourseList from './layout/course-list.js';
+import * as Home from './layout/home.js';
+import * as Portfolio from './layout/portfolio.js';
+import * as Experience from './layout/experience.js';
+import * as About from './layout/about.js';
+import * as Glossary from './layout/glossary.js';
+import * as Software from './layout/software.js';
+import { fetchLesson, buildLesson, initLesson } from './renderer/renderer.js';
+import { initScrollSpy } from './components/scroll-spy.js';
+import { initLightbox } from './components/lightbox.js';
+
+let catalogCache = null;
+
+async function getCatalog() {
+  if (!catalogCache) {
+    const res = await fetch('data/catalog.json');
+    catalogCache = await res.json();
+  }
+  return catalogCache;
+}
+
+async function getCourse(courseId) {
+  const res = await fetch(`data/courses/${courseId}.json`);
+  if (!res.ok) throw new Error(`Курсът "${courseId}" не е намерен.`);
+  return res.json();
+}
+
+function parseHash() {
+  return location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
+}
+
+async function renderCourseView(courseId) {
+  const [catalog, course] = await Promise.all([getCatalog(), getCourse(courseId)]);
+  const asideHtml = CourseShell.renderClassPicker(catalog, courseId);
+  const mainHtml = CourseList.render(course);
+  document.getElementById('view-root').innerHTML = CourseShell.render(asideHtml, mainHtml);
+  CourseList.init(document.querySelector('.course-main'));
+}
+
+async function renderLessonView(courseId, lessonId) {
+  const course = await getCourse(courseId);
+  const lessonMeta = course.sections.flatMap(s => s.lessons).find(l => l.id === lessonId);
+  if (!lessonMeta || !lessonMeta.lessonPath) throw new Error('Урокът все още не е добавен.');
+
+  const lesson = await fetchLesson(lessonMeta.lessonPath);
+  const { headerHtml, bodyHtml, navItems } = buildLesson(lesson);
+  const asideHtml = CourseShell.renderLessonNav(courseId, navItems);
+  const mainHtml = headerHtml + `<div class="lesson-body">${bodyHtml}</div>`;
+
+  document.getElementById('view-root').innerHTML = CourseShell.render(asideHtml, mainHtml);
+  initLesson(lesson);
+  initLightbox(document.getElementById('view-root'));
+  initScrollSpy();
+}
+
+async function redirectToFirstCourse() {
+  const catalog = await getCatalog();
+  const firstAvailable = catalog.grades.flatMap(g => g.courses).find(c => c.available);
+  if (firstAvailable) {
+    location.hash = `#/course/${firstAvailable.id}`;
+  } else {
+    document.getElementById('view-root').innerHTML = '<p class="error-state">Няма налични курсове.</p>';
+  }
+}
+
+async function route() {
+  const parts = parseHash();
+  const viewRoot = document.getElementById('view-root');
+  const body = document.body;
+  const headerRoot = document.getElementById('header-root');
+  const sidebarRoot = document.getElementById('sidebar-root');
+  const footerRoot = document.getElementById('footer-root');
+
+  Portfolio.cleanupPortfolio();
+  About.cleanupAboutAudio();
+  Home.cleanupLanding();
+  Glossary.cleanupGlossaryPage?.();
+
+  // Re-render sidebar when switching between portfolio and learning modes
+  const newMode = (parts[0] === 'portfolio' || parts[0] === 'experience') ? 'portfolio' : 'learning';
+  // Persist the mode so the standalone /tools/* pages (tools/embed.js) can
+  // render the SAME side menu instead of ending up empty via the
+  // body.portfolio-mode CSS toggles.
+  Sidebar.setStoredMode(newMode);
+  const currentMode = body.classList.contains('portfolio-mode') ? 'portfolio' : 'learning';
+
+  body.classList.remove('about-mode', 'portfolio-mode', 'landing-mode');
+  if (headerRoot) headerRoot.style.display = '';
+  if (sidebarRoot) sidebarRoot.style.display = '';
+  if (footerRoot) footerRoot.style.display = '';
+
+  if (newMode !== currentMode) {
+    sidebarRoot.innerHTML = Sidebar.render(newMode);
+    Sidebar.init();
+  }
+
+  viewRoot.innerHTML = '<p class="loading-state">Зареждане...</p>';
+
+  try {
+    if (parts.length === 0) {
+      // Public landing page: random subject cards + news feed
+      Header.setTitle('Начало', 'fa-solid fa-house');
+      document.body.classList.add('landing-mode');
+      const catalog = await getCatalog();
+      viewRoot.innerHTML = Home.renderLandingPage(catalog);
+      requestAnimationFrame(() => Home.initLandingPage());
+    } else if (parts[0] === 'portfolio') {
+      // Portfolio is protected — access only with code from the About page
+      if (!About.isPortfolioUnlocked()) {
+        location.hash = '#/about';
+        return;
+      }
+      body.classList.add('portfolio-mode');
+      Header.setTitle('Учителско Портфолио', 'fa-solid fa-graduation-cap');
+      viewRoot.innerHTML = Portfolio.renderPortfolioPage();
+      requestAnimationFrame(() => Portfolio.initPortfolioPage());
+    } else if (parts[0] === 'about') {
+      body.classList.add('about-mode');
+      if (headerRoot) headerRoot.style.display = 'none';
+      if (sidebarRoot) sidebarRoot.style.display = 'none';
+      if (footerRoot) footerRoot.style.display = 'none';
+      viewRoot.innerHTML = About.renderAboutPage();
+      About.initAboutPage();
+      About.initAboutAudio();
+    } else if (parts[0] === 'tools') {
+      // The tools dashboard is a standalone page inside /tools.
+      // ?mode= keeps the SAME side menu + footer mode there.
+      location.replace(`/tools/index.html?mode=${newMode}`);
+      return;
+    } else if (parts[0] === 'experience') {
+      if (!About.isPortfolioUnlocked()) {
+        location.hash = '#/about';
+        return;
+      }
+      body.classList.add('portfolio-mode');
+      Header.setTitle('Професионален опит', 'fa-solid fa-briefcase');
+      viewRoot.innerHTML = Experience.renderExperiencePage();
+    } else if (parts[0] === 'lesson' && parts[1] && parts[2]) {
+      Header.setTitle('Учебни материали', 'fa-solid fa-book-open');
+      await renderLessonView(parts[1], parts[2]);
+    } else if (parts[0] === 'course' && parts[1]) {
+      Header.setTitle('Учебни материали', 'fa-solid fa-book-open');
+      await renderCourseView(parts[1]);
+    } else if (parts[0] === 'subjects') {
+      Header.setTitle('Учебни ресурси', 'fa-solid fa-book-open');
+      viewRoot.innerHTML = Home.renderSubjectsPage();
+    } else if (parts[0] === 'dictionary') {
+      Header.setTitle('Речник', 'fa-solid fa-book');
+      Glossary.cleanupGlossaryPage?.();
+      viewRoot.innerHTML = Glossary.renderGlossaryPage();
+      requestAnimationFrame(() => Glossary.initGlossaryPage());
+    } else if (parts[0] === 'software') {
+      Header.setTitle('Софтуер', 'fa-solid fa-code');
+      viewRoot.innerHTML = Software.renderSoftwarePage();
+      requestAnimationFrame(() => Software.initSoftwarePage());
+    } else {
+      Header.setTitle('Учебни ресурси', 'fa-solid fa-book-open');
+      viewRoot.innerHTML = Home.renderSubjectsPage();
+    }
+  } catch (err) {
+    viewRoot.innerHTML = `<p class="error-state">Грешка: ${err.message}</p>`;
+    console.error(err);
+  }
+
+  window.scrollTo(0, 0);
+}
+
+// --- bootstrap: mount static chrome once, then start the router ---
+// ?mode= (set by sidebar/tool links) wins over the hash, so coming back
+// from /tools/index.html?mode=portfolio keeps the portfolio side menu.
+document.getElementById('header-root').innerHTML = Header.render();
+const initialMode = Sidebar.getStoredMode()
+  || (location.hash.startsWith('#/portfolio') || location.hash.startsWith('#/experience') ? 'portfolio' : 'learning');
+document.getElementById('sidebar-root').innerHTML = Sidebar.render(initialMode);
+document.getElementById('footer-root').innerHTML = Footer.render();
+Header.init();
+Sidebar.init();
+
+// Only react to real app routes (#/course/..., #/lesson/..., or empty).
+// In-page anchors like "#quiz-1" (used by the lesson's own section nav)
+// must NOT trigger the router — they're plain native anchor scrolling.
+window.addEventListener('hashchange', () => {
+  const h = location.hash;
+  if (h === '' || h === '#' || h.startsWith('#/')) route();
+});
+// Persist the initial mode too (portfolio direct link vs learning).
+Sidebar.setStoredMode(initialMode);
+route();

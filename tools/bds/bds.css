@@ -1,0 +1,209 @@
+/* tools/bds/bds.css — инструментът "БДС Клавиатура".
+   Визуалът на клавиатурата (оцветяване по пръсти, анимации) е запазен
+   от оригинала в morphemes-main (class=section2). */
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 30px 20px 60px;
+    background: #f4f7f6;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: #11101d;
+}
+
+.bds-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.bds-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.bds-toolbar h1 {
+    margin: 0 auto 0 0;
+    font-size: 1.6rem;
+    letter-spacing: -0.02em;
+}
+
+.bds-toolbar label {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.bds-toolbar select {
+    padding: 9px 12px;
+    border: 1px solid #dfe5e3;
+    border-radius: 10px;
+    background: #fff;
+    font-size: 0.95rem;
+    color: #11101d;
+    min-width: 240px;
+}
+
+.bds-toolbar button {
+    padding: 9px 16px;
+    border: 1px solid #dfe5e3;
+    border-radius: 10px;
+    background: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.bds-toolbar button:hover {
+    border-color: #f17a3e;
+    color: #f17a3e;
+}
+
+.bds-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.bds-stats span {
+    padding: 8px 14px;
+    background: #fff;
+    border: 1px solid #dfe5e3;
+    border-radius: 20px;
+}
+
+.bds-stats .wrong { color: #d63031; }
+.bds-stats .done  { color: #00b894; }
+
+/* ===== целеви текст + поле за писане ===== */
+#storyParagraph {
+    background: #fff;
+    border: 1px solid #dfe5e3;
+    border-radius: 14px;
+    color: #333;
+    font-size: 20px;
+    font-style: italic;
+    line-height: 1.7;
+    padding: 20px 26px;
+    min-height: 96px;
+    max-height: 170px;
+    overflow: auto;
+    text-align: left;
+}
+
+#storyParagraph .highlight { background: #87CEFA; }
+
+textarea#storyTextArea {
+    width: 100%;
+    margin-top: 12px;
+    padding: 14px 18px;
+    font-size: 20px;
+    font-family: serif;
+    border: 1px solid #dfe5e3;
+    border-radius: 12px;
+    resize: vertical;
+    outline: none;
+}
+
+textarea#storyTextArea:focus { border-color: #f17a3e; }
+
+/* ===== клавиатурата — стилът е от оригинала (запазен) ===== */
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 100%;
+    margin-top: 20px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.row {
+    list-style: none;
+    display: flex;
+    width: 100%;
+    margin: auto;
+    padding: 0;
+}
+
+.keyboard span {
+    font-size: 21.7px;
+    font-weight: bold;
+    font-style: oblique;
+}
+
+.keyboard li {
+    height: 3em;
+    width: 3em;
+    color: rgba(0, 0, 0, 0.7);
+    border-radius: 0.4em;
+    line-height: 3em;
+    letter-spacing: 1px;
+    margin: 0.4em;
+    transition: 0.3s;
+    text-align: center;
+    font-size: 1em;
+    cursor: default;
+}
+
+#Space { margin-left: auto; margin-right: auto; width: 24em; }
+#tab { width: 5em; }
+#caps { width: 6em; }
+#ShiftLeft { width: 8em; }
+#enter { width: 6em; }
+#ShiftRight { width: 8em; }
+#back { width: 5em; }
+
+.big { background-color: crimson; border: 2px solid crimson; }
+.big.selected { color: crimson; }
+
+.pinky { background-color: crimson; border: 2px solid crimson; }
+.pinky.selected { color: crimson; }
+
+.ring { background-color: coral; border: 2px solid coral; }
+.ring.selected { color: coral; }
+
+.middle { background-color: darkorange; border: 2px solid darkorange; }
+.middle.selected { color: darkorange; }
+
+.pointer1st { background-color: gold; border: 2px solid gold; }
+.pointer1st.selected { color: gold; }
+
+.pointer2nd { background-color: khaki; border: 2px solid khaki; }
+.pointer2nd.selected { color: khaki; }
+
+.fill-out-key { background-color: slategrey; border: 2px solid slategrey; }
+
+.selected {
+    background-color: transparent;
+    animation: vibrate-1 0.3s linear infinite both;
+}
+
+.hit {
+    animation: hit 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@keyframes hit {
+    0% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+@keyframes vibrate-1 {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+.bds-hint {
+    margin-top: 26px;
+    font-size: 0.85rem;
+    color: #8a9198;
+}

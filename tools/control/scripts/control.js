@@ -1,0 +1,100 @@
+console.log("~ Clean code, clear mind. - ø");
+let timerId = null;
+let mode = 'initial';
+const angryDuration = 120;
+let statusDisplay = null;
+let body = null;
+let alarmSound = null;
+const happyQuotes = [
+    "„Мечтите нарочно са с по-голям размер, за да можем да пораснем в тях.“ – Джоузи Бисет",
+    "„В живота няма смисъл, има само възможности.“ – Марк Твен",
+    "Целият свят прави път на този, който знае къде отива.",
+    "„Най-важното е да вярваш в себе си… Мнението на другите се мени непрекъснато.“ – Уинстън Чърчил",
+    "От миналото трябва да вземете огъня, а не пепелта.",
+    "Не позволявайте душата ви да изстине… Завивайте я с мечти.",
+    "„Чудесата започват да се случват тогава, когато спреш да отдаваш енергията си на страховете си и започнеш да я влагаш в мечтите си.“ – Филип Уилкинсън",
+    "„За да озариш света на другите е необходимо да носиш Слънцето в себе си.“ – Ромен Ролан",
+    "„Този, който е уверен в собствената си светлина, не се притеснява от блясъка на другите.“ – Виктор Юго",
+    "Най-хубавите неща в живота са хората, които обичаш, местата, които си видял и спомените, които си създал!",
+    "„Човек е устроен така, че когато нещо запали душата му, всичко е възможно.“ – Лафонтен",
+    "Обръщай лицето си винаги по посока на слънцето и сенките ще останат зад гърба ти.",
+    "Благодарността е най-красивият цвят на душата!",
+    "Никой не прави ключалка без ключ. Така и животът не дава проблем без решения.",
+    "„Малките решения трябва да се вземат с главата, а големите – със сърцето.“",
+    "Всеки нов ден е като бял лист. От нас зависи дали ще го изпълним с красиви картини.",
+    "Винаги се смей, когато можеш. Смехът е най-евтиното лекарство.",
+    "Винаги заспивай с мечта и се събуждай с цел!",
+    "„Да владееш себе си е по-добре, отколкото да владееш всички останали.“ – Буда",
+    "Истинският ви живот започва тогава, когато вашето щастие е по-важно от хорското мнение."
+];
+function getRandomStudents() {
+    const studentCount = 25;
+    const numbers = [];
+    while(numbers.length < 3){
+        const r = Math.floor(Math.random() * studentCount) + 1;
+        if(numbers.indexOf(r) === -1) numbers.push(r);
+    }
+    return numbers.join(', ');
+}
+function getRandomQuote() {
+    const index = Math.floor(Math.random() * happyQuotes.length);
+    return happyQuotes[index];
+}
+function setMode(newMode) {
+   
+    if (!statusDisplay || !body) { 
+        console.error('Error: statusDisplay or body element not initialized yet. Check your HTML for id="status-display".');
+        return; 
+    }
+    
+    if (timerId !== null) {
+        clearInterval(timerId);
+        timerId = null;
+    }
+    mode = newMode;
+    statusDisplay.className = `status ${mode}`;
+    body.classList.remove('bg-happy', 'bg-angry');
+    if (mode === 'happy') {
+        body.classList.add('bg-happy');
+        const quote = getRandomQuote();
+        statusDisplay.innerHTML = `</p><p>✨${quote}✨</p>`;
+    } else if (mode === 'angry') {
+        body.classList.add('bg-angry');
+        startAngryTimer();
+    }
+}
+function startAngryTimer() {
+    let timeLeft = angryDuration;
+    const studentNumbers = getRandomStudents();
+    function updateDisplay() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        statusDisplay.innerHTML =
+            `<p>🚨 Изпитване на трима ученици с номера: ${studentNumbers}</p>
+             <p>след **${timeString}**</p>`;
+        if (timeLeft <= 0) {
+            clearInterval(timerId);
+            timerId = null;
+            
+            if (alarmSound) { 
+                alarmSound.play();
+            }
+            
+            statusDisplay.innerHTML =
+                `<p>🛑 ВРЕМЕТО ИЗТЕЧЕ! Изпитване на номера: ${studentNumbers}</p>
+                 <p>Сменете на усмихнато емоджи, за да нулирате.</p>`;
+        } else {
+            timeLeft--;
+        }
+    }
+    timerId = setInterval(updateDisplay, 1000);
+    updateDisplay();
+}
+document.addEventListener('DOMContentLoaded', () => {
+  
+    statusDisplay = document.getElementById('status-display');
+    body = document.body;
+    alarmSound = document.getElementById('alarm-sound'); 
+    
+});

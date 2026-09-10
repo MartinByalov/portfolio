@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Калкулатори</title>
+
+    <link rel="stylesheet" href="calculators.css">
+</head>
+
+<body>
+
+<main>
+
+    <!-- HEADER -->
+    <header class="calc-header">
+        <h1>Калкулатори</h1>
+
+        <p class="calc-sub">
+            Практични инструменти за математика, програмиране,
+            физика и финанси.
+        </p>
+    </header>
+
+
+    <!-- SEARCH -->
+    <section class="catalog-tools">
+
+        <div class="search-box">
+            <span class="search-icon">⌕</span>
+
+            <input
+                type="search"
+                id="calculatorSearch"
+                placeholder="Търси калкулатор..."
+                autocomplete="off"
+            >
+        </div>
+
+    </section>
+
+
+    <!-- CATEGORY FILTERS -->
+    <nav class="category-filter" aria-label="Категории">
+
+        <button
+            class="category-btn active"
+            data-category="all"
+        >
+            Всички
+        </button>
+
+        <button
+            class="category-btn"
+            data-category="math"
+        >
+            Математика
+        </button>
+
+        <button
+            class="category-btn"
+            data-category="programming"
+        >
+            Програмиране
+        </button>
+
+        <button
+            class="category-btn"
+            data-category="physics"
+        >
+            Физика
+        </button>
+
+        <button
+            class="category-btn"
+            data-category="finance"
+        >
+            Финанси
+        </button>
+
+        <button
+            class="category-btn"
+            data-category="tools"
+        >
+            Инструменти
+        </button>
+
+    </nav>
+
+
+    <!-- CALCULATOR CATALOG -->
+    <section class="calculator-catalog" id="calculatorCatalog">
+
+
+        <!-- ========================= -->
+        <!-- МАТЕМАТИКА -->
+        <!-- ========================= -->
+
+        <div class="catalog-group" data-group="math">
+
+            <div class="catalog-group-header">
+                <h2>Математика</h2>
+            </div>
+
+
+            <button
+                class="calculator-card"
+                data-calculator="percentage"
+                data-category="math"
+            >
+                <div class="calculator-card-content">
+
+                    <div class="calculator-card-title">
+                        Проценти
+                    </div>
+
+                    <div class="calculator-card-description">
+                        Изчисляване на процент от число и процентна промяна.
+                    </div>
+
+                </div>
+
+                <span class="calculator-card-arrow">→</span>
+            </button>
+
+
+            <button
+                class="calculator-card"
+                data-calculator="average"
+                data-category="math"
+            >
+                <div class="calculator-card-content">
+
+                    <div class="calculator-card-title">
+                        Средно аритметично
+                    </div>
+
+                    <div class="calculator-card-description">
+                        Изчисляване на средната стойност на поредица от числа.
+                    </div>
+
+                </div>
+
+                <span class="calculator-card-arrow">→</span>
+            </button>
+
+
+            <button
+                class="calculator-card"
+                data-calculator="pythagoras"
+                data-category="math"
+            >
+                <div class="calculator-card-content">
+
+                    <div class="calculator-card-title">
+                        Питагорова теорема
+                    </div>
+
+                    <div class="calculator-card-description">
+                        Изчисляване на страна от правоъгълен триъгълник.
+                    </div>
+
+                </div>
+
+                <span class="calculator-card-arrow">→</span>
+            </button>
+
+
+            <button
+                class="calculator-card"
+                data-calculator="quadratic"
+                data-category="math"
+            >
+                <div class="calculator-card-content">
+
+                    <div class="calculator-card-title">
+                        Квадратно уравнение
+                    </div>
+
+                    <div class="calculator-card-description">
+                        Намиране на корените на ax² + bx + c = 0.
+                    </div>
+
+                </div>
+
+                <span class="calculator-card-arrow">→</span>
+            </button>
+
+        </div>
+
+
+
+        <!-- ========================= -->
+        <!-- ПРОГРАМИРАНЕ -->
+        <!-- ========================= -->
+
+        <div class="catalog-group" data-group="programming">
+
+            <div class="catalog-group-header">
+                <h2>Програмиране</h2>
+            </div>
+
+
+            <button
+                class="calculator-card"
+                data-calculator="number-system"
+                data-category="programming"
+            >
+                <div class="calculator-card-content">
+
+                    <div class="calculator-card-title">
+                        Бройни системи
+                    </div>
+
+                    <div class="calculator-card-description">
+                        Преобразуване между двоична, десетична,
+                        осмична и шестнадесетична система.
+                    </div>
+
+                </div>
+
+                <span class="calculator-card-arrow">→</span>
+            </button>
+
+
+            <button
+                class="calculator-card"
+                data-calculator="modulo"
+                data-category="programming"
+            >
+                <div class="calculator-card-content">
+
+                    <div class="calculator-card-title">
+                        Modulo
+                    </div>
+
+                    <div class="calculator-card-description">
+                        Изчисляване на остатък при целочислено деление.
+                    </div>
+
+                </div>
+
+                <span class="calculator-card-arrow">→</span>
+            </button>
+
+
+            <button
+                class="calculator-card"
+                data-calculator="ascii"
+                data-category="programming"
+            >
+                <div class="calculator-card-content">
+
+                    <div class="calculator-card-title">
+                        ASCII / Unicode
+                    </div>
+
+                    <div class="calculator-card-description">
+                        Преобразуване на символи в числови кодове и обратно.
+                    </div>
+
+                </div>
+
+                <span class="calculator-card-arrow">→</span>
+            </button>
+
+        </div>
+
+
+
+        <!-- ========================= -->
+        <!-- ФИЗИКА -->
+        <!-- ========================= -->
+
+        <div class="catalog-group" data-group="physics">
+
+            <div class="catalog-group-header">
+                <h2>Физика</h2>
+            </div>
+
+
+            <button
+                class="calculator-card"
+                data-calculator="speed"
+                data-category="physics"
+            >
+                <div class="calculator-card-content">
+
+                    <div class="calculator-card-title">
+                        Скорост
+                    </div>
+
+                    <div class="calculator-card-description">
+                        Изчисляване на скорост, разстояние или време.
+                    </div>
+
+                </div>
+
+                <span class="calculator-card-arrow">→</span>
+            </button>
+
+
+            <button
+                class="calculator-card"
+                data-calculator="ohm"
+                data-category="physics"
+            >
+                <div class="calculator-card-content">
+
+                    <div class="calculator-card-title">
+                        Закон на Ом
+                    </div>
+
+                    <div class="calculator-card-description">
+                        Изчисляване на напрежение, ток или съпротивление.
+                    </div>
+
+                </div>
+
+                <span class="calculator-card-arrow">→</span>
+            </button>
+
+
+            <button
+                class="calculator-card"
+                data-calculator="force"
+                data-category="physics"
+            >
+                <div class="calculator-card-content">
+
+                    <div class="calculator-card-title">
+                        Сила
+                    </div>
+
+                    <div class="calculator-card-description">
+                        Изчисляване на сила по формулата F = m × a.
+                    </div>
+
+                </div>
+
+                <span class="calculator-card-arrow">→</span>
+            </button>
+
+        </div>
+
+
+
+        <!-- ========================= -->
+        <!-- ФИНАНСИ -->
+        <!-- ========================= -->
+
+        <div class="catalog-group" data-group="finance">
+
+            <div class="catalog-group-header">
+                <h2>Финанси</h2>
+            </div>
+
+
+            <button
+                class="calculator-card"
+                data-calculator="vat"
+                data-category="finance"
+            >
+                <div class="calculator-card-content">
+
+                    <div class="calculator-card-title">
+                        ДДС
+                    </div>
+
+                    <div class="calculator-card-description">
+                        Добавяне или премахване на ДДС от цена.
+                    </div>
+
+                </div>
+
+                <span class="calculator-card-arrow">→</span>
+            </button>
+
+
+            <button
+                class="calculator-card"
+                data-calculator="discount"
+                data-category="finance"
+            >
+                <div class="calculator-card-content">
+
+                    <div class="calculator-card-title">
+                        Отстъпка
+                    </div>
+
+                    <div class="calculator-card-description">
+                        Изчисляване на крайната цена след отстъпка.
+                    </div>
+
+                </div>
+
+                <span class="calculator-card-arrow">→</span>
+            </button>
+
+
+            <button
+                class="calculator-card"
+                data-calculator="compound-interest"
+                data-category="finance"
+            >
+                <div class="calculator-card-content">
+
+                    <div class="calculator-card-title">
+                        Сложна лихва
+                    </div>
+
+                    <div class="calculator-card-description">
+                        Изчисляване на натрупана сума при сложна лихва.
+                    </div>
+
+                </div>
+
+                <span class="calculator-card-arrow">→</span>
+            </button>
+
+
+            <button
+                class="calculator-card"
+                data-calculator="inflation"
+                data-category="finance"
+            >
+                <div class="calculator-card-content">
+
+                    <div class="calculator-card-title">
+                        Инфлация
+                    </div>
+
+                    <div class="calculator-card-description">
+                        Изчисляване на промяната в покупателната способност.
+                    </div>
+
+                </div>
+
+                <span class="calculator-card-arrow">→</span>
+            </button>
+
+        </div>
+
+
+
+        <!-- ========================= -->
+        <!-- ИНСТРУМЕНТИ -->
+        <!-- ========================= -->
+
+        <div class="catalog-group" data-group="tools">
+
+            <div class="catalog-group-header">
+                <h2>Инструменти</h2>
+            </div>
+
+
+            <button
+                class="calculator-card"
+                data-calculator="units"
+                data-category="tools"
+            >
+                <div class="calculator-card-content">
+
+                    <div class="calculator-card-title">
+                        Преобразуване на единици
+                    </div>
+
+                    <div class="calculator-card-description">
+                        Преобразуване между основни мерни единици.
+                    </div>
+
+                </div>
+
+                <span class="calculator-card-arrow">→</span>
+            </button>
+
+
+            <button
+                class="calculator-card"
+                data-calculator="random"
+                data-category="tools"
+            >
+                <div class="calculator-card-content">
+
+                    <div class="calculator-card-title">
+                        Случайно число
+                    </div>
+
+                    <div class="calculator-card-description">
+                        Генериране на случайно число в зададен диапазон.
+                    </div>
+
+                </div>
+
+                <span class="calculator-card-arrow">→</span>
+            </button>
+
+        </div>
+
+
+        <!-- NO RESULTS -->
+        <div
+            class="no-results"
+            id="noResults"
+            hidden
+        >
+            <strong>Няма намерени калкулатори.</strong>
+
+            <span>
+                Опитай с друга дума или избери друга категория.
+            </span>
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- ================================================= -->
+<!-- MODAL -->
+<!-- ================================================= -->
+
+<div
+    class="calculator-modal"
+    id="calculatorModal"
+    aria-hidden="true"
+>
+
+    <div
+        class="calculator-modal-window"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+    >
+
+        <button
+            class="modal-close"
+            id="modalClose"
+            type="button"
+            aria-label="Затвори"
+        >
+            ×
+        </button>
+
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+                Калкулатор
+            </h2>
+
+            <p id="modalDescription">
+                Избери стойности и извърши изчислението.
+            </p>
+
+        </div>
+
+
+        <div
+            class="modal-content"
+            id="modalContent"
+        >
+            <!-- Калкулаторът се зарежда тук от JavaScript -->
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="calculators.js"></script>
+
+</body>
+</html>

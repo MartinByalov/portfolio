@@ -1,0 +1,416 @@
+{
+  "id": "it-8-1",
+  "title": "Урок 1.1: Преговор",
+  "grade": 8,
+  "subject": "Информационни технологии",
+  "goal": "Актуализиране на знанията за компютърните системи, интернет технологиите и приложното програмно осигуряване.",
+  "layout": {
+    "type": "lesson",
+    "contentWidth": "wide",
+    "planType": "accordion",
+    "accordion": {
+      "itemsAlign": "stretch",
+      "titleAlign": "left",
+      "contentInsideItem": true,
+      "singleOpen": false
+    }
+  },
+  "components": [
+    {
+      "type": "accordion",
+      "id": "lesson-plan",
+      "heading": "План на урока",
+      "options": {
+        "itemsAlign": "stretch",
+        "titleAlign": "left",
+        "singleOpen": false
+      },
+      "items": [
+        {
+          "id": "section-computer-system",
+          "title": "1. Компютърна система",
+          "content": [
+            {
+              "type": "text",
+              "id": "ks-intro",
+              "content": "<p><b>Компютърната система (КС)</b> е съвкупност от две части: техническо осигуряване (<b>Хардуер</b>) и програмно осигуряване (<b>Софтуер</b>). Хардуерът включва всички физически компоненти, а софтуерът – инструкциите, които казват на хардуера какво да прави. Разгледай схемата стъпка по стъпка:</p>"
+            },
+            {
+              "type": "image",
+              "id": "ks-real-computer",
+              "src": "/assets/it-8-1/computer-system.jpg",
+              "alt": "Компютърна система с видими хардуерни компоненти",
+              "caption": "Компютърната система включва хардуер и софтуер."
+            },
+            {
+              "type": "visualization",
+              "id": "hardware-software",
+              "title": "Хардуер и софтуер",
+              "nodes": [
+                {
+                  "label": "ХАРДУЕР",
+                  "description": "Физически компоненти",
+                  "image": "/assets/it-8-1/motherboard.jpg"
+                },
+                {
+                  "label": "СОФТУЕР",
+                  "description": "Програми и инструкции",
+                  "image": "/assets/it-8-1/os-windows.jpg"
+                }
+              ],
+              "diagram": {
+                "layout": "split",
+                "flow": "КОМПЮТЪРНА СИСТЕМА → ХАРДУЕР + СОФТУЕР"
+              }
+            },
+            {
+              "type": "subsection",
+              "id": "hardware",
+              "heading": "Хардуерът отблизо",
+              "content": [
+                {
+                  "type": "text",
+                  "id": "hardware-explanation",
+                  "content": "<p>Хардуерът включва физическите части на компютъра – компоненти, които можеш да докоснеш или видиш.</p>"
+                },
+                {
+                  "type": "image-gallery",
+                  "id": "hardware-gallery",
+                  "title": "Основни хардуерни компоненти",
+                  "items": [
+                    {
+                      "title": "Дънна платка",
+                      "src": "/assets/it-8-1/motherboard.jpg",
+                      "alt": "Реална компютърна дънна платка"
+                    },
+                    {
+                      "title": "Централен процесор",
+                      "src": "/assets/it-8-1/cpu.jpg",
+                      "alt": "Реален централен процесор CPU"
+                    },
+                    {
+                      "title": "Оперативна памет",
+                      "src": "/assets/it-8-1/ram.jpg",
+                      "alt": "Реален RAM модул"
+                    },
+                    {
+                      "title": "SSD",
+                      "src": "/assets/it-8-1/ssd.jpg",
+                      "alt": "Реален SSD диск"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "subsection",
+              "id": "software",
+              "heading": "Софтуерът отблизо",
+              "content": [
+                {
+                  "type": "text",
+                  "id": "software-explanation",
+                  "content": "<p>Софтуерът представлява съвкупност от програми и инструкции, които определят как компютърът да работи.</p>"
+                },
+                {
+                  "type": "image-gallery",
+                  "id": "software-gallery",
+                  "title": "Примери за софтуер",
+                  "items": [
+                    {
+                      "title": "Операционна система",
+                      "src": "/assets/it-8-1/os-windows.jpg",
+                      "alt": "Реален интерфейс на операционна система"
+                    },
+                    {
+                      "title": "Уеб браузър",
+                      "src": "/assets/it-8-1/browser.jpg",
+                      "alt": "Реален интерфейс на уеб браузър"
+                    },
+                    {
+                      "title": "Приложна програма",
+                      "src": "/assets/it-8-1/application.jpg",
+                      "alt": "Реална приложна програма"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "visualization",
+              "id": "software-hardware-flow",
+              "title": "Как хардуерът и софтуерът работят заедно",
+              "nodes": [
+                {
+                  "label": "Програма",
+                  "description": "изпраща инструкции",
+                  "image": "/assets/it-8-1/application.jpg"
+                },
+                {
+                  "label": "Инструкция",
+                  "description": "данни за обработва",
+                  "image": "/assets/it-8-1/input.jpg"
+                },
+                {
+                  "label": "Хардуер",
+                  "description": "изпълнява инструкциите",
+                  "image": "/assets/it-8-1/cpu.jpg"
+                },
+                {
+                  "label": "Резултат",
+                  "description": "връща обработени данни",
+                  "image": "/assets/it-8-1/output.jpg"
+                }
+              ],
+              "diagram": {
+                "layout": "flow",
+                "flow": "Програма → инструкция → хардуер → резултат"
+              }
+            },
+            {
+              "type": "subsection",
+              "id": "cpu",
+              "heading": "Централен процесор (CPU)",
+              "content": [
+                {
+                  "type": "text",
+                  "id": "cpu-explanation",
+                  "content": "<p><b>Централният процесор (CPU)</b> се нарича „мозъкът“ на компютъра. Той изпълнява инструкциите на програмите и обработва данните – извършва изчисления, сравнения и управлява обмена на информация между паметта и устройствата.</p>"
+                },
+                {
+                  "type": "image",
+                  "id": "cpu-image",
+                  "src": "/assets/it-8-1/cpu.jpg",
+                  "alt": "Реален централен процесор (CPU)",
+                  "caption": "Процесорът изпълнява милиони инструкции за секунда."
+                }
+              ]
+            },
+            {
+              "type": "subsection",
+              "id": "ram",
+              "heading": "Оперативна памет (RAM)",
+              "content": [
+                {
+                  "type": "text",
+                  "id": "ram-explanation",
+                  "content": "<p><b>Оперативната памет (RAM)</b> е бърза памет, коята съхранява данните и програмите, докато компютърът работи. При изключване на захранването информацията в нея се изтрива.</p>"
+                },
+                {
+                  "type": "image",
+                  "id": "ram-image",
+                  "src": "/assets/it-8-1/ram.jpg",
+                  "alt": "Реален RAM модул",
+                  "caption": "RAM е временна памет – данните се изтриват при изключване."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "section-internet",
+          "title": "2. Интернет и технологии",
+          "content": [
+            {
+              "type": "text",
+              "id": "internet-intro",
+              "content": "<p><b>Интернет</b> е глобална система от свързани компютърни мрежи, които обменят информация чрез стандартни протоколи (<b>TCP/IP</b>). Данните се разделят на малки <b>пакети</b>, всяк пакет пътува самостоятелно и се събира на местото на назначение.</p>"
+            },
+            {
+              "type": "image",
+              "id": "internet-network",
+              "src": "/assets/it-8-1/network.jpg",
+              "alt": "Мрежови устройства — комутатор и маршрутизатор",
+              "caption": "Мрежови устройства (комутатори, маршрутизатори) насочат пакетите между мрежите."
+            },
+            {
+              "type": "visualization",
+              "id": "internet-flow",
+              "title": "Как пътуват данните по модела TCP/IP",
+              "nodes": [
+                {
+                  "label": "Браузър",
+                  "description": "стрито собствен данни в пакети",
+                  "image": "/assets/it-8-1/browser.jpg"
+                },
+                {
+                  "label": "Провайдър",
+                  "description": "маршрутизират пакетите",
+                  "image": "/assets/it-8-1/network.jpg"
+                },
+                {
+                  "label": "Сървър",
+                  "description": "връща отговор (HTML, файл)",
+                  "image": "/assets/it-8-1/computer-system.jpg"
+                }
+              ],
+              "diagram": {
+                "layout": "flow",
+                "flow": "Браузър → провайдър → интернет → сървър"
+              }
+            },
+            {
+              "type": "subsection",
+              "id": "tcp-ip",
+              "heading": "Пакети и протоколи TCP/IP",
+              "content": [
+                {
+                  "type": "text",
+                  "id": "tcpip-explanation",
+                  "content": "<p>Всяк пакет съдържа <b>IP адрес</b> на изпратителя и на получателя, а протоколът <b>TCP</b> подрежда пакетите въ верния поряд и провери, дали всички пакети пристигнали. Така файл с 1000 пакети стига до получателя дори ако пакетите минават по различни маршрути.</p>"
+                },
+                {
+                  "type": "image",
+                  "id": "internet-cable",
+                  "src": "/assets/it-8-1/cable.jpg",
+                  "alt": "Мрежов кабел (Ethernet)",
+                  "caption": "Пакетите пътуат по мрежови кабели и безжични връзки."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "section-apps",
+          "title": "3. Приложни програми",
+          "content": [
+            {
+              "type": "text",
+              "id": "apps-intro",
+              "content": "<p>Приложните програми служат за конкретни задачи – писане на текст, изпълнение на изчисления, създаване на презентации и обработва на данните. Текстообработва (Word), таблични процесори (Excel) и програми за презентации (PowerPoint) са най-често използваеми.</p>"
+            },
+            {
+              "type": "image-gallery",
+              "id": "apps-gallery",
+              "title": "Карта на приложните програми",
+              "items": [
+                {
+                  "title": "Текстообработва",
+                  "src": "/assets/it-8-1/application.jpg",
+                  "alt": "Работа с текстови документи"
+                },
+                {
+                  "title": "Табличен процесор",
+                  "src": "/assets/it-8-1/input.jpg",
+                  "alt": "Изчисления и таблици с формули"
+                },
+                {
+                  "title": "Уеб браузър",
+                  "src": "/assets/it-8-1/browser.jpg",
+                  "alt": "Достъп до интернет ресурси"
+                },
+                {
+                  "title": "Презентации",
+                  "src": "/assets/it-8-1/output.jpg",
+                  "alt": "Визуално представяне на информация"
+                }
+              ]
+            },
+            {
+              "type": "visualization",
+              "id": "excel-flow",
+              "title": "От таблица до диаграма",
+              "nodes": [
+                {
+                  "label": "Таблица",
+                  "description": "данни в клетки",
+                  "image": "/assets/it-8-1/application.jpg"
+                },
+                {
+                  "label": "Формула",
+                  "description": "напр. =СУМ(A1:A4)",
+                  "image": "/assets/it-8-1/input.jpg"
+                },
+                {
+                  "label": "Диаграма",
+                  "description": "визуална визуализация",
+                  "image": "/assets/it-8-1/output.jpg"
+                }
+              ],
+              "diagram": {
+                "layout": "flow",
+                "flow": "Таблица → формула → диаграма"
+              }
+            },
+            {
+              "type": "text",
+              "id": "apps-summary",
+              "content": "<p>Връзката <b>таблица → формула → диаграма</b> е основни работен принцип в табличните процесори: в таблица се въвеждат данните, с формули се изчислят резултатите, а диаграмата представлява ги визуално.</p>"
+            }
+          ]
+        },
+        {
+          "id": "section-project",
+          "title": "4. Работа по проект",
+          "content": [
+            {
+              "type": "text",
+              "id": "project-intro",
+              "content": "<p>Работата по проект преминава през <b>пет етапа</b> – от идеята до представянето. Всяка стъпка има свои задачи и резултат, и на края проектът се представя пред класа.</p>"
+            },
+            {
+              "type": "image",
+              "id": "project-presentation",
+              "src": "/assets/it-8-1/output.jpg",
+              "alt": "Представяне на проект на екран",
+              "caption": "Крайният етап е представяне на резултатите на проекта."
+            },
+            {
+              "type": "visualization",
+              "id": "project-steps",
+              "title": "Петте етапа на проекта",
+              "nodes": [
+                {
+                  "label": "Идея",
+                  "description": "цели и задачи",
+                  "image": "/assets/it-8-1/input-devices.jpg"
+                },
+                {
+                  "label": "Планираване",
+                  "description": "разпределяване и сроки",
+                  "image": "/assets/it-8-1/os.jpg"
+                },
+                {
+                  "label": "Изпълнение",
+                  "description": "създаване на продукти",
+                  "image": "/assets/it-8-1/application.jpg"
+                },
+                {
+                  "label": "Изпитване",
+                  "description": "проверка и поправки",
+                  "image": "/assets/it-8-1/output.jpg"
+                },
+                {
+                  "label": "Представяне",
+                  "description": "защита пред класа",
+                  "image": "/assets/it-8-1/browser.jpg"
+                }
+              ],
+              "diagram": {
+                "layout": "flow",
+                "flow": "Идея → планираване → изпълнение → изпитване → представяне"
+              }
+            },
+            {
+              "type": "subsection",
+              "id": "project-details",
+              "heading": "Какво правим на всяк етап",
+              "content": [
+                {
+                  "type": "text",
+                  "id": "project-stages",
+                  "content": "<ol><li><b>Идея</b> – определят темата, целта и целевата група.</li><li><b>Планираване</b> – поставяме задачи, сроки и разпределяваме роли.</li><li><b>Изпълнение</b> – създаваме материала или продукти на проекта.</li><li><b>Изпитване</b> – проверяваме правилността и подобряваме.</li><li><b>Представяне</b> – показваме резултатите и получаваме оценка.</li></ol>"
+                },
+                {
+                  "type": "text",
+                  "id": "project-summary",
+                  "content": "<p>Проектната работа развива уменията за планираване, работа в екип и представяне – полезни за всяк учебен и професионален тим.</p>"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

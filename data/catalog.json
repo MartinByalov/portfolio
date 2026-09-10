@@ -1,0 +1,64 @@
+{
+  "grades": [
+    {
+      "id": "grade-8",
+      "label": "8 клас",
+      "courses": [
+        {
+          "id": "it-8",
+          "title": "8 клас - ИТ",
+          "description": "Основи на работата с компютър и MS Office.",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "grade-9",
+      "label": "9 клас",
+      "courses": [
+        {
+          "id": "it-9",
+          "title": "9 клас - ИТ",
+          "description": "Работа с електронни таблици и презентации.",
+          "available": false
+        }
+      ]
+    },
+    {
+      "id": "grade-10",
+      "label": "10 клас",
+      "courses": [
+        {
+          "id": "it-10",
+          "title": "10 клас - ИТ",
+          "description": "Интернет, мрежи, сигурност и уеб основи.",
+          "available": false
+        }
+      ]
+    },
+    {
+      "id": "grade-12",
+      "label": "12 клас",
+      "courses": [
+        {
+          "id": "up-ii-12",
+          "title": "12 клас - УП ИИ",
+          "description": "Информационни системи в бизнеса и управлението.",
+          "available": false
+        },
+        {
+          "id": "programming-12",
+          "title": "12 клас - Програмиране",
+          "description": "Програмиране на Python и структури от данни.",
+          "available": false
+        },
+        {
+          "id": "kaos-12",
+          "title": "12 клас - КАОС",
+          "description": "Хардуер, процесори, памет и операционни системи.",
+          "available": true
+        }
+      ]
+    }
+  ]
+}

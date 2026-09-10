@@ -1,0 +1,81 @@
+body {
+    transition: background-color 0.5s ease-in-out; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #f4f4f9;
+}
+
+.bg-happy {
+    background-color: #e6ffe6 !important; 
+}
+
+.bg-angry {
+    background-color: #ffe6e6 !important; 
+}
+
+.container {
+    text-align: center;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.emojis {
+    margin-bottom: 20px;
+}
+
+.emoji-btn {
+    font-size: 120px; 
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    /* Запазваме оригиналната трансформация за плавност */
+    transition: transform 0.2s; 
+    outline: none;
+    /* Допълнителни стилове за позициониране на псевдо-елемента */
+    position: relative; 
+    text-align: center;
+    line-height: 1; /* За центриране на емотикона */
+}
+
+/* При hover се запазва увеличението */
+.emoji-btn:hover {
+    transform: scale(1.1); 
+}
+
+/* Hide button content */
+.emoji-btn::before {
+    content: attr(data-content); /* Show main emoticon */
+    transition: content 0.2s; /* Add transition for content swap */
+}
+
+/* При hover се сменя емотиконът */
+.emoji-btn:hover::before {
+    content: attr(data-hover-content); /* Показва емотикона при hover */
+}
+
+.status {
+    font-size: 32px; 
+    padding: 15px;
+    border-radius: 5px;
+    min-height: 50px; 
+}
+
+.status.angry {
+    background-color: #ffdddd;
+    color: #cc0000;
+    border: 2px solid #cc0000;
+    font-weight: bold;
+}
+
+.status.happy {
+    background-color: #ddffdd;
+    color: #008800;
+    border: 2px solid #008800;
+}

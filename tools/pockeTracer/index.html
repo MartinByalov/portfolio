@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PockeTracer - Network Simulator</title>
+    <meta name="tool-title" content="PockeTracer">
+    <meta name="tool-icon" content="fa-solid fa-network-wired">
+    <link rel="stylesheet" href="/tools/pockeTracer/css/main.css">
+    <link rel="stylesheet" href="/tools/pockeTracer/css/components.css">
+</head>
+
+<body>
+    <div class="app">
+        <!-- Top Menu -->
+        <div class="menu-bar">
+            <div class="logo">
+                <span>⚡</span>
+                <span>PockeTracer</span>
+            </div>
+            <div class="menu-actions">
+                <button class="menu-btn" onclick="app.newProject()">📄 New</button>
+                <button class="menu-btn" onclick="app.openProject()">📂 Open</button>
+                <button class="menu-btn" onclick="app.saveProject()">💾 Save</button>
+            </div>
+        </div>
+
+        <!-- Main Container -->
+        <div class="main-container">
+            <!-- Left Panel -->
+            <div class="left-panel">
+                <div id="logicalPanel">
+                    <div class="category">
+                        <div class="category-header" onclick="toggleCategory(this)">
+                            <span class="category-icon">🔀</span>
+                            <span class="category-title">Network Devices</span>
+                            <span class="category-arrow">▼</span>
+                        </div>
+                        <div class="category-content">
+                            <div class="device-item" data-type="router-2911" draggable="true">
+                                <div class="device-icon">🔀</div>
+                                <div class="device-name">Router 2911</div>
+                            </div>
+                            <div class="device-item" data-type="home-router" draggable="true">
+                                <div class="device-icon">📶</div>
+                                <div class="device-name">Home Router</div>
+                            </div>
+                            <div class="device-item" data-type="switch-2960" draggable="true">
+                                <div class="device-icon">⚡</div>
+                                <div class="device-name">Switch 2960</div>
+                            </div>
+                            <div class="device-item" data-type="switch-3560-24ps" draggable="true">
+                                <div class="device-icon">🔷</div>
+                                <div class="device-name">Switch 3560-24PS</div>
+                            </div>
+                            <div class="device-item" data-type="access-point" draggable="true">
+                                <div class="device-icon">📡</div>
+                                <div class="device-name">Access Point</div>
+                            </div>
+                            <div class="device-item" data-type="hub-8" draggable="true">
+                                <div class="device-icon">🧩</div>
+                                <div class="device-name">Ethernet Hub (8-port)</div>
+                            </div>
+                            <div class="device-item" data-type="coax-tap" draggable="true">
+                                <div class="device-icon">┬</div>
+                                <div class="device-name">Coax Tap</div>
+                            </div>
+                            <div class="device-item" data-type="token-ring-mau" draggable="true">
+                                <div class="device-icon">⭕</div>
+                                <div class="device-name">Token Ring MAU</div>
+                            </div>
+                            <div class="device-item" data-type="cloud-isp" draggable="true">
+                                <div class="device-icon">☁️</div>
+                                <div class="device-name">Cloud/ISP</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="category">
+                        <div class="category-header" onclick="toggleCategory(this)">
+                            <span class="category-icon">💻</span>
+                            <span class="category-title">End Devices</span>
+                            <span class="category-arrow">▼</span>
+                        </div>
+                        <div class="category-content">
+                            <div class="device-item" data-type="pc" draggable="true">
+                                <div class="device-icon">💻</div>
+                                <div class="device-name">PC</div>
+                            </div>
+                            <div class="device-item" data-type="laptop" draggable="true">
+                                <div class="device-icon">💻</div>
+                                <div class="device-name">Laptop</div>
+                            </div>
+                            <div class="device-item" data-type="tablet" draggable="true">
+                                <div class="device-icon">📱</div>
+                                <div class="device-name">Tablet</div>
+                            </div>
+                            <div class="device-item" data-type="smartphone" draggable="true">
+                                <div class="device-icon">📲</div>
+                                <div class="device-name">Smartphone</div>
+                            </div>
+                            <div class="device-item" data-type="server" draggable="true">
+                                <div class="device-icon">🖥️</div>
+                                <div class="device-name">Server</div>
+                            </div>
+                            <div class="device-item" data-type="pc-coax" draggable="true">
+                                <div class="device-icon">💻</div>
+                                <div class="device-name">PC (Coax NIC)</div>
+                            </div>
+                            <div class="device-item" data-type="pc-ring" draggable="true">
+                                <div class="device-icon">💻</div>
+                                <div class="device-name">PC (Ring NIC In/Out)</div>
+                            </div>
+                            <div class="device-item" data-type="printer" draggable="true">
+                                <div class="device-icon">🖨️</div>
+                                <div class="device-name">Printer</div>
+                            </div>
+                            <div class="device-item" data-type="camera" draggable="true">
+                                <div class="device-icon">📹</div>
+                                <div class="device-name">IP Camera</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="category">
+                        <div class="category-header" onclick="toggleCategory(this)">
+                            <span class="category-icon">🔌</span>
+                            <span class="category-title">Connections</span>
+                            <span class="category-arrow">▼</span>
+                        </div>
+                        <div class="category-content">
+                            <div class="cable-item" data-cable="straight" onclick="app.selectCable('straight')">
+                                <div class="cable-line straight"></div>
+                                <div class="cable-name">Straight</div>
+                            </div>
+                            <div class="cable-item" data-cable="crossover" onclick="app.selectCable('crossover')">
+                                <div class="cable-line crossover"></div>
+                                <div class="cable-name">Cross-Over</div>
+                            </div>
+                            <div class="cable-item" data-cable="fiber" onclick="app.selectCable('fiber')">
+                                <div class="cable-line fiber"></div>
+                                <div class="cable-name">Fiber</div>
+                            </div>
+                            <div class="cable-item" data-cable="serial" onclick="app.selectCable('serial')">
+                                <div class="cable-line serial"></div>
+                                <div class="cable-name">Serial</div>
+                            </div>
+                            <div class="cable-item" data-cable="console" onclick="app.selectCable('console')">
+                                <div class="cable-line console"></div>
+                                <div class="cable-name">Console</div>
+                            </div>
+                            <div class="cable-item" data-cable="coaxial" onclick="app.selectCable('coaxial')">
+                                <div class="cable-line coaxial"></div>
+                                <div class="cable-name">Coaxial</div>
+                            </div>
+                            <div class="cable-item" data-cable="telephone" onclick="app.selectCable('telephone')">
+                                <div class="cable-line telephone"></div>
+                                <div class="cable-name">Telephone</div>
+                            </div>
+                            <div class="cable-item" data-cable="usb" onclick="app.selectCable('usb')">
+                                <div class="cable-line usb"></div>
+                                <div class="cable-name">USB</div>
+                            </div>
+                            <div class="cable-item" data-cable="wifi" onclick="app.selectCable('wifi')">
+                                <div class="cable-line wifi"></div>
+                                <div class="cable-name">WiFi</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+
+            <!-- Canvas Wrapper -->
+            <div class="canvas-wrapper-container">
+                <div class="canvas-wrapper">
+                    <div class="canvas-toolbar">
+                        <div class="zoom-controls">
+                            <span>Zoom:</span>
+                            <button onclick="app.zoomOut()">−</button>
+                            <span id="zoomValue">100%</span>
+                            <button onclick="app.zoomIn()">+</button>
+                            <button onclick="app.resetZoom()">↺</button>
+                            <button onclick="History.undo()">↶ Undo</button>
+                            <button onclick="History.redo()">↷ Redo</button>
+                        </div>
+                    </div>
+                    <div class="canvas-container" id="canvasContainer">
+                        <div id="workspaceLogical" class="workspace"></div>
+                    </div>
+                </div>
+
+                <!-- Resize Handle -->
+                <div class="resize-handle" id="resizeHandle"></div>
+
+                <!-- Bottom Panel - CLI & Stats -->
+                <div class="bottom-panel" id="bottomPanel">
+                    <div class="bottom-tabs">
+                        <button class="bottom-tab active" onclick="app.switchBottomTab('cli')">💻 CLI Console</button>
+                        <button class="bottom-tab" onclick="app.switchBottomTab('stats')">📊 Statistics</button>
+                    </div>
+
+                    <!-- CLI Tab -->
+                    <div class="bottom-content active" id="cliContent">
+                        <div class="cli-wrapper">
+                            <div class="cli-header">
+                                <span>▶</span>
+                                <span>CLI Console</span>
+                            </div>
+                            <div class="cli-console" id="cliConsole"></div>
+                            <div class="cli-input-area">
+                                <span class="cli-prompt" id="cliPrompt">PockeTracer></span>
+                                <input type="text" class="cli-input" id="cliInput" autocomplete="off"
+                                    placeholder="Type command...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Tab -->
+                    <div class="bottom-content" id="statsContent">
+                        <div class="stats-wrapper">
+                            <div class="stat-card">
+                                <div class="stat-header">Devices</div>
+                                <div class="stat-value" id="deviceCount">0</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-header">Connections</div>
+                                <div class="stat-value" id="connectionCount">0</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-header">Topology</div>
+                                <div class="topology-display" id="topologyDisplay">
+                                    <div class="topology-icon">🌐</div>
+                                    <div class="topology-name">Unknown</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-header">Costs</div>
+                                <ul class="cost-list">
+                                    <li class="cost-item">
+                                        <span>Devices:</span>
+                                        <span id="deviceCost">0 €</span>
+                                    </li>
+                                    <li class="cost-item">
+                                        <span>Cables:</span>
+                                        <span id="cableCost">0 €</span>
+                                    </li>
+                                    <li class="cost-item total">
+                                        <span>Total:</span>
+                                        <span id="totalCost">0 €</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel - Config -->
+            <div class="right-panel">
+                <div class="panel-header">⚙️ Device Configuration</div>
+
+                <div class="panel-tabs">
+                    <button class="panel-tab active" onclick="app.switchConfigTab('config')">Config</button>
+                    <button class="panel-tab" onclick="app.switchConfigTab('settings')">Settings</button>
+                </div>
+
+                <!-- Config Tab — статус на устройството (интерфейси, IP-та от терминала) -->
+                <div class="panel-content active" id="configContent">
+                    <div class="empty-state">
+                        <div class="empty-icon">⚙️</div>
+                        <div class="empty-title">Configuration</div>
+                        <div class="empty-hint">Select a device</div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab — настройки, които се задават извън терминала (форма) -->
+                <div class="panel-content" id="settingsContent">
+                    <div class="empty-state">
+                        <div class="empty-icon">🛠️</div>
+                        <div class="empty-title">Settings</div>
+                        <div class="empty-hint">Select a device</div>
+                    </div>
+                </div>
+
+
+                <!-- Topology Modal -->
+                <div class="modal" id="topologyModal">
+                    <div class="modal-content">
+                        <div class="topology-options">
+                            <div class="topology-option" data-topo="bus">
+                                <div class="topology-option-icon">➖</div>
+                                <div class="topology-option-desc">Bus</div>
+                            </div>
+                            <div class="topology-option" data-topo="ring">
+                                <div class="topology-option-icon">⭕</div>
+                                <div class="topology-option-desc">Ring</div>
+                            </div>
+                            <div class="topology-option" data-topo="star">
+                                <div class="topology-option-icon">⭐</div>
+                                <div class="topology-option-desc">Star</div>
+                            </div>
+                            <div class="topology-option" data-topo="mesh">
+                                <div class="topology-option-icon">🕸️</div>
+                                <div class="topology-option-desc">Mesh</div>
+                            </div>
+                            <div class="topology-option" data-topo="tree">
+                                <div class="topology-option-icon">🌲</div>
+                                <div class="topology-option-desc">Tree</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Context Menu -->
+    <div id="contextMenu" class="context-menu hidden">
+        <div class="context-item" onclick="app.duplicateDevice()">
+            <span>📑</span> Duplicate
+        </div>
+        <div class="context-divider"></div>
+        <div class="context-item danger" onclick="app.deleteSelected()">
+            <span>🗑️</span> Delete
+        </div>
+    </div>
+
+    <script src="/tools/pockeTracer/data/devices-catalog.js"></script>
+    <script src="/tools/pockeTracer/js/config.js"></script>
+    <script src="/tools/pockeTracer/js/utils.js"></script>
+    <script src="/tools/pockeTracer/js/history.js"></script>
+    <script src="/tools/pockeTracer/js/devices.js"></script>
+    <script src="/tools/pockeTracer/js/connections.js"></script>
+    <script src="/tools/pockeTracer/js/topology.js"></script>
+    <script src="/tools/pockeTracer/js/cli.js"></script>
+    <script src="/tools/pockeTracer/js/ui.js"></script>
+    <script src="/tools/pockeTracer/js/app.js"></script>
+</body>
+
+</html>

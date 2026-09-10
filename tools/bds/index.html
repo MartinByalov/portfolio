@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>БДС Клавиатура — Тренировка</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="/tools/bds/bds.css">
+</head>
+<body>
+    <div class="bds-wrap">
+    <div class="bds-toolbar">
+        <h1>БДС Клавиатура</h1>
+        <label for="bookSelect">Книга:</label>
+        <select id="bookSelect"><option value="">Зареждане…</option></select>
+        <button id="newChapterBtn" type="button">↻ Нова глава</button>
+    </div>
+    <p class="bds-hint">Тренировка за научаване на клавиатурната подредба БДС 5237:1978 — препишете откъса в полето.</p>
+
+    <div class="bds-stats">
+        <span class="done">Прогрес: <b id="statProgress">0%</b></span>
+        <span>Грешки: <b id="statWrong">0</b></span>
+        <span>Точност: <b id="statAccuracy">100%</b></span>
+    </div>
+
+    <div class="section2">
+
+        <p id="storyParagraph">Изберете книга, за да се зареди произволна глава за упражнение.</p>
+        <figcaption id="bookCaption"></figcaption>
+        <textarea id="storyTextArea" placeholder="Текстово поле"></textarea>
+
+        <div class="keyboard" id="keyboard">
+
+            <ul class="row row-0">
+                <li class="pinky" id="ESC"><span>ESC</span></li>
+                <li class="pinky" id="Digit1"><span>1</span></li>
+                <li class="ring" id="Digit2"><span>2</span></li>
+                <li class="middle" id="Digit3"><span>3</span></li>
+                <li class="pointer1st" id="Digit4"><span>4</span></li>
+                <li class="pointer2nd" id="Digit5"><span>5</span></li>
+                <li class="pointer2nd" id="Digit6"><span>6</span></li>
+                <li class="pointer1st" id="Digit7"><span>7</span></li>
+                <li class="middle" id="Digit8"><span>8</span></li>
+                <li class="ring" id="Digit9"><span>9</span></li>
+                <li class="pinky" id="Digit0"><span>0</span></li>
+                <li class="pinky" id="Minus"><span>-</span></li>
+                <li class="pinky" id="Equal"><span>.</span></li>
+                <li class="pinky" id="back"><span>BACK</span></li>
+            </ul>
+            <ul class="row row-1">
+                <li class="pinky" id="tab"><span>TAB</span></li>
+                <li class="pinky" id="KeyQ"><span>,</span></li>
+                <li class="ring" id="KeyW"><span>У</span></li>
+                <li class="middle" id="KeyE"><span>Е</span></li>
+                <li class="pointer1st" id="KeyR"><span>И</span></li>
+                <li class="pointer2nd" id="KeyT"><span>Ш</span></li>
+                <li class="pointer2nd" id="KeyY"><span>Щ</span></li>
+                <li class="pointer1st" id="KeyU"><span>К</span></li>
+                <li class="middle" id="KeyI"><span>С</span></li>
+                <li class="ring" id="KeyO"><span>Д</span></li>
+                <li class="pinky" id="KeyP"><span>З</span></li>
+                <li class="pinky" id="BracketLeft"><span>Ц</span></li>
+                <li class="pinky" id="BracketRight"><span>§</span></li>
+                <li class="pinky" id="Backslash"><span>\</span></li>
+            </ul>
+            <ul class="row row-2">
+                <li class="pinky" id="caps"><span>CAPS</span></li>
+                <li class="pinky" id="KeyA"><span>Ь</span></li>
+                <li class="ring" id="KeyS"><span>Я</span></li>
+                <li class="middle" id="KeyD"><span>А</span></li>
+                <li class="pointer1st" id="KeyF"><span>О</span></li>
+                <li class="pointer2nd" id="KeyG"><span>Ж</span></li>
+                <li class="pointer2nd" id="KeyH"><span>Г</span></li>
+                <li class="pointer1st" id="KeyJ"><span>Т</span></li>
+                <li class="middle" id="KeyK"><span>Н</span></li>
+                <li class="ring" id="KeyL"><span>В</span></li>
+                <li class="pinky" id="Semicolon"><span>М</span></li>
+                <li class="pinky" id="Quote"><span>Ч</span></li>
+                <li class="pinky" id="enter"><span>ENT</span></li>
+            </ul>
+            <ul class="row row-3">
+                <li class="pinky" id="ShiftLeft"><span>SHIFT</span></li>
+                <li class="pinky" id="KeyZ"><span>Ю</span></li>
+                <li class="ring" id="KeyX"><span>Й</span></li>
+                <li class="middle" id="KeyC"><span>Ъ</span></li>
+                <li class="pointer1st" id="KeyV"><span>Э</span></li>
+                <li class="pointer2nd" id="KeyB"><span>Ф</span></li>
+                <li class="pointer2nd" id="KeyN"><span>Х</span></li>
+                <li class="pointer1st" id="KeyM"><span>П</span></li>
+                <li class="middle" id="Comma"><span>Р</span></li>
+                <li class="ring" id="Period"><span>Л</span></li>
+                <li class="pinky" id="Slash"><span>Б</span></li>
+                <li class="pinky" id="ShiftRight"><span>SHIFT</span></li>
+            </ul>
+            <ul class="row row-4">
+                <li class="pinky" id="Space"><span>SPACE</span></li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <script src="/tools/bds/bds.js"></script>
+</body>
+</html>

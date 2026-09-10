@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Случайни групи</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    :root {
+      --accent: #f17a3e;
+      --accent-dark: #e05e1f;
+      --dark: #1d1b31;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fdeadf 0%, #f4f4f9 60%);
+      margin: 0;
+      padding: 20px;
+      color: var(--dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .panel {
+      background: #fff;
+      border: 2px solid var(--dark);
+      border-radius: 16px;
+      box-shadow: 6px 6px 0 rgba(29, 27, 49, 0.12);
+      padding: 24px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .toggle-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 0 0 18px;
+      font-size: 0.95em;
+      color: #666;
+    }
+    .mode-label { transition: color 0.2s; }
+    .mode-label.active { color: var(--accent-dark); font-weight: 600; }
+    .choice {
+      position: relative;
+      display: inline-block;
+      flex: none;
+      width: 3em;
+      height: 1.25em;
+      background: var(--accent);
+      border-radius: 1000px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .choice:hover { background: var(--accent-dark); }
+    .switch {
+      position: absolute;
+      top: 0.1em;
+      right: 0.15em;
+      height: 1em;
+      width: 1.5em;
+      background: #fff;
+      border-radius: 1000px;
+      transition: right 0.3s;
+    }
+    .panel.alt .switch { right: calc(100% - 1.6em); }
+    .mode-group {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    #group-count { display: flex; }
+    .panel.alt #group-count { display: none; }
+    .panel.alt #group-size { display: flex; }
+    .mode-group label { font-size: 0.95em; font-weight: 600; }
+    .mode-group input {
+      width: 90px;
+      padding: 8px;
+      border: 2px solid var(--dark);
+      border-radius: 10px;
+      font-size: 1em;
+      text-align: center;
+      font-family: inherit;
+    }
+    .mode-group input:focus, textarea:focus { outline: none; border-color: var(--accent); }
+    textarea {
+      width: 100%;
+      min-height: 190px;
+      resize: vertical;
+      border: 2px solid var(--dark);
+      border-radius: 10px;
+      padding: 10px;
+      font-family: inherit;
+      font-size: 1em;
+      background: #fff;
+    }
+    .hint {
+      text-align: center;
+      font-size: 0.85em;
+      color: #888;
+      margin: 10px 0 16px;
+    }
+    .actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    button { font-family: inherit; cursor: pointer; }
+    .primary {
+      width: 75%;
+      padding: 12px;
+      font-size: 1.15em;
+      font-weight: 700;
+      color: #fff;
+      background: var(--accent);
+      border: 2px solid var(--dark);
+      border-radius: 999px;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .primary:hover { background: var(--accent-dark); }
+    .primary:active { transform: scale(0.98); }
+    .csv-link {
+      background: none;
+      border: none;
+      padding: 4px;
+      font-size: 0.9em;
+      color: var(--dark);
+      text-decoration: underline;
+    }
+    .csv-link:hover { color: var(--accent-dark); }
+    #message {
+      text-align: center;
+      min-height: 1.4em;
+      font-weight: 600;
+      margin: 0 0 15px;
+    }
+    #message.error { color: #dc3545; }
+    #message.ok { color: #2e9e5b; }
+    .groups {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .group-card {
+      background: #fff;
+      border: 2px solid var(--dark);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 4px 4px 0 rgba(29, 27, 49, 0.12);
+    }
+    .group-card h3 {
+      margin: 0;
+      padding: 10px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 1.05em;
+    }
+    .group-card ul {
+      list-style: none;
+      margin: 0;
+      padding: 12px 16px;
+      text-align: left;
+    }
+    .group-card li { padding: 4px 0; border-bottom: 1px dashed #eee; }
+    .group-card li:last-child { border-bottom: none; }
+  </style>
+</head>
+<body>
+  <div class="panel" id="panel">
+    <p class="toggle-wrap">
+      <span class="mode-label" id="label-size">Ученици в група</span>
+      <span class="choice" id="mode-toggle" role="switch" aria-checked="false" tabindex="0" title="Превключи режима"><span class="switch"></span></span>
+      <span class="mode-label active" id="label-count">Брой групи</span>
+    </p>
+
+    <div class="mode-group" id="group-size">
+      <label for="pergroup">Ученици в група:</label>
+      <input type="number" id="pergroup" min="2" max="30" value="4">
+    </div>
+    <div class="mode-group" id="group-count">
+      <label for="numgroups">Брой групи:</label>
+      <input type="number" id="numgroups" min="2" max="30" value="4">
+    </div>
+
+    <textarea id="names" placeholder="Иван Иванов&#10;Мария Петрова&#10;Георги Димитров"></textarea>
+    <p class="hint">Въведи или постави имената на учениците – <strong>по едно на ред</strong>.</p>
+
+    <div class="actions">
+      <button id="generate" class="primary">Раздели на групи</button>
+      <button id="csv" class="csv-link">Изтегли CSV версия</button>
+    </div>
+  </div>
+
+  <p id="message"></p>
+  <div id="groups" class="groups"></div>
+
+  <script>
+    (function () {
+      const panel = document.getElementById('panel');
+      const toggleEl = document.getElementById('mode-toggle');
+      const labelSize = document.getElementById('label-size');
+      const labelCount = document.getElementById('label-count');
+      const sizeInput = document.getElementById('pergroup');
+      const countInput = document.getElementById('numgroups');
+      const namesEl = document.getElementById('names');
+      const groupsEl = document.getElementById('groups');
+      const messageEl = document.getElementById('message');
+
+      const saved = localStorage.getItem('rg-names');
+      if (saved !== null) namesEl.value = saved;
+      namesEl.addEventListener('input', () => localStorage.setItem('rg-names', namesEl.value));
+
+      function isPergroupMode() {
+        return panel.classList.contains('alt');
+      }
+
+      function shuffle(list) {
+        for (let i = list.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [list[i], list[j]] = [list[j], list[i]];
+        }
+        return list;
+      }
+
+      function parseNames() {
+        return [...new Set(namesEl.value.split(/\r?\n/).map(n => n.trim()).filter(Boolean))];
+      }
+
+      function say(text, type) {
+        messageEl.textContent = text;
+        messageEl.className = type || '';
+      }
+
+      function escapeHtml(value) {
+        return value.replace(/[&<>"']/g, ch => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[ch]));
+      }
+
+      function escapeCsv(value) {
+        return /[",;\n\r]/.test(value) ? '"' + value.replace(/"/g, '""') + '"' : value;
+      }
+
+      toggleEl.addEventListener('click', () => {
+        panel.classList.toggle('alt');
+        const pergroup = isPergroupMode();
+        labelSize.classList.toggle('active', pergroup);
+        labelCount.classList.toggle('active', !pergroup);
+        say('');
+      });
+
+      function generate() {
+        const names = parseNames();
+        if (names.length < 2) {
+          say('Въведи поне две имена, по едно на ред.', 'error');
+          groupsEl.innerHTML = '';
+          return;
+        }
+
+        const amount = parseInt((isPergroupMode() ? sizeInput : countInput).value, 10);
+        if (!Number.isFinite(amount) || amount < 1) {
+          say('Задай валидна стойност.', 'error');
+          return;
+        }
+        if (isPergroupMode() && amount > names.length) {
+          say('Размерът на групата не може да е по-голям от броя ученици.', 'error');
+          return;
+        }
+        if (!isPergroupMode() && amount > names.length) {
+          say('Броят групи не може да е по-голям от броя ученици.', 'error');
+          return;
+        }
+
+        shuffle(names);
+        const groups = [];
+        if (isPergroupMode()) {
+          for (let i = 0; i < names.length; i += amount) groups.push(names.slice(i, i + amount));
+        } else {
+          for (let i = 0; i < amount; i++) groups.push([]);
+          names.forEach((name, i) => groups[i % amount].push(name));
+        }
+
+        render(groups);
+        say(`Класът е разделен на ${groups.length} групи.`, 'ok');
+      }
+
+      function render(groups) {
+        groupsEl.innerHTML = groups.map((members, idx) => `
+          <div class="group-card" data-group="${idx + 1}">
+            <h3>Група ${idx + 1}</h3>
+            <ul>${members.map(name => `<li>${escapeHtml(name)}</li>`).join('')}</ul>
+          </div>
+        `).join('');
+      }
+
+      function downloadCsv() {
+        const cards = groupsEl.querySelectorAll('.group-card');
+        if (!cards.length) {
+          say('Първо раздели класа на групи.', 'error');
+          return;
+        }
+        const rows = [...cards].map(card => {
+          const title = card.querySelector('h3').textContent;
+          const members = [...card.querySelectorAll('li')].map(li => li.textContent);
+          return [title, ...members].map(escapeCsv).join(',');
+        });
+        // \ufeff (BOM) – за да се показва кирилицата коректно в Excel
+        const blob = new Blob(['\ufeff' + rows.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'randomni-grupi.csv';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        say('CSV файлът е изтеглен.', 'ok');
+      }
+
+      document.getElementById('generate').addEventListener('click', generate);
+      document.getElementById('csv').addEventListener('click', downloadCsv);
+    })();
+  </script>
+</body>
+</html>

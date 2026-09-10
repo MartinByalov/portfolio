@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="bg">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Геометрична дъска</title>
+    <title>Ð“ÐµÐ¾Ð¼ÐµÑ‚Ñ€Ð¸Ñ‡Ð½Ð° Ð´ÑŠÑÐºÐ°</title>
 
     <link
         rel="stylesheet"
@@ -27,127 +27,163 @@
     <header class="geometry-header">
 
         <div>
-            <h1>Геометрична дъска</h1>
+            <h1>Ð“ÐµÐ¾Ð¼ÐµÑ‚Ñ€Ð¸Ñ‡Ð½Ð° Ð´ÑŠÑÐºÐ°</h1>
 
             <p>
-                Чертаене и построения по геометрия —
-                като на лист или на дъската.
+                Ð§ÐµÑ€Ñ‚Ð°ÐµÐ½Ðµ Ð¸ Ð¿Ð¾ÑÑ‚Ñ€Ð¾ÐµÐ½Ð¸Ñ Ð¿Ð¾ Ð³ÐµÐ¾Ð¼ÐµÑ‚Ñ€Ð¸Ñ â€”
+                ÐºÐ°Ñ‚Ð¾ Ð½Ð° Ð»Ð¸ÑÑ‚ Ð¸Ð»Ð¸ Ð½Ð° Ð´ÑŠÑÐºÐ°Ñ‚Ð°.
             </p>
         </div>
 
-    </header>
+    <!-- =====================================================
+         TOP CONTROLS BAR (ÐžÑ‚Ð¼ÑÐ½Ð°, ÐŸÐ¾Ð²Ñ‚Ð¾Ñ€ÐµÐ½Ð¸Ðµ, Ð˜Ð·Ñ‡Ð¸ÑÑ‚Ð²Ð°Ð½Ðµ, Ð—Ð°Ð¿Ð°Ð·Ð²Ð°Ð½Ðµ)
+         ===================================================== -->
+
+    <section class="geometry-top-controls">
+
+        <button class="control-button" onclick="app.undo()" title="ÐžÑ‚Ð¼ÑÐ½Ð°">
+            <span class="control-icon">â†©</span>
+            <span>ÐžÑ‚Ð¼ÑÐ½Ð°</span>
+        </button>
+
+        <button class="control-button" onclick="app.redo()" title="ÐŸÐ¾Ð²Ñ‚Ð¾Ñ€ÐµÐ½Ð¸Ðµ">
+            <span class="control-icon">â†ª</span>
+            <span>ÐŸÐ¾Ð²Ñ‚Ð¾Ñ€ÐµÐ½Ð¸Ðµ</span>
+        </button>
+
+        <button class="control-button danger" onclick="app.clear()" title="Ð˜Ð·Ñ‡Ð¸ÑÑ‚Ð²Ð°Ð½Ðµ">
+            <span class="control-icon">ðŸ—‘</span>
+            <span>Ð˜Ð·Ñ‡Ð¸ÑÑ‚Ð²Ð°Ð½Ðµ</span>
+        </button>
+
+        <button class="control-button primary" onclick="app.save()" title="Ð—Ð°Ð¿Ð°Ð·Ð²Ð°Ð½Ðµ">
+            <span class="control-icon">ðŸ’¾</span>
+            <span>Ð—Ð°Ð¿Ð°Ð·Ð²Ð°Ð½Ðµ</span>
+        </button>
+
+    </section>
 
 
     <!-- =====================================================
-         TOOLBAR
+         MAIN LAYOUT: TOOLS LEFT + CANVAS RIGHT
          ===================================================== -->
 
-    <section class="geometry-toolbar">
+    <div class="geometry-main">
+
+        <!-- =====================================================
+             TOOLS PANEL (Ð’Ð›Ð¯Ð’Ðž)
+             ===================================================== -->
+
+        <div class="geometry-tools-panel">
+
+            <!-- TOOLBAR (Ð§ÐµÑ€Ñ‚Ð°Ð½Ðµ) - Ð’Ð›Ð¯Ð’Ðž -->
+
+            <section class="geometry-toolbar">
 
         <div class="toolbar-group">
 
             <span class="toolbar-label">
-                Чертане
+                Ð§ÐµÑ€Ñ‚Ð°Ð½Ðµ
             </span>
 
 
             <button
                 class="tool-button active"
                 data-tool="select"
-                title="Избери и премести"
+                title="Ð˜Ð·Ð±ÐµÑ€Ð¸ Ð¸ Ð¿Ñ€ÐµÐ¼ÐµÑÑ‚Ð¸"
             >
-                <span class="tool-icon">↖</span>
-                <span>Избери</span>
+                <span class="tool-icon">â†–</span>
+                <span>Ð˜Ð·Ð±ÐµÑ€Ð¸</span>
             </button>
 
 
             <button
                 class="tool-button"
                 data-tool="point"
-                title="Точка"
+                title="Ð¢Ð¾Ñ‡ÐºÐ°"
             >
-                <span class="tool-icon">•</span>
-                <span>Точка</span>
+                <span class="tool-icon">â€¢</span>
+                <span>Ð¢Ð¾Ñ‡ÐºÐ°</span>
             </button>
 
 
             <button
                 class="tool-button"
                 data-tool="segment"
-                title="Отсечка"
+                title="ÐžÑ‚ÑÐµÑ‡ÐºÐ°"
             >
-                <span class="tool-icon">╱</span>
-                <span>Отсечка</span>
+                <span class="tool-icon">â•±</span>
+                <span>ÐžÑ‚ÑÐµÑ‡ÐºÐ°</span>
             </button>
 
 
             <button
                 class="tool-button"
                 data-tool="line"
-                title="Права"
+                title="ÐŸÑ€Ð°Ð²Ð°"
             >
-                <span class="tool-icon">↔</span>
-                <span>Права</span>
+                <span class="tool-icon">â†”</span>
+                <span>ÐŸÑ€Ð°Ð²Ð°</span>
             </button>
 
 
             <button
                 class="tool-button"
                 data-tool="ray"
-                title="Лъч"
+                title="Ð›ÑŠÑ‡"
             >
-                <span class="tool-icon">→</span>
-                <span>Лъч</span>
+                <span class="tool-icon">â†’</span>
+                <span>Ð›ÑŠÑ‡</span>
             </button>
 
 
             <button
                 class="tool-button"
                 data-tool="circle"
-                title="Окръжност"
+                title="ÐžÐºÑ€ÑŠÐ¶Ð½Ð¾ÑÑ‚"
             >
-                <span class="tool-icon">○</span>
-                <span>Окръжност</span>
+                <span class="tool-icon">â—‹</span>
+                <span>ÐžÐºÑ€ÑŠÐ¶Ð½Ð¾ÑÑ‚</span>
             </button>
 
 
             <button
                 class="tool-button"
                 data-tool="arc"
-                title="Дъга"
+                title="Ð”ÑŠÐ³Ð°"
             >
-                <span class="tool-icon">◡</span>
-                <span>Дъга</span>
+                <span class="tool-icon">â—¡</span>
+                <span>Ð”ÑŠÐ³Ð°</span>
             </button>
 
 
             <button
                 class="tool-button"
                 data-tool="polygon"
-                title="Многоъгълник"
+                title="ÐœÐ½Ð¾Ð³Ð¾ÑŠÐ³ÑŠÐ»Ð½Ð¸Ðº"
             >
-                <span class="tool-icon">△</span>
-                <span>Многоъгълник</span>
+                <span class="tool-icon">â–³</span>
+                <span>ÐœÐ½Ð¾Ð³Ð¾ÑŠÐ³ÑŠÐ»Ð½Ð¸Ðº</span>
             </button>
 
 
             <button
                 class="tool-button"
                 data-tool="pencil"
-                title="Молив"
+                title="ÐœÐ¾Ð»Ð¸Ð²"
             >
-                <span class="tool-icon">✎</span>
-                <span>Молив</span>
+                <span class="tool-icon">âœŽ</span>
+                <span>ÐœÐ¾Ð»Ð¸Ð²</span>
             </button>
 
 
             <button
                 class="tool-button"
                 data-tool="eraser"
-                title="Гума"
+                title="Ð“ÑƒÐ¼Ð°"
             >
-                <span class="tool-icon">⌫</span>
-                <span>Гума</span>
+                <span class="tool-icon">âŒ«</span>
+                <span>Ð“ÑƒÐ¼Ð°</span>
             </button>
 
         </div>
@@ -159,27 +195,27 @@
         <div class="toolbar-group">
 
             <span class="toolbar-label">
-                Изглед
+                Ð˜Ð·Ð³Ð»ÐµÐ´
             </span>
 
 
             <button
                 class="tool-button active"
                 id="gridButton"
-                title="Покажи/скрий мрежата"
+                title="ÐŸÐ¾ÐºÐ°Ð¶Ð¸/ÑÐºÑ€Ð¸Ð¹ Ð¼Ñ€ÐµÐ¶Ð°Ñ‚Ð°"
             >
-                <span class="tool-icon">▦</span>
-                <span>Мрежа</span>
+                <span class="tool-icon">â–¦</span>
+                <span>ÐœÑ€ÐµÐ¶Ð°</span>
             </button>
 
 
             <button
                 class="tool-button active"
                 id="labelsButton"
-                title="Покажи/скрий етикетите"
+                title="ÐŸÐ¾ÐºÐ°Ð¶Ð¸/ÑÐºÑ€Ð¸Ð¹ ÐµÑ‚Ð¸ÐºÐµÑ‚Ð¸Ñ‚Ðµ"
             >
                 <span class="tool-icon">A</span>
-                <span>Етикети</span>
+                <span>Ð•Ñ‚Ð¸ÐºÐµÑ‚Ð¸</span>
             </button>
 
         </div>
@@ -193,46 +229,49 @@
             <button
                 class="tool-button"
                 id="undoButton"
-                title="Отмени"
+                title="ÐžÑ‚Ð¼ÐµÐ½Ð¸"
             >
-                <span class="tool-icon">↶</span>
-                <span>Отмени</span>
+                <span class="tool-icon">â†¶</span>
+                <span>ÐžÑ‚Ð¼ÐµÐ½Ð¸</span>
             </button>
 
 
             <button
                 class="tool-button"
                 id="redoButton"
-                title="Повтори"
+                title="ÐŸÐ¾Ð²Ñ‚Ð¾Ñ€Ð¸"
             >
-                <span class="tool-icon">↷</span>
-                <span>Повтори</span>
+                <span class="tool-icon">â†·</span>
+                <span>ÐŸÐ¾Ð²Ñ‚Ð¾Ñ€Ð¸</span>
             </button>
 
 
             <button
                 class="tool-button danger"
                 id="clearButton"
-                title="Изчисти дъската"
+                title="Ð˜Ð·Ñ‡Ð¸ÑÑ‚Ð¸ Ð´ÑŠÑÐºÐ°Ñ‚Ð°"
             >
-                <span class="tool-icon">⌫</span>
-                <span>Изчисти</span>
+                <span class="tool-icon">âŒ«</span>
+                <span>Ð˜Ð·Ñ‡Ð¸ÑÑ‚Ð¸</span>
             </button>
 
 
             <button
                 class="tool-button"
                 id="saveButton"
-                title="Запази като PNG"
+                title="Ð—Ð°Ð¿Ð°Ð·Ð¸ ÐºÐ°Ñ‚Ð¾ PNG"
             >
-                <span class="tool-icon">↓</span>
-                <span>Запази</span>
+                <span class="tool-icon">â†“</span>
+                <span>Ð—Ð°Ð¿Ð°Ð·Ð¸</span>
             </button>
 
         </div>
 
     </section>
 
+        </div>
+
+        <div class="geometry-canvas-wrapper">
 
 
     <!-- =====================================================
@@ -360,29 +399,7 @@
 
             </svg>
 
-
-            <!-- EMPTY STATE -->
-
-            <div
-                class="board-empty"
-                id="boardEmpty"
-            >
-
-                <div class="empty-icon">
-                    △
-                </div>
-
-                <strong>
-                    Започни да чертаеш
-                </strong>
-
-                <span>
-                    Избери инструмент отгоре.
-                </span>
-
             </div>
-
-        </div>
 
 
         <!-- STATUS BAR -->
@@ -392,15 +409,15 @@
             <div class="status-left">
 
                 <span id="currentToolText">
-                    Избери
+                    Ð˜Ð·Ð±ÐµÑ€Ð¸
                 </span>
 
                 <span class="status-separator">
-                    ·
+                    Â·
                 </span>
 
                 <span id="cursorPosition">
-                    x: — &nbsp; y: —
+                    x: â€” &nbsp; y: â€”
                 </span>
 
             </div>
@@ -409,58 +426,19 @@
             <div class="status-right">
 
                 <span id="objectCount">
-                    0 обекта
+                    0 Ð¾Ð±ÐµÐºÑ‚Ð°
                 </span>
 
             </div>
 
         </div>
-
     </section>
 
+</div>
 
-
-    <!-- =====================================================
-         HELP
-         ===================================================== -->
-
-    <section class="geometry-help">
-
-        <div class="help-item">
-            <strong>Избери</strong>
-            <span>
-                Кликни върху обект, за да го избереш и преместиш.
-            </span>
-        </div>
-
-
-        <div class="help-item">
-            <strong>Точка</strong>
-            <span>
-                Кликни върху дъската, за да поставиш точка.
-            </span>
-        </div>
-
-
-        <div class="help-item">
-            <strong>Отсечка</strong>
-            <span>
-                Кликни и издърпай или посочи начало и край.
-            </span>
-        </div>
-
-
-        <div class="help-item">
-            <strong>Окръжност</strong>
-            <span>
-                Кликни за център и издърпай до радиуса.
-            </span>
-        </div>
-
-    </section>
+</div>
 
 </main>
-
 
 <script src="geometry.js"></script>
 <script type="module" src="/tools/embed.js"></script>

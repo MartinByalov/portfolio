@@ -36,13 +36,50 @@
         </div>
 
     </header>
+    <!-- =====================================================
+         TOP CONTROLS BAR (Отмяна, Повторение, Изчистване, Запазване)
+         ===================================================== -->
+
+    <section class="geometry-top-controls">
+
+        <button class="control-button" onclick="app.undo()" title="Отмяна">
+            <span class="control-icon">↩</span>
+            <span>Отмяна</span>
+        </button>
+
+        <button class="control-button" onclick="app.redo()" title="Повторение">
+            <span class="control-icon">↪</span>
+            <span>Повторение</span>
+        </button>
+
+        <button class="control-button danger" onclick="app.clear()" title="Изчистване">
+            <span class="control-icon">🗑</span>
+            <span>Изчистване</span>
+        </button>
+
+        <button class="control-button primary" onclick="app.save()" title="Запазване">
+            <span class="control-icon">💾</span>
+            <span>Запазване</span>
+        </button>
+
+    </section>
 
 
     <!-- =====================================================
-         TOOLBAR
+         MAIN LAYOUT: TOOLS LEFT + CANVAS RIGHT
          ===================================================== -->
 
-    <section class="geometry-toolbar">
+    <div class="geometry-main">
+
+        <!-- =====================================================
+             TOOLS PANEL (ВЛЯВО)
+             ===================================================== -->
+
+        <div class="geometry-tools-panel">
+
+            <!-- TOOLBAR (Чертане) - ВЛЯВО -->
+
+            <section class="geometry-toolbar">
 
         <div class="toolbar-group">
 
@@ -233,6 +270,9 @@
 
     </section>
 
+        </div>
+
+        <div class="geometry-canvas-wrapper">
 
 
     <!-- =====================================================
@@ -360,34 +400,12 @@
 
             </svg>
 
-
-            <!-- EMPTY STATE -->
-
-            <div
-                class="board-empty"
-                id="boardEmpty"
-            >
-
-                <div class="empty-icon">
-                    △
-                </div>
-
-                <strong>
-                    Започни да чертаеш
-                </strong>
-
-                <span>
-                    Избери инструмент отгоре.
-                </span>
-
             </div>
 
-        </div>
 
+            <!-- BOARD STATUS (долу) -->
 
-        <!-- STATUS BAR -->
-
-        <div class="board-status">
+            <div class="board-status">
 
             <div class="status-left">
 
@@ -416,51 +434,13 @@
 
         </div>
 
-    </section>
+</section>
+    </div>
 
+</div>
 
-
-    <!-- =====================================================
-         HELP
-         ===================================================== -->
-
-    <section class="geometry-help">
-
-        <div class="help-item">
-            <strong>Избери</strong>
-            <span>
-                Кликни върху обект, за да го избереш и преместиш.
-            </span>
-        </div>
-
-
-        <div class="help-item">
-            <strong>Точка</strong>
-            <span>
-                Кликни върху дъската, за да поставиш точка.
-            </span>
-        </div>
-
-
-        <div class="help-item">
-            <strong>Отсечка</strong>
-            <span>
-                Кликни и издърпай или посочи начало и край.
-            </span>
-        </div>
-
-
-        <div class="help-item">
-            <strong>Окръжност</strong>
-            <span>
-                Кликни за център и издърпай до радиуса.
-            </span>
-        </div>
-
-    </section>
 
 </main>
-
 
 <script src="geometry.js"></script>
 <script type="module" src="/tools/embed.js"></script>

@@ -1,0 +1,20 @@
+=== Downloading remaining images ===
+  Attempting API for: modern computer processor CPU (attempt 1)
+OK: cpu-modern.jpg (318783 bytes)
+  Attempting API for: Windows 11 desktop operating system (attempt 1)
+FAIL: windows11.jpg - The remote server returned an error: (429) Too many requests. Please contact bot-traffic@wikimedia.org (fceb99d).
+  Attempting API for: Mozilla Firefox browser interface (attempt 1)
+FAIL: firefox.jpg - The remote server returned an error: (429) Too many requests. Please contact bot-traffic@wikimedia.org (fceb99d).
+  Attempting API for: Microsoft Word application (attempt 1)
+SKIP: word-modern.jpg (exists, 44677 bytes)
+  Attempting API for: Microsoft Excel spreadsheet (attempt 1)
+OK: excel-modern.jpg (67081 bytes)
+  Attempting API for: Microsoft PowerPoint presentation (attempt 1)
+OK: powerpoint-modern.jpg (30956 bytes)
+  Attempting API for: modern wifi router networking (attempt 1)
+OK: router-modern.jpg (141446 bytes)
+  Attempting API for: data center server rack (attempt 1)
+FAIL: server-modern.jpg - The remote server returned an error: (429) Too many requests. Please contact bot-traffic@wikimedia.org (fceb99d).
+  Attempting API for: network packet journey (attempt 1)
+OK: packet-journey.jpg (145601 bytes)
+=== Done ===

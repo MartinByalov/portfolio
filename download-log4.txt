@@ -1,0 +1,8 @@
+=== Downloading remaining images with delays ===
+  Attempting API for: Windows 11 desktop operating system (attempt 1)
+FAIL: windows11.jpg - The remote server returned an error: (429) Too many requests. Please contact bot-traffic@wikimedia.org (fceb99d).
+  Attempting API for: Mozilla Firefox browser interface (attempt 1)
+FAIL: firefox.jpg - The remote server returned an error: (429) Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1).
+  Attempting API for: data center server rack computer (attempt 1)
+OK: server-modern.jpg (198789 bytes)
+=== Done ===

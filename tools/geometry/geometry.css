@@ -67,16 +67,16 @@ input {
 
 
 /* =========================================================
-   TOOLBAR
+   TOP CONTROLS BAR (Отмяна, Повторение, Изчистване, Запазване)
    ========================================================= */
 
-.geometry-toolbar {
+.geometry-top-controls {
     display: flex;
     align-items: center;
+    justify-content: center;
+    gap: 10px;
 
-    gap: 14px;
-
-    padding: 10px;
+    padding: 10px 16px;
 
     background: #fff;
 
@@ -88,14 +88,67 @@ input {
         0 3px 10px rgba(0, 0, 0, 0.05);
 
     margin-bottom: 12px;
+}
 
-    overflow-x: auto;
+
+.control-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    min-height: 36px;
+
+    padding: 7px 14px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 8px;
+
+    background: #f9fafb;
+
+    color: #555;
+
+    font-size: 0.85rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s,
+        color 0.15s,
+        border-color 0.15s;
+}
+
+
+/* =========================================================
+   TOOLBAR (Чертане) — ВЛЯВО
+   ========================================================= */
+
+.geometry-toolbar {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+
+    padding: 12px;
+
+    background: #fff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.05);
+
+    overflow-x: visible;
 }
 
 
 .toolbar-group {
     display: flex;
-    align-items: center;
 
     gap: 5px;
 
@@ -120,89 +173,12 @@ input {
 
 .toolbar-divider {
     width: 1px;
+
     height: 34px;
 
     background: #e5e7eb;
 
     flex-shrink: 0;
-}
-
-
-.tool-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: 6px;
-
-    min-height: 36px;
-
-    padding: 7px 10px;
-
-    border: 1px solid transparent;
-
-    border-radius: 8px;
-
-    background: transparent;
-
-    color: #555;
-
-    font-size: 0.82rem;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    white-space: nowrap;
-
-    transition:
-        background 0.15s,
-        color 0.15s,
-        border-color 0.15s;
-}
-
-
-.tool-button:hover {
-    background: #f3f4f6;
-
-    color: #1d1b31;
-}
-
-
-.tool-button.active {
-    background: #1d1b31;
-
-    color: #fff;
-
-    border-color: #1d1b31;
-}
-
-
-.tool-button.active:hover {
-    background: #2d2b41;
-
-    color: #fff;
-}
-
-
-.tool-button.danger:hover {
-    color: #d34e4e;
-
-    background: #fff2f2;
-}
-
-
-.tool-icon {
-    display: inline-flex;
-
-    align-items: center;
-    justify-content: center;
-
-    min-width: 17px;
-
-    font-size: 1rem;
-
-    line-height: 1;
 }
 
 
@@ -249,72 +225,22 @@ input {
 }
 
 
-.board.select-mode
-#geometrySvg {
+.board.select-mode #geometrySvg {
     cursor: default;
 }
 
 
-.board.eraser-mode
-#geometrySvg {
+.board.eraser-mode #geometrySvg {
     cursor: not-allowed;
 }
 
 
 /* =========================================================
-   EMPTY BOARD
+   EMPTY BOARD (скрито — не се показва)
    ========================================================= */
 
 .board-empty {
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    transform: translate(-50%, -50%);
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    gap: 5px;
-
-    pointer-events: none;
-
-    color: #aaa;
-
-    text-align: center;
-
-    transition:
-        opacity 0.2s;
-}
-
-
-.board-empty.hidden {
-    opacity: 0;
-}
-
-
-.empty-icon {
-    margin-bottom: 3px;
-
-    font-size: 2.5rem;
-
-    color: #ddd;
-}
-
-
-.board-empty strong {
-    color: #777;
-
-    font-size: 0.95rem;
-}
-
-
-.board-empty span {
-    font-size: 0.82rem;
+    display: none;
 }
 
 
@@ -480,52 +406,152 @@ input {
 }
 
 
-/* =========================================================
-   HELP
-   ========================================================= */
-
-.geometry-help {
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 12px;
-
-    margin-top: 14px;
-}
-
-
-.help-item {
+.tool-button {
     display: flex;
+    align-items: center;
+    justify-content: center;
 
-    flex-direction: column;
+    gap: 6px;
 
-    gap: 5px;
+    min-height: 36px;
 
-    padding: 14px;
+    padding: 7px 10px;
 
-    background: #fff;
+    border: 1px solid transparent;
 
-    border: 1px solid #e5e7eb;
+    border-radius: 8px;
 
-    border-radius: 10px;
+    background: transparent;
+
+    color: #555;
+
+    font-size: 0.82rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition:
+        background 0.15s,
+        color 0.15s,
+        border-color 0.15s;
 }
 
 
-.help-item strong {
+.tool-button:hover {
+    background: #f3f4f6;
+
+    color: #1d1b31;
+}
+
+
+.tool-button.active {
+    background: #1d1b31;
+
+    color: #fff;
+
+    border-color: #1d1b31;
+}
+
+
+.tool-button.active:hover {
+    background: #2d2b41;
+
+    color: #fff;
+}
+
+
+.tool-button.danger:hover {
+    color: #d34e4e;
+
+    background: #fff2f2;
+}
+
+
+.tool-icon {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 17px;
+
+    font-size: 1rem;
+
+    line-height: 1;
+}
+
+
+.control-button:hover {
+    background: #f3f4f6;
+
     color: #1d1b31;
 
-    font-size: 0.85rem;
+    border-color: #d1d5db;
 }
 
 
-.help-item span {
-    color: #777;
+.control-button.primary {
+    background: #1d1b31;
 
-    font-size: 0.78rem;
+    color: #fff;
 
-    line-height: 1.45;
+    border-color: #1d1b31;
+}
+
+
+.control-button.primary:hover {
+    background: #2d2b41;
+
+    color: #fff;
+}
+
+
+.control-button.danger:hover {
+    color: #d34e4e;
+
+    background: #fff2f2;
+
+    border-color: #fca5a5;
+}
+
+
+.control-icon {
+    font-size: 1.1rem;
+}
+
+
+/* =========================================================
+   MAIN LAYOUT: TOOLS LEFT + CANVAS RIGHT
+   ========================================================= */
+
+.geometry-main {
+    display: flex;
+    gap: 16px;
+
+    align-items: flex-start;
+}
+
+
+.geometry-tools-panel {
+    flex: 0 0 auto;
+
+    width: 200px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+.geometry-canvas-wrapper {
+    flex: 1;
+
+    min-width: 0;
 }
 
 
@@ -541,16 +567,32 @@ input {
     }
 
 
+    .geometry-main {
+        flex-direction: column;
+    }
+
+
+    .geometry-tools-panel {
+        width: 100%;
+
+        flex-direction: row;
+
+        flex-wrap: wrap;
+    }
+
+
     .geometry-toolbar {
+        flex-direction: row;
+
         align-items: flex-start;
+
+        width: 100%;
     }
 
 
-    .geometry-help {
-        grid-template-columns:
-            repeat(2, 1fr);
+    .board {
+        min-height: 400px;
     }
-
 }
 
 
@@ -563,11 +605,6 @@ input {
 
     .geometry-header p {
         font-size: 0.85rem;
-    }
-
-
-    .geometry-help {
-        grid-template-columns: 1fr;
     }
 
 
@@ -584,5 +621,4 @@ input {
     .toolbar-label {
         display: none;
     }
-
 }

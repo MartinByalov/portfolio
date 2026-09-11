@@ -85,9 +85,7 @@ async function route() {
 
   // Re-render sidebar when switching between portfolio and learning modes
   const newMode = (parts[0] === 'portfolio' || parts[0] === 'experience') ? 'portfolio' : 'learning';
-  // Persist the mode so the standalone /tools/* pages (tools/embed.js) can
-  // render the SAME side menu instead of ending up empty via the
-  // body.portfolio-mode CSS toggles.
+  // Persist mode so standalone /tools/* pages render the same side menu
   Sidebar.setStoredMode(newMode);
   const currentMode = body.classList.contains('portfolio-mode') ? 'portfolio' : 'learning';
 
@@ -105,14 +103,14 @@ async function route() {
 
   try {
     if (parts.length === 0) {
-      // Public landing page: random subject cards + news feed
+      // Public landing page
       Header.setTitle('Начало', 'fa-solid fa-house');
       document.body.classList.add('landing-mode');
       const catalog = await getCatalog();
       viewRoot.innerHTML = Home.renderLandingPage(catalog);
       requestAnimationFrame(() => Home.initLandingPage());
     } else if (parts[0] === 'portfolio') {
-      // Portfolio is protected — access only with code from the About page
+      // Portfolio access control
       if (!About.isPortfolioUnlocked()) {
         location.hash = '#/about';
         return;
@@ -130,8 +128,7 @@ async function route() {
       About.initAboutPage();
       About.initAboutAudio();
     } else if (parts[0] === 'tools') {
-      // The tools dashboard is a standalone page inside /tools.
-      // ?mode= keeps the SAME side menu + footer mode there.
+      // Redirect to standalone tools dashboard preserving mode
       location.replace(`/tools/index.html?mode=${newMode}`);
       return;
     } else if (parts[0] === 'experience') {
@@ -183,9 +180,7 @@ async function route() {
   window.scrollTo(0, 0);
 }
 
-// --- bootstrap: mount static chrome once, then start the router ---
-// ?mode= (set by sidebar/tool links) wins over the hash, so coming back
-// from /tools/index.html?mode=portfolio keeps the portfolio side menu.
+// Mount chrome components and start router
 document.getElementById('header-root').innerHTML = Header.render();
 const initialMode = Sidebar.getStoredMode()
   || (location.hash.startsWith('#/portfolio') || location.hash.startsWith('#/experience') ? 'portfolio' : 'learning');
@@ -194,13 +189,10 @@ document.getElementById('footer-root').innerHTML = Footer.render();
 Header.init();
 Sidebar.init();
 
-// Only react to real app routes (#/course/..., #/lesson/..., or empty).
-// In-page anchors like "#quiz-1" (used by the lesson's own section nav)
-// must NOT trigger the router — they're plain native anchor scrolling.
+// Route app paths on hashchange
 window.addEventListener('hashchange', () => {
   const h = location.hash;
   if (h === '' || h === '#' || h.startsWith('#/')) route();
 });
-// Persist the initial mode too (portfolio direct link vs learning).
 Sidebar.setStoredMode(initialMode);
 route();

@@ -48,8 +48,7 @@ function injectStyles() {
   head.appendChild(style);
 }
 
-// Tool pages live outside the SPA, so hash links must point at "/#/...".
-// ?mode= is preserved so "back" links keep the same side menu + footer mode.
+// Ensure tool pages link back correctly to the SPA
 function absolutizeLinks(root, mode) {
   root.querySelectorAll('a[href^="#/"]').forEach(a => {
     const hash = a.getAttribute('href');
@@ -61,7 +60,7 @@ function absolutizeLinks(root, mode) {
   });
 }
 
-// Tool-to-tool navigation inside /tools/* keeps the same ?mode=.
+// Preserve mode parameter for navigation between tools
 function absolutizeToolsLinks(root, mode) {
   if (!mode) return;
   root.querySelectorAll('a[href^="/tools/"]').forEach(a => {
@@ -73,10 +72,7 @@ function absolutizeToolsLinks(root, mode) {
   });
 }
 
-// Resolve which side menu + footer mode this tools page is in:
-//   1. explicit ?mode=portfolio|learning in the URL (set by sidebar links)
-//   2. sessionStorage 'platform-mode' written by the SPA router in app.js
-//   3. fallback: portfolio (old behaviour for direct links)
+// Resolve active mode from URL or session storage
 function resolveMode() {
   try {
     const q = new URLSearchParams(location.search).get('mode');
@@ -121,14 +117,12 @@ async function mount() {
   document.body.append(headerRoot, sidebarRoot, shell, footerRoot);
 
   [headerRoot, sidebarRoot, footerRoot].forEach(root => absolutizeLinks(root, mode));
-  // Tool-to-tool navigation inside /tools/* keeps the same mode.
+  // Preserve mode on tools links
   absolutizeToolsLinks(shell, mode);
   Header.init();
   Sidebar.init();
 
-  // Per-page header title/icon (e.g. "Планировчик"), declared in the page head:
-  //   <meta name="tool-title" content="Планировчик">
-  //   <meta name="tool-icon" content="fa-solid fa-list-check">
+  // Set header title from metadata
   const pageTitle = document.querySelector('meta[name="tool-title"]')?.content;
   if (pageTitle) {
     const pageIcon = document.querySelector('meta[name="tool-icon"]')?.content;

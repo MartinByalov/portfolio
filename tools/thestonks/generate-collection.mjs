@@ -24,9 +24,7 @@ const TOTAL_SUPPLY = 10000;
 const COLLECTION_SEED = 'stonks-v1';
 
 
-// ============================================================
-// SEEDED RANDOM
-// ============================================================
+// Seeded random
 
 function hashSeed(str) {
   let h = 1779033703 ^ str.length;
@@ -95,9 +93,7 @@ function makeRng(seedStr) {
 }
 
 
-// ============================================================
-// WEIGHTED CHOICE
-// ============================================================
+// Weighted choice
 
 function weightedChoice(
   rng,
@@ -150,9 +146,7 @@ function weightedChoice(
 }
 
 
-// ============================================================
-// MAIN
-// ============================================================
+// Main
 
 function main() {
   console.log('');

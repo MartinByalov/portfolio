@@ -29,8 +29,7 @@ const Connections = (() => {
     if (['usb','usb-a','usb-b','usb-c','usb2','usb3','micro-usb'].includes(s)) return 'usb';
     // WiFi / Wireless
     if (['wifi','wlan','wireless','802.11','wi-fi','ant','antenna'].includes(s)) return 'wifi';
-    // Fallback: ако не е разпознат — третираме като ethernet (физически порт)
-    // Това покрива всякакви непознати типове от devices-catalog
+    // Fallback: treat unrecognized ports as ethernet
     return 'ethernet';
   };
 

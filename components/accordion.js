@@ -90,7 +90,7 @@ function renderQuizBlock(b) {
 }
 
 function initQuizBlock(root, b) {
-  // Рендерът поставя id "<b.id>-form" на <form>; намираме scope по двата варианта.
+  // Find quiz scope matching rendered element id
   const scope = b.id
     ? (root.querySelector('#' + CSS.escape(b.id)) || root.querySelector('#' + CSS.escape(b.id + '-form')) || root)
     : root;

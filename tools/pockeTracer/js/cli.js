@@ -143,10 +143,7 @@ const CLI = (() => {
 
       if (deviceHasIP(dev, targetIP)) return { dev, path, hops };
 
-      // Forwarding policy:
-      // - L3: routers, L3 switches, cloud (ipRouting=true or known L3 types)
-      // - L2 bridging: classic switches, hubs, taps, APs
-      // - Ring PCs (with In/Out) forward in-ring
+      // Forwarding policy for L3, L2, and ring devices
       const L3_FORWARD = ['router-2911','home-router','switch-3650','switch-3560-24ps','cloud-isp'];
       const L2_FORWARD = ['switch-2960','switch-2960-8','hub-8','coax-tap','access-point','token-ring-mau'];
       const RING_FORWARD = ['pc-ring'];

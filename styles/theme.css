@@ -1,6 +1,4 @@
-/* styles/theme.css — design tokens for the lesson platform.
-   Pulled from the existing portfolio's lesson.css / layout.css so the
-   platform stays visually consistent with what you already had. */
+/* Design tokens for the platform */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 :root {

@@ -14,9 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const catalogGroups = document.querySelectorAll('.catalog-group');
     const noResults = document.getElementById('noResults');
 
-    // ========================================================================
-    // CALCULATOR DEFINITIONS & IMPLEMENTATIONS
-    // ========================================================================
+    // Calculator definitions and implementations
     const calculators = {
 
         // Math calculators
@@ -222,12 +220,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     let res = null;
                     let detail = "";
 
-                    // Търсим c
+                    // Solve for hypotenuse c
                     if (!isNaN(a) && !isNaN(b) && isNaN(c)) {
                         res = Math.sqrt(a * a + b * b);
                         detail = `Хипотенуза c = √(${a}² + ${b}²)`;
                     }
-                    // Търсим a
+                    // Solve for leg a
                     else if (!isNaN(c) && !isNaN(b) && isNaN(a)) {
                         if (c <= b) {
                             detail = "Хипотенузата c трябва да е по-голяма от катета b.";
@@ -236,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             detail = `Катет a = √(${c}² - ${b}²)`;
                         }
                     }
-                    // Търсим b
+                    // Solve for leg b
                     else if (!isNaN(c) && !isNaN(a) && isNaN(b)) {
                         if (c <= a) {
                             detail = "Хипотенузата c трябва да е по-голяма от катета a.";
@@ -467,7 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         return;
                     }
 
-                    const rem = ((a % b) + b) % b; // Математически коректен modulo за отрицателни числа
+                    const rem = ((a % b) + b) % b; // Mathematical modulo for negative numbers
                     const quotient = Math.floor(a / b);
 
                     resultBox.style.display = 'block';
@@ -1060,7 +1058,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         return;
                     }
 
-                    // Сумата, нужна за да се купи същото нещо: Future Cost = amount * (1 + rate)^years
+                    // Future cost: amount * (1 + rate)^years
                     const futureCost = amount * Math.pow(1 + rate, years);
                     // Real purchasing power of money:
                     const realPower = amount / Math.pow(1 + rate, years);
@@ -1341,9 +1339,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // ========================================================================
-    // MODAL CONTROL
-    // ========================================================================
+    // Modal control
     function openCalculator(key) {
         const calc = calculators[key];
         if (!calc) return;
@@ -1358,7 +1354,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
 
-        // Фокус върху първия интерактивен елемент
+        // Focus first interactive element
         setTimeout(() => {
             const firstInput = modalContent.querySelector('input, select, textarea, button');
             if (firstInput) firstInput.focus();
@@ -1372,7 +1368,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalContent.innerHTML = '';
     }
 
-    // Събития за отваряне на калкулатор от картите
+    // Open calculator card events
     // Preserve mode query param for sidebar navigation
     function withMode(url) {
         try {

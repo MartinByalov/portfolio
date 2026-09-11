@@ -23,8 +23,7 @@ const Devices = (() => {
         return n;
     };
 
-    // Render device DOM element from a saved state object (used by History.restore)
-    // Does NOT push to list or call History.save
+    // Render device DOM element from a saved state object without saving history
     const renderDevice = (device) => {
         const el = Utils.createEl('div', { className: 'placed-device', id: device.id });
         el.style.left = device.x + 'px';

@@ -1,6 +1,4 @@
-/* styles/layout.css — header / sidebar drawer / footer / course-layout.
-   Ported from the current site's layout.css + sidebar.css so the
-   platform looks like the same product, just data-driven now. */
+/* Layout styles: header, sidebar drawer, footer, course-layout */
 
 /* ---------- header ---------- */
 .main-header {
@@ -498,16 +496,13 @@ body.landing-mode .home-section.subject-section {
   margin-bottom: 6px;
 }
 
-/* Разделите (accordion) в course изглед: заглавието и стрелката вертикално
-   подравнени на едно ниво (center) вътре в балончето на раздела. */
+/* Course view accordion header alignment */
 .course-main .accordion-header {
   align-items: center;
   min-height: 64px;
 }
 
-/* margin: 0 занулява наследения margin-bottom:12px от .card-title
-   (components.css), който иначе измества заглавието нагоре спрямо стрелката.
-   В урока заглавията на разделите са подравнени ВЛЯВО, пример: "1. Компютърна система". */
+/* Reset margin to align title with expand arrow */
 .course-main .accordion-header .card-title {
   flex: 1;
   margin: 0;
@@ -518,7 +513,7 @@ body.landing-mode .home-section.subject-section {
   line-height: 1.35;
 }
 
-/* Стрелката за разгръщане стои на същото вертикално ниво като заглавието. */
+/* Vertical alignment for expand arrow */
 .course-main .accordion-header .card-icon-mini {
   display: flex;
   align-items: center;
@@ -535,7 +530,7 @@ body.landing-mode .home-section.subject-section {
   margin-bottom: 14px;
 }
 
-/* Цел на урока — осезаема лента с мек фон (като етикетите), икона-балонче + текст. */
+/* Lesson goal banner styles */
 .lesson-goal-line {
   display: flex;
   align-items: flex-start;
@@ -568,7 +563,7 @@ body.landing-mode .home-section.subject-section {
   padding-top: 6px;
 }
 
-/* Тонове за целта — същата палитра като етикетите. */
+/* Tone variations for lesson goals */
 .lesson-goal-line.tone-orange {
   background: #fdeadd;
   border-color: #f6c9a8;
@@ -597,9 +592,7 @@ body.landing-mode .home-section.subject-section {
 }
 .lesson-goal-line.tone-purple .lesson-goal-ico { background: #8e44ad; }
 
-/* Етикети-разделители в урока (Инструктаж, Упражнение...).
-   Пълна ширина, мек tint фон + икона-балонче, заоблени като акордеона.
-   Всеки етикет си има тон (цвят), зададен от JSON полето "tone". */
+/* Lesson section divider tags with tone variations */
 .component.tag {
   margin: 22px 0 14px;
 }
@@ -655,7 +648,7 @@ button.lesson-tag:hover {
   opacity: 0.7;
 }
 
-/* Тонове — меки цветове като категориите новини. */
+/* Tone color palettes */
 .lesson-tag.tone-blue {
   background: #e8f1fd;
   border-color: #c4dbf7;
@@ -684,7 +677,7 @@ button.lesson-tag:hover {
 }
 .lesson-tag.tone-purple .lesson-tag-ico { background: #8e44ad; }
 
-/* Акордеон-панел с тон (напр. "Пробно Входно ниво") — същият визуален език. */
+/* Accordion panel with tone palette */
 .accordion-item.tone-green {
   border-color: #bfe6cc;
   border-left: 5px solid #27ae60;
@@ -748,7 +741,7 @@ button.lesson-tag:hover {
 .tone-purple .acc-tone-ico { background: #8e44ad; }
 .accordion-header .card-title { flex: 1; }
 
-/* Бутон за електронен учебник — осезаема лента с мек фон (като етикетите в урока). */
+/* E-textbook button styles */
 .course-textbook-btn {
   display: flex;
   align-items: center;

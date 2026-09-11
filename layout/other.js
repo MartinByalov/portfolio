@@ -16,9 +16,7 @@ function esc(v) {
   }[ch]));
 }
 
-// -------------------------------------------------------------
 // Main view entry point
-// -------------------------------------------------------------
 export function renderOtherPage(subRoute) {
   if (subRoute === 'nft-generator') {
     return renderNftTutorial();
@@ -1209,21 +1207,21 @@ async function initChartsTutorialDemo() {
     function setChart(typeKey) {
       const preset = CHART_PRESETS[typeKey] || CHART_PRESETS.line;
 
-      // Унищожаване на предишната инстанция, ако съществува
+      // Destroy previous chart instance
       if (activeChartInstance) {
         activeChartInstance.destroy();
       }
 
-      // Обновяване на активния бутон
+      // Update active tab button
       tabButtons.forEach(btn => {
         btn.classList.toggle('active', btn.getAttribute('data-chart-type') === typeKey);
       });
 
-      // Показване на съответния сорс код
+      // Display corresponding source code
       if (codeDisplay) codeDisplay.innerText = preset.codeSnippet;
       if (filenameEl) filenameEl.innerText = preset.filename;
 
-      // Създаване на новата диаграма
+      // Create new chart instance
       activeChartInstance = new ChartClass(canvas, preset.config);
     }
 

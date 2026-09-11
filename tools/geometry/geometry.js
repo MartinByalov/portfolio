@@ -406,12 +406,12 @@ svg.addEventListener("pointerdown", event => {
         currentTool === "circle"
     ) {
         if (temporaryPoints.length === 0) {
-            // Започваме чертане с влачене (drag-to-draw)
+            // Start drag-to-draw mode
             isDrawingShape = true;
             shapeDragStart = point;
             createPreviewPoint(point);
         } else {
-            // Второ кликване в режим последователно кликване
+            // Second click in sequential click mode
             const first = temporaryPoints[0];
             temporaryPoints = [];
             removePreview();
@@ -515,7 +515,7 @@ svg.addEventListener("pointerup", event => {
         const dist = distance(shapeDragStart, point);
 
         if (dist > 8) {
-            // Влаченето е завършено — създаваме фигурата веднага!
+            // Drag finished: create shape immediately
             removePreview();
             temporaryPoints = [];
 
@@ -528,7 +528,7 @@ svg.addEventListener("pointerup", event => {
             render();
             return;
         } else {
-            // Беше единичен клик — оставяме начална точка за втория клик
+            // Single click: save start point for second click
             temporaryPoints = [shapeDragStart];
             shapeDragStart = null;
             createPreviewPoint(temporaryPoints[0]);

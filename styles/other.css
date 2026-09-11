@@ -1,7 +1,4 @@
-/* styles/other.css — Стил за страница "Други" и блогови уроци (tutorials)
-   Вдъхновен от стила на MartinByalov/python с чиста типография,
-   JetBrains Mono за код/badges, стъпкови блокове и тъмни акцентни хедъри.
-*/
+/* Styles for Other page and tutorials */
 
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap');
 
@@ -39,9 +36,7 @@
   --tut-radius: 12px;
 }
 
-/* =========================================================
-   1. КАТАЛОГ С КАРТИ (Междинна страница #/other)
-   ========================================================= */
+/* 1. Catalog cards view */
 .other-catalog-container {
   max-width: 1100px;
   margin: 0 auto;
@@ -285,9 +280,7 @@
   border-color: #ffffff;
 }
 
-/* =========================================================
-   2. ЕДИНИЧЕН УРОК / БЛОГ ПОСТ (стил MartinByalov/python)
-   ========================================================= */
+/* 2. Tutorial layout */
 .tutorial-view-container {
   font-family: 'Nunito', sans-serif;
   color: var(--tut-text);
@@ -295,7 +288,7 @@
   padding-bottom: 80px;
 }
 
-/* Навигация назад */
+/* Back navigation */
 .tutorial-top-bar {
   max-width: 900px;
   margin: 0 auto 16px;
@@ -327,7 +320,7 @@
   transform: translateX(-2px);
 }
 
-/* Тъмен хедър в стил MartinByalov/python */
+/* Dark header styling */
 .tut-header {
   background: linear-gradient(135deg, #1a1f35 0%, #2d1f5e 100%);
   color: #ffffff;
@@ -405,14 +398,14 @@
   transform: translateY(-1px);
 }
 
-/* Основно тяло */
+/* Main content */
 .tut-main {
   max-width: 900px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-/* Секционни заглавия (.sh) с черта и badge */
+/* Section headers */
 .sh {
   display: flex;
   align-items: center;
@@ -457,7 +450,7 @@
   background: var(--tut-border);
 }
 
-/* Прегледни карти (.overview) */
+/* Overview cards */
 .overview {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
@@ -499,7 +492,7 @@
   margin: 0;
 }
 
-/* Стъпкови блокове (.step-block) */
+/* Step blocks */
 .step-block {
   background: var(--tut-white);
   border: 1px solid var(--tut-border);
@@ -558,7 +551,7 @@
   padding: 22px 24px;
 }
 
-/* Номериран списък (.ilist) с кръгли цветни значки */
+/* Numbered list */
 .ilist {
   list-style: none;
   counter-reset: ic;
@@ -597,7 +590,7 @@
 .ilist.green li::before  { background: var(--tut-green); }
 .ilist.purple li::before { background: var(--tut-purple); }
 
-/* Кодови прозорци (.code-wrap) в macOS стил */
+/* Code windows */
 .code-wrap {
   border-radius: 10px;
   overflow: hidden;
@@ -672,7 +665,7 @@
   margin: 0;
 }
 
-/* Синтактично подчертаване за код */
+/* Code syntax styling */
 .kw { color: #93c5fd; font-weight: 600; }
 .fn { color: #6ee7b7; }
 .st { color: #fde68a; }
@@ -681,7 +674,7 @@
 .tg { color: #f87171; }
 .num{ color: #fca5a5; }
 
-/* Карета със съвети (.callout) */
+/* Callout cards */
 .callout {
   border-radius: 0 var(--tut-radius) var(--tut-radius) 0;
   padding: 14px 18px;
@@ -714,9 +707,7 @@
   color: #4c1d95;
 }
 
-/* =========================================================
-   3. ИНТЕРАКТИВНИ СИМУЛАЦИИ (Live Sandboxes)
-   ========================================================= */
+/* 3. Interactive live sandboxes */
 .live-sandbox-block {
   background: #0d1117;
   border: 1px solid #30363d;
@@ -794,7 +785,7 @@
   height: auto;
 }
 
-/* Специфично за NFT демо */
+/* NFT demo styles */
 .nft-demo-grid {
   display: grid;
   grid-template-columns: 240px 1fr;

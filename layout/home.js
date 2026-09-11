@@ -207,7 +207,7 @@ function newsSiteName(feedTitle, feedUrl) {
       return host || raw || 'Новини';
     } catch { return raw || 'Новини'; }
   }
-  // rss2json връща понякога HTML в feed.title — чистим го.
+  // Clean HTML from feed title if present
   const cleaned = raw.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
   return cleaned || 'Новини';
 }
@@ -295,7 +295,7 @@ async function loadNewsBox(source, signal, onItems) {
       if (signal.aborted) return;
     }
   }
-  // Fallback: използваме локални данни, ако RSS не работи
+  // Fallback to local items if RSS fails
   const fallback = FALLBACK_NEWS[source.name];
   if (fallback) {
     onItems(fallback);
@@ -314,7 +314,7 @@ function categoryClass(source) {
 }
 
 function metaSiteLine(item) {
-  // Долу вляво — САМО сайтът-източник (напр. kaldata.com), без [object Object] и без време.
+  // Source website display
   return `<span class="news-source"><i class="fas fa-newspaper"></i> ${escapeHtmlLanding(String(item.source || 'Новини'))}</span>`;
 }
 

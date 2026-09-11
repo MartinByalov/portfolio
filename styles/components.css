@@ -1,6 +1,4 @@
-/* styles/components.css — lesson-body component styles: accordion,
-   activity cards, exercise modal, quiz. Matches the accordion/card
-   styling already used across the site. */
+/* Component styles: accordion, activity cards, exercise modal, quiz */
 
 /* --- accordion (used by both text-group and course-list) --- */
 .accordion-item {
@@ -249,7 +247,7 @@
 
 .resources-grid {
   display: grid;
-  /* по-квадратични карти на предметите: по-тесни колони вместо издължени правоъгълници */
+  /* Compact square subject card layout */
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 22px;
   padding: 20px;
@@ -341,7 +339,7 @@
   }
 }
 
-/* --- animated-diagram (стъпкова схема в урока) --- */
+/* --- animated-diagram step layout in lesson --- */
 .adiagram-intro {
   color: #475569;
   margin-bottom: 14px;
@@ -354,8 +352,7 @@
   padding: 20px;
   margin-bottom: 0;
 }
-/* When the diagram lives inside an accordion panel, the outer card is redundant —
-   render it flush with the panel content via the .adiagram-nested modifier. */
+/* Flush rendering for nested animated diagrams */
 .adiagram-nested .adiagram-card {
   border: none;
   border-radius: 0;
@@ -462,7 +459,7 @@
   .adiagram-nav { flex-wrap: wrap; }
 }
 
-/* --- about / За мен landing (hero fullscreen) --- */
+/* --- About page hero fullscreen layout --- */
 
 @keyframes aboutSlowZoom {
   0% { transform: scale(1); }
@@ -620,11 +617,8 @@ body.about-mode .home-content {
 
 /* ============ PORTFOLIO MODE TOGGLES ============ */
 
-/* The header title/icon is dynamic (Header.setTitle) — only the search box
-   still toggles with the mode. */
-/* Two footer modes:
-     - learning (Учебни ресурси): под Контакти пише САМО Имейл byalov.v.martin@gmail.com
-     - portfolio (след правилен код): под Контакти пише Тел + Имейл */
+/* Dynamic header title and search box toggles */
+/* Footer modes: learning vs portfolio */
 .header-search-only { display: flex !important; }
 .footer-phone-only { display: none; }
 
@@ -1265,8 +1259,7 @@ body.portfolio-mode .main-portfolio-content {
   .tool-icon-main img { max-width: 48px; max-height: 48px; }
 }
 /* ============ PROFESSIONAL EXPERIENCE PAGE (#/experience) ============ */
-/* Ported from old/public/styles/experience.css so the SPA experience view
-   keeps the same look as the original experience.html page. */
+/* Experience view layout */
 
 .experience-section {
   padding: 100px 5% 50px;
@@ -1487,9 +1480,7 @@ body.portfolio-mode .main-portfolio-content {
   margin-top: 8px;
 }
 
-/* Scope: experience .card-icon is a 60px orange tile (old experience.css).
-   It must NOT inherit the generic .card-icon (3rem, dark) used by
-   Учебни ресурси cards elsewhere in components.css. */
+/* Experience tile icon sizing */
 .experience-section .card-icon {
   width: 60px;
   height: 60px;
@@ -1514,9 +1505,9 @@ body.portfolio-mode .main-portfolio-content {
   }
 }
 
-/* ============================ LANDING (Учебни ресурси) ============================ */
+/* ============================ LEARNING RESOURCES LANDING ============================ */
 
-/* Разгъващ се слайдер с предмети (клик разширява картата) */
+/* Subject slider cards with expanding interaction */
 .exp-slider {
   display: flex;
   gap: 14px;
@@ -1617,7 +1608,7 @@ body.portfolio-mode .main-portfolio-content {
   margin-top: 20px;
 }
 
-/* новини — trending-area (като aznews) */
+/* News and trending articles feed */
 .trending-area { margin-top: 0; }
 .trending-bar {
   display: flex;
@@ -1860,7 +1851,7 @@ body.portfolio-mode .main-portfolio-content {
   image-rendering: auto;
   position: relative;
 }
-/* Малките карти вдясно (Образование/Наука) ползват икона вместо снимка */
+/* Compact cards using icons */
 .trending-post-icon {
   width: 110px;
   min-height: 130px;
@@ -1936,7 +1927,7 @@ body.portfolio-mode .main-portfolio-content {
 }
 .news-medium-link:hover { color: #fff; }
 
-/* Подобряване на качеството на изображенията при висока резолюция */
+/* High-DPI image rendering optimization */
 .trending-featured,
 .trending-post-img,
 .trending-medium {
@@ -2052,7 +2043,7 @@ body.portfolio-mode .main-portfolio-content {
   margin-bottom: 14px;
 }
 
-/* Стретч: картите запълватя цялата ширина на секция (iOS подравняни граници) */
+/* Full width aligned card styling */
 .component.accordion.items-stretch .accordion-item {
   width: 100%;
 }
@@ -2065,9 +2056,7 @@ body.portfolio-mode .main-portfolio-content {
   padding: 18px 22px;
 }
 
-/* Заглавието се подравнява вертикално в самия div.accordion-header.
-   По подразбиране (в урока) заглавията са подравнени ВЛЯВО;
-   center/right се управляват от data-title-align. */
+/* Accordion header text vertical alignment */
 .component.accordion .accordion-header .card-title {
   flex: 1;
   margin: 0;
@@ -2093,7 +2082,7 @@ body.portfolio-mode .main-portfolio-content {
   text-align: right;
 }
 
-/* скакателни връзки от сайдбар → лесно скоят под фиксирания хедър */
+/* Scroll offset for fixed header navigation */
 .component.accordion .accordion-item {
   scroll-margin-top: 90px;
 }
@@ -2277,7 +2266,7 @@ body.portfolio-mode .main-portfolio-content {
   color: #1e293b;
 }
 
-/* ---------- lightbox (голям мащаб за снимките в урока) ---------- */
+/* ---------- Lightbox modal for lesson images ---------- */
 
 .lb-lightbox {
   position: fixed;
@@ -2367,7 +2356,7 @@ body.lb-lightbox-open {
 
 /* ---------- rich media blocks (components/lesson-media.js) ---------- */
 
-/* split-diagram: централно ядро + контурни разклонения */
+/* Split diagram: central core with branching nodes */
 .split-diagram { text-align: center; margin: 14px 0; }
 .sd-center {
   display: inline-block;
@@ -2404,7 +2393,7 @@ body.lb-lightbox-open {
 .sd-branch-label { font-weight: 800; font-size: 0.9rem; letter-spacing: 0.3px; }
 .sd-branch-sub { font-size: 0.78rem; color: #64748b; }
 
-/* tree-diagram: вертикална йерархична верига */
+/* Tree diagram: vertical hierarchy chain */
 .tree-diagram { display: flex; flex-direction: column; align-items: center; margin: 14px 0; }
 .tree-node {
   width: min(560px, 100%);
@@ -2430,7 +2419,7 @@ body.lb-lightbox-open {
   font-size: 0.7rem;
 }
 
-/* mindmap: централен кръг + лъчи */
+/* Mindmap diagram: central node with radial branches */
 .mindmap { display: flex; align-items: center; justify-content: center; gap: 20px; margin: 14px 0; }
 .mm-col { display: flex; flex-direction: column; gap: 14px; flex: 1 1 0; min-width: 0; }
 .mm-node {
@@ -2486,7 +2475,7 @@ body.lb-lightbox-open {
   box-shadow: 0 12px 28px rgba(109, 40, 217, 0.35);
 }
 
-/* flowchart-horizontal: стъпки + стрелки + предупреждение */
+/* Horizontal flowchart with steps and arrows */
 .flow-steps { display: flex; align-items: stretch; margin: 14px 0 6px; }
 .flow-step {
   flex: 1 1 0;
@@ -2531,7 +2520,7 @@ body.lb-lightbox-open {
   font-weight: 600;
 }
 
-/* ui-mockup: чат на смартфон */
+/* UI mockup: smartphone chat interface */
 .chat-mockup { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center; gap: 16px; }
 .mockup-phone {
   width: 280px;
@@ -2599,7 +2588,7 @@ body.lb-lightbox-open {
 }
 .mockup-side-dot { width: 10px; height: 10px; border-radius: 50%; flex: 0 0 auto; }
 
-/* ui-mockup: блог страница */
+/* UI mockup: blog page layout */
 .blog-mockup { display: flex; flex-wrap: wrap; gap: 14px; }
 .blog-main { flex: 2 1 320px; background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 16px; min-width: 0; }
 .blog-header { font-weight: 800; color: #db2777; letter-spacing: 0.5px; border-bottom: 2px solid #fce7f3; padding-bottom: 8px; margin-bottom: 10px; }
@@ -2650,7 +2639,7 @@ body.lb-lightbox-open {
 .blog-badge { display: inline-block; background: #fce7f3; color: #be185d; border-radius: 999px; padding: 2px 10px; font-size: 0.72rem; font-weight: 700; margin: 8px 8px 0 0; }
 .blog-btn { display: inline-block; background: #ec4899; color: #fff; border-radius: 8px; padding: 5px 12px; font-size: 0.78rem; font-weight: 700; margin-top: 8px; }
 
-/* ui-mockup: настройки за поверителност */
+/* UI mockup: privacy settings screen */
 .privacy-mockup { max-width: 520px; margin: 0 auto; background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; }
 .privacy-header { background: #6d28d9; color: #fff; padding: 10px 16px; font-weight: 700; font-size: 0.92rem; display: flex; align-items: center; gap: 8px; }
 .privacy-field { padding: 12px 16px; border-bottom: 1px solid #f1f5f9; }
@@ -2672,14 +2661,14 @@ body.lb-lightbox-open {
 .pp-option.selected { border-color: #6d28d9; background: #f5f3ff; color: #4c1d95; font-weight: 700; }
 .pp-option.selected .pp-dot { border-color: #6d28d9; background: #6d28d9; }
 
-/* infographic: мрежа от рискове (grid-2x3) */
+/* Infographic: 2x3 risks grid */
 .risk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 14px 0; }
 .risk-card { background: #fff; border: 1px solid #e2e8f0; border-left: 5px solid; border-radius: 10px; padding: 12px 14px; }
 .risk-card-icon { font-size: 1.05rem; }
 .risk-card-title { font-weight: 800; font-size: 0.92rem; color: #1e293b; margin: 4px 0 2px; }
 .risk-card-sub { font-size: 0.8rem; color: #64748b; }
 
-/* infographic: вертикален чек-лист */
+/* Infographic: vertical checklist */
 .checklist { display: flex; flex-direction: column; gap: 10px; margin: 14px 0; }
 .checklist-item { display: flex; align-items: flex-start; gap: 12px; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; }
 .checklist-badge {
@@ -2697,7 +2686,7 @@ body.lb-lightbox-open {
 .checklist-q { font-weight: 800; font-size: 0.95rem; letter-spacing: 0.2px; }
 .checklist-sub { font-size: 0.85rem; color: #475569; margin-top: 2px; }
 
-/* таблица в урок */
+/* Table styling inside lessons */
 .lb-table-wrap { overflow-x: auto; margin: 14px 0; }
 .lb-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; font-size: 0.88rem; }
 .lb-table th { background: #1e293b; color: #fff; text-align: left; padding: 10px 14px; font-size: 0.82rem; letter-spacing: 0.3px; }
@@ -2727,7 +2716,7 @@ body.lb-lightbox-open {
 .lb-viz .lb-image img,
 .titled-image img { width: 100%; height: auto; border-radius: 8px; }
 
-/* smartApp.png + Медийни типове панел */
+/* Smart app media types panel */
 .media-types-row {
   display: flex;
   flex-wrap: wrap;
@@ -2756,7 +2745,7 @@ body.lb-lightbox-open {
   font-size: 0.95rem;
 }
 
-/* списък термин -> описание в акордеона „Речник“ */
+/* Glossary term and definition list */
 .glossary-list { margin: 0; }
 .glossary-row {
   display: flex;
@@ -2780,7 +2769,7 @@ button.about-btn-primary {
   font-family: inherit;
 }
 
-/* ============================ ТЕРМИНОЛОГИЧЕН РЕЧНИК ============================ */
+/* ============================ GLOSSARY ============================ */
 
 .glossary-tools {
   display: flex;
@@ -2853,7 +2842,7 @@ button.about-btn-primary {
 }
 .glossary-empty { color: #999; font-size: 0.95rem; }
 
-/* Режим Списък / Флаш карти — същите заоблени квадратични стилове */
+/* List / Flashcard toggle modes */
 .glossary-modes {
   display: flex;
   gap: 8px;
@@ -2879,7 +2868,7 @@ button.about-btn-primary {
   border-color: var(--dark-bg);
 }
 
-/* Флаш карти — в grid-а стоят САМО наименованията */
+/* Flashcards grid display */
 .flash-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -2911,7 +2900,7 @@ button.about-btn-primary {
 .flash-card-hint { font-size: 0.78rem; color: #999; }
 .flash-card-hint i { margin-right: 4px; }
 
-/* Уголемена карта в центъра на екрана */
+/* Centered enlarged flashcard */
 .flash-overlay {
   position: fixed;
   inset: 0;

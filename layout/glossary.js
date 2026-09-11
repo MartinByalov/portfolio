@@ -42,7 +42,7 @@ async function loadTerms() {
           if (!glossary) continue;
           const lessonTags = [lesson.grade ? lesson.grade + ' клас' : '', lesson.id || course.id].filter(Boolean).join(' ');
           for (const item of glossary.items || []) {
-            // нов формат: блок glossary-list вътре в съдържанието
+            // Modern format: glossary-list block
             for (const block of item.content || []) {
               if (block && block.type === 'glossary-list') {
                 for (const it of block.items || []) {
@@ -52,7 +52,7 @@ async function loadTerms() {
                 }
               }
             }
-            // стар формат: самият item е термин
+            // Legacy format: item itself is a term
             if (item.title && item.title !== 'Речник' && item.definition) {
               terms.push({ term: item.title, definition: item.definition, tags: lessonTags });
             }
@@ -139,11 +139,11 @@ export function initGlossaryPage() {
   let query = '';
   let mode = 'list';
 
-  // Термините идват от „Речник“ акордеоните в края на урокoвете.
+  // Load terms from lesson glossary sections
   loadTerms().then(terms => {
     const gridNow = document.getElementById('glossary-grid');
     const alphabetNow = document.getElementById('glossary-alphabet');
-    if (!gridNow || gridNow !== grid || !alphabetNow) return; // навигацията е сменена
+    if (!gridNow || gridNow !== grid || !alphabetNow) return; // Navigation changed
     const loading = document.getElementById('glossary-loading');
     if (loading) loading.remove();
     if (!terms.length) {
@@ -175,7 +175,7 @@ export function initGlossaryPage() {
       card.classList.toggle('is-hidden', !show);
       if (show) visible++;
     });
-    // Флаш режим: картите показват САМО наименованията.
+    // Flashcard mode: cards display term only
     if (mode === 'flash' && flashGrid) {
       const list = visibleTerms();
       flashGrid.innerHTML = list.map(t => renderFlashCard(t, t.idx)).join('');

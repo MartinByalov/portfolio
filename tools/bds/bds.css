@@ -1,6 +1,4 @@
-/* tools/bds/bds.css — инструментът "БДС Клавиатура".
-   Визуалът на клавиатурата (оцветяване по пръсти, анимации) е запазен
-   от оригинала в morphemes-main (class=section2). */
+/* BDS Keyboard training tool styling */
 
 * { box-sizing: border-box; }
 

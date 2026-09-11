@@ -11,15 +11,15 @@ const ZADANIE_TOOLS = [
 ];
 
 const TRAINING_TOOLS = [
-  { img: 'images/smartest.png',    alt: 'СмарТест',          label: 'СмарТест',               href: 'https://www.smartest.bg/' },
-  { img: 'images/googleClassroom.png', alt: 'Google Classroom', label: 'Google Classroom',    href: 'https://edu.google.com/workspace-for-education/products/classroom/' },
-  { img: 'images/prepodavame.png', alt: 'Prepodavame.bg',    label: 'Prepodavame.bg',         href: 'https://prepodavame.bg/' },
-  { img: 'images/uchase.png',      alt: 'Уча.се',            label: 'Уча.се',                 href: 'https://ucha.se/' },
-  { img: 'images/domino.png',      alt: 'Изд. ДОМИНО',       label: 'Изд. ДОМИНО',            href: 'https://ebook.domino.bg/' },
-  { img: 'images/smartDraw.png',   alt: 'SmartDraw',         label: 'SmartDraw',              href: 'https://www.smartdraw.com/' },
-  { img: 'images/sqlOnline.png',   alt: 'SQLite Online',     label: 'SQLite Online',          href: 'https://sqliteonline.com/' },
-  { img: 'images/logicLy.png',     alt: 'Logic.ly',          label: 'Logic.ly',               href: 'https://logic.ly/demo/' },
-  { img: '/tools/bds/gimp.svg',    alt: 'GIMP',              label: 'БДС Клавиатура',         href: '/tools/bds/index.html' }
+  { img: '/images/smartest.png',        alt: 'СмарТест',          label: 'СмарТест',               href: 'https://www.smartest.bg/' },
+  { img: '/images/googleClassroom.png', alt: 'Google Classroom', label: 'Google Classroom',    href: 'https://edu.google.com/workspace-for-education/products/classroom/' },
+  { img: '/images/prepodavame.png',     alt: 'Prepodavame.bg',    label: 'Prepodavame.bg',         href: 'https://prepodavame.bg/' },
+  { img: '/images/uchase.png',          alt: 'Уча.се',            label: 'Уча.се',                 href: 'https://ucha.se/' },
+  { img: '/images/domino.png',          alt: 'Изд. ДОМИНО',       label: 'Изд. ДОМИНО',            href: 'https://ebook.domino.bg/' },
+  { img: '/images/smartDraw.png',       alt: 'SmartDraw',         label: 'SmartDraw',              href: 'https://www.smartdraw.com/' },
+  { img: '/images/sqlOnline.png',       alt: 'SQLite Online',     label: 'SQLite Online',          href: 'https://sqliteonline.com/' },
+  { img: '/images/logicLy.png',         alt: 'Logic.ly',          label: 'Logic.ly',               href: 'https://logic.ly/demo/' },
+  { img: '/tools/bds/gimp.svg',        alt: 'GIMP',              label: 'БДС Клавиатура',         href: '/tools/bds/index.html' }
 ];
 
 const SKILLS_PROG = [
@@ -115,7 +115,7 @@ export function renderPortfolioPage() {
 
           <div class="profile-summary-row">
             <div class="profile-square-img">
-              <img src="images/profile.jpg" alt="Мартин Бялов" onerror="this.style.display='none'">
+              <img src="/images/profile.jpg" alt="Мартин Бялов" onerror="this.style.display='none'">
             </div>
             <div class="profile-info-text">
               <p class="teacher-degree">Бакалавър по Педагогика на обучението по математика и информатика</p>

@@ -13,7 +13,7 @@ export function isPortfolioUnlocked() {
 
 export function renderAboutPage() {
   return `
-    <audio id="about-bgMusic" src="audio/background_sound.mp3" autoplay loop preload="auto"></audio>
+    <audio id="about-bgMusic" src="/audio/background_sound.mp3" autoplay loop preload="auto"></audio>
 
     <section class="about-hero-wrapper">
       <div class="about-hero-overlay"></div>

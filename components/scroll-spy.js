@@ -10,7 +10,7 @@ export function initScrollSpy() {
   }).filter(Boolean);
   if (!targets.length) return;
 
-  // Клик на сайдбар линк → отвори съответния акордеон item (ако е затворен)
+  // Open target accordion item on link click if closed
   links.forEach(a => {
     if (a.dataset.scrollSpyBound) return;
     a.dataset.scrollSpyBound = 'true';
@@ -39,7 +39,7 @@ export function initScrollSpy() {
     targets.forEach(t => t.link.classList.toggle('active', t === current));
   };
 
-  // Следим и скрола, и преоразмеряване (акордеон content проано адаптир).
+  // Track scroll and resize events
   window.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update, { passive: true });
   update();

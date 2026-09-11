@@ -10,7 +10,7 @@ const BDS_ROWS = [
         { id: 'Digit9', base: '9', shift: '_' }, { id: 'Digit0', base: '0', shift: '№' },
         { id: 'Minus', base: '-', shift: 'І' }, { id: 'Equal', base: '.', shift: 'Ѵ' }
     ],
-    [ // горен буквен ред
+    [ // Top letter row
         { id: 'KeyQ', base: ',', shift: 'Ы' }, { id: 'KeyW', base: 'у', shift: 'У' },
         { id: 'KeyE', base: 'е', shift: 'Е' }, { id: 'KeyR', base: 'и', shift: 'И' },
         { id: 'KeyT', base: 'ш', shift: 'Ш' }, { id: 'KeyY', base: 'щ', shift: 'Щ' },
@@ -18,7 +18,7 @@ const BDS_ROWS = [
         { id: 'KeyO', base: 'д', shift: 'Д' }, { id: 'KeyP', base: 'з', shift: 'З' },
         { id: 'BracketLeft', base: 'ц', shift: 'Ц' }, { id: 'BracketRight', base: ';', shift: '§' }
     ],
-    [ // среден буквен ред
+    [ // Home letter row
         { id: 'KeyA', base: 'ь', shift: 'Ь' }, { id: 'KeyS', base: 'я', shift: 'Я' },
         { id: 'KeyD', base: 'а', shift: 'А' }, { id: 'KeyF', base: 'о', shift: 'О' },
         { id: 'KeyG', base: 'ж', shift: 'Ж' }, { id: 'KeyH', base: 'г', shift: 'Г' },
@@ -26,7 +26,7 @@ const BDS_ROWS = [
         { id: 'KeyL', base: 'в', shift: 'В' }, { id: 'Semicolon', base: 'м', shift: 'М' },
         { id: 'Quote', base: 'ч', shift: 'Ч' }
     ],
-    [ // долен буквен ред
+    [ // Bottom letter row
         { id: 'KeyZ', base: 'ю', shift: 'Ю' }, { id: 'KeyX', base: 'й', shift: 'Й' },
         { id: 'KeyC', base: 'ъ', shift: 'Ъ' }, { id: 'KeyV', base: 'э', shift: 'Э' },
         { id: 'KeyB', base: 'ф', shift: 'Ф' }, { id: 'KeyN', base: 'х', shift: 'Х' },
@@ -108,33 +108,33 @@ function buildRow(cls) {
     return ul;
 }
 
-// ред 0: цифри + BACK
+// Row 0: number keys and backspace
 const r0 = buildRow('row-0');
 BDS_ROWS[0].forEach(k => r0.appendChild(li(k.id, fingerOf(k.id), k.base, k)));
 r0.appendChild(li('back', 'pinky fill-out-key', 'BACK'));
 keyboardEl.appendChild(r0);
 
-// ред 1: TAB + горен буквен ред
+// Row 1: tab and top letter row
 const r1 = buildRow('row-1');
 r1.appendChild(li('tab', 'pinky fill-out-key', 'TAB'));
 BDS_ROWS[1].forEach(k => r1.appendChild(li(k.id, fingerOf(k.id), k.base.toUpperCase(), k)));
 keyboardEl.appendChild(r1);
 
-// ред 2: CAPS + среден буквен ред + ENTER
+// Row 2: caps, home row, enter
 const r2 = buildRow('row-2');
 r2.appendChild(li('caps', 'pinky fill-out-key', 'CAPS'));
 BDS_ROWS[2].forEach(k => r2.appendChild(li(k.id, fingerOf(k.id), k.base.toUpperCase(), k)));
 r2.appendChild(li('enter', 'pinky fill-out-key', 'ENT'));
 keyboardEl.appendChild(r2);
 
-// ред 3: SHIFT + долен буквен ред + SHIFT
+// Row 3: shift and bottom row
 const r3 = buildRow('row-3');
 r3.appendChild(li('ShiftLeft', 'pinky', 'SHIFT'));
 BDS_ROWS[3].forEach(k => r3.appendChild(li(k.id, fingerOf(k.id), k.base.toUpperCase(), k)));
 r3.appendChild(li('ShiftRight', 'pinky', 'SHIFT'));
 keyboardEl.appendChild(r3);
 
-// ред 4: SPACE
+// Row 4: spacebar
 const r4 = buildRow('row-4');
 r4.appendChild(li('Space', 'pinky', 'SPACE'));
 keyboardEl.appendChild(r4);
@@ -174,14 +174,14 @@ const BUILTIN_BOOKS = [
     }
 ];
 
-let targetText = '';   // текст, който се преписва
-let position = 0;      // докъде сме стигнали
+let targetText = '';   // Target text to type
+let position = 0;      // Current typed position
 let wrongCharacters = 0;
 let totalKeystrokes = 0;
-let books = [...BUILTIN_BOOKS]; // стартира с вградените книги за мигновен старт
+let books = [...BUILTIN_BOOKS]; // Initialize with built-in books
 let hasMistake = false;
 
-// Създаване на речник за бързо търсене код -> БДС знаци
+// Map physical keycodes to BDS characters
 const CODE_TO_BDS = {};
 BDS_ROWS.flat().forEach(k => {
     CODE_TO_BDS[k.id] = { base: k.base, shift: k.shift };
@@ -271,7 +271,7 @@ function processKeyInput(code, key, explicitChar, isShift) {
     if (!targetText || position >= targetText.length) return;
     if (['Shift', 'Control', 'Alt', 'CapsLock', 'Meta', 'ContextMenu'].includes(key)) return;
 
-    // Backspace — връщане с един символ назад
+    // Backspace: step back one character
     if (key === 'Backspace' || code === 'Backspace') {
         if (position > 0) {
             position--;
@@ -290,7 +290,7 @@ function processKeyInput(code, key, explicitChar, isShift) {
     const expected = targetText[position];
     const map = CHAR_MAP[expected] || CHAR_MAP[expected.toLowerCase()];
 
-    // Ако очакваният символ не е в БДС подредбата (редки символи), преминава напред
+    // Skip characters outside BDS layout
     if (!map) {
         position++;
         storyTextArea.value = targetText.slice(0, position);
@@ -302,10 +302,7 @@ function processKeyInput(code, key, explicitChar, isShift) {
 
     totalKeystrokes++;
 
-    // Определяне на въведения знак:
-    // 1) Явно предаден знак от екранния клавиш
-    // 2) ИЛИ съответствието от физическия клавиш спрямо БДС (CODE_TO_BDS)
-    // 3) ИЛИ въведения знак от системната клавиатура
+    // Determine input character from onscreen key, physical key, or system input
     const bdsChar = CODE_TO_BDS[code] ? (isShift ? CODE_TO_BDS[code].shift : CODE_TO_BDS[code].base) : null;
     const candidate = explicitChar || bdsChar || key;
 
@@ -340,13 +337,13 @@ function processKeyInput(code, key, explicitChar, isShift) {
 
 // Keydown event listener
 window.addEventListener('keydown', (event) => {
-    // Ако фокусът е върху падащото меню с книги, не прехващаме
+    // Ignore keydown when book selector is focused
     if (event.target === bookSelect) return;
 
     // Trigger visual key feedback:
     pressKeyVisual(event.code, event.shiftKey);
 
-    // Предотвратяваме стандартния скрол/въвеждане, за да гарантираме точно въвеждане в текстовото поле
+    // Prevent default scrolling during typing practice
     if (typeof event.preventDefault === 'function') event.preventDefault();
 
     processKeyInput(event.code, event.key, null, event.shiftKey);
@@ -357,7 +354,7 @@ window.addEventListener('keyup', (event) => {
 });
 
 storyTextArea.addEventListener('keydown', (event) => {
-    // Вече се обработва от window listener-а
+    // Handled by window listener
     event.stopPropagation();
     pressKeyVisual(event.code, event.shiftKey);
     if (typeof event.preventDefault === 'function') event.preventDefault();
@@ -441,11 +438,11 @@ function populateBookSelect() {
 }
 
 async function loadBooks() {
-    // 1. Моментално стартиране с вградените класически текстове
+    // 1. Instant launch with built-in texts
     populateBookSelect();
     loadRandomChapter();
 
-    // 2. Асинхронно добавяне на външните книги от books.json, ако са налични
+    // 2. Async load external books if available
     try {
         const res = await fetch('/tools/bds/books/books.json');
         if (res.ok) {
@@ -456,7 +453,7 @@ async function loadBooks() {
             if (currentVal) bookSelect.value = currentVal;
         }
     } catch (err) {
-        // Вградените книги вече работят отлично
+        // Fallback to built-in texts
     }
 }
 

@@ -1,7 +1,4 @@
-/* styles/software.css
-   Страница "Софтуер" (#/software) — Hall of Source.
-   Стиловете са от оригиналната страница, скопирани под .hall-of-source,
-   за да не се налагат върху останалите изгледи. */
+/* Software page styles scoped under .hall-of-source */
 
 .hall-of-source {
   --hall-dark-bg: #11101d;

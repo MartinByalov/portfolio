@@ -311,7 +311,7 @@
           const members = [...card.querySelectorAll('li')].map(li => li.textContent);
           return [title, ...members].map(escapeCsv).join(',');
         });
-        // \ufeff (BOM) – за да се показва кирилицата коректно в Excel
+        // Add UTF-8 BOM for Excel Cyrillic support
         const blob = new Blob(['\ufeff' + rows.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);

@@ -4,7 +4,7 @@ const MONTHS_BG = ['януари', 'февруари', 'март', 'април',
                    'юли', 'август', 'септември', 'октомври', 'ноември', 'декември'];
 const WEEKDAYS = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'];
 
-// Учебна 2026/2027: от септември 2026, общо 11 месеца (до юли 2027).
+// School year 2026/2027: 11 months from September 2026 to July 2027
 const SCHOOL_YEAR_START = { year: 2026, month: 8 };
 const SCHOOL_YEAR_MONTHS = 11;
 
@@ -17,7 +17,7 @@ const MONTHS = (() => {
   return list;
 })();
 
-// type: 'special' (начало/край), 'vacation', 'holiday' (неучебен ден), 'exam' (НВО/ДЗИ)
+// Event types: special (term start/end), vacation, holiday, exam
 const EVENTS = [
   { type: 'special',  label: 'Първи учебен ден',                    dates: ['2026-09-15'] },
   { type: 'holiday',  label: 'Официален празник – Ден на независимостта',   dates: ['2026-09-22'] },

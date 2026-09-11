@@ -1,6 +1,4 @@
-/* =========================================================
-   GEOMETRY BOARD (ЧЕРТОЖНИК)
-   ========================================================= */
+/* GEOMETRY BOARD (ЧЕРТОЖНИК) */
 
 * {
     box-sizing: border-box;
@@ -26,9 +24,7 @@ button, input {
     padding: 24px 20px 48px;
 }
 
-/* =========================================================
-   HEADER & TOP ACTIONS
-   ========================================================= */
+/* HEADER & TOP ACTIONS */
 
 .geometry-header {
     display: flex;
@@ -114,9 +110,7 @@ button, input {
     line-height: 1;
 }
 
-/* =========================================================
-   MAIN LAYOUT: TOOLS LEFT + CANVAS RIGHT
-   ========================================================= */
+/* MAIN LAYOUT: TOOLS LEFT + CANVAS RIGHT */
 
 .geometry-main {
     display: flex;
@@ -249,9 +243,7 @@ kbd {
     border: 1px solid #cbd5e1;
 }
 
-/* =========================================================
-   CANVAS / BOARD WRAPPER
-   ========================================================= */
+/* CANVAS / BOARD WRAPPER */
 
 .geometry-canvas-wrapper {
     flex: 1;
@@ -290,9 +282,7 @@ kbd {
     cursor: not-allowed;
 }
 
-/* =========================================================
-   BOARD STATUS BAR
-   ========================================================= */
+/* BOARD STATUS BAR */
 
 .board-status {
     display: flex;
@@ -326,9 +316,7 @@ kbd {
     color: #cbd5e1;
 }
 
-/* =========================================================
-   SVG OBJECTS STYLING
-   ========================================================= */
+/* SVG OBJECTS STYLING */
 
 .geometry-object {
     vector-effect: non-scaling-stroke;
@@ -415,9 +403,7 @@ kbd {
     fill: none;
 }
 
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
+/* RESPONSIVE */
 
 @media (max-width: 1024px) {
     .geometry-main {

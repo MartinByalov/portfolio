@@ -106,7 +106,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
     <script>
-        // Инициализация при зареждане на страницата
+        // Initialize on DOM load
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('text').value = '';
             generateQRCode();
@@ -114,17 +114,17 @@
 
         function generateQRCode() {
             const container = document.getElementById("qrcode");
-            container.innerHTML = ""; // Изчистване на стар QR код
+            container.innerHTML = ""; // Clear existing QR code
 
             let text = document.getElementById("text").value;
-            // Добавяне на базова стойност, ако полето е празно
+            // Set default text if input is empty
             if (!text) {
                 text = 'Няма въведен текст';
             }
 
             new QRCode(container, {
                 text: text,
-                width: 250, // Увеличих размера малко
+                width: 250,
                 height: 250,
                 colorDark: "#000000",
                 colorLight: "#ffffff",

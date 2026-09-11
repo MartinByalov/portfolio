@@ -18,7 +18,6 @@ export function render(comp) {
     <div class="interactive-fill-card" id="${id}">
       <div class="interactive-card-header">
         <div class="interactive-card-badge">
-          <i class="fas fa-pen-clip"></i>
           <span>${esc(title)}</span>
         </div>
         <p class="interactive-card-lead">Изберете точния термин от падащото меню, за да допълните всяко от изреченията:</p>
@@ -41,7 +40,7 @@ export function render(comp) {
       </div>
       <div class="fill-actions">
         <button type="button" class="btn-activity fill-submit">
-          <i class="fas fa-check"></i> Провери отговорите
+          Провери
         </button>
         <button type="button" class="btn-activity fill-reset" style="display:none;">
           <i class="fas fa-rotate-left"></i> Опитай отново

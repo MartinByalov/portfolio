@@ -38,7 +38,6 @@ export function render(comp) {
     <div class="interactive-matching-card" id="${id}">
       <div class="interactive-card-header">
         <div class="interactive-card-badge">
-          <i class="fas fa-link"></i>
           <span>${esc(title)}</span>
         </div>
         <p class="interactive-card-lead">За всяко от определенията по-долу изберете съответстващото му понятие от падащия списък:</p>
@@ -48,7 +47,7 @@ export function render(comp) {
       </div>
       <div class="matching-actions">
         <button type="button" class="btn-activity matching-submit">
-          <i class="fas fa-check"></i> Провери съответствията
+          Провери
         </button>
         <button type="button" class="btn-activity matching-reset" style="display:none;">
           <i class="fas fa-rotate-left"></i> Опитай отново

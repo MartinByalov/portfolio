@@ -94,7 +94,7 @@
             {
               "type": "subsection",
               "id": "hardware",
-              "heading": "Хардуерът",
+              "heading": "Хардуер",
               "content": [
                 {
                   "type": "text",
@@ -125,6 +125,16 @@
                       "title": "Статичен диск (SSD)",
                       "src": "/assets/it-8-1/nvme.jpg",
                       "alt": "Съвременно бързо SSD M.2 NVMe устройство"
+                    },
+                    {
+                      "title": "Хард диск (HDD)",
+                      "src": "/assets/it-8-1/hardDrive.jpg",
+                      "alt": "Класически твърд диск (HDD) за постоянно съхранение на данни"
+                    },
+                    {
+                      "title": "Видеокарта (GPU)",
+                      "src": "/assets/it-8-1/videocard.png",
+                      "alt": "Съвременна видеокарта за обработка на графика"
                     }
                   ]
                 },
@@ -138,7 +148,7 @@
             {
               "type": "subsection",
               "id": "software",
-              "heading": "Софтуерът",
+              "heading": "Софтуер",
               "content": [
                 {
                   "type": "text",
@@ -481,7 +491,7 @@
     {
       "type": "tag",
       "id": "exercise-tag",
-      "icon": "fas fa-pen-to-square",
+      "icon": "fas fa-dumbbell",
       "text": "Упражнение",
       "modalTarget": "exerciseModal",
       "tone": "orange"
@@ -667,7 +677,6 @@
     {
       "type": "accordion",
       "id": "lesson-glossary",
-      "heading": "Речник",
       "options": {
         "itemsAlign": "stretch",
         "titleAlign": "left",
@@ -741,7 +750,8 @@
             }
           ]
         }
-      ]
+      ],
+      "icon": "fas fa-book-open"
     }
   ]
 }

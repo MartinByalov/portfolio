@@ -7,6 +7,7 @@ import * as InteractiveFill from './interactive-fill.js';
 import * as InteractiveStepGuide from './interactive-step-guide.js';
 import * as MoodAnimalGenerator from './mood-animal-generator.js';
 import * as ResourceDownloadBox from './resource-download-box.js';
+import * as DragAndDrop from './drag-and-drop.js';
 
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
@@ -209,7 +210,8 @@ function renderBlock(b) {
     case 'interactive-fill':       return InteractiveFill.render(b);
     case 'interactive-step-guide': return InteractiveStepGuide.render(b);
     case 'mood-animal-generator':  return MoodAnimalGenerator.render(b);
-    case 'resource-download-box':  return ResourceDownloadBox.render(b);
+        case 'resource-download-box':  return ResourceDownloadBox.render(b);
+    case 'drag-and-drop':          return DragAndDrop.render(b);
     default:                       return '<!-- unknown lesson block type: ' + esc(b.type) + ' -->';
   }
 }
@@ -269,6 +271,7 @@ export function init(comp) {
       if (b.type === 'interactive-step-guide') InteractiveStepGuide.init(b);
       if (b.type === 'mood-animal-generator') MoodAnimalGenerator.init(b);
       if (b.type === 'resource-download-box') ResourceDownloadBox.init(b);
+      if (b.type === 'drag-and-drop') DragAndDrop.init(b);
     });
   });
 }

@@ -29,13 +29,13 @@ export function renderClassPicker(catalog, activeCourseId) {
 }
 
 // Lesson in-page anchors navigation sidebar
-export function renderLessonNav(courseId, navItems) {
+export function renderLessonNav(courseId, navItems, lessonNumber) {
   const links = navItems.map((item, i) => `
     <a href="#${item.id}" class="course-link${i === 0 ? ' active' : ''}"><i class='bx bx-chevron-right'></i> ${item.label}</a>
   `).join('');
 
   return `
-    <div class="sidebar-badge">Урок</div>
+    <div class="sidebar-badge">Урок ${lessonNumber || ""}</div>
     <nav class="course-list-nav">
       <a href="#/course/${courseId}" class="course-link"><i class='bx bx-left-arrow-alt'></i> Назад</a>
       ${links}

@@ -9,8 +9,8 @@ function esc(s) {
 
 export function render(comp) {
   const id = comp.id || 'mood-animal-generator';
-  const title = comp.title || '🦁 Интерактивна рефлексия: Какво дигитално животно си днес?';
-  const prompt = comp.prompt || 'Отговорете на 3 бързи въпроса за това как се справихте с урока и генерирайте своя дигитален аватар за деня!';
+  const title = comp.title || 'Какво дигитално животно сте днес?';
+  const prompt = comp.prompt || '';
   const animals = comp.animals || [
     { title: "🦉 Мъдра сова", desc: "Овладя облачните среди и правилното задаване на права за достъп!" },
     { title: "🐆 Бърз гепард", desc: "Редактираше онлайн документите светкавично и без грешка!" },
@@ -93,14 +93,15 @@ export function render(comp) {
     `;
   }).join('');
 
+  const leadHtml = prompt ? '<p class="interactive-card-lead">' + esc(prompt) + '</p>' : '';
+
   return `
     <div class="mood-animal-card" id="${id}">
       <div class="interactive-card-header">
         <div class="interactive-card-badge">
-          <i class="fas fa-paw"></i>
           <span>${esc(title)}</span>
         </div>
-        <p class="interactive-card-lead">${esc(prompt)}</p>
+        ${leadHtml}
       </div>
 
       <form class="mood-animal-form">
@@ -118,10 +119,6 @@ export function render(comp) {
         </div>
         <h4 class="animal-avatar-title"></h4>
         <p class="animal-avatar-desc"></p>
-        <div class="animal-traits-badges">
-          <span class="trait-badge"><i class="fas fa-star text-amber-400"></i> ИТ Шампион на деня</span>
-          <span class="trait-badge"><i class="fas fa-shield-halved text-blue-500"></i> Сигурност в облака</span>
-        </div>
         <div class="animal-result-actions">
           <button type="button" class="btn-activity btn-restart-avatar">
             <i class="fas fa-rotate-left"></i> Избери отново

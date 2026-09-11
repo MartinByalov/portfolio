@@ -46,18 +46,44 @@ async function renderCourseView(courseId) {
 
 async function renderLessonView(courseId, lessonId) {
   const course = await getCourse(courseId);
-  const lessonMeta = course.sections.flatMap(s => s.lessons).find(l => l.id === lessonId);
+  const allLessons = course.sections.flatMap(s => s.lessons);
+  const lessonMeta = allLessons.find(l => l.id === lessonId);
+  const lessonIndex = allLessons.findIndex(l => l.id === lessonId);
+  const lessonNumber = lessonIndex + 1;
+  const lessonTitleNum = lessonMeta.title ? (lessonMeta.title.match(/^(\d+\.\d+)/)?.[1] || String(lessonIndex + 1)) : String(lessonIndex + 1);
   if (!lessonMeta || !lessonMeta.lessonPath) throw new Error('Урокът все още не е добавен.');
 
   const lesson = await fetchLesson(lessonMeta.lessonPath);
   const { headerHtml, bodyHtml, navItems } = buildLesson(lesson);
-  const asideHtml = CourseShell.renderLessonNav(courseId, navItems);
-  const mainHtml = headerHtml + `<div class="lesson-body">${bodyHtml}</div>`;
+  const asideHtml = CourseShell.renderLessonNav(courseId, navItems, lessonTitleNum);
+  const mainHtml = headerHtml + `<div class="lesson-body">${bodyHtml}</div>` + renderNextLessonTag(course, lessonId);
 
   document.getElementById('view-root').innerHTML = CourseShell.render(asideHtml, mainHtml);
   initLesson(lesson);
   initLightbox(document.getElementById('view-root'));
   initScrollSpy();
+}
+
+// Small right-aligned tag at the end of a lesson pointing to the next lesson in the same section
+function renderNextLessonTag(course, lessonId) {
+  for (const section of course.sections || []) {
+    const lessons = section.lessons || [];
+    for (let i = 0; i < lessons.length; i++) {
+      if (lessons[i].id !== lessonId) continue;
+      const next = lessons[i + 1];
+      if (!next || !next.lessonPath) return '';
+      const num = next.title.match(/^(\d+\.\d+)/)?.[1] || String(i + 2);
+      return `
+        <div class="next-lesson-wrap">
+          <a class="next-lesson-tag" href="#/lesson/${course.id}/${next.id}">
+            <span class="next-lesson-label">Следващ урок:</span>
+            <span class="next-lesson-title">Урок ${num}</span>
+            <i class="fas fa-arrow-right next-lesson-arrow"></i>
+          </a>
+        </div>`;
+    }
+  }
+  return '';
 }
 
 async function redirectToFirstCourse() {

@@ -470,6 +470,61 @@
       ]
     },
     {
+      "type": "drag-and-drop",
+      "id": "social-network-matching",
+      "title": "Свържете социалните мрежи с техните лога",
+      "description": "Хванете карта и я преместете с влачене на желаната позиция в нейната колона. Свържете всяко име със своето лого на същия ред.",
+      "leftItems": [
+        {
+          "id": "fb",
+          "text": "Facebook"
+        },
+        {
+          "id": "ig",
+          "text": "Instagram"
+        },
+        {
+          "id": "x",
+          "text": "X (Twitter)"
+        },
+        {
+          "id": "li",
+          "text": "LinkedIn"
+        },
+        {
+          "id": "yt",
+          "text": "Youtube"
+        }
+      ],
+      "rightItems": [
+        {
+          "id": "fb",
+          "image": "/assets/it-8-2/facebook.png",
+          "alt": "Facebook"
+        },
+        {
+          "id": "ig",
+          "image": "/assets/it-8-2/instagram.png",
+          "alt": "Instagram"
+        },
+        {
+          "id": "x",
+          "image": "/assets/it-8-2/x_logo.png",
+          "alt": "X (Twitter)"
+        },
+        {
+          "id": "li",
+          "image": "/assets/it-8-2/LinkedIn.png",
+          "alt": "LinkedIn"
+        },
+        {
+          "id": "yt",
+          "image": "/assets/it-8-2/youtube.png",
+          "alt": "Youtube"
+        }
+      ]
+    },
+    {
       "type": "tag",
       "id": "exercise-tag",
       "icon": "fas fa-comments",
@@ -503,7 +558,7 @@
           "id": "section-quiz-assessment",
           "title": "Бързи 5 въпроса",
           "tone": "green",
-          "icon": "fas fa-clipboard-question",
+          "icon": "fas fa-hand",
           "content": [
             {
               "type": "quiz",
@@ -571,12 +626,11 @@
       "icon": "fas fa-file-powerpoint",
       "text": "Презентация",
       "href": "https://drive.google.com/file/d/1LNQ6YZnRVR4-e3F-pzY0WppMMTZwz1rs/view?usp=drive_link",
-      "tone": "green"
+      "tone": "orange"
     },
     {
       "type": "accordion",
       "id": "lesson-glossary",
-      "heading": "Речник",
       "options": {
         "itemsAlign": "stretch",
         "titleAlign": "left",
@@ -638,7 +692,8 @@
             }
           ]
         }
-      ]
+      ],
+      "icon": "fas fa-book-open"
     }
   ]
 }

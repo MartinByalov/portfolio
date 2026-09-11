@@ -539,6 +539,7 @@ body.landing-mode .home-section.subject-section {
   padding: 12px 16px;
   border-radius: 12px;
   border: 1px solid transparent;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
   margin-bottom: 18px;
   max-width: 100%;
   font-size: 0.95rem;
@@ -605,6 +606,7 @@ body.landing-mode .home-section.subject-section {
   padding: 12px 16px;
   border-radius: 12px;
   border: 1px solid transparent;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
   font-weight: 700;
   font-size: 1rem;
   line-height: 1.4;
@@ -646,6 +648,58 @@ button.lesson-tag:hover {
   flex-shrink: 0;
   font-size: 0.85rem;
   opacity: 0.7;
+}
+
+/* Universal lesson font: all content inside a lesson uses Poppins */
+.lesson-body,
+.lesson-body * {
+  font-family: "Poppins", sans-serif;
+}
+.lesson-body pre,
+.lesson-body code,
+.lesson-body kbd,
+.lesson-body .hub-address {
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+}
+
+/* Next lesson tag shown at the end of each lesson */
+.next-lesson-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+  padding: 0 4px 12px;
+}
+.next-lesson-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  background: #ffffff;
+  border: 1px dashed #cbd5e1;
+  border-radius: 999px;
+  color: #1e293b;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.next-lesson-tag:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-orange);
+  color: var(--accent-orange);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+.next-lesson-label {
+  color: #64748b;
+  font-weight: 600;
+}
+.next-lesson-title {
+  color: inherit;
+}
+.next-lesson-arrow {
+  font-size: 0.85rem;
+  color: var(--accent-orange);
 }
 
 /* Tone color palettes */

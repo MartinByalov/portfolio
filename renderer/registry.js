@@ -13,6 +13,8 @@ import * as InteractiveFill from '../components/interactive-fill.js';
 import * as InteractiveStepGuide from '../components/interactive-step-guide.js';
 import * as MoodAnimalGenerator from '../components/mood-animal-generator.js';
 import * as ResourceDownloadBox from '../components/resource-download-box.js';
+import * as DragAndDrop from '../components/drag-and-drop.js';
+import * as ImagePlaceholder from '../components/image-placeholder.js';
 
 const registry = {
   'text-group': TextGroup,
@@ -28,6 +30,7 @@ const registry = {
   'interactive-step-guide': InteractiveStepGuide,
   'mood-animal-generator': MoodAnimalGenerator,
   'resource-download-box': ResourceDownloadBox,
+  'drag-and-drop': DragAndDrop,
 };
 
 export function renderComponent(comp) {

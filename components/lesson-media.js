@@ -248,8 +248,13 @@ function renderGlossaryList(b) {
 }
 
 // LMS ecosystem diagram with central course hub and modules
-function renderLmsEcosystem(spec) {
+function renderLmsEcosystem(spec, b) {
   const dev = spec.centerDevice || {};
+  const assetPath = spec.assetPath;
+  if (assetPath) {
+    const img = '<img class="lms-ecosystem-img" src="' + esc(assetPath) + '" alt="' + esc((b && b.title) || 'LMS') + '" />';
+    return '<div class="lms-ecosystem">' + img + '</div>';
+  }
   const defaultModules = [
     { label: "Материали", desc: "уроци и ресурси", color: "#8B5CF6", icon: "fas fa-book" },
     { label: "Задачи", desc: "възлагане и предаване", color: "#10B981", icon: "fas fa-tasks" },
@@ -319,7 +324,7 @@ function renderComparisonCardsSync(spec) {
 }
 
 // Cloud storage UI mockup
-function renderCloudStorageMockup(spec) {
+function renderCloudStorageMockup(spec, b) {
   const defaultSidebar = ['Моят диск (My Drive)', 'Споделени с мен', 'Скорошни', 'Кошче'];
   const defaultFolders = [
     { name: "ИТ_8клас", itemsCount: "5 файла", color: "#FBBF24" },
@@ -334,6 +339,13 @@ function renderCloudStorageMockup(spec) {
   const sidebarList = (spec.leftSidebar && spec.leftSidebar.length) ? spec.leftSidebar : defaultSidebar;
   const folderList = (spec.folders && spec.folders.length) ? spec.folders : defaultFolders;
   const fileList = (spec.files && spec.files.length) ? spec.files : defaultFiles;
+  const cloudAsset = spec.assetPath;
+
+  if (cloudAsset) {
+    return '<div class="cloud-storage-mockup cloud-asset-img">'
+      + '<img class="cloud-asset-img-el" src="' + esc(cloudAsset) + '" alt="' + esc((b && b.title) || 'Облачна услуга') + '" />'
+      + '</div>';
+  }
 
   const navItems = sidebarList.map((item, i) => {
     const icon = i === 0 ? 'fas fa-hdd' : i === 1 ? 'fas fa-user-friends' : i === 2 ? 'fas fa-clock' : 'fas fa-trash-alt';
@@ -549,11 +561,12 @@ function renderVideoBlock(b) {
     '<div class="topic-item"><i class="fas fa-check-circle"></i><span>' + esc(top) + '</span></div>'
   ).join('');
 
+  const videoUrl = spec.videoUrl || 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1';
   return '<div class="video-lesson-card">'
     + '<div class="video-screen-banner">'
-    + '<div class="video-overlay-play">'
+    + '<a class="video-overlay-play" href="' + esc(videoUrl) + '" target="_blank" rel="noopener" aria-label="Гледай видео упътването" title="Отвори в YouTube">'
     + '<div class="play-btn-circle"><i class="fas fa-play"></i></div>'
-    + '</div>'
+    + '</a>'
     + '<div class="video-conference-ui">'
     + '<div class="conf-top-bar">'
     + '<span class="conf-dot red"></span>'
@@ -815,9 +828,37 @@ function renderInfographicGrid2x2(spec) {
     + '</div>'
     + '<div class="info-body">' + esc(c.text || '') + '</div>'
     + '</div>'
-  ).join('');
+    ).join('');
 
   return '<div class="infographic-2x2-grid">' + cards + '</div>';
+}
+
+// Session rules cards with optional start button
+function renderSessionRules(spec) {
+  const rules = (spec.rules || []).map(r =>
+    '<div class="session-rule-card">'
+    + '<div class="session-rule-icon">'
+    + '<i class="' + esc(r.icon || 'fas fa-check-circle') + '"></i>'
+    + '</div>'
+    + '<div class="session-rule-body">'
+    + '<div class="session-rule-title">' + esc(r.title || '') + '</div>'
+    + (r.desc ? '<div class="session-rule-desc">' + esc(r.desc || '') + '</div>' : '')
+    + '</div>'
+    + '</div>'
+  ).join('');
+
+  const startBtn = spec.startButton
+    ? '<div class="session-rules-start">'
+    + '<a href="' + esc(spec.startButton.href || '') + '" class="session-start-btn">'
+    + '<i class="fas fa-play"></i> ' + esc(spec.startButton.text || 'Старт')
+    + '</a>'
+    + '</div>'
+    : '';
+
+  return '<div class="session-rules">'
+    + rules
+    + startBtn
+    + '</div>';
 }
 
 // Block dispatcher
@@ -830,11 +871,11 @@ export function renderRichBlock(b) {
       case 'tree-diagram':           return vizWrapper(b, renderTreeDiagram(spec));
       case 'mindmap':                return vizWrapper(b, renderMindmap(spec));
       case 'flowchart-horizontal':   return vizWrapper(b, renderFlowchart(spec));
-      case 'lms-ecosystem-diagram':  return vizWrapper(b, renderLmsEcosystem(spec));
+      case 'lms-ecosystem-diagram':  return vizWrapper(b, renderLmsEcosystem(spec, b));
       case 'comparison-cards-sync':  return vizWrapper(b, renderComparisonCardsSync(spec));
       case 'permission-matrix':      return vizWrapper(b, renderPermissionMatrix(spec));
       case 'flowchart-steps':        return vizWrapper(b, renderFlowchartSteps(spec));
-      case 'group-email-diagram':    return vizWrapper(b, renderGroupEmailDiagram(spec));
+      case 'session-rules':         return vizWrapper(b, renderSessionRules(spec));
       default: return '<!-- unknown visualType: ' + esc(b.visualType) + ' -->';
     }
   }
@@ -843,7 +884,7 @@ export function renderRichBlock(b) {
     if (spec.component === 'SmartphoneChatMockup')        inner = renderChatMockup(spec);
     else if (spec.component === 'BlogPageMockup')         inner = renderBlogMockup(spec);
     else if (spec.component === 'PrivacySettingsPanel')   inner = renderPrivacyMockup(spec);
-    else if (spec.component === 'CloudStorageMockup' || spec.component === 'CloudStorageRealUI') inner = renderCloudStorageMockup(spec);
+    else if (spec.component === 'CloudStorageMockup' || spec.component === 'CloudStorageRealUI') inner = renderCloudStorageMockup(spec, b);
     else if (spec.component === 'RealtimeDocumentEditor' || spec.component === 'RealtimeDocumentEditorUI') inner = renderRealtimeDocEditor(spec);
     else if (spec.component === 'GoogleFormsQuizSettingsUI') inner = renderGoogleFormsQuizSettingsUI(spec);
     else if (spec.component === 'GoogleFormsQuestionTypesUI') inner = renderGoogleFormsQuestionTypesUI(spec);

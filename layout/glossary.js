@@ -1,27 +1,81 @@
 /* layout/glossary.js
    Терминологичен речник (#/dictionary) — понятия от учебните материали,
    подредени по азбучен ред, с филтър по буква и търсене в страницата.
-   Нови термини -> добави запис в TERMS по-долу. */
+   Термините се зареждат АВТОМАТИЧНО от „Речник“ акордеоните в края на
+   урокoвете (lessons/**.json): всеки акордеон с heading „Речник“
+   (id "lesson-glossary") дава термина (item.title) и описанието
+   (item.definition или първият текстов блок).
+   Нов урок с речник -> термините се появяват тук без допълнителен код. */
 
-const TERMS = [
-  { term: 'Счетоводство', definition: 'Система за събиране, записване и анализ на информация за финансовото състояние на предприятието.', tags: 'финанси анализ информация' },
-  { term: 'Активи', definition: 'Всичко, което фирмата притежава и което има икономическа стойност.', tags: 'собственост икономика' },
-  { term: 'Пасиви', definition: 'Всичко, което фирмата дължи – задължения към трети лица.', tags: 'дългове задължения' },
-  { term: 'Собствен капитал', definition: 'Разликата между активите и пасивите на предприятието (Активи - Пасиви).', tags: 'капитал формула' },
-  { term: 'Печалба', definition: 'Положителната разлика между приходите и разходите (Приходи - Разходи).', tags: 'финанси резултат' },
-  { term: 'ДДС', definition: 'Косвен данък върху потреблението (Данък върху добавената стойност).', tags: 'данък потребление' },
-  { term: 'Амортизация', definition: 'Постепенното отчитане на износването на дълготрайните активи като разход.', tags: 'разход активи износване' },
-  { term: 'Ликвидност', definition: 'Способността на предприятието да изплаща текущите си задължения.', tags: 'плащане стабилност' },
-  { term: 'Инвентаризация', definition: 'Проверка на реалната наличност на активите и пасивите и сравняването им със счетоводните данни.', tags: 'проверка наличност' },
-  { term: 'ООП', definition: 'Парадигма, използваща класове и обекти за организиране на данни и функции по начин, отразяващ реалния свят.', tags: 'програмиране парадигма структура' },
-  { term: 'Капсулация', definition: 'Скриване на данните на обект и контролиране на достъпа до тях чрез методи (get и set).', tags: 'сигурност методи данни' },
-  { term: 'Абстракция', definition: 'Скриване на детайлите по реализацията и предоставяне само на съществената функционалност.', tags: 'интерфейс функционалност' },
-  { term: 'Наследяване', definition: 'Позволява на един подклас да наследи характеристики и методи от родителски клас за преизползване на код.', tags: 'клас преизползване' },
-  { term: 'Полиморфизъм', definition: 'Възможност един метод да има различно поведение в зависимост от обекта, който го използва.', tags: 'метод поведение' },
-  { term: 'Клас', definition: 'Шаблон за създаване на обекти, дефиниращ техните атрибути (характеристики) и методи (поведение).', tags: 'шаблон обект' },
-  { term: 'Обект', definition: 'Инстанция на даден клас; абстрактно представяне на обект от реалния свят.', tags: 'инстанция данни' },
-  { term: 'Конструктор', definition: 'Специален метод, извикван автоматично при създаване на обект за инициализиране на атрибутите му.', tags: 'инициализация метод' }
-];
+let TERMS = [];
+
+/* Извлича чист текст от HTML съдържанието на акордеонна тема. */
+function stripHtml(html) {
+  return String(html || '')
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function blockToDefinition(content) {
+  const text = (content || [])
+    .filter(b => b && b.type === 'text')
+    .map(b => stripHtml(b.content))
+    .join(' ');
+  return text.length > 320 ? text.slice(0, 317).trimEnd() + '…' : text;
+}
+
+/* Зарежда термините от всички налични курсoве -> уроци -> „Речник“ акордеони.
+   Поддържа два формата на акордеона:
+   - един item „Речник“ с блок { type:"glossary-list", items:[{term,definition}] };
+   - директни items с { title, definition } (обратна съвместимост). */
+async function loadTerms() {
+  if (TERMS.length) return TERMS;
+  const terms = [];
+  try {
+    const catalogRes = await fetch('data/catalog.json');
+    const catalog = await catalogRes.json();
+    const courses = catalog.grades.flatMap(g => g.courses).filter(c => c.available);
+    for (const course of courses) {
+      const courseRes = await fetch(`data/courses/${course.id}.json`);
+      if (!courseRes.ok) continue;
+      const courseData = await courseRes.json();
+      for (const section of courseData.sections || []) {
+        for (const lessonMeta of section.lessons || []) {
+          if (!lessonMeta.lessonPath) continue;
+          const res = await fetch(lessonMeta.lessonPath);
+          if (!res.ok) continue;
+          const lesson = await res.json();
+          const glossary = (lesson.components || []).find(c =>
+            c.type === 'accordion' && (c.heading === 'Речник' || c.id === 'lesson-glossary'));
+          if (!glossary) continue;
+          const lessonTags = [lesson.grade ? lesson.grade + ' клас' : '', lesson.id || course.id].filter(Boolean).join(' ');
+          for (const item of glossary.items || []) {
+            // нов формат: блок glossary-list вътре в съдържанието
+            for (const block of item.content || []) {
+              if (block && block.type === 'glossary-list') {
+                for (const it of block.items || []) {
+                  if (it.term && it.definition) {
+                    terms.push({ term: it.term, definition: it.definition, tags: lessonTags });
+                  }
+                }
+              }
+            }
+            // стар формат: самият item е термин
+            if (item.title && item.title !== 'Речник' && item.definition) {
+              terms.push({ term: item.title, definition: item.definition, tags: lessonTags });
+            }
+          }
+        }
+      }
+    }
+  } catch (err) {
+    console.error('[glossary] Неуспешно зареждане на термините:', err);
+  }
+  TERMS = terms;
+  return TERMS;
+}
 
 function escapeHtmlGlossary(value) {
   return String(value).replace(/[&<>"']/g, ch => ({
@@ -41,7 +95,6 @@ function renderTermCard(term) {
 }
 
 export function renderGlossaryPage() {
-  const letters = [...new Set(TERMS.map(t => t.term[0].toUpperCase()))].sort((a, b) => a.localeCompare(b, 'bg'));
   return `
     <section class="home-section">
       <div class="home-content">
@@ -56,13 +109,11 @@ export function renderGlossaryPage() {
             </div>
             <div class="glossary-alphabet" id="glossary-alphabet">
               <button type="button" class="glossary-letter active" data-letter="">Всички</button>
-              ${letters.map(letter => `<button type="button" class="glossary-letter" data-letter="${letter}">${letter}</button>`).join('')}
             </div>
           </div>
-          <div class="glossary-grid" id="glossary-grid">
-            ${TERMS.map(renderTermCard).join('')}
-          </div>
+          <div class="glossary-grid" id="glossary-grid"></div>
           <div class="flash-grid is-hidden" id="flash-grid"></div>
+          <p class="glossary-loading" id="glossary-loading">Зареждане на термините от уроците…</p>
           <p class="glossary-empty is-hidden" id="glossary-empty">Няма термини, отговарящи на избора.</p>
         </div>
       </div>
@@ -97,6 +148,25 @@ export function initGlossaryPage() {
   let activeLetter = '';
   let query = '';
   let mode = 'list';
+
+  // Термините идват от „Речник“ акордеоните в края на урокoвете.
+  loadTerms().then(terms => {
+    const gridNow = document.getElementById('glossary-grid');
+    const alphabetNow = document.getElementById('glossary-alphabet');
+    if (!gridNow || gridNow !== grid || !alphabetNow) return; // навигацията е сменена
+    const loading = document.getElementById('glossary-loading');
+    if (loading) loading.remove();
+    if (!terms.length) {
+      empty.classList.remove('is-hidden');
+      empty.textContent = 'Още няма термини — добавете „Речник“ акордеон в края на даден урок.';
+      return;
+    }
+    const letters = [...new Set(terms.map(t => t.term[0].toUpperCase()))].sort((a, b) => a.localeCompare(b, 'bg'));
+    alphabetNow.insertAdjacentHTML('beforeend', letters.map(letter =>
+      `<button type="button" class="glossary-letter" data-letter="${letter}">${letter}</button>`).join(''));
+    grid.innerHTML = terms.map(renderTermCard).join('');
+    apply();
+  });
 
   function visibleTerms() {
     return TERMS.map((t, i) => ({ ...t, idx: i })).filter(t => {

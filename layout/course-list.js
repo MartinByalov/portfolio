@@ -30,10 +30,22 @@ export function render(course) {
     `;
   }).join('');
 
+  const resourceLinks = course.links && course.links.length
+    ? course.links
+    : (course.textbookUrl ? [{ label: course.textbookLabel || 'Електронен учебник', url: course.textbookUrl, icon: 'fas fa-book-open' }] : []);
+
+  const resourceBtns = resourceLinks.map(link => `
+      <a class="course-textbook-btn" href="${link.url}" target="_blank" rel="noopener">
+        <span class="course-textbook-ico"><i class="${link.icon || 'fas fa-link'}"></i></span>
+        <span class="course-textbook-text">${link.label}</span>
+        <i class="fas fa-chevron-right course-textbook-arrow"></i>
+      </a>`).join('');
+
   return `
     <div class="course-header-info">
       <h1 class="page-title">${course.title}</h1>
       <p class="page-description">${course.description || ''}</p>
+      ${resourceBtns}
     </div>
     <div class="accordion">${sections}</div>
   `;

@@ -18,6 +18,7 @@
 */
 
 import { initAccordion } from './accordion-behavior.js';
+import { renderRichBlock } from './lesson-media.js';
 
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
@@ -80,13 +81,115 @@ function renderSubsectionBlock(b) {
     + '</div>';
 }
 
+function renderQuizBlock(b) {
+  const questions = (b.questions || []).map((q, qi) => {
+    const options = (q.options || []).map((opt, oi) =>
+      '<label>'
+      + '<input type="radio" name="' + esc(b.id || 'quiz') + '-q' + qi + '" value="' + oi + '">'
+      + esc(opt)
+      + '</label>'
+    ).join('');
+
+    return '<div class="quiz-question" data-correct="' + esc(q.correctIndex) + '">'
+      + '<p class="quiz-question-text">' + (qi + 1) + '. ' + esc(q.question) + '</p>'
+      + '<div class="quiz-options">' + options + '</div>'
+      + '</div>';
+  }).join('');
+
+  return '<form class="quiz-form"' + (b.id ? ' id="' + esc(b.id) + '-form"' : '') + '>'
+    + questions
+    + '<div class="quiz-actions">'
+    + '<button type="button" class="btn-activity quiz-submit">Провери</button>'
+    + '<button type="button" class="btn-activity quiz-reset" style="display:none;">Отначало</button>'
+    + '</div>'
+    + '<div class="quiz-result" style="display:none;"></div>'
+    + '</form>';
+}
+
+function initQuizBlock(root, b) {
+  // Рендерът поставя id "<b.id>-form" на <form>; намираме scope по двата варианта.
+  const scope = b.id
+    ? (root.querySelector('#' + CSS.escape(b.id)) || root.querySelector('#' + CSS.escape(b.id + '-form')) || root)
+    : root;
+  if (!scope) return;
+  const form = scope.tagName === 'FORM' ? scope : scope.querySelector('.quiz-form');
+  if (!form) return;
+
+  const submitBtn = form.querySelector('.quiz-submit');
+  const resetBtn = form.querySelector('.quiz-reset');
+  const resultBox = form.querySelector('.quiz-result');
+  const questions = form.querySelectorAll('.quiz-question');
+  if (!submitBtn || !resetBtn || !resultBox) return;
+
+  const showResult = (text, type) => {
+    resultBox.textContent = text;
+    resultBox.style.display = 'block';
+    resultBox.className = 'quiz-result quiz-result-' + type;
+  };
+
+  submitBtn.addEventListener('click', () => {
+    const formData = new FormData(form);
+    let answered = 0;
+    questions.forEach(q => {
+      const name = q.querySelector('input').name;
+      if (formData.has(name)) answered++;
+    });
+
+    if (answered < questions.length) {
+      showResult('Моля, отговорете на всички въпроси преди проверка!', 'error');
+      return;
+    }
+
+    let score = 0;
+    questions.forEach(q => {
+      const correct = q.dataset.correct;
+      const name = q.querySelector('input').name;
+      const userChoice = formData.get(name);
+
+      q.querySelectorAll('label').forEach(label => {
+        const input = label.querySelector('input');
+        label.classList.remove('correct', 'incorrect');
+        if (input.value === correct) label.classList.add('correct');
+        if (input.checked && input.value !== correct) label.classList.add('incorrect');
+        input.disabled = true;
+      });
+
+      if (userChoice === correct) score++;
+    });
+
+    showResult('Резултат: ' + score + ' от ' + questions.length + ' верни отговора.', 'info');
+    submitBtn.style.display = 'none';
+    resetBtn.style.display = 'inline-block';
+  });
+
+  resetBtn.addEventListener('click', () => {
+    form.reset();
+    questions.forEach(q => {
+      q.querySelectorAll('label').forEach(label => {
+        label.classList.remove('correct', 'incorrect');
+        label.querySelector('input').disabled = false;
+      });
+    });
+    resultBox.style.display = 'none';
+    submitBtn.style.display = 'inline-block';
+    resetBtn.style.display = 'none';
+  });
+}
+
 function renderBlock(b) {
   switch (b.type) {
     case 'text':           return '<div class="lb-text">' + (b.content || '') + '</div>';
     case 'image':          return renderImageBlock(b);
     case 'image-gallery':  return renderGalleryBlock(b);
-    case 'visualization':  return renderVizBlock(b);
+    case 'visualization':  return b.visualType ? renderRichBlock(b) : renderVizBlock(b);
+    case 'ui-mockup':
+    case 'infographic':
+    case 'table':
+    case 'glossary-list':
+    case 'titled-image':
+    case 'media-types':   return renderRichBlock(b);
     case 'subsection':     return renderSubsectionBlock(b);
+    case 'quiz':           return renderQuizBlock(b);
     default:               return '<!-- unknown lesson block type: ' + esc(b.type) + ' -->';
   }
 }
@@ -94,18 +197,23 @@ function renderBlock(b) {
 /* --- component ------------------------------------------------------------------ */
 
 export function render(comp) {
-  const items = (comp.items || []).map((it, i) =>
-    '<div class="accordion-item' + (i === 0 ? ' active' : '') + '"'
+  const items = (comp.items || []).map((it, i) => {
+    const toneCls = it.tone ? ' tone-' + esc(it.tone) : '';
+    const toneIco = it.tone && it.icon
+      ? '<span class="acc-tone-ico"><i class="' + esc(it.icon) + '"></i></span>'
+      : '';
+    return '<div class="accordion-item' + (i === 0 ? ' active' : '') + toneCls + '"'
       + (it.id ? ' id="' + esc(it.id) + '"' : '') + '>'
-    + '<div class="accordion-header">'
-    + '<span class="card-title">' + esc(it.title || '') + '</span>'
-    + '<i class="fas fa-chevron-down card-icon-mini"></i>'
-    + '</div>'
-    + '<div class="accordion-content">'
-    + (it.content || []).map(renderBlock).join('')
-    + '</div>'
-    + '</div>'
-  ).join('');
+      + '<div class="accordion-header">'
+      + toneIco
+      + '<span class="card-title">' + esc(it.title || '') + '</span>'
+      + '<i class="fas fa-chevron-down card-icon-mini"></i>'
+      + '</div>'
+      + '<div class="accordion-content">'
+      + (it.content || []).map(renderBlock).join('')
+      + '</div>'
+      + '</div>';
+  }).join('');
 
   const align = (comp.options && comp.options.titleAlign) || 'left';
   const stretch = comp.options && comp.options.itemsAlign === 'stretch';
@@ -129,5 +237,12 @@ export function init(comp) {
   accordion.querySelectorAll('.accordion-item').forEach(item => {
     const content = item.querySelector('.accordion-content');
     if (content) content.style.display = item.classList.contains('active') ? 'block' : 'none';
+  });
+
+  // wire up embedded quiz blocks (type:"quiz" inside an item's content)
+  (comp.items || []).forEach(it => {
+    (it.content || []).forEach(b => {
+      if (b && b.type === 'quiz' && b.id) initQuizBlock(root, b);
+    });
   });
 }

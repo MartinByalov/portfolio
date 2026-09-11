@@ -368,7 +368,7 @@
 
 .sidebar .nav-links li:last-child .profile-details .github-icon {
   color: #f17a3e;
-  font-size: 26px;
+  font-size: 30px;
   font-weight: 400;
   text-decoration: none;
   display: inline-flex;
@@ -451,7 +451,7 @@ body.landing-mode .home-section.subject-section {
   padding: 6px 16px;
   font-size: 0.8rem;
   font-weight: 600;
-  border-radius: 20px;
+  border-radius: 12px;
   margin-bottom: 12px;
 }
 
@@ -532,6 +532,268 @@ body.landing-mode .home-section.subject-section {
 
 .page-description {
   color: #555;
+  margin-bottom: 14px;
+}
+
+/* Цел на урока — осезаема лента с мек фон (като етикетите), икона-балонче + текст. */
+.lesson-goal-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  margin-bottom: 18px;
+  max-width: 100%;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.lesson-goal-line .lesson-goal-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.lesson-goal-line .lesson-goal-text {
+  color: inherit;
+  flex: 1;
+  padding-top: 6px;
+}
+
+/* Тонове за целта — същата палитра като етикетите. */
+.lesson-goal-line.tone-orange {
+  background: #fdeadd;
+  border-color: #f6c9a8;
+  color: #b45309;
+}
+.lesson-goal-line.tone-orange .lesson-goal-ico { background: var(--accent-orange); }
+
+.lesson-goal-line.tone-blue {
+  background: #e8f1fd;
+  border-color: #c4dbf7;
+  color: #1558a8;
+}
+.lesson-goal-line.tone-blue .lesson-goal-ico { background: #1558a8; }
+
+.lesson-goal-line.tone-green {
+  background: #e6f6ec;
+  border-color: #bfe6cc;
+  color: #1c7a3d;
+}
+.lesson-goal-line.tone-green .lesson-goal-ico { background: #27ae60; }
+
+.lesson-goal-line.tone-purple {
+  background: #f1e8fa;
+  border-color: #d6bdf0;
+  color: #6c3483;
+}
+.lesson-goal-line.tone-purple .lesson-goal-ico { background: #8e44ad; }
+
+/* Етикети-разделители в урока (Инструктаж, Упражнение...).
+   Пълна ширина, мек tint фон + икона-балонче, заоблени като акордеона.
+   Всеки етикет си има тон (цвят), зададен от JSON полето "tone". */
+.component.tag {
+  margin: 22px 0 14px;
+}
+
+.lesson-tag {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.4;
+  text-decoration: none;
+  cursor: default;
+  font-family: inherit;
+  text-align: left;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+a.lesson-tag,
+button.lesson-tag {
+  cursor: pointer;
+}
+
+a.lesson-tag:hover,
+button.lesson-tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
+}
+
+.lesson-tag-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.lesson-tag-text {
+  flex: 1;
+}
+
+.lesson-tag-arrow {
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* Тонове — меки цветове като категориите новини. */
+.lesson-tag.tone-blue {
+  background: #e8f1fd;
+  border-color: #c4dbf7;
+  color: #1558a8;
+}
+.lesson-tag.tone-blue .lesson-tag-ico { background: #1558a8; }
+
+.lesson-tag.tone-orange {
+  background: #fdeadd;
+  border-color: #f6c9a8;
+  color: #b45309;
+}
+.lesson-tag.tone-orange .lesson-tag-ico { background: var(--accent-orange); }
+
+.lesson-tag.tone-green {
+  background: #e6f6ec;
+  border-color: #bfe6cc;
+  color: #1c7a3d;
+}
+.lesson-tag.tone-green .lesson-tag-ico { background: #27ae60; }
+
+.lesson-tag.tone-purple {
+  background: #f1e8fa;
+  border-color: #d6bdf0;
+  color: #6c3483;
+}
+.lesson-tag.tone-purple .lesson-tag-ico { background: #8e44ad; }
+
+/* Акордеон-панел с тон (напр. "Пробно Входно ниво") — същият визуален език. */
+.accordion-item.tone-green {
+  border-color: #bfe6cc;
+  border-left: 5px solid #27ae60;
+}
+.accordion-item.tone-green .accordion-header {
+  background: #e6f6ec;
+  color: #1c7a3d;
+}
+.accordion-item.tone-green.active .accordion-header {
+  color: #1c7a3d;
+}
+.accordion-item.tone-blue {
+  border-color: #c4dbf7;
+  border-left: 5px solid #1558a8;
+}
+.accordion-item.tone-blue .accordion-header {
+  background: #e8f1fd;
+  color: #1558a8;
+}
+.accordion-item.tone-blue.active .accordion-header {
+  color: #1558a8;
+}
+.accordion-item.tone-orange {
+  border-color: #f6c9a8;
+  border-left: 5px solid var(--accent-orange);
+}
+.accordion-item.tone-orange .accordion-header {
+  background: #fdeadd;
+  color: #b45309;
+}
+.accordion-item.tone-orange.active .accordion-header {
+  color: #b45309;
+}
+.accordion-item.tone-purple {
+  border-color: #d6bdf0;
+  border-left: 5px solid #8e44ad;
+}
+.accordion-item.tone-purple .accordion-header {
+  background: #f1e8fa;
+  color: #6c3483;
+}
+.accordion-item.tone-purple.active .accordion-header {
+  color: #6c3483;
+}
+
+.acc-tone-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 0.9rem;
+  margin-right: 10px;
+}
+.tone-green .acc-tone-ico { background: #27ae60; }
+.tone-blue .acc-tone-ico { background: #1558a8; }
+.tone-orange .acc-tone-ico { background: var(--accent-orange); }
+.tone-purple .acc-tone-ico { background: #8e44ad; }
+.accordion-header .card-title { flex: 1; }
+
+/* Бутон за електронен учебник — осезаема лента с мек фон (като етикетите в урока). */
+.course-textbook-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid #c4dbf7;
+  background: #e8f1fd;
+  color: #1558a8;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.4;
+  margin-bottom: 18px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.course-textbook-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
+  color: #1558a8;
+}
+
+.course-textbook-btn .course-textbook-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #1558a8;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.course-textbook-btn .course-textbook-text {
+  flex: 1;
+}
+
+.course-textbook-btn .course-textbook-arrow {
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  opacity: 0.7;
 }
 
 .lesson-links {

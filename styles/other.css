@@ -1,0 +1,907 @@
+/* styles/other.css — Стил за страница "Други" и блогови уроци (tutorials)
+   Вдъхновен от стила на MartinByalov/python с чиста типография,
+   JetBrains Mono за код/badges, стъпкови блокове и тъмни акцентни хедъри.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+:root {
+  --tut-bg: #f8fafc;
+  --tut-white: #ffffff;
+  --tut-border: #e2e8f0;
+  --tut-border2: #cbd5e1;
+  --tut-text: #0f172a;
+  --tut-muted: #64748b;
+  --tut-light: #f1f5f9;
+  
+  --tut-blue: #2563eb;
+  --tut-blue-bg: #eff6ff;
+  --tut-blue-bd: #bfdbfe;
+  
+  --tut-purple: #7c3aed;
+  --tut-purple-bg: #f5f3ff;
+  --tut-purple-bd: #ddd6fe;
+  
+  --tut-green: #059669;
+  --tut-green-bg: #ecfdf5;
+  --tut-green-bd: #a7f3d0;
+  
+  --tut-orange: #d97706;
+  --tut-orange-bg: #fffbeb;
+  --tut-orange-bd: #fde68a;
+  
+  --tut-red: #dc2626;
+  --tut-red-bg: #fef2f2;
+  --tut-red-bd: #fecaca;
+  
+  --tut-code-bg: #111827;
+  --tut-code-text: #e2e8f0;
+  --tut-radius: 12px;
+}
+
+/* =========================================================
+   1. КАТАЛОГ С КАРТИ (Междинна страница #/other)
+   ========================================================= */
+.other-catalog-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+  font-family: 'Nunito', sans-serif;
+  color: var(--tut-text);
+}
+
+.other-hero {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 24px 16px;
+}
+
+.other-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+  margin-bottom: 14px;
+}
+
+.other-hero-title {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: -0.8px;
+  margin-bottom: 12px;
+}
+
+.other-hero-subtitle {
+  font-size: 1.05rem;
+  color: #64748b;
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.other-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 28px;
+}
+
+.other-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--tut-border);
+  background: var(--tut-white);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  text-decoration: none;
+  color: inherit;
+  min-height: 380px;
+}
+
+.other-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+  border-color: #94a3b8;
+}
+
+/* NFT CARD WITH AVATAR.PNG BACKGROUND */
+.other-card.nft-card {
+  background-color: #0f172a;
+  color: #ffffff;
+  border-color: rgba(241, 122, 62, 0.35);
+  position: relative;
+}
+
+.other-card.nft-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(180deg, rgba(15, 23, 42, 0.35) 0%, rgba(15, 23, 42, 0.88) 65%, #0f172a 100%),
+    url('/avatar.png');
+  background-size: cover;
+  background-position: center 25%;
+  background-repeat: no-repeat;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  z-index: 1;
+}
+
+.other-card.nft-card:hover::before {
+  transform: scale(1.05);
+  filter: brightness(1.08);
+}
+
+.other-card.nft-card:hover {
+  border-color: #f17a3e;
+  box-shadow: 0 16px 36px rgba(241, 122, 62, 0.25);
+}
+
+/* CHARTS CARD WITH MODERN VIZ THEME */
+.other-card.charts-card {
+  background: linear-gradient(145deg, #0d1b2a 0%, #1e293b 100%);
+  color: #ffffff;
+  border-color: rgba(59, 130, 246, 0.35);
+  position: relative;
+}
+
+.other-card.charts-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 85% 20%, rgba(59, 130, 246, 0.25), transparent 50%),
+    radial-gradient(circle at 15% 85%, rgba(16, 185, 129, 0.2), transparent 50%),
+    linear-gradient(180deg, rgba(13, 27, 42, 0.4) 0%, rgba(13, 27, 42, 0.92) 80%, #0d1b2a 100%);
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.other-card.charts-card:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 16px 36px rgba(37, 99, 235, 0.25);
+}
+
+.other-card-content {
+  position: relative;
+  z-index: 2;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.other-card-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: auto;
+  gap: 8px;
+}
+
+.other-card-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.other-card-badge.orange {
+  background: rgba(241, 122, 62, 0.25);
+  border-color: rgba(241, 122, 62, 0.6);
+  color: #ffedd5;
+}
+
+.other-card-badge.blue {
+  background: rgba(37, 99, 235, 0.25);
+  border-color: rgba(59, 130, 246, 0.6);
+  color: #dbeafe;
+}
+
+.other-card-time {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.75);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+}
+
+.other-card-body {
+  margin-top: 100px;
+  margin-bottom: 20px;
+}
+
+.other-card-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 10px;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+}
+
+.other-card-desc {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: 16px;
+}
+
+.other-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin-top: auto;
+}
+
+.other-card-meta {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.other-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.2s ease;
+}
+
+.other-card:hover .other-card-cta {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: #ffffff;
+}
+
+/* =========================================================
+   2. ЕДИНИЧЕН УРОК / БЛОГ ПОСТ (стил MartinByalov/python)
+   ========================================================= */
+.tutorial-view-container {
+  font-family: 'Nunito', sans-serif;
+  color: var(--tut-text);
+  line-height: 1.75;
+  padding-bottom: 80px;
+}
+
+/* Навигация назад */
+.tutorial-top-bar {
+  max-width: 900px;
+  margin: 0 auto 16px;
+  padding: 16px 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tutorial-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #475569;
+  text-decoration: none;
+  padding: 7px 14px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+
+.tutorial-back-btn:hover {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+  transform: translateX(-2px);
+}
+
+/* Тъмен хедър в стил MartinByalov/python */
+.tut-header {
+  background: linear-gradient(135deg, #1a1f35 0%, #2d1f5e 100%);
+  color: #ffffff;
+  padding: 44px 32px 40px;
+  border-bottom: 4px solid var(--tut-purple);
+  border-radius: var(--tut-radius);
+  max-width: 900px;
+  margin: 0 auto 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.tut-header.theme-blue {
+  background: linear-gradient(135deg, #0d1b2a 0%, #1e293b 100%);
+  border-bottom-color: var(--tut-blue);
+}
+
+.tut-header-inner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.tut-header-logo {
+  font-size: 48px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.tut-header-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  opacity: 0.75;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.tut-header h1 {
+  font-size: clamp(22px, 3.5vw, 32px);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 8px;
+  letter-spacing: -0.4px;
+}
+
+.tut-header p {
+  opacity: 0.8;
+  font-size: 14.5px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.tut-header-nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.tut-header-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.tut-header-pill:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Основно тяло */
+.tut-main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Секционни заглавия (.sh) с черта и badge */
+.sh {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 44px 0 20px;
+}
+
+.sh:first-child {
+  margin-top: 0;
+}
+
+.sh-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.bg-blue   { background: var(--tut-blue); }
+.bg-green  { background: var(--tut-green); }
+.bg-purple { background: var(--tut-purple); }
+.bg-orange { background: var(--tut-orange); }
+.bg-red    { background: var(--tut-red); }
+
+.sh h2 {
+  font-size: 19px;
+  font-weight: 800;
+  margin: 0;
+  color: var(--tut-text);
+  letter-spacing: -0.2px;
+}
+
+.sh .line {
+  flex: 1;
+  height: 1px;
+  background: var(--tut-border);
+}
+
+/* Прегледни карти (.overview) */
+.overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.ov-card {
+  background: var(--tut-white);
+  border: 1px solid var(--tut-border);
+  border-radius: var(--tut-radius);
+  padding: 20px 18px;
+  text-align: center;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.ov-card:hover {
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.08);
+  transform: translateY(-2px);
+  border-color: #cbd5e1;
+}
+
+.ov-card .icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.ov-card h3 {
+  font-size: 14.5px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  color: var(--tut-text);
+}
+
+.ov-card p {
+  font-size: 13px;
+  color: var(--tut-muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Стъпкови блокове (.step-block) */
+.step-block {
+  background: var(--tut-white);
+  border: 1px solid var(--tut-border);
+  border-radius: var(--tut-radius);
+  margin-bottom: 22px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.step-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 22px;
+  border-bottom: 1px solid var(--tut-border);
+  background: var(--tut-light);
+}
+
+.step-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.step-head h3 {
+  font-size: 15.5px;
+  font-weight: 800;
+  flex: 1;
+  margin: 0;
+  color: var(--tut-text);
+}
+
+.step-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+
+.tag-html { background: var(--tut-orange-bg); color: var(--tut-orange); border: 1px solid var(--tut-orange-bd); }
+.tag-css  { background: var(--tut-blue-bg);   color: var(--tut-blue);   border: 1px solid var(--tut-blue-bd); }
+.tag-js   { background: var(--tut-green-bg);  color: var(--tut-green);  border: 1px solid var(--tut-green-bd); }
+.tag-ex   { background: var(--tut-purple-bg); color: var(--tut-purple); border: 1px solid var(--tut-purple-bd); }
+
+.step-body {
+  padding: 22px 24px;
+}
+
+/* Номериран списък (.ilist) с кръгли цветни значки */
+.ilist {
+  list-style: none;
+  counter-reset: ic;
+  padding: 0;
+  margin: 0 0 16px;
+}
+
+.ilist li {
+  counter-increment: ic;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 14.5px;
+  align-items: flex-start;
+  line-height: 1.65;
+}
+
+.ilist li::before {
+  content: counter(ic);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.ilist.orange li::before { background: var(--tut-orange); }
+.ilist.blue li::before   { background: var(--tut-blue); }
+.ilist.green li::before  { background: var(--tut-green); }
+.ilist.purple li::before { background: var(--tut-purple); }
+
+/* Кодови прозорци (.code-wrap) в macOS стил */
+.code-wrap {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #1f293d;
+  margin: 18px 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  background: var(--tut-code-bg);
+}
+
+.code-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1f293d;
+  padding: 8px 14px;
+  border-bottom: 1px solid #2d3748;
+}
+
+.code-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.code-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.code-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.d-r { background: #f87171; }
+.d-y { background: #fbbf24; }
+.d-g { background: #34d399; }
+
+.code-fname {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.code-copy-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.code-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+
+.code-body {
+  padding: 16px 20px;
+  background: var(--tut-code-bg);
+  color: var(--tut-code-text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.8px;
+  line-height: 1.75;
+  overflow-x: auto;
+  white-space: pre;
+  margin: 0;
+}
+
+/* Синтактично подчертаване за код */
+.kw { color: #93c5fd; font-weight: 600; }
+.fn { color: #6ee7b7; }
+.st { color: #fde68a; }
+.at { color: #f9a8d4; }
+.cm { color: #64748b; font-style: italic; }
+.tg { color: #f87171; }
+.num{ color: #fca5a5; }
+
+/* Карета със съвети (.callout) */
+.callout {
+  border-radius: 0 var(--tut-radius) var(--tut-radius) 0;
+  padding: 14px 18px;
+  font-size: 14px;
+  margin: 16px 0;
+  line-height: 1.6;
+}
+
+.c-blue {
+  background: var(--tut-blue-bg);
+  border-left: 4px solid var(--tut-blue);
+  color: #1e3a8a;
+}
+
+.c-orange {
+  background: var(--tut-orange-bg);
+  border-left: 4px solid var(--tut-orange);
+  color: #78350f;
+}
+
+.c-green {
+  background: var(--tut-green-bg);
+  border-left: 4px solid var(--tut-green);
+  color: #064e3b;
+}
+
+.c-purple {
+  background: var(--tut-purple-bg);
+  border-left: 4px solid var(--tut-purple);
+  color: #4c1d95;
+}
+
+/* =========================================================
+   3. ИНТЕРАКТИВНИ СИМУЛАЦИИ (Live Sandboxes)
+   ========================================================= */
+.live-sandbox-block {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: var(--tut-radius);
+  padding: 24px;
+  margin: 24px 0;
+  color: #e6edf3;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.sandbox-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #21262d;
+}
+
+.sandbox-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.sandbox-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.sandbox-tab-btn {
+  background: #161b22;
+  border: 1px solid #30363d;
+  color: #8b949e;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sandbox-tab-btn:hover {
+  color: #c9d1d9;
+  border-color: #8b949e;
+}
+
+.sandbox-tab-btn.active {
+  background: #238636;
+  border-color: #2ea043;
+  color: #ffffff;
+}
+
+.sandbox-canvas-wrapper {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  position: relative;
+}
+
+.sandbox-canvas-wrapper canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Специфично за NFT демо */
+.nft-demo-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 700px) {
+  .nft-demo-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nft-demo-preview {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.nft-demo-canvas {
+  width: 192px;
+  height: 192px;
+  image-rendering: pixelated;
+  background: #0d1117;
+  border-radius: 8px;
+  border: 1px solid #30363d;
+}
+
+.nft-demo-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nft-demo-traits {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 8px;
+  background: #161b22;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #30363d;
+}
+
+.nft-demo-trait-card {
+  background: #0d1117;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #21262d;
+}
+
+.nft-demo-trait-cat {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #8b949e;
+  text-transform: uppercase;
+}
+
+.nft-demo-trait-val {
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sandbox-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.btn-sandbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-sandbox.primary {
+  background: #f17a3e;
+  color: #ffffff;
+}
+
+.btn-sandbox.primary:hover {
+  background: #ff8c52;
+}
+
+.btn-sandbox.secondary {
+  background: #21262d;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+}
+
+.btn-sandbox.secondary:hover {
+  background: #30363d;
+  color: #ffffff;
+}

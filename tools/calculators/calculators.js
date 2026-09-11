@@ -1080,6 +1080,97 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
 
+        investment: {
+            title: "Инвестиционен калкулатор",
+            desc: "Пресметни капиталовия растеж при сложна лихва и регулярни месечни вноски.",
+            render(container) {
+                container.innerHTML = `
+                    <form class="calculator-form">
+                        <div class="calc-row">
+                            <div class="calc-group">
+                                <label for="invInit">Първоначална сума (лв.)</label>
+                                <input type="number" step="any" id="invInit" placeholder="Напр. 5000" value="5000">
+                            </div>
+                            <div class="calc-group">
+                                <label for="invMonthly">Месечна вноска (лв.)</label>
+                                <input type="number" step="any" id="invMonthly" placeholder="Напр. 300" value="300">
+                            </div>
+                        </div>
+
+                        <div class="calc-row">
+                            <div class="calc-group">
+                                <label for="invReturn">Годишна доходност (%)</label>
+                                <input type="number" step="any" id="invReturn" placeholder="Напр. 8" value="8">
+                            </div>
+                            <div class="calc-group">
+                                <label for="invYears">Период (години)</label>
+                                <input type="number" id="invYears" placeholder="Напр. 15" value="15">
+                            </div>
+                        </div>
+
+                        <div class="calc-result" id="invResult" style="display: block;">
+                            <div class="calc-result-title">Краен баланс след инвестиционния период</div>
+                            <div class="calc-result-value" id="invTotalVal">-</div>
+                            <div class="calc-result-grid" style="margin-top: 10px;">
+                                <div class="calc-result-item">
+                                    <div class="calc-result-item-label">Внесени общо</div>
+                                    <div class="calc-result-item-val" id="invPrincipalVal">-</div>
+                                </div>
+                                <div class="calc-result-item">
+                                    <div class="calc-result-item-label">Спечелена лихва</div>
+                                    <div class="calc-result-item-val" id="invInterestVal" style="color: #10b981;">-</div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 14px; text-align: center;">
+                                <a href="/tools/inv.html" target="_blank" style="display: inline-block; padding: 8px 14px; background: #2563eb; color: #fff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 0.85rem;">
+                                    📊 Отвори пълната симулация с графика и таблица →
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                `;
+
+                const initIn = container.querySelector('#invInit');
+                const monthlyIn = container.querySelector('#invMonthly');
+                const returnIn = container.querySelector('#invReturn');
+                const yearsIn = container.querySelector('#invYears');
+
+                const totalValEl = container.querySelector('#invTotalVal');
+                const principalValEl = container.querySelector('#invPrincipalVal');
+                const interestValEl = container.querySelector('#invInterestVal');
+
+                function calculate() {
+                    const init = Math.max(0, parseFloat(initIn.value) || 0);
+                    const monthly = Math.max(0, parseFloat(monthlyIn.value) || 0);
+                    const rate = Math.max(0, parseFloat(returnIn.value) || 0) / 100;
+                    const years = Math.max(1, parseFloat(yearsIn.value) || 1);
+
+                    let balance = init;
+                    let totalInvested = init;
+                    const monthlyRate = rate / 12;
+
+                    for (let m = 1; m <= years * 12; m++) {
+                        balance += monthly;
+                        totalInvested += monthly;
+                        balance += balance * monthlyRate;
+                    }
+
+                    const interest = balance - totalInvested;
+
+                    totalValEl.textContent = `${formatNumber(balance)} лв.`;
+                    principalValEl.textContent = `${formatNumber(totalInvested)} лв.`;
+                    interestValEl.textContent = `+${formatNumber(interest)} лв.`;
+                }
+
+                initIn.addEventListener('input', calculate);
+                monthlyIn.addEventListener('input', calculate);
+                returnIn.addEventListener('input', calculate);
+                yearsIn.addEventListener('input', calculate);
+
+                calculate();
+            }
+        },
+
         // --- ИНСТРУМЕНТИ ---------------------------------------------------
         units: {
             title: "Преобразуване на мерни единици",
@@ -1288,7 +1379,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Събития за отваряне на калкулатор от картите
     catalogCards.forEach(card => {
         card.addEventListener('click', () => {
+            const href = card.getAttribute('data-href');
+            if (href) {
+                window.location.href = href;
+                return;
+            }
             const key = card.getAttribute('data-calculator');
+            if (key === 'investment') {
+                window.location.href = '/tools/inv.html';
+                return;
+            }
             openCalculator(key);
         });
     });

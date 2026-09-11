@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="bg">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Ð“ÐµÐ¾Ð¼ÐµÑ‚Ñ€Ð¸Ñ‡Ð½Ð° Ð´ÑŠÑÐºÐ°</title>
+    <title>Геометрична дъска</title>
 
     <link
         rel="stylesheet"
@@ -27,38 +27,39 @@
     <header class="geometry-header">
 
         <div>
-            <h1>Ð“ÐµÐ¾Ð¼ÐµÑ‚Ñ€Ð¸Ñ‡Ð½Ð° Ð´ÑŠÑÐºÐ°</h1>
+            <h1>Геометрична дъска</h1>
 
             <p>
-                Ð§ÐµÑ€Ñ‚Ð°ÐµÐ½Ðµ Ð¸ Ð¿Ð¾ÑÑ‚Ñ€Ð¾ÐµÐ½Ð¸Ñ Ð¿Ð¾ Ð³ÐµÐ¾Ð¼ÐµÑ‚Ñ€Ð¸Ñ â€”
-                ÐºÐ°Ñ‚Ð¾ Ð½Ð° Ð»Ð¸ÑÑ‚ Ð¸Ð»Ð¸ Ð½Ð° Ð´ÑŠÑÐºÐ°Ñ‚Ð°.
+                Чертаене и построения по геометрия —
+                като на лист или на дъската.
             </p>
         </div>
 
+    </header>
     <!-- =====================================================
-         TOP CONTROLS BAR (ÐžÑ‚Ð¼ÑÐ½Ð°, ÐŸÐ¾Ð²Ñ‚Ð¾Ñ€ÐµÐ½Ð¸Ðµ, Ð˜Ð·Ñ‡Ð¸ÑÑ‚Ð²Ð°Ð½Ðµ, Ð—Ð°Ð¿Ð°Ð·Ð²Ð°Ð½Ðµ)
+         TOP CONTROLS BAR (Отмяна, Повторение, Изчистване, Запазване)
          ===================================================== -->
 
     <section class="geometry-top-controls">
 
-        <button class="control-button" onclick="app.undo()" title="ÐžÑ‚Ð¼ÑÐ½Ð°">
-            <span class="control-icon">â†©</span>
-            <span>ÐžÑ‚Ð¼ÑÐ½Ð°</span>
+        <button class="control-button" onclick="app.undo()" title="Отмяна">
+            <span class="control-icon">↩</span>
+            <span>Отмяна</span>
         </button>
 
-        <button class="control-button" onclick="app.redo()" title="ÐŸÐ¾Ð²Ñ‚Ð¾Ñ€ÐµÐ½Ð¸Ðµ">
-            <span class="control-icon">â†ª</span>
-            <span>ÐŸÐ¾Ð²Ñ‚Ð¾Ñ€ÐµÐ½Ð¸Ðµ</span>
+        <button class="control-button" onclick="app.redo()" title="Повторение">
+            <span class="control-icon">↪</span>
+            <span>Повторение</span>
         </button>
 
-        <button class="control-button danger" onclick="app.clear()" title="Ð˜Ð·Ñ‡Ð¸ÑÑ‚Ð²Ð°Ð½Ðµ">
-            <span class="control-icon">ðŸ—‘</span>
-            <span>Ð˜Ð·Ñ‡Ð¸ÑÑ‚Ð²Ð°Ð½Ðµ</span>
+        <button class="control-button danger" onclick="app.clear()" title="Изчистване">
+            <span class="control-icon">🗑</span>
+            <span>Изчистване</span>
         </button>
 
-        <button class="control-button primary" onclick="app.save()" title="Ð—Ð°Ð¿Ð°Ð·Ð²Ð°Ð½Ðµ">
-            <span class="control-icon">ðŸ’¾</span>
-            <span>Ð—Ð°Ð¿Ð°Ð·Ð²Ð°Ð½Ðµ</span>
+        <button class="control-button primary" onclick="app.save()" title="Запазване">
+            <span class="control-icon">💾</span>
+            <span>Запазване</span>
         </button>
 
     </section>
@@ -71,119 +72,119 @@
     <div class="geometry-main">
 
         <!-- =====================================================
-             TOOLS PANEL (Ð’Ð›Ð¯Ð’Ðž)
+             TOOLS PANEL (ВЛЯВО)
              ===================================================== -->
 
         <div class="geometry-tools-panel">
 
-            <!-- TOOLBAR (Ð§ÐµÑ€Ñ‚Ð°Ð½Ðµ) - Ð’Ð›Ð¯Ð’Ðž -->
+            <!-- TOOLBAR (Чертане) - ВЛЯВО -->
 
             <section class="geometry-toolbar">
 
         <div class="toolbar-group">
 
             <span class="toolbar-label">
-                Ð§ÐµÑ€Ñ‚Ð°Ð½Ðµ
+                Чертане
             </span>
 
 
             <button
                 class="tool-button active"
                 data-tool="select"
-                title="Ð˜Ð·Ð±ÐµÑ€Ð¸ Ð¸ Ð¿Ñ€ÐµÐ¼ÐµÑÑ‚Ð¸"
+                title="Избери и премести"
             >
-                <span class="tool-icon">â†–</span>
-                <span>Ð˜Ð·Ð±ÐµÑ€Ð¸</span>
+                <span class="tool-icon">↖</span>
+                <span>Избери</span>
             </button>
 
 
             <button
                 class="tool-button"
                 data-tool="point"
-                title="Ð¢Ð¾Ñ‡ÐºÐ°"
+                title="Точка"
             >
-                <span class="tool-icon">â€¢</span>
-                <span>Ð¢Ð¾Ñ‡ÐºÐ°</span>
+                <span class="tool-icon">•</span>
+                <span>Точка</span>
             </button>
 
 
             <button
                 class="tool-button"
                 data-tool="segment"
-                title="ÐžÑ‚ÑÐµÑ‡ÐºÐ°"
+                title="Отсечка"
             >
-                <span class="tool-icon">â•±</span>
-                <span>ÐžÑ‚ÑÐµÑ‡ÐºÐ°</span>
+                <span class="tool-icon">╱</span>
+                <span>Отсечка</span>
             </button>
 
 
             <button
                 class="tool-button"
                 data-tool="line"
-                title="ÐŸÑ€Ð°Ð²Ð°"
+                title="Права"
             >
-                <span class="tool-icon">â†”</span>
-                <span>ÐŸÑ€Ð°Ð²Ð°</span>
+                <span class="tool-icon">↔</span>
+                <span>Права</span>
             </button>
 
 
             <button
                 class="tool-button"
                 data-tool="ray"
-                title="Ð›ÑŠÑ‡"
+                title="Лъч"
             >
-                <span class="tool-icon">â†’</span>
-                <span>Ð›ÑŠÑ‡</span>
+                <span class="tool-icon">→</span>
+                <span>Лъч</span>
             </button>
 
 
             <button
                 class="tool-button"
                 data-tool="circle"
-                title="ÐžÐºÑ€ÑŠÐ¶Ð½Ð¾ÑÑ‚"
+                title="Окръжност"
             >
-                <span class="tool-icon">â—‹</span>
-                <span>ÐžÐºÑ€ÑŠÐ¶Ð½Ð¾ÑÑ‚</span>
+                <span class="tool-icon">○</span>
+                <span>Окръжност</span>
             </button>
 
 
             <button
                 class="tool-button"
                 data-tool="arc"
-                title="Ð”ÑŠÐ³Ð°"
+                title="Дъга"
             >
-                <span class="tool-icon">â—¡</span>
-                <span>Ð”ÑŠÐ³Ð°</span>
+                <span class="tool-icon">◡</span>
+                <span>Дъга</span>
             </button>
 
 
             <button
                 class="tool-button"
                 data-tool="polygon"
-                title="ÐœÐ½Ð¾Ð³Ð¾ÑŠÐ³ÑŠÐ»Ð½Ð¸Ðº"
+                title="Многоъгълник"
             >
-                <span class="tool-icon">â–³</span>
-                <span>ÐœÐ½Ð¾Ð³Ð¾ÑŠÐ³ÑŠÐ»Ð½Ð¸Ðº</span>
+                <span class="tool-icon">△</span>
+                <span>Многоъгълник</span>
             </button>
 
 
             <button
                 class="tool-button"
                 data-tool="pencil"
-                title="ÐœÐ¾Ð»Ð¸Ð²"
+                title="Молив"
             >
-                <span class="tool-icon">âœŽ</span>
-                <span>ÐœÐ¾Ð»Ð¸Ð²</span>
+                <span class="tool-icon">✎</span>
+                <span>Молив</span>
             </button>
 
 
             <button
                 class="tool-button"
                 data-tool="eraser"
-                title="Ð“ÑƒÐ¼Ð°"
+                title="Гума"
             >
-                <span class="tool-icon">âŒ«</span>
-                <span>Ð“ÑƒÐ¼Ð°</span>
+                <span class="tool-icon">⌫</span>
+                <span>Гума</span>
             </button>
 
         </div>
@@ -195,27 +196,27 @@
         <div class="toolbar-group">
 
             <span class="toolbar-label">
-                Ð˜Ð·Ð³Ð»ÐµÐ´
+                Изглед
             </span>
 
 
             <button
                 class="tool-button active"
                 id="gridButton"
-                title="ÐŸÐ¾ÐºÐ°Ð¶Ð¸/ÑÐºÑ€Ð¸Ð¹ Ð¼Ñ€ÐµÐ¶Ð°Ñ‚Ð°"
+                title="Покажи/скрий мрежата"
             >
-                <span class="tool-icon">â–¦</span>
-                <span>ÐœÑ€ÐµÐ¶Ð°</span>
+                <span class="tool-icon">▦</span>
+                <span>Мрежа</span>
             </button>
 
 
             <button
                 class="tool-button active"
                 id="labelsButton"
-                title="ÐŸÐ¾ÐºÐ°Ð¶Ð¸/ÑÐºÑ€Ð¸Ð¹ ÐµÑ‚Ð¸ÐºÐµÑ‚Ð¸Ñ‚Ðµ"
+                title="Покажи/скрий етикетите"
             >
                 <span class="tool-icon">A</span>
-                <span>Ð•Ñ‚Ð¸ÐºÐµÑ‚Ð¸</span>
+                <span>Етикети</span>
             </button>
 
         </div>
@@ -229,40 +230,40 @@
             <button
                 class="tool-button"
                 id="undoButton"
-                title="ÐžÑ‚Ð¼ÐµÐ½Ð¸"
+                title="Отмени"
             >
-                <span class="tool-icon">â†¶</span>
-                <span>ÐžÑ‚Ð¼ÐµÐ½Ð¸</span>
+                <span class="tool-icon">↶</span>
+                <span>Отмени</span>
             </button>
 
 
             <button
                 class="tool-button"
                 id="redoButton"
-                title="ÐŸÐ¾Ð²Ñ‚Ð¾Ñ€Ð¸"
+                title="Повтори"
             >
-                <span class="tool-icon">â†·</span>
-                <span>ÐŸÐ¾Ð²Ñ‚Ð¾Ñ€Ð¸</span>
+                <span class="tool-icon">↷</span>
+                <span>Повтори</span>
             </button>
 
 
             <button
                 class="tool-button danger"
                 id="clearButton"
-                title="Ð˜Ð·Ñ‡Ð¸ÑÑ‚Ð¸ Ð´ÑŠÑÐºÐ°Ñ‚Ð°"
+                title="Изчисти дъската"
             >
-                <span class="tool-icon">âŒ«</span>
-                <span>Ð˜Ð·Ñ‡Ð¸ÑÑ‚Ð¸</span>
+                <span class="tool-icon">⌫</span>
+                <span>Изчисти</span>
             </button>
 
 
             <button
                 class="tool-button"
                 id="saveButton"
-                title="Ð—Ð°Ð¿Ð°Ð·Ð¸ ÐºÐ°Ñ‚Ð¾ PNG"
+                title="Запази като PNG"
             >
-                <span class="tool-icon">â†“</span>
-                <span>Ð—Ð°Ð¿Ð°Ð·Ð¸</span>
+                <span class="tool-icon">↓</span>
+                <span>Запази</span>
             </button>
 
         </div>
@@ -402,22 +403,22 @@
             </div>
 
 
-        <!-- STATUS BAR -->
+            <!-- BOARD STATUS (долу) -->
 
-        <div class="board-status">
+            <div class="board-status">
 
             <div class="status-left">
 
                 <span id="currentToolText">
-                    Ð˜Ð·Ð±ÐµÑ€Ð¸
+                    Избери
                 </span>
 
                 <span class="status-separator">
-                    Â·
+                    ·
                 </span>
 
                 <span id="cursorPosition">
-                    x: â€” &nbsp; y: â€”
+                    x: — &nbsp; y: —
                 </span>
 
             </div>
@@ -426,17 +427,18 @@
             <div class="status-right">
 
                 <span id="objectCount">
-                    0 Ð¾Ð±ÐµÐºÑ‚Ð°
+                    0 обекта
                 </span>
 
             </div>
 
         </div>
-    </section>
+
+</section>
+    </div>
 
 </div>
 
-</div>
 
 </main>
 

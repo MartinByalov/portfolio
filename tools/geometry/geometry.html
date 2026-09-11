@@ -2,443 +2,187 @@
 <html lang="bg">
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Геометрична дъска</title>
-
-    <link
-        rel="stylesheet"
-        href="geometry.css"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чертожник — Геометрична дъска</title>
+    <link rel="stylesheet" href="geometry.css">
 </head>
-
 <body>
 
 <main class="geometry-page">
 
     <!-- =====================================================
-         HEADER
+         HEADER WITH TITLE & ACTIONS
          ===================================================== -->
-
     <header class="geometry-header">
-
-        <div>
-            <h1>Геометрична дъска</h1>
-
-            <p>
-                Чертаене и построения по геометрия —
-                като на лист или на дъската.
-            </p>
+        <div class="geometry-header-info">
+            <h1>Чертожник</h1>
+            <p>Геометрична дъска — чертаене и построения по геометрия</p>
         </div>
 
-    </header>
-    <!-- =====================================================
-         TOP CONTROLS BAR (Отмяна, Повторение, Изчистване, Запазване)
-         ===================================================== -->
-
-    <section class="geometry-top-controls">
-
-        <button class="control-button" onclick="app.undo()" title="Отмяна">
-            <span class="control-icon">↩</span>
-            <span>Отмяна</span>
-        </button>
-
-        <button class="control-button" onclick="app.redo()" title="Повторение">
-            <span class="control-icon">↪</span>
-            <span>Повторение</span>
-        </button>
-
-        <button class="control-button danger" onclick="app.clear()" title="Изчистване">
-            <span class="control-icon">🗑</span>
-            <span>Изчистване</span>
-        </button>
-
-        <button class="control-button primary" onclick="app.save()" title="Запазване">
-            <span class="control-icon">💾</span>
-            <span>Запазване</span>
-        </button>
-
-    </section>
-
-
-    <!-- =====================================================
-         MAIN LAYOUT: TOOLS LEFT + CANVAS RIGHT
-         ===================================================== -->
-
-    <div class="geometry-main">
-
-        <!-- =====================================================
-             TOOLS PANEL (ВЛЯВО)
-             ===================================================== -->
-
-        <div class="geometry-tools-panel">
-
-            <!-- TOOLBAR (Чертане) - ВЛЯВО -->
-
-            <section class="geometry-toolbar">
-
-        <div class="toolbar-group">
-
-            <span class="toolbar-label">
-                Чертане
-            </span>
-
-
-            <button
-                class="tool-button active"
-                data-tool="select"
-                title="Избери и премести"
-            >
-                <span class="tool-icon">↖</span>
-                <span>Избери</span>
-            </button>
-
-
-            <button
-                class="tool-button"
-                data-tool="point"
-                title="Точка"
-            >
-                <span class="tool-icon">•</span>
-                <span>Точка</span>
-            </button>
-
-
-            <button
-                class="tool-button"
-                data-tool="segment"
-                title="Отсечка"
-            >
-                <span class="tool-icon">╱</span>
-                <span>Отсечка</span>
-            </button>
-
-
-            <button
-                class="tool-button"
-                data-tool="line"
-                title="Права"
-            >
-                <span class="tool-icon">↔</span>
-                <span>Права</span>
-            </button>
-
-
-            <button
-                class="tool-button"
-                data-tool="ray"
-                title="Лъч"
-            >
-                <span class="tool-icon">→</span>
-                <span>Лъч</span>
-            </button>
-
-
-            <button
-                class="tool-button"
-                data-tool="circle"
-                title="Окръжност"
-            >
-                <span class="tool-icon">○</span>
-                <span>Окръжност</span>
-            </button>
-
-
-            <button
-                class="tool-button"
-                data-tool="arc"
-                title="Дъга"
-            >
-                <span class="tool-icon">◡</span>
-                <span>Дъга</span>
-            </button>
-
-
-            <button
-                class="tool-button"
-                data-tool="polygon"
-                title="Многоъгълник"
-            >
-                <span class="tool-icon">△</span>
-                <span>Многоъгълник</span>
-            </button>
-
-
-            <button
-                class="tool-button"
-                data-tool="pencil"
-                title="Молив"
-            >
-                <span class="tool-icon">✎</span>
-                <span>Молив</span>
-            </button>
-
-
-            <button
-                class="tool-button"
-                data-tool="eraser"
-                title="Гума"
-            >
-                <span class="tool-icon">⌫</span>
-                <span>Гума</span>
-            </button>
-
-        </div>
-
-
-        <div class="toolbar-divider"></div>
-
-
-        <div class="toolbar-group">
-
-            <span class="toolbar-label">
-                Изглед
-            </span>
-
-
-            <button
-                class="tool-button active"
-                id="gridButton"
-                title="Покажи/скрий мрежата"
-            >
-                <span class="tool-icon">▦</span>
-                <span>Мрежа</span>
-            </button>
-
-
-            <button
-                class="tool-button active"
-                id="labelsButton"
-                title="Покажи/скрий етикетите"
-            >
-                <span class="tool-icon">A</span>
-                <span>Етикети</span>
-            </button>
-
-        </div>
-
-
-        <div class="toolbar-divider"></div>
-
-
-        <div class="toolbar-group toolbar-actions">
-
-            <button
-                class="tool-button"
-                id="undoButton"
-                title="Отмени"
-            >
-                <span class="tool-icon">↶</span>
+        <div class="geometry-header-actions">
+            <button class="control-button" id="undoButton" title="Отмени (Ctrl+Z)">
+                <span class="control-icon">↩</span>
                 <span>Отмени</span>
             </button>
 
-
-            <button
-                class="tool-button"
-                id="redoButton"
-                title="Повтори"
-            >
-                <span class="tool-icon">↷</span>
+            <button class="control-button" id="redoButton" title="Повтори (Ctrl+Y)">
+                <span class="control-icon">↪</span>
                 <span>Повтори</span>
             </button>
 
-
-            <button
-                class="tool-button danger"
-                id="clearButton"
-                title="Изчисти дъската"
-            >
-                <span class="tool-icon">⌫</span>
+            <button class="control-button danger" id="clearButton" title="Изчисти всичко">
+                <span class="control-icon">🗑</span>
                 <span>Изчисти</span>
             </button>
 
-
-            <button
-                class="tool-button"
-                id="saveButton"
-                title="Запази като PNG"
-            >
-                <span class="tool-icon">↓</span>
-                <span>Запази</span>
+            <button class="control-button primary" id="saveButton" title="Запази като PNG изображение">
+                <span class="control-icon">💾</span>
+                <span>Запази PNG</span>
             </button>
-
         </div>
-
-    </section>
-
-        </div>
-
-        <div class="geometry-canvas-wrapper">
-
+    </header>
 
     <!-- =====================================================
-         BOARD
+         MAIN LAYOUT: TOOLS PANEL (LEFT) + CANVAS (RIGHT)
          ===================================================== -->
+    <div class="geometry-main">
 
-    <section class="board-wrapper">
+        <!-- TOOLS PANEL -->
+        <aside class="geometry-tools-panel">
+            <div class="geometry-toolbar">
+                <div class="toolbar-section-header">
+                    <span class="toolbar-label">Чертане</span>
+                </div>
 
-        <div
-            class="board"
-            id="board"
-        >
+                <div class="toolbar-tools-grid">
+                    <button class="tool-button active" data-tool="select" title="Избери и премести (Esc)">
+                        <span class="tool-icon">↖</span>
+                        <span>Избери</span>
+                    </button>
 
-            <svg
-                id="geometrySvg"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 1400 800"
-                preserveAspectRatio="xMidYMid meet"
-            >
+                    <button class="tool-button" data-tool="point" title="Точка (P)">
+                        <span class="tool-icon">•</span>
+                        <span>Точка</span>
+                    </button>
 
-                <!-- GRID -->
+                    <button class="tool-button" data-tool="segment" title="Отсечка (S)">
+                        <span class="tool-icon">╱</span>
+                        <span>Отсечка</span>
+                    </button>
 
-                <defs>
+                    <button class="tool-button" data-tool="line" title="Права (L)">
+                        <span class="tool-icon">↔</span>
+                        <span>Права</span>
+                    </button>
 
-                    <pattern
-                        id="smallGrid"
-                        width="20"
-                        height="20"
-                        patternUnits="userSpaceOnUse"
-                    >
+                    <button class="tool-button" data-tool="ray" title="Лъч (R)">
+                        <span class="tool-icon">→</span>
+                        <span>Лъч</span>
+                    </button>
 
-                        <path
-                            d="M 20 0 L 0 0 0 20"
-                            fill="none"
-                            stroke="#ececf1"
-                            stroke-width="1"
-                        />
+                    <button class="tool-button" data-tool="circle" title="Окръжност (C)">
+                        <span class="tool-icon">○</span>
+                        <span>Окръжност</span>
+                    </button>
 
-                    </pattern>
+                    <button class="tool-button" data-tool="arc" title="Дъга (A)">
+                        <span class="tool-icon">◡</span>
+                        <span>Дъга</span>
+                    </button>
 
+                    <button class="tool-button" data-tool="polygon" title="Многоъгълник (G)">
+                        <span class="tool-icon">△</span>
+                        <span>Многоъгълник</span>
+                    </button>
 
-                    <pattern
-                        id="grid"
-                        width="100"
-                        height="100"
-                        patternUnits="userSpaceOnUse"
-                    >
+                    <button class="tool-button" data-tool="pencil" title="Свободен молив (B)">
+                        <span class="tool-icon">✎</span>
+                        <span>Молив</span>
+                    </button>
 
-                        <rect
-                            width="100"
-                            height="100"
-                            fill="url(#smallGrid)"
-                        />
+                    <button class="tool-button" data-tool="eraser" title="Гума за изтриване (E)">
+                        <span class="tool-icon">⌫</span>
+                        <span>Гума</span>
+                    </button>
+                </div>
 
-                        <path
-                            d="M 100 0 L 0 0 0 100"
-                            fill="none"
-                            stroke="#dcdce5"
-                            stroke-width="1"
-                        />
+                <div class="toolbar-divider"></div>
 
-                    </pattern>
+                <div class="toolbar-section-header">
+                    <span class="toolbar-label">Изглед</span>
+                </div>
 
-                </defs>
+                <div class="toolbar-view-group">
+                    <button class="tool-button active" id="gridButton" title="Покажи/скрий координатната мрежа">
+                        <span class="tool-icon">▦</span>
+                        <span>Мрежа</span>
+                    </button>
 
+                    <button class="tool-button active" id="labelsButton" title="Покажи/скрий буквените етикети (A, B, C...)">
+                        <span class="tool-icon">A</span>
+                        <span>Етикети</span>
+                    </button>
+                </div>
 
-                <rect
-                    id="gridBackground"
-                    x="0"
-                    y="0"
-                    width="1400"
-                    height="800"
-                    fill="url(#grid)"
-                />
+                <div class="toolbar-divider"></div>
 
-
-                <!-- AXES -->
-
-                <line
-                    id="axisX"
-                    x1="0"
-                    y1="400"
-                    x2="1400"
-                    y2="400"
-                    stroke="#cfcfd8"
-                    stroke-width="1.5"
-                />
-
-
-                <line
-                    id="axisY"
-                    x1="700"
-                    y1="0"
-                    x2="700"
-                    y2="800"
-                    stroke="#cfcfd8"
-                    stroke-width="1.5"
-                />
-
-
-                <!-- OBJECTS -->
-
-                <g id="geometryObjects"></g>
-
-
-                <!-- POINTER -->
-
-                <g
-                    id="pointerLayer"
-                    pointer-events="none"
-                >
-
-                    <circle
-                        id="snapIndicator"
-                        cx="0"
-                        cy="0"
-                        r="7"
-                        fill="none"
-                        stroke="#f17a3e"
-                        stroke-width="2"
-                        opacity="0"
-                    />
-
-                </g>
-
-            </svg>
-
+                <div class="toolbar-tips">
+                    <div class="tip-row"><kbd>Esc</kbd> <span>Избери</span></div>
+                    <div class="tip-row"><kbd>Del</kbd> <span>Изтрий</span></div>
+                    <div class="tip-row"><kbd>Ctrl+Z</kbd> <span>Отмени</span></div>
+                </div>
             </div>
+        </aside>
 
+        <!-- CANVAS WRAPPER -->
+        <div class="geometry-canvas-wrapper">
+            <section class="board-wrapper">
+                <div class="board" id="board">
+                    <svg id="geometrySvg" viewBox="0 0 1400 800" preserveAspectRatio="xMidYMid meet">
+                        <!-- GRID -->
+                        <defs>
+                            <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#ececf1" stroke-width="1" />
+                            </pattern>
+                            <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+                                <rect width="100" height="100" fill="url(#smallGrid)" />
+                                <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#dcdce5" stroke-width="1" />
+                            </pattern>
+                        </defs>
 
-            <!-- BOARD STATUS (долу) -->
+                        <rect id="gridBackground" x="0" y="0" width="1400" height="800" fill="url(#grid)" />
 
-            <div class="board-status">
+                        <!-- AXES -->
+                        <line id="axisX" x1="0" y1="400" x2="1400" y2="400" stroke="#cfcfd8" stroke-width="1.5" />
+                        <line id="axisY" x1="700" y1="0" x2="700" y2="800" stroke="#cfcfd8" stroke-width="1.5" />
 
-            <div class="status-left">
+                        <!-- OBJECTS LAYER -->
+                        <g id="geometryObjects"></g>
 
-                <span id="currentToolText">
-                    Избери
-                </span>
+                        <!-- POINTER SNAP INDICATOR -->
+                        <g id="pointerLayer" pointer-events="none">
+                            <circle id="snapIndicator" cx="0" cy="0" r="7" fill="none" stroke="#f17a3e" stroke-width="2" opacity="0" />
+                        </g>
+                    </svg>
+                </div>
 
-                <span class="status-separator">
-                    ·
-                </span>
+                <!-- BOARD STATUS (BOTTOM) -->
+                <div class="board-status">
+                    <div class="status-left">
+                        <span class="status-tool-badge">Инструмент:</span>
+                        <strong id="currentToolText">Избери</strong>
+                        <span class="status-separator">·</span>
+                        <span id="cursorPosition">x: — &nbsp; y: —</span>
+                    </div>
 
-                <span id="cursorPosition">
-                    x: — &nbsp; y: —
-                </span>
-
-            </div>
-
-
-            <div class="status-right">
-
-                <span id="objectCount">
-                    0 обекта
-                </span>
-
-            </div>
-
+                    <div class="status-right">
+                        <span id="objectCount">0 обекта</span>
+                    </div>
+                </div>
+            </section>
         </div>
 
-</section>
     </div>
-
-</div>
-
 
 </main>
 

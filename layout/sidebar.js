@@ -46,6 +46,7 @@ const LEARNING_NAV = [
   { icon: 'bx bx-calculator',  label: 'Калкулатори',    href: '/tools/calculators/index.html', 'data-nav': 'learning' },
   { icon: 'bx bx-book',        label: 'Речник',         href: '#/dictionary', 'data-nav': 'learning' },
   { icon: 'bx bx-code-alt',    label: 'Софтуер',        href: '#/software',   'data-nav': 'learning' },
+  { icon: 'bx bx-layer',       label: 'Други',          href: '#/other',      'data-nav': 'learning' },
   { icon: 'bx bx-user-pin',    label: 'За мен',         href: '#/about',      'data-nav': 'learning' }
 ];
 
@@ -71,7 +72,7 @@ export function render(mode = 'learning') {
             <div class="name-job">
               <div class="profile_name">Мартин Бялов</div>
               <div class="job">Учител по ИТ</div>
-              <span class="profile-role-separator">&lt;/&gt;</span>
+              <span class="profile-role-separator" id="sidebar-nft-trigger" role="button" tabindex="0" title="Генерирай Stonk NFT (TheStonks)">&lt;/&gt;</span>
               <span class="github-icon" aria-hidden="true"><i class='bx bxl-github'></i></span>
             </div>
           </div>
@@ -86,6 +87,20 @@ export function init() {
   const logoutBtn = document.getElementById('bx-logout');
   const userLink = document.getElementById('menu-toggle');
   const calendarLink = document.querySelector('#platform-sidebar .nav-links a[href="#calendar"]');
+  const nftTrigger = document.getElementById('sidebar-nft-trigger') || document.querySelector('#platform-sidebar .profile-role-separator');
+
+  if (nftTrigger) {
+    nftTrigger.style.cursor = 'pointer';
+    const launchNft = (e) => {
+      e?.preventDefault?.();
+      e?.stopPropagation?.();
+      import('./nft-popup.js').then(module => module.open()).catch(err => console.error(err));
+    };
+    nftTrigger.addEventListener('click', launchNft);
+    nftTrigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') launchNft(e);
+    });
+  }
 
   function open() {
     sidebar.classList.add('open');

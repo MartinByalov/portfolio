@@ -21,6 +21,7 @@ import * as Experience from './layout/experience.js';
 import * as About from './layout/about.js';
 import * as Glossary from './layout/glossary.js';
 import * as Software from './layout/software.js';
+import * as Other from './layout/other.js';
 import { fetchLesson, buildLesson, initLesson } from './renderer/renderer.js';
 import { initScrollSpy } from './components/scroll-spy.js';
 import { initLightbox } from './components/lightbox.js';
@@ -169,6 +170,17 @@ async function route() {
       Header.setTitle('Софтуер', 'fa-solid fa-code');
       viewRoot.innerHTML = Software.renderSoftwarePage();
       requestAnimationFrame(() => Software.initSoftwarePage());
+    } else if (parts[0] === 'other' || parts[0] === 'tutorials') {
+      const sub = parts[1];
+      if (sub === 'nft-generator') {
+        Header.setTitle('Генератор на NFT', 'fa-solid fa-cube');
+      } else if (sub === 'charts' || sub === 'graph-js') {
+        Header.setTitle('Диаграми с Graph.js', 'fa-solid fa-chart-line');
+      } else {
+        Header.setTitle('Други', 'fa-solid fa-shapes');
+      }
+      viewRoot.innerHTML = Other.renderOtherPage(sub);
+      requestAnimationFrame(() => Other.initOtherPage(sub));
     } else {
       Header.setTitle('Учебни ресурси', 'fa-solid fa-book-open');
       viewRoot.innerHTML = Home.renderSubjectsPage();

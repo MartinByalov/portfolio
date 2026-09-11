@@ -1,528 +1,118 @@
 /* =========================================================
-   GEOMETRY BOARD
+   GEOMETRY BOARD (ЧЕРТОЖНИК)
    ========================================================= */
 
 * {
     box-sizing: border-box;
 }
 
-
 body {
     margin: 0;
     padding: 0;
-
-    font-family: sans-serif;
-
-    background: #f4f4f9;
-    color: #1d1b31;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #f4f5f8;
+    color: #1e1e2d;
+    -webkit-font-smoothing: antialiased;
 }
 
-
-button,
-input {
+button, input {
     font-family: inherit;
 }
 
-
 .geometry-page {
     width: 100%;
-
-    max-width: 1500px;
-
+    max-width: 1560px;
     margin: 0 auto;
-
-    padding: 30px 24px 50px;
+    padding: 24px 20px 48px;
 }
 
-
 /* =========================================================
-   HEADER
+   HEADER & TOP ACTIONS
    ========================================================= */
 
 .geometry-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    margin-bottom: 22px;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e2e4ea;
 }
 
-
-.geometry-header h1 {
-    margin: 0 0 7px;
-
-    font-size: 2rem;
-
-    color: #1d1b31;
+.geometry-header-info h1 {
+    margin: 0 0 4px;
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: #1e1e2d;
+    letter-spacing: -0.02em;
 }
 
-
-.geometry-header p {
+.geometry-header-info p {
     margin: 0;
-
-    color: #666;
-
+    color: #64748b;
     font-size: 0.95rem;
 }
 
-
-/* =========================================================
-   TOP CONTROLS BAR (Отмяна, Повторение, Изчистване, Запазване)
-   ========================================================= */
-
-.geometry-top-controls {
+.geometry-header-actions {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-
-    padding: 10px 16px;
-
-    background: #fff;
-
-    border: 1px solid #e5e7eb;
-
-    border-radius: 12px;
-
-    box-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.05);
-
-    margin-bottom: 12px;
+    gap: 8px;
+    flex-wrap: wrap;
 }
-
 
 .control-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-
-    min-height: 36px;
-
-    padding: 7px 14px;
-
-    border: 1px solid #e5e7eb;
-
-    border-radius: 8px;
-
-    background: #f9fafb;
-
-    color: #555;
-
-    font-size: 0.85rem;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition:
-        background 0.15s,
-        color 0.15s,
-        border-color 0.15s;
-}
-
-
-/* =========================================================
-   TOOLBAR (Чертане) — ВЛЯВО
-   ========================================================= */
-
-.geometry-toolbar {
-    display: flex;
-    flex-direction: column;
-
-    gap: 4px;
-
-    padding: 12px;
-
-    background: #fff;
-
-    border: 1px solid #e5e7eb;
-
-    border-radius: 12px;
-
-    box-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.05);
-
-    overflow-x: visible;
-}
-
-
-.toolbar-group {
-    display: flex;
-
-    gap: 5px;
-
-    flex-shrink: 0;
-}
-
-
-.toolbar-label {
-    margin-right: 5px;
-
-    color: #999;
-
-    font-size: 0.72rem;
-
-    font-weight: 700;
-
-    text-transform: uppercase;
-
-    letter-spacing: 0.05em;
-}
-
-
-.toolbar-divider {
-    width: 1px;
-
-    height: 34px;
-
-    background: #e5e7eb;
-
-    flex-shrink: 0;
-}
-
-
-/* =========================================================
-   BOARD
-   ========================================================= */
-
-.board-wrapper {
-    width: 100%;
-}
-
-
-.board {
-    position: relative;
-
-    width: 100%;
-
-    aspect-ratio: 1400 / 800;
-
-    min-height: 400px;
-
-    overflow: hidden;
-
-    background: #fff;
-
-    border: 1px solid #dfe0e7;
-
-    border-radius: 12px;
-
-    box-shadow:
-        0 5px 18px rgba(0, 0, 0, 0.07);
-}
-
-
-#geometrySvg {
-    display: block;
-
-    width: 100%;
-    height: 100%;
-
-    touch-action: none;
-
-    cursor: crosshair;
-}
-
-
-.board.select-mode #geometrySvg {
-    cursor: default;
-}
-
-
-.board.eraser-mode #geometrySvg {
-    cursor: not-allowed;
-}
-
-
-/* =========================================================
-   EMPTY BOARD (скрито — не се показва)
-   ========================================================= */
-
-.board-empty {
-    display: none;
-}
-
-
-/* =========================================================
-   SVG OBJECTS
-   ========================================================= */
-
-.geometry-object {
-    vector-effect: non-scaling-stroke;
-}
-
-
-.geometry-point {
-    fill: #1d1b31;
-
-    stroke: #fff;
-
-    stroke-width: 2;
-
-    cursor: pointer;
-}
-
-
-.geometry-line {
-    fill: none;
-
-    stroke: #1d1b31;
-
-    stroke-width: 2.5;
-
-    stroke-linecap: round;
-
-    cursor: pointer;
-}
-
-
-.geometry-circle {
-    fill: rgba(241, 122, 62, 0.04);
-
-    stroke: #1d1b31;
-
-    stroke-width: 2.5;
-
-    cursor: pointer;
-}
-
-
-.geometry-polygon {
-    fill: rgba(241, 122, 62, 0.08);
-
-    stroke: #1d1b31;
-
-    stroke-width: 2.5;
-
-    stroke-linejoin: round;
-
-    cursor: pointer;
-}
-
-
-.geometry-pencil {
-    fill: none;
-
-    stroke: #1d1b31;
-
-    stroke-width: 2;
-
-    stroke-linecap: round;
-
-    stroke-linejoin: round;
-
-    cursor: pointer;
-}
-
-
-/* =========================================================
-   SELECTED OBJECT
-   ========================================================= */
-
-.geometry-object.selected {
-    stroke: #f17a3e;
-
-    filter:
-        drop-shadow(
-            0 0 3px rgba(241, 122, 62, 0.35)
-        );
-}
-
-
-.geometry-point.selected {
-    fill: #f17a3e;
-}
-
-
-/* =========================================================
-   LABELS
-   ========================================================= */
-
-.geometry-label {
-    fill: #1d1b31;
-
-    font-size: 18px;
-
-    font-weight: 700;
-
-    pointer-events: none;
-
-    user-select: none;
-}
-
-
-/* =========================================================
-   PREVIEW
-   ========================================================= */
-
-.geometry-preview {
-    fill: none;
-
-    stroke: #f17a3e;
-
-    stroke-width: 2;
-
-    stroke-dasharray: 7 6;
-
-    opacity: 0.9;
-
-    pointer-events: none;
-}
-
-
-/* =========================================================
-   STATUS BAR
-   ========================================================= */
-
-.board-status {
-    display: flex;
-
-    align-items: center;
-    justify-content: space-between;
-
-    min-height: 38px;
-
-    padding: 0 12px;
-
-    color: #777;
-
-    font-size: 0.78rem;
-}
-
-
-.status-left,
-.status-right {
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-}
-
-
-.status-separator {
-    color: #ccc;
-}
-
-
-.tool-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: 6px;
-
-    min-height: 36px;
-
-    padding: 7px 10px;
-
-    border: 1px solid transparent;
-
-    border-radius: 8px;
-
-    background: transparent;
-
-    color: #555;
-
-    font-size: 0.82rem;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    white-space: nowrap;
-
-    transition:
-        background 0.15s,
-        color 0.15s,
-        border-color 0.15s;
-}
-
-
-.tool-button:hover {
-    background: #f3f4f6;
-
-    color: #1d1b31;
-}
-
-
-.tool-button.active {
-    background: #1d1b31;
-
-    color: #fff;
-
-    border-color: #1d1b31;
-}
-
-
-.tool-button.active:hover {
-    background: #2d2b41;
-
-    color: #fff;
-}
-
-
-.tool-button.danger:hover {
-    color: #d34e4e;
-
-    background: #fff2f2;
-}
-
-
-.tool-icon {
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
-
-    min-width: 17px;
-
-    font-size: 1rem;
-
-    line-height: 1;
+    gap: 6px;
+    min-height: 38px;
+    padding: 8px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #374151;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    transition: all 0.15s ease;
 }
-
 
 .control-button:hover {
-    background: #f3f4f6;
-
-    color: #1d1b31;
-
-    border-color: #d1d5db;
+    background: #f9fafb;
+    color: #111827;
+    border-color: #9ca3af;
 }
 
-
-.control-button.primary {
-    background: #1d1b31;
-
-    color: #fff;
-
-    border-color: #1d1b31;
+.control-button.danger {
+    color: #dc2626;
+    border-color: #fecaca;
+    background: #fef2f2;
 }
-
-
-.control-button.primary:hover {
-    background: #2d2b41;
-
-    color: #fff;
-}
-
 
 .control-button.danger:hover {
-    color: #d34e4e;
-
-    background: #fff2f2;
-
-    border-color: #fca5a5;
+    background: #fee2e2;
+    border-color: #f87171;
+    color: #b91c1c;
 }
 
+.control-button.primary {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
+}
+
+.control-button.primary:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+}
 
 .control-icon {
-    font-size: 1.1rem;
+    font-size: 1rem;
+    line-height: 1;
 }
-
 
 /* =========================================================
    MAIN LAYOUT: TOOLS LEFT + CANVAS RIGHT
@@ -530,95 +120,362 @@ input {
 
 .geometry-main {
     display: flex;
-    gap: 16px;
-
+    gap: 20px;
     align-items: flex-start;
 }
 
-
 .geometry-tools-panel {
-    flex: 0 0 auto;
-
-    width: 200px;
-
-    display: flex;
-    flex-direction: column;
-
-    gap: 10px;
+    flex: 0 0 220px;
+    width: 220px;
 }
 
+.geometry-toolbar {
+    display: flex;
+    flex-direction: column;
+    padding: 14px;
+    background: #ffffff;
+    border: 1px solid #e2e4ea;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.toolbar-section-header {
+    margin-bottom: 8px;
+}
+
+.toolbar-label {
+    display: block;
+    color: #64748b;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+/* TOOLS GRID */
+.toolbar-tools-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+}
+
+.toolbar-view-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+}
+
+.toolbar-divider {
+    width: 100%;
+    height: 1px;
+    background: #e2e4ea;
+    margin: 14px 0;
+}
+
+/* TOOL BUTTONS */
+.tool-button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    min-height: 36px;
+    padding: 6px 10px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #4b5563;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.15s ease;
+}
+
+.tool-button:hover {
+    background: #f3f4f6;
+    color: #111827;
+    border-color: #d1d5db;
+}
+
+.tool-button.active {
+    background: #1e1e2d;
+    color: #ffffff;
+    border-color: #1e1e2d;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tool-button.active:hover {
+    background: #2d2d3f;
+    border-color: #2d2d3f;
+}
+
+.tool-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    font-size: 0.95rem;
+    line-height: 1;
+}
+
+/* TOOLBAR SHORTCUT TIPS */
+.toolbar-tips {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    background: #f8fafc;
+    border-radius: 8px;
+    font-size: 0.76rem;
+    color: #64748b;
+}
+
+.tip-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+kbd {
+    display: inline-block;
+    padding: 1px 5px;
+    font-family: monospace;
+    font-size: 0.72rem;
+    background: #e2e8f0;
+    color: #334155;
+    border-radius: 4px;
+    border: 1px solid #cbd5e1;
+}
+
+/* =========================================================
+   CANVAS / BOARD WRAPPER
+   ========================================================= */
 
 .geometry-canvas-wrapper {
     flex: 1;
-
     min-width: 0;
 }
 
+.board-wrapper {
+    width: 100%;
+}
+
+.board {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1400 / 800;
+    min-height: 480px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #d8dbe2;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+#geometrySvg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+    cursor: crosshair;
+}
+
+.board.select-mode #geometrySvg {
+    cursor: default;
+}
+
+.board.eraser-mode #geometrySvg {
+    cursor: not-allowed;
+}
+
+/* =========================================================
+   BOARD STATUS BAR
+   ========================================================= */
+
+.board-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 38px;
+    padding: 0 16px;
+    background: #ffffff;
+    border: 1px solid #d8dbe2;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    color: #64748b;
+    font-size: 0.8rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.status-left,
+.status-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-tool-badge {
+    color: #94a3b8;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+.status-separator {
+    color: #cbd5e1;
+}
+
+/* =========================================================
+   SVG OBJECTS STYLING
+   ========================================================= */
+
+.geometry-object {
+    vector-effect: non-scaling-stroke;
+}
+
+.geometry-point {
+    fill: #1e1e2d;
+    stroke: #ffffff;
+    stroke-width: 2px;
+    cursor: pointer;
+    transition: r 0.1s ease;
+}
+
+.geometry-point:hover {
+    r: 7;
+    fill: #2563eb;
+}
+
+.geometry-line,
+.geometry-segment,
+.geometry-ray {
+    stroke: #1e1e2d;
+    stroke-width: 2.5px;
+    stroke-linecap: round;
+    cursor: pointer;
+}
+
+.geometry-circle {
+    fill: transparent;
+    stroke: #1e1e2d;
+    stroke-width: 2.5px;
+    cursor: pointer;
+}
+
+.geometry-arc {
+    fill: transparent;
+    stroke: #1e1e2d;
+    stroke-width: 2.5px;
+    stroke-linecap: round;
+    cursor: pointer;
+}
+
+.geometry-polygon {
+    fill: rgba(37, 99, 235, 0.08);
+    stroke: #2563eb;
+    stroke-width: 2.5px;
+    stroke-linejoin: round;
+    cursor: pointer;
+}
+
+.geometry-pencil {
+    fill: none;
+    stroke: #1e1e2d;
+    stroke-width: 2.5px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    cursor: pointer;
+}
+
+.geometry-label {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    fill: #1e1e2d;
+    user-select: none;
+    pointer-events: none;
+}
+
+/* Selected object highlighting */
+.geometry-object.selected {
+    stroke: #2563eb !important;
+    stroke-width: 3.5px !important;
+}
+
+.geometry-point.selected {
+    fill: #2563eb !important;
+    stroke: #93c5fd !important;
+    r: 7 !important;
+}
+
+.geometry-preview {
+    stroke: #f17a3e !important;
+    stroke-dasharray: 5, 5;
+    fill: none;
+}
 
 /* =========================================================
    RESPONSIVE
    ========================================================= */
 
-@media (max-width: 1000px) {
-
-    .geometry-page {
-        padding:
-            24px 14px 40px;
-    }
-
-
+@media (max-width: 1024px) {
     .geometry-main {
         flex-direction: column;
     }
 
-
     .geometry-tools-panel {
         width: 100%;
-
-        flex-direction: row;
-
-        flex-wrap: wrap;
+        flex: 0 0 auto;
     }
-
 
     .geometry-toolbar {
         flex-direction: row;
-
-        align-items: flex-start;
-
-        width: 100%;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
     }
 
+    .toolbar-tools-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
 
-    .board {
-        min-height: 400px;
+    .toolbar-view-group {
+        display: flex;
+        gap: 6px;
+    }
+
+    .toolbar-divider {
+        display: none;
+    }
+
+    .toolbar-tips {
+        display: none;
     }
 }
 
-
-@media (max-width: 650px) {
-
-    .geometry-header h1 {
-        font-size: 1.6rem;
+@media (max-width: 680px) {
+    .geometry-header {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-
-    .geometry-header p {
-        font-size: 0.85rem;
+    .geometry-header-actions {
+        width: 100%;
+        justify-content: flex-start;
     }
-
 
     .board {
-        min-height: 300px;
+        min-height: 340px;
     }
-
 
     .tool-button span:last-child {
         display: none;
     }
 
-
-    .toolbar-label {
-        display: none;
+    .tool-button {
+        padding: 8px 10px;
     }
 }

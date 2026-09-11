@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Инвестиционен калкулатор</title>
+    <link rel="stylesheet" href="/tools/dashboard.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --accent: #10b981;
+            --surface: #ffffff;
+            --bg: #f8fafc;
+            --border: #e2e8f0;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            padding: 24px 16px 48px;
+            line-height: 1.5;
+        }
+
+        .inv-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .inv-header {
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .inv-header h1 {
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .inv-header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 4px;
+        }
+
+        .inv-presets {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .preset-btn {
+            padding: 6px 12px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .preset-btn:hover {
+            background: #f1f5f9;
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .inv-grid {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        @media (max-width: 960px) {
+            .inv-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* FORM CARD */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-main);
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #334155;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper input,
+        .input-wrapper select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            background: #ffffff;
+            color: var(--text-main);
+            outline: none;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+
+        .input-wrapper input:focus,
+        .input-wrapper select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .input-suffix {
+            position: absolute;
+            right: 12px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            pointer-events: none;
+        }
+
+        .slider-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 6px;
+        }
+
+        .slider-group input[type="range"] {
+            flex: 1;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* METRICS SUMMARY */
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .metric-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary);
+        }
+
+        .metric-card.accent::before {
+            background: var(--accent);
+        }
+
+        .metric-card.warning::before {
+            background: #f59e0b;
+        }
+
+        .metric-card.neutral::before {
+            background: #64748b;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 6px;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .metric-subtext {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* CHART CONTAINER */
+        .chart-card {
+            margin-bottom: 24px;
+        }
+
+        .chart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: 16px;
+            font-size: 0.82rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 3px;
+        }
+
+        .legend-principal {
+            background: #2563eb;
+        }
+
+        .legend-interest {
+            background: #10b981;
+        }
+
+        .chart-box {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #fafafa;
+            overflow: hidden;
+        }
+
+        #growthChart {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* TABLE */
+        .table-responsive {
+            max-height: 340px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            text-align: right;
+        }
+
+        th, td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: #f8fafc;
+            color: var(--text-muted);
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        th:first-child, td:first-child {
+            text-align: left;
+        }
+
+        tr:hover td {
+            background: #f1f5f9;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: #334155;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .btn-action:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="inv-container">
+    <header class="inv-header">
+        <div>
+            <h1>📈 Инвестиционен калкулатор</h1>
+            <p>Симулация на сложна лихва, регулярни месечни вноски и дългосрочен капиталов растеж</p>
+        </div>
+
+        <div class="inv-presets">
+            <button class="preset-btn" data-preset="savings">Спестовен план (4%)</button>
+            <button class="preset-btn" data-preset="index">Глобален индекс ETF (8%)</button>
+            <button class="preset-btn" data-preset="aggressive">Агресивен растеж (12%)</button>
+        </div>
+    </header>
+
+    <div class="inv-grid">
+        <!-- CONTROLS -->
+        <div class="card">
+            <h2 class="card-title">Параметри на инвестицията</h2>
+
+            <div class="form-group">
+                <label for="initDeposit">Първоначална инвестиция (лв.)</label>
+                <div class="input-wrapper">
+                    <input type="number" id="initDeposit" value="5000" min="0" step="100">
+                    <span class="input-suffix">лв.</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="monthlyDeposit">Месечна вноска (лв.)</label>
+                <div class="input-wrapper">
+                    <input type="number" id="monthlyDeposit" value="300" min="0" step="50">
+                    <span class="input-suffix">лв./мес.</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="annualReturn">Очаквана годишна доходност (%)</label>
+                <div class="input-wrapper">
+                    <input type="number" id="annualReturn" value="8" min="0" max="100" step="0.5">
+                    <span class="input-suffix">%</span>
+                </div>
+                <div class="slider-group">
+                    <input type="range" id="returnSlider" min="0" max="25" step="0.5" value="8">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="years">Инвестиционен хоризонт (години)</label>
+                <div class="input-wrapper">
+                    <input type="number" id="years" value="15" min="1" max="50" step="1">
+                    <span class="input-suffix">г.</span>
+                </div>
+                <div class="slider-group">
+                    <input type="range" id="yearsSlider" min="1" max="40" step="1" value="15">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="compoundFreq">Капитализация на доходността</label>
+                <div class="input-wrapper">
+                    <select id="compoundFreq">
+                        <option value="12" selected>Ежемесечно (12 пъти / год)</option>
+                        <option value="4">Тримесечно (4 пъти / год)</option>
+                        <option value="1">Годишно (1 път / год)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inflationRate">Прогнозна годишна инфлация (%)</label>
+                <div class="input-wrapper">
+                    <input type="number" id="inflationRate" value="2.5" min="0" max="50" step="0.1">
+                    <span class="input-suffix">%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULTS -->
+        <div>
+            <!-- METRICS -->
+            <div class="metrics-row">
+                <div class="metric-card accent">
+                    <div class="metric-label">Краен баланс</div>
+                    <div class="metric-value" id="resTotal">0 лв.</div>
+                    <div class="metric-subtext">след инвестиционния период</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Спечелена лихва</div>
+                    <div class="metric-value" id="resInterest">0 лв.</div>
+                    <div class="metric-subtext" id="resInterestPercent">0% от сумата</div>
+                </div>
+
+                <div class="metric-card neutral">
+                    <div class="metric-label">Общо внесени средства</div>
+                    <div class="metric-value" id="resPrincipal">0 лв.</div>
+                    <div class="metric-subtext" id="resPrincipalDetail">първоначална + вноски</div>
+                </div>
+
+                <div class="metric-card warning">
+                    <div class="metric-label">Реална стойност (с инфлация)</div>
+                    <div class="metric-value" id="resRealTotal">0 лв.</div>
+                    <div class="metric-subtext">покупателна способност днес</div>
+                </div>
+            </div>
+
+            <!-- CHART CARD -->
+            <div class="card chart-card">
+                <div class="chart-header">
+                    <h3 class="card-title" style="margin-bottom: 0;">Растеж на капитала по години</h3>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <span class="legend-dot legend-principal"></span>
+                            <span>Внесени средства</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot legend-interest"></span>
+                            <span>Натрупана лихва / доход</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-box">
+                    <svg id="growthChart" viewBox="0 0 800 300" preserveAspectRatio="none"></svg>
+                </div>
+            </div>
+
+            <!-- TABLE CARD -->
+            <div class="card">
+                <div class="chart-header">
+                    <h3 class="card-title" style="margin-bottom: 0;">Годишна разбивка</h3>
+                    <button class="btn-action" id="btnExportCsv">📥 Експорт (CSV)</button>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="growthTable">
+                        <thead>
+                            <tr>
+                                <th>Година</th>
+                                <th>Внесени общо</th>
+                                <th>Годишна лихва</th>
+                                <th>Натрупана лихва</th>
+                                <th>Краен баланс</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/tools/inv.js"></script>
+<script type="module" src="/tools/embed.js"></script>
+</body>
+</html>

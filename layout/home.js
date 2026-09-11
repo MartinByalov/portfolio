@@ -306,8 +306,15 @@ async function loadNewsBox(source, signal, onItems) {
   }
 }
 
+const CATEGORY_DEFAULT_IMAGES = {
+  Technologies: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&q=90',
+  Education: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1600&q=90',
+  Science: 'https://images.unsplash.com/photo-1507668077129-56e32842fceb?w=1600&q=90',
+  Innovations: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&q=90'
+};
+
 function categoryClass(source) {
-  return 'cat-' + (source.name || 'other').toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  return 'cat-' + ((source && source.name) || 'other').toLowerCase().replace(/[^a-z0-9]+/g, '-');
 }
 
 function metaSiteLine(item) {
@@ -316,15 +323,13 @@ function metaSiteLine(item) {
 }
 
 function renderFeaturedNews(item, source) {
-  const badge = `<span class="news-cat news-cat-${categoryClass(source)}">${escapeHtmlLanding(source.label || 'Новини')}</span>`;
-  const image = item.image
-    ? `<img class="news-featured-img" src="${escapeHtmlLanding(item.image)}" alt="" loading="eager" onerror="this.classList.add('news-no-img'); this.src=''; this.parentElement.classList.add('news-img-fallback');">`
-    : '';
+  const src = source || item._source || { name: 'Technologies', label: 'Технологии' };
+  const badge = `<span class="news-cat news-cat-${categoryClass(src)}">${escapeHtmlLanding(src.label || 'Новини')}</span>`;
+  const bgImg = item.image || CATEGORY_DEFAULT_IMAGES[src.name] || CATEGORY_DEFAULT_IMAGES.Technologies;
   return `
-    <article class="trending-featured" style="background-image: url('${escapeHtmlLanding(item.image || '')}')">
+    <article class="trending-featured" style="background-image: url('${escapeHtmlLanding(bgImg)}')">
       ${badge}
       <a href="${escapeHtmlLanding(item.link)}" target="_blank" rel="noopener" class="news-featured-link">
-        ${image}
         <div class="trending-featured-content">
           <h3>${escapeHtmlLanding(item.title)}</h3>
           <div class="trending-meta">
@@ -338,10 +343,9 @@ function renderFeaturedNews(item, source) {
 
 function renderSideNews(item, source) {
   if (!item) return '<div class="trending-side-empty"></div>';
-  const badge = `<span class="news-cat-sm news-cat-sm-${categoryClass(source)}">${escapeHtmlLanding(source.label || 'Новини')}</span>`;
-  // Двата малки правоъгълника вдясно ползват икона вместо снимка —
-  // фийдовете често нямат изображения и се чупят визуално.
-  const icon = `<div class="trending-post-icon"><i class="${escapeHtmlLanding(source.icon || 'fas fa-newspaper')}"></i></div>`;
+  const src = source || item._source || { name: 'Education', label: 'Образование', icon: 'fas fa-newspaper' };
+  const badge = `<span class="news-cat-sm news-cat-sm-${categoryClass(src)}">${escapeHtmlLanding(src.label || 'Новини')}</span>`;
+  const icon = `<div class="trending-post-icon"><i class="${escapeHtmlLanding(src.icon || 'fas fa-newspaper')}"></i></div>`;
   return `
     <article class="trending-post">
       <a href="${escapeHtmlLanding(item.link)}" target="_blank" rel="noopener" class="news-side-link">
@@ -349,6 +353,26 @@ function renderSideNews(item, source) {
         <div class="trending-post-body">
           ${badge}
           <h4>${escapeHtmlLanding(item.title)}</h4>
+          <div class="trending-meta">
+            ${metaSiteLine(item)}
+          </div>
+        </div>
+      </a>
+    </article>
+  `;
+}
+
+function renderMediumNews(item, source) {
+  if (!item) return '';
+  const src = source || item._source || { name: 'Innovations', label: 'Иновации' };
+  const badge = `<span class="news-cat news-cat-${categoryClass(src)}">${escapeHtmlLanding(src.label || 'Новини')}</span>`;
+  const bgImg = item.image || CATEGORY_DEFAULT_IMAGES[src.name] || CATEGORY_DEFAULT_IMAGES.Innovations;
+  return `
+    <article class="trending-medium" style="background-image: url('${escapeHtmlLanding(bgImg)}')">
+      ${badge}
+      <a href="${escapeHtmlLanding(item.link)}" target="_blank" rel="noopener" class="news-medium-link">
+        <div class="trending-medium-content">
+          <h3>${escapeHtmlLanding(item.title)}</h3>
           <div class="trending-meta">
             ${metaSiteLine(item)}
           </div>
@@ -423,52 +447,72 @@ export function initLandingPage() {
   const boxes = {};
   let pending = NEWS_SOURCES.length;
 
-  function renderMediumNews(item, source) {
-    if (!item) return '';
-    const badge = `<span class="news-cat news-cat-${categoryClass(source)}">${escapeHtmlLanding(source.label || 'Новини')}</span>`;
-    return `
-      <article class="trending-medium" style="background-image: url('${escapeHtmlLanding(item.image || '')}')">
-        ${badge}
-        <a href="${escapeHtmlLanding(item.link)}" target="_blank" rel="noopener" class="news-medium-link">
-          <div class="trending-medium-content">
-            <h3>${escapeHtmlLanding(item.title)}</h3>
-            <div class="trending-meta">
-                ${metaSiteLine(item)}
-            </div>
-          </div>
-        </a>
-      </article>
-    `;
-  }
-
   function rebuild() {
     if (!area) return;
-    // Групи по категория: голям = Технологии, малки = Образование + Наука, дълъг = Иновации
-    const tech = (boxes.Technologies && boxes.Technologies.items[0]) || null;
-    const edu = (boxes.Education && boxes.Education.items[0]) || null;
-    const sci = (boxes.Science && boxes.Science.items[0]) || null;
-    const inno = (boxes.Innovations && boxes.Innovations.items[0]) || null;
-    const first = tech || edu || sci || inno;
-    const second = edu || sci || tech || inno;
-    const third = sci || edu || tech || inno;
-    const fourth = inno || tech || edu || sci;
-    if (!first) return;
     const grid = document.getElementById('trending-grid');
-    if (grid) {
-      grid.innerHTML = renderFeaturedNews(first, boxes.Technologies?.source || first._source) +
-        `<div class="trending-side">${renderSideNews(second, boxes.Education?.source || second._source)}${renderSideNews(third, boxes.Science?.source || third._source)}</div>` +
-        renderMediumNews(fourth, boxes.Innovations?.source || fourth._source);
+    if (!grid) return;
+
+    // Build pools of items for each category
+    const techItems = (boxes.Technologies && boxes.Technologies.items) || [];
+    const eduItems = (boxes.Education && boxes.Education.items) || [];
+    const sciItems = (boxes.Science && boxes.Science.items) || [];
+    const innoItems = (boxes.Innovations && boxes.Innovations.items) || [];
+
+    const usedLinks = new Set();
+    const usedTitles = new Set();
+
+    function pickItem(primaryList, fallbackLists) {
+      const candidates = [...primaryList];
+      fallbackLists.forEach(list => candidates.push(...list));
+      for (const item of candidates) {
+        const id = (item.link || item.title || '').trim();
+        const titleKey = (item.title || '').trim();
+        if (id && !usedLinks.has(id) && !usedTitles.has(titleKey)) {
+          usedLinks.add(id);
+          usedTitles.add(titleKey);
+          return item;
+        }
+      }
+      return null;
     }
+
+    const first = pickItem(techItems, [innoItems, sciItems, eduItems]);
+    const second = pickItem(eduItems, [sciItems, techItems, innoItems]);
+    const third = pickItem(sciItems, [eduItems, innoItems, techItems]);
+    const fourth = pickItem(innoItems, [techItems, sciItems, eduItems]);
+
+    if (!first) return;
+
+    grid.innerHTML =
+      renderFeaturedNews(first, first._source || boxes.Technologies?.source) +
+      `<div class="trending-side">` +
+        renderSideNews(second, second?._source || boxes.Education?.source) +
+        renderSideNews(third, third?._source || boxes.Science?.source) +
+      `</div>` +
+      renderMediumNews(fourth, fourth?._source || boxes.Innovations?.source);
+
+    // Ticker with fresh, non-overlapping items
     const ticker = document.getElementById('news-ticker');
-    const rest = [];
-    Object.values(boxes).forEach(b => (b.items || []).slice(1, 4).forEach(item => rest.push(item)));
-    if (ticker && rest.length) {
-      const head = rest.map(n =>
-        `<a href="${escapeHtmlLanding(n.link)}" target="_blank" rel="noopener">${escapeHtmlLanding(n.title)}</a><i class="trending-ticker-sep">•</i>`
-      ).join('');
-      ticker.innerHTML = `<span class="trending-ticker-group">${head}</span><span class="trending-ticker-group">${head}</span>`;
-    } else if (area.querySelector('.trending-bar')) {
-      area.querySelector('.trending-bar').style.display = 'none';
+    if (ticker) {
+      const remaining = [];
+      Object.values(boxes).forEach(b => {
+        (b.items || []).forEach(item => {
+          const id = (item.link || item.title || '').trim();
+          const titleKey = (item.title || '').trim();
+          if (!usedLinks.has(id) && !usedTitles.has(titleKey) && remaining.length < 12) {
+            usedLinks.add(id);
+            usedTitles.add(titleKey);
+            remaining.push(item);
+          }
+        });
+      });
+
+      if (remaining.length) {
+        const head = remaining.map(n =>
+          `<a href="${escapeHtmlLanding(n.link)}" target="_blank" rel="noopener">${escapeHtmlLanding(n.title)}</a><i class="trending-ticker-sep">•</i>`
+        ).join('');
+        ticker.innerHTML = `<span class="trending-ticker-group">${head}</span><span class="trending-ticker-group">${head}</span>`;
+      }
     }
   }
 
@@ -482,16 +526,39 @@ export function initLandingPage() {
     }
   }
 
-
-NEWS_SOURCES.forEach(source => {
-    loadNewsBox(source, controller.signal, items => {
-      boxes[source.name] = {
-        source,
-        items: items.map(item => ({ ...item, _source: source }))
-      };
-      rebuild();
-    }).finally(settle);
-});
+  // First attempt: fetch through server-side /api/news for speed, stability & CORS bypass
+  fetch('/api/news', { signal: controller.signal })
+    .then(r => r.ok ? r.json() : null)
+    .then(res => {
+      if (res && res.status === 'ok' && res.data) {
+        NEWS_SOURCES.forEach(source => {
+          const items = res.data[source.name];
+          if (Array.isArray(items) && items.length) {
+            boxes[source.name] = {
+              source,
+              items: items.map(item => ({ ...item, _source: source }))
+            };
+          }
+        });
+        rebuild();
+        const loading = area?.querySelector('.news-collage-loading');
+        if (loading) loading.remove();
+      } else {
+        throw new Error('Fallback to direct RSS');
+      }
+    })
+    .catch(() => {
+      // Direct client-side RSS loading as resilient fallback
+      NEWS_SOURCES.forEach(source => {
+        loadNewsBox(source, controller.signal, items => {
+          boxes[source.name] = {
+            source,
+            items: items.map(item => ({ ...item, _source: source }))
+          };
+          rebuild();
+        }).finally(settle);
+      });
+    });
 }
 
 export function cleanupLanding() {

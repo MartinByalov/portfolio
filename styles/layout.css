@@ -353,6 +353,17 @@
   display: block;
   white-space: nowrap;
   margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  user-select: none;
+}
+
+.sidebar .nav-links li:last-child .profile-details .profile-role-separator:hover,
+.sidebar .nav-links li:last-child .profile-details .profile-role-separator:focus-visible {
+  color: #ffffff;
+  transform: scale(1.15);
+  text-shadow: 0 0 10px rgba(241, 122, 62, 0.85);
+  outline: none;
 }
 
 .sidebar .nav-links li:last-child .profile-details .github-icon {

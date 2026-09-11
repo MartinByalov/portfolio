@@ -61,7 +61,7 @@ let moveStart = null;
 
 let movingObjectId = null;
 
-let isDraggingShape = false;
+let isDrawingShape = false;
 
 let shapeDragStart = null;
 
@@ -181,7 +181,7 @@ svg.addEventListener("pointermove", event => {
     }
 
     /* DRAGGING SHAPE PREVIEW (Live drag-to-draw or click-move preview) */
-    const activeStart = (isDraggingShape && shapeDragStart) || (temporaryPoints.length > 0 ? temporaryPoints[0] : null);
+    const activeStart = (isDrawingShape && shapeDragStart) || (temporaryPoints.length > 0 ? temporaryPoints[0] : null);
     if (activeStart && (currentTool === "segment" || currentTool === "line" || currentTool === "ray" || currentTool === "circle")) {
         const snappedCurrent = snapPoint(point);
         if (currentTool === "circle") {
@@ -238,7 +238,7 @@ function setTool(tool) {
     pencilPoints = [];
     isDrawing = false;
     isMoving = false;
-    isDraggingShape = false;
+    isDrawingShape = false;
     shapeDragStart = null;
     movingObjectId = null;
     selectedObjectId = null;
@@ -1142,7 +1142,9 @@ function updateStatus() {
    ========================================================= */
 
 function updateEmptyState() {
-    boardEmpty.classList.toggle("hidden", objects.length > 0);
+    if (boardEmpty) {
+        boardEmpty.classList.toggle("hidden", objects.length > 0);
+    }
 }
 
 
@@ -1370,3 +1372,41 @@ function saveAsPNG() {
 gridButton.classList.add("active");
 labelsButton.classList.add("active");
 render();
+
+/* =========================================================
+   KEYBOARD SHORTCUTS & APP EXPORT
+   ========================================================= */
+
+document.addEventListener("keydown", (e) => {
+    if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+
+    if ((e.ctrlKey || e.metaKey) && (e.key === "z" || e.key === "Z")) {
+        e.preventDefault();
+        if (e.shiftKey) {
+            redo();
+        } else {
+            undo();
+        }
+    } else if ((e.ctrlKey || e.metaKey) && (e.key === "y" || e.key === "Y")) {
+        e.preventDefault();
+        redo();
+    } else if (e.key === "Escape") {
+        setTool("select");
+    } else if (e.key === "Delete" || e.key === "Backspace") {
+        if (selectedObjectId) {
+            saveState();
+            objects = objects.filter(o => o.id !== selectedObjectId);
+            selectedObjectId = null;
+            render();
+        }
+    }
+});
+
+window.app = {
+    undo,
+    redo,
+    clear: () => clearButton.click(),
+    save: saveAsPNG,
+    setTool
+};
+

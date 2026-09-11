@@ -1377,16 +1377,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Събития за отваряне на калкулатор от картите
+    // ?mode= се пази, за да не се губи сайдбар режимът (learning/portfolio).
+    function withMode(url) {
+        try {
+            const q = new URLSearchParams(location.search).get('mode');
+            if (q === 'portfolio' || q === 'learning') {
+                const u = new URL(url, location.origin);
+                if (!u.searchParams.get('mode')) u.searchParams.set('mode', q);
+                return u.pathname + u.search + u.hash;
+            }
+        } catch (err) {}
+        return url;
+    }
     catalogCards.forEach(card => {
         card.addEventListener('click', () => {
             const href = card.getAttribute('data-href');
             if (href) {
-                window.location.href = href;
+                window.location.href = withMode(href);
                 return;
             }
             const key = card.getAttribute('data-calculator');
             if (key === 'investment') {
-                window.location.href = '/tools/inv.html';
+                window.location.href = withMode('/tools/inv.html');
                 return;
             }
             openCalculator(key);

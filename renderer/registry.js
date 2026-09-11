@@ -7,6 +7,12 @@ import * as ExerciseModal from '../components/exercise-modal.js';
 import * as Quiz from '../components/quiz.js';
 import * as Accordion from '../components/accordion.js';
 import * as Tag from '../components/tag.js';
+import * as ExitTicket from '../components/exit-ticket.js';
+import * as InteractiveMatching from '../components/interactive-matching.js';
+import * as InteractiveFill from '../components/interactive-fill.js';
+import * as InteractiveStepGuide from '../components/interactive-step-guide.js';
+import * as MoodAnimalGenerator from '../components/mood-animal-generator.js';
+import * as ResourceDownloadBox from '../components/resource-download-box.js';
 
 const registry = {
   'text-group': TextGroup,
@@ -16,6 +22,12 @@ const registry = {
   'quiz': Quiz,
   'accordion': Accordion,
   'tag': Tag,
+  'exit-ticket': ExitTicket,
+  'interactive-matching': InteractiveMatching,
+  'interactive-fill': InteractiveFill,
+  'interactive-step-guide': InteractiveStepGuide,
+  'mood-animal-generator': MoodAnimalGenerator,
+  'resource-download-box': ResourceDownloadBox,
 };
 
 export function renderComponent(comp) {

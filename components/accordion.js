@@ -2,6 +2,11 @@
 
 import { initAccordion } from './accordion-behavior.js';
 import { renderRichBlock } from './lesson-media.js';
+import * as InteractiveMatching from './interactive-matching.js';
+import * as InteractiveFill from './interactive-fill.js';
+import * as InteractiveStepGuide from './interactive-step-guide.js';
+import * as MoodAnimalGenerator from './mood-animal-generator.js';
+import * as ResourceDownloadBox from './resource-download-box.js';
 
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
@@ -73,13 +78,20 @@ function renderQuizBlock(b) {
       + '</label>'
     ).join('');
 
+    const qText = /^\d+[\.\)]\s*/.test(q.question) ? esc(q.question) : (qi + 1) + '. ' + esc(q.question);
+    const expl = q.explanation
+      ? '<div class="quiz-explanation" style="display:none;"><i class="fas fa-lightbulb"></i> <span>' + esc(q.explanation) + '</span></div>'
+      : '';
+
     return '<div class="quiz-question" data-correct="' + esc(q.correctIndex) + '">'
-      + '<p class="quiz-question-text">' + (qi + 1) + '. ' + esc(q.question) + '</p>'
+      + '<p class="quiz-question-text">' + qText + '</p>'
       + '<div class="quiz-options">' + options + '</div>'
+      + expl
       + '</div>';
   }).join('');
 
   return '<form class="quiz-form"' + (b.id ? ' id="' + esc(b.id) + '-form"' : '') + '>'
+    + (b.title ? '<h4 class="quiz-block-title">' + esc(b.title) + '</h4>' : '')
     + questions
     + '<div class="quiz-actions">'
     + '<button type="button" class="btn-activity quiz-submit">Провери</button>'
@@ -138,6 +150,8 @@ function initQuizBlock(root, b) {
       });
 
       if (userChoice === correct) score++;
+      const expl = q.querySelector('.quiz-explanation');
+      if (expl) expl.style.display = 'flex';
     });
 
     showResult('Резултат: ' + score + ' от ' + questions.length + ' верни отговора.', 'info');
@@ -152,6 +166,8 @@ function initQuizBlock(root, b) {
         label.classList.remove('correct', 'incorrect');
         label.querySelector('input').disabled = false;
       });
+      const expl = q.querySelector('.quiz-explanation');
+      if (expl) expl.style.display = 'none';
     });
     resultBox.style.display = 'none';
     submitBtn.style.display = 'inline-block';
@@ -159,21 +175,42 @@ function initQuizBlock(root, b) {
   });
 }
 
+function formatMarkdown(text) {
+  if (!text) return '';
+  let s = String(text);
+  s = s.replace(/### (.*?)(?:\n|$)/g, '<h4 class="wb-task-heading">$1</h4>\n');
+  s = s.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  s = s.replace(/\*(.*?)\*/g, '<em>$1</em>');
+  const blocks = s.split(/\n\s*\n/).map(b => {
+    b = b.trim();
+    if (!b) return '';
+    if (/^<h[1-6]/.test(b)) return b;
+    return '<p>' + b.replace(/\n/g, '<br>') + '</p>';
+  });
+  return blocks.join('');
+}
+
 function renderBlock(b) {
   switch (b.type) {
-    case 'text':           return '<div class="lb-text">' + (b.content || '') + '</div>';
-    case 'image':          return renderImageBlock(b);
-    case 'image-gallery':  return renderGalleryBlock(b);
-    case 'visualization':  return b.visualType ? renderRichBlock(b) : renderVizBlock(b);
+    case 'text':                   return '<div class="lb-text">' + formatMarkdown(b.content || '') + '</div>';
+    case 'image':                  return renderImageBlock(b);
+    case 'image-gallery':          return renderGalleryBlock(b);
+    case 'visualization':          return b.visualType ? renderRichBlock(b) : renderVizBlock(b);
     case 'ui-mockup':
     case 'infographic':
     case 'table':
     case 'glossary-list':
     case 'titled-image':
-    case 'media-types':   return renderRichBlock(b);
-    case 'subsection':     return renderSubsectionBlock(b);
-    case 'quiz':           return renderQuizBlock(b);
-    default:               return '<!-- unknown lesson block type: ' + esc(b.type) + ' -->';
+    case 'media-types':
+    case 'video':                  return renderRichBlock(b);
+    case 'subsection':             return renderSubsectionBlock(b);
+    case 'quiz':                   return renderQuizBlock(b);
+    case 'interactive-matching':   return InteractiveMatching.render(b);
+    case 'interactive-fill':       return InteractiveFill.render(b);
+    case 'interactive-step-guide': return InteractiveStepGuide.render(b);
+    case 'mood-animal-generator':  return MoodAnimalGenerator.render(b);
+    case 'resource-download-box':  return ResourceDownloadBox.render(b);
+    default:                       return '<!-- unknown lesson block type: ' + esc(b.type) + ' -->';
   }
 }
 
@@ -222,10 +259,16 @@ export function init(comp) {
     if (content) content.style.display = item.classList.contains('active') ? 'block' : 'none';
   });
 
-  // wire up embedded quiz blocks (type:"quiz" inside an item's content)
+  // wire up embedded interactive blocks inside items' content
   (comp.items || []).forEach(it => {
     (it.content || []).forEach(b => {
-      if (b && b.type === 'quiz' && b.id) initQuizBlock(root, b);
+      if (!b) return;
+      if (b.type === 'quiz' && b.id) initQuizBlock(root, b);
+      if (b.type === 'interactive-matching') InteractiveMatching.init(b);
+      if (b.type === 'interactive-fill') InteractiveFill.init(b);
+      if (b.type === 'interactive-step-guide') InteractiveStepGuide.init(b);
+      if (b.type === 'mood-animal-generator') MoodAnimalGenerator.init(b);
+      if (b.type === 'resource-download-box') ResourceDownloadBox.init(b);
     });
   });
 }

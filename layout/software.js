@@ -1,6 +1,4 @@
-/* layout/software.js
-   Страница "Софтуер" (#/software) — Hall of Source:
-   подбора свободен софтуер за учениците, изобразен като карти. */
+// Software directory showcase page
 
 export function renderSoftwarePage() {
   return `

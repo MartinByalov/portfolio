@@ -1,10 +1,4 @@
-/* layout/course-list.js
-   Renders a course's sections as an accordion of lesson links — the
-   "Раздел -> Урок" level of the hierarchy. Lessons that have a
-   lessonPath are real links to #/lesson/...; the rest render as
-   disabled "предстои" items, same idea as the "#" placeholders in the
-   original HTML pages.
-*/
+// Course section and lesson list renderer
 
 import { initAccordion } from '../components/accordion-behavior.js';
 

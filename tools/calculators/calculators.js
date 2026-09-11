@@ -1,8 +1,4 @@
-/**
- * ============================================================================
- * CALCULATORS LOGIC
- * ============================================================================
- */
+// Calculators catalog logic
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -23,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ========================================================================
     const calculators = {
 
-        // --- МАТЕМАТИКА ----------------------------------------------------
+        // Math calculators
         percentage: {
             title: "Проценти",
             desc: "Изчисли колко е X% от Y, или какъв процент е X спрямо Y.",
@@ -348,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
 
-        // --- ПРОГРАМИРАНЕ --------------------------------------------------
+        // Programming calculators
         "number-system": {
             title: "Бройни системи",
             desc: "Въведи число в която и да е система, за да се конвертира във всички останали.",
@@ -553,7 +549,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
 
-        // --- ФИЗИКА --------------------------------------------------------
+        // Physics calculators
         speed: {
             title: "Скорост, път и време",
             desc: "Пресмятане по класическата формула v = s / t.",
@@ -799,7 +795,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
 
-        // --- ФИНАНСИ -------------------------------------------------------
+        // Finance calculators
         vat: {
             title: "ДДС Калкулатор",
             desc: "Бързо добавяне или изваждане на ДДС (по подразбиране 20% за България).",
@@ -1066,7 +1062,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Сумата, нужна за да се купи същото нещо: Future Cost = amount * (1 + rate)^years
                     const futureCost = amount * Math.pow(1 + rate, years);
-                    // Реална стойност на днешните пари тогава:
+                    // Real purchasing power of money:
                     const realPower = amount / Math.pow(1 + rate, years);
 
                     resBox.style.display = 'block';
@@ -1171,7 +1167,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
 
-        // --- ИНСТРУМЕНТИ ---------------------------------------------------
+        // General tool calculators
         units: {
             title: "Преобразуване на мерни единици",
             desc: "Бърз конвертор за дължина, маса и температура.",
@@ -1377,7 +1373,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Събития за отваряне на калкулатор от картите
-    // ?mode= се пази, за да не се губи сайдбар режимът (learning/portfolio).
+    // Preserve mode query param for sidebar navigation
     function withMode(url) {
         try {
             const q = new URLSearchParams(location.search).get('mode');
@@ -1405,7 +1401,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Затваряне на модала
+    // Close modal
     modalClose.addEventListener('click', closeCalculator);
 
     modal.addEventListener('click', (e) => {
@@ -1420,9 +1416,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ========================================================================
-    // SEARCH & CATEGORY FILTERING
-    // ========================================================================
+    // Search and category filtering
     let currentCategory = 'all';
     let searchQuery = '';
 
@@ -1434,7 +1428,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const cards = group.querySelectorAll('.calculator-card');
             let groupVisibleCards = 0;
 
-            // Проверка за съвпадение на категорията на групата
+            // Check group category match
             const categoryMatches = (currentCategory === 'all' || currentCategory === groupCategory);
 
             cards.forEach(card => {
@@ -1451,7 +1445,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Скриваме цялата група, ако няма видими калкулатори в нея
+            // Hide group if no calculators are visible
             if (groupVisibleCards > 0) {
                 group.style.display = 'flex';
             } else {
@@ -1459,7 +1453,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Показване на съобщение при липса на резултати
+        // Show empty results message when no matches found
         if (totalVisible === 0) {
             noResults.hidden = false;
         } else {
@@ -1467,13 +1461,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Търсене
+    // Search input handler
     searchInput.addEventListener('input', (e) => {
         searchQuery = e.target.value.toLowerCase().trim();
         filterCatalog();
     });
 
-    // Филтър по категория
+    // Category button filter handler
     categoryBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             categoryBtns.forEach(b => b.classList.remove('active'));
@@ -1483,12 +1477,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ========================================================================
-    // HELPERS
-    // ========================================================================
+    // Helpers
     function formatNumber(num) {
         if (isNaN(num)) return "-";
-        // Закръгляме до 4 знака след запетаята за прецизност, но махаме излишните нули
+        // Round to 4 decimal places and strip trailing zeros
         return parseFloat(num.toFixed(4)).toString();
     }
 });

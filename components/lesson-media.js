@@ -1,29 +1,4 @@
-/* components/lesson-media.js
-   Rich-media lesson blocks rendered inside accordion items
-   (dispatched from components/accordion.js renderBlock).
-   All colors are plain hex strings coming from the lesson JSON.
-
-   Block shapes:
-   visualization { visualType, title, id, mediaSpec }
-     "split-diagram"        mediaSpec.centerNode{label,color,textColor},
-                            mediaSpec.branches[{label,subtext,color,iconClass}]
-     "tree-diagram"         mediaSpec.nodes[{level,title,subtitle,color}]
-     "mindmap"              mediaSpec.center{title,color},
-                            mediaSpec.nodes[{title,desc,color,icon}]
-     "flowchart-horizontal" mediaSpec.steps[{step,title,desc,color}],
-                            mediaSpec.footerWarning
-   ui-mockup { title, id, mediaSpec.component }
-     "SmartphoneChatMockup"    header, messages[{sender,text,bubbleColor,align}],
-                               sideBarMediaTypes[{label,color}]
-     "BlogPageMockup"          header, postTitle, date, imagePlaceholder{alt},
-                               mediaTypesUsed[], authorSidebar{name,avatarColor},
-                               commentsBlock{text,buttonText,badge}
-     "PrivacySettingsPanel"    fields[{label,options[],selected}]
-   infographic { title, id, mediaSpec.layout }
-     "grid-2x3"                cards[{title,subtext,color,icon}]
-     "vertical-checklist"      items[{question,sub,color}]
-   table { title, id, headers[], rows[][] }
-*/
+// Rich-media lesson blocks component
 
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
@@ -31,13 +6,13 @@ function esc(s) {
   });
 }
 
-/* Pastel card background from a hex color (#RRGGBB + alpha). */
+// Pastel card background from hex color
 function tint(color) {
   const c = esc(color);
   return /^#[0-9a-fA-F]{6}$/.test(c) ? c + '22' : c;
 }
 
-/* Common card wrapper: matches the lesson .lb-viz block styling. */
+// Common card wrapper matching lesson styling
 function vizWrapper(b, innerHtml) {
   return '<div class="lb-viz"' + (b.id ? ' id="' + esc(b.id) + '"' : '') + '>'
     + (b.title ? '<div class="lb-viz-title">' + esc(b.title) + '</div>' : '')
@@ -45,7 +20,7 @@ function vizWrapper(b, innerHtml) {
     + '</div>';
 }
 
-/* --- visualization: split-diagram ------------------------------------ */
+// Split-diagram visualization
 
 function renderSplitDiagram(spec) {
   const c = spec.centerNode || {};
@@ -65,7 +40,7 @@ function renderSplitDiagram(spec) {
     + '</div>';
 }
 
-/* --- visualization: tree-diagram -------------------------------------- */
+// Tree-diagram visualization
 
 function renderTreeDiagram(spec) {
   const nodes = (spec.nodes || []).slice().sort((a, b) => (a.level || 0) - (b.level || 0));
@@ -78,7 +53,7 @@ function renderTreeDiagram(spec) {
   return '<div class="tree-diagram">' + rows + '</div>';
 }
 
-/* --- visualization: mindmap -------------------------------------------- */
+// Mindmap visualization
 
 function renderMindmap(spec) {
   const c = spec.center || {};
@@ -100,7 +75,7 @@ function renderMindmap(spec) {
     + '</div>';
 }
 
-/* --- visualization: flowchart-horizontal -------------------------------- */
+// Horizontal flowchart visualization
 
 function renderFlowchart(spec) {
   const steps = (spec.steps || []).map(s =>
@@ -114,7 +89,7 @@ function renderFlowchart(spec) {
     + (spec.footerWarning ? '<div class="flow-warning">' + esc(spec.footerWarning) + '</div>' : '');
 }
 
-/* --- ui-mockup: SmartphoneChatMockup ---------------------------------- */
+// Smartphone chat mockup
 
 function renderChatMockup(spec) {
   const msgs = (spec.messages || []).map(m =>
@@ -141,7 +116,7 @@ function renderChatMockup(spec) {
     + '</div>';
 }
 
-/* --- ui-mockup: BlogPageMockup ----------------------------------------- */
+// Blog page mockup
 
 function renderBlogMockup(spec) {
   const ph = spec.imagePlaceholder || {};
@@ -173,7 +148,7 @@ function renderBlogMockup(spec) {
     + '</div>';
 }
 
-/* --- ui-mockup: PrivacySettingsPanel ------------------------------------ */
+// Privacy settings panel mockup
 
 function renderPrivacyMockup(spec) {
   const fields = (spec.fields || []).map(f =>
@@ -193,7 +168,7 @@ function renderPrivacyMockup(spec) {
     + '</div>';
 }
 
-/* --- infographic: grid-2x3 / vertical-checklist -------------------------- */
+// Infographic grid component
 
 function renderRiskGrid(spec) {
   const cards = (spec.cards || []).map(card =>
@@ -219,7 +194,7 @@ function renderChecklist(spec) {
   return '<div class="checklist">' + items + '</div>';
 }
 
-/* --- table --------------------------------------------------------------- */
+// Table component
 
 function renderTable(b) {
   const head = (b.headers || []).map(h => '<th>' + esc(h) + '</th>').join('');
@@ -231,9 +206,9 @@ function renderTable(b) {
     + '</div>';
 }
 
-/* --- image blocks --------------------------------------------------------- */
+// Image blocks
 
-/* Titled image: card with a heading + lightbox image. */
+// Titled image with lightbox
 function renderTitledImage(b) {
   return '<figure class="lb-image titled-image">'
     + '<img src="' + esc(b.src) + '" alt="' + esc(b.alt || '') + '" loading="lazy">'
@@ -241,7 +216,7 @@ function renderTitledImage(b) {
     + '</figure>';
 }
 
-/* Image + "Медийни типове" panel side by side. */
+// Side-by-side image and media types panel
 function renderMediaTypes(b) {
   const img = b.image || {};
   const items = (b.items || []).map(t =>
@@ -261,7 +236,7 @@ function renderMediaTypes(b) {
     + '</div>';
 }
 
-/* glossary-list: термин -> описание (вътре в акордеона „Речник“). */
+// Glossary term and description list
 function renderGlossaryList(b) {
   const rows = (b.items || []).map(it =>
     '<div class="glossary-row">'
@@ -272,7 +247,7 @@ function renderGlossaryList(b) {
   return '<dl class="glossary-list">' + rows + '</dl>';
 }
 
-/* --- dispatcher ------------------------------------------------------------ */
+// Block dispatcher
 
 export function renderRichBlock(b) {
   const spec = b.mediaSpec || {};

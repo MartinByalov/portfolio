@@ -1,7 +1,4 @@
-/* components/text-group.js
-   Renders a set of text sections as an accordion.
-   Data shape: { type: "text-group", id, heading, items: [{ title, content }] }
-*/
+// Text accordion group component
 
 import { initAccordion } from './accordion-behavior.js';
 

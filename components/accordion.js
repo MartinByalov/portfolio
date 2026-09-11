@@ -1,21 +1,4 @@
-/* components/accordion.js
-   Lesson "accordion" component — each lesson point is an accordion item
-   and ALL of that point's content (text, real images, image-galleries,
-   visualizations, subsections) lives INSIDE the item.
-
-   Data shape:
-   { type:"accordion", id, heading,
-     options: { itemsAlign:"stretch", titleAlign:"left", singleOpen:false },
-     items: [{ id, title, content: [ Block, ... ] }] }
-
-   Block types (nested inside an item's content):
-     text          { type:"text", content:"<p>..</p>" }
-     image         { type:"image", src, alt, caption, fit }
-     image-gallery { type:"image-gallery", title, items:[{title,src,alt}] }
-     visualization { type:"visualization", id, title,
-                     nodes:[{label,description,image}], diagram:{layout,flow} }
-     subsection    { type:"subsection", heading, content:[ Block, ... ] }
-*/
+// Lesson accordion component
 
 import { initAccordion } from './accordion-behavior.js';
 import { renderRichBlock } from './lesson-media.js';
@@ -26,7 +9,7 @@ function esc(s) {
   });
 }
 
-/* --- nested content blocks ------------------------------------------- */
+// Nested content blocks
 
 function renderImageBlock(b) {
   return '<figure class="lb-image">'
@@ -194,7 +177,7 @@ function renderBlock(b) {
   }
 }
 
-/* --- component ------------------------------------------------------------------ */
+// Component renderer
 
 export function render(comp) {
   const items = (comp.items || []).map((it, i) => {

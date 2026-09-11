@@ -1,18 +1,4 @@
-/* layout/header.js
-   Top bar: decorative logo icon (NOT a link — navigation lives in the
-   sidebar drawer), dynamic page title and the icon that opens the
-   sidebar drawer (dispatches a "toggle-sidebar" event; sidebar.js listens).
-
-   The title + icon are DYNAMIC — call setTitle(title, iconClass) whenever a
-   new page/route/tool is shown (app.js for SPA routes, tools/embed.js and
-   tools/popup.js for the standalone tool pages):
-      - Начало (house)                    -> public landing #/
-      - Учебни ресурси (book-open)        -> learning routes
-      - Учителско Портфолио (grad-cap)    -> #/portfolio
-      - Професионален опит (briefcase)    -> #/experience
-      - Инструменти (wrench)              -> /tools dashboard
-      - <tool name>                       -> a concrete tool page/popup
-*/
+// Top navigation header component
 
 export function render() {
   return `
@@ -28,7 +14,7 @@ export function render() {
   `;
 }
 
-/** Update the header title + icon for the currently shown page/route/tool. */
+// Update header title and icon for active route
 export function setTitle(title, iconClass) {
   const titleEl = document.getElementById('header-title');
   const iconEl = document.getElementById('header-icon');
@@ -36,7 +22,7 @@ export function setTitle(title, iconClass) {
   if (iconEl && typeof iconClass === 'string' && iconClass) iconEl.className = iconClass;
 }
 
-/** Current header title/icon (used to restore after tool popups close). */
+// Current header title and icon state
 export function getTitle() {
   return document.getElementById('header-title')?.textContent || '';
 }

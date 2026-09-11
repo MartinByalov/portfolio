@@ -1,10 +1,6 @@
-/* =========================================================
-   GEOMETRY BOARD
-   ========================================================= */
+// / GEOMETRY BOARD /
 
-/* =========================================================
-   CONSTANTS
-   ========================================================= */
+// / CONSTANTS /
 
 const SVG_WIDTH = 1400;
 const SVG_HEIGHT = 800;
@@ -14,9 +10,7 @@ const SNAP_DISTANCE = 14;
 const SVG_NS = "http://www.w3.org/2000/svg";
 
 
-/* =========================================================
-   ELEMENTS
-   ========================================================= */
+// / ELEMENTS /
 
 const board = document.getElementById("board");
 const svg = document.getElementById("geometrySvg");
@@ -37,9 +31,7 @@ const clearButton = document.getElementById("clearButton");
 const saveButton = document.getElementById("saveButton");
 
 
-/* =========================================================
-   STATE
-   ========================================================= */
+// / STATE /
 
 let currentTool = "select";
 
@@ -76,9 +68,7 @@ let undoStack = [];
 let redoStack = [];
 
 
-/* =========================================================
-   TOOL NAMES
-   ========================================================= */
+// / TOOL NAMES /
 
 const toolNames = {
     select: "Избери",
@@ -94,18 +84,14 @@ const toolNames = {
 };
 
 
-/* =========================================================
-   SVG HELPERS
-   ========================================================= */
+// / SVG HELPERS /
 
 function createSvgElement(type) {
     return document.createElementNS(SVG_NS, type);
 }
 
 
-/* =========================================================
-   POINTER POSITION
-   ========================================================= */
+// / POINTER POSITION /
 
 function getSvgPoint(event) {
     const rect = svg.getBoundingClientRect();
@@ -119,9 +105,7 @@ function getSvgPoint(event) {
 }
 
 
-/* =========================================================
-   DISTANCE
-   ========================================================= */
+// / DISTANCE /
 
 function distance(a, b) {
     return Math.sqrt(
@@ -131,9 +115,7 @@ function distance(a, b) {
 }
 
 
-/* =========================================================
-   SNAP TO EXISTING POINT
-   ========================================================= */
+// / SNAP TO EXISTING POINT /
 
 function snapPoint(point) {
     let closest = null;
@@ -167,9 +149,7 @@ function snapPoint(point) {
 }
 
 
-/* =========================================================
-   UPDATE CURSOR & LIVE PREVIEWS
-   ========================================================= */
+// / UPDATE CURSOR & LIVE PREVIEWS /
 
 svg.addEventListener("pointermove", event => {
     const point = getSvgPoint(event);
@@ -180,7 +160,7 @@ svg.addEventListener("pointermove", event => {
         snapPoint(point);
     }
 
-    /* DRAGGING SHAPE PREVIEW (Live drag-to-draw or click-move preview) */
+    // // Live shape drag preview
     const activeStart = (isDrawingShape && shapeDragStart) || (temporaryPoints.length > 0 ? temporaryPoints[0] : null);
     if (activeStart && (currentTool === "segment" || currentTool === "line" || currentTool === "ray" || currentTool === "circle")) {
         const snappedCurrent = snapPoint(point);
@@ -194,13 +174,13 @@ svg.addEventListener("pointermove", event => {
         renderPreviewLine(temporaryPoints[temporaryPoints.length - 1], snappedCurrent, "segment");
     }
 
-    /* POLYGON LIVE PREVIEW LINE */
+    // // Polygon live preview line
     if (polygonPoints.length > 0 && currentTool === "polygon") {
         const snappedCurrent = snapPoint(point);
         renderPreviewLine(polygonPoints[polygonPoints.length - 1], snappedCurrent, "segment");
     }
 
-    /* ERASER DRAG WIPING */
+    // // Eraser drag wipe
     if (currentTool === "eraser" && event.buttons === 1) {
         const target = findObjectAtPoint(point);
         if (target) {
@@ -210,18 +190,14 @@ svg.addEventListener("pointermove", event => {
 });
 
 
-/* =========================================================
-   HIDE SNAP
-   ========================================================= */
+// / HIDE SNAP /
 
 svg.addEventListener("pointerleave", () => {
     snapIndicator.setAttribute("opacity", "0");
 });
 
 
-/* =========================================================
-   TOOL SELECTION
-   ========================================================= */
+// / TOOL SELECTION /
 
 const toolButtons = document.querySelectorAll(".tool-button[data-tool]");
 
@@ -257,9 +233,7 @@ function setTool(tool) {
 }
 
 
-/* =========================================================
-   CREATE POINT
-   ========================================================= */
+// / CREATE POINT /
 
 function createPoint(point) {
     saveState();
@@ -278,9 +252,7 @@ function createPoint(point) {
 }
 
 
-/* =========================================================
-   CREATE LINE OBJECT
-   ========================================================= */
+// / CREATE LINE OBJECT /
 
 function createTwoPointObject(type, first, second) {
     saveState();
@@ -298,9 +270,7 @@ function createTwoPointObject(type, first, second) {
 }
 
 
-/* =========================================================
-   CREATE CIRCLE
-   ========================================================= */
+// / CREATE CIRCLE /
 
 function createCircle(center, edge) {
     saveState();
@@ -317,9 +287,7 @@ function createCircle(center, edge) {
 }
 
 
-/* =========================================================
-   CREATE ARC
-   ========================================================= */
+// / CREATE ARC /
 
 function createArc(center, start, end) {
     const radius = distance(center, start);
@@ -347,9 +315,7 @@ function createArc(center, start, end) {
 }
 
 
-/* =========================================================
-   CREATE POLYGON
-   ========================================================= */
+// / CREATE POLYGON /
 
 function createPolygon(points) {
     if (points.length < 3) {
@@ -371,9 +337,7 @@ function createPolygon(points) {
 }
 
 
-/* =========================================================
-   CREATE PENCIL
-   ========================================================= */
+// / CREATE PENCIL /
 
 function createPencil(points) {
     if (points.length < 2) {
@@ -395,9 +359,7 @@ function createPencil(points) {
 }
 
 
-/* =========================================================
-   POINTER DOWN (ЧЕРТАЕНЕ С ВЛАЧЕНЕ ИЛИ КЛИКВАНЕ)
-   ========================================================= */
+// Pointer down handler
 
 svg.addEventListener("pointerdown", event => {
     const rawPoint = getSvgPoint(event);
@@ -405,9 +367,7 @@ svg.addEventListener("pointerdown", event => {
         ? rawPoint
         : snapPoint(rawPoint);
 
-    /* -----------------------------------------------
-       SELECT
-       ----------------------------------------------- */
+    // / SELECT /
     if (currentTool === "select") {
         const target = findObjectAtPoint(point);
         if (target) {
@@ -423,9 +383,7 @@ svg.addEventListener("pointerdown", event => {
         return;
     }
 
-    /* -----------------------------------------------
-       ERASER
-       ----------------------------------------------- */
+    // / ERASER /
     if (currentTool === "eraser") {
         const target = findObjectAtPoint(point);
         if (target) {
@@ -434,17 +392,13 @@ svg.addEventListener("pointerdown", event => {
         return;
     }
 
-    /* -----------------------------------------------
-       POINT
-       ----------------------------------------------- */
+    // / POINT /
     if (currentTool === "point") {
         createPoint(point);
         return;
     }
 
-    /* -----------------------------------------------
-       SEGMENT / LINE / RAY / CIRCLE (ВЛАЧЕНЕ ИЛИ КЛИКВАНЕ)
-       ----------------------------------------------- */
+    // Drawing mode for segment, line, ray, circle
     if (
         currentTool === "segment" ||
         currentTool === "line" ||
@@ -470,9 +424,7 @@ svg.addEventListener("pointerdown", event => {
         return;
     }
 
-    /* -----------------------------------------------
-       ARC
-       ----------------------------------------------- */
+    // / ARC /
     if (currentTool === "arc") {
         temporaryPoints.push(point);
         createPreviewPoint(point);
@@ -489,9 +441,7 @@ svg.addEventListener("pointerdown", event => {
         return;
     }
 
-    /* -----------------------------------------------
-       POLYGON
-       ----------------------------------------------- */
+    // / POLYGON /
     if (currentTool === "polygon") {
         polygonPoints.push(point);
         renderPreviewPolygon();
@@ -509,9 +459,7 @@ svg.addEventListener("pointerdown", event => {
         return;
     }
 
-    /* -----------------------------------------------
-       PENCIL
-       ----------------------------------------------- */
+    // / PENCIL /
     if (currentTool === "pencil") {
         isDrawing = true;
         pencilPoints = [point];
@@ -520,16 +468,12 @@ svg.addEventListener("pointerdown", event => {
 });
 
 
-/* =========================================================
-   POINTER MOVE (ДВИЖЕНИЕ И ПРЕВЮ)
-   ========================================================= */
+// Pointer move handler
 
 svg.addEventListener("pointermove", event => {
     const point = getSvgPoint(event);
 
-    /* -----------------------------------------------
-       MOVING OBJECT
-       ----------------------------------------------- */
+    // / MOVING OBJECT /
     if (isMoving && movingObjectId) {
         const object = objects.find(item => item.id === movingObjectId);
         if (!object) return;
@@ -543,9 +487,7 @@ svg.addEventListener("pointermove", event => {
         return;
     }
 
-    /* -----------------------------------------------
-       PENCIL
-       ----------------------------------------------- */
+    // / PENCIL /
     if (currentTool === "pencil" && isDrawing) {
         pencilPoints.push(point);
         renderPencilPreview();
@@ -553,9 +495,7 @@ svg.addEventListener("pointermove", event => {
 });
 
 
-/* =========================================================
-   POINTER UP (ЗАВЪРШВАНЕ НА ЧЕРТАЕНЕ С ВЛАЧЕНЕ)
-   ========================================================= */
+// Pointer up handler
 
 svg.addEventListener("pointerup", event => {
     const rawPoint = getSvgPoint(event);
@@ -569,7 +509,7 @@ svg.addEventListener("pointerup", event => {
         render();
     }
 
-    /* ЗАВЪРШВАНЕ НА ЧЕРТАЕНЕ С ВЛАЧЕНЕ (SEGMENT, LINE, RAY, CIRCLE) */
+    // // Complete drag-to-draw (segment, line, ray, circle)
     if (isDrawingShape && shapeDragStart) {
         isDrawingShape = false;
         const dist = distance(shapeDragStart, point);
@@ -597,7 +537,7 @@ svg.addEventListener("pointerup", event => {
         }
     }
 
-    /* ЗАВЪРШВАНЕ НА PENCIL */
+    // // Complete pencil stroke
     if (currentTool === "pencil" && isDrawing) {
         isDrawing = false;
         if (pencilPoints.length > 1) {
@@ -610,9 +550,7 @@ svg.addEventListener("pointerup", event => {
 });
 
 
-/* =========================================================
-   POINTER CANCEL
-   ========================================================= */
+// / POINTER CANCEL /
 
 svg.addEventListener("pointercancel", () => {
     isMoving = false;
@@ -628,9 +566,7 @@ svg.addEventListener("pointercancel", () => {
 });
 
 
-/* =========================================================
-   MOVE OBJECT
-   ========================================================= */
+// / MOVE OBJECT /
 
 function moveObject(object, dx, dy) {
     if (object.type === "point") {
@@ -672,9 +608,7 @@ function moveObject(object, dx, dy) {
 }
 
 
-/* =========================================================
-   FIND OBJECT
-   ========================================================= */
+// / FIND OBJECT /
 
 function findObjectAtPoint(point) {
     for (let i = objects.length - 1; i >= 0; i--) {
@@ -687,9 +621,7 @@ function findObjectAtPoint(point) {
 }
 
 
-/* =========================================================
-   OBJECT HIT TEST
-   ========================================================= */
+// / OBJECT HIT TEST /
 
 function isPointNearObject(point, object) {
     const threshold = 12;
@@ -746,9 +678,7 @@ function isPointNearObject(point, object) {
 }
 
 
-/* =========================================================
-   DISTANCE TO SEGMENT
-   ========================================================= */
+// / DISTANCE TO SEGMENT /
 
 function distanceToSegment(point, object) {
     return distanceToSegmentPoints(
@@ -778,9 +708,7 @@ function distanceToSegmentPoints(point, a, b) {
 }
 
 
-/* =========================================================
-   DISTANCE TO INFINITE LINE
-   ========================================================= */
+// / DISTANCE TO INFINITE LINE /
 
 function distanceToInfiniteLine(point, object) {
     const x1 = object.x1;
@@ -808,9 +736,7 @@ function distanceToInfiniteLine(point, object) {
 }
 
 
-/* =========================================================
-   DISTANCE TO RAY
-   ========================================================= */
+// / DISTANCE TO RAY /
 
 function distanceToRay(point, object) {
     const dx = object.x2 - object.x1;
@@ -831,9 +757,7 @@ function distanceToRay(point, object) {
 }
 
 
-/* =========================================================
-   ANGLE CHECK
-   ========================================================= */
+// / ANGLE CHECK /
 
 function normalizeAngle(angle) {
     const twoPi = Math.PI * 2;
@@ -854,9 +778,7 @@ function angleBetween(angle, start, end) {
 }
 
 
-/* =========================================================
-   DELETE OBJECT
-   ========================================================= */
+// / DELETE OBJECT /
 
 function deleteObject(id) {
     const index = objects.findIndex(object => object.id === id);
@@ -873,9 +795,7 @@ function deleteObject(id) {
 }
 
 
-/* =========================================================
-   KEYBOARD SHORTCUTS
-   ========================================================= */
+// / KEYBOARD SHORTCUTS /
 
 document.addEventListener("keydown", event => {
     if (event.key === "Delete" && selectedObjectId) {
@@ -894,9 +814,7 @@ document.addEventListener("keydown", event => {
 });
 
 
-/* =========================================================
-   RENDER
-   ========================================================= */
+// / RENDER /
 
 function render() {
     objectsLayer.innerHTML = "";
@@ -911,9 +829,7 @@ function render() {
 }
 
 
-/* =========================================================
-   RENDER OBJECT
-   ========================================================= */
+// / RENDER OBJECT /
 
 function renderObject(object) {
     let element = null;
@@ -1024,9 +940,7 @@ function renderObject(object) {
 }
 
 
-/* =========================================================
-   EXTEND LINE & RAY
-   ========================================================= */
+// / EXTEND LINE & RAY /
 
 function extendLine(object, length) {
     const dx = object.x2 - object.x1;
@@ -1076,9 +990,7 @@ function extendRay(object) {
 }
 
 
-/* =========================================================
-   LABELS
-   ========================================================= */
+// / LABELS /
 
 function updateLabels() {
     const labels = document.querySelectorAll(".geometry-label");
@@ -1113,9 +1025,7 @@ function nextLabel() {
 }
 
 
-/* =========================================================
-   ID GENERATOR
-   ========================================================= */
+// / ID GENERATOR /
 
 function createId() {
     return (
@@ -1127,9 +1037,7 @@ function createId() {
 }
 
 
-/* =========================================================
-   STATUS
-   ========================================================= */
+// / STATUS /
 
 function updateStatus() {
     const count = objects.length;
@@ -1137,9 +1045,7 @@ function updateStatus() {
 }
 
 
-/* =========================================================
-   EMPTY STATE
-   ========================================================= */
+// / EMPTY STATE /
 
 function updateEmptyState() {
     if (boardEmpty) {
@@ -1148,9 +1054,7 @@ function updateEmptyState() {
 }
 
 
-/* =========================================================
-   GRID TOGGLE
-   ========================================================= */
+// / GRID TOGGLE /
 
 gridButton.addEventListener("click", () => {
     showGrid = !showGrid;
@@ -1161,9 +1065,7 @@ gridButton.addEventListener("click", () => {
 });
 
 
-/* =========================================================
-   LABELS TOGGLE
-   ========================================================= */
+// / LABELS TOGGLE /
 
 labelsButton.addEventListener("click", () => {
     showLabels = !showLabels;
@@ -1172,9 +1074,7 @@ labelsButton.addEventListener("click", () => {
 });
 
 
-/* =========================================================
-   UNDO / REDO
-   ========================================================= */
+// / UNDO / REDO /
 
 function cloneObjects(source) {
     return JSON.parse(JSON.stringify(source));
@@ -1210,9 +1110,7 @@ function redo() {
 }
 
 
-/* =========================================================
-   CLEAR
-   ========================================================= */
+// / CLEAR /
 
 clearButton.addEventListener("click", () => {
     if (objects.length === 0) return;
@@ -1234,9 +1132,7 @@ clearButton.addEventListener("click", () => {
 });
 
 
-/* =========================================================
-   PREVIEWS (LINE, CIRCLE, POINT, POLYGON, PENCIL)
-   ========================================================= */
+// / PREVIEWS (LINE, CIRCLE, POINT, POLYGON, PENCIL) /
 
 function createPreviewPoint(point) {
     let circle = document.getElementById("previewPoint");
@@ -1330,9 +1226,7 @@ function removePreview() {
 }
 
 
-/* =========================================================
-   SAVE AS PNG
-   ========================================================= */
+// / SAVE AS PNG /
 
 saveButton.addEventListener("click", saveAsPNG);
 
@@ -1365,17 +1259,13 @@ function saveAsPNG() {
 }
 
 
-/* =========================================================
-   INITIAL STATE
-   ========================================================= */
+// / INITIAL STATE /
 
 gridButton.classList.add("active");
 labelsButton.classList.add("active");
 render();
 
-/* =========================================================
-   KEYBOARD SHORTCUTS & APP EXPORT
-   ========================================================= */
+// / KEYBOARD SHORTCUTS & APP EXPORT /
 
 document.addEventListener("keydown", (e) => {
     if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;

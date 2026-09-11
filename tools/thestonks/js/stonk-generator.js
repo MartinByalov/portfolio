@@ -1,9 +1,4 @@
-/**
- * The Stonks — browser-side Stonk generator
- *
- * Layer order:
- * background > chart > body > eyes > faceFeature > dress > hat > bag
- */
+// The Stonks browser-side generator
 
 export class StonkGenerator {
   constructor(opts = {}) {
@@ -16,9 +11,7 @@ export class StonkGenerator {
     this._imageCache = new Map();
   }
 
-  /**
-   * Load configuration and generated collection.
-   */
+  // Load configuration and generated collection
   async load() {
     const [configRes, collectionRes] = await Promise.all([
       fetch(`${this.basePath}/data/traits-config.json`),
@@ -45,16 +38,12 @@ export class StonkGenerator {
     return this;
   }
 
-  /**
-   * Total collection supply.
-   */
+  // Total collection supply
   get totalSupply() {
     return this.collection?.totalSupply || 0;
   }
 
-  /**
-   * Return a random token ID.
-   */
+  // Return a random token ID
   randomId() {
     if (!this.totalSupply) {
       throw new Error('Collection is not loaded');
@@ -63,9 +52,7 @@ export class StonkGenerator {
     return 1 + Math.floor(Math.random() * this.totalSupply);
   }
 
-  /**
-   * Find category by key.
-   */
+  // Find category by key
   _categoryByKey(key) {
     if (!this.config?.categories) {
       return null;
@@ -76,9 +63,7 @@ export class StonkGenerator {
     ) || null;
   }
 
-  /**
-   * Find option metadata by category + option ID.
-   */
+  // Find option metadata by category and option ID
   _optionMeta(categoryKey, optionId) {
     if (optionId === null || optionId === undefined) {
       return null;
@@ -95,13 +80,7 @@ export class StonkGenerator {
     ) || null;
   }
 
-  /**
-   * Extract body type number.
-   *
-   * body_type_1 -> 1
-   * body_type_2 -> 2
-   * body_type_3 -> 3
-   */
+  // Extract numeric body type from identifier
   _getBodyTypeNumber(record) {
     const bodyType = record?.traits?.bodyType;
 
@@ -118,24 +97,7 @@ export class StonkGenerator {
     return match[1];
   }
 
-  /**
-   * Get the display name of a body/candle trait.
-   *
-   * Type 1:
-   *   golden -> Golden Candle
-   *   green  -> Bullish Candle
-   *   red    -> Bearish Candle
-   *
-   * Type 2:
-   *   golden -> Golden Marubozu
-   *   green  -> Bullish Marubozu
-   *   red    -> Bearish Marubozu
-   *
-   * Type 3:
-   *   golden -> Golden Doji
-   *   green  -> Bullish Doji
-   *   red    -> Bearish Doji
-   */
+  // Get display name of body or candle trait
   _getBodyDisplayName(record, optionId) {
     const bodyType = record?.traits?.bodyType;
 
@@ -162,33 +124,7 @@ export class StonkGenerator {
     return typeNames[bodyType]?.[optionId] || null;
   }
 
-  /**
-   * Build the actual asset path.
-   *
-   * Assets are organized as:
-   *
-   * assets/
-   * ├── background/
-   * ├── charts/
-   * ├── body_types/body_type_1/
-   * ├── body_types/body_type_2/
-   * ├── body_types/body_type_3/
-   * ├── eyes/eyes_type_1/
-   * ├── eyes/eyes_type_2/
-   * ├── eyes/eyes_type_3/
-   * ├── face_feature/face_feature_type_1/
-   * ├── face_feature/face_feature_type_2/
-   * ├── face_feature/face_feature_type_3/
-   * ├── dress/dress_type_1/
-   * ├── dress/dress_type_2/
-   * ├── dress/dress_type_3/
-   * ├── hats/hats_type_1/
-   * ├── hats/hats_type_2/
-   * ├── hats/hats_type_3/
-   * ├── bags/bag_body_type_1/
-   * ├── bags/bag_body_type_2/
-   * └── bags/bag_body_type_3/
-   */
+  // Build asset file path for trait
   _buildAssetPath(record, category, optionId) {
     if (optionId === null || optionId === undefined) {
       return null;
@@ -202,25 +138,19 @@ export class StonkGenerator {
       );
     }
 
-    /*
-     * Background is shared by all body types.
-     */
+    // Background is shared by all body types
     if (category.key === 'background') {
       return `background/${meta.file}`;
     }
 
-    /*
-     * Chart is shared by all body types.
-     */
+    // Chart is shared by all body types
     if (category.key === 'chart') {
       return `charts/${meta.file}`;
     }
 
     const typeNum = this._getBodyTypeNumber(record);
 
-    /*
-     * Body-type-specific folders.
-     */
+    // Body-type-specific folder mapping
     const folderMap = {
       body: `body_types/body_type_${typeNum}`,
       eyes: `eyes/eyes_type_${typeNum}`,
@@ -238,14 +168,7 @@ export class StonkGenerator {
       );
     }
 
-    /*
-     * Replace %TYPE% if it exists in the filename.
-     *
-     * Example:
-     * goldencandle%TYPE%.png
-     *
-     * body_type_2 -> goldencandle2.png
-     */
+    // Replace %TYPE% placeholder in filename
     let file = meta.file;
 
     file = file.replace(/%TYPE%/g, typeNum);
@@ -253,9 +176,7 @@ export class StonkGenerator {
     return `${folder}/${file}`;
   }
 
-  /**
-   * Load image and cache it.
-   */
+  // Load and cache image element
   _loadImage(path) {
     if (!path) {
       return null;
@@ -287,9 +208,7 @@ export class StonkGenerator {
     return promise;
   }
 
-  /**
-   * Get complete Stonk information for UI.
-   */
+  // Assemble full token data for UI rendering
   getStonk(tokenId) {
     const numericId = Number(tokenId);
 
@@ -304,9 +223,7 @@ export class StonkGenerator {
     for (const category of this.config.categories) {
       const optionId = record.traits[category.key];
 
-      /*
-       * None trait.
-       */
+      // Handle none trait
       if (optionId === null || optionId === undefined) {
         traits.push({
           category: category.key,
@@ -326,9 +243,7 @@ export class StonkGenerator {
 
       let name = meta?.name || 'Unknown';
 
-      /*
-       * Body names depend on body type.
-       */
+      // Determine body display name based on body type
       if (category.key === 'body') {
         name =
           this._getBodyDisplayName(record, optionId) ||
@@ -353,9 +268,7 @@ export class StonkGenerator {
     };
   }
 
-  /**
-   * Render a Stonk onto a canvas.
-   */
+  // Render Stonk composite layers onto canvas
   async render(tokenId, canvasEl, opts = {}) {
     const numericId = Number(tokenId);
 
@@ -380,9 +293,7 @@ export class StonkGenerator {
       throw new Error('Could not get 2D canvas context');
     }
 
-    /*
-     * Important for pixel art.
-     */
+    // Disable image smoothing for pixel-art rendering
     ctx.imageSmoothingEnabled = false;
 
     ctx.clearRect(
@@ -392,9 +303,7 @@ export class StonkGenerator {
       size
     );
 
-    /*
-     * Exact layer order.
-     */
+    // Exact layer rendering order
     const layerOrder = [
       'background',
       'chart',
@@ -417,9 +326,7 @@ export class StonkGenerator {
       const optionId =
         record.traits[layerKey];
 
-      /*
-       * Optional trait = None.
-       */
+      // Skip rendering if trait is none
       if (optionId === null || optionId === undefined) {
         continue;
       }
@@ -442,9 +349,7 @@ export class StonkGenerator {
         continue;
       }
 
-      /*
-       * Every asset is drawn over the previous layer.
-       */
+      // Draw image asset onto canvas context
       ctx.drawImage(
         image,
         0,
@@ -457,11 +362,7 @@ export class StonkGenerator {
     return canvasEl;
   }
 
-  /**
-   * Clear cached images.
-   *
-   * Useful during development if assets are replaced.
-   */
+  // Clear cached image elements
   clearImageCache() {
     this._imageCache.clear();
   }

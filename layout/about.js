@@ -1,7 +1,4 @@
-/* layout/about.js
-   About page (#/about) — "За мен" page with portfolio access code gate.
-   Contains: about page rendering, portfolio code gate, background audio.
-*/
+// About page and portfolio access gate
 
 const PORTFOLIO_ACCESS_CODE = '123456';
 const GATE_STORAGE_KEY = 'portfolio-unlocked';
@@ -49,7 +46,7 @@ export function renderAboutPage() {
   `;
 }
 
-/* ---------- Portfolio access code gate ---------- */
+// Portfolio access code gate
 
 function gateOverlay() {
   return document.getElementById('code-gate-overlay');
@@ -138,7 +135,7 @@ function openPortfolioGate() {
   setTimeout(() => digits[0]?.focus(), 80);
 }
 
-/* ---------- About page init ---------- */
+// About page initialization
 
 let aboutAudioCleanup = null;
 

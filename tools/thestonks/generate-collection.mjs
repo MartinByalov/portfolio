@@ -1,29 +1,6 @@
 #!/usr/bin/env node
 
-/**
- * The Stonks
- * Collection generator
- *
- * Generates:
- * data/stonks-collection.json
- *
- * Supply:
- * 10,000 unique NFTs
- *
- * Required:
- * - Background
- * - Candle / Body
- *
- * Optional:
- * - Chart
- * - Eyes
- * - Face Feature
- * - Dress
- * - Hat
- * - Bag
- *
- * Optional traits can be None according to noneWeight.
- */
+// The Stonks collection generator
 
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -280,10 +257,7 @@ function main() {
 
         let noneWeight = 0;
 
-        /*
-         * Required categories:
-         * None is never allowed.
-         */
+        // Required categories where none is not allowed
         if (
           category.required === true
         ) {

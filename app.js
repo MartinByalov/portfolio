@@ -1,14 +1,4 @@
-/* app.js
-   The whole "site" in one small router:
-     #/                          -> public landing (subject accents + news feed)
-     #/portfolio                 -> protected portfolio home (access code from #/about)
-     #/experience                -> protected professional experience view
-     #/course/{courseId}         -> section/lesson list for that course
-     #/lesson/{courseId}/{lessonId} -> a rendered lesson (via the Lesson Renderer)
-
-   Header, sidebar and footer are mounted once and never re-rendered;
-   only #view-root swaps content on navigation, same as a single-page app.
-*/
+// Application router and entry controller
 
 import * as Header from './layout/header.js';
 import * as Sidebar from './layout/sidebar.js';

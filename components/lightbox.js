@@ -1,8 +1,4 @@
-/* components/lightbox.js
-   Отваря снимките / изображенията / визуалните елементи на урока
-   в голям мащаб — модален прозорец в средата на екрана.
-   Затваряне: по бутона ✕, клик вън от снимката или Escape.
-*/
+// Image lightbox modal component
 
 let overlay = null;
 let activeImg = null;

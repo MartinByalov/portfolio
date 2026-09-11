@@ -1,9 +1,4 @@
-/* components/scroll-spy.js
-   Актуализира страничния речник (course-sidebar) спрямо това какво
-   е отворено като акордеон и къде сме скролвали в урока:
-     - маркатава линка, чия цел (section) е в момента видима на екрана
-     - при клик на линка отваря съответния акордеон item (ако е затворен)
-*/
+// Lesson scroll-spy and active section tracker
 
 export function initScrollSpy() {
   const links = Array.from(document.querySelectorAll('.course-list-nav .course-link'));

@@ -1,8 +1,4 @@
-/* layout/other.js
-   Страница "Други" (#/other) — Каталог от практически уроци и блогови публикации,
-   изпълнени в стила на MartinByalov/python с тъмни хедъри, JetBrains Mono код блокове
-   и интерактивни симулации.
-*/
+// Tutorials and practical projects catalog
 
 import * as NftPopup from './nft-popup.js';
 
@@ -21,7 +17,7 @@ function esc(v) {
 }
 
 // -------------------------------------------------------------
-// ГЛАВЕН ВХОД НА СТРАНИЦАТА
+// Main view entry point
 // -------------------------------------------------------------
 export function renderOtherPage(subRoute) {
   if (subRoute === 'nft-generator') {
@@ -34,7 +30,7 @@ export function renderOtherPage(subRoute) {
 }
 
 export async function initOtherPage(subRoute) {
-  // Активиране на бутоните за копиране на код
+  // Enable code snippet copy buttons
   document.querySelectorAll('.code-copy-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const targetId = btn.getAttribute('data-target');
@@ -56,7 +52,7 @@ export async function initOtherPage(subRoute) {
 }
 
 // =============================================================
-// 1. КАТАЛОГ С КАРТИ (Междинна страница #/other)
+// Catalog cards view
 // =============================================================
 function renderCardsCatalog() {
   return `
@@ -133,7 +129,7 @@ function renderCardsCatalog() {
 }
 
 // =============================================================
-// 2. УРОК 1: СЪЗДАВАНЕ НА ГЕНЕРАТОР НА NFT (The Stonks)
+// NFT generator tutorial view
 // =============================================================
 function renderNftTutorial() {
   return `
@@ -281,14 +277,14 @@ function renderNftTutorial() {
                 <button type="button" class="code-copy-btn" data-target="code-layers">Копирай</button>
               </div>
               <pre class="code-body" id="code-layers"><span class="kw">const</span> <span class="at">LAYER_ORDER</span> = [
-  <span class="st">'background'</span>,  <span class="cm">// Слой 0: Заден фон</span>
-  <span class="st">'chart'</span>,       <span class="cm">// Слой 1: Линия на графиката</span>
-  <span class="st">'body'</span>,        <span class="cm">// Слой 2: Основно тяло на персонажа</span>
-  <span class="st">'dress'</span>,       <span class="cm">// Слой 3: Облекло / Костюм</span>
-  <span class="st">'hat'</span>,         <span class="cm">// Слой 4: Шапка / Корона</span>
-  <span class="st">'faceFeature'</span>, <span class="cm">// Слой 5: Лицеви детайли</span>
-  <span class="st">'eyes'</span>,        <span class="cm">// Слой 6: Очи / Очила</span>
-  <span class="st">'bag'</span>          <span class="cm">// Слой 7: Преден план (лаптоп, чанта)</span>
+  <span class="st">'background'</span>,  <span class="cm">// Layer 0: Background</span>
+  <span class="st">'chart'</span>,       <span class="cm">// Layer 1: Chart line</span>
+  <span class="st">'body'</span>,        <span class="cm">// Layer 2: Character body</span>
+  <span class="st">'dress'</span>,       <span class="cm">// Layer 3: Outfit / Suit</span>
+  <span class="st">'hat'</span>,         <span class="cm">// Layer 4: Hat / Crown</span>
+  <span class="st">'faceFeature'</span>, <span class="cm">// Layer 5: Face details</span>
+  <span class="st">'eyes'</span>,        <span class="cm">// Layer 6: Eyes / Glasses</span>
+  <span class="st">'bag'</span>          <span class="cm">// Layer 7: Foreground items</span>
 ];</pre>
             </div>
           </div>
@@ -453,7 +449,7 @@ function renderNftTutorial() {
               </div>
               <pre class="code-body" id="code-canvas"><span class="kw">async function</span> <span class="fn">renderStonkToCanvas</span>(<span class="at">canvas</span>, <span class="at">layers</span>) {
   <span class="kw">const</span> <span class="at">ctx</span> = canvas.<span class="fn">getContext</span>(<span class="st">'2d'</span>);
-  <span class="cm">// Ключова настройка за пиксел-арт!</span>
+  <span class="cm">// Pixel-art rendering configuration</span>
   ctx.<span class="at">imageSmoothingEnabled</span> = <span class="kw">false</span>;
 
   ctx.<span class="fn">clearRect</span>(<span class="num">0</span>, <span class="num">0</span>, canvas.width, canvas.height);
@@ -474,7 +470,7 @@ function renderNftTutorial() {
 }
 
 // =============================================================
-// 3. УРОК 2: ВИДОВЕ ДИАГРАМИ С GRAPH.JS (CHART.JS)
+// Chart.js diagrams tutorial view
 // =============================================================
 function renderChartsTutorial() {
   return `
@@ -856,7 +852,7 @@ function renderChartsTutorial() {
 }
 
 // =============================================================
-// ПОМОЩНИ ФУНКЦИИ ЗА СИМУЛАЦИИТЕ
+// Simulation helper functions
 // =============================================================
 
 // NFT DEMO
@@ -951,7 +947,7 @@ const CHART_PRESETS = {
         }
       }
     },
-    codeSnippet: `// Линейна графика (Line Chart)
+    codeSnippet: `// Line chart
 new Chart(ctx, {
   type: 'line',
   data: {
@@ -993,7 +989,7 @@ new Chart(ctx, {
         }
       }
     },
-    codeSnippet: `// Стълбовидна графика (Bar Chart)
+    codeSnippet: `// Bar chart
 new Chart(ctx, {
   type: 'bar',
   data: {
@@ -1030,7 +1026,7 @@ new Chart(ctx, {
         }
       }
     },
-    codeSnippet: `// Пръстеновидна диаграма (Doughnut Chart)
+    codeSnippet: `// Doughnut chart
 new Chart(ctx, {
   type: 'doughnut',
   data: {
@@ -1067,7 +1063,7 @@ new Chart(ctx, {
         }
       }
     },
-    codeSnippet: `// Кръгова диаграма (Pie Chart)
+    codeSnippet: `// Pie chart
 new Chart(ctx, {
   type: 'pie',
   data: {
@@ -1119,7 +1115,7 @@ new Chart(ctx, {
         }
       }
     },
-    codeSnippet: `// Радарна диаграма (Radar Chart)
+    codeSnippet: `// Radar chart
 new Chart(ctx, {
   type: 'radar',
   data: {
@@ -1179,7 +1175,7 @@ new Chart(ctx, {
         }
       }
     },
-    codeSnippet: `// Полярна диаграма (Polar Area Chart)
+    codeSnippet: `// Polar area chart
 new Chart(ctx, {
   type: 'polarArea',
   data: {

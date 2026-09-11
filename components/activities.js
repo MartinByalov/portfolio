@@ -1,10 +1,4 @@
-/* components/activities.js
-   Renders a grid of activity cards. Each card either links out or opens a modal
-   (typically an "exercise-modal" component elsewhere on the page).
-   Data shape: { type: "activities", id, heading, items: [
-     { icon, color, title, description, buttonText, action: "link"|"modal", href?, target? }
-   ]}
-*/
+// Activity cards grid component
 
 export function render(comp) {
   const cards = (comp.items || []).map(item => {

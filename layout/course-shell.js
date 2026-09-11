@@ -1,9 +1,4 @@
-/* layout/course-shell.js
-   The two-column shell used by both the course listing view and the
-   lesson view: a narrow "course-sidebar" aside (either the class/course
-   picker, or a back-link + in-page section nav) plus the wide
-   "course-main" content area.
-*/
+// Two-column course shell layout
 
 export function render(asideHtml, mainHtml) {
   return `
@@ -18,7 +13,7 @@ export function render(asideHtml, mainHtml) {
   `;
 }
 
-/* Aside for the catalog/course view: full list of grades and courses. */
+// Catalog and course sidebar navigation
 export function renderClassPicker(catalog, activeCourseId) {
   const links = catalog.grades.flatMap(grade => grade.courses).map(course => {
     const activeClass = course.id === activeCourseId ? ' active' : '';
@@ -33,7 +28,7 @@ export function renderClassPicker(catalog, activeCourseId) {
   `;
 }
 
-/* Aside for the lesson view: back link + in-page anchors to each named component. */
+// Lesson in-page anchors navigation sidebar
 export function renderLessonNav(courseId, navItems) {
   const links = navItems.map((item, i) => `
     <a href="#${item.id}" class="course-link${i === 0 ? ' active' : ''}"><i class='bx bx-chevron-right'></i> ${item.label}</a>

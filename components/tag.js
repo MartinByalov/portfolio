@@ -1,8 +1,4 @@
-/* components/tag.js
-   Section divider label inside a lesson — full-width soft-tone band.
-   Can be a plain label, a link (href) or a modal trigger (modalTarget).
-   Data shape: { type: "tag", id, icon, text, tone?, href?, modalTarget? }
-*/
+// Section divider tag component
 
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {

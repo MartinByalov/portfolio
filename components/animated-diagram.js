@@ -1,9 +1,4 @@
-/* components/animated-diagram.js
-   Стъпкова анимирана схема: текст от урока -> схема -> визуализация.
-   Data shape: { type:"animated-diagram", id, heading, intro, autoplayMs,
-     steps:[{ title, body, diagram:{ kind, nodes:[{label,sub,icon}], flow, note } }] }
-   Управлението е: Назад / Напред + точки + бутон Преиграй.
-*/
+// Animated step-by-step diagram component
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
     return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch];

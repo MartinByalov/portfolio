@@ -1,8 +1,4 @@
-/* components/exercise-modal.js
-   Renders a hidden modal with exercise instructions and resource links.
-   Opened by an "activities" card with action:"modal", target: this component's id.
-   Data shape: { type: "exercise-modal", id, title, instructions, resources: [{icon, label, href}] }
-*/
+// Exercise modal component
 
 export function render(comp) {
   const resources = (comp.resources || []).map(r => `

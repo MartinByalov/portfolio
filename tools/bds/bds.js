@@ -1,12 +1,6 @@
-/* tools/bds/bds.js — инструментът "БДС Клавиатура".
-   Тренировка за научаване на клавиатурната подредба БДС 5237:1978.
-   Визуалът на клавиатурата (оцветяване по пръсти, анимации) е запазен
-   от оригинала в morphemes-main (class=section2). */
+// BDS 5237:1978 Bulgarian typewriter keyboard trainer
 
-/* ============================================================
-   БДС 5237:1978 подредба (Bulgarian Typewriter).
-   Всеки клавиш: код (event.code), символ без SHIFT, символ със SHIFT.
-   ============================================================ */
+// BDS 5237:1978 keyboard layout mapping
 const BDS_ROWS = [
     [ // ред с цифри
         { id: 'Digit1', base: '1', shift: '!' }, { id: 'Digit2', base: '2', shift: '?' },
@@ -41,7 +35,7 @@ const BDS_ROWS = [
     ]
 ];
 
-/* Оцветяване по пръсти (както в оригинала) — по колона на физическия клавиш. */
+// Finger color column mapping
 const FINGERS = {
     0: ['Digit1', 'KeyQ', 'KeyA', 'KeyZ'],
     1: ['Digit2', 'KeyW', 'KeyS', 'KeyX'],
@@ -62,7 +56,7 @@ function fingerOf(id) {
     return 'pinky';
 }
 
-/* символ → { code, shift } */
+// Character to key code and shift state mapping
 const CHAR_MAP = {};
 BDS_ROWS.flat().forEach(k => {
     CHAR_MAP[k.base] = { code: k.id, shift: false };
@@ -70,9 +64,9 @@ BDS_ROWS.flat().forEach(k => {
 });
 CHAR_MAP[' '] = { code: 'Space', shift: false };
 
-/* ============================ рендериране ============================ */
+// Keyboard layout rendering
 
-/* изграждане на редовете на клавиатурата (визуалът е от оригинала) */
+// Build keyboard layout rows
 const keyboardEl = document.getElementById('keyboard');
 keyboardEl.innerHTML = '';
 const keyEls = {};
@@ -145,7 +139,7 @@ const r4 = buildRow('row-4');
 r4.appendChild(li('Space', 'pinky', 'SPACE'));
 keyboardEl.appendChild(r4);
 
-/* ============================ тренировка ============================ */
+// Typing practice logic
 const storyParagraph = document.getElementById('storyParagraph');
 const storyTextArea = document.getElementById('storyTextArea');
 const bookSelect = document.getElementById('bookSelect');
@@ -228,7 +222,7 @@ function updateStats() {
         : '100%';
 }
 
-/* анимира следващия пореден символ (при главна буква — и двата SHIFT) */
+// Animate next expected key character
 function showNextKey() {
     clearSelection();
     if (position >= targetText.length) return;
@@ -272,7 +266,7 @@ function releaseKeyVisual(code, isShift) {
     }
 }
 
-/* глобална обработка на въвеждането */
+// Global input handler
 function processKeyInput(code, key, explicitChar, isShift) {
     if (!targetText || position >= targetText.length) return;
     if (['Shift', 'Control', 'Alt', 'CapsLock', 'Meta', 'ContextMenu'].includes(key)) return;
@@ -344,12 +338,12 @@ function processKeyInput(code, key, explicitChar, isShift) {
     showNextKey();
 }
 
-/* Слушане за натиснати клавиши — както в текстовото поле, така и на ниво прозорец */
+// Keydown event listener
 window.addEventListener('keydown', (event) => {
     // Ако фокусът е върху падащото меню с книги, не прехващаме
     if (event.target === bookSelect) return;
 
-    // Визуална реакция на клавиша винаги:
+    // Trigger visual key feedback:
     pressKeyVisual(event.code, event.shiftKey);
 
     // Предотвратяваме стандартния скрол/въвеждане, за да гарантираме точно въвеждане в текстовото поле
@@ -370,9 +364,9 @@ storyTextArea.addEventListener('keydown', (event) => {
     processKeyInput(event.code, event.key, null, event.shiftKey);
 });
 
-/* ============================ epub книги ============================ */
+// EPUB book loader
 
-/* зарежда произволна глава от избраната книга като упражнение */
+// Load random chapter from selected book
 function loadRandomChapter() {
     const book = books.find(b => b.file === bookSelect.value) || books[0];
     if (!book || !book.chapters || !book.chapters.length) {
@@ -397,7 +391,7 @@ function loadRandomChapter() {
     storyTextArea.focus();
 }
 
-/* чете epub (zip) -> container.xml -> OPF -> spine -> текст на главите */
+// Parse EPUB archive structure
 async function readBook(book) {
     if (book.chapters) return;
     book.chapters = [];

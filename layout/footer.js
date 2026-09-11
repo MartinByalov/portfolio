@@ -1,8 +1,4 @@
-/* layout/footer.js
-   Static footer — two modes via body.portfolio-mode:
-     - portfolio (home)  -> shows phone + email + FMI SU map
-     - learning (all other routes) -> shows ONLY email + same FMI SU map
-*/
+// Application footer component
 
 export function render() {
   return `

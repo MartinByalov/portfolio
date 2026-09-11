@@ -1,16 +1,4 @@
-/* tools/popup.js
-   Modal popup for dashboard tools that don't need their own page
-   (QR Code, Случайни групи, Регулировчик, Таймер). Clicking such a card
-   opens an overlay with the tool loaded in an iframe and an X close button,
-   while the platform header title/icon switches to the tool's name.
-
-   Dashboard usage:
-     <a class="tool-card"
-        data-popup-src="/tools/timer/timer.html"
-        data-popup-title="Таймер"
-        data-popup-icon="fa-solid fa-hourglass-half">...</a>
-     <script type="module" src="/tools/popup.js"></script>
-*/
+// Modal popup handler for dashboard tools
 
 import * as Header from '/layout/header.js';
 
@@ -104,7 +92,7 @@ export function close(silent) {
   }
 }
 
-/** Bind every [data-popup-src] card on the page. */
+// Bind every data-popup-src card on the page
 export function init() {
   document.querySelectorAll('[data-popup-src]').forEach((card) => {
     card.addEventListener('click', (e) => {

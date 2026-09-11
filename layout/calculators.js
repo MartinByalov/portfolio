@@ -1,4 +1,4 @@
-/* layout/calculators.js - Popup Калкулатори под Календар в Sidebar. */
+// Calculators modal launcher
 let overlayEl = null;
 function onKeydown(e) { if (e.key === 'Escape') close(); }
 function esc(v) {

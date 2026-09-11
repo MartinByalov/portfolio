@@ -1,7 +1,4 @@
-/* layout/nft-popup.js
-   Изскачащ прозорец (Modal) за генериране на 1 брой Stonk NFT
-   използващ модула TheStonks от /tools/thestonks/js/stonk-generator.js
-*/
+// Stonk NFT generator popup modal
 
 let overlayEl = null;
 let generator = null;

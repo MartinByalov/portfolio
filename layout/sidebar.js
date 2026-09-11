@@ -1,14 +1,4 @@
-/* layout/sidebar.js
-   The right-hand slide-out drawer with two different nav menus,
-   toggled via body.portfolio-mode set in app.js router:
-     - portfolio mode (#/portfolio, #/experience): Портфолио / Учебни ресурси(->Начало #/) / Инструменти / Опит
-     - learning mode  (all other routes)        : Начало / Учебни ресурси / Инструменти / Календар / Речник / Софтуер / За мен
-
-   The mode is also persisted in sessionStorage ('platform-mode') + the
-   ?mode= query param so the standalone /tools/* pages (tools/embed.js)
-   can render the SAME menu instead of ending up empty via the
-   body.portfolio-mode CSS toggles.
-*/
+// Sidebar navigation drawer component
 
 import * as SchoolCalendar from './school-calendar.js';
 

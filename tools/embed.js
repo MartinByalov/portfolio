@@ -1,10 +1,4 @@
-/* tools/embed.js
-   Mounts the platform chrome (header / sidebar drawer / footer) around the
-   standalone tool pages, so /tools/* pages look like the rest of the site.
-
-   Usage — add once before </body> in the tool page:
-     <script type="module" src="/tools/embed.js"></script>
-*/
+// Embed platform layout in standalone tools
 
 import '/scripts/clone-guard.js';
 
@@ -15,24 +9,15 @@ const FONT_CSS = [
 ];
 
 const EMBED_STYLE = `
-  /* Column flex: header offset on top, shell stretches, footer sits right
-     below the content (visible without scrolling on short pages). */
   body.tools-embedded {
-    padding: 60px 0 0; /* fixed 60px header offset; NO side/bottom padding so
-                          the footer spans the viewport edge to edge */
+    padding: 60px 0 0;
     margin: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    /* Tool pages style body themselves (planner: align-items:flex-start,
-       wpm: align-items:center) — stretch again so the shell and the footer
-       are full-width instead of shrink-to-fit. */
     align-items: stretch;
     justify-content: flex-start;
   }
-  /* The tool pages' own body padding (20px) moves here, so the footer below
-     stays flush with the viewport edges and, being in normal flow after the
-     shell, can never clip/cover the page content above it. */
   .tools-page-shell {
     flex: 1 0 auto;
     width: 100%;
@@ -40,10 +25,7 @@ const EMBED_STYLE = `
     box-sizing: border-box;
   }
   body.tools-embedded .main-footer { flex-shrink: 0; width: 100%; text-align: left; border-top: 0; }
-  /* Neutralize tool pages' own min-height:100vh (e.g. planner #app), which
-     would otherwise push the footer a full viewport below the fold. */
   body.tools-embedded .tools-page-shell > * { min-height: 0; }
-  /* Center the page's main column (wpm <main>, planner #app) in the shell. */
   body.tools-embedded .tools-page-shell > main,
   body.tools-embedded .tools-page-shell > #app { margin-left: auto; margin-right: auto; }
 `;

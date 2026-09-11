@@ -1,7 +1,4 @@
-/* layout/portfolio.js
-   Portfolio page (#/portfolio) — protected by access code from About page.
-   Contains: slider, teacher intro, skills, tools carousel.
-*/
+// Portfolio page renderer and slider
 
 const ZADANIE_TOOLS = [
   { emoji: '📢', label: 'Регулировчик',   href: '/tools/control/control.html'             },
@@ -154,7 +151,7 @@ export function renderPortfolioPage() {
   `;
 }
 
-/* ---------- Portfolio slider ---------- */
+// Portfolio slider
 
 let sliderCleanup = null;
 let autoSlideTimeout = null;
@@ -234,10 +231,10 @@ export function initPortfolioPage() {
     slider.style.transform = `translateX(${-curSlide * 100}%)`;
   }
 
-  /* Auto-slide */
+  // Auto-slide
   autoSlide();
 
-  /* Controls */
+  // Slider controls
   leftCtrl?.addEventListener('click', () => {
     if (animating) return;
     curSlide--;
@@ -254,7 +251,7 @@ export function initPortfolioPage() {
     autoSlide();
   });
 
-  /* Pagination */
+  // Slider pagination
   pagi.addEventListener('click', (e) => {
     const target = e.target.closest('.slider-pagi__elem');
     if (!target || animating) return;
@@ -265,7 +262,7 @@ export function initPortfolioPage() {
     autoSlide();
   });
 
-  /* Drag support */
+  // Drag gesture support
   let isDragging = false;
   let startX = 0;
   let currentX = 0;
@@ -304,7 +301,7 @@ export function initPortfolioPage() {
     autoSlide();
   });
 
-  /* Touch support */
+  // Touch gesture support
   slider.addEventListener('touchstart', (e) => {
     isDragging = true;
     startX = e.touches[0].clientX;
@@ -337,7 +334,7 @@ export function initPortfolioPage() {
     autoSlide();
   });
 
-  /* Pause on hover */
+  // Pause on hover
   slider.addEventListener('mouseenter', clearAuto);
   slider.addEventListener('mouseleave', autoSlide);
 

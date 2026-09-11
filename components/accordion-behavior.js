@@ -1,11 +1,4 @@
-/* components/accordion-behavior.js
-   Shared accordion toggle logic, used by text-group, course-list
-   and the lesson "accordion" component so the behavior only has to
-   be written once.
-
-   opts.singleOpen — true: opening an item closes the others (default);
-                     false: items toggle independently (multiple open).
-*/
+// Shared accordion toggle behavior
 
 export function initAccordion(root, opts) {
   if (!root) return;

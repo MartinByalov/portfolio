@@ -1,8 +1,4 @@
-/* layout/home.js
-   Public landing page (#/) with random subjects slider + news collage,
-   and subjects page (#/subjects).
-   Portfolio, experience, and about pages are in their own files.
-*/
+// Home landing page with subject cards and news feed
 
 const SUBJECT_CARDS = [
   { badge: '8 клас',  icon: 'fas fa-desktop',       title: 'ИТ',                       description: 'Основи на работа с компютър и MS Office.',                                 href: '#/course/it-8' },
@@ -393,7 +389,7 @@ export function initLandingPage() {
       });
     });
 
-    // Ротация на трите предмета: първо слот 0, после слот 1, после слот 2, и пак отначало.
+    // Rotate subject cards
     try {
       const poolData = JSON.parse(slider.dataset.pool || '[]');
       if (Array.isArray(poolData) && poolData.length > 3) {
@@ -443,7 +439,7 @@ export function initLandingPage() {
 
   const controller = new AbortController();
   window.__newsController = controller;
-  // Пазят се по категория { source, items[] }, за да не се смесват групите.
+  // Group news items by category
   const boxes = {};
   let pending = NEWS_SOURCES.length;
 

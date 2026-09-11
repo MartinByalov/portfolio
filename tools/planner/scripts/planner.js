@@ -431,7 +431,7 @@ function renderSchedule() {
         durationText.textContent = `Продължителност: ${activity.duration} мин.`;
         bottomControls.appendChild(durationText);
         
-        // Таймерът е тук, НЕ в activity-controls (промяна)
+        // Timer display placement
         const timerDisplay = document.createElement('span');
         timerDisplay.id = `timer-display-${index}`;
         timerDisplay.className = `activity-timer-display ${activity.status}-timer`;
@@ -445,7 +445,7 @@ function renderSchedule() {
             const remainingTime = (activity.duration * 60) - timeInCurrentActivity;
             timerDisplay.textContent = formatTime(remainingTime < 0 ? 0 : remainingTime);
         } else if (activity.status === 'done') {
-            // Show duration in green instead of "ГОТОВО" (change)
+            // Show duration instead of completed label
             timerDisplay.textContent = formatTime(activity.duration * 60);
         } else {
             timerDisplay.textContent = formatTime(activity.duration * 60);

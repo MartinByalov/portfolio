@@ -1,8 +1,4 @@
-/**
- * Global clone & postMessage safety guard
- * Prevents DataCloneError when DOM nodes (such as HTMLLinkElement) are passed to
- * structuredClone, postMessage, or Worker/MessagePort.
- */
+// Global clone and postMessage safety guard
 (function() {
   function isNode(val) {
     return typeof Node === 'function' ? val instanceof Node : (val && typeof val === 'object' && val.nodeType);

@@ -1,15 +1,8 @@
-/* layout/glossary.js
-   Терминологичен речник (#/dictionary) — понятия от учебните материали,
-   подредени по азбучен ред, с филтър по буква и търсене в страницата.
-   Термините се зареждат АВТОМАТИЧНО от „Речник“ акордеоните в края на
-   урокoвете (lessons/**.json): всеки акордеон с heading „Речник“
-   (id "lesson-glossary") дава термина (item.title) и описанието
-   (item.definition или първият текстов блок).
-   Нов урок с речник -> термините се появяват тук без допълнителен код. */
+// Interactive glossary and flashcards component
 
 let TERMS = [];
 
-/* Извлича чист текст от HTML съдържанието на акордеонна тема. */
+// Extract plain text from HTML content
 function stripHtml(html) {
   return String(html || '')
     .replace(/<[^>]*>/g, ' ')
@@ -26,10 +19,7 @@ function blockToDefinition(content) {
   return text.length > 320 ? text.slice(0, 317).trimEnd() + '…' : text;
 }
 
-/* Зарежда термините от всички налични курсoве -> уроци -> „Речник“ акордеони.
-   Поддържа два формата на акордеона:
-   - един item „Речник“ с блок { type:"glossary-list", items:[{term,definition}] };
-   - директни items с { title, definition } (обратна съвместимост). */
+// Load terms from all courses and lessons
 async function loadTerms() {
   if (TERMS.length) return TERMS;
   const terms = [];
@@ -122,7 +112,7 @@ export function renderGlossaryPage() {
 }
 
 function termImage(term) {
-  // Подходящо изображение за гърба на флаш картата — стабилен seed на термин.
+  // Stable seed image for flashcard reverse
   const seed = encodeURIComponent(String(term.term || 'term').trim().toLowerCase().replace(/\s+/g, '-'));
   return `https://picsum.photos/seed/${seed}/800/500`;
 }

@@ -1,9 +1,4 @@
-/* components/quiz.js
-   Renders a self-checking multiple choice quiz.
-   Data shape: { type: "quiz", id, heading, questions: [
-     { question, options: [string], correctIndex }
-   ]}
-*/
+// Multiple choice quiz component
 
 export function render(comp) {
   const questions = (comp.questions || []).map((q, qi) => {

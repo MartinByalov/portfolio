@@ -1,8 +1,4 @@
-/**
- * ============================================================================
- * INVESTMENT CALCULATOR ENGINE (/tools/inv.js)
- * ============================================================================
- */
+// Investment calculator engine
 
 document.addEventListener("DOMContentLoaded", () => {
     // DOM Elements

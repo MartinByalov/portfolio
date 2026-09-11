@@ -1,7 +1,4 @@
-/* layout/experience.js
-   Experience page (#/experience) — 1:1 пренос на old/experience.html
-   (секция experience-section + exp-grid), за да изглежда точно както преди.
-*/
+// Professional experience page renderer
 
 export function renderExperiencePage() {
   return `

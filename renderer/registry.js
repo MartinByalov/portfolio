@@ -1,8 +1,4 @@
-/* renderer/registry.js
-   Single place that maps a lesson component's "type" to the module that
-   knows how to render and initialize it. Adding a new component type to
-   the platform means: write components/your-type.js, register it here.
-*/
+// Registry mapping lesson component types to renderers
 
 import * as TextGroup from '../components/text-group.js';
 import * as AnimatedDiagram from '../components/animated-diagram.js';

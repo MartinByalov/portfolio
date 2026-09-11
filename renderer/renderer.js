@@ -1,9 +1,4 @@
-/* renderer/renderer.js
-   The Lesson Renderer engine. Given lesson JSON, it builds the header
-   HTML, the concatenated component body HTML, and a list of in-page nav
-   items (label + anchor id) for any component that declares a
-   "heading" — app.js uses that list to build the lesson's aside nav.
-*/
+// Lesson renderer engine
 
 import { renderComponent, initComponent } from './registry.js';
 

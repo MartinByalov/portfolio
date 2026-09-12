@@ -584,9 +584,11 @@ async function handleImageUpload(event) {
         uploadButtonEl.textContent = '...';
         imageUploadButtonContainer.disabled = true;
         fileNameDisplay.textContent = `Четене на: ${file.name}...`;
+        let fullDataUrl = '';
         const base64Image = await new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.onload = () => {
+                fullDataUrl = reader.result;
                 const base64Data = reader.result.split(',')[1];
                 resolve(base64Data);
             };
@@ -595,28 +597,37 @@ async function handleImageUpload(event) {
         });
         uploadButtonEl.textContent = '...';
         fileNameDisplay.textContent = `Качвам: ${file.name}...`;
-        const response = await fetch('/api/upload-image', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                base64Image: base64Image,
-                fileName: file.name
-            })
-        });
-        if (!response.ok) {
-            const errorBody = await response.json().catch(() => ({}));
-            const errorText = errorBody.message || response.statusText;
-            throw new Error(`Upload failed: ${response.status} ${errorText}`);
+        
+        let imageUrl = '';
+        try {
+            const response = await fetch('/api/upload-image', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    base64Image: base64Image,
+                    fileName: file.name
+                })
+            });
+            if (response.ok) {
+                const result = await response.json();
+                imageUrl = result.url;
+            }
+        } catch (netErr) {
+            // Static host fallback
         }
-        const result = await response.json();
-        const imageUrl = result.url;
+
+        if (!imageUrl && fullDataUrl) {
+            imageUrl = fullDataUrl;
+        }
+
         if (!imageUrl) {
-            throw new Error('Upload successful, but no URL returned from server.');
+            throw new Error('Upload failed');
         }
+
         activityImageInput.value = imageUrl;
-        fileNameDisplay.textContent = `Успешно качен: ${file.name}`;
+        fileNameDisplay.textContent = `Успешно заредено: ${file.name}`;
         setTimeout(() => {
             if (fileNameDisplay.parentElement) {
                 fileNameDisplay.remove();

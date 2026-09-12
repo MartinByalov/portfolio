@@ -82,7 +82,7 @@ export function renderPortfolioPage() {
             <div class="slide__text">
               <h2 class="slide__text-heading">Иновативни подходи в ИТ</h2>
               <p class="slide__text-desc">Учене чрез действие и интегриране на нови технологии в учебния процес.</p>
-              <a class="slide__text-link" href="/tools/index.html?mode=portfolio">Инструменти</a>
+              <a class="slide__text-link" href="tools/index.html?mode=portfolio">Инструменти</a>
             </div>
           </div>
         </div>
@@ -115,7 +115,7 @@ export function renderPortfolioPage() {
 
           <div class="profile-summary-row">
             <div class="profile-square-img">
-              <img src="/images/profile.jpg" alt="Мартин Бялов" onerror="this.style.display='none'">
+              <img src="images/profile.jpg" alt="Мартин Бялов" onerror="this.style.display='none'">
             </div>
             <div class="profile-info-text">
               <p class="teacher-degree">Бакалавър по Педагогика на обучението по математика и информатика</p>

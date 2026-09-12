@@ -24,16 +24,16 @@ export function setStoredMode(mode) {
 const PORTFOLIO_NAV = [
   { icon: 'bx bx-book-reader',  label: 'Портфолио',      href: '#/portfolio', 'data-nav': 'portfolio' },
   { icon: 'bx bx-home-alt',     label: 'Учебни ресурси', href: '#/',          'data-nav': 'portfolio' },
-  { icon: 'bx bx-wrench',       label: 'Инструменти',    href: '/tools/index.html?mode=portfolio', 'data-nav': 'portfolio' },
+  { icon: 'bx bx-wrench',       label: 'Инструменти',    href: 'tools/index.html?mode=portfolio', 'data-nav': 'portfolio' },
   { icon: 'bx bx-briefcase-alt',label: 'Опит',           href: '#/experience', 'data-nav': 'portfolio' }
 ];
 
 const LEARNING_NAV = [
   { icon: 'bx bx-home-alt',    label: 'Начало',         href: '#/',           'data-nav': 'learning' },
   { icon: 'bx bx-book-reader', label: 'Учебни ресурси', href: '#/subjects',   'data-nav': 'learning' },
-  { icon: 'bx bx-wrench',      label: 'Инструменти',    href: '/tools/index.html?mode=learning', 'data-nav': 'learning' },
+  { icon: 'bx bx-wrench',      label: 'Инструменти',    href: 'tools/index.html?mode=learning', 'data-nav': 'learning' },
   { icon: 'bx bx-calendar',    label: 'Календар',       href: '#calendar',    'data-nav': 'learning' },
-  { icon: 'bx bx-calculator',  label: 'Калкулатори',    href: '/tools/calculators/index.html?mode=learning', 'data-nav': 'learning' },
+  { icon: 'bx bx-calculator',  label: 'Калкулатори',    href: 'tools/calculators/index.html?mode=learning', 'data-nav': 'learning' },
   { icon: 'bx bx-book',        label: 'Речник',         href: '#/dictionary', 'data-nav': 'learning' },
   { icon: 'bx bx-code-alt',    label: 'Софтуер',        href: '#/software',   'data-nav': 'learning' },
   { icon: 'bx bx-layer',       label: 'Други',          href: '#/other',      'data-nav': 'learning' },

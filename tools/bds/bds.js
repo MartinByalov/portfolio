@@ -444,7 +444,7 @@ async function loadBooks() {
 
     // 2. Async load external books if available
     try {
-        const res = await fetch('/tools/bds/books/books.json');
+        const res = await fetch('books/books.json');
         if (res.ok) {
             const external = await res.json();
             books = [...BUILTIN_BOOKS, ...external];

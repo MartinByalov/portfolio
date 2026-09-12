@@ -1,6 +1,6 @@
 // Modal popup handler for dashboard tools
 
-import * as Header from '/layout/header.js';
+import * as Header from '../layout/header.js';
 
 const POPUP_STYLE = `
   .tool-popup-overlay {

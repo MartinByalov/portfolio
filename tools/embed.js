@@ -1,8 +1,13 @@
 // Embed platform layout in standalone tools
 
-import '/scripts/clone-guard.js';
+const rootUrl = new URL('../', import.meta.url).href;
+import(`${rootUrl}scripts/clone-guard.js`).catch(() => {});
 
-const SITE_CSS = ['/styles/theme.css', '/styles/layout.css', '/styles/components.css'];
+const SITE_CSS = [
+  `${rootUrl}styles/theme.css`,
+  `${rootUrl}styles/layout.css`,
+  `${rootUrl}styles/components.css`
+];
 const FONT_CSS = [
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css',
   'https://unpkg.com/boxicons@2.1.0/css/boxicons.min.css'
@@ -50,24 +55,37 @@ function injectStyles() {
 
 // Ensure tool pages link back correctly to the SPA
 function absolutizeLinks(root, mode) {
-  root.querySelectorAll('a[href^="#/"]').forEach(a => {
-    const hash = a.getAttribute('href');
-    a.setAttribute('href', mode ? `/?mode=${mode}${hash}` : `/${hash}`);
+  const indexUrl = `${rootUrl}index.html`;
+  root.querySelectorAll('a[href^="#/"], a[href="#/"], a[href="#"]').forEach(a => {
+    const hash = a.getAttribute('href') || '';
+    if (hash.startsWith('#/')) {
+      a.setAttribute('href', mode ? `${indexUrl}?mode=${mode}${hash}` : `${indexUrl}${hash}`);
+    } else if (hash === '#/' || hash === '#') {
+      a.setAttribute('href', mode ? `${indexUrl}?mode=${mode}` : indexUrl);
+    }
   });
-  root.querySelectorAll('a[href^="/#/"]').forEach(a => {
-    const hash = a.getAttribute('href').replace(/^\//, '');
-    a.setAttribute('href', mode ? `/?mode=${mode}${hash}` : `/${hash}`);
+  root.querySelectorAll('a[href^="/#/"], a[href^="/?"]').forEach(a => {
+    const raw = a.getAttribute('href');
+    if (raw.startsWith('/#/')) {
+      const hash = raw.substring(1);
+      a.setAttribute('href', mode ? `${indexUrl}?mode=${mode}${hash}` : `${indexUrl}${hash}`);
+    } else if (raw.startsWith('/?')) {
+      a.setAttribute('href', `${indexUrl}${raw.substring(1)}`);
+    }
   });
 }
 
 // Preserve mode parameter for navigation between tools
 function absolutizeToolsLinks(root, mode) {
   if (!mode) return;
-  root.querySelectorAll('a[href^="/tools/"]').forEach(a => {
+  root.querySelectorAll('a[href*="/tools/"], a[href*="tools/"]').forEach(a => {
     try {
-      const url = new URL(a.getAttribute('href'), location.origin);
-      if (!url.searchParams.get('mode')) url.searchParams.set('mode', mode);
-      a.setAttribute('href', url.pathname + url.search + url.hash);
+      const href = a.getAttribute('href');
+      if (href && !href.startsWith('http') && !href.startsWith('#')) {
+        const url = new URL(href, location.href);
+        if (!url.searchParams.get('mode')) url.searchParams.set('mode', mode);
+        a.setAttribute('href', url.href);
+      }
     } catch (err) {}
   });
 }
@@ -93,9 +111,9 @@ async function mount() {
   document.body.classList.toggle('portfolio-mode', mode === 'portfolio');
 
   const [Header, Sidebar, Footer] = await Promise.all([
-    import('/layout/header.js'),
-    import('/layout/sidebar.js'),
-    import('/layout/footer.js')
+    import(`${rootUrl}layout/header.js`),
+    import(`${rootUrl}layout/sidebar.js`),
+    import(`${rootUrl}layout/footer.js`)
   ]);
 
   const headerRoot = document.createElement('div');

@@ -130,7 +130,7 @@ function renderNftTutorial() {
       <header class="tut-header tut-header-split">
         <div class="tut-header-inner">
           <div class="tut-header-left">
-            <img src="/images/avatar.png" alt="Stonks Avatar" class="tut-header-avatar-large" />
+            <img src="images/avatar.png" alt="Stonks Avatar" class="tut-header-avatar-large" />
           </div>
           <div class="tut-header-right">
             <div class="tut-header-meta">TUTORIAL // JAVASCRIPT &amp; HTML5 CANVAS // THE STONKS</div>

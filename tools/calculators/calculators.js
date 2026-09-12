@@ -1116,7 +1116,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </div>
                             </div>
                             <div style="margin-top: 14px; text-align: center;">
-                                <a href="/tools/inv.html" target="_blank" style="display: inline-block; padding: 8px 14px; background: #2563eb; color: #fff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 0.85rem;">
+                                <a href="../inv.html" target="_blank" style="display: inline-block; padding: 8px 14px; background: #2563eb; color: #fff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 0.85rem;">
                                     📊 Отвори пълната симулация с графика и таблица →
                                 </a>
                             </div>

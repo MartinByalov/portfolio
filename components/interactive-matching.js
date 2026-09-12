@@ -40,7 +40,6 @@ export function render(comp) {
         <div class="interactive-card-badge">
           <span>${esc(title)}</span>
         </div>
-        <p class="interactive-card-lead">За всяко от определенията по-долу изберете съответстващото му понятие от падащия списък:</p>
       </div>
       <div class="matching-list">
         ${rows}
@@ -50,7 +49,7 @@ export function render(comp) {
           Провери
         </button>
         <button type="button" class="btn-activity matching-reset" style="display:none;">
-          <i class="fas fa-rotate-left"></i> Опитай отново
+          <i class="fas fa-rotate-left"></i> Нов опит
         </button>
       </div>
       <div class="matching-feedback" style="display:none;"></div>

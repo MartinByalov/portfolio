@@ -24,6 +24,23 @@ function renderImageBlock(b) {
     + '</figure>';
 }
 
+function renderImagePlaceholderBlock(b) {
+  const label = b.label || b.title || 'Място за екранна снимка';
+  const desc = b.description || b.desc || '';
+  const icon = b.icon || 'fas fa-image';
+  const step = b.step ? '<span class="placeholder-step">' + esc(b.step) + '</span>' : '';
+  return '<div class="lesson-image-placeholder">'
+    + '<div class="placeholder-badge"><i class="fas fa-camera"></i> ' + (step || 'Екранна снимка (Placeholder)') + '</div>'
+    + '<div class="placeholder-body">'
+    + '<div class="placeholder-icon-wrap"><i class="' + esc(icon) + '"></i></div>'
+    + '<div class="placeholder-text-wrap">'
+    + '<h4 class="placeholder-heading">' + esc(label) + '</h4>'
+    + (desc ? '<p class="placeholder-desc">' + esc(desc) + '</p>' : '')
+    + '</div>'
+    + '</div>'
+    + '</div>';
+}
+
 function renderGalleryBlock(b) {
   const figs = (b.items || []).map(g =>
     '<figure class="lb-gallery-item">'
@@ -96,7 +113,7 @@ function renderQuizBlock(b) {
     + questions
     + '<div class="quiz-actions">'
     + '<button type="button" class="btn-activity quiz-submit">Провери</button>'
-    + '<button type="button" class="btn-activity quiz-reset" style="display:none;">Отначало</button>'
+    + '<button type="button" class="btn-activity quiz-reset" style="display:none;"><i class="fas fa-rotate-left"></i> Нов опит</button>'
     + '</div>'
     + '<div class="quiz-result" style="display:none;"></div>'
     + '</form>';
@@ -195,6 +212,7 @@ function renderBlock(b) {
   switch (b.type) {
     case 'text':                   return '<div class="lb-text">' + formatMarkdown(b.content || '') + '</div>';
     case 'image':                  return renderImageBlock(b);
+    case 'image-placeholder':      return renderImagePlaceholderBlock(b);
     case 'image-gallery':          return renderGalleryBlock(b);
     case 'visualization':          return b.visualType ? renderRichBlock(b) : renderVizBlock(b);
     case 'ui-mockup':

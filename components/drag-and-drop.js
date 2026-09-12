@@ -63,7 +63,7 @@ function renderCard(item, col) {
 export function render(comp) {
   const id = comp.id || 'drag-and-drop';
   const title = comp.title || 'Свържете карти чрез размяна на места';
-  const desc = comp.description || 'Хванете карта и я преместете с влачене на желаната позиция в нейната колона. Свържете всяко име със своето лого на същия ред.';
+  const desc = comp.description || '';
   const items = buildItems(comp);
 
   const leftShuffled = shuffle(items.left);
@@ -76,7 +76,7 @@ export function render(comp) {
   return '<div class="interactive-dd-card" id="' + esc(id) + '">'
     + '<div class="interactive-card-header">'
     + '<div class="interactive-card-badge"><span>' + esc(title) + '</span></div>'
-    + '<p class="interactive-card-lead">' + esc(desc) + '</p>'
+    + (desc ? '<p class="interactive-card-lead">' + esc(desc) + '</p>' : '')
     + '</div>'
     + '<div class="dd-board">'
     + '<div class="dd-column dd-left" data-dd-col="left">' + leftHtml + '</div>'
@@ -86,7 +86,7 @@ export function render(comp) {
     + '<div class="dd-actions">'
     + '<button type="button" class="btn-activity dd-submit">Провери</button>'
     + '<button type="button" class="btn-activity dd-reset" style="display:none;">'
-    + '<i class="fas fa-rotate-left"></i> Разбъркай отново</button>'
+    + '<i class="fas fa-rotate-left"></i> Нов опит</button>'
     + '</div>'
     + '<div class="dd-feedback" style="display:none;"></div>'
     + '</div>';

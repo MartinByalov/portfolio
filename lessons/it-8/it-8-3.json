@@ -349,7 +349,7 @@
             {
               "type": "visualization",
               "id": "session-rules",
-              "title": "Правила за провеждане на Онлайн сесия и запис",
+              "title": "Правила за провеждане на онлайн сесия и запис",
               "visualType": "session-rules",
               "mediaInstruction": "(добави безплатна илюстрация)",
               "mediaSpec": {
@@ -466,8 +466,7 @@
                     "Да",
                     "Не"
                   ],
-                  "correctIndex": 1,
-                  "explanation": "Вярно е „Не“: Груповият имейл е списък с адреси на получатели, до които едно изпратено съобщение се препраща автоматично."
+                  "correctIndex": 1
                 },
                 {
                   "question": "2. Връзката между преподавателите и обучаващите обикновено се осъществява посредством уеб-базирана програма.",
@@ -475,8 +474,7 @@
                     "Да",
                     "Не"
                   ],
-                  "correctIndex": 0,
-                  "explanation": "Вярно е „Да“: Средите за електронно обучение (LMS) са преобладаващо уеб базирани и достъпни през браузър."
+                  "correctIndex": 0
                 },
                 {
                   "question": "3. В социалната мрежа Facebook можете да създадете „Затворена“ група за обмен на информация.",
@@ -484,8 +482,7 @@
                     "Да",
                     "Не"
                   ],
-                  "correctIndex": 0,
-                  "explanation": "Вярно е „Да“: Затворените групи осигуряват поверителност само между одобрените членове на класа."
+                  "correctIndex": 0
                 },
                 {
                   "question": "4. При асинхронното обучение има директна връзка с учителя.",
@@ -493,8 +490,7 @@
                     "Да",
                     "Не"
                   ],
-                  "correctIndex": 1,
-                  "explanation": "Вярно е „Не“: Директен контакт в реално време има при синхронното обучение; при асинхронното ученикът учи самостоятелно."
+                  "correctIndex": 1
                 }
               ]
             }
@@ -534,7 +530,7 @@
               "id": "reflection-mood",
               "animals": [
                 {
-                  "title": "🦉 Мъдра бухалка",
+                  "title": "🦉 Мъдър бухал",
                   "desc": "Разбра всичко за LMS и облачните среди от първия път!"
                 },
                 {
@@ -573,47 +569,69 @@
               "items": [
                 {
                   "term": "Електронно обучение (E-learning)",
-                  "definition": "Обучение, осъществявано чрез използване на съвременни информационни и комуникационни технологии и интернет."
+                  "definition": "Обучение, осъществявано чрез използване на съвременни информационни и комуникационни технологии и интернет.",
+                  "image_prompt": "Realistic documentary photograph of a student participating in an interactive online lecture on a laptop with headphones on, sitting at a clean study desk by a sunlit window with open textbooks and handwritten summary notes, authentic learning atmosphere.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "LMS (Learning Management System)",
-                  "definition": "Система за управление на обучението – уеб базирана среда за администриране, управление на курсове, учебни материали и задачи."
+                  "definition": "Система за управление на обучението – уеб базирана среда за администриране, управление на курсове, учебни материали и задачи.",
+                  "image_prompt": "Realistic photograph of a high school teacher in a modern digital classroom reviewing student assignment submissions on an interactive touch smartboard, clean modern school classroom, natural bright lighting, authentic teaching environment.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Синхронно обучение",
-                  "definition": "Форма на електронно обучение, при която преподавателят и учащите си взаимодействат едновременно в реално време."
+                  "definition": "Форма на електронно обучение, при която преподавателят и учащите си взаимодействат едновременно в реално време.",
+                  "image_prompt": "Realistic photograph of a live video conference classroom in progress on a large monitor, showing an instructor speaking with multiple engaged students visible in participant grid tiles, classroom setting with soft natural light.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Асинхронно обучение",
-                  "definition": "Форма на електронно обучение, при която обучаемите работят с материалите самостоятелно в удобно за тях време и темпо."
+                  "definition": "Форма на електронно обучение, при която обучаемите работят с материалите самостоятелно в удобно за тях време и темпо.",
+                  "image_prompt": "Warm realistic photograph of an independent learner studying course video modules and downloading assignment PDFs on a laptop at a quiet public library desk in the evening, desk lamp providing focused warm light.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Облачна услуга (Cloud service)",
-                  "definition": "Услуга за съхранение, обработка и достъп до данни и програми чрез отдалечени сървъри в интернет."
+                  "definition": "Услуга за съхранение, обработка и достъп до данни и програми чрез отдалечени сървъри в интернет.",
+                  "image_prompt": "Realistic architectural photography of a large-scale enterprise cloud datacenter interior, symmetric aisles of high-performance server cabinets with blue indicator lights, clean white cable trays suspended overhead, pristine cleanroom environment.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Споделяне (Sharing)",
-                  "definition": "Предоставяне на достъп до файл или папка на други потребители чрез електронен адрес или хипервръзка."
+                  "definition": "Предоставяне на достъп до файл или папка на други потребители чрез електронен адрес или хипервръзка.",
+                  "image_prompt": "Realistic photograph of two colleagues sitting side-by-side at a collaborative desk, pointing at a shared cloud document on a screen and discussing revisions, warm natural office daylight, genuine teamwork setting.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Права за достъп (Permissions)",
-                  "definition": "Нива на разрешение (Преглед, Коментар, Редактиране), определящи действията на потребителя спрямо споделения ресурс."
+                  "definition": "Нива на разрешение (Преглед, Коментар, Редактиране), определящи действията на потребителя спрямо споделения ресурс.",
+                  "image_prompt": "Realistic eye-level photograph of an office administrator reviewing user role access cards and digital security credentials on a desktop monitor, sleek minimalist desk with an ID badge and secure card reader, natural office lighting.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Съвместно редактиране (Co-authoring)",
-                  "definition": "Едновременна съвместна работа на двама или повече потребители върху общ документ в реално време."
+                  "definition": "Едновременна съвместна работа на двама или повече потребители върху общ документ в реално време.",
+                  "image_prompt": "Realistic photograph of two students seated across from each other with laptops at a library study table, simultaneously editing the same live collaborative presentation, coffee cups and textbooks on the table, natural daytime library lighting.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "История на версиите (Version History)",
-                  "definition": "Хронологичен запис на всички направени редакции в даден документ с възможност за възстановяване на предишно състояние."
+                  "definition": "Хронологичен запис на всички направени редакции в даден документ с възможност за възстановяване на предишно състояние.",
+                  "image_prompt": "Realistic close-up photograph of a programmer or student reviewing revision timestamps and color-coded changes of a collaborative document on a clear high-resolution monitor, hands on keyboard, quiet evening study environment.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Групов електронен адрес",
-                  "definition": "Специален имейл адрес, който автоматично препраща получените писма до всички регистрирани членове на групата."
+                  "definition": "Специален имейл адрес, който автоматично препраща получените писма до всички регистрирани членове на групата.",
+                  "image_prompt": "Realistic photograph of a school project team of four diverse students gathered around a shared project laptop in an innovation lab, checking group notifications and planning tasks together, bright daylight through large windows.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Онлайн сесия",
-                  "definition": "Учебен час или среща в реално време чрез аудио/видеоконферентна връзка със специфични роли за участниците."
+                  "definition": "Учебен час или среща в реално време чрез аудио/видеоконферентна връзка със специфични роли за участниците.",
+                  "image_prompt": "Realistic photograph of a student wearing a lightweight headset with a boom microphone, smiling while actively speaking during an interactive virtual classroom session on a desktop computer, natural room lighting, genuine study context.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 }
               ]
             }

@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { GoogleGenAI } from '@google/genai';
+import { buildRealisticImagePrompt, generateRealisticPromptWithGemini, STANDARD_NEGATIVE_PROMPT } from './utils/promptGenerator.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -160,73 +161,144 @@ app.post('/api/portfolio/verify', (req, res) => {
   return res.status(403).json({ status: 'error', success: false, message: 'Невалиден код за достъп.' });
 });
 
+// Clean vector illustration fallback for glossary flashcards
+function generateTermFallbackSvg(term, definition) {
+  const safeTerm = String(term || 'ИТ Понятие').replace(/[<>&"']/g, '').trim();
+  const colors = [
+    ['#1e1b4b', '#3b82f6'],
+    ['#064e3b', '#10b981'],
+    ['#4c1d95', '#8b5cf6'],
+    ['#7c2d12', '#f97316'],
+    ['#1e293b', '#06b6d4'],
+    ['#14213d', '#fca311']
+  ];
+  const charCode = safeTerm.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
+  const [bgDark, accent] = colors[charCode % colors.length];
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360">
+    <defs>
+      <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="${bgDark}" />
+        <stop offset="100%" stop-color="#090d16" />
+      </linearGradient>
+      <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+        <path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#bg)" />
+    <rect width="100%" height="100%" fill="url(#grid)" />
+    <circle cx="320" cy="130" r="60" fill="${accent}" fill-opacity="0.15" />
+    <circle cx="320" cy="130" r="42" fill="none" stroke="${accent}" stroke-width="2.5" stroke-dasharray="6 4" />
+    <circle cx="320" cy="130" r="32" fill="${accent}" fill-opacity="0.25" />
+    <text x="320" y="140" text-anchor="middle" fill="#ffffff" font-size="24" font-family="system-ui, -apple-system, sans-serif" font-weight="bold">IT</text>
+    <text x="320" y="220" text-anchor="middle" fill="#ffffff" font-size="22" font-family="system-ui, -apple-system, sans-serif" font-weight="700">${safeTerm}</text>
+    <rect x="250" y="244" width="140" height="22" rx="11" fill="${accent}" fill-opacity="0.25" />
+    <text x="320" y="259" text-anchor="middle" fill="${accent}" font-size="11" font-family="system-ui, -apple-system, sans-serif" font-weight="700" letter-spacing="1">ИТ РЕЧНИК</text>
+  </svg>`;
+  return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+}
+
 // In-memory cache for generated glossary images
 const glossaryImageCache = new Map();
 
-// Cloudflare Workers AI Image Generation for glossary & flashcards
-app.post('/api/glossary/image', async (req, res) => {
+// Generate realistic educational image prompts based on term & definition
+app.post('/api/glossary/generate-prompt', async (req, res) => {
   const { term, definition } = req.body || {};
+  if (!term) {
+    return res.status(400).json({ status: 'error', message: 'Missing term' });
+  }
+
+  try {
+    const result = await generateRealisticPromptWithGemini(term, definition || '');
+    return res.json({
+      status: 'ok',
+      term,
+      prompt: result.image_prompt,
+      negative_prompt: result.negative_prompt
+    });
+  } catch (err) {
+    const fallback = buildRealisticImagePrompt(term, definition || '');
+    return res.json({
+      status: 'ok',
+      term,
+      prompt: fallback.image_prompt,
+      negative_prompt: fallback.negative_prompt
+    });
+  }
+});
+
+// Realistic Image Generation for glossary & flashcards via Cloudflare Workers AI
+app.post('/api/glossary/image', async (req, res) => {
+  const { term, definition, prompt: customPrompt, negative_prompt: customNegativePrompt } = req.body || {};
   if (!term) {
     return res.status(400).json({ status: 'error', message: 'Missing term' });
   }
 
   const cacheKey = String(term).trim().toLowerCase();
   if (glossaryImageCache.has(cacheKey)) {
-    return res.json({ status: 'ok', imageUrl: glossaryImageCache.get(cacheKey), cached: true, source: 'cloudflare-workers-ai' });
+    const cachedItem = glossaryImageCache.get(cacheKey);
+    const imageUrl = typeof cachedItem === 'string' ? cachedItem : cachedItem.imageUrl;
+    const promptUsed = typeof cachedItem === 'string' ? '' : cachedItem.prompt;
+    return res.json({ status: 'ok', imageUrl, prompt: promptUsed, cached: true, source: 'cache' });
   }
 
-  const endpoint = 'https://lucky-cloud-1c42.byalov-v-martin.workers.dev';
-  const prompt = `3D isometric digital art illustration of ${term}, clean tech icon style, vibrant educational computer science concept, studio lighting`;
-  
-  const payload = {
-    prompt: prompt,
-    negative_prompt: 'blurry, low quality, distorted',
-    width: 1024,
-    height: 1024,
-    steps: 4,
-    guidance: 7.5
-  };
+  // Derive photorealistic prompt and negative prompt
+  let activePrompt = (customPrompt || '').trim();
+  let activeNegativePrompt = (customNegativePrompt || '').trim();
 
-  const headers = { 'Content-Type': 'application/json' };
+  if (!activePrompt) {
+    const promptObj = buildRealisticImagePrompt(term, definition || '');
+    activePrompt = promptObj.image_prompt;
+    if (!activeNegativePrompt) activeNegativePrompt = promptObj.negative_prompt;
+  }
+  if (!activeNegativePrompt) {
+    activeNegativePrompt = STANDARD_NEGATIVE_PROMPT;
+  }
+
   const authToken = (process.env.CLOUDFLARE_AI_TOKEN || process.env.WORKER_AI_TOKEN || process.env.CF_AI_TOKEN || '').trim();
+
+  // If a valid Cloudflare AI token is configured, execute realistic image generation
   if (authToken) {
-    headers['Authorization'] = authToken.startsWith('Bearer ') ? authToken : `Bearer ${authToken}`;
-  }
-
-  try {
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: headers,
-      body: JSON.stringify(payload)
-    });
-
-    const contentType = response.headers.get('content-type') || '';
-
-    if (response.ok && contentType.includes('image')) {
-      const arrayBuffer = await response.arrayBuffer();
-      const base64 = Buffer.from(arrayBuffer).toString('base64');
-      const dataUrl = `data:image/png;base64,${base64}`;
-      glossaryImageCache.set(cacheKey, dataUrl);
-      return res.json({ status: 'ok', imageUrl: dataUrl, source: 'cloudflare-workers-ai' });
-    }
-
-    // If worker returned JSON error (e.g. { error: '...', details: '...' })
-    let errorInfo = null;
     try {
-      errorInfo = await response.json();
-    } catch (_) {}
+      const endpoint = 'https://lucky-cloud-1c42.byalov-v-martin.workers.dev';
+      const payload = {
+        prompt: activePrompt,
+        negative_prompt: activeNegativePrompt,
+        width: 1024,
+        height: 1024,
+        steps: 4,
+        guidance: 7.5
+      };
 
-    console.warn('[glossary/image] Cloudflare Workers AI response:', response.status, errorInfo);
-    return res.json({
-      status: 'error',
-      imageUrl: null,
-      error: errorInfo?.error || `HTTP ${response.status}`,
-      details: errorInfo?.details || null
-    });
-  } catch (err) {
-    console.warn('[glossary/image] Network error calling Cloudflare Workers AI:', err.message);
-    return res.status(500).json({ status: 'error', imageUrl: null, message: err.message });
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': authToken.startsWith('Bearer ') ? authToken : `Bearer ${authToken}`
+      };
+
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(payload)
+      });
+
+      const contentType = response.headers.get('content-type') || '';
+      if (response.ok && (contentType.includes('image') || contentType.includes('application/octet-stream'))) {
+        const arrayBuffer = await response.arrayBuffer();
+        const base64 = Buffer.from(arrayBuffer).toString('base64');
+        const mimeType = contentType.includes('jpeg') || contentType.includes('jpg') ? 'image/jpeg' : 'image/png';
+        const dataUrl = `data:${mimeType};base64,${base64}`;
+        glossaryImageCache.set(cacheKey, { imageUrl: dataUrl, prompt: activePrompt });
+        return res.json({ status: 'ok', imageUrl: dataUrl, prompt: activePrompt, source: 'cloudflare-workers-ai' });
+      }
+    } catch (_) {
+      // Fall through to fallback SVG below
+    }
   }
+
+  // Graceful fallback to SVG vector card for the term
+  const fallbackSvg = generateTermFallbackSvg(term, definition);
+  glossaryImageCache.set(cacheKey, { imageUrl: fallbackSvg, prompt: activePrompt });
+  return res.json({ status: 'ok', imageUrl: fallbackSvg, prompt: activePrompt, source: 'vector-fallback' });
 });
 
 // Dynamic AI explanation for glossary flashcards on the fly

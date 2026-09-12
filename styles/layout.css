@@ -511,6 +511,8 @@ body.landing-mode .home-section.subject-section {
   justify-content: flex-start;
   text-align: left;
   line-height: 1.35;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
 }
 
 /* Vertical alignment for expand arrow */
@@ -756,6 +758,34 @@ button.lesson-tag:hover {
 }
 .lesson-tag.tone-purple .lesson-tag-ico { background: #8e44ad; }
 
+.lesson-tag.tone-accent {
+  background: #ede9fe;
+  border-color: #c7d2fe;
+  color: #4338ca;
+}
+.lesson-tag.tone-accent .lesson-tag-ico { background: #6366f1; }
+
+.lesson-tag.tone-info {
+  background: #e0f2fe;
+  border-color: #bae6fd;
+  color: #0369a1;
+}
+.lesson-tag.tone-info .lesson-tag-ico { background: #0284c7; }
+
+.lesson-tag.tone-warning {
+  background: #fef3c7;
+  border-color: #fde68a;
+  color: #b45309;
+}
+.lesson-tag.tone-warning .lesson-tag-ico { background: #d97706; }
+
+.lesson-tag.tone-success {
+  background: #dcfce7;
+  border-color: #bbf7d0;
+  color: #15803d;
+}
+.lesson-tag.tone-success .lesson-tag-ico { background: #16a34a; }
+
 /* Accordion panel with tone palette */
 .accordion-item.tone-green {
   border-color: #bfe6cc;
@@ -797,24 +827,72 @@ button.lesson-tag:hover {
 .accordion-item.tone-purple.active .accordion-header {
   color: #6c3483;
 }
+.accordion-item.tone-accent {
+  border-color: #c7d2fe;
+}
+.accordion-item.tone-accent .accordion-header {
+  background: #ede9fe;
+  color: #4338ca;
+}
+.accordion-item.tone-accent.active .accordion-header {
+  color: #4338ca;
+}
+.accordion-item.tone-info {
+  border-color: #bae6fd;
+}
+.accordion-item.tone-info .accordion-header {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+.accordion-item.tone-info.active .accordion-header {
+  color: #0369a1;
+}
+.accordion-item.tone-warning {
+  border-color: #fde68a;
+}
+.accordion-item.tone-warning .accordion-header {
+  background: #fef3c7;
+  color: #b45309;
+}
+.accordion-item.tone-warning.active .accordion-header {
+  color: #b45309;
+}
+.accordion-item.tone-success {
+  border-color: #bbf7d0;
+}
+.accordion-item.tone-success .accordion-header {
+  background: #dcfce7;
+  color: #15803d;
+}
+.accordion-item.tone-success.active .accordion-header {
+  color: #15803d;
+}
 
 .acc-tone-ico {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   flex-shrink: 0;
-  border-radius: 10px;
+  border-radius: 12px;
   color: #fff;
-  font-size: 0.9rem;
-  margin-right: 10px;
+  font-size: 0.95rem;
+  margin-right: 12px;
 }
 .tone-green .acc-tone-ico { background: #27ae60; }
 .tone-blue .acc-tone-ico { background: #1558a8; }
 .tone-orange .acc-tone-ico { background: var(--accent-orange); }
 .tone-purple .acc-tone-ico { background: #8e44ad; }
-.accordion-header .card-title { flex: 1; }
+.tone-accent .acc-tone-ico { background: #6366f1; }
+.tone-info .acc-tone-ico { background: #0284c7; }
+.tone-warning .acc-tone-ico { background: #d97706; }
+.tone-success .acc-tone-ico { background: #16a34a; }
+.accordion-header .card-title {
+  flex: 1;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+}
 
 /* E-textbook button styles */
 .course-textbook-btn {
@@ -1013,4 +1091,85 @@ button.lesson-tag:hover {
   .home-content {
     padding: 0 16px;
   }
+}
+
+/* Educational Lesson Image Placeholders */
+.lesson-image-placeholder {
+  margin: 20px 0;
+  padding: 20px 22px;
+  background: #f8fafc;
+  border: 2px dashed #cbd5e1;
+  border-radius: 14px;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.lesson-image-placeholder:hover {
+  border-color: #94a3b8;
+  background: #f1f5f9;
+}
+.placeholder-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #475569;
+  background: #e2e8f0;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  margin-bottom: 12px;
+}
+.placeholder-badge .placeholder-step {
+  color: #1e40af;
+  font-weight: 800;
+}
+.placeholder-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.placeholder-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #ede9fe;
+  color: #6366f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+.placeholder-text-wrap {
+  flex: 1;
+}
+.placeholder-heading {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 4px;
+  line-height: 1.4;
+}
+.placeholder-desc {
+  font-size: 0.88rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.5;
+}
+.flash-ai-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(4px);
+  color: #f8fafc;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
 }

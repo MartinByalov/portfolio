@@ -473,7 +473,6 @@
       "type": "drag-and-drop",
       "id": "social-network-matching",
       "title": "Свържете социалните мрежи с техните лога",
-      "description": "Хванете карта и я преместете с влачене на желаната позиция в нейната колона. Свържете всяко име със своето лого на същия ред.",
       "leftItems": [
         {
           "id": "fb",
@@ -558,7 +557,7 @@
           "id": "section-quiz-assessment",
           "title": "Бързи 5 въпроса",
           "tone": "green",
-          "icon": "fas fa-hand",
+          "icon": "fas fa-bolt",
           "content": [
             {
               "type": "quiz",
@@ -646,47 +645,69 @@
               "items": [
                 {
                   "term": "Чат",
-                  "definition": "Технология за обмен на съобщения между двама или повече потребители чрез интернет в реално време."
+                  "definition": "Технология за обмен на съобщения между двама или повече потребители чрез интернет в реално време.",
+                  "image_prompt": "Realistic photo of a person holding a modern smartphone in their hands in a cozy cafe, thumbs typing on the touchscreen with a messaging app open, soft blurred background with warm ambient cafe lighting, natural shallow depth of field.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Блог",
-                  "definition": "Интернет дневник или уеб сайт, на който собственикът добавя публикации, съдържащи текст, изображения, мултимедия, и комуникира с потребителите посредством техните коментари."
+                  "definition": "Интернет дневник или уеб сайт, на който собственикът добавя публикации, съдържащи текст, изображения, мултимедия, и комуникира с потребителите посредством техните коментари.",
+                  "image_prompt": "Documentary photograph of an independent content creator working in a bright home studio, typing a structured article on a slim laptop with a camera on a tripod and a notebook beside them, warm afternoon sunlight, authentic creative workstation.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Блогър",
-                  "definition": "Човекът, който създава и поддържа блог."
+                  "definition": "Човекът, който създава и поддържа блог.",
+                  "image_prompt": "Realistic photograph of a young technological blogger reviewing a new tech device at a clean studio desk with a ring light, microphone with a pop filter, and a mirrorless camera on a desk mount, natural and professional lighting.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Микроблог",
-                  "definition": "Вид блог с много кратки съобщения (напр. социалната мрежа Twitter)."
+                  "definition": "Вид блог с много кратки съобщения (напр. социалната мрежа Twitter).",
+                  "image_prompt": "Candid street photograph of a commuter on a modern passenger train checking quick social news updates on a smartphone held in one hand, morning city sunlight reflecting through the train window, sharp focus on the phone and hand.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Социална мрежа",
-                  "definition": "Онлайн услуга, която може да се ползва през уеб сайт или приложение за изграждане и организиране на социални взаимоотношения между хора."
+                  "definition": "Онлайн услуга, която може да се ползва през уеб сайт или приложение за изграждане и организиране на социални взаимоотношения между хора.",
+                  "image_prompt": "Realistic photograph of a diverse group of three young university students gathered around a tablet device on an outdoor campus bench, smiling and discussing a shared multimedia post, natural outdoor golden hour lighting, authentic lifestyle photo.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Форум",
-                  "definition": "Онлайн платформа за дискусии, организирани в раздели, теми и отговори."
+                  "definition": "Онлайн платформа за дискусии, организирани в раздели, теми и отговори.",
+                  "image_prompt": "Documentary photograph of an IT student seated at a library computer desk researching community troubleshooting threads on a wide monitor, taking notes with a pen in a spiral notebook, quiet library atmosphere with soft overhead lighting.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Нетикет",
-                  "definition": "Правилата за учтиво и етично поведение при общуване в интернет."
+                  "definition": "Правилата за учтиво и етично поведение при общуване в интернет.",
+                  "image_prompt": "Realistic close-up photograph of hands typing thoughtfully on a modern backlit laptop keyboard in a calm, organized study room, soft natural morning window light, cup of tea beside the keyboard, peaceful and respectful digital communication setting.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Киберсигурност",
-                  "definition": "Съвкупност от технологии, правила и действия за защита на устройства, профили, мрежи и данни от неоторизиран достъп, измами, повреда или злоупотреба."
+                  "definition": "Съвкупност от технологии, правила и действия за защита на устройства, профили, мрежи и данни от неоторизиран достъп, измами, повреда или злоупотреба.",
+                  "image_prompt": "Realistic documentary photograph of a cyber defense operations center with an IT security analyst observing security monitoring consoles and telemetry status dashboards on wall-mounted screens, dimly lit blue ambient room lighting, authentic cybersecurity operations environment.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Метаданни (EXIF)",
-                  "definition": "Допълнителна скрита информация за файл — дата и час, автор, модел на устройство, понякога GPS местоположение."
+                  "definition": "Допълнителна скрита информация за файл — дата и час, автор, модел на устройство, понякога GPS местоположение.",
+                  "image_prompt": "Realistic macro photograph of a professional digital SLR camera resting on a wooden table next to an open laptop showing photo EXIF metadata properties such as shutter speed, aperture, and GPS coordinates on the screen, natural window lighting.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Двуфакторно удостоверяване",
-                  "definition": "Защита на профила с втори фактор (код или приложение) освен паролата."
+                  "definition": "Защита на профила с втори фактор (код или приложение) освен паролата.",
+                  "image_prompt": "Realistic close-up photograph of a person holding a smartphone showing a 6-digit one-time security authentication code in an authenticator app, with a laptop login prompt slightly blurred in the background on the desk, natural indoor lighting.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Настройки за поверителност",
-                  "definition": "Настройки, чрез които определяме кой вижда публикациите ни, кой може да ни пише и да ни отбелязва."
+                  "definition": "Настройки, чрез които определяме кой вижда публикациите ни, кой може да ни пише и да ни отбелязва.",
+                  "image_prompt": "Realistic photograph of a user sitting at a modern desk adjusting privacy and permission toggles on an open tablet device, clean minimalist workspace with a small indoor plant, soft daylight from a nearby window.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 }
               ]
             }

@@ -43,7 +43,7 @@ export function render(comp) {
           Провери
         </button>
         <button type="button" class="btn-activity fill-reset" style="display:none;">
-          <i class="fas fa-rotate-left"></i> Опитай отново
+          <i class="fas fa-rotate-left"></i> Нов опит
         </button>
       </div>
       <div class="fill-feedback" style="display:none;"></div>

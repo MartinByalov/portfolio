@@ -15,7 +15,8 @@
   align-items: center;
   padding: 16px 20px;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
 }
 
 .accordion-item.active .accordion-header {
@@ -2066,6 +2067,8 @@ body.portfolio-mode .main-portfolio-content {
   text-align: left;
   line-height: 1.4;
   font-size: 1rem;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
 }
 .component.accordion .accordion-header .card-icon-mini {
   flex-shrink: 0;
@@ -3661,8 +3664,8 @@ button.about-btn-primary {
 .video-meta-bar { position: relative; z-index: 1; display: flex; justify-content: space-between; font-size: 0.74rem; opacity: 0.8; }
 .video-duration { display: flex; align-items: center; gap: 4px; }
 .video-info-pane { padding: 16px; }
-.video-info-title { font-size: 1.05rem; font-weight: 800; color: #1e293b; margin-bottom: 10px; }
-.topics-heading { font-size: 0.82rem; font-weight: 800; color: #475569; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.video-info-title { font-family: "Poppins", sans-serif; font-size: 1.05rem; font-weight: 600; color: #1e293b; margin-bottom: 10px; }
+.topics-heading { font-family: "Poppins", sans-serif; font-size: 0.82rem; font-weight: 600; color: #475569; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
 .video-topics-list { display: flex; flex-direction: column; gap: 6px; }
 .topic-item { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; color: #334155; }
 .topic-item i { color: #10b981; font-size: 0.82rem; }
@@ -3722,8 +3725,8 @@ button.about-btn-primary {
   margin-top: 2px;
 }
 .session-rule-body { flex: 1; display: flex; flex-direction: column; gap: 4px; }
-.session-rule-title { font-weight: 800; font-size: 0.95rem; color: #1e293b; }
-.session-rule-desc { font-size: 0.86rem; color: #475569; line-height: 1.5; }
+.session-rule-title { font-family: "Poppins", sans-serif; font-weight: 600; font-size: 0.95rem; color: #1e293b; }
+.session-rule-desc { font-family: "Poppins", sans-serif; font-size: 0.86rem; color: #475569; line-height: 1.5; }
 .session-rules-start { margin-top: 6px; }
 .session-start-btn {
   display: inline-flex;
@@ -3742,8 +3745,9 @@ button.about-btn-primary {
 
 /* Workbook tasks and quiz headings */
 .wb-task-heading {
+  font-family: "Poppins", sans-serif;
   font-size: 1.05rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #1e293b;
   margin: 18px 0 8px;
   padding-bottom: 4px;
@@ -3751,8 +3755,9 @@ button.about-btn-primary {
 }
 .wb-task-heading:first-child { margin-top: 0; }
 .quiz-block-title {
+  font-family: "Poppins", sans-serif;
   font-size: 1.05rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #1e293b;
   margin: 16px 0 10px;
 }
@@ -3897,9 +3902,10 @@ button.about-btn-primary {
   align-items: center;
   gap: 8px;
   font-size: 1rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #1e293b;
   margin-bottom: 6px;
+  font-family: "Poppins", sans-serif;
 }
 
 .interactive-card-badge i {
@@ -4150,8 +4156,9 @@ button.about-btn-primary {
   border: 2px dashed #94a3b8;
   border-radius: 10px;
   background: #ffffff;
+  font-family: "Poppins", sans-serif;
   font-size: 0.95rem;
-  font-weight: 700;
+  font-weight: 500;
   color: #1e293b;
   text-align: center;
   user-select: none;

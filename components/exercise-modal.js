@@ -12,15 +12,15 @@ function formatInstructions(text) {
 }
 
 export function render(comp) {
-  const illustration = (comp.mediaInstruction || (comp.mediaSpec && comp.mediaSpec.illustration) || (comp.id === 'exerciseModal')) ? `
+  const illustration = comp.mediaInstruction ? `
     <div class="case-study-banner">
       <div class="case-study-graphic">
         <div class="case-folder-mock">
           <i class="fas fa-folder-open folder-ico"></i>
-          <span class="warning-badge"><i class="fas fa-triangle-exclamation"></i> Публичен достъп: Редактиране</span>
+          <span class="warning-badge"><i class="fas fa-triangle-exclamation"></i> Практически казус</span>
         </div>
         <div class="case-tag-line">
-          <strong>Ситуация:</strong> Открит е списък с лични данни (телефони и адреси) в публично достъпна папка без защита!
+          <strong>Ситуация:</strong> ${comp.mediaInstruction}
         </div>
       </div>
     </div>

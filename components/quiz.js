@@ -24,7 +24,7 @@ export function render(comp) {
         ${questions}
         <div class="quiz-actions">
           <button type="button" class="btn-activity quiz-submit">Провери</button>
-          <button type="button" class="btn-activity quiz-reset" style="display:none;">Отначало</button>
+          <button type="button" class="btn-activity quiz-reset" style="display:none;"><i class="fas fa-rotate-left"></i> Нов опит</button>
         </div>
         <div class="quiz-result" style="display:none;"></div>
       </form>

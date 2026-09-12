@@ -47,14 +47,26 @@ async function loadTerms() {
               if (block && block.type === 'glossary-list') {
                 for (const it of block.items || []) {
                   if (it.term && it.definition) {
-                    terms.push({ term: it.term, definition: it.definition, tags: lessonTags });
+                    terms.push({
+                      term: it.term,
+                      definition: it.definition,
+                      tags: lessonTags,
+                      image_prompt: it.image_prompt || it.prompt || '',
+                      negative_prompt: it.negative_prompt || ''
+                    });
                   }
                 }
               }
             }
             // Legacy format: item itself is a term
             if (item.title && item.title !== 'Речник' && item.definition) {
-              terms.push({ term: item.title, definition: item.definition, tags: lessonTags });
+              terms.push({
+                term: item.title,
+                definition: item.definition,
+                tags: lessonTags,
+                image_prompt: item.image_prompt || item.prompt || '',
+                negative_prompt: item.negative_prompt || ''
+              });
             }
           }
         }
@@ -208,19 +220,25 @@ export function initGlossaryPage() {
     document.body.appendChild(overlay);
     requestAnimationFrame(() => overlay.classList.add('open'));
 
-    // Fetch Stable Diffusion image generated via ModelsLab
+    // Fetch realistic photograph image generated via Cloudflare Workers AI
     fetch('/api/glossary/image', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ term: term.term, definition: term.definition })
+      body: JSON.stringify({
+        term: term.term,
+        definition: term.definition,
+        prompt: term.image_prompt,
+        negative_prompt: term.negative_prompt
+      })
     })
       .then(res => res.json())
       .then(data => {
         const imgWrap = document.getElementById('flash-image-wrapper');
         if (!imgWrap) return;
         if (data && data.imageUrl) {
+          const promptInfo = data.prompt ? escapeHtmlGlossary(data.prompt) : '';
           imgWrap.innerHTML = `
-            <img src="${escapeHtmlGlossary(data.imageUrl)}" alt="${escapeHtmlGlossary(term.term)}" class="flash-term-img" />
+            <img src="${escapeHtmlGlossary(data.imageUrl)}" alt="${escapeHtmlGlossary(term.term)}" class="flash-term-img" title="${promptInfo}" />
           `;
         } else {
           imgWrap.style.display = 'none';

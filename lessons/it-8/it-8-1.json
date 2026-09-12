@@ -692,59 +692,87 @@
               "items": [
                 {
                   "term": "Компютърна система",
-                  "definition": "Съвкупност от три основни компонента: техническо осигуряване (хардуер), програмно осигуряване (софтуер) и данни."
+                  "definition": "Съвкупност от три основни компонента: техническо осигуряване (хардуер), програмно осигуряване (софтуер) и данни.",
+                  "image_prompt": "Documentary studio photography of a complete modern desktop computer workstation on a solid natural oak desk. Showing a sleek brushed aluminum tower with a transparent tempered glass side panel displaying an illuminated motherboard with copper heatpipes and RAM modules, paired with dual ultra-thin bezel monitors showing data charts, an ergonomic mechanical keyboard, and a precision mouse. Natural daylight streaming from an office window, authentic depth of field, 50mm lens.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Хардуер",
-                  "definition": "Физическите компоненти на компютърната система."
+                  "definition": "Физическите компоненти на компютърната система.",
+                  "image_prompt": "Macro documentary photograph of real computer hardware components arranged neatly on an anti-static work mat on a technician workbench. A multi-core CPU chip with golden contact pins visible, two DDR5 RAM sticks with matte black heat spreaders, an NVMe solid-state drive, and a precision magnetic screwdriver resting nearby under soft neutral workshop lighting, hyper-realistic, extremely detailed texture of printed circuit board traces.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Софтуер",
-                  "definition": "Програмите и инструкциите, които управляват устройствата на компютърната система."
+                  "definition": "Програмите и инструкциите, които управляват устройствата на компютърната система.",
+                  "image_prompt": "Realistic professional photograph of a software engineer sitting in front of dual high-resolution monitors in a contemporary sunlit office, writing clean code in an IDE with syntax highlighting, hands resting on a mechanical keyboard, a notebook with architecture notes and a ceramic coffee mug on the desk. Shallow depth of field, warm ambient morning light, authentic workplace atmosphere.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Данни",
-                  "definition": "Цифровото представяне на информацията — текстове, числа, изображения, звук, бази от данни."
+                  "definition": "Цифровото представяне на информацията — текстове, числа, изображения, звук, бази от данни.",
+                  "image_prompt": "Realistic eye-level photograph inside a high-security modern enterprise data center corridor. Clean perspective view of tall server racks with blinking green and amber status LEDs, neatly bundled blue and yellow Ethernet patch cables, polished reflective raised floor tiles, cool ambient overhead illumination, sharp focus, professional industrial architectural photography.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Интернет",
-                  "definition": "Глобална мрежа от взаимосвързани компютърни мрежи, в която данните пътуват на малки части (пакети)."
+                  "definition": "Глобална мрежа от взаимосвързани компютърни мрежи, в която данните пътуват на малки части (пакети).",
+                  "image_prompt": "Close-up documentary photograph of glowing undersea fiber optic telecommunication cables being connected inside an industrial switching station. Bright points of light emanating from glass fiber strands, precision optical transceiver modules with metallic shielding, realistic depth of field, authentic industrial network engineering photography.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Браузър",
-                  "definition": "Програма за достъп и изобразяване на уеб страници (напр. Google Chrome, Mozilla Firefox)."
+                  "definition": "Програма за достъп и изобразяване на уеб страници (напр. Google Chrome, Mozilla Firefox).",
+                  "image_prompt": "Realistic photograph taken from behind the shoulder of a high school student using a modern laptop in a bright school library, navigating educational web pages inside a web browser window on the screen, natural window light illuminating the wooden library desk, authentic educational environment.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Интернет доставчик (ISP)",
-                  "definition": "Фирма, осигуряваща връзка (достъп) до интернет."
+                  "definition": "Фирма, осигуряваща връзка (достъп) до интернет.",
+                  "image_prompt": "Authentic documentary photograph of an internet service provider field technician wearing high-visibility gear and safety gloves, carefully splicing delicate optical fiber ribbons inside an outdoor weather-resistant telecommunications cabinet on a city street during daytime, natural lighting, sharp focus on tools and optical fiber cassette.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Сървър",
-                  "definition": "Компютър, който обработва заявките на клиентите и връща резултат."
+                  "definition": "Компютър, който обработва заявките на клиентите и връща резултат.",
+                  "image_prompt": "Realistic close-up photograph of enterprise rackmount servers in a data center. High-density server blades with hot-swap hard drive bays, active cooling fan grilles, status indicator lights, and blue network patch cables neatly routed with velcro straps, cool atmospheric lighting, shallow depth of field, industrial technology photography.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "IP адрес",
-                  "definition": "Уникален адрес на устройство в интернет мрежата, записан във всеки пакет."
+                  "definition": "Уникален адрес на устройство в интернет мрежата, записан във всеки пакет.",
+                  "image_prompt": "Macro photograph of an Ethernet network cable with a clear RJ45 modular connector clicked securely into the glowing port of an enterprise network router, label tags visible on the cable sleeve, warm ambient room lighting, realistic tech equipment photo.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "TCP/IP",
-                  "definition": "Протоколи, чрез които данните се разделят на пакети, подреждат в точен ред и проверяват при пренос по интернет."
+                  "definition": "Протоколи, чрез които данните се разделят на пакети, подреждат в точен ред и проверяват при пренос по интернет.",
+                  "image_prompt": "Documentary photograph of a network engineer using a handheld digital cable tester and network analyzer on a patch panel inside a clean telecom rack, multi-colored patch cords neatly organized in cable management rings, realistic focus on the device screen and physical cables.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Пакет",
-                  "definition": "Малка порция данни, съдържаща адресите на изпращача и на получателя."
+                  "definition": "Малка порция данни, съдържаща адресите на изпращача и на получателя.",
+                  "image_prompt": "Realistic macro photograph of high-speed optical transceiver ports in a network switch, showing light pulses through clear fiber-optic LC duplex connectors, detailed metallic shielding, shallow depth of field, authentic data transmission hardware.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Приложни програми",
-                  "definition": "Програми за конкретни потребителски задачи — писане на текст, таблици, презентации, браузване."
+                  "definition": "Програми за конкретни потребителски задачи — писане на текст, таблици, презентации, браузване.",
+                  "image_prompt": "Realistic photograph of a creative professional designer using a stylus pen on an active graphics tablet beside a large color-calibrated display showing an open productivity application and spreadsheet, bright minimalist desk environment, natural morning illumination.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Растерно изображение",
-                  "definition": "Изображение, съставено от точки (пиксели), което има цветови модел и разделителна способност."
+                  "definition": "Изображение, съставено от точки (пиксели), което има цветови модел и разделителна способност.",
+                  "image_prompt": "Macro photograph of a high-resolution LCD display panel viewed up close, revealing the physical sub-pixel arrangement of red, green, and blue microscopic phosphor dots forming part of a vivid digital photograph, authentic optical magnification, scientific display technology photo.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
                 {
                   "term": "Проект",
-                  "definition": "Работа по определена тема, минаваща през етапите планиране, изпълнение и завършване."
+                  "definition": "Работа по определена тема, минаваща през етапите планиране, изпълнение и завършване.",
+                  "image_prompt": "Realistic candid photograph of two high school students collaborating on an IT STEM project at a wide wooden table in a well-lit classroom, reviewing printed flowcharts and interactive laptop screens, sticky notes on the wall behind them, natural daylight, authentic school setting.",
+                  "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 }
               ]
             }

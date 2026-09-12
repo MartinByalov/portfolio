@@ -14,8 +14,9 @@ function tint(color) {
 
 // Common card wrapper matching lesson styling
 function vizWrapper(b, innerHtml) {
+  const showTitle = b.title && b.type !== 'video';
   return '<div class="lb-viz"' + (b.id ? ' id="' + esc(b.id) + '"' : '') + '>'
-    + (b.title ? '<div class="lb-viz-title">' + esc(b.title) + '</div>' : '')
+    + (showTitle ? '<div class="lb-viz-title">' + esc(b.title) + '</div>' : '')
     + innerHtml
     + '</div>';
 }

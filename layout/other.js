@@ -55,16 +55,6 @@ export async function initOtherPage(subRoute) {
 function renderCardsCatalog() {
   return `
     <div class="other-catalog-container">
-      <div class="other-hero">
-        <div class="other-hero-eyebrow">
-          <i class="fa-solid fa-shapes"></i> Практически разработки · Tutorials
-        </div>
-        <h1 class="other-hero-title">Други</h1>
-        <p class="other-hero-subtitle">
-          Специализирани практически уроци, софтуерни архитектури и алгоритми с интерактивни симулации на живо.
-        </p>
-      </div>
-
       <div class="other-cards-grid">
         <!-- КАРТА 1: NFT ГЕНЕРАТОР (с avatar.png за фон) -->
         <a href="#/other/nft-generator" class="other-card nft-card" id="cardNftGenerator">
@@ -86,7 +76,6 @@ function renderCardsCatalog() {
             </div>
 
             <div class="other-card-footer">
-              <span class="other-card-meta">4 стъпки · Интерактивно демо</span>
               <span class="other-card-cta">
                 Прочети урока <i class="fa-solid fa-arrow-right"></i>
               </span>
@@ -114,7 +103,6 @@ function renderCardsCatalog() {
             </div>
 
             <div class="other-card-footer">
-              <span class="other-card-meta">5 вида графики · Playground</span>
               <span class="other-card-cta">
                 Прочети урока <i class="fa-solid fa-arrow-right"></i>
               </span>
@@ -138,13 +126,13 @@ function renderNftTutorial() {
         </a>
       </div>
 
-      <!-- ХЕДЪР В СТИЛ MartinByalov/python -->
-      <header class="tut-header">
+      <!-- ХЕДЪР В СТИЛ MartinByalov/python - РАЗДЕЛЕН НА ДВЕ СЕКЦИИ -->
+      <header class="tut-header tut-header-split">
         <div class="tut-header-inner">
-          <div class="tut-header-logo">
-            <img src="/avatar.png" alt="Stonks Avatar" style="width: 60px; height: 60px; border-radius: 12px; image-rendering: pixelated; border: 2px solid rgba(255,255,255,0.3);" />
+          <div class="tut-header-left">
+            <img src="/avatar.png" alt="Stonks Avatar" class="tut-header-avatar-large" />
           </div>
-          <div>
+          <div class="tut-header-right">
             <div class="tut-header-meta">TUTORIAL // JAVASCRIPT &amp; HTML5 CANVAS // THE STONKS</div>
             <h1>Създаване на генератор на NFT колекция</h1>
             <p>
@@ -236,7 +224,6 @@ function renderNftTutorial() {
 
         <div class="step-block">
           <div class="step-head">
-            <div class="step-circle bg-blue">1</div>
             <h3>Строг йерархичен ред на изчертаване (Layer Order)</h3>
             <span class="step-tag tag-js">Архитектура</span>
           </div>
@@ -297,7 +284,6 @@ function renderNftTutorial() {
 
         <div class="step-block">
           <div class="step-head">
-            <div class="step-circle bg-orange">2</div>
             <h3>Претеглен случаен избор (Weighted Random Selection)</h3>
             <span class="step-tag tag-ex">Математика</span>
           </div>
@@ -356,7 +342,6 @@ function renderNftTutorial() {
 
         <div class="step-block">
           <div class="step-head">
-            <div class="step-circle bg-purple">3</div>
             <h3>ДНК сигнатура и липса на дубликати</h3>
             <span class="step-tag tag-js">Алгоритми</span>
           </div>
@@ -417,7 +402,6 @@ function renderNftTutorial() {
 
         <div class="step-block">
           <div class="step-head">
-            <div class="step-circle bg-green">4</div>
             <h3>Запазване на резки пиксели (Nearest-Neighbor Scaling)</h3>
             <span class="step-tag tag-html">Canvas API</span>
           </div>
@@ -580,7 +564,6 @@ function renderChartsTutorial() {
 
         <div class="step-block">
           <div class="step-head">
-            <div class="step-circle bg-blue">1</div>
             <h3>Инициализация на Chart инстанция върху Canvas елемент</h3>
             <span class="step-tag tag-html">Основи</span>
           </div>
@@ -628,7 +611,6 @@ function renderChartsTutorial() {
 
         <div class="step-block">
           <div class="step-head">
-            <div class="step-circle bg-green">2</div>
             <h3>Трендове, плавни Безриеви криви и градиенти</h3>
             <span class="step-tag tag-js">Линейна графика</span>
           </div>
@@ -691,7 +673,6 @@ function renderChartsTutorial() {
 
         <div class="step-block">
           <div class="step-head">
-            <div class="step-circle bg-purple">3</div>
             <h3>Вертикални, хоризонтални стълбове и заоблени ъгли</h3>
             <span class="step-tag tag-js">Стълбове</span>
           </div>
@@ -744,7 +725,6 @@ function renderChartsTutorial() {
 
         <div class="step-block">
           <div class="step-head">
-            <div class="step-circle bg-orange">4</div>
             <h3>Дялово разпределение от 100% и cutout отрязване</h3>
             <span class="step-tag tag-js">Пропорции</span>
           </div>
@@ -796,7 +776,6 @@ function renderChartsTutorial() {
 
         <div class="step-block">
           <div class="step-head">
-            <div class="step-circle bg-red">5</div>
             <h3>Многомерен профилен анализ (Spider Chart)</h3>
             <span class="step-tag tag-js">Многоосни данни</span>
           </div>

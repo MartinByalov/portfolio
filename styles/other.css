@@ -40,7 +40,7 @@
 .other-catalog-container {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 32px 20px 80px;
+  padding: 104px 20px 80px;
   font-family: 'Nunito', sans-serif;
   color: var(--tut-text);
 }
@@ -158,12 +158,19 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: 
-    radial-gradient(circle at 85% 20%, rgba(59, 130, 246, 0.25), transparent 50%),
-    radial-gradient(circle at 15% 85%, rgba(16, 185, 129, 0.2), transparent 50%),
-    linear-gradient(180deg, rgba(13, 27, 42, 0.4) 0%, rgba(13, 27, 42, 0.92) 80%, #0d1b2a 100%);
+  background-image: 
+    linear-gradient(180deg, rgba(13, 27, 42, 0.45) 0%, rgba(13, 27, 42, 0.90) 65%, #0d1b2a 100%),
+    url('/assets/it-8-1/chartTypesPNG.png');
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  transition: transform 0.4s ease, filter 0.4s ease;
   z-index: 1;
-  transition: opacity 0.3s ease;
+}
+
+.other-card.charts-card:hover::before {
+  transform: scale(1.05);
+  filter: brightness(1.08);
 }
 
 .other-card.charts-card:hover {
@@ -248,7 +255,7 @@
 .other-card-footer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding-top: 16px;
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   margin-top: auto;
@@ -285,6 +292,7 @@
   font-family: 'Nunito', sans-serif;
   color: var(--tut-text);
   line-height: 1.75;
+  padding-top: 80px;
   padding-bottom: 80px;
 }
 
@@ -341,6 +349,57 @@
   display: flex;
   align-items: center;
   gap: 24px;
+}
+
+.tut-header-split .tut-header-inner {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 32px;
+}
+
+.tut-header-left {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tut-header-avatar-large {
+  width: 140px;
+  height: 140px;
+  border-radius: 16px;
+  object-fit: cover;
+  image-rendering: pixelated;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  border: 3px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  display: block;
+}
+
+.tut-header-right {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .tut-header-split .tut-header-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 20px;
+  }
+  .tut-header-avatar-large {
+    margin: 0 auto;
+    width: 110px;
+    height: 110px;
+  }
+  .tut-header-right {
+    align-items: center;
+  }
+  .tut-header-nav {
+    justify-content: center;
+  }
 }
 
 .tut-header-logo {

@@ -5,7 +5,8 @@
   "textbookLabel": "Електронен учебник",
   "links": [
     { "label": "Електронен учебник", "url": "https://ebook.domino.bg/books/8/it/#page=1", "icon": "fas fa-book-open" },
-    { "label": "Учебна програма", "url": "https://www.mon.bg/nfs/2024/03/up-8kl-it_190324.pdf", "icon": "fas fa-file-pdf" }
+    { "label": "Допълнение - Програмиране и изкуствен интелект", "url": "https://www.kmit.bg/f/it8-ai.pdf", "icon": "fas fa-book-bookmark" },
+    { "label": "Учебна програма", "url": "https://www.mon.bg/nfs/2024/03/up-8kl-it_190324.pdf", "icon": "fas fa-graduation-cap" }
   ],
   "sections": [
     {

@@ -56,7 +56,7 @@ async function renderLessonView(courseId, lessonId) {
   const lesson = await fetchLesson(lessonMeta.lessonPath);
   const { headerHtml, bodyHtml, navItems } = buildLesson(lesson);
   const asideHtml = CourseShell.renderLessonNav(courseId, navItems, lessonTitleNum);
-  const mainHtml = headerHtml + `<div class="lesson-body">${bodyHtml}</div>` + renderNextLessonTag(course, lessonId);
+  const mainHtml = headerHtml + `<div class="lesson-body">${bodyHtml}</div>` + renderLessonNavTags(course, lessonId);
 
   document.getElementById('view-root').innerHTML = CourseShell.render(asideHtml, mainHtml);
   initLesson(lesson);
@@ -64,22 +64,43 @@ async function renderLessonView(courseId, lessonId) {
   initScrollSpy();
 }
 
-// Small right-aligned tag at the end of a lesson pointing to the next lesson in the same section
-function renderNextLessonTag(course, lessonId) {
+// Navigation tags at the end of a lesson pointing to previous and next lessons
+function renderLessonNavTags(course, lessonId) {
   for (const section of course.sections || []) {
     const lessons = section.lessons || [];
     for (let i = 0; i < lessons.length; i++) {
       if (lessons[i].id !== lessonId) continue;
+      const prev = lessons[i - 1];
       const next = lessons[i + 1];
-      if (!next || !next.lessonPath) return '';
-      const num = next.title.match(/^(\d+\.\d+)/)?.[1] || String(i + 2);
+
+      let prevHtml = '';
+      if (prev && prev.lessonPath) {
+        const prevNum = prev.title.match(/^(\d+\.\d+)/)?.[1] || String(i);
+        prevHtml = `
+          <a class="lesson-nav-tag prev-lesson-tag" href="#/lesson/${course.id}/${prev.id}">
+            <i class="fas fa-arrow-left lesson-nav-arrow"></i>
+            <span class="lesson-nav-label">Предишен урок:</span>
+            <span class="lesson-nav-title">Урок ${prevNum}</span>
+          </a>`;
+      }
+
+      let nextHtml = '';
+      if (next && next.lessonPath) {
+        const nextNum = next.title.match(/^(\d+\.\d+)/)?.[1] || String(i + 2);
+        nextHtml = `
+          <a class="lesson-nav-tag next-lesson-tag" href="#/lesson/${course.id}/${next.id}">
+            <span class="lesson-nav-label">Следващ урок:</span>
+            <span class="lesson-nav-title">Урок ${nextNum}</span>
+            <i class="fas fa-arrow-right lesson-nav-arrow"></i>
+          </a>`;
+      }
+
+      if (!prevHtml && !nextHtml) return '';
+
       return `
-        <div class="next-lesson-wrap">
-          <a class="next-lesson-tag" href="#/lesson/${course.id}/${next.id}">
-            <span class="next-lesson-label">Следващ урок:</span>
-            <span class="next-lesson-title">Урок ${num}</span>
-            <i class="fas fa-arrow-right next-lesson-arrow"></i>
-          </a>
+        <div class="lesson-nav-wrap">
+          <div class="lesson-nav-prev">${prevHtml}</div>
+          <div class="lesson-nav-next">${nextHtml}</div>
         </div>`;
     }
   }

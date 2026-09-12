@@ -533,13 +533,13 @@ body.landing-mode .home-section.subject-section {
 /* Lesson goal banner styles */
 .lesson-goal-line {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
   width: 100%;
   padding: 12px 16px;
   border-radius: 12px;
   border: 1px solid transparent;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   margin-bottom: 18px;
   max-width: 100%;
   font-size: 0.95rem;
@@ -561,7 +561,7 @@ body.landing-mode .home-section.subject-section {
 .lesson-goal-line .lesson-goal-text {
   color: inherit;
   flex: 1;
-  padding-top: 6px;
+  padding-top: 0;
 }
 
 /* Tone variations for lesson goals */
@@ -606,7 +606,7 @@ body.landing-mode .home-section.subject-section {
   padding: 12px 16px;
   border-radius: 12px;
   border: 1px solid transparent;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   font-weight: 700;
   font-size: 1rem;
   line-height: 1.4;
@@ -625,7 +625,7 @@ button.lesson-tag {
 a.lesson-tag:hover,
 button.lesson-tag:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .lesson-tag-ico {
@@ -662,44 +662,69 @@ button.lesson-tag:hover {
   font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
 }
 
-/* Next lesson tag shown at the end of each lesson */
-.next-lesson-wrap {
+/* Previous and Next lesson rectangular navigation tags */
+.lesson-nav-wrap {
   display: flex;
-  justify-content: flex-end;
-  margin-top: 30px;
-  padding: 0 4px 12px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
+  padding: 0 4px 16px;
+  flex-wrap: wrap;
 }
-.next-lesson-tag {
+
+.lesson-nav-prev {
+  display: flex;
+}
+
+.lesson-nav-next {
+  display: flex;
+  margin-left: auto;
+}
+
+.lesson-nav-tag,
+.next-lesson-tag,
+.prev-lesson-tag {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 9px 16px;
-  background: #ffffff;
-  border: 1px dashed #cbd5e1;
-  border-radius: 999px;
-  color: #1e293b;
-  font-size: 0.85rem;
+  gap: 10px;
+  padding: 10px 18px;
+  background: #1d1b31;
+  border: 1px solid #1d1b31;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 0.9rem;
   font-weight: 700;
   text-decoration: none;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  box-shadow: 0 4px 14px rgba(29, 27, 49, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
-.next-lesson-tag:hover {
+
+.lesson-nav-tag:hover,
+.next-lesson-tag:hover,
+.prev-lesson-tag:hover {
   transform: translateY(-2px);
-  border-color: var(--accent-orange);
-  color: var(--accent-orange);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  background: #2b2848;
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(29, 27, 49, 0.35);
 }
+
+.lesson-nav-label,
 .next-lesson-label {
-  color: #64748b;
-  font-weight: 600;
+  color: #cbd5e1;
+  font-weight: 500;
 }
+
+.lesson-nav-title,
 .next-lesson-title {
-  color: inherit;
+  color: #ffffff;
+  font-weight: 700;
 }
+
+.lesson-nav-arrow,
 .next-lesson-arrow {
   font-size: 0.85rem;
-  color: var(--accent-orange);
+  color: var(--accent-orange, #f17a3e);
 }
 
 /* Tone color palettes */
@@ -734,7 +759,6 @@ button.lesson-tag:hover {
 /* Accordion panel with tone palette */
 .accordion-item.tone-green {
   border-color: #bfe6cc;
-  border-left: 5px solid #27ae60;
 }
 .accordion-item.tone-green .accordion-header {
   background: #e6f6ec;
@@ -745,7 +769,6 @@ button.lesson-tag:hover {
 }
 .accordion-item.tone-blue {
   border-color: #c4dbf7;
-  border-left: 5px solid #1558a8;
 }
 .accordion-item.tone-blue .accordion-header {
   background: #e8f1fd;
@@ -756,7 +779,6 @@ button.lesson-tag:hover {
 }
 .accordion-item.tone-orange {
   border-color: #f6c9a8;
-  border-left: 5px solid var(--accent-orange);
 }
 .accordion-item.tone-orange .accordion-header {
   background: #fdeadd;
@@ -767,7 +789,6 @@ button.lesson-tag:hover {
 }
 .accordion-item.tone-purple {
   border-color: #d6bdf0;
-  border-left: 5px solid #8e44ad;
 }
 .accordion-item.tone-purple .accordion-header {
   background: #f1e8fa;
@@ -811,12 +832,13 @@ button.lesson-tag:hover {
   font-size: 1rem;
   line-height: 1.4;
   margin-bottom: 18px;
+  box-shadow: 0 1px 3px rgba(21, 88, 168, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .course-textbook-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
+  box-shadow: 0 4px 10px rgba(21, 88, 168, 0.15);
   color: #1558a8;
 }
 

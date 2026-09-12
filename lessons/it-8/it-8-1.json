@@ -494,7 +494,7 @@
       "icon": "fas fa-dumbbell",
       "text": "Упражнение",
       "modalTarget": "exerciseModal",
-      "tone": "orange"
+      "tone": "green"
     },
     {
       "type": "exercise-modal",

@@ -108,7 +108,7 @@ export function render(comp) {
         ${qHtml}
         <div class="mood-actions">
           <button type="button" class="btn-activity btn-generate-avatar">
-            <i class="fas fa-wand-magic-sparkles"></i> Генерирай моя дигитален аватар!
+            <i class="fas fa-wand-magic-sparkles"></i> Генерирай
           </button>
         </div>
       </form>

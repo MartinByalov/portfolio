@@ -5,7 +5,7 @@
   "textbookLabel": "Електронен учебник",
   "links": [
     { "label": "Електронен учебник", "url": "https://ebook.domino.bg/books/9/it/#page=1", "icon": "fas fa-book-open" },
-    { "label": "Учебна програма", "url": "https://www.mon.bg/nfs/2024/03/up-9kl-it_190324.pdf", "icon": "fas fa-file-pdf" }
+    { "label": "Учебна програма", "url": "https://www.mon.bg/nfs/2024/03/up-9kl-it_190324.pdf", "icon": "fas fa-graduation-cap" }
   ],
   "sections": [
     {

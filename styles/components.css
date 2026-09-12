@@ -2713,9 +2713,36 @@ body.lb-lightbox-open {
 
 /* image blocks inside rich cards */
 .lb-viz .lb-image,
-.titled-image { margin: 0; max-width: 640px; }
+.titled-image {
+  margin: 0 auto;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
 .lb-viz .lb-image img,
-.titled-image img { width: 100%; height: auto; border-radius: 8px; }
+.titled-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}
+#privacy-settings-image {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#privacy-settings-image .titled-image {
+  margin: 0 auto;
+}
+#privacy-settings-image img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
 
 /* Smart app media types panel */
 .media-types-row {
@@ -2915,12 +2942,6 @@ button.about-btn-primary {
   transition: opacity 0.18s ease;
 }
 .flash-overlay.open { opacity: 1; }
-.flash-modal {
-  position: relative;
-  width: min(560px, 92vw);
-  min-height: 340px;
-  perspective: 1200px;
-}
 .flash-close {
   position: absolute;
   top: -14px;
@@ -2938,14 +2959,6 @@ button.about-btn-primary {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
 .flash-close:hover { background: var(--accent-orange); }
-.flash-inner {
-  position: relative;
-  width: 100%;
-  min-height: 340px;
-  transform-style: preserve-3d;
-  transition: transform 0.5s ease;
-  cursor: pointer;
-}
 .flash-modal.flipped .flash-inner { transform: rotateY(180deg); }
 .flash-face {
   position: absolute;
@@ -2956,26 +2969,200 @@ button.about-btn-primary {
   border-radius: 16px;
   border-top: 5px solid var(--accent-orange);
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
-  padding: 36px 32px;
+  padding: 24px 28px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 14px;
+  gap: 10px;
   text-align: center;
-  min-height: 340px;
+  min-height: 420px;
 }
-.flash-face h3 { margin: 0; color: #1d1b31; font-size: 1.5rem; }
-.flash-face p { margin: 0; color: #555; font-size: 1rem; line-height: 1.6; }
-.flash-back { transform: rotateY(180deg); padding: 24px; }
+.flash-face h3 { margin: 0; color: #1d1b31; font-size: 1.4rem; }
+.flash-face p { margin: 0; color: #555; font-size: 0.95rem; line-height: 1.55; }
+.flash-term-title {
+  font-size: 1.6rem !important;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 6px 0 4px 0 !important;
+}
+.flash-back-title {
+  font-size: 1.3rem !important;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 4px 0 8px 0 !important;
+}
+.flash-definition-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+}
+.flash-definition-text {
+  font-size: 1.05rem !important;
+  color: #1e293b !important;
+  line-height: 1.65 !important;
+  margin: 0 !important;
+  font-weight: 500;
+}
+.flash-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin: 4px 0;
+}
+.flash-tags span {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+.flash-modal {
+  position: relative;
+  width: min(560px, 92vw);
+  min-height: 420px;
+  perspective: 1200px;
+}
+.flash-inner {
+  position: relative;
+  width: 100%;
+  min-height: 420px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+  cursor: pointer;
+}
+.flash-image-wrapper {
+  width: 100%;
+  max-width: 320px;
+  height: 180px;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0 12px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+.flash-term-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.flash-image-loading {
+  font-size: 0.8rem;
+  color: #64748b;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.flash-img-badge {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.flash-card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: #f1f5f9;
+  color: #64748b;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.flash-back { transform: rotateY(180deg); padding: 28px; }
+.flash-ai-box {
+  width: 100%;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 18px;
+  text-align: left;
+  box-sizing: border-box;
+}
+.flash-ai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent-orange, #f97316);
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.flash-ai-loading {
+  font-size: 0.9rem;
+  color: #64748b;
+  padding: 12px 0;
+  text-align: center;
+}
+.flash-ai-text {
+  font-size: 0.96rem;
+  color: #1e293b;
+  line-height: 1.6;
+  margin: 0 0 10px 0;
+}
+.flash-ai-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #8b5cf6;
+  background: #f5f3ff;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
 .flash-back img {
   width: 100%;
   max-height: 300px;
   object-fit: cover;
   border-radius: 12px;
 }
-.flash-flip-hint { font-size: 0.82rem; color: var(--accent-orange); font-weight: 600; }
-.flash-flip-hint i { margin-right: 6px; }
+.flash-flip-hint {
+  font-size: 1.15rem;
+  color: var(--accent-orange, #f97316);
+  opacity: 0.85;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(249, 115, 22, 0.08);
+}
+.flash-flip-hint:hover {
+  opacity: 1;
+  transform: rotate(45deg);
+}
+.flash-flip-hint i { margin: 0; }
 .is-hidden { display: none !important; }
 
 /* LMS ecosystem interactive diagram */
@@ -3941,27 +4128,35 @@ button.about-btn-primary {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 56px;
+  height: 60px;
+  min-height: 60px;
+  max-height: 60px;
+  box-sizing: border-box;
   flex-shrink: 0;
   width: 36px;
   color: #94a3b8;
 }
 
 .dd-card {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  min-height: 56px;
-  padding: 10px 14px;
+  gap: 10px;
+  height: 60px;
+  min-height: 60px;
+  max-height: 60px;
+  padding: 8px 14px;
   border: 2px dashed #94a3b8;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.4);
-  font-size: 0.9rem;
+  background: #ffffff;
+  font-size: 0.95rem;
   font-weight: 700;
   color: #1e293b;
   text-align: center;
   user-select: none;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
   transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
 }
 
@@ -3972,7 +4167,7 @@ button.about-btn-primary {
 .dd-draggable:hover {
   border-color: var(--accent-orange, #f97316);
   background: #fff7ed;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
 }
 
 .dd-draggable.dd-dragging {
@@ -3982,26 +4177,29 @@ button.about-btn-primary {
 
 .dd-card.dd-correct {
   background: #f0fdf4;
-  border-color: #4ade80;
-  border-style: solid;
+  border: 2px solid #22c55e;
 }
 
 .dd-card.dd-wrong {
   background: #fef2f2;
-  border-color: #f87171;
-  border-style: solid;
+  border: 2px solid #ef4444;
 }
 
 .dd-card-img {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
+  max-height: 36px;
   object-fit: contain;
   pointer-events: none;
+  flex-shrink: 0;
 }
 
 .dd-card-text {
-  line-height: 1.3;
+  line-height: 1.2;
   pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .dd-actions {

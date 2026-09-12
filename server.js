@@ -1,13 +1,51 @@
 import express from 'express';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
+import { GoogleGenAI } from '@google/genai';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Helper to load .env variables into process.env if present
+function loadEnv() {
+  const envPath = path.join(__dirname, '.env');
+  if (fs.existsSync(envPath)) {
+    try {
+      const content = fs.readFileSync(envPath, 'utf8');
+      content.split(/\r?\n/).forEach(line => {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) return;
+        const eqIdx = trimmed.indexOf('=');
+        if (eqIdx !== -1) {
+          const key = trimmed.slice(0, eqIdx).trim();
+          const val = trimmed.slice(eqIdx + 1).trim();
+          process.env[key] = val;
+        }
+      });
+    } catch (e) {
+      console.warn('Could not read .env:', e.message);
+    }
+  }
+}
+loadEnv();
+
 const app = express();
 const PORT = 3000;
 const HOST = '0.0.0.0';
+
+app.use(express.json());
+
+// Lazy-initialized Gemini AI client
+let genAI = null;
+function getGenAIClient() {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) return null;
+  if (!genAI) {
+    genAI = new GoogleGenAI({ apiKey });
+  }
+  return genAI;
+}
 
 // Ensure proper mime type mapping for epub files
 express.static.mime.define({
@@ -108,6 +146,117 @@ app.get('/api/news', async (req, res) => {
   } catch {}
 
   res.json({ status: 'ok', data: result, cached: false });
+});
+
+// Verify Portfolio access code stored in .env
+app.post('/api/portfolio/verify', (req, res) => {
+  const { code } = req.body || {};
+  const correctCode = String(process.env.PORTFOLIO_ACCESS_CODE || '123456').trim();
+  const inputCode = String(code || '').trim();
+
+  if (inputCode && inputCode === correctCode) {
+    return res.json({ status: 'ok', success: true });
+  }
+  return res.status(403).json({ status: 'error', success: false, message: 'Невалиден код за достъп.' });
+});
+
+// In-memory cache for generated glossary images
+const glossaryImageCache = new Map();
+
+// Cloudflare Workers AI Image Generation for glossary & flashcards
+app.post('/api/glossary/image', async (req, res) => {
+  const { term, definition } = req.body || {};
+  if (!term) {
+    return res.status(400).json({ status: 'error', message: 'Missing term' });
+  }
+
+  const cacheKey = String(term).trim().toLowerCase();
+  if (glossaryImageCache.has(cacheKey)) {
+    return res.json({ status: 'ok', imageUrl: glossaryImageCache.get(cacheKey), cached: true, source: 'cloudflare-workers-ai' });
+  }
+
+  const endpoint = 'https://lucky-cloud-1c42.byalov-v-martin.workers.dev';
+  const prompt = `3D isometric digital art illustration of ${term}, clean tech icon style, vibrant educational computer science concept, studio lighting`;
+  
+  const payload = {
+    prompt: prompt,
+    negative_prompt: 'blurry, low quality, distorted',
+    width: 1024,
+    height: 1024,
+    steps: 4,
+    guidance: 7.5
+  };
+
+  const headers = { 'Content-Type': 'application/json' };
+  const authToken = (process.env.CLOUDFLARE_AI_TOKEN || process.env.WORKER_AI_TOKEN || process.env.CF_AI_TOKEN || '').trim();
+  if (authToken) {
+    headers['Authorization'] = authToken.startsWith('Bearer ') ? authToken : `Bearer ${authToken}`;
+  }
+
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(payload)
+    });
+
+    const contentType = response.headers.get('content-type') || '';
+
+    if (response.ok && contentType.includes('image')) {
+      const arrayBuffer = await response.arrayBuffer();
+      const base64 = Buffer.from(arrayBuffer).toString('base64');
+      const dataUrl = `data:image/png;base64,${base64}`;
+      glossaryImageCache.set(cacheKey, dataUrl);
+      return res.json({ status: 'ok', imageUrl: dataUrl, source: 'cloudflare-workers-ai' });
+    }
+
+    // If worker returned JSON error (e.g. { error: '...', details: '...' })
+    let errorInfo = null;
+    try {
+      errorInfo = await response.json();
+    } catch (_) {}
+
+    console.warn('[glossary/image] Cloudflare Workers AI response:', response.status, errorInfo);
+    return res.json({
+      status: 'error',
+      imageUrl: null,
+      error: errorInfo?.error || `HTTP ${response.status}`,
+      details: errorInfo?.details || null
+    });
+  } catch (err) {
+    console.warn('[glossary/image] Network error calling Cloudflare Workers AI:', err.message);
+    return res.status(500).json({ status: 'error', imageUrl: null, message: err.message });
+  }
+});
+
+// Dynamic AI explanation for glossary flashcards on the fly
+app.post('/api/glossary/explain', async (req, res) => {
+  const { term, definition } = req.body || {};
+  if (!term) {
+    return res.status(400).json({ status: 'error', message: 'Missing term' });
+  }
+
+  try {
+    const ai = getGenAIClient();
+    if (ai) {
+      const response = await ai.models.generateContent({
+        model: 'gemini-3.8-flash',
+        contents: `Ти си учител по информационни технологии за 8-12 клас. Обясни на разбираем български език следното понятие: "${term}".
+Дефиниция: "${definition || ''}".
+Дай кратък, ясен практически пример от практиката или ежедневието (2-3 кратки изречения). Не слагай сложни въвеждащи думи, а директно полезното обяснение и пример.`
+      });
+      const text = response.text ? response.text.trim() : null;
+      if (text) {
+        return res.json({ status: 'ok', explanation: text, source: 'gemini-ai' });
+      }
+    }
+  } catch (err) {
+    console.warn('[glossary/explain] AI generation error:', err.message);
+  }
+
+  // Graceful smart educational fallback
+  const fallback = `Практическо приложение: Понятието „${term}“ се прилага ежедневно в дигиталната среда за оптимизация на работните процеси и сигурността на потребителските данни.`;
+  res.json({ status: 'ok', explanation: fallback, source: 'system-fallback' });
 });
 
 // Route fallback to index.html for root or SPA paths

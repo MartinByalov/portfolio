@@ -111,12 +111,6 @@ export function renderGlossaryPage() {
   `;
 }
 
-function termImage(term) {
-  // Stable seed image for flashcard reverse
-  const seed = encodeURIComponent(String(term.term || 'term').trim().toLowerCase().replace(/\s+/g, '-'));
-  return `https://picsum.photos/seed/${seed}/800/500`;
-}
-
 function renderFlashCard(term, idx) {
   const search = escapeHtmlGlossary((term.term + ' ' + term.definition + ' ' + term.tags).toLowerCase());
   return `
@@ -196,18 +190,47 @@ export function initGlossaryPage() {
         <button type="button" class="flash-close" id="flash-close" aria-label="Затвори">&times;</button>
         <div class="flash-inner" id="flash-inner">
           <div class="flash-face flash-front">
-            <h3>${escapeHtmlGlossary(term.term)}</h3>
-            <p>${escapeHtmlGlossary(term.definition)}</p>
-            <span class="flash-flip-hint"><i class="fas fa-rotate"></i> Обърни</span>
+            <div class="flash-image-wrapper" id="flash-image-wrapper">
+              <div class="flash-image-loading"><i class="fas fa-spinner fa-spin"></i></div>
+            </div>
+            <h3 class="flash-term-title">${escapeHtmlGlossary(term.term)}</h3>
+            <span class="flash-flip-hint" aria-hidden="true"><i class="fas fa-rotate"></i></span>
           </div>
           <div class="flash-face flash-back">
-            <img src="${termImage(term)}" alt="${escapeHtmlGlossary(term.term)}" loading="lazy" onerror="this.style.display='none'">
-            <span class="flash-flip-hint"><i class="fas fa-rotate"></i> Обърни</span>
+            <h3 class="flash-back-title">${escapeHtmlGlossary(term.term)}</h3>
+            <div class="flash-definition-box">
+              <p class="flash-definition-text">${escapeHtmlGlossary(term.definition)}</p>
+            </div>
+            <span class="flash-flip-hint" aria-hidden="true"><i class="fas fa-rotate"></i></span>
           </div>
         </div>
       </div>`;
     document.body.appendChild(overlay);
     requestAnimationFrame(() => overlay.classList.add('open'));
+
+    // Fetch Stable Diffusion image generated via ModelsLab
+    fetch('/api/glossary/image', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ term: term.term, definition: term.definition })
+    })
+      .then(res => res.json())
+      .then(data => {
+        const imgWrap = document.getElementById('flash-image-wrapper');
+        if (!imgWrap) return;
+        if (data && data.imageUrl) {
+          imgWrap.innerHTML = `
+            <img src="${escapeHtmlGlossary(data.imageUrl)}" alt="${escapeHtmlGlossary(term.term)}" class="flash-term-img" />
+          `;
+        } else {
+          imgWrap.style.display = 'none';
+        }
+      })
+      .catch(() => {
+        const imgWrap = document.getElementById('flash-image-wrapper');
+        if (imgWrap) imgWrap.style.display = 'none';
+      });
+
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) closeFlash();
     });

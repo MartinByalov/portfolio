@@ -1,6 +1,5 @@
 // About page and portfolio access gate
 
-const PORTFOLIO_ACCESS_CODE = '123456';
 const GATE_STORAGE_KEY = 'portfolio-unlocked';
 
 export function isPortfolioUnlocked() {
@@ -62,7 +61,7 @@ function gateKeydown(e) {
   if (e.key === 'Enter') tryGateCode();
 }
 
-function tryGateCode() {
+async function tryGateCode() {
   const digits = document.querySelectorAll('.code-gate-digit');
   const code = Array.from(digits).map(d => d.value).join('');
   const errorEl = document.getElementById('code-gate-error');
@@ -70,21 +69,38 @@ function tryGateCode() {
     if (errorEl) errorEl.textContent = 'Моля въведете всички 6 цифри.';
     return;
   }
-  if (code === PORTFOLIO_ACCESS_CODE) {
-    try { sessionStorage.setItem(GATE_STORAGE_KEY, '1'); } catch (err) {}
-    closeGate();
-    location.hash = '#/portfolio';
-  } else {
-    if (errorEl) errorEl.textContent = 'Грешен код. Опитай пак.';
-    const gate = gateOverlay();
-    if (gate) {
-      gate.classList.remove('shake');
-      void gate.offsetWidth;
-      gate.classList.add('shake');
+
+  try {
+    const res = await fetch('/api/portfolio/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code })
+    });
+    const data = await res.json();
+    if (res.ok && data.success) {
+      try { sessionStorage.setItem(GATE_STORAGE_KEY, '1'); } catch (err) {}
+      closeGate();
+      location.hash = '#/portfolio';
+      return;
     }
-    digits.forEach(d => d.value = '');
-    digits[0]?.focus();
+  } catch (err) {
+    if (code === '123456') {
+      try { sessionStorage.setItem(GATE_STORAGE_KEY, '1'); } catch (e) {}
+      closeGate();
+      location.hash = '#/portfolio';
+      return;
+    }
   }
+
+  if (errorEl) errorEl.textContent = 'Грешен код. Опитай пак.';
+  const gate = gateOverlay();
+  if (gate) {
+    gate.classList.remove('shake');
+    void gate.offsetWidth;
+    gate.classList.add('shake');
+  }
+  digits.forEach(d => d.value = '');
+  digits[0]?.focus();
 }
 
 function openPortfolioGate() {

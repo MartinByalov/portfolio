@@ -1,0 +1,152 @@
+/* ==========================================================================
+ * Lesson Tags & Accordions — canonical label system (it-8-1 … it-8-4)
+ * --------------------------------------------------------------------------
+ * This file documents + styles the canonical section labels used across
+ * lessons. It layers SEMANTIC classes on top of the generic tone system
+ * in styles/layout.css (which stays the single source of truth for colors).
+ *
+ * Canonical mapping (audited from lessons/it-8/it-8-1..3.json):
+ *
+ *   1) Цел (lesson header goal line, renderer/renderer.js):
+ *      { "goal": "..." }  ->  .lesson-goal-line.tone-orange + fa-bullseye
+ *      Class hook: .lesson-goal-line.tag-goal
+ *
+ *   2) Инструктаж:
+ *      { "type":"tag", "text":"Инструктаж",
+ *        "icon":"fas fa-clipboard-check", "tone":"blue",
+ *        "href":"https://drive.google.com/..." }
+ *      Class hook: .lesson-tag.tag-instruktazh
+ *      Example: lessons/it-8/it-8-1.json :: instruktazh-tag
+ *
+ *   3) Упражнение (section divider -> modal):
+ *      { "type":"tag", "text":"Упражнение",
+ *        "icon":"fas fa-dumbbell", "tone":"green",
+ *        "modalTarget":"exerciseModal" }
+ *      Class hook: .lesson-tag.tag-exercise
+ *      Example: lessons/it-8/it-8-1.json + it-8-3.json :: exercise-tag
+ *
+ *   4) Дискусия (section divider -> modal):
+ *      { "type":"tag", "text":"Дискусия",
+ *        "icon":"fas fa-comments", "tone":"purple",
+ *        "modalTarget":"exerciseModal" }
+ *      Class hook: .lesson-tag.tag-discussion
+ *      Example: lessons/it-8/it-8-2.json :: exercise-tag ("Дискусия")
+ *      NOTE: plain (non-modal) discussion blocks inside accordion content use
+ *      .lb-discussion (see styles/components.css), not this divider tag.
+ *
+ *   5) Рефлексия (accordion item):
+ *      { "id":"lesson-reflection", "items":[
+ *        { "title":"Рефлексия", "tone":"purple",
+ *          "icon":"fas fa-paw",
+ *          "content":[{ "type":"mood-animal-generator", ... }] } ] }
+ *      Class hook: .accordion-item.tag-reflection
+ *      Example: lessons/it-8/it-8-3.json :: lesson-reflection
+ *
+ *   6) Тест с 4 възможни отговора (accordion item: "Бързи 5 въпроса"):
+ *      { "items":[ { "title":"Бързи 5 въпроса", "tone":"green",
+ *          "icon":"fas fa-bolt",
+ *          "content":[{ "type":"quiz",
+ *            "questions":[{ "question":"...",
+ *              "options":["A","B","C","D"], "correctIndex":1 }] }] } ] }
+ *      Class hook: .accordion-item.tag-quiz-4
+ *      Example: lessons/it-8/it-8-2.json :: section-quiz-assessment;
+ *      entry-level variant: it-8-1.json :: "Пробно Входно ниво"
+ *      (tone green + fas fa-clipboard-question + quiz).
+ *
+ *   7) Задача / Задачи:
+ *      a) Divider tag (empty for now, statement arrives later):
+ *         { "type":"tag", "text":"Задача", "icon":"fas fa-list-check",
+ *           "tone":"blue" }
+ *         Class hook: .lesson-tag.tag-task
+ *         Example: lessons/it-8/it-8-4.json :: task-tag
+ *      b) Accordion item with task content:
+ *         { "title":"Задачи", "tone":"blue", "icon":"fas fa-list-check",
+ *           "content":[{ "type":"interactive-matching"|"interactive-fill"|"quiz", ... }] }
+ *         Class hook: .accordion-item.tag-task-item
+ *         Example: lessons/it-8/it-8-3.json :: workbook-tasks-item
+ *
+ *   8) Презентация (bonus, found in audit):
+ *      { "type":"tag", "text":"Презентация",
+ *        "icon":"fas fa-file-powerpoint", "tone":"orange",
+ *        "href":"https://drive.google.com/..." }
+ *      Class hook: .lesson-tag.tag-presentation
+ *      Example: lessons/it-8/it-8-2.json :: presentation-tag
+ *
+ * Wiring: components/tag.js appends `tag-<variant>` when the JSON carries
+ * "variant" (e.g. "variant":"exercise"); components/accordion.js appends
+ * `tag-<variant>` to .accordion-item when the item carries "variant".
+ * Variants are OPTIONAL — plain tone-only JSON keeps working unchanged.
+ * ========================================================================== */
+
+/* --- 1) Цел: keep header goal readable when it doubles as label --- */
+.lesson-goal-line.tag-goal {
+  font-size: 0.95rem;
+}
+
+/* --- Shared divider-tag polish for semantic labels --- */
+.lesson-tag.tag-instruktazh,
+.lesson-tag.tag-exercise,
+.lesson-tag.tag-discussion,
+.lesson-tag.tag-task,
+.lesson-tag.tag-presentation {
+  letter-spacing: 0.01em;
+}
+
+/* Упражнение: slightly stronger border so the modal CTA stands out */
+.lesson-tag.tag-exercise {
+  border-width: 2px;
+}
+
+/* Дискусия: canonical lavender #f1e8fa (user-specified; same as tone-purple
+   palette in layout.css — kept here only as a semantic guarantee for the
+   discussion item, without overriding the global purple tone) */
+.lesson-tag.tag-discussion .lesson-tag-ico {
+  border-radius: 50%;
+}
+.accordion-item.tag-discussion .accordion-header {
+  background: #f1e8fa;
+}
+
+/* Задача: checklist feel — square icon, mono-ish counter-ready text */
+.lesson-tag.tag-task .lesson-tag-ico {
+  border-radius: 8px;
+}
+
+/* Презентация: keep Drive-link tags visually distinct on hover */
+a.lesson-tag.tag-presentation:hover {
+  text-decoration: underline;
+}
+
+/* --- Accordion semantic hooks (mirror the tag palette) --- */
+
+/* Рефлексия: soft purple glow around the open item */
+.accordion-item.tag-reflection.active {
+  box-shadow: 0 0 0 2px #d6bdf0 inset;
+}
+
+/* Тест с 4 възможни: bolt items get tabular numerals for Q numbers */
+.accordion-item.tag-quiz-4 .quiz-question-text {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Задачи (accordion item): tighten spacing between stacked task blocks */
+.accordion-item.tag-task-item .accordion-content > * + * {
+  margin-top: 14px;
+}
+
+/* Чек-лист (accordion item): rendered like any accordion item — checklist
+   icon before the title via item.icon + acc-tone-ico, orange color via
+   "tone":"orange" (canonical palette in layout.css: header #fdeadd,
+   border #f6c9a8, text #b45309, icon var(--accent-orange)).
+   No color override here — tones stay the single source of truth. */
+
+/* --- Responsive: tags stay one-row on desktop, wrap icon+text on small --- */
+@media (max-width: 480px) {
+  .lesson-tag.tag-instruktazh,
+  .lesson-tag.tag-exercise,
+  .lesson-tag.tag-discussion,
+  .lesson-tag.tag-task,
+  .lesson-tag.tag-presentation {
+    font-size: 0.92rem;
+  }
+}

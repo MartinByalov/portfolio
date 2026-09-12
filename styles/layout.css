@@ -512,7 +512,7 @@ body.landing-mode .home-section.subject-section {
   text-align: left;
   line-height: 1.35;
   font-family: "Poppins", sans-serif;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 /* Vertical alignment for expand arrow */
@@ -605,7 +605,8 @@ body.landing-mode .home-section.subject-section {
   align-items: center;
   gap: 12px;
   width: 100%;
-  padding: 12px 16px;
+  min-height: 64px;
+  padding: 18px 22px;
   border-radius: 12px;
   border: 1px solid transparent;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
@@ -891,7 +892,7 @@ button.lesson-tag:hover {
 .accordion-header .card-title {
   flex: 1;
   font-family: "Poppins", sans-serif;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 /* E-textbook button styles */

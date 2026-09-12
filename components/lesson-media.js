@@ -202,7 +202,8 @@ function renderTable(b) {
   const body = (b.rows || []).map(r =>
     '<tr>' + (r || []).map(cell => '<td>' + esc(cell) + '</td>').join('') + '</tr>'
   ).join('');
-  return '<div class="lb-table-wrap">'
+  return '<div class="lb-table-wrap"' + (b.id ? ' id="' + esc(b.id) + '"' : '') + '>'
+    + (b.intro ? '<p class="lb-table-intro">' + esc(b.intro) + '</p>' : '')
     + '<table class="lb-table"><thead><tr>' + head + '</tr></thead><tbody>' + body + '</tbody></table>'
     + '</div>';
 }
@@ -817,7 +818,7 @@ function renderGoogleFormsShareLinkUI(spec) {
   `;
 }
 
-// 2x2 grid infographic
+// 2x2 grid infographic (also supports grid-2x3 / 5-card layouts via same card style)
 function renderInfographicGrid2x2(spec) {
   const cards = (spec.cards || []).map(c =>
     '<div class="info-card" style="border-left-color:' + esc(c.color) + '">'
@@ -827,7 +828,7 @@ function renderInfographicGrid2x2(spec) {
     + '</div>'
     + '<div class="info-title" style="color:' + esc(c.color) + '">' + esc(c.title || '') + '</div>'
     + '</div>'
-    + '<div class="info-body">' + esc(c.text || '') + '</div>'
+    + '<div class="info-body">' + esc(c.text || c.subtext || '') + '</div>'
     + '</div>'
     ).join('');
 
@@ -897,7 +898,7 @@ export function renderRichBlock(b) {
   if (b.type === 'infographic') {
     if (spec.permissions)                      return vizWrapper(b, renderPermissionMatrix(spec));
     if (spec.layout === 'vertical-checklist') return vizWrapper(b, renderChecklist(spec));
-    if (spec.layout === 'grid-2x2')            return vizWrapper(b, renderInfographicGrid2x2(spec));
+    if (spec.layout === 'grid-2x2' || spec.layout === 'grid-2x3') return vizWrapper(b, renderInfographicGrid2x2(spec));
     return vizWrapper(b, renderRiskGrid(spec));
   }
   if (b.type === 'video')        return vizWrapper(b, renderVideoBlock(b));

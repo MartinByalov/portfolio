@@ -8,6 +8,10 @@ import * as InteractiveStepGuide from './interactive-step-guide.js';
 import * as MoodAnimalGenerator from './mood-animal-generator.js';
 import * as ResourceDownloadBox from './resource-download-box.js';
 import * as DragAndDrop from './drag-and-drop.js';
+import * as UiHotspots from './ui-hotspots.js';
+import * as SpotTheBug from './spot-the-bug.js';
+import * as InteractiveChecklist from './interactive-checklist.js';
+import * as TrueFalseSwipe from './true-false-swipe.js';
 
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
@@ -84,6 +88,26 @@ function renderSubsectionBlock(b) {
   return '<div class="lb-subsection">'
     + (b.heading ? '<h4 class="lb-subsection-heading">' + esc(b.heading) + '</h4>' : '')
     + inner
+    + '</div>';
+}
+
+function renderFeatureListBlock(b) {
+  const items = (b.items || []).map(it =>
+    '<li><i class="fas fa-check"></i><span>' + esc(it) + '</span></li>'
+  ).join('');
+  return '<div class="lb-feature-list"' + (b.id ? ' id="' + esc(b.id) + '"' : '') + '>'
+    + (b.title ? '<div class="lb-feature-title">' + esc(b.title) + '</div>' : '')
+    + '<ul class="lb-feature-items">' + items + '</ul>'
+    + (b.advantage ? '<div class="lb-feature-advantage"><span>' + esc(b.advantage) + '</span></div>' : '')
+    + '</div>';
+}
+
+function renderDiscussionBlock(b) {
+  const paras = (b.paragraphs && b.paragraphs.length ? b.paragraphs : (b.text ? [b.text] : []));
+  const html = paras.map(p => '<p>' + esc(p) + '</p>').join('');
+  return '<div class="lb-discussion"' + (b.id ? ' id="' + esc(b.id) + '"' : '') + '>'
+    + '<div class="lb-discussion-badge"><i class="fas fa-comments"></i><span>' + esc(b.title || 'Дискусия') + '</span></div>'
+    + '<div class="lb-discussion-body">' + html + '</div>'
     + '</div>';
 }
 
@@ -211,6 +235,8 @@ function formatMarkdown(text) {
 function renderBlock(b) {
   switch (b.type) {
     case 'text':                   return '<div class="lb-text">' + formatMarkdown(b.content || '') + '</div>';
+    case 'feature-list':           return renderFeatureListBlock(b);
+    case 'discussion':             return renderDiscussionBlock(b);
     case 'image':                  return renderImageBlock(b);
     case 'image-placeholder':      return renderImagePlaceholderBlock(b);
     case 'image-gallery':          return renderGalleryBlock(b);
@@ -228,6 +254,10 @@ function renderBlock(b) {
     case 'interactive-fill':       return InteractiveFill.render(b);
     case 'interactive-step-guide': return InteractiveStepGuide.render(b);
     case 'mood-animal-generator':  return MoodAnimalGenerator.render(b);
+    case 'ui-hotspots':            return UiHotspots.render(b);
+    case 'spot-the-bug':           return SpotTheBug.render(b);
+    case 'interactive-checklist':  return InteractiveChecklist.render(b);
+    case 'true-false-swipe':       return TrueFalseSwipe.render(b);
         case 'resource-download-box':  return ResourceDownloadBox.render(b);
     case 'drag-and-drop':          return DragAndDrop.render(b);
     default:                       return '<!-- unknown lesson block type: ' + esc(b.type) + ' -->';
@@ -239,10 +269,11 @@ function renderBlock(b) {
 export function render(comp) {
   const items = (comp.items || []).map((it, i) => {
     const toneCls = it.tone ? ' tone-' + esc(it.tone) : '';
+    const variantCls = it.variant ? ' tag-' + esc(it.variant) : '';
     const toneIco = it.tone && it.icon
       ? '<span class="acc-tone-ico"><i class="' + esc(it.icon) + '"></i></span>'
       : '';
-    return '<div class="accordion-item' + (i === 0 ? ' active' : '') + toneCls + '"'
+    return '<div class="accordion-item' + (i === 0 ? ' active' : '') + toneCls + variantCls + '"'
       + (it.id ? ' id="' + esc(it.id) + '"' : '') + '>'
       + '<div class="accordion-header">'
       + toneIco
@@ -288,6 +319,10 @@ export function init(comp) {
       if (b.type === 'interactive-fill') InteractiveFill.init(b);
       if (b.type === 'interactive-step-guide') InteractiveStepGuide.init(b);
       if (b.type === 'mood-animal-generator') MoodAnimalGenerator.init(b);
+      if (b.type === 'ui-hotspots') UiHotspots.init(b);
+      if (b.type === 'spot-the-bug') SpotTheBug.init(b);
+      if (b.type === 'interactive-checklist') InteractiveChecklist.init(b);
+      if (b.type === 'true-false-swipe') TrueFalseSwipe.init(b);
       if (b.type === 'resource-download-box') ResourceDownloadBox.init(b);
       if (b.type === 'drag-and-drop') DragAndDrop.init(b);
     });

@@ -19,7 +19,7 @@ export function buildLesson(lesson) {
     <div class="course-header-info">
       <span class="sidebar-badge-inline">${lesson.subject || ''}${lesson.grade ? ' · ' + lesson.grade + ' клас' : ''}</span>
       <h1 class="page-title">${lesson.title}</h1>
-      ${lesson.goal ? `<div class="lesson-goal-line tone-orange"><span class="lesson-goal-ico"><i class="fas fa-bullseye"></i></span><span class="lesson-goal-text"><strong>Цел:</strong> ${esc(lesson.goal)}</span></div>` : ''}
+      ${lesson.goal ? `<div class="lesson-goal-line tone-orange tag-goal"><span class="lesson-goal-ico"><i class="fas fa-bullseye"></i></span><span class="lesson-goal-text"><strong>Цел:</strong> ${esc(lesson.goal)}</span></div>` : ''}
     </div>
   `;
 

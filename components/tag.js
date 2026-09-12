@@ -8,6 +8,7 @@ function esc(s) {
 
 export function render(comp) {
   const tone = comp.tone ? ' tone-' + esc(comp.tone) : ' tone-blue';
+  const variant = comp.variant ? ' tag-' + esc(comp.variant) : '';
   const arrow = (comp.href || comp.modalTarget)
     ? '<i class="fas fa-chevron-right lesson-tag-arrow"></i>'
     : '';
@@ -18,7 +19,7 @@ export function render(comp) {
   if (comp.href) {
     return '<section class="component tag"'
       + (comp.id ? ' id="' + esc(comp.id) + '"' : '') + '>'
-      + '<a class="lesson-tag' + tone + '" href="' + esc(comp.href) + '" target="_blank" rel="noopener">'
+      + '<a class="lesson-tag' + tone + variant + '" href="' + esc(comp.href) + '" target="_blank" rel="noopener">'
       + inner
       + '</a>'
       + '</section>';
@@ -27,7 +28,7 @@ export function render(comp) {
   if (comp.modalTarget) {
     return '<section class="component tag"'
       + (comp.id ? ' id="' + esc(comp.id) + '"' : '') + '>'
-      + '<button type="button" class="lesson-tag' + tone + '" data-modal-target="' + esc(comp.modalTarget) + '">'
+      + '<button type="button" class="lesson-tag' + tone + variant + '" data-modal-target="' + esc(comp.modalTarget) + '">'
       + inner
       + '</button>'
       + '</section>';
@@ -35,7 +36,7 @@ export function render(comp) {
 
   return '<section class="component tag"'
     + (comp.id ? ' id="' + esc(comp.id) + '"' : '') + '>'
-    + '<div class="lesson-tag' + tone + '">'
+    + '<div class="lesson-tag' + tone + variant + '">'
     + inner
     + '</div>'
     + '</section>';

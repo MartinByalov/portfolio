@@ -15,6 +15,10 @@ import * as MoodAnimalGenerator from '../components/mood-animal-generator.js';
 import * as ResourceDownloadBox from '../components/resource-download-box.js';
 import * as DragAndDrop from '../components/drag-and-drop.js';
 import * as ImagePlaceholder from '../components/image-placeholder.js';
+import * as UiHotspots from '../components/ui-hotspots.js';
+import * as SpotTheBug from '../components/spot-the-bug.js';
+import * as InteractiveChecklist from '../components/interactive-checklist.js';
+import * as TrueFalseSwipe from '../components/true-false-swipe.js';
 
 const registry = {
   'text-group': TextGroup,
@@ -31,6 +35,10 @@ const registry = {
   'mood-animal-generator': MoodAnimalGenerator,
   'resource-download-box': ResourceDownloadBox,
   'drag-and-drop': DragAndDrop,
+  'ui-hotspots': UiHotspots,
+  'spot-the-bug': SpotTheBug,
+  'interactive-checklist': InteractiveChecklist,
+  'true-false-swipe': TrueFalseSwipe,
 };
 
 export function renderComponent(comp) {

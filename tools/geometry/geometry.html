@@ -6,6 +6,7 @@
     <title>Чертожник — Геометрична дъска</title>
     <meta name="tool-title" content="Чертожник">
     <meta name="tool-icon" content="fa-solid fa-compass-drafting">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="geometry.css">
 </head>
 <body>
@@ -30,7 +31,7 @@
                 <span>Повтори</span>
             </button>
 
-            <button class="control-button danger" id="clearButton" title="Изчисти всичко">
+            <button class="control-button danger" id="clearButton" title="Изчисти цялата дъска">
                 <span class="control-icon">🗑</span>
                 <span>Изчисти</span>
             </button>
@@ -54,53 +55,43 @@
 
                 <div class="toolbar-tools-grid">
                     <button class="tool-button active" data-tool="select" title="Избери и премести (Esc)">
-                        <span class="tool-icon">↖</span>
-                        <span>Избери</span>
+                        <i class="fa-solid fa-hand-pointer"></i>
                     </button>
 
                     <button class="tool-button" data-tool="point" title="Точка (P)">
-                        <span class="tool-icon">•</span>
-                        <span>Точка</span>
+                        <i class="fa-solid fa-circle" style="font-size: 0.55rem;"></i>
                     </button>
 
                     <button class="tool-button" data-tool="segment" title="Отсечка (S)">
-                        <span class="tool-icon">╱</span>
-                        <span>Отсечка</span>
+                        <span class="tool-icon-char">╱</span>
                     </button>
 
                     <button class="tool-button" data-tool="line" title="Права (L)">
-                        <span class="tool-icon">↔</span>
-                        <span>Права</span>
+                        <i class="fa-solid fa-arrows-left-right"></i>
                     </button>
 
                     <button class="tool-button" data-tool="ray" title="Лъч (R)">
-                        <span class="tool-icon">→</span>
-                        <span>Лъч</span>
+                        <i class="fa-solid fa-arrow-right"></i>
                     </button>
 
                     <button class="tool-button" data-tool="circle" title="Окръжност (C)">
-                        <span class="tool-icon">○</span>
-                        <span>Окръжност</span>
+                        <i class="fa-regular fa-circle"></i>
                     </button>
 
                     <button class="tool-button" data-tool="arc" title="Дъга (A)">
-                        <span class="tool-icon">◡</span>
-                        <span>Дъга</span>
+                        <span class="tool-icon-char">◡</span>
                     </button>
 
                     <button class="tool-button" data-tool="polygon" title="Многоъгълник (G)">
-                        <span class="tool-icon">△</span>
-                        <span>Многоъгълник</span>
+                        <span class="tool-icon-char">△</span>
                     </button>
 
-                    <button class="tool-button" data-tool="pencil" title="Свободен молив (B)">
-                        <span class="tool-icon">✎</span>
-                        <span>Молив</span>
+                    <button class="tool-button" data-tool="pencil" title="Молив (B)">
+                        <i class="fa-solid fa-pencil"></i>
                     </button>
 
-                    <button class="tool-button" data-tool="eraser" title="Гума за изтриване (E)">
-                        <span class="tool-icon">⌫</span>
-                        <span>Гума</span>
+                    <button class="tool-button" data-tool="eraser" title="Гума (E)">
+                        <i class="fa-solid fa-eraser"></i>
                     </button>
                 </div>
 
@@ -111,14 +102,12 @@
                 </div>
 
                 <div class="toolbar-view-group">
-                    <button class="tool-button active" id="gridButton" title="Покажи/скрий координатната мрежа">
-                        <span class="tool-icon">▦</span>
-                        <span>Мрежа</span>
+                    <button class="tool-button active" id="gridButton" title="Мрежа (покажи/скрий)">
+                        <i class="fa-solid fa-border-all"></i>
                     </button>
 
-                    <button class="tool-button active" id="labelsButton" title="Покажи/скрий буквените етикети (A, B, C...)">
-                        <span class="tool-icon">A</span>
-                        <span>Етикети</span>
+                    <button class="tool-button active" id="labelsButton" title="Етикети (A, B, C...)">
+                        <i class="fa-solid fa-font"></i>
                     </button>
                 </div>
 
@@ -167,7 +156,6 @@
                 <!-- BOARD STATUS (BOTTOM) -->
                 <div class="board-status">
                     <div class="status-left">
-                        <span class="status-tool-badge">Инструмент:</span>
                         <strong id="currentToolText">Избери</strong>
                         <span class="status-separator">·</span>
                         <span id="cursorPosition">x: — &nbsp; y: —</span>

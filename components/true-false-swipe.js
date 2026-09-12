@@ -25,7 +25,6 @@ export function render(comp) {
   return '<div class="true-false-swipe-card" id="' + esc(id) + '">'
     + '<div class="interactive-card-header">'
     + '<div class="interactive-card-badge"><i class="fas fa-arrows-left-right"></i><span>' + esc(title) + '</span></div>'
-    + '<p class="interactive-card-lead">Прочетете всяко твърдение и изберете „Вярно“ или „Лъжа“.</p>'
     + '</div>'
     + '<div class="swipe-list">' + list + '</div>'
     + '<div class="swipe-score"><span class="swipe-score-counter">Резултат: 0 от ' + cards.length + '</span></div>'
@@ -45,7 +44,7 @@ export function init(comp) {
       if (c.classList.contains('answered-ok')) { score++; answered++; }
       else if (c.classList.contains('answered-bad')) { answered++; }
     });
-    if (scoreEl) scoreEl.textContent = 'Резултат: ' + score + ' от ' + cards.length + ' (отговорени: ' + answered + ')';
+    if (scoreEl) scoreEl.textContent = 'Резултат: ' + score + ' от ' + cards.length + ' верни.';
   }
 
   cards.forEach(card => {

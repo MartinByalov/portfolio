@@ -85,8 +85,7 @@ export function render(comp) {
     + '</div>'
     + '<div class="dd-actions">'
     + '<button type="button" class="btn-activity dd-submit">Провери</button>'
-    + '<button type="button" class="btn-activity dd-reset" style="display:none;">'
-    + '<i class="fas fa-rotate-left"></i> Нов опит</button>'
+    + '<button type="button" class="btn-activity dd-reset" style="display:none;">Нов опит</button>'
     + '</div>'
     + '<div class="dd-feedback" style="display:none;"></div>'
     + '</div>';
@@ -159,7 +158,7 @@ export function init(comp) {
       feedback.innerHTML = '<i class="fas fa-circle-check"></i> Отлично! Всички двойки са свързани правилно!';
       feedback.className = 'dd-feedback feedback-success';
     } else {
-      feedback.innerHTML = '<i class="fas fa-triangle-exclamation"></i> Резултат: ' + correct + ' от ' + total + ' верни. Разменяйте местата в двете колони, докато всяко име застане срещу своето лого.';
+      feedback.innerHTML = '<i class="fas fa-triangle-exclamation"></i> Резултат: ' + correct + ' от ' + total + ' верни.';
       feedback.className = 'dd-feedback feedback-info';
     }
     feedback.style.display = 'block';

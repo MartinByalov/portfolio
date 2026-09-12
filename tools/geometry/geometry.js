@@ -57,6 +57,8 @@ let isDrawingShape = false;
 
 let shapeDragStart = null;
 
+let pointDragOrigin = null;
+
 let showGrid = true;
 
 let showLabels = true;
@@ -117,12 +119,12 @@ function distance(a, b) {
 
 // / SNAP TO EXISTING POINT /
 
-function snapPoint(point) {
+function snapPoint(point, excludeId = null) {
     let closest = null;
     let closestDistance = SNAP_DISTANCE;
 
     objects.forEach(object => {
-        if (object.type !== "point") {
+        if (object.type !== "point" || (excludeId && object.id === excludeId)) {
             return;
         }
 
@@ -156,31 +158,66 @@ svg.addEventListener("pointermove", event => {
 
     cursorPosition.textContent = `x: ${Math.round(point.x)} · y: ${Math.round(point.y)}`;
 
-    if (currentTool !== "select" && currentTool !== "eraser") {
-        snapPoint(point);
+    // Moving object or dragging from point
+    if (isMoving && movingObjectId) {
+        const object = objects.find(item => item.id === movingObjectId);
+        if (!object) return;
+
+        // If dragging an existing point in select mode:
+        if (pointDragOrigin && object.type === "point") {
+            const targetPoint = objects.find(o => o.type === "point" && o.id !== pointDragOrigin.id && distance(point, o) <= SNAP_DISTANCE * 1.5);
+            if (targetPoint) {
+                snapIndicator.setAttribute("cx", targetPoint.x);
+                snapIndicator.setAttribute("cy", targetPoint.y);
+                snapIndicator.setAttribute("opacity", "1");
+                renderPreviewLine(pointDragOrigin, targetPoint, "segment");
+                return;
+            } else {
+                removePreview();
+                snapIndicator.setAttribute("opacity", "0");
+            }
+        }
+
+        const dx = point.x - moveStart.x;
+        const dy = point.y - moveStart.y;
+
+        moveObject(object, dx, dy);
+        moveStart = { x: point.x, y: point.y };
+        render();
+        return;
     }
 
-    // // Live shape drag preview
+    if (currentTool !== "select" && currentTool !== "eraser") {
+        snapPoint(point, shapeDragStart ? shapeDragStart.id : null);
+    }
+
+    // Live shape drag preview
     const activeStart = (isDrawingShape && shapeDragStart) || (temporaryPoints.length > 0 ? temporaryPoints[0] : null);
-    if (activeStart && (currentTool === "segment" || currentTool === "line" || currentTool === "ray" || currentTool === "circle")) {
-        const snappedCurrent = snapPoint(point);
+    if (activeStart && (currentTool === "segment" || currentTool === "line" || currentTool === "ray" || currentTool === "circle" || currentTool === "point")) {
+        const snappedCurrent = snapPoint(point, activeStart.id);
         if (currentTool === "circle") {
             renderPreviewCircle(activeStart, snappedCurrent);
         } else {
-            renderPreviewLine(activeStart, snappedCurrent, currentTool);
+            renderPreviewLine(activeStart, snappedCurrent, currentTool === "point" ? "segment" : currentTool);
         }
     } else if (temporaryPoints.length > 0 && currentTool === "arc") {
         const snappedCurrent = snapPoint(point);
         renderPreviewLine(temporaryPoints[temporaryPoints.length - 1], snappedCurrent, "segment");
     }
 
-    // // Polygon live preview line
+    // Polygon live preview line
     if (polygonPoints.length > 0 && currentTool === "polygon") {
         const snappedCurrent = snapPoint(point);
         renderPreviewLine(polygonPoints[polygonPoints.length - 1], snappedCurrent, "segment");
     }
 
-    // // Eraser drag wipe
+    // Pencil preview
+    if (currentTool === "pencil" && isDrawing) {
+        pencilPoints.push(point);
+        renderPencilPreview();
+    }
+
+    // Eraser drag wipe
     if (currentTool === "eraser" && event.buttons === 1) {
         const target = findObjectAtPoint(point);
         if (target) {
@@ -363,21 +400,25 @@ function createPencil(points) {
 
 svg.addEventListener("pointerdown", event => {
     const rawPoint = getSvgPoint(event);
-    const point = (currentTool === "select" || currentTool === "eraser")
-        ? rawPoint
-        : snapPoint(rawPoint);
+    const targetPointObj = objects.find(o => o.type === "point" && distance(rawPoint, o) <= SNAP_DISTANCE * 1.4);
 
     // / SELECT /
     if (currentTool === "select") {
-        const target = findObjectAtPoint(point);
+        const target = targetPointObj || findObjectAtPoint(rawPoint);
         if (target) {
             selectedObjectId = target.id;
             isMoving = true;
             movingObjectId = target.id;
-            moveStart = { x: point.x, y: point.y };
+            moveStart = { x: rawPoint.x, y: rawPoint.y };
+            if (target.type === "point") {
+                pointDragOrigin = { id: target.id, x: target.x, y: target.y };
+            } else {
+                pointDragOrigin = null;
+            }
             render();
         } else {
             selectedObjectId = null;
+            pointDragOrigin = null;
             render();
         }
         return;
@@ -385,7 +426,7 @@ svg.addEventListener("pointerdown", event => {
 
     // / ERASER /
     if (currentTool === "eraser") {
-        const target = findObjectAtPoint(point);
+        const target = targetPointObj || findObjectAtPoint(rawPoint);
         if (target) {
             deleteObject(target.id);
         }
@@ -394,9 +435,19 @@ svg.addEventListener("pointerdown", event => {
 
     // / POINT /
     if (currentTool === "point") {
-        createPoint(point);
+        if (targetPointObj) {
+            // Dragging from an existing point creates a segment to another point
+            isDrawingShape = true;
+            shapeDragStart = { x: targetPointObj.x, y: targetPointObj.y, id: targetPointObj.id };
+            pointDragOrigin = { id: targetPointObj.id, x: targetPointObj.x, y: targetPointObj.y };
+            createPreviewPoint(shapeDragStart);
+        } else {
+            createPoint(rawPoint);
+        }
         return;
     }
+
+    const point = snapPoint(rawPoint);
 
     // Drawing mode for segment, line, ray, circle
     if (
@@ -409,6 +460,9 @@ svg.addEventListener("pointerdown", event => {
             // Start drag-to-draw mode
             isDrawingShape = true;
             shapeDragStart = point;
+            if (targetPointObj) {
+                pointDragOrigin = { id: targetPointObj.id, x: targetPointObj.x, y: targetPointObj.y };
+            }
             createPreviewPoint(point);
         } else {
             // Second click in sequential click mode
@@ -468,53 +522,52 @@ svg.addEventListener("pointerdown", event => {
 });
 
 
-// Pointer move handler
-
-svg.addEventListener("pointermove", event => {
-    const point = getSvgPoint(event);
-
-    // / MOVING OBJECT /
-    if (isMoving && movingObjectId) {
-        const object = objects.find(item => item.id === movingObjectId);
-        if (!object) return;
-
-        const dx = point.x - moveStart.x;
-        const dy = point.y - moveStart.y;
-
-        moveObject(object, dx, dy);
-        moveStart = { x: point.x, y: point.y };
-        render();
-        return;
-    }
-
-    // / PENCIL /
-    if (currentTool === "pencil" && isDrawing) {
-        pencilPoints.push(point);
-        renderPencilPreview();
-    }
-});
+// Pointer move handler (already registered above)
 
 
 // Pointer up handler
 
 svg.addEventListener("pointerup", event => {
     const rawPoint = getSvgPoint(event);
-    const point = snapPoint(rawPoint);
+
+    // Check if dragging from an existing point in select mode and released on another point
+    if (isMoving && pointDragOrigin) {
+        const targetPoint = objects.find(o => o.type === "point" && o.id !== pointDragOrigin.id && distance(rawPoint, o) <= SNAP_DISTANCE * 1.5);
+        if (targetPoint) {
+            // Restore dragged point to original position
+            const origPointObj = objects.find(o => o.id === pointDragOrigin.id);
+            if (origPointObj) {
+                origPointObj.x = pointDragOrigin.x;
+                origPointObj.y = pointDragOrigin.y;
+            }
+            createTwoPointObject("segment", pointDragOrigin, targetPoint);
+            isMoving = false;
+            movingObjectId = null;
+            moveStart = null;
+            pointDragOrigin = null;
+            removePreview();
+            snapIndicator.setAttribute("opacity", "0");
+            render();
+            return;
+        }
+    }
 
     if (isMoving) {
         saveState();
         isMoving = false;
         movingObjectId = null;
         moveStart = null;
+        pointDragOrigin = null;
         render();
     }
 
-    // // Complete drag-to-draw (segment, line, ray, circle)
+    // Complete drag-to-draw (segment, line, ray, circle, or point-to-point)
     if (isDrawingShape && shapeDragStart) {
         isDrawingShape = false;
+        const point = snapPoint(rawPoint, shapeDragStart.id);
         const dist = distance(shapeDragStart, point);
 
-        if (dist > 8) {
+        if (dist > 8 || (point.id && point.id !== shapeDragStart.id)) {
             // Drag finished: create shape immediately
             removePreview();
             temporaryPoints = [];
@@ -522,22 +575,32 @@ svg.addEventListener("pointerup", event => {
             if (currentTool === "circle") {
                 createCircle(shapeDragStart, point);
             } else {
-                createTwoPointObject(currentTool, shapeDragStart, point);
+                const toolToUse = currentTool === "point" ? "segment" : currentTool;
+                createTwoPointObject(toolToUse, shapeDragStart, point);
             }
             shapeDragStart = null;
+            pointDragOrigin = null;
             render();
             return;
         } else {
+            if (currentTool === "point") {
+                removePreview();
+                shapeDragStart = null;
+                pointDragOrigin = null;
+                render();
+                return;
+            }
             // Single click: save start point for second click
             temporaryPoints = [shapeDragStart];
             shapeDragStart = null;
+            pointDragOrigin = null;
             createPreviewPoint(temporaryPoints[0]);
             render();
             return;
         }
     }
 
-    // // Complete pencil stroke
+    // Complete pencil stroke
     if (currentTool === "pencil" && isDrawing) {
         isDrawing = false;
         if (pencilPoints.length > 1) {
@@ -556,6 +619,7 @@ svg.addEventListener("pointercancel", () => {
     isMoving = false;
     movingObjectId = null;
     moveStart = null;
+    pointDragOrigin = null;
     isDrawing = false;
     isDrawingShape = false;
     shapeDragStart = null;
@@ -919,23 +983,6 @@ function renderObject(object) {
         element.classList.add("selected");
     }
 
-    element.addEventListener("pointerdown", event => {
-        event.stopPropagation();
-
-        if (currentTool === "select") {
-            selectedObjectId = object.id;
-            isMoving = true;
-            movingObjectId = object.id;
-            const point = getSvgPoint(event);
-            moveStart = point;
-            render();
-        }
-
-        if (currentTool === "eraser") {
-            deleteObject(object.id);
-        }
-    });
-
     objectsLayer.appendChild(element);
 }
 
@@ -1115,19 +1162,21 @@ function redo() {
 clearButton.addEventListener("click", () => {
     if (objects.length === 0) return;
 
-    const confirmed = confirm("Да изчистя ли цялата дъска?");
-    if (!confirmed) return;
-
     saveState();
     objects = [];
     selectedObjectId = null;
     temporaryPoints = [];
     polygonPoints = [];
     pencilPoints = [];
+    isDrawing = false;
+    isMoving = false;
     isDrawingShape = false;
     shapeDragStart = null;
+    movingObjectId = null;
+    pointDragOrigin = null;
     labelCounter = 0;
     removePreview();
+    snapIndicator.setAttribute("opacity", "0");
     render();
 });
 

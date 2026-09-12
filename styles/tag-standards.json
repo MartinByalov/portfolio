@@ -1,0 +1,75 @@
+{
+  "$schema": "Standardized Tag Specifications for Educational IT Platform",
+  "tags": [
+    {
+      "name": "Упражнение",
+      "variant": "exercise",
+      "tone": "green",
+      "color": "#1c7a3d",
+      "backgroundColor": "#e6f6ec",
+      "borderColor": "#bfe6cc",
+      "icon": "fas fa-dumbbell",
+      "description": "Практически задачи, модали или пренасочване към външни учебни ресурси/документи."
+    },
+    {
+      "name": "Задача",
+      "variant": "task",
+      "tone": "blue",
+      "color": "#1e3a8a",
+      "backgroundColor": "#e8f1fd",
+      "borderColor": "#c4dbf7",
+      "icon": "fas fa-list-check",
+      "description": "Училищни и самостоятелни интерактивни задачи за изпълнение."
+    },
+    {
+      "name": "Чек-лист преди предаване",
+      "variant": "checklist",
+      "tone": "orange",
+      "color": "#c2410c",
+      "backgroundColor": "#fdeadd",
+      "borderColor": "#f6c9a8",
+      "icon": "fas fa-list-check",
+      "description": "Контролни списъци с отметки преди предаване на задача."
+    },
+    {
+      "name": "Дискусия",
+      "variant": "discussion",
+      "tone": "purple",
+      "color": "#4c1d95",
+      "backgroundColor": "#f1e8fa",
+      "borderColor": "#d6bdf0",
+      "icon": "fas fa-comments",
+      "description": "Въпроси за казуси, обсъждания в клас и групови разсъждения."
+    },
+    {
+      "name": "Пробно Входно ниво",
+      "variant": "trial-quiz",
+      "tone": "green",
+      "color": "#1c7a3d",
+      "backgroundColor": "#e6f6ec",
+      "borderColor": "#bfe6cc",
+      "icon": "fas fa-clipboard-question",
+      "description": "Пробни тестове и контролни въпроси за самопроверка."
+    },
+    {
+      "name": "Рефлексия",
+      "variant": "reflection",
+      "tone": "purple",
+      "color": "#4c1d95",
+      "backgroundColor": "#f1e8fa",
+      "borderColor": "#d6bdf0",
+      "icon": "fas fa-paw",
+      "description": "Самооценка и размисъл върху наученото в урока."
+    },
+    {
+      "name": "Речник",
+      "variant": "glossary",
+      "tone": "dark",
+      "color": "#1d1b31",
+      "backgroundColor": "#eef0f6",
+      "borderColor": "#d5d9e5",
+      "icon": "fas fa-book-bookmark",
+      "description": "Основни понятия и терминология по урока."
+    }
+  ]
+}

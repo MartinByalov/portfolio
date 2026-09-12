@@ -368,7 +368,7 @@ export async function open(targetId = null) {
 
           <div class="nft-actions">
             <button type="button" class="nft-btn nft-btn-primary" id="nftRerollBtn">
-              <i class="fa-solid fa-dice"></i> Генерирай нов Stonk
+              <i class="fa-solid fa-dice"></i> Генерирай
             </button>
             <button type="button" class="nft-btn nft-btn-secondary" id="nftDownloadBtn">
               <i class="fa-solid fa-download"></i> Свали PNG

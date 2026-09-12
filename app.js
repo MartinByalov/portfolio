@@ -64,6 +64,18 @@ async function renderLessonView(courseId, lessonId) {
   initScrollSpy();
 }
 
+function getLessonNumLabel(item) {
+  if (!item) return '';
+  const match = item.title ? item.title.match(/^(\d+\.\d+)/) : null;
+  if (match) return `Урок ${match[1]}`;
+  const idMatch = item.id ? item.id.match(/^it-(\d+)-(\d+)$/) : null;
+  if (idMatch) {
+    const num = Math.max(0, parseInt(idMatch[2], 10) - 1);
+    return `Урок ${idMatch[1]}.${num}`;
+  }
+  return `Урок ${item.title || ''}`;
+}
+
 // Navigation tags at the end of a lesson pointing to previous and next lessons
 function renderLessonNavTags(course, lessonId) {
   for (const section of course.sections || []) {
@@ -75,22 +87,20 @@ function renderLessonNavTags(course, lessonId) {
 
       let prevHtml = '';
       if (prev && prev.lessonPath) {
-        const prevNum = prev.title.match(/^(\d+\.\d+)/)?.[1] || String(i);
+        const prevLabel = getLessonNumLabel(prev);
         prevHtml = `
           <a class="lesson-nav-tag prev-lesson-tag" href="#/lesson/${course.id}/${prev.id}">
             <i class="fas fa-arrow-left lesson-nav-arrow"></i>
-            <span class="lesson-nav-label">Предишен урок:</span>
-            <span class="lesson-nav-title">Урок ${prevNum}</span>
+            <span class="lesson-nav-title">${prevLabel}</span>
           </a>`;
       }
 
       let nextHtml = '';
       if (next && next.lessonPath) {
-        const nextNum = next.title.match(/^(\d+\.\d+)/)?.[1] || String(i + 2);
+        const nextLabel = getLessonNumLabel(next);
         nextHtml = `
           <a class="lesson-nav-tag next-lesson-tag" href="#/lesson/${course.id}/${next.id}">
-            <span class="lesson-nav-label">Следващ урок:</span>
-            <span class="lesson-nav-title">Урок ${nextNum}</span>
+            <span class="lesson-nav-title">${nextLabel}</span>
             <i class="fas fa-arrow-right lesson-nav-arrow"></i>
           </a>`;
       }

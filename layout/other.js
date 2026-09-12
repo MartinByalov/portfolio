@@ -77,7 +77,7 @@ function renderCardsCatalog() {
 
             <div class="other-card-footer">
               <span class="other-card-cta">
-                Прочети урока <i class="fa-solid fa-arrow-right"></i>
+                Прочети <i class="fa-solid fa-arrow-right"></i>
               </span>
             </div>
           </div>
@@ -104,7 +104,7 @@ function renderCardsCatalog() {
 
             <div class="other-card-footer">
               <span class="other-card-cta">
-                Прочети урока <i class="fa-solid fa-arrow-right"></i>
+                Прочети <i class="fa-solid fa-arrow-right"></i>
               </span>
             </div>
           </div>
@@ -122,7 +122,7 @@ function renderNftTutorial() {
     <div class="tutorial-view-container">
       <div class="tutorial-top-bar">
         <a href="#/other" class="tutorial-back-btn">
-          <i class="fa-solid fa-arrow-left"></i> Обратно към Други
+          <i class="fa-solid fa-arrow-left"></i> Обратно
         </a>
       </div>
 
@@ -130,7 +130,7 @@ function renderNftTutorial() {
       <header class="tut-header tut-header-split">
         <div class="tut-header-inner">
           <div class="tut-header-left">
-            <img src="/avatar.png" alt="Stonks Avatar" class="tut-header-avatar-large" />
+            <img src="/images/avatar.png" alt="Stonks Avatar" class="tut-header-avatar-large" />
           </div>
           <div class="tut-header-right">
             <div class="tut-header-meta">TUTORIAL // JAVASCRIPT &amp; HTML5 CANVAS // THE STONKS</div>
@@ -143,7 +143,6 @@ function renderNftTutorial() {
               <a href="#tut-rarity" class="tut-header-pill">2. Математика на редкостта</a>
               <a href="#tut-uniqueness" class="tut-header-pill">3. Уникалност и Seed</a>
               <a href="#tut-canvas" class="tut-header-pill">4. Рендериране с Canvas</a>
-              <a href="#tut-demo" class="tut-header-pill">Демо на живо</a>
             </div>
           </div>
         </div>
@@ -175,13 +174,7 @@ function renderNftTutorial() {
         </div>
 
         <!-- ИНТЕРАКТИВНА СИМУЛАЦИЯ НА ЖИВО -->
-        <div class="sh" id="tut-demo">
-          <span class="sh-badge bg-orange">ДЕМО</span>
-          <h2>Интерактивна симулация в браузъра</h2>
-          <div class="line"></div>
-        </div>
-
-        <div class="live-sandbox-block">
+        <div class="live-sandbox-block" id="tut-demo">
           <div class="sandbox-header">
             <div class="sandbox-title">
               <i class="fa-solid fa-dice" style="color: #f17a3e;"></i>
@@ -189,10 +182,10 @@ function renderNftTutorial() {
             </div>
             <div class="sandbox-actions" style="margin: 0;">
               <button type="button" class="btn-sandbox primary" id="tutRollBtn">
-                <i class="fa-solid fa-dice"></i> Генерирай нов
+                <i class="fa-solid fa-dice"></i> Генерирай
               </button>
-              <button type="button" class="btn-sandbox secondary" id="tutModalBtn">
-                <i class="fa-solid fa-up-right-and-down-left-from-center"></i> Отвори в цял прозорец
+              <button type="button" class="btn-sandbox secondary" id="tutModalBtn" title="Отвори в цял прозорец" aria-label="Отвори в цял прозорец">
+                <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
               </button>
             </div>
           </div>
@@ -225,7 +218,6 @@ function renderNftTutorial() {
         <div class="step-block">
           <div class="step-head">
             <h3>Строг йерархичен ред на изчертаване (Layer Order)</h3>
-            <span class="step-tag tag-js">Архитектура</span>
           </div>
           <div class="step-body">
             <p>
@@ -285,7 +277,6 @@ function renderNftTutorial() {
         <div class="step-block">
           <div class="step-head">
             <h3>Претеглен случаен избор (Weighted Random Selection)</h3>
-            <span class="step-tag tag-ex">Математика</span>
           </div>
           <div class="step-body">
             <p>
@@ -343,7 +334,6 @@ function renderNftTutorial() {
         <div class="step-block">
           <div class="step-head">
             <h3>ДНК сигнатура и липса на дубликати</h3>
-            <span class="step-tag tag-js">Алгоритми</span>
           </div>
           <div class="step-body">
             <p>
@@ -403,7 +393,6 @@ function renderNftTutorial() {
         <div class="step-block">
           <div class="step-head">
             <h3>Запазване на резки пиксели (Nearest-Neighbor Scaling)</h3>
-            <span class="step-tag tag-html">Canvas API</span>
           </div>
           <div class="step-body">
             <p>
@@ -459,7 +448,7 @@ function renderChartsTutorial() {
     <div class="tutorial-view-container">
       <div class="tutorial-top-bar">
         <a href="#/other" class="tutorial-back-btn">
-          <i class="fa-solid fa-arrow-left"></i> Обратно към Други
+          <i class="fa-solid fa-arrow-left"></i> Обратно
         </a>
       </div>
 
@@ -481,7 +470,6 @@ function renderChartsTutorial() {
               <a href="#tut-bar-chart" class="tut-header-pill">3. Стълбовидна графика</a>
               <a href="#tut-pie-chart" class="tut-header-pill">4. Кръгови графики</a>
               <a href="#tut-radar-chart" class="tut-header-pill">5. Радарна графика</a>
-              <a href="#tut-charts-demo" class="tut-header-pill">Интерактивен Playground</a>
             </div>
           </div>
         </div>
@@ -513,13 +501,7 @@ function renderChartsTutorial() {
         </div>
 
         <!-- ИНТЕРАКТИВЕН PLAYGROUND С CHART.JS -->
-        <div class="sh" id="tut-charts-demo">
-          <span class="sh-badge bg-blue">PLAYGROUND</span>
-          <h2>Интерактивна конзола за видове диаграми</h2>
-          <div class="line"></div>
-        </div>
-
-        <div class="live-sandbox-block">
+        <div class="live-sandbox-block" id="tut-charts-demo">
           <div class="sandbox-header">
             <div class="sandbox-title">
               <i class="fa-solid fa-chart-pie" style="color: #38bdf8;"></i>
@@ -565,7 +547,6 @@ function renderChartsTutorial() {
         <div class="step-block">
           <div class="step-head">
             <h3>Инициализация на Chart инстанция върху Canvas елемент</h3>
-            <span class="step-tag tag-html">Основи</span>
           </div>
           <div class="step-body">
             <p>
@@ -612,7 +593,6 @@ function renderChartsTutorial() {
         <div class="step-block">
           <div class="step-head">
             <h3>Трендове, плавни Безриеви криви и градиенти</h3>
-            <span class="step-tag tag-js">Линейна графика</span>
           </div>
           <div class="step-body">
             <p>
@@ -674,7 +654,6 @@ function renderChartsTutorial() {
         <div class="step-block">
           <div class="step-head">
             <h3>Вертикални, хоризонтални стълбове и заоблени ъгли</h3>
-            <span class="step-tag tag-js">Стълбове</span>
           </div>
           <div class="step-body">
             <p>
@@ -726,7 +705,6 @@ function renderChartsTutorial() {
         <div class="step-block">
           <div class="step-head">
             <h3>Дялово разпределение от 100% и cutout отрязване</h3>
-            <span class="step-tag tag-js">Пропорции</span>
           </div>
           <div class="step-body">
             <p>
@@ -777,7 +755,6 @@ function renderChartsTutorial() {
         <div class="step-block">
           <div class="step-head">
             <h3>Многомерен профилен анализ (Spider Chart)</h3>
-            <span class="step-tag tag-js">Многоосни данни</span>
           </div>
           <div class="step-body">
             <p>

@@ -36,7 +36,6 @@ export function render(comp) {
           <i class="fas fa-cloud-arrow-up"></i>
           <span>${esc(title)}</span>
         </div>
-        <p class="interactive-card-lead">Следвайте стъпките, маркирайте всяка завършена стъпка и тествайте симулатора по-долу:</p>
       </div>
 
       <!-- Checklist & Progress -->

@@ -24,7 +24,7 @@ export function render(comp) {
         ${questions}
         <div class="quiz-actions">
           <button type="button" class="btn-activity quiz-submit">Провери</button>
-          <button type="button" class="btn-activity quiz-reset" style="display:none;"><i class="fas fa-rotate-left"></i> Нов опит</button>
+          <button type="button" class="btn-activity quiz-reset" style="display:none;">Нов опит</button>
         </div>
         <div class="quiz-result" style="display:none;"></div>
       </form>
@@ -72,7 +72,7 @@ export function init(comp) {
       if (userChoice === correct) score++;
     });
 
-    showResult(`Резултат: ${score} от ${questions.length} верни отговора.`, 'info');
+    showResult(`Резултат: ${score} от ${questions.length} верни.`, 'info');
     submitBtn.style.display = 'none';
     resetBtn.style.display = 'inline-block';
   });

@@ -39,7 +39,6 @@ export function render(comp) {
   return '<div class="interactive-step-guide-card interactive-checklist-card" id="' + esc(id) + '">'
     + '<div class="interactive-card-header">'
     + '<div class="interactive-card-badge"><i class="fas fa-list-check"></i><span>' + esc(title) + '</span></div>'
-    + '<p class="interactive-card-lead">Маркирайте всяка изпълнена точка. Всички трябва да са отметнати преди предаване.</p>'
     + '</div>'
     + '<div class="steps-checklist-box">' + list + '</div>'
     + progress

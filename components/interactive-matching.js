@@ -49,7 +49,7 @@ export function render(comp) {
           Провери
         </button>
         <button type="button" class="btn-activity matching-reset" style="display:none;">
-          <i class="fas fa-rotate-left"></i> Нов опит
+          Нов опит
         </button>
       </div>
       <div class="matching-feedback" style="display:none;"></div>
@@ -101,7 +101,7 @@ export function init(comp) {
       feedback.innerHTML = `<i class="fas fa-circle-check"></i> Отлично! Всички ${correctCount} понятия са свързани правилно с техните дефиниции!`;
       feedback.className = 'matching-feedback feedback-success';
     } else {
-      feedback.innerHTML = `<i class="fas fa-triangle-exclamation"></i> Резултат: ${correctCount} от ${items.length} верни. Прегледайте оцветените в червено редове и опитайте отново.`;
+      feedback.innerHTML = `<i class="fas fa-triangle-exclamation"></i> Резултат: ${correctCount} от ${items.length} верни.`;
       feedback.className = 'matching-feedback feedback-info';
     }
     feedback.style.display = 'block';

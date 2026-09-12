@@ -105,8 +105,12 @@ function renderFeatureListBlock(b) {
 function renderDiscussionBlock(b) {
   const paras = (b.paragraphs && b.paragraphs.length ? b.paragraphs : (b.text ? [b.text] : []));
   const html = paras.map(p => '<p>' + esc(p) + '</p>').join('');
+  const showBadge = b.title !== '' && b.title !== null && b.title !== false;
+  const badgeHtml = showBadge
+    ? '<div class="lb-discussion-badge"><i class="fas fa-comments"></i><span>' + esc(b.title || 'Дискусия') + '</span></div>'
+    : '';
   return '<div class="lb-discussion"' + (b.id ? ' id="' + esc(b.id) + '"' : '') + '>'
-    + '<div class="lb-discussion-badge"><i class="fas fa-comments"></i><span>' + esc(b.title || 'Дискусия') + '</span></div>'
+    + badgeHtml
     + '<div class="lb-discussion-body">' + html + '</div>'
     + '</div>';
 }
@@ -137,7 +141,7 @@ function renderQuizBlock(b) {
     + questions
     + '<div class="quiz-actions">'
     + '<button type="button" class="btn-activity quiz-submit">Провери</button>'
-    + '<button type="button" class="btn-activity quiz-reset" style="display:none;"><i class="fas fa-rotate-left"></i> Нов опит</button>'
+    + '<button type="button" class="btn-activity quiz-reset" style="display:none;">Нов опит</button>'
     + '</div>'
     + '<div class="quiz-result" style="display:none;"></div>'
     + '</form>';
@@ -196,7 +200,7 @@ function initQuizBlock(root, b) {
       if (expl) expl.style.display = 'flex';
     });
 
-    showResult('Резултат: ' + score + ' от ' + questions.length + ' верни отговора.', 'info');
+    showResult('Резултат: ' + score + ' от ' + questions.length + ' верни.', 'info');
     submitBtn.style.display = 'none';
     resetBtn.style.display = 'inline-block';
   });
@@ -267,13 +271,15 @@ function renderBlock(b) {
 // Component renderer
 
 export function render(comp) {
+  const startClosed = comp.options && comp.options.startClosed === true;
   const items = (comp.items || []).map((it, i) => {
     const toneCls = it.tone ? ' tone-' + esc(it.tone) : '';
     const variantCls = it.variant ? ' tag-' + esc(it.variant) : '';
     const toneIco = it.tone && it.icon
       ? '<span class="acc-tone-ico"><i class="' + esc(it.icon) + '"></i></span>'
       : '';
-    return '<div class="accordion-item' + (i === 0 ? ' active' : '') + toneCls + variantCls + '"'
+    const isActive = it.defaultOpen === true || (!startClosed && it.defaultOpen !== false && i === 0);
+    return '<div class="accordion-item' + (isActive ? ' active' : '') + toneCls + variantCls + '"'
       + (it.id ? ' id="' + esc(it.id) + '"' : '') + '>'
       + '<div class="accordion-header">'
       + toneIco

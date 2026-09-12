@@ -121,7 +121,7 @@ export function render(comp) {
         <p class="animal-avatar-desc"></p>
         <div class="animal-result-actions">
           <button type="button" class="btn-activity btn-restart-avatar">
-            <i class="fas fa-rotate-left"></i> Нов опит
+            Нов опит
           </button>
         </div>
       </div>

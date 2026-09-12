@@ -27,14 +27,24 @@ export function buildLesson(lesson) {
   const bodyHtml = components.map(renderComponent).join('');
   const navItems = [];
   components.forEach(c => {
-    if (c.heading && c.id) navItems.push({ id: c.id, label: c.heading });
+    if (c.heading && c.id && !c.skipNav) navItems.push({ id: c.id, label: c.heading });
     // Accordion lesson points become direct in-page nav targets too.
     if (c.type === 'accordion') {
       (c.items || []).forEach(it => {
-        if (it.title && it.id) navItems.push({ id: it.id, label: it.title });
+        if (it.title && it.id && !it.skipNav) navItems.push({ id: it.id, label: it.title });
       });
     }
+    if (c.type === 'tag' && c.text && c.id && !c.skipNav) {
+      navItems.push({ id: c.id, label: c.text });
+    }
   });
+
+  // Ensure "Речник" is placed at the very bottom of course sidebar if present
+  const glossaryIdx = navItems.findIndex(it => it.label === 'Речник');
+  if (glossaryIdx !== -1 && glossaryIdx !== navItems.length - 1) {
+    const [glossaryItem] = navItems.splice(glossaryIdx, 1);
+    navItems.push(glossaryItem);
+  }
 
   return { headerHtml, bodyHtml, navItems };
 }

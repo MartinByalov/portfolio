@@ -3,6 +3,7 @@
   "title": "1.3. ИТ за социално общуване и споделена работа (упражнение)",
   "grade": 8,
   "subject": "Информационни технологии",
+  "goal": "Практическо прилагане на умения за екипна работа в споделен документ, използване на коментари и история на версиите, спазване на правила за съвместна дейност и използване на групов електронен адрес.",
   "layout": {
     "type": "lesson",
     "contentWidth": "wide",
@@ -26,12 +27,18 @@
       "items": [
         {
           "id": "section-collaborative-editing",
-          "title": "Работа в споделен документ",
+          "title": "1. Работа в споделен документ",
           "content": [
             {
               "type": "text",
               "id": "collab-editing-definition",
-              "content": "При съвместна работа няколко потребители могат да редактират един и същ документ, като промените се виждат почти веднага.<br><img src=\"/images/sharedWork.png\" alt=\"Споделен документ\" style=\"max-width:100%; margin-top:8px;\">"
+              "content": "При съвместна работа няколко потребители могат да редактират един и същ документ, като промените се виждат почти веднага."
+            },
+            {
+              "type": "image",
+              "id": "shared-work-image",
+              "src": "/images/sharedWork.png",
+              "alt": "Работа в споделен документ"
             },
             {
               "type": "feature-list",
@@ -44,8 +51,7 @@
                 "Автоматично запазване",
                 "История на версиите",
                 "Връщане към по-ранна версия"
-              ],
-              "advantage": "Всички участници работят върху една актуална версия, вместо да изпращат неколкократно файлове с имена като 'Проект_final_2_последен.docx'."
+              ]
             },
             {
               "type": "table",
@@ -88,16 +94,34 @@
       "id": "task-tag",
       "icon": "fas fa-list-check",
       "text": "Задача",
+      "modalTarget": "exerciseModal",
       "tone": "blue",
-      "variant": "task"
+      "variant": "task",
+      "skipNav": true
+    },
+    {
+      "type": "exercise-modal",
+      "id": "exerciseModal",
+      "title": "Тема: Изкуственият интелект – наш помощник или заплаха?",
+      "instructions": "<div class='exercise-instructions'><ol><li>В <b>Google Drive</b> създайте нов текстов документ с име <b>AI_Екип_[Номер]</b>. Споделете документа с всички останали от екипа, като им дадете права за Редактиране (Editor).</li><li>В документа, всеки член на екипа да напише кратък абзац (3-4 изречения) със своето мнение по темата.</li><li>Всеки да маркира изречение от абзаца на свой съученик, да добави коментар и да зададе въпрос или да даде градивна идея.</li><li>Всеки да отговори на коментарите отправени към него.</li></ol></div>",
+      "resources": []
     },
     {
       "type": "tag",
-      "id": "checklist-tag",
-      "icon": "fas fa-list-check",
-      "text": "Интерактивен чек-лист преди предаване на задачата",
-      "tone": "blue",
-      "variant": "task"
+      "id": "discussion-tag-1",
+      "icon": "fas fa-comments",
+      "text": "Дискусия",
+      "modalTarget": "discussionModal1",
+      "tone": "purple",
+      "variant": "discussion",
+      "skipNav": true
+    },
+    {
+      "type": "exercise-modal",
+      "id": "discussionModal1",
+      "title": "Дискусия: Възстановяване на версия",
+      "instructions": "<div class='exercise-instructions'><p>Представете си, че Ученик А без да иска изтрива текста на Ученик Б: обсъдете какви стъпки ще предприемете в документа, за да върнете състоянието му отпреди 5 минути, запазвайки новите допълнения.</p></div>",
+      "resources": []
     },
     {
       "type": "accordion",
@@ -105,21 +129,28 @@
       "options": {
         "itemsAlign": "stretch",
         "titleAlign": "left",
-        "singleOpen": false
+        "singleOpen": false,
+        "startClosed": true
       },
       "items": [
         {
-          "id": "task-discussion-restore",
-          "title": "Дискусия",
-          "tone": "purple",
-          "icon": "fas fa-comments",
-          "variant": "discussion",
+          "id": "task-checklist-item",
+          "title": "Чек-лист преди предаване",
+          "tone": "orange",
+          "icon": "fas fa-list-check",
+          "variant": "task",
+          "defaultOpen": false,
           "content": [
             {
-              "type": "discussion",
-              "id": "discussion-restore-5min",
-              "title": "Дискусия",
-              "text": "Представете си, че Ученик А без да иска изтрива текста на Ученик Б: обсъдете какви стъпки ще предприемете в документа, за да върнете състоянието му отпреди 5 минути, запазвайки новите допълнения."
+              "type": "interactive-checklist",
+              "id": "task-checklist-interactive",
+              "bare": true,
+              "checkItems": [
+                "Файлът има ли правилно име (Етичен_код_Екип_[Номер].docx)?",
+                "Текстът редактиран ли е от всички членове на екипа?",
+                "Добавени ли са коментари и предложения за подобрения?",
+                "Спазени ли са правилата за съвместна работа?"
+              ]
             }
           ]
         }
@@ -131,17 +162,25 @@
       "options": {
         "itemsAlign": "stretch",
         "titleAlign": "left",
-        "singleOpen": false
+        "singleOpen": false,
+        "startClosed": true
       },
       "items": [
         {
           "id": "group-email-description",
-          "title": "Групов електронен адрес",
+          "title": "2. Групов електронен адрес",
+          "defaultOpen": false,
           "content": [
             {
               "type": "text",
               "id": "group-email-definition",
               "content": "Груповият електронен адрес е един адрес, чрез който съобщението достига до всички членове на предварително създадена група."
+            },
+            {
+              "type": "image",
+              "id": "group-email-image",
+              "src": "/images/groupAddress_cleanup.jpg",
+              "alt": "Групов електронен адрес"
             },
             {
               "type": "feature-list",
@@ -158,21 +197,66 @@
               "type": "text",
               "id": "group-email-example",
               "content": "Пример: Вместо учителят да въвежда 25 отделни адреса, може да изпрати съобщението до един групов адрес, който разпределя писмото до всички членове."
-            },
-            {
-              "type": "discussion",
-              "id": "discussion-group-email",
-              "title": "Дискусия: Кога е полезен груповият адрес?",
-              "text": "Посочете три ситуации от училищния живот, в които групов електронен адрес би улеснил комуникацията."
-            },
-            {
-              "type": "discussion",
-              "id": "discussion-group-email-usage",
-              "title": "Дискусия: Кога е полезен груповият адрес?",
-              "text": "Посочете три ситуации от училищния живот, в които групов електронен адрес би улеснил комуникацията."
             }
-          ],
-          "variant": "discussion"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "tag",
+      "id": "discussion-tag-2",
+      "icon": "fas fa-comments",
+      "text": "Дискусия",
+      "modalTarget": "discussionModal2",
+      "tone": "purple",
+      "variant": "discussion",
+      "skipNav": true
+    },
+    {
+      "type": "exercise-modal",
+      "id": "discussionModal2",
+      "title": "Дискусия: Употреба на групов адрес",
+      "instructions": "<div class='exercise-instructions'><p>Посочете три ситуации от училищния живот, в които групов електронен адрес би улеснил комуникацията.</p></div>",
+      "resources": []
+    },
+    {
+      "type": "accordion",
+      "id": "lesson-glossary",
+      "options": {
+        "itemsAlign": "stretch",
+        "titleAlign": "left",
+        "singleOpen": false
+      },
+      "items": [
+        {
+          "id": "section-glossary",
+          "title": "Речник",
+          "tone": "dark",
+          "icon": "fas fa-book-bookmark",
+          "content": [
+            {
+              "type": "glossary-list",
+              "id": "glossary-it-8-4",
+              "items": [
+                {
+                  "term": "Работа в споделен документ",
+                  "definition": "Едновременна съвместна работа от няколко потребители с промени в реално време."
+                },
+                {
+                  "term": "Групов електронен адрес",
+                  "definition": "Един електронен адрес, който пренасочва получените съобщения до всички членове на групата."
+                },
+                {
+                  "term": "История на версиите",
+                  "definition": "Функция за преглед и възстановяване на предишни промени в документ."
+                },
+                {
+                  "term": "Етичен код",
+                  "definition": "Споразумение за спазване на добри общи правила при работа в споделено дигитално пространство."
+                }
+              ]
+            }
+          ]
         }
       ]
     }

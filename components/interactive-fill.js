@@ -20,7 +20,6 @@ export function render(comp) {
         <div class="interactive-card-badge">
           <span>${esc(title)}</span>
         </div>
-        <p class="interactive-card-lead">Изберете точния термин от падащото меню, за да допълните всяко от изреченията:</p>
       </div>
       <div class="fill-sentences-wrap">
         <div class="fill-sentence-row" data-answer="${esc(comp.answer1 || 'Асинхронното')}">
@@ -43,7 +42,7 @@ export function render(comp) {
           Провери
         </button>
         <button type="button" class="btn-activity fill-reset" style="display:none;">
-          <i class="fas fa-rotate-left"></i> Нов опит
+          Нов опит
         </button>
       </div>
       <div class="fill-feedback" style="display:none;"></div>
@@ -98,7 +97,7 @@ export function init(comp) {
       feedback.innerHTML = '<i class="fas fa-circle-check"></i> Браво! И двете изречения са попълнени напълно вярно!';
       feedback.className = 'fill-feedback feedback-success';
     } else {
-      feedback.innerHTML = `<i class="fas fa-triangle-exclamation"></i> Резултат: ${score} от ${rows.length} верни. Припомнете си кое обучение се случва в реално време (на живо) и кое позволява индивидуален график.`;
+      feedback.innerHTML = `<i class="fas fa-triangle-exclamation"></i> Резултат: ${score} от ${rows.length} верни.`;
       feedback.className = 'fill-feedback feedback-info';
     }
     feedback.style.display = 'block';

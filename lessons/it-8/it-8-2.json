@@ -320,37 +320,37 @@
                     "title": "Лична информация",
                     "subtext": "адрес, местоположение, телефон",
                     "color": "#F87171",
-                    "icon": "⚠️"
+                    "icon": "fas fa-user-shield"
                   },
                   {
                     "title": "Фалшиви профили",
                     "subtext": "не всеки е този, за когото се представя",
                     "color": "#FBBF24",
-                    "icon": "⚠️"
+                    "icon": "fas fa-user-ninja"
                   },
                   {
                     "title": "Невярна информация",
                     "subtext": "подвеждащи публикации и слухове",
                     "color": "#F472B6",
-                    "icon": "⚠️"
+                    "icon": "fas fa-newspaper"
                   },
                   {
                     "title": "Кибертормоз",
                     "subtext": "обиди, заплахи, унижение",
                     "color": "#A78BFA",
-                    "icon": "⚠️"
+                    "icon": "fas fa-user-slash"
                   },
                   {
                     "title": "Загуба на контрол",
                     "subtext": "копиране и препращане на съдържание",
                     "color": "#60A5FA",
-                    "icon": "⚠️"
+                    "icon": "fas fa-share-nodes"
                   },
                   {
                     "title": "Прекомерна употреба",
                     "subtext": "време, сън, концентрация",
                     "color": "#34D399",
-                    "icon": "⚠️"
+                    "icon": "fas fa-clock"
                   }
                 ]
               }
@@ -534,7 +534,7 @@
     {
       "type": "exercise-modal",
       "id": "exerciseModal",
-      "title": "Практически казус: „Снимка от рождения ден“",
+      "title": "Дискусия: „Снимка от рождения ден“",
       "mediaSpec": {
         "illustration": {
           "alt": "Група от 6-ма тийнейджъри на рожден ден с екран на смартфон, предупредителна пин иконка за GPS метаданни и бутон Изтрий",
@@ -637,7 +637,10 @@
       },
       "items": [
         {
+          "id": "section-glossary",
           "title": "Речник",
+          "tone": "dark",
+          "icon": "fas fa-book-bookmark",
           "content": [
             {
               "type": "glossary-list",

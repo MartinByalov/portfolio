@@ -7184,10 +7184,10 @@ button.about-btn-primary {
   font-size: 0.8rem;
 }
 
-/* UserWay Accessibility Widget - positioned close to the bottom right corner and scaled down */
+/* UserWay Accessibility Widget - positioned extremely close to the bottom right corner and scaled down */
 .uwy, #userwayAccessibilityIcon, .userway-wrapper, .uwy-btn, div[id^="userway"], #userway-accessibility-icon {
-  bottom: 8px !important;
-  right: 6px !important;
+  bottom: 2px !important;
+  right: 2px !important;
   left: auto !important;
   top: auto !important;
   transform: scale(0.75) !important;

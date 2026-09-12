@@ -2,11 +2,19 @@
 <html lang="bg">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=1200">
   <title>Учебна платформа</title>
   <meta name="description" content="Учебна платформа за уроци, курсове и интерактивни инструменти">
   <meta property="og:title" content="Учебна платформа">
   <meta property="og:description" content="Учебна платформа за уроци, курсове и интерактивни инструменти">
+  <script>
+    (function() {
+      try {
+        var theme = localStorage.getItem('platform-theme') || 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })();
+  </script>
   <script src="scripts/clone-guard.js"></script>
   <!-- UserWay Accessibility Widget -->
   <script>

@@ -48,10 +48,10 @@ async function renderLessonView(courseId, lessonId) {
   const course = await getCourse(courseId);
   const allLessons = course.sections.flatMap(s => s.lessons);
   const lessonMeta = allLessons.find(l => l.id === lessonId);
+  if (!lessonMeta || !lessonMeta.lessonPath) throw new Error('Урокът все още не е добавен.');
   const lessonIndex = allLessons.findIndex(l => l.id === lessonId);
   const lessonNumber = lessonIndex + 1;
   const lessonTitleNum = lessonMeta.title ? (lessonMeta.title.match(/^(\d+\.\d+)/)?.[1] || String(lessonIndex + 1)) : String(lessonIndex + 1);
-  if (!lessonMeta || !lessonMeta.lessonPath) throw new Error('Урокът все още не е добавен.');
 
   const lesson = await fetchLesson(lessonMeta.lessonPath);
   const { headerHtml, bodyHtml, navItems } = buildLesson(lesson);
@@ -162,6 +162,7 @@ async function route() {
     if (parts.length === 0) {
       // Public landing page
       Header.setTitle('Начало', 'fa-solid fa-house');
+      document.title = 'Начало — Учебна платформа';
       document.body.classList.add('landing-mode');
       const catalog = await getCatalog();
       viewRoot.innerHTML = Home.renderLandingPage(catalog);
@@ -174,6 +175,7 @@ async function route() {
       }
       body.classList.add('portfolio-mode');
       Header.setTitle('Учителско Портфолио', 'fa-solid fa-graduation-cap');
+      document.title = 'Учителско Портфолио — Учебна платформа';
       viewRoot.innerHTML = Portfolio.renderPortfolioPage();
       requestAnimationFrame(() => Portfolio.initPortfolioPage());
     } else if (parts[0] === 'about') {
@@ -181,6 +183,8 @@ async function route() {
       if (headerRoot) headerRoot.style.display = 'none';
       if (sidebarRoot) sidebarRoot.style.display = 'none';
       if (footerRoot) footerRoot.style.display = 'none';
+      Header.setTitle('Вход с код', 'fa-solid fa-lock');
+      document.title = 'Вход с код — Учебна платформа';
       viewRoot.innerHTML = About.renderAboutPage();
       About.initAboutPage();
       About.initAboutAudio();
@@ -195,38 +199,50 @@ async function route() {
       }
       body.classList.add('portfolio-mode');
       Header.setTitle('Професионален опит', 'fa-solid fa-briefcase');
+      document.title = 'Професионален опит — Учебна платформа';
       viewRoot.innerHTML = Experience.renderExperiencePage();
     } else if (parts[0] === 'lesson' && parts[1] && parts[2]) {
-      Header.setTitle('Учебни материали', 'fa-solid fa-book-open');
+      Header.setTitle('Урок', 'fa-solid fa-file-lines');
+      document.title = 'Урок — Учебна платформа';
       await renderLessonView(parts[1], parts[2]);
     } else if (parts[0] === 'course' && parts[1]) {
-      Header.setTitle('Учебни материали', 'fa-solid fa-book-open');
+      const course = await getCourse(parts[1]);
+      const courseName = course?.title || 'Курс';
+      Header.setTitle(courseName, 'fa-solid fa-book');
+      document.title = `${courseName} — Учебна платформа`;
       await renderCourseView(parts[1]);
     } else if (parts[0] === 'subjects') {
       Header.setTitle('Учебни ресурси', 'fa-solid fa-book-open');
+      document.title = 'Учебни ресурси — Учебна платформа';
       viewRoot.innerHTML = Home.renderSubjectsPage();
     } else if (parts[0] === 'dictionary') {
       Header.setTitle('Речник', 'fa-solid fa-book');
+      document.title = 'Речник на термините — Учебна платформа';
       Glossary.cleanupGlossaryPage?.();
       viewRoot.innerHTML = Glossary.renderGlossaryPage();
       requestAnimationFrame(() => Glossary.initGlossaryPage());
     } else if (parts[0] === 'software') {
       Header.setTitle('Софтуер', 'fa-solid fa-code');
+      document.title = 'Софтуер и инструменти — Учебна платформа';
       viewRoot.innerHTML = Software.renderSoftwarePage();
       requestAnimationFrame(() => Software.initSoftwarePage());
     } else if (parts[0] === 'other' || parts[0] === 'tutorials') {
       const sub = parts[1];
       if (sub === 'nft-generator') {
         Header.setTitle('Генератор на NFT', 'fa-solid fa-cube');
+        document.title = 'Генератор на NFT — Учебна платформа';
       } else if (sub === 'charts' || sub === 'graph-js') {
         Header.setTitle('Диаграми с Graph.js', 'fa-solid fa-chart-line');
+        document.title = 'Диаграми с Graph.js — Учебна платформа';
       } else {
         Header.setTitle('Други', 'fa-solid fa-shapes');
+        document.title = 'Допълнителни материали — Учебна платформа';
       }
       viewRoot.innerHTML = Other.renderOtherPage(sub);
       requestAnimationFrame(() => Other.initOtherPage(sub));
     } else {
       Header.setTitle('Учебни ресурси', 'fa-solid fa-book-open');
+      document.title = 'Учебни ресурси — Учебна платформа';
       viewRoot.innerHTML = Home.renderSubjectsPage();
     }
   } catch (err) {

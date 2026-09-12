@@ -157,6 +157,40 @@ const CALENDAR_STYLE = `
   .cal-event-exam { border-left-color: #dc3545; }
   .cal-event-special { border-left-color: #2e9e5b; }
   .cal-event-dates { color: #777; font-size: 0.78rem; }
+  
+  /* Dark mode overrides for calendar */
+  [data-theme="dark"] .cal-popup,
+  body.dark-mode .cal-popup {
+    background: #171b2d;
+    border: 1px solid #262e4a;
+    color: #f1f5f9;
+  }
+  [data-theme="dark"] .cal-month-title,
+  body.dark-mode .cal-month-title { color: #ffffff; }
+  [data-theme="dark"] .cal-weekday,
+  body.dark-mode .cal-weekday { color: #94a3b8; }
+  [data-theme="dark"] .cal-day,
+  body.dark-mode .cal-day {
+    background: #1d2238;
+    border-color: #262e4a;
+    color: #f1f5f9;
+  }
+  [data-theme="dark"] .cal-day.weekend,
+  body.dark-mode .cal-day.weekend { background: #121524; color: #64748b; }
+  [data-theme="dark"] .cal-day.today,
+  body.dark-mode .cal-day.today { outline-color: #f17a3e; }
+  [data-theme="dark"] .cal-legend,
+  body.dark-mode .cal-legend { color: #cbd5e1; }
+  [data-theme="dark"] .cal-events-title,
+  body.dark-mode .cal-events-title { color: #ffffff; }
+  [data-theme="dark"] .cal-events-list li,
+  body.dark-mode .cal-events-list li {
+    background: #1d2238;
+    color: #f1f5f9;
+    border-color: #262e4a;
+  }
+  [data-theme="dark"] .cal-event-dates,
+  body.dark-mode .cal-event-dates { color: #94a3b8; }
 `;
 
 function ensureStyle() {

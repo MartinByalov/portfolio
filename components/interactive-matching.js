@@ -9,7 +9,11 @@ function esc(s) {
 
 export function render(comp) {
   const id = comp.id || 'interactive-matching';
-  const pairs = comp.pairs || [];
+  const rawPairs = comp.pairs || [];
+  const pairs = rawPairs.map(p => ({
+    concept: p.concept || p.left || '',
+    definition: p.definition || p.right || ''
+  }));
   const title = comp.title || 'Свържете понятията с правилното определение';
 
   const conceptOptions = pairs.map((p, idx) =>

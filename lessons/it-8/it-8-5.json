@@ -1,0 +1,339 @@
+{
+  "id": "it-8-5",
+  "slug": "it-8-information-search-win11",
+  "title": "Урок 1.4: Ефективно търсене на информация (Windows 11)",
+  "grade": 8,
+  "subject": "Информационни технологии",
+  "goal": "Пълно усвояване на методите за локално търсене във Windows 11, глобални символи (* и ?), логически и интернет оператори, решаване на задачи от Учебната тетрадка и критично оценяване на източници.",
+  "layout": {
+    "type": "lesson",
+    "contentWidth": "wide",
+    "planType": "accordion",
+    "accordion": {
+      "itemsAlign": "stretch",
+      "titleAlign": "left",
+      "contentInsideItem": true,
+      "singleOpen": false
+    }
+  },
+  "components": [
+    {
+      "type": "tag",
+      "id": "intro-tag",
+      "text": "Тема 1: Информация и информационни дейности",
+      "tone": "blue",
+      "icon": "fas fa-search"
+    },
+    {
+      "type": "accordion",
+      "id": "lesson-content-accordion",
+      "items": [
+        {
+          "id": "section-local-search-win11",
+          "title": "1. Локално търсене във файловата система (Windows 11)",
+          "icon": "fas fa-desktop",
+          "tone": "neutral",
+          "defaultOpen": true,
+          "content": [
+            {
+              "type": "image-with-instruction",
+              "id": "img-concept-map",
+              "title": "Концептуална схема: Ефективно търсене на информация",
+              "imagePath": "assets/images/concept_map_search.jpg",
+              "userUploadInstruction": "Качете в 'assets/images/' файл 'concept_map_search.jpg' – Схема от стр. 1 на PDF файла '1.3-Efektivno_tursene_na_informacia_8_klas.pdf', показваща 4-те модула (Локално търсене, Интернет търсене, Подбор, Оценка)."
+            },
+            {
+              "type": "text",
+              "id": "local-search-win11-text",
+              "content": "### 1. Теоретичен справочник и основни понятия\n* **Ефективно търсене на информация:** Процес на бързо и точно откриване на нужните файлове и надеждни източници чрез подходящи ключови думи, филтри, оператори и критерии за оценка.\n* **Поле за търсене:** Мястото, където се изписва името на търсения файл, папка или уеб заявка.\n* **Ключови думи:** Думите, които най-добре описват търсената тема.\n* **Заявка за търсене:** Текстът или комбинацията от ключови думи, изпратени към търсещата машина.\n  * **Проста заявка:** Съдържа единична дума или фраза без допълнителни ограничения.\n  * **Съставна / Разширена заявка:** Включва оператори и филтри за език, домейн, файлов формат и изключване на думи.\n\n---\n\n### 2. Локално търсене във файловата система (Windows 11)\n* **Taskbar Search:** Центрирано поле/бутон на лентата със задачи в Windows 11 за бързо стартиране на приложения, системни настройки и скорошни файлове.\n* **File Explorer с табове:** Използва се за търсене във файловата система в конкретна папка или устройство чрез новата командна лента Command Bar."
+            },
+            {
+              "type": "image-with-instruction",
+              "id": "windows11-search-comparison-image",
+              "title": "Локално търсене в Windows 11: Taskbar Search vs File Explorer",
+              "imagePath": "assets/images/win11_taskbar_vs_explorer.jpg",
+              "userUploadInstruction": "Качете в 'assets/images/' файл 'win11_taskbar_vs_explorer.jpg' – Екранна снимка от учебника (стр. 10, Фиг. 1 и 2) или от Windows 11 с Taskbar Search отляво и File Explorer с табове отдясно."
+            },
+            {
+              "type": "image-with-instruction",
+              "id": "img-wildcards-table",
+              "title": "Глобални символи при търсене (* и ?)",
+              "imagePath": "assets/images/wildcards_explanation.jpg",
+              "userUploadInstruction": "Качете в 'assets/images/' файл 'wildcards_explanation.jpg' – Таблица от стр. 4 на '1.3-Efektivno_tursene_na_informacia_8_klas.pdf' с обясненията за * и ?."
+            },
+            {
+              "type": "wildcard-visualizer",
+              "id": "wildcard-symbols-interactive",
+              "title": "Интерактивен модул: Символи * и ?",
+              "symbols": [
+                {
+                  "symbol": "* (звездичка)",
+                  "rule": "Замества произволен брой знаци (включително 0).",
+                  "examples": ["*.jpg (всички JPG снимки)", "project* (project1, project_final)", "*report*.docx (Word документи с report)"],
+                  "color": "#10B981"
+                },
+                {
+                  "symbol": "? (въпросителен знак)",
+                  "rule": "Замества точно 1 неизвестен знак.",
+                  "examples": ["photo?.jpg (намира photo1.jpg и photoA.jpg, но НЕ photo10.jpg)", "test?.docx (намира test1.docx, testA.docx)"],
+                  "color": "#F59E0B"
+                }
+              ]
+            },
+            {
+              "type": "image-with-instruction",
+              "id": "img-explorer-filters",
+              "title": "Филтри за търсене във File Explorer",
+              "imagePath": "assets/images/file_explorer_filters_menu.jpg",
+              "userUploadInstruction": "Качете в 'assets/images/' файл 'file_explorer_filters_menu.jpg' – Сканирана Фиг. 4 от стр. 10 на Учебника по ИТ (падащо меню Search Tools с опциите Date modified, Kind, Size и Other properties)."
+            },
+            {
+              "type": "venn-logic-diagram",
+              "id": "logic-operators-venn",
+              "title": "Логически оператори (AND, OR, NOT)",
+              "operators": [
+                {
+                  "name": "AND",
+                  "query": "north AND america",
+                  "effect": "Изисква едновременното присъствие и на двете думи.",
+                  "activeRegion": "intersection",
+                  "color": "#3B82F6"
+                },
+                {
+                  "name": "OR",
+                  "query": "north OR america",
+                  "effect": "Намира файлове, съдържащи коя да е от двете думи (поне едната).",
+                  "activeRegion": "union",
+                  "color": "#10B981"
+                },
+                {
+                  "name": "NOT",
+                  "query": "north NOT america",
+                  "effect": "Намира файлове с първата дума 'north', но изключва тези с 'america'.",
+                  "activeRegion": "left-only",
+                  "color": "#EF4444"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "section-web-search",
+          "title": "2. Търсене на информация в Интернет",
+          "icon": "fas fa-globe",
+          "tone": "neutral",
+          "defaultOpen": false,
+          "content": [
+            {
+              "type": "text",
+              "id": "web-search-theory-text",
+              "content": "### Основни понятия при търсене в Интернет\n* **Уеб браузър (клиент):** Приложна програма за отваряне и преглед на страници (Chrome, Edge, Firefox, Safari).\n* **Търсачка (Search Engine):** Специализирана онлайн услуга с огромни бази от данни за индексиране и търсене на съдържание (Google, Bing, Yahoo!).\n* **Метатърсачки:** Програми, които изпращат заявката едновременно към няколко търсачки."
+            },
+            {
+              "type": "image-with-instruction",
+              "id": "img-browser-vs-engine",
+              "title": "Разлика между Уеб Браузър и Търсачка",
+              "imagePath": "assets/images/browser_vs_searchengine_scheme.jpg",
+              "userUploadInstruction": "Качете в 'assets/images/' файл 'browser_vs_searchengine_scheme.jpg' – Схема от стр. 9 на PDF документа '1.3-Efektivno_tursene_na_informacia_8_klas.pdf' (1. Браузър ➔ 2. Търсачка ➔ 3. Заявка ➔ 4. Резултати)."
+            },
+            {
+              "type": "image-with-instruction",
+              "id": "img-operators-cheatsheet",
+              "title": "Таблица с уеб оператори за търсене",
+              "imagePath": "assets/images/search_operators_cheatsheet.jpg",
+              "userUploadInstruction": "Качете в 'assets/images/' файл 'search_operators_cheatsheet.jpg' – Таблица от стр. 11 на PDF документа с операторите кавички, тире, OR, site: и filetype:."
+            },
+            {
+              "type": "before-after-slider",
+              "id": "quotes-search-comparison",
+              "title": "Плъзгач Преди/След: Търсене със и без кавички",
+              "beforeLabel": "Без кавички: безопасен интернет",
+              "beforeDescription": "Намира над 15 000 000 резултата с думите разпръснати произволно в текста на различни места.",
+              "afterLabel": "С кавички: \"безопасен интернет\"",
+              "afterDescription": "Стеснява резултатите точно до точната фраза с думите една след друга."
+            },
+            {
+              "type": "query-builder",
+              "id": "advanced-query-builder-tool",
+              "title": "Конструктор на заявки",
+              "instruction": "Сглобете заявка за PDF материали за киберсигурност от сайта на МОН:",
+              "availableBlocks": [
+                { "id": "b1", "text": "\"киберсигурност\"" },
+                { "id": "b2", "text": "site:mon.bg" },
+                { "id": "b3", "text": "filetype:pdf" },
+                { "id": "b4", "text": "-футбол" }
+              ],
+              "targetPattern": ["b1", "b2", "b3"],
+              "successMessage": "Успех! Заявката е: \"киберсигурност\" site:mon.bg filetype:pdf"
+            },
+            {
+              "type": "live-search-sandbox",
+              "id": "mock-search-engine-sandbox",
+              "title": "Търсещ Симулатор (Sandbox)",
+              "placeholder": "Въведете заявка (напр. Левски -футбол, site:mon.bg, filetype:pdf)...",
+              "mockDatabase": [
+                { "title": "Васил Левски - Биография", "url": "https://history.bg/levski", "snippet": "Апостолът на свободата Васил Левски.", "tags": ["Левски", "история"] },
+                { "title": "ПФК Левски София", "url": "https://levski.bg", "snippet": "Официален сайт на футболния клуб.", "tags": ["Левски", "футбол"] },
+                { "title": "Учебна програма ИТ (МОН)", "url": "https://mon.bg/it_8klas.pdf", "snippet": "Официален PDF документ от МОН.", "tags": ["site:mon.bg", "filetype:pdf"] },
+                { "title": "Безопасно сърфиране в интернет", "url": "https://cybersecurity.bg/safe-web", "snippet": "Основни правила за сигурност и защита на личните данни.", "tags": ["\"безопасен интернет\"", "киберсигурност"] }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "section-credibility",
+          "title": "3. Критерии за оценка на достоверността",
+          "icon": "fas fa-shield-halved",
+          "tone": "neutral",
+          "defaultOpen": false,
+          "content": [
+            {
+              "type": "text",
+              "id": "credibility-intro-text",
+              "content": "При проверка на онлайн източник се прилагат следните **6 критични критерия**:\n\n1. **Автор:** Посочен ли е конкретен автор, журналист или експерт?\n2. **Източник / Домейн:** Достоверен ли е сайтът (`.gov.bg`, `.edu`, официални институции)?\n3. **Дата:** Посочена ли е дата на публикуване или последна актуализация?\n4. **Цел:** Информира ли обективно, или използва сензационни думи (\"ШОК\", \"СЕНЗАЦИЯ\")?\n5. **Доказателства:** Има ли цитирани факти, статистики и научни източници?\n6. **Съпоставка:** Потвърждава ли се информацията и от втори независим източник?"
+            },
+            {
+              "type": "image-with-instruction",
+              "id": "img-credibility-grid",
+              "title": "6-те критерия за оценка на източник",
+              "imagePath": "assets/images/credibility_criteria_grid.jpg",
+              "userUploadInstruction": "Качете в 'assets/images/' файл 'credibility_criteria_grid.jpg' – Инфографика от стр. 12 на '1.3-Efektivno_tursene_na_informacia_8_klas.pdf' (Автор, Източник, Дата, Цел, Доказателства, Съпоставка)."
+            },
+            {
+              "type": "spot-the-bug",
+              "id": "spot-fake-news-source",
+              "title": "Разпознаване на грешка: Ненадежден източник",
+              "scenarioDescription": "Намерете 3-те белега за фалшива или ненадеждна статия:",
+              "bugsToFind": [
+                { "bugTitle": "Липса на автор", "explanation": "Статията няма посочено име на експерт или журналист." },
+                { "bugTitle": "Сензационни думи", "explanation": "Използват се думи като 'ШОК!' и 'СЕНЗАЦИЯ!'." },
+                { "bugTitle": "Анонимен домейн с реклами", "explanation": "Уеб адресът е от безплатен домейн с прекомерни реклами." }
+              ]
+            },
+            {
+              "type": "interactive-checklist",
+              "id": "credibility-assessment-checklist",
+              "title": "Чек-лист за оценка на източник",
+              "checkItems": [
+                "Посочен ли е конкретен автор или официална организация?",
+                "Има ли дата на публикуване или актуализация?",
+                "Домейнът официален или образователен ли е (.gov, .edu, .bg)?",
+                "Има ли посочени факти, цитати и научни препратки?",
+                "Потвърждава ли се информацията и от втори източник?"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "accordion",
+      "id": "interactive-workbook-section",
+      "items": [
+        {
+          "id": "interactive-tasks-item",
+          "title": "Задачи от Учебната Тетрадка (Стр. 8 - Windows 11)",
+          "tone": "orange",
+          "icon": "fas fa-book-open-reader",
+          "defaultOpen": false,
+          "content": [
+            {
+              "type": "image-with-instruction",
+              "id": "img-workbook-page8",
+              "title": "Страница 8 от Учебната Тетрадка",
+              "imagePath": "assets/images/workbook_page8_scanned.jpg",
+              "userUploadInstruction": "Качете в 'assets/images/' файл 'workbook_page8_scanned.jpg' – Сканираната 8-ма страница от '8 клас ИТ Учебна тетрадка.pdf' с попълнените отговори за Задачи 1, 2, 3 и 4."
+            },
+            {
+              "type": "match-pairs",
+              "id": "wb-task1-match-pairs",
+              "title": "Задача 1. Понятия и дефиниции",
+              "pairs": [
+                { "left": "Ключови думи", "right": "Думи, чрез които се извършва търсенето в интернет." },
+                { "left": "Заявка за търсене", "right": "Комбинация от ключови думи, изпратени към търсеща машина." },
+                { "left": "Поле за търсене", "right": "Място, където се изписва името на търсения файл или папка." }
+              ]
+            },
+            {
+              "type": "interactive-fill",
+              "id": "wb-task2-interactive-fill",
+              "title": "Задача 2. Попълнете липсващите думи",
+              "sentence1": "са специални програми, които събират информация от достъпните страници в интернет.",
+              "answer1": "Търсещите машини",
+              "sentence2": "са програми, предоставящи възможност за търсене едновременно чрез няколко търсачки.",
+              "answer2": "Метатърсачки",
+              "sentence3": "За да се свърже с търсещите машини, потребителят използва програма , която отправя заявка.",
+              "answer3": "Клиент"
+            },
+            {
+              "type": "category-sorter",
+              "id": "wb-task3-filters-sorter-win11",
+              "title": "Задача 3. Филтри във File Explorer на Windows 11",
+              "categories": [
+                { "id": "date", "name": "Време на създаване (Date Modified)" },
+                { "id": "size", "name": "Големина на файла (Size)" },
+                { "id": "kind", "name": "Вид (Kind)" },
+                { "id": "other", "name": "Други свойства (Other properties)" }
+              ],
+              "items": [
+                { "text": "Днес, миналата седмица, миналия месец", "categoryId": "date" },
+                { "text": "Малки (<100KB), средни, големи файлове", "categoryId": "size" },
+                { "text": "Документ, изображение, видео, папка", "categoryId": "kind" },
+                { "text": "Тип на файла, автор, тагове", "categoryId": "other" }
+              ]
+            },
+            {
+              "type": "quiz",
+              "id": "wb-task4-interactive-quiz",
+              "title": "Задача 4. Въпроси Да / Не",
+              "questions": [
+                {
+                  "question": "1) Операторът AND намира файлове, съдържащи коя да е от търсените думи.",
+                  "options": ["Да", "Не"],
+                  "correctIndex": 1,
+                  "explanation": "AND изисква едновременното присъствие на двете думи."
+                },
+                {
+                  "question": "2) Колкото повече ограничения се задават в заявката, толкова резултатът е по-качествен.",
+                  "options": ["Да", "Не"],
+                  "correctIndex": 0,
+                  "explanation": "Точните ограничения премахват излишните резултати и подобряват качеството."
+                },
+                {
+                  "question": "3) Операторът OR намира само файлове с двете думи едновременно.",
+                  "options": ["Да", "Не"],
+                  "correctIndex": 1,
+                  "explanation": "OR намира файлове, съдържащи поне една от думите."
+                },
+                {
+                  "question": "4) Ролята на програма Клиент се изпълнява от уеб браузърите.",
+                  "options": ["Да", "Не"],
+                  "correctIndex": 0,
+                  "explanation": "Уеб браузърът (Chrome, Edge, Safari) е клиентът, изпращащ заявки към търсачката."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "tag",
+      "id": "exercise-tag",
+      "icon": "fas fa-users-gear",
+      "text": "Практически Казус (Групова Работа)",
+      "modalTarget": "exerciseModal",
+      "tone": "orange"
+    },
+    {
+      "type": "exercise-modal",
+      "id": "exerciseModal",
+      "title": "Практически казус: „Изгубеният проект за соларна енергия“",
+      "mediaInstruction": "Папка за упражнение: SEARCH_8_CLASS (Documents, Presentations, Images, Spreadsheets, Installers, Content_Search, Mixed_Files)",
+      "imagePath": "assets/images/practical_exercise_folder_tree.jpg",
+      "userUploadInstruction": "Качете в 'assets/images/' файл 'practical_exercise_folder_tree.jpg' – Схема от стр. 1 на PDF файла 'Praktichesko_uprazhnenie_Tursene_na_failove_i_papki_8_klas.pdf'.",
+      "instructions": "Екип от ученици търси изгубен PDF файл с име, съдържащо 'соларна', във файловата система на Windows 11, създаден през последния месец, както и научен доклад в PDF формат от официалния сайт на МОН.\n\n**Задачи за екипа:**\n1. Напишете точния шаблон с `*` или `?` за локално търсене на файла (`*соларна*.pdf`).\n2. Посочете кои филтри ще използвате в лентата Search Options (Kind = Document, Date Modified = Last month, Size = Medium).\n3. Сглобете разширена интернет заявка за PDF материали от сайта на МОН без реклами: `site:mon.bg filetype:pdf \"соларна енергия\"`.",
+      "resources": []
+    }
+  ]
+}

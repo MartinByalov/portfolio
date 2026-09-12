@@ -12,6 +12,13 @@ import * as UiHotspots from './ui-hotspots.js';
 import * as SpotTheBug from './spot-the-bug.js';
 import * as InteractiveChecklist from './interactive-checklist.js';
 import * as TrueFalseSwipe from './true-false-swipe.js';
+import * as WildcardVisualizer from './wildcard-visualizer.js';
+import * as VennLogicDiagram from './venn-logic-diagram.js';
+import * as BeforeAfterSlider from './before-after-slider.js';
+import * as QueryBuilder from './query-builder.js';
+import * as LiveSearchSandbox from './live-search-sandbox.js';
+import * as CategorySorter from './category-sorter.js';
+import * as ImageWithInstruction from './image-with-instruction.js';
 
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
@@ -254,7 +261,8 @@ function renderBlock(b) {
     case 'video':                  return renderRichBlock(b);
     case 'subsection':             return renderSubsectionBlock(b);
     case 'quiz':                   return renderQuizBlock(b);
-    case 'interactive-matching':   return InteractiveMatching.render(b);
+    case 'interactive-matching':
+    case 'match-pairs':            return InteractiveMatching.render(b);
     case 'interactive-fill':       return InteractiveFill.render(b);
     case 'interactive-step-guide': return InteractiveStepGuide.render(b);
     case 'mood-animal-generator':  return MoodAnimalGenerator.render(b);
@@ -262,8 +270,15 @@ function renderBlock(b) {
     case 'spot-the-bug':           return SpotTheBug.render(b);
     case 'interactive-checklist':  return InteractiveChecklist.render(b);
     case 'true-false-swipe':       return TrueFalseSwipe.render(b);
-        case 'resource-download-box':  return ResourceDownloadBox.render(b);
+    case 'resource-download-box':  return ResourceDownloadBox.render(b);
     case 'drag-and-drop':          return DragAndDrop.render(b);
+    case 'wildcard-visualizer':    return WildcardVisualizer.render(b);
+    case 'venn-logic-diagram':     return VennLogicDiagram.render(b);
+    case 'before-after-slider':    return BeforeAfterSlider.render(b);
+    case 'query-builder':          return QueryBuilder.render(b);
+    case 'live-search-sandbox':    return LiveSearchSandbox.render(b);
+    case 'category-sorter':        return CategorySorter.render(b);
+    case 'image-with-instruction': return ImageWithInstruction.render(b);
     default:                       return '<!-- unknown lesson block type: ' + esc(b.type) + ' -->';
   }
 }
@@ -321,7 +336,7 @@ export function init(comp) {
     (it.content || []).forEach(b => {
       if (!b) return;
       if (b.type === 'quiz' && b.id) initQuizBlock(root, b);
-      if (b.type === 'interactive-matching') InteractiveMatching.init(b);
+      if (b.type === 'interactive-matching' || b.type === 'match-pairs') InteractiveMatching.init(b);
       if (b.type === 'interactive-fill') InteractiveFill.init(b);
       if (b.type === 'interactive-step-guide') InteractiveStepGuide.init(b);
       if (b.type === 'mood-animal-generator') MoodAnimalGenerator.init(b);
@@ -331,6 +346,13 @@ export function init(comp) {
       if (b.type === 'true-false-swipe') TrueFalseSwipe.init(b);
       if (b.type === 'resource-download-box') ResourceDownloadBox.init(b);
       if (b.type === 'drag-and-drop') DragAndDrop.init(b);
+      if (b.type === 'wildcard-visualizer') WildcardVisualizer.init(b);
+      if (b.type === 'venn-logic-diagram') VennLogicDiagram.init(b);
+      if (b.type === 'before-after-slider') BeforeAfterSlider.init(b);
+      if (b.type === 'query-builder') QueryBuilder.init(b);
+      if (b.type === 'live-search-sandbox') LiveSearchSandbox.init(b);
+      if (b.type === 'category-sorter') CategorySorter.init(b);
+      if (b.type === 'image-with-instruction') ImageWithInstruction.init(b);
     });
   });
 }

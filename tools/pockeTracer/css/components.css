@@ -668,6 +668,214 @@
   border-radius: 12px;
 }
 
+/* Cisco Command Help Modal */
+.cisco-modal-content {
+  background: var(--bg-darker);
+  width: 92%;
+  max-width: 900px;
+  max-height: 85vh;
+  padding: 0;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+}
+
+.cisco-help-header {
+  padding: 14px 20px;
+  background: var(--bg-dark);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cisco-help-title {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cisco-help-close {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.4em;
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: 4px;
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+.cisco-help-close:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.cisco-help-toolbar {
+  padding: 12px 20px;
+  background: var(--bg-dark);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cisco-search-box {
+  display: flex;
+  align-items: center;
+  background: var(--bg-light);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 12px;
+  gap: 8px;
+}
+
+.cisco-search-input {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  outline: none;
+  width: 100%;
+  font-size: 0.9em;
+}
+
+.cisco-filter-chips {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: thin;
+}
+
+.cisco-filter-chip {
+  padding: 4px 12px;
+  font-size: 0.78em;
+  border-radius: 14px;
+  background: var(--bg-light);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.cisco-filter-chip.active,
+.cisco-filter-chip:hover {
+  background: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+.cisco-help-body {
+  padding: 18px 20px;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cisco-section {
+  background: var(--bg-dark);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.cisco-section-header {
+  font-size: 0.92em;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 6px;
+}
+
+.cisco-cmd-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cisco-cmd-item {
+  display: grid;
+  grid-template-columns: 270px 120px 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 7px 10px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.25);
+  font-size: 0.85em;
+  transition: background 0.15s;
+}
+
+.cisco-cmd-item:hover {
+  background: rgba(0, 212, 255, 0.08);
+}
+
+.cisco-cmd-code {
+  font-family: 'Consolas', 'Courier New', monospace;
+  color: #75beff;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.cisco-cmd-mode {
+  display: inline-block;
+  font-family: monospace;
+  font-size: 0.78em;
+  color: var(--accent-yellow);
+  padding: 2px 6px;
+  background: rgba(255, 165, 2, 0.12);
+  border: 1px solid rgba(255, 165, 2, 0.25);
+  border-radius: 4px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.cisco-cmd-desc {
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.cisco-cmd-example {
+  color: var(--text-muted);
+  font-size: 0.82em;
+  font-family: monospace;
+  margin-top: 2px;
+}
+
+.menu-btn.help-btn {
+  font-weight: 700;
+  padding: 7px 12px;
+  background: rgba(0, 212, 255, 0.12);
+  border-color: rgba(0, 212, 255, 0.5);
+  color: var(--accent);
+}
+
+.menu-btn.help-btn:hover {
+  background: var(--accent);
+  color: #000;
+}
+
+@media (max-width: 768px) {
+  .cisco-cmd-item {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
+
 .topology-options {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

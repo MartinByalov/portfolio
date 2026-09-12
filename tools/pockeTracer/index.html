@@ -23,6 +23,7 @@
                 <button class="menu-btn" onclick="app.newProject()">📄 New</button>
                 <button class="menu-btn" onclick="app.openProject()">📂 Open</button>
                 <button class="menu-btn" onclick="app.saveProject()">💾 Save</button>
+                <button class="menu-btn help-btn" id="ciscoHelpBtn" onclick="app.openCiscoHelp()" title="Cisco Команди — Ръководство">❓</button>
             </div>
         </div>
 
@@ -309,6 +310,360 @@
                                 <div class="topology-option-icon">🌲</div>
                                 <div class="topology-option-desc">Tree</div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cisco Command Guide Modal -->
+    <div class="modal" id="ciscoHelpModal" onclick="if(event.target===this)app.closeCiscoHelp()">
+        <div class="cisco-modal-content">
+            <div class="cisco-help-header">
+                <div class="cisco-help-title">
+                    <span>📖</span>
+                    <span>Cisco IOS Команди — Ръководство & Справка</span>
+                </div>
+                <button class="cisco-help-close" onclick="app.closeCiscoHelp()" title="Затвори (Esc)">✕</button>
+            </div>
+
+            <div class="cisco-help-toolbar">
+                <div class="cisco-search-box">
+                    <span>🔍</span>
+                    <input type="text" id="ciscoSearchInput" class="cisco-search-input" 
+                           placeholder="Търсене на команда (напр. vlan, ip route, trunk, dhcp, nat, ping)..." 
+                           oninput="app.filterCiscoHelp(this.value)">
+                </div>
+                <div class="cisco-filter-chips">
+                    <button class="cisco-filter-chip active" onclick="app.setHelpCategory('all', this)">Всички</button>
+                    <button class="cisco-filter-chip" onclick="app.setHelpCategory('modes', this)">Йерархия и режими</button>
+                    <button class="cisco-filter-chip" onclick="app.setHelpCategory('interfaces', this)">Интерфейси и IP</button>
+                    <button class="cisco-filter-chip" onclick="app.setHelpCategory('vlan', this)">VLAN & Комутация</button>
+                    <button class="cisco-filter-chip" onclick="app.setHelpCategory('routing', this)">Маршрутизация & NAT</button>
+                    <button class="cisco-filter-chip" onclick="app.setHelpCategory('dhcp', this)">DHCP Сървър</button>
+                    <button class="cisco-filter-chip" onclick="app.setHelpCategory('show', this)">Диагностика & Show</button>
+                    <button class="cisco-filter-chip" onclick="app.setHelpCategory('enddev', this)">Крайни устройства</button>
+                </div>
+            </div>
+
+            <div class="cisco-help-body" id="ciscoHelpBody">
+                <!-- 1. Йерархия и навигация -->
+                <div class="cisco-section" data-cat="modes">
+                    <div class="cisco-section-header">
+                        <span>🔰</span>
+                        <span>Йерархия на режимите (Command Modes) и навигация</span>
+                    </div>
+                    <div class="cisco-cmd-list">
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">enable</span>
+                            <span class="cisco-cmd-mode">User &gt;</span>
+                            <div class="cisco-cmd-desc">Преминаване от потребителски към привилегирован режим (EXEC mode).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">configure terminal <span style="color:var(--text-muted)">(conf t)</span></span>
+                            <span class="cisco-cmd-mode">Priv #</span>
+                            <div class="cisco-cmd-desc">Влизане в глобален конфигурационен режим на устройството.</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">exit</span>
+                            <span class="cisco-cmd-mode">Всички</span>
+                            <div class="cisco-cmd-desc">Връщане с едно йерархично ниво назад.</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">end <span style="color:var(--text-muted)">(или Ctrl+Z)</span></span>
+                            <span class="cisco-cmd-mode">(config*)#</span>
+                            <div class="cisco-cmd-desc">Директно излизане до привилегирован режим (<code>Router#</code>).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">hostname &lt;име&gt;</span>
+                            <span class="cisco-cmd-mode">(config)#</span>
+                            <div class="cisco-cmd-desc">Задава име на устройството (напр. <code>hostname R1_Sofia</code>).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">write memory <span style="color:var(--text-muted)">(wr)</span></span>
+                            <span class="cisco-cmd-mode">Priv #</span>
+                            <div class="cisco-cmd-desc">Запазва текущата конфигурация (running-config) в постоянната памет NVRAM.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Интерфейси и IP адресация -->
+                <div class="cisco-section" data-cat="interfaces">
+                    <div class="cisco-section-header">
+                        <span>🔌</span>
+                        <span>Конфигуриране на интерфейси и IP адреси</span>
+                    </div>
+                    <div class="cisco-cmd-list">
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">interface &lt;тип/номер&gt;</span>
+                            <span class="cisco-cmd-mode">(config)#</span>
+                            <div class="cisco-cmd-desc">Влизане в режим на интерфейс (напр. <code>int Gi0/0</code>, <code>int Fa0/1</code>, <code>int Vlan10</code>).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">interface range &lt;порт-порт&gt;</span>
+                            <span class="cisco-cmd-mode">(config)#</span>
+                            <div class="cisco-cmd-desc">Едновременна конфигурация на група портове (напр. <code>int range Fa0/1-24</code>).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">ip address &lt;ip&gt; &lt;маска&gt;</span>
+                            <span class="cisco-cmd-mode">(config-if)#</span>
+                            <div class="cisco-cmd-desc">Задаване на IPv4 адрес и маска (напр. <code>ip address 192.168.1.1 255.255.255.0</code>).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">no shutdown</span>
+                            <span class="cisco-cmd-mode">(config-if)#</span>
+                            <div class="cisco-cmd-desc">Активиране / пускане на интерфейса (състояние UP).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">shutdown</span>
+                            <span class="cisco-cmd-mode">(config-if)#</span>
+                            <div class="cisco-cmd-desc">Административно спиране / изключване на порта.</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">description &lt;текст&gt;</span>
+                            <span class="cisco-cmd-mode">(config-if)#</span>
+                            <div class="cisco-cmd-desc">Добавя пояснително описание на интерфейса (напр. <code>description Link_to_Core</code>).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">ip default-gateway &lt;ip&gt;</span>
+                            <span class="cisco-cmd-mode">(config)#</span>
+                            <div class="cisco-cmd-desc">Задава шлюз по подразбиране за управление на L2 суич.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. VLAN и Комутация -->
+                <div class="cisco-section" data-cat="vlan">
+                    <div class="cisco-section-header">
+                        <span>⚡</span>
+                        <span>VLAN мрежи, Access & Trunk портове (Суичинг)</span>
+                    </div>
+                    <div class="cisco-cmd-list">
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">vlan &lt;id&gt;</span>
+                            <span class="cisco-cmd-mode">(config)#</span>
+                            <div class="cisco-cmd-desc">Създава виртуален LAN сегмент (напр. <code>vlan 10</code>).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">name &lt;име&gt;</span>
+                            <span class="cisco-cmd-mode">(config-vlan)#</span>
+                            <div class="cisco-cmd-desc">Задава име на създадения VLAN (напр. <code>name Teachers</code>).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">switchport mode access</span>
+                            <span class="cisco-cmd-mode">(config-if)#</span>
+                            <div class="cisco-cmd-desc">Настройва порта в режим Access за крайно устройство (PC, принтер, камера).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">switchport access vlan &lt;id&gt;</span>
+                            <span class="cisco-cmd-mode">(config-if)#</span>
+                            <div class="cisco-cmd-desc">Присвоява порта към посочения VLAN (напр. <code>switchport access vlan 20</code>).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">switchport mode trunk</span>
+                            <span class="cisco-cmd-mode">(config-if)#</span>
+                            <div class="cisco-cmd-desc">Превръща порта в Trunk канал (пренася маркиран трафик за множество VLAN-и).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">switchport trunk allowed vlan &lt;списък&gt;</span>
+                            <span class="cisco-cmd-mode">(config-if)#</span>
+                            <div class="cisco-cmd-desc">Ограничава кои VLAN-и могат да преминават през транка (напр. <code>10,20,30</code> или <code>all</code>).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">switchport trunk encapsulation dot1q</span>
+                            <span class="cisco-cmd-mode">(config-if)#</span>
+                            <div class="cisco-cmd-desc">Задава стандартизирано 802.1Q маркиране на транк порта (при L3 суич 3560).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">no switchport</span>
+                            <span class="cisco-cmd-mode">(config-if)#</span>
+                            <div class="cisco-cmd-desc">Премахва L2 суич функционалността и прави порта L3 рутиращ порт (L3 Switch).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">spanning-tree portfast</span>
+                            <span class="cisco-cmd-mode">(config-if)#</span>
+                            <div class="cisco-cmd-desc">Пропуска състоянията на Spanning Tree за незабавно преминаване към forwarding.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Маршрутизация и NAT -->
+                <div class="cisco-section" data-cat="routing">
+                    <div class="cisco-section-header">
+                        <span>🌐</span>
+                        <span>IP Маршрутизация (Routing), Статични маршрути и NAT</span>
+                    </div>
+                    <div class="cisco-cmd-list">
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">ip routing</span>
+                            <span class="cisco-cmd-mode">(config)#</span>
+                            <div class="cisco-cmd-desc">Активира IP маршрутизирането на L3 устройство (за Switch 3560-24PS).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">ip route &lt;мрежа&gt; &lt;маска&gt; &lt;next-hop&gt;</span>
+                            <span class="cisco-cmd-mode">(config)#</span>
+                            <div class="cisco-cmd-desc">Добавя статичен маршрут (напр. <code>ip route 192.168.20.0 255.255.255.0 10.0.0.2</code>).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">ip route 0.0.0.0 0.0.0.0 &lt;gateway&gt;</span>
+                            <span class="cisco-cmd-mode">(config)#</span>
+                            <div class="cisco-cmd-desc">Default Route (Маршрут по подразбиране към интернет или upstream рутер).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">no ip route &lt;мрежа&gt; &lt;маска&gt;</span>
+                            <span class="cisco-cmd-mode">(config)#</span>
+                            <div class="cisco-cmd-desc">Премахва дефиниран статичен маршрут.</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">ip nat inside / ip nat outside</span>
+                            <span class="cisco-cmd-mode">(config-if)#</span>
+                            <div class="cisco-cmd-desc">Обозначава интерфейса съответно като вътрешен (LAN) или външен (WAN/ISP) за NAT.</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">access-list &lt;1-99&gt; permit &lt;мрежа&gt; &lt;wildcard&gt;</span>
+                            <span class="cisco-cmd-mode">(config)#</span>
+                            <div class="cisco-cmd-desc">Дефинира списък с разрешени локални адреси (напр. <code>access-list 1 permit 192.168.0.0 0.0.255.255</code>).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">ip nat inside source list &lt;acl&gt; interface &lt;if&gt; overload</span>
+                            <span class="cisco-cmd-mode">(config)#</span>
+                            <div class="cisco-cmd-desc">Активира PAT (Port Address Translation / NAT Overload) през посочения външен интерфейс.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. DHCP Сървър -->
+                <div class="cisco-section" data-cat="dhcp">
+                    <div class="cisco-section-header">
+                        <span>📡</span>
+                        <span>DHCP Сървър (Автоматично конфигуриране на IP адреси)</span>
+                    </div>
+                    <div class="cisco-cmd-list">
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">ip dhcp excluded-address &lt;от&gt; [&lt;до&gt;]</span>
+                            <span class="cisco-cmd-mode">(config)#</span>
+                            <div class="cisco-cmd-desc">Изключва статично заети адреси от раздаване (напр. <code>ip dhcp excluded 192.168.10.1 192.168.10.10</code>).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">ip dhcp pool &lt;име&gt;</span>
+                            <span class="cisco-cmd-mode">(config)#</span>
+                            <div class="cisco-cmd-desc">Създава нов DHCP пул и влиза в подрежим <code>(dhcp-config)#</code>.</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">network &lt;мрежа&gt; &lt;маска&gt;</span>
+                            <span class="cisco-cmd-mode">(dhcp-config)#</span>
+                            <div class="cisco-cmd-desc">Задава адресния диапазон на мрежата за раздаване (напр. <code>network 192.168.10.0 255.255.255.0</code>).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">default-router &lt;ip&gt;</span>
+                            <span class="cisco-cmd-mode">(dhcp-config)#</span>
+                            <div class="cisco-cmd-desc">Задава адрес на шлюза по подразбиране (Default Gateway) за DHCP клиентите.</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">dns-server &lt;ip&gt;</span>
+                            <span class="cisco-cmd-mode">(dhcp-config)#</span>
+                            <div class="cisco-cmd-desc">Задава DNS сървър (напр. <code>dns-server 8.8.8.8</code>).</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Диагностика и Show -->
+                <div class="cisco-section" data-cat="show">
+                    <div class="cisco-section-header">
+                        <span>🔍</span>
+                        <span>Диагностика, проверка и мониторинг (Show &amp; Test)</span>
+                    </div>
+                    <div class="cisco-cmd-list">
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">show ip interface brief <span style="color:var(--text-muted)">(sh ip int br)</span></span>
+                            <span class="cisco-cmd-mode">Priv #</span>
+                            <div class="cisco-cmd-desc">Обобщен преглед на всички портове: техните IP адреси, статус (UP/DOWN) и протокол.</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">show running-config <span style="color:var(--text-muted)">(sh run)</span></span>
+                            <span class="cisco-cmd-mode">Priv #</span>
+                            <div class="cisco-cmd-desc">Показва цялостната активна конфигурация в RAM паметта на устройството.</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">show ip route</span>
+                            <span class="cisco-cmd-mode">Priv #</span>
+                            <div class="cisco-cmd-desc">Извежда пълната маршрутизираща таблица (Connected 'C', Static 'S', Default '*').</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">show vlan <span style="color:var(--text-muted)">(sh vlan)</span></span>
+                            <span class="cisco-cmd-mode">Priv #</span>
+                            <div class="cisco-cmd-desc">Показва всички активни VLAN-и и портовете, асоциирани с тях.</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">show arp</span>
+                            <span class="cisco-cmd-mode">Priv #</span>
+                            <div class="cisco-cmd-desc">Извежда ARP кеша (съответствие между IP и MAC адресите на съседните устройства).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">show interfaces [&lt;порт&gt;]</span>
+                            <span class="cisco-cmd-mode">Priv #</span>
+                            <div class="cisco-cmd-desc">Детайлна статистика и хардуерен MAC адрес за конкретен или всички интерфейси.</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">ping &lt;ip&gt;</span>
+                            <span class="cisco-cmd-mode">Всички</span>
+                            <div class="cisco-cmd-desc">Изпраща 4 ICMP ехо-пакета за тестване на мрежова свързаност (с време на отговор).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">traceroute &lt;ip&gt; <span style="color:var(--text-muted)">(tracert)</span></span>
+                            <span class="cisco-cmd-mode">Всички</span>
+                            <div class="cisco-cmd-desc">Трасира междинните рутери (хопове) по пътя до целевия IP адрес.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. PockeTracer помощни и крайни устройства -->
+                <div class="cisco-section" data-cat="enddev">
+                    <div class="cisco-section-header">
+                        <span>💻</span>
+                        <span>PockeTracer и команди за крайни устройства (PC / Laptop / Server)</span>
+                    </div>
+                    <div class="cisco-cmd-list">
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">connect &lt;име_устройство&gt;</span>
+                            <span class="cisco-cmd-mode">PockeTracer&gt;</span>
+                            <div class="cisco-cmd-desc">Отваря конзолна CLI сесия към посоченото устройство (напр. <code>connect Router_Core</code>).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">disconnect</span>
+                            <span class="cisco-cmd-mode">Всяко у-во</span>
+                            <div class="cisco-cmd-desc">Затваря текущата конзолна сесия и се връща в PockeTracer&gt;.</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">show devices</span>
+                            <span class="cisco-cmd-mode">PockeTracer&gt;</span>
+                            <div class="cisco-cmd-desc">Показва списък на всички разположени устройства, техния статус и конфигурирани IP-та.</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">show connections</span>
+                            <span class="cisco-cmd-mode">PockeTracer&gt;</span>
+                            <div class="cisco-cmd-desc">Извежда всички прокарани кабели и връзки между устройствата.</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">show topology</span>
+                            <span class="cisco-cmd-mode">PockeTracer&gt;</span>
+                            <div class="cisco-cmd-desc">Автоматично разпознава типа на топологията (Star, Bus, Ring, Mesh, Tree).</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">ipconfig</span>
+                            <span class="cisco-cmd-mode">PC / Server</span>
+                            <div class="cisco-cmd-desc">Показва IPv4 адреса, подмрежовата маска и шлюза по подразбиране на компютъра.</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">clear</span>
+                            <span class="cisco-cmd-mode">Всички</span>
+                            <div class="cisco-cmd-desc">Изчиства съдържанието на конзолния екран.</div>
+                        </div>
+                        <div class="cisco-cmd-item">
+                            <span class="cisco-cmd-code">Tab / ↑ ↓</span>
+                            <span class="cisco-cmd-mode">Клавиатура</span>
+                            <div class="cisco-cmd-desc"><code>Tab</code> за автоматично дописване на командата, стрелки нагоре/надолу за история.</div>
                         </div>
                     </div>
                 </div>

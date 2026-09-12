@@ -147,6 +147,70 @@ const App = (() => {
     });
   };
 
+  let activeHelpCat = 'all';
+
+  const openCiscoHelp = () => {
+    const modal = Utils.qs('#ciscoHelpModal');
+    if (!modal) return;
+    modal.classList.add('active');
+    const searchInput = Utils.qs('#ciscoSearchInput');
+    if (searchInput) {
+      searchInput.value = '';
+      filterCiscoHelp('');
+      setTimeout(() => searchInput.focus(), 50);
+    }
+  };
+
+  const closeCiscoHelp = () => {
+    const modal = Utils.qs('#ciscoHelpModal');
+    if (modal) modal.classList.remove('active');
+  };
+
+  const setHelpCategory = (cat, btn) => {
+    activeHelpCat = cat;
+    Utils.qsa('.cisco-filter-chip').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    const term = Utils.qs('#ciscoSearchInput')?.value || '';
+    filterCiscoHelp(term);
+  };
+
+  const filterCiscoHelp = (term) => {
+    const q = (term || '').toLowerCase().trim();
+    const sections = Utils.qsa('.cisco-section');
+    sections.forEach(sec => {
+      const secCat = sec.dataset.cat;
+      const matchCat = activeHelpCat === 'all' || secCat === activeHelpCat;
+      const items = sec.querySelectorAll('.cisco-cmd-item');
+      let visibleItemCount = 0;
+
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        const matchesSearch = !q || text.includes(q);
+        if (matchCat && matchesSearch) {
+          item.style.display = 'grid';
+          visibleItemCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      if (matchCat && visibleItemCount > 0) {
+        sec.style.display = 'block';
+      } else {
+        sec.style.display = 'none';
+      }
+    });
+  };
+
+  // Keyboard shortcut (Escape to close modals)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeCiscoHelp();
+      const topoModal = Utils.qs('#topologyModal');
+      if (topoModal) topoModal.classList.remove('active');
+    }
+  });
+
   return {
     init,
     get zoom() { return zoom; },
@@ -161,7 +225,9 @@ const App = (() => {
     newProject, saveProject, openProject, importProject,
     getWorkspace,
     deleteSelected,
-    duplicateDevice
+    duplicateDevice,
+    openCiscoHelp, closeCiscoHelp,
+    setHelpCategory, filterCiscoHelp
   };
 })();
 

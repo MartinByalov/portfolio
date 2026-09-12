@@ -44,6 +44,15 @@ export function render(comp) {
           ${illustration}
           <div class="exercise-instructions">
             ${formatInstructions(comp.instructions)}
+            ${comp.userUploadInstruction ? `
+              <div class="iwi-upload-instruction" style="margin-top: 16px;">
+                <div class="iwi-instruction-header">
+                  <i class="fas fa-camera"></i>
+                  <span>РЕАЛЕН ПЛЕЙСХОЛДЪР ЗА ИЗОБРАЖЕНИЕ:</span>
+                </div>
+                <p class="iwi-instruction-text">${comp.userUploadInstruction}</p>
+              </div>
+            ` : ''}
             ${resources ? `
               <h5 class="resource-section-title">Ресурсни файлове</h5>
               <div class="resource-list">${resources}</div>

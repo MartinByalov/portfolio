@@ -7,12 +7,65 @@ function esc(s) {
   });
 }
 
+function extractSentences(comp) {
+  if (comp.sentences && Array.isArray(comp.sentences)) {
+    return comp.sentences.map(s => ({
+      text: s.text || s.sentence || '',
+      answer: s.answer || '',
+      prefix: s.prefix || '',
+      suffix: s.suffix || ''
+    }));
+  }
+
+  const items = [];
+  for (let i = 1; i <= 20; i++) {
+    const sKey = `sentence${i}`;
+    const aKey = `answer${i}`;
+    if (comp[sKey] !== undefined || comp[aKey] !== undefined) {
+      items.push({
+        text: comp[sKey] || '',
+        answer: comp[aKey] || '',
+        prefix: comp[`prefix${i}`] || '',
+        suffix: comp[`suffix${i}`] || ''
+      });
+    }
+  }
+
+  if (items.length === 0) {
+    items.push(
+      { text: comp.sentence1 || '', answer: comp.answer1 || 'Асинхронното' },
+      { text: comp.sentence2 || '', answer: comp.answer2 || 'Синхронното' }
+    );
+  }
+  return items;
+}
+
 export function render(comp) {
   const id = comp.id || 'interactive-fill';
   const title = comp.title || 'Попълнете липсващата дума';
-  const options = ['Синхронното', 'Асинхронното'];
+  const sentences = extractSentences(comp);
+
+  const rawOptions = comp.options || Array.from(new Set(sentences.map(s => s.answer).filter(Boolean)));
+  const sortedOptions = rawOptions.slice().sort();
+
   const optHtml = `<option value="">-- Изберете термин --</option>`
-    + options.map(o => `<option value="${esc(o)}">${esc(o)}</option>`).join('');
+    + sortedOptions.map(o => `<option value="${esc(o)}">${esc(o)}</option>`).join('');
+
+  const rows = sentences.map((item, idx) => {
+    // If text contains a blank indicator or starts with text
+    return `
+      <div class="fill-sentence-row" data-answer="${esc(item.answer)}">
+        <span class="fill-item-num">${idx + 1}.</span>
+        ${item.prefix ? `<span class="fill-prefix">${esc(item.prefix)} </span>` : ''}
+        <span class="fill-drop-wrap">
+          <select class="fill-select" aria-label="Термин ${idx + 1}">${optHtml}</select>
+          <span class="fill-status-ico"></span>
+        </span>
+        <span class="fill-text"> ${esc(item.text)}</span>
+        ${item.suffix ? `<span class="fill-suffix"> ${esc(item.suffix)}</span>` : ''}
+      </div>
+    `;
+  }).join('');
 
   return `
     <div class="interactive-fill-card" id="${id}">
@@ -22,20 +75,7 @@ export function render(comp) {
         </div>
       </div>
       <div class="fill-sentences-wrap">
-        <div class="fill-sentence-row" data-answer="${esc(comp.answer1 || 'Асинхронното')}">
-          <span class="fill-drop-wrap">
-            <select class="fill-select" aria-label="Термин 1">${optHtml}</select>
-            <span class="fill-status-ico"></span>
-          </span>
-          <span class="fill-text"> ${esc(comp.sentence1 || '')}</span>
-        </div>
-        <div class="fill-sentence-row" data-answer="${esc(comp.answer2 || 'Синхронното')}">
-          <span class="fill-drop-wrap">
-            <select class="fill-select" aria-label="Термин 2">${optHtml}</select>
-            <span class="fill-status-ico"></span>
-          </span>
-          <span class="fill-text"> ${esc(comp.sentence2 || '')}</span>
-        </div>
+        ${rows}
       </div>
       <div class="fill-actions">
         <button type="button" class="btn-activity fill-submit">
@@ -94,7 +134,7 @@ export function init(comp) {
     });
 
     if (score === rows.length) {
-      feedback.innerHTML = '<i class="fas fa-circle-check"></i> Браво! И двете изречения са попълнени напълно вярно!';
+      feedback.innerHTML = `<i class="fas fa-circle-check"></i> Браво! Всички ${rows.length} изречения са попълнени напълно вярно!`;
       feedback.className = 'fill-feedback feedback-success';
     } else {
       feedback.innerHTML = `<i class="fas fa-triangle-exclamation"></i> Резултат: ${score} от ${rows.length} верни.`;

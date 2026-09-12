@@ -19,6 +19,13 @@ import * as UiHotspots from '../components/ui-hotspots.js';
 import * as SpotTheBug from '../components/spot-the-bug.js';
 import * as InteractiveChecklist from '../components/interactive-checklist.js';
 import * as TrueFalseSwipe from '../components/true-false-swipe.js';
+import * as WildcardVisualizer from '../components/wildcard-visualizer.js';
+import * as VennLogicDiagram from '../components/venn-logic-diagram.js';
+import * as BeforeAfterSlider from '../components/before-after-slider.js';
+import * as QueryBuilder from '../components/query-builder.js';
+import * as LiveSearchSandbox from '../components/live-search-sandbox.js';
+import * as CategorySorter from '../components/category-sorter.js';
+import * as ImageWithInstruction from '../components/image-with-instruction.js';
 
 const registry = {
   'text-group': TextGroup,
@@ -30,6 +37,7 @@ const registry = {
   'tag': Tag,
   'exit-ticket': ExitTicket,
   'interactive-matching': InteractiveMatching,
+  'match-pairs': InteractiveMatching,
   'interactive-fill': InteractiveFill,
   'interactive-step-guide': InteractiveStepGuide,
   'mood-animal-generator': MoodAnimalGenerator,
@@ -39,6 +47,13 @@ const registry = {
   'spot-the-bug': SpotTheBug,
   'interactive-checklist': InteractiveChecklist,
   'true-false-swipe': TrueFalseSwipe,
+  'wildcard-visualizer': WildcardVisualizer,
+  'venn-logic-diagram': VennLogicDiagram,
+  'before-after-slider': BeforeAfterSlider,
+  'query-builder': QueryBuilder,
+  'live-search-sandbox': LiveSearchSandbox,
+  'category-sorter': CategorySorter,
+  'image-with-instruction': ImageWithInstruction,
 };
 
 export function renderComponent(comp) {

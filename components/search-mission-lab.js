@@ -13,12 +13,12 @@ const MISSIONS = [
     title: 'Казус 1: Официален училищен правилник',
     badge: 'site: и filetype:',
     goal: 'Потърсете в интернет официалния „правилник за вътрешния ред“ на училището. Трябва да намерите само официалния документ в PDF формат, публикуван директно на сайта на училището.',
-    targetSample: 'filetype:pdf site:spgke.com "правилник за вътрешния ред"',
+    targetSample: 'filetype:pdf site:school.com "правилник за вътрешния ред"',
     requiredOperators: ['site:', 'filetype:', '"'],
     hint: 'Използвайте site:[уебсайт], filetype:pdf и сложете фразата в кавички (" ").',
     sampleResult: {
       title: 'Правилник за устройството и дейността на училището (2025/2026)',
-      url: 'https://spgke.com/docs/pravilnik_za_vatreshnia_red.pdf',
+      url: 'https://school.com/docs/pravilnik_za_vatreshnia_red.pdf',
       snippet: 'Официален утвърден нормативен документ. Права, задължения и вътрешен ред за ученици, учители и родители.'
     },
     reflectionQuestion: 'Защо филтрирането по файлов тип и домейн е единственият начин да сте сигурни, че споделяте с класа актуална и достоверна информация, а не остаряла чернова?',
@@ -121,33 +121,11 @@ export function render(comp) {
           <div class="sml-feedback-box" style="display:none;"></div>
 
           <div class="sml-serp-preview" style="display:none;">
-            <div class="sml-serp-header"><i class="fas fa-globe"></i> Симулиран сигурен резултат:</div>
+            <div class="sml-serp-header"><i class="fas fa-globe"></i> Резултат</div>
             <div class="sml-serp-card">
               <div class="sml-serp-url"></div>
               <div class="sml-serp-title"></div>
               <div class="sml-serp-snippet"></div>
-            </div>
-          </div>
-
-          <div class="sml-reflection-card">
-            <button type="button" class="lesson-tag tone-purple tag-discussion sml-discussion-btn" data-modal-target="smlDiscussionModal">
-              <span class="lesson-tag-ico"><i class="fas fa-comments"></i></span>
-              <span class="lesson-tag-text">Дискусия</span>
-              <i class="fas fa-chevron-right lesson-tag-arrow"></i>
-            </button>
-          </div>
-
-          <div id="smlDiscussionModal" class="lesson-modal" style="display:none;">
-            <div class="modal-wrapper">
-              <div class="modal-header">
-                <h3 class="modal-title sml-modal-title">Дискусия: Въпрос за критичен анализ</h3>
-                <button type="button" class="close-modal" data-close-modal="smlDiscussionModal">&times;</button>
-              </div>
-              <div class="modal-body exercise-modal-content">
-                <div class="exercise-instructions">
-                  <p class="exercise-text sml-modal-question-text"></p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -175,40 +153,6 @@ export function init(comp) {
   const serpUrl = root.querySelector('.sml-serp-url');
   const serpTitle = root.querySelector('.sml-serp-title');
   const serpSnippet = root.querySelector('.sml-serp-snippet');
-  const modal = root.querySelector('#smlDiscussionModal');
-  const modalText = root.querySelector('.sml-modal-question-text');
-  const modalTitle = root.querySelector('.sml-modal-title');
-  const discussionBtn = root.querySelector('.sml-discussion-btn');
-
-  function openModal() {
-    if (modal) {
-      modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    }
-  }
-
-  function closeModal() {
-    if (modal) {
-      modal.style.display = 'none';
-      document.body.style.overflow = 'auto';
-    }
-  }
-
-  if (discussionBtn) {
-    discussionBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      openModal();
-    });
-  }
-
-  if (modal) {
-    modal.querySelectorAll('[data-close-modal]').forEach(btn => {
-      btn.addEventListener('click', closeModal);
-    });
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
-    });
-  }
 
   function loadMission(idx) {
     currentIdx = idx;
@@ -223,12 +167,6 @@ export function init(comp) {
     queryInput.value = '';
     feedbackBox.style.display = 'none';
     serpPreview.style.display = 'none';
-    if (modalText) {
-      modalText.textContent = m.reflectionQuestion;
-    }
-    if (modalTitle) {
-      modalTitle.textContent = 'Дискусия: ' + m.title.split(':')[0];
-    }
   }
 
   tabs.forEach((t, idx) => {
@@ -254,7 +192,7 @@ export function init(comp) {
       if (!val) {
         feedbackBox.style.display = 'block';
         feedbackBox.className = 'sml-feedback-box feedback-error';
-        feedbackBox.innerHTML = '<i class="fas fa-circle-exclamation"></i> Моля, въведете търсеща заявка преди да натиснете Тествай.';
+        feedbackBox.innerHTML = '<i class="fas fa-circle-exclamation"></i> Моля, въведете заявка за търсене.';
         serpPreview.style.display = 'none';
         return;
       }
@@ -283,7 +221,7 @@ export function init(comp) {
       } else {
         feedbackBox.style.display = 'block';
         feedbackBox.className = 'sml-feedback-box feedback-success';
-        feedbackBox.innerHTML = `<i class="fas fa-circle-check"></i> <strong>Отлична професионална заявка!</strong> Заявката спазва всички изисквания на казуса и филтрира излишния шум.`;
+        feedbackBox.innerHTML = `<i class="fas fa-circle-check"></i> <strong>Отлична заявка!</strong>`;
       }
 
       // Show mock SERP

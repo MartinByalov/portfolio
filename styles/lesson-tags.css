@@ -101,7 +101,7 @@
    palette in layout.css — kept here only as a semantic guarantee for the
    discussion item, without overriding the global purple tone) */
 .lesson-tag.tag-discussion .lesson-tag-ico {
-  border-radius: 50%;
+  border-radius: 4px;
 }
 .accordion-item.tag-discussion .accordion-header {
   background: #f1e8fa;

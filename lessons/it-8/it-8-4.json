@@ -179,7 +179,7 @@
             {
               "type": "image",
               "id": "group-email-image",
-              "src": "/images/groupAddress_cleanup.jpg",
+              "src": "/assets/it-8-4/groupAddress_cleanup.jpg",
               "alt": "Групов електронен адрес"
             },
             {
@@ -215,7 +215,7 @@
     {
       "type": "exercise-modal",
       "id": "discussionModal2",
-      "title": "Дискусия: Употреба на групов адрес",
+      "title": "Употреба на групов адрес",
       "instructions": "<div class='exercise-instructions'><p>Посочете три ситуации от училищния живот, в които групов електронен адрес би улеснил комуникацията.</p></div>",
       "resources": []
     },

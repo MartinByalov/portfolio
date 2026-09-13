@@ -73,6 +73,9 @@ async function renderLessonView(courseId, lessonId) {
 
 function getLessonNumLabel(item) {
   if (!item) return '';
+  if (item.title && (item.title.toLowerCase().includes('преговор'))) {
+    return 'Преговор';
+  }
   const prefix = 'Урок';
   const match = item.title ? item.title.match(/^(\d+\.\d+)/) : null;
   if (match) return `${prefix} ${match[1]}`;

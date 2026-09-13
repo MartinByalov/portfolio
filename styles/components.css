@@ -3735,8 +3735,11 @@ button.about-btn-primary {
   border-radius: 12px;
   padding: 14px 16px;
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  overflow: hidden;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
-.info-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.info-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; min-width: 0; }
 .info-icon {
   width: 36px;
   height: 36px;
@@ -3747,8 +3750,8 @@ button.about-btn-primary {
   font-size: 1rem;
   flex-shrink: 0;
 }
-.info-title { font-weight: 800; font-size: 0.95rem; }
-.info-body { font-size: 0.86rem; color: #475569; line-height: 1.5; }
+.info-title { font-weight: 800; font-size: 0.95rem; flex: 1; min-width: 0; word-break: break-word; overflow-wrap: break-word; }
+.info-body { font-size: 0.86rem; color: #475569; line-height: 1.5; word-break: break-word; overflow-wrap: break-word; }
 
 /* Session rules cards */
 .session-rules { display: flex; flex-direction: column; gap: 14px; margin: 14px 0; }

@@ -29,7 +29,7 @@ export function renderAboutPage() {
             <p>Стремя се да създавам интерактивна учебна среда, където грешките се приемат като възможности за растеж, а технологиите са инструмент за изграждане на критично мислене.</p>
           </div>
           <div class="about-hero-actions">
-            <button id="portfolio-gate-btn" class="about-btn-primary" type="button"><i class="fa-solid fa-graduation-cap"></i> Учителско Портфолио</button>
+            <button id="portfolio-gate-btn" class="about-btn-primary" type="button"><i class="fa-solid fa-graduation-cap"></i> ПОРТФОЛИО</button>
           </div>
         </main>
 

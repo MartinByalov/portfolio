@@ -4,10 +4,13 @@ const ZADANIE_TOOLS = [
   { emoji: '📢', label: 'Регулировчик',   href: '/tools/control/control.html'             },
   { emoji: '⏱️', label: 'Планировчик',    href: '/tools/planner/planner.html'             },
   { emoji: '🎲', label: 'Случайни групи', href: '/tools/random-groups/random-groups.html' },
-  { emoji: '⛶',  label: 'QR Code',        href: '/tools/qr_code/qr_code.html'             },
-  { emoji: '⌨️', label: 'WPM Тест',       href: '/tools/wpm/wpm.html'                     },
+  { emoji: '⛶',  label: 'QR Code Генератор', href: '/tools/qr_code/qr_code.html'          },
+  { emoji: '⌨️', label: 'WPM',            href: '/tools/wpm/wpm.html'                     },
   { emoji: '⏳', label: 'Таймер',         href: '/tools/timer/timer.html'                 },
-  { emoji: '🗝️', label: 'Шифър',          href: '/tools/cipher/cipher.html'               }
+  { emoji: '🗝️', label: 'Шифър',          href: '/tools/cipher/cipher.html'               },
+  { emoji: '🌐', label: 'PockeTracer',    href: '/tools/pockeTracer/index.html'           },
+  { emoji: '📐', label: 'Чертожник',      href: '/tools/geometry/geometry.html'           },
+  { emoji: '🧮', label: 'Калкулатори',    href: '/tools/calculators/calculators.html'     }
 ];
 
 const TRAINING_TOOLS = [
@@ -18,8 +21,7 @@ const TRAINING_TOOLS = [
   { img: '/images/domino.png',          alt: 'Domino Pub.',       label: 'Изд. ДОМИНО',       href: 'https://ebook.domino.bg/' },
   { img: '/images/smartDraw.png',       alt: 'SmartDraw',         label: 'SmartDraw',         href: 'https://www.smartdraw.com/' },
   { img: '/images/sqlOnline.png',       alt: 'SQLite Online',     label: 'SQLite Online',     href: 'https://sqliteonline.com/' },
-  { img: '/images/logicLy.png',         alt: 'Logic.ly',          label: 'Logic.ly',          href: 'https://logic.ly/demo/' },
-  { img: '/tools/bds/gimp.svg',        alt: 'BDS Keyboard',      label: 'БДС Клавиатура',    href: '/tools/bds/index.html' }
+  { img: '/images/logicLy.png',         alt: 'Logic.ly',          label: 'Logic.ly',          href: 'https://logic.ly/demo/' }
 ];
 
 const SKILLS_PROG = [

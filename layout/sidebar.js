@@ -39,7 +39,7 @@ function getNavItems(mode) {
       { icon: 'bx bx-book',        label: 'Речник',            href: '#/dictionary', 'data-nav': 'learning' },
       { icon: 'bx bx-code-alt',    label: 'Софтуер',           href: '#/software',   'data-nav': 'learning' },
       { icon: 'bx bx-layer',       label: 'Други',             href: '#/other',      'data-nav': 'learning' },
-      { icon: 'bx bx-user-pin',    label: 'Вход',              href: '#/about',      'data-nav': 'learning' }
+      { icon: 'bx bx-user-pin',    label: 'За мен',            href: '#/about',      'data-nav': 'learning' }
     ];
   }
 }

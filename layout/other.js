@@ -505,7 +505,7 @@ function renderChartsTutorial() {
           <div class="sandbox-header">
             <div class="sandbox-title">
               <i class="fa-solid fa-chart-pie" style="color: #38bdf8;"></i>
-              Интерактивна симулация на живо
+              Симулация
             </div>
             <div class="sandbox-tabs">
               <button type="button" class="sandbox-tab-btn active" data-chart-type="line">📈 Линейна</button>

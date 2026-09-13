@@ -64,7 +64,7 @@ const SOURCES = [
   },
   {
     name: "GIMP",
-    logo: "/tools/bds/gimp.svg",
+    logo: "/src/assets/images/gimpLogo.svg",
     category: "Графика",
     desc: "Свободен инструмент за обработка и редактиране на изображения.",
     tags: ["Графика", "Дизайн", "Свободен софтуер"],
@@ -72,7 +72,7 @@ const SOURCES = [
   },
   {
     name: "Inkscape",
-    logo: "/tools/bds/inkscape.svg",
+    logo: "/src/assets/images/inskapeLogo.png",
     category: "Графика",
     desc: "Векторен графичен редактор за създаване на илюстрации, диаграми и графични проекти.",
     tags: ["Векторна графика", "Дизайн", "SVG"],
@@ -80,7 +80,7 @@ const SOURCES = [
   },
   {
     name: "BCUninstaller",
-    logo: "/tools/bds/bcuninstaller.svg",
+    logo: "/src/assets/images/bcuninstallerLogo.png",
     category: "Система",
     desc: "Инструмент за управление и премахване на инсталиран софтуер от Windows.",
     tags: ["Windows", "Система", "Управление"],
@@ -112,7 +112,7 @@ const SOURCES = [
   },
   {
     name: "WinRAR",
-    logo: "/tools/bds/winrar.svg",
+    logo: "/src/assets/images/winrarLogo.png",
     category: "Система",
     desc: "Инструмент за компресиране, архивиране и управление на файлове.",
     tags: ["Архиви", "Файлове", "Windows"],

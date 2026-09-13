@@ -10,8 +10,14 @@ function esc(s) {
 export function render(comp) {
   const id = comp.id || 'query-builder';
   const title = comp.title || 'Конструктор на заявки: Сглобете точна търсеща заявка';
-  const instruction = comp.instruction || 'Изберете и подредете блоковете в полето за търсене:';
+  const instruction = comp.instruction || '';
+  const searchBarLabel = comp.searchBarLabel || 'Поле за търсене (Вашата заявка):';
+  const checkBtnText = comp.checkBtnText || 'Провери';
   const blocks = comp.availableBlocks || [];
+
+  const showIcon = comp.showIcon !== false && comp.icon !== false && comp.icon !== "";
+  const iconHtml = showIcon ? `<i class="${esc(typeof comp.icon === 'string' ? comp.icon : 'fas fa-layer-group')}"></i> ` : '';
+  const leadHtml = instruction ? `<p class="interactive-card-lead">${esc(instruction)}</p>` : '';
 
   const availableChips = blocks.map(b => `
     <button type="button" class="qb-block-chip qb-available-chip" data-block-id="${esc(b.id)}" data-block-text="${esc(b.text)}">
@@ -23,15 +29,14 @@ export function render(comp) {
     <div class="interactive-query-builder-card" id="${esc(id)}">
       <div class="interactive-card-header">
         <div class="interactive-card-badge">
-          <i class="fas fa-layer-group"></i>
-          <span>${esc(title)}</span>
+          ${iconHtml}<span>${esc(title)}</span>
         </div>
-        <p class="interactive-card-lead">${esc(instruction)}</p>
+        ${leadHtml}
       </div>
 
       <div class="qb-work-area">
         <div class="qb-target-search-bar">
-          <div class="qb-search-bar-label"><i class="fas fa-magnifying-glass"></i> Търсещо поле (Вашата заявка):</div>
+          <div class="qb-search-bar-label"><i class="fas fa-magnifying-glass"></i> ${esc(searchBarLabel)}</div>
           <div class="qb-assembled-container" data-empty-hint="Кликнете върху блоковете отдолу, за да ги добавите тук...">
             <span class="qb-placeholder-text">Кликнете върху блоковете отдолу, за да ги добавите тук...</span>
           </div>
@@ -45,7 +50,7 @@ export function render(comp) {
         </div>
 
         <div class="qb-actions">
-          <button type="button" class="btn-activity qb-check-btn">Провери заявката</button>
+          <button type="button" class="btn-activity qb-check-btn">${esc(checkBtnText)}</button>
           <button type="button" class="btn-activity qb-clear-btn" style="background:#64748B;">Изчисти</button>
         </div>
 

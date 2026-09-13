@@ -42,17 +42,21 @@ const DEFAULT_MOCK_DATABASE = [
 
 export function render(comp) {
   const id = comp.id || 'live-search-sandbox';
+  const showHeader = comp.title !== "" && comp.title !== null && comp.title !== false && comp.showTitle !== false;
   const title = comp.title || 'Търсещ Симулатор (Sandbox): Изпробвайте операторите в реално време';
   const placeholder = comp.placeholder || 'Въведете заявка (напр. Левски -футбол, site:mon.bg, filetype:pdf)...';
 
-  return `
-    <div class="interactive-sandbox-card" id="${esc(id)}">
+  const headerHtml = showHeader ? `
       <div class="interactive-card-header">
         <div class="interactive-card-badge">
           <i class="fas fa-magnifying-glass-chart"></i>
           <span>${esc(title)}</span>
         </div>
-      </div>
+      </div>` : '';
+
+  return `
+    <div class="interactive-sandbox-card" id="${esc(id)}">
+      ${headerHtml}
 
       <div class="sandbox-search-bar-wrap">
         <div class="sandbox-input-box">

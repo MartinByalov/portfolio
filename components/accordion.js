@@ -20,6 +20,7 @@ import * as QueryBuilder from './query-builder.js';
 import * as LiveSearchSandbox from './live-search-sandbox.js';
 import * as CategorySorter from './category-sorter.js';
 import * as ImageWithInstruction from './image-with-instruction.js';
+import * as Tag from './tag.js';
 
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
@@ -282,13 +283,24 @@ function renderBlock(b) {
     case 'live-search-sandbox':    return LiveSearchSandbox.render(b);
     case 'category-sorter':        return CategorySorter.render(b);
     case 'image-with-instruction': return ImageWithInstruction.render(b);
+    case 'tag':                    return Tag.render(b);
+    case 'accordion':              return render(b);
     default:                       return '<!-- unknown lesson block type: ' + esc(b.type) + ' -->';
   }
 }
 
 // Component renderer
 
+let hasFirstAccordionRendered = false;
+
+export function resetAccordionState() {
+  hasFirstAccordionRendered = false;
+}
+
 export function render(comp) {
+  const isFirstOnPage = !hasFirstAccordionRendered;
+  hasFirstAccordionRendered = true;
+
   const startClosed = comp.options && comp.options.startClosed === true;
   const items = (comp.items || []).map((it, i) => {
     const toneCls = it.tone ? ' tone-' + esc(it.tone) : '';
@@ -296,7 +308,7 @@ export function render(comp) {
     const toneIco = it.tone && it.icon
       ? '<span class="acc-tone-ico"><i class="' + esc(it.icon) + '"></i></span>'
       : '';
-    const isActive = it.defaultOpen === true || (!startClosed && it.defaultOpen !== false && i === 0);
+    const isActive = it.defaultOpen === true || (isFirstOnPage && !startClosed && it.defaultOpen !== false && i === 0);
     return '<div class="accordion-item' + (isActive ? ' active' : '') + toneCls + variantCls + '"'
       + (it.id ? ' id="' + esc(it.id) + '"' : '') + '>'
       + '<div class="accordion-header">'
@@ -321,11 +333,39 @@ export function render(comp) {
     + '</section>';
 }
 
+function initBlock(b, root) {
+  if (!b) return;
+  if (b.type === 'quiz' && b.id) initQuizBlock(root, b);
+  if (b.type === 'interactive-matching' || b.type === 'scattered-matching' || b.type === 'match-pairs') InteractiveMatching.init(b);
+  if (b.type === 'interactive-fill') InteractiveFill.init(b);
+  if (b.type === 'interactive-step-guide') InteractiveStepGuide.init(b);
+  if (b.type === 'emotiometer') Emotiometer.init(b);
+  if (b.type === 'mood-animal-generator') MoodAnimalGenerator.init(b);
+  if (b.type === 'ui-hotspots') UiHotspots.init(b);
+  if (b.type === 'spot-the-bug') SpotTheBug.init(b);
+  if (b.type === 'interactive-checklist') InteractiveChecklist.init(b);
+  if (b.type === 'true-false-swipe') TrueFalseSwipe.init(b);
+  if (b.type === 'resource-download-box') ResourceDownloadBox.init(b);
+  if (b.type === 'drag-and-drop') DragAndDrop.init(b);
+  if (b.type === 'wildcard-visualizer') WildcardVisualizer.init(b);
+  if (b.type === 'venn-logic-diagram') VennLogicDiagram.init(b);
+  if (b.type === 'before-after-slider') BeforeAfterSlider.init(b);
+  if (b.type === 'query-builder') QueryBuilder.init(b);
+  if (b.type === 'live-search-sandbox') LiveSearchSandbox.init(b);
+  if (b.type === 'category-sorter') CategorySorter.init(b);
+  if (b.type === 'image-with-instruction') ImageWithInstruction.init(b);
+  if (b.type === 'tag') Tag.init(b);
+  if (b.type === 'accordion') init(b);
+  if (b.type === 'subsection' && Array.isArray(b.content)) {
+    b.content.forEach(subB => initBlock(subB, root));
+  }
+}
+
 export function init(comp) {
   const root = document.getElementById(comp.id);
   if (!root) return;
   const accordion = root.querySelector('.accordion');
-  const singleOpen = !(comp.options && comp.options.singleOpen === false);
+  const singleOpen = comp.options && comp.options.singleOpen === true;
   initAccordion(accordion, { singleOpen });
 
   // sync inline display with the pre-rendered .active class (first item open)
@@ -336,27 +376,6 @@ export function init(comp) {
 
   // wire up embedded interactive blocks inside items' content
   (comp.items || []).forEach(it => {
-    (it.content || []).forEach(b => {
-      if (!b) return;
-      if (b.type === 'quiz' && b.id) initQuizBlock(root, b);
-      if (b.type === 'interactive-matching' || b.type === 'scattered-matching' || b.type === 'match-pairs') InteractiveMatching.init(b);
-      if (b.type === 'interactive-fill') InteractiveFill.init(b);
-      if (b.type === 'interactive-step-guide') InteractiveStepGuide.init(b);
-      if (b.type === 'emotiometer') Emotiometer.init(b);
-      if (b.type === 'mood-animal-generator') MoodAnimalGenerator.init(b);
-      if (b.type === 'ui-hotspots') UiHotspots.init(b);
-      if (b.type === 'spot-the-bug') SpotTheBug.init(b);
-      if (b.type === 'interactive-checklist') InteractiveChecklist.init(b);
-      if (b.type === 'true-false-swipe') TrueFalseSwipe.init(b);
-      if (b.type === 'resource-download-box') ResourceDownloadBox.init(b);
-      if (b.type === 'drag-and-drop') DragAndDrop.init(b);
-      if (b.type === 'wildcard-visualizer') WildcardVisualizer.init(b);
-      if (b.type === 'venn-logic-diagram') VennLogicDiagram.init(b);
-      if (b.type === 'before-after-slider') BeforeAfterSlider.init(b);
-      if (b.type === 'query-builder') QueryBuilder.init(b);
-      if (b.type === 'live-search-sandbox') LiveSearchSandbox.init(b);
-      if (b.type === 'category-sorter') CategorySorter.init(b);
-      if (b.type === 'image-with-instruction') ImageWithInstruction.init(b);
-    });
+    (it.content || []).forEach(b => initBlock(b, root));
   });
 }

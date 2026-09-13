@@ -15,12 +15,31 @@ export function render(comp) {
   const afterLabel = comp.afterLabel || 'С кавички: "безопасен интернет"';
   const afterDesc = comp.afterDescription || 'Стеснява резултатите точно до страниците, в които двете думи се срещат една след друга като точен израз.';
 
+  const showIcon = comp.showIcon !== false && comp.icon !== false && comp.icon !== "";
+  const iconHtml = showIcon ? `<i class="${esc(typeof comp.icon === 'string' ? comp.icon : 'fas fa-sliders')}"></i> ` : '';
+
+  const showToggle = comp.showToggle !== false && comp.toggle !== false;
+  const toggleHtml = showToggle ? `
+        <div class="slider-interactive-toggle">
+          <div class="toggle-track">
+            <button type="button" class="toggle-mode-btn active" data-mode="split">
+              <i class="fas fa-columns"></i> Сравнение едно до друго
+            </button>
+            <button type="button" class="toggle-mode-btn" data-mode="before">
+              <i class="fas fa-arrow-left"></i> Само без кавички
+            </button>
+            <button type="button" class="toggle-mode-btn" data-mode="after">
+              <i class="fas fa-arrow-right"></i> Само с кавички
+            </button>
+          </div>
+        </div>
+  ` : '';
+
   return `
     <div class="interactive-slider-card" id="${esc(id)}">
       <div class="interactive-card-header">
         <div class="interactive-card-badge">
-          <i class="fas fa-sliders"></i>
-          <span>${esc(title)}</span>
+          ${iconHtml}<span>${esc(title)}</span>
         </div>
       </div>
 
@@ -61,19 +80,7 @@ export function render(comp) {
           </div>
         </div>
 
-        <div class="slider-interactive-toggle">
-          <div class="toggle-track">
-            <button type="button" class="toggle-mode-btn active" data-mode="split">
-              <i class="fas fa-columns"></i> Сравнение едно до друго
-            </button>
-            <button type="button" class="toggle-mode-btn" data-mode="before">
-              <i class="fas fa-arrow-left"></i> Само без кавички
-            </button>
-            <button type="button" class="toggle-mode-btn" data-mode="after">
-              <i class="fas fa-arrow-right"></i> Само с кавички
-            </button>
-          </div>
-        </div>
+        ${toggleHtml}
       </div>
     </div>
   `;

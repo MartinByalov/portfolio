@@ -2,7 +2,7 @@
 
 export function initAccordion(root, opts) {
   if (!root) return;
-  const singleOpen = !opts || opts.singleOpen !== false;
+  const singleOpen = opts && opts.singleOpen === true;
   root.querySelectorAll(':scope > .accordion-item, .accordion > .accordion-item').forEach(item => {
     const header = item.querySelector('.accordion-header');
     const content = item.querySelector('.accordion-content');

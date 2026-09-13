@@ -1,6 +1,7 @@
 // Lesson renderer engine
 
 import { renderComponent, initComponent } from './registry.js';
+import { resetAccordionState } from '../components/accordion.js';
 
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
@@ -15,6 +16,7 @@ export async function fetchLesson(jsonPath) {
 }
 
 export function buildLesson(lesson) {
+  resetAccordionState();
   const gradeLabel = lesson.grade ? ` · ${lesson.grade} клас` : '';
   const goalLabel = 'Цел:';
 

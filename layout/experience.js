@@ -71,8 +71,7 @@ export function renderExperiencePage() {
                                 <a href="https://martinbyalov.github.io/distance-velocity-time/" target="_blank"
                                     class="badge-link"><i class="fas fa-chevron-right"></i> Път, скорост, време</a><br>
                                 <a href="https://martinbyalov.github.io/littlePhysics/" target="_blank"
-                                    class="badge-link"><i class="fas fa-chevron-right"></i> Трети принцип на
-                                    механиката</a>
+                                    class="badge-link"><i class="fas fa-chevron-right"></i> Трети принцип на механиката</a>
                             </div>
                         </div>
                     </div>
@@ -125,9 +124,9 @@ export function renderExperiencePage() {
                                 <a href="https://drive.google.com/drive/folders/1zeuZvG3AwPQf2NgRovDIVqGXI--Vb7Kd?usp=sharing"
                                     target="_blank" class="badge-link">#Versailles - 8.ж</a><br>
                                 <a href="https://drive.google.com/drive/folders/1mlbTulC5BWBXVATPT8CeDAa3VZyMtDPH?usp=sharing"
-                                    target="_blank" class="badge-link">Личните данни - Стефан 12.а</a>
+                                    target="_blank" class="badge-link">Личните данни - Стефан 12.а</a><br>
                                 <a href="https://drive.google.com/file/d/16aQPpTpsLcN3HgLqwM6gaGCPjLZz5fk8/view?usp=drive_link"
-                                    target="_blank" class="badge-link">Ден на отворените врати - Пламена 8.д (2025)</a>
+                                    target="_blank" class="badge-link">Ден на отворените врати - Пламена 8.д (2025)</a><br>
                                 <a href="https://mihaelamiteva2029.wixsite.com/mysite" target="_blank"
                                     class="badge-link">Ресторант Boris's mehana - Борис, Михаела - 8.а (2025)</a>
 

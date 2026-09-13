@@ -101,11 +101,11 @@ export function renderGlossaryPage() {
     <section class="home-section">
       <div class="home-content">
         <div class="main-portfolio-content">
-          <h2 class="page-title">Терминологичен речник</h2>
-          <p class="page-description">Ключови понятия от учебните материали — избери буква или потърси термин.</p>
+          <h2 class="page-title">Речник на термините</h2>
+          <p class="page-description">Всички термини, дефиниции и понятия от уроците по Информационни технологии.</p>
           <div class="glossary-tools">
-            <input type="text" id="glossary-filter" class="glossary-filter" placeholder="Търси термин...">
-            <div class="glossary-modes" id="glossary-modes" role="tablist" aria-label="Режим на речника">
+            <input type="text" id="glossary-filter" class="glossary-filter" placeholder="Търсене на термин или понятие...">
+            <div class="glossary-modes" id="glossary-modes" role="tablist" aria-label="Речник">
               <button type="button" class="glossary-mode active" data-mode="list"><i class="fas fa-list"></i> Списък</button>
               <button type="button" class="glossary-mode" data-mode="flash"><i class="fas fa-layer-group"></i> Флаш карти</button>
             </div>
@@ -116,7 +116,7 @@ export function renderGlossaryPage() {
           <div class="glossary-grid" id="glossary-grid"></div>
           <div class="flash-grid is-hidden" id="flash-grid"></div>
           <p class="glossary-loading" id="glossary-loading">Зареждане на термините от уроците…</p>
-          <p class="glossary-empty is-hidden" id="glossary-empty">Няма термини, отговарящи на избора.</p>
+          <p class="glossary-empty is-hidden" id="glossary-empty">Няма намерени термини.</p>
         </div>
       </div>
     </section>
@@ -202,18 +202,20 @@ export function initGlossaryPage() {
         <button type="button" class="flash-close" id="flash-close" aria-label="Затвори">&times;</button>
         <div class="flash-inner" id="flash-inner">
           <div class="flash-face flash-front">
-            <div class="flash-image-wrapper" id="flash-image-wrapper">
-              <div class="flash-image-loading"><i class="fas fa-spinner fa-spin"></i></div>
-            </div>
             <h3 class="flash-term-title">${escapeHtmlGlossary(term.term)}</h3>
-            <span class="flash-flip-hint" aria-hidden="true"><i class="fas fa-rotate"></i></span>
+            <div class="flash-body-centered">
+              <div class="flash-image-wrapper" id="flash-image-wrapper">
+                <div class="flash-image-loading"><i class="fas fa-spinner fa-spin"></i></div>
+              </div>
+            </div>
+            <span class="flash-flip-hint" aria-hidden="true" title="Завърти картата"><i class="fas fa-rotate"></i></span>
           </div>
           <div class="flash-face flash-back">
             <h3 class="flash-back-title">${escapeHtmlGlossary(term.term)}</h3>
-            <div class="flash-definition-box">
+            <div class="flash-body-centered">
               <p class="flash-definition-text">${escapeHtmlGlossary(term.definition)}</p>
             </div>
-            <span class="flash-flip-hint" aria-hidden="true"><i class="fas fa-rotate"></i></span>
+            <span class="flash-flip-hint" aria-hidden="true" title="Завърти картата"><i class="fas fa-rotate"></i></span>
           </div>
         </div>
       </div>`;

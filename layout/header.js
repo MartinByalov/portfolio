@@ -1,5 +1,7 @@
 // Top navigation header component
 
+import { renderRadioControl, initRadioControl } from './radio.js';
+
 export function render() {
   return `
     <header class="main-header">
@@ -8,6 +10,7 @@ export function render() {
         <div class="header-title" id="header-title">Учебни материали</div>
       </div>
       <div class="header-icons">
+        ${renderRadioControl()}
         <a href="#" id="menu-toggle" title="Меню"><i class="fa-solid fa-bars"></i></a>
       </div>
     </header>
@@ -34,9 +37,13 @@ export function getIcon() {
 export function init() {
   const menuToggle = document.getElementById('menu-toggle');
 
+  // Initialize header radio button
+  initRadioControl();
+
   menuToggle.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
     document.dispatchEvent(new CustomEvent('toggle-sidebar'));
   });
 }
+

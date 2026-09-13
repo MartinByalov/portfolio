@@ -183,6 +183,22 @@ export function render(comp) {
   const imgPath = comp.imagePath || comp.src || 'assets/images/placeholder.jpg';
   const instruction = comp.userUploadInstruction || comp.instruction || '';
 
+  if (id === 'img-concept-map') {
+    return `
+      <div class="my-6 mb-8 text-center" id="${esc(id)}">
+        ${imgPath && imgPath !== 'assets/images/placeholder.jpg' ? `
+          <div class="inline-block overflow-hidden rounded-xl shadow-sm border border-slate-200 max-w-lg w-full mb-6">
+            <img src="${esc(imgPath)}" alt="${esc(title)}" class="w-full h-auto max-h-[280px] object-contain block mx-auto p-1 bg-white" onerror="this.parentElement.style.display='none'" />
+          </div>
+        ` : `
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl mb-6">
+            ${getMockIllustration(id)}
+          </div>
+        `}
+      </div>
+    `;
+  }
+
   return `
     <div class="image-with-instruction-card" id="${esc(id)}">
       <div class="iwi-header">

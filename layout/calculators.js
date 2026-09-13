@@ -1,4 +1,5 @@
 // Calculators modal launcher
+
 let overlayEl = null;
 function onKeydown(e) { if (e.key === 'Escape') close(); }
 function esc(v) {
@@ -55,9 +56,9 @@ export function open() {
   overlayEl.innerHTML = '<div class="calc-popup" role="dialog" aria-modal="true" aria-label="calc">'
     + '<div class="calc-popup-header"><span class="calc-popup-title">Калкулатори</span>'
     + '<button type="button" class="calc-close">&times;</button></div>'
-    + '<div class="calc-tabs"><button type="button" class="calc-tab active" data-pane="std">Обикновен</button>'
+    + '<div class="calc-tabs"><button type="button" class="calc-tab active" data-pane="std">Стандартен</button>'
     + '<button type="button" class="calc-tab" data-pane="base">Бройни системи</button>'
-    + '<button type="button" class="calc-tab" data-pane="ip">IP / Subnet</button></div>'
+    + '<button type="button" class="calc-tab" data-pane="ip">IP &amp; CIDR</button></div>'
     + '<div class="calc-body"><div class="calc-pane active" id="calc-pane-std">'
     + '<input class="calc-display" id="calc-display" value="0" readonly>'
     + '<div class="calc-keys" id="calc-keys"><button data-k="C">C</button><button data-k="back">x</button>'
@@ -70,12 +71,12 @@ export function open() {
     + '<input id="calc-base-value" placeholder="1010 / 255 / FF">'
     + '<select id="calc-base-from"><option value="2">BIN</option><option value="10" selected>DEC</option><option value="16">HEX</option></select></div>'
     + '<button type="button" class="calc-btn" id="calc-base-go">Преобразувай</button>'
-    + '<div class="calc-result" id="calc-base-result">Въведи стойност.</div></div>'
+    + '<div class="calc-result" id="calc-base-result">Въведете стойност</div></div>'
     + '<div class="calc-pane" id="calc-pane-ip"><div class="calc-row">'
     + '<input id="calc-ip" placeholder="192.168.1.10">'
     + '<input id="calc-cidr" type="number" min="0" max="32" value="24" style="max-width:90px"></div>'
     + '<button type="button" class="calc-btn" id="calc-ip-go">Изчисли</button>'
-    + '<div class="calc-result" id="calc-ip-result">Въведи IP + CIDR.</div></div>'
+    + '<div class="calc-result" id="calc-ip-result">Въведете IP адрес</div></div>'
     + '</div></div>';
   document.body.appendChild(overlayEl);
   requestAnimationFrame(function () { overlayEl.classList.add('open'); });

@@ -529,7 +529,8 @@
       "icon": "fas fa-comments",
       "text": "Дискусия",
       "modalTarget": "exerciseModal",
-      "tone": "purple"
+      "tone": "purple",
+      "skipNav": true
     },
     {
       "type": "exercise-modal",
@@ -558,6 +559,7 @@
           "title": "Бързи 5 въпроса",
           "tone": "green",
           "icon": "fas fa-bolt",
+          "skipNav": true,
           "content": [
             {
               "type": "quiz",
@@ -625,7 +627,8 @@
       "icon": "fas fa-file-powerpoint",
       "text": "Презентация",
       "href": "https://drive.google.com/file/d/1LNQ6YZnRVR4-e3F-pzY0WppMMTZwz1rs/view?usp=drive_link",
-      "tone": "orange"
+      "tone": "orange",
+      "skipNav": true
     },
     {
       "type": "accordion",

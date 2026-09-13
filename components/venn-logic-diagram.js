@@ -36,7 +36,7 @@ export function render(comp) {
 
   const tabsHtml = operators.map((op, idx) => `
     <button type="button" class="venn-tab-btn ${idx === 0 ? 'active' : ''}" data-op-idx="${idx}" style="--op-color: ${esc(op.color)}">
-      <span class="venn-op-name">${esc(op.name)}</span>
+      
       <span class="venn-op-query"><code>${esc(op.query)}</code></span>
     </button>
   `).join('');
@@ -45,7 +45,7 @@ export function render(comp) {
     <div class="interactive-venn-card" id="${esc(id)}">
       <div class="interactive-card-header">
         <div class="interactive-card-badge">
-          <i class="fas fa-cubes"></i>
+          
           <span>${esc(title)}</span>
         </div>
       </div>

@@ -26,7 +26,7 @@ export function render(course) {
 
   const resourceLinks = course.links && course.links.length
     ? course.links
-    : (course.textbookUrl ? [{ label: course.textbookLabel || 'Електронен учебник', url: course.textbookUrl, icon: 'fas fa-book-open' }] : []);
+    : (course.textbookUrl ? [{ label: course.textbookLabel || 'Учебник', url: course.textbookUrl, icon: 'fas fa-book-open' }] : []);
 
   const resourceBtns = resourceLinks.map(link => `
       <a class="course-textbook-btn" href="${link.url}" target="_blank" rel="noopener">

@@ -6,6 +6,7 @@ import * as InteractiveMatching from './interactive-matching.js';
 import * as InteractiveFill from './interactive-fill.js';
 import * as InteractiveStepGuide from './interactive-step-guide.js';
 import * as MoodAnimalGenerator from './mood-animal-generator.js';
+import * as Emotiometer from './emotiometer.js';
 import * as ResourceDownloadBox from './resource-download-box.js';
 import * as DragAndDrop from './drag-and-drop.js';
 import * as UiHotspots from './ui-hotspots.js';
@@ -262,9 +263,11 @@ function renderBlock(b) {
     case 'subsection':             return renderSubsectionBlock(b);
     case 'quiz':                   return renderQuizBlock(b);
     case 'interactive-matching':
+    case 'scattered-matching':
     case 'match-pairs':            return InteractiveMatching.render(b);
     case 'interactive-fill':       return InteractiveFill.render(b);
     case 'interactive-step-guide': return InteractiveStepGuide.render(b);
+    case 'emotiometer':            return Emotiometer.render(b);
     case 'mood-animal-generator':  return MoodAnimalGenerator.render(b);
     case 'ui-hotspots':            return UiHotspots.render(b);
     case 'spot-the-bug':           return SpotTheBug.render(b);
@@ -336,9 +339,10 @@ export function init(comp) {
     (it.content || []).forEach(b => {
       if (!b) return;
       if (b.type === 'quiz' && b.id) initQuizBlock(root, b);
-      if (b.type === 'interactive-matching' || b.type === 'match-pairs') InteractiveMatching.init(b);
+      if (b.type === 'interactive-matching' || b.type === 'scattered-matching' || b.type === 'match-pairs') InteractiveMatching.init(b);
       if (b.type === 'interactive-fill') InteractiveFill.init(b);
       if (b.type === 'interactive-step-guide') InteractiveStepGuide.init(b);
+      if (b.type === 'emotiometer') Emotiometer.init(b);
       if (b.type === 'mood-animal-generator') MoodAnimalGenerator.init(b);
       if (b.type === 'ui-hotspots') UiHotspots.init(b);
       if (b.type === 'spot-the-bug') SpotTheBug.init(b);

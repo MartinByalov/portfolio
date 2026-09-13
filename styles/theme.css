@@ -655,4 +655,706 @@ body.dark-mode .markdown-body h4 {
   color: #ffffff !important;
 }
 
+/* ==========================================================================
+   Course View & Lesson Links Readability in Dark Mode (e.g. course/it-8)
+   ========================================================================== */
+[data-theme="dark"] .course-main,
+body.dark-mode .course-main {
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .lesson-links li a,
+body.dark-mode .lesson-links li a {
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .lesson-links li a:hover,
+body.dark-mode .lesson-links li a:hover {
+  color: var(--accent-orange) !important;
+}
+
+[data-theme="dark"] .lesson-link-disabled,
+body.dark-mode .lesson-link-disabled {
+  color: #64748b !important;
+}
+
+[data-theme="dark"] .course-textbook-btn,
+body.dark-mode .course-textbook-btn {
+  background: rgba(37, 99, 235, 0.18) !important;
+  border-color: #2563eb !important;
+  color: #93c5fd !important;
+}
+
+[data-theme="dark"] .course-textbook-btn:hover,
+body.dark-mode .course-textbook-btn:hover {
+  background: rgba(37, 99, 235, 0.3) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .course-header-info .page-title,
+body.dark-mode .course-header-info .page-title {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .course-header-info .page-description,
+body.dark-mode .course-header-info .page-description {
+  color: #cbd5e1 !important;
+}
+
+/* Accordion Headers in Dark Mode (Normal and Active States) */
+[data-theme="dark"] .accordion-item .accordion-header .card-title,
+[data-theme="dark"] .accordion-item.active .accordion-header .card-title,
+[data-theme="dark"] .accordion-item.tone-green .card-title,
+[data-theme="dark"] .accordion-item.tone-green.active .card-title,
+[data-theme="dark"] .accordion-item.tone-blue .card-title,
+[data-theme="dark"] .accordion-item.tone-blue.active .card-title,
+[data-theme="dark"] .accordion-item.tone-orange .card-title,
+[data-theme="dark"] .accordion-item.tone-orange.active .card-title,
+[data-theme="dark"] .accordion-item.tone-purple .card-title,
+[data-theme="dark"] .accordion-item.tone-purple.active .card-title,
+[data-theme="dark"] .accordion-item.tone-accent .card-title,
+[data-theme="dark"] .accordion-item.tone-accent.active .card-title,
+[data-theme="dark"] .accordion-item.tone-dark .card-title,
+[data-theme="dark"] .accordion-item.tone-dark.active .card-title,
+body.dark-mode .accordion-item .accordion-header .card-title,
+body.dark-mode .accordion-item.active .accordion-header .card-title,
+body.dark-mode .accordion-item.tone-green .card-title,
+body.dark-mode .accordion-item.tone-green.active .card-title,
+body.dark-mode .accordion-item.tone-blue .card-title,
+body.dark-mode .accordion-item.tone-blue.active .card-title,
+body.dark-mode .accordion-item.tone-orange .card-title,
+body.dark-mode .accordion-item.tone-orange.active .card-title,
+body.dark-mode .accordion-item.tone-purple .card-title,
+body.dark-mode .accordion-item.tone-purple.active .card-title,
+body.dark-mode .accordion-item.tone-accent .card-title,
+body.dark-mode .accordion-item.tone-accent.active .card-title,
+body.dark-mode .accordion-item.tone-dark .card-title,
+body.dark-mode .accordion-item.tone-dark.active .card-title {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .accordion-item.tone-green .accordion-header,
+body.dark-mode .accordion-item.tone-green .accordion-header {
+  background: rgba(34, 197, 94, 0.15) !important;
+  color: #86efac !important;
+}
+
+[data-theme="dark"] .accordion-item.tone-blue .accordion-header,
+body.dark-mode .accordion-item.tone-blue .accordion-header {
+  background: rgba(37, 99, 235, 0.15) !important;
+  color: #93c5fd !important;
+}
+
+[data-theme="dark"] .accordion-item.tone-orange .accordion-header,
+body.dark-mode .accordion-item.tone-orange .accordion-header {
+  background: rgba(241, 122, 62, 0.15) !important;
+  color: #fdba74 !important;
+}
+
+[data-theme="dark"] .accordion-item.tone-purple .accordion-header,
+body.dark-mode .accordion-item.tone-purple .accordion-header {
+  background: rgba(139, 92, 246, 0.15) !important;
+  color: #d8b4fe !important;
+}
+
+[data-theme="dark"] .accordion-item.tone-accent .accordion-header,
+body.dark-mode .accordion-item.tone-accent .accordion-header {
+  background: rgba(99, 102, 241, 0.15) !important;
+  color: #c7d2fe !important;
+}
+
+[data-theme="dark"] .accordion-item.tone-dark .accordion-header,
+body.dark-mode .accordion-item.tone-dark .accordion-header {
+  background: rgba(30, 36, 58, 0.8) !important;
+  color: #f1f5f9 !important;
+}
+
+/* ==========================================================================
+   Lesson Interactive Components in Dark Mode
+   ========================================================================== */
+
+/* Cards and Containers */
+[data-theme="dark"] .interactive-matching-card,
+[data-theme="dark"] .interactive-fill-card,
+[data-theme="dark"] .interactive-step-guide-card,
+[data-theme="dark"] .mood-animal-card,
+[data-theme="dark"] .interactive-dd-card,
+[data-theme="dark"] .interactive-wildcard-card,
+[data-theme="dark"] .interactive-venn-card,
+[data-theme="dark"] .interactive-slider-card,
+[data-theme="dark"] .interactive-query-builder-card,
+[data-theme="dark"] .interactive-sandbox-card,
+[data-theme="dark"] .interactive-category-sorter-card,
+[data-theme="dark"] .resource-download-card,
+[data-theme="dark"] .adiagram-card,
+[data-theme="dark"] .lb-image,
+[data-theme="dark"] .step-card,
+[data-theme="dark"] .step-check-question-card,
+body.dark-mode .interactive-matching-card,
+body.dark-mode .interactive-fill-card,
+body.dark-mode .interactive-step-guide-card,
+body.dark-mode .mood-animal-card,
+body.dark-mode .interactive-dd-card,
+body.dark-mode .interactive-wildcard-card,
+body.dark-mode .interactive-venn-card,
+body.dark-mode .interactive-slider-card,
+body.dark-mode .interactive-query-builder-card,
+body.dark-mode .interactive-sandbox-card,
+body.dark-mode .interactive-category-sorter-card,
+body.dark-mode .resource-download-card,
+body.dark-mode .adiagram-card,
+body.dark-mode .lb-image,
+body.dark-mode .step-card,
+body.dark-mode .step-check-question-card {
+  background: var(--card-bg) !important;
+  border-color: var(--card-border) !important;
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .interactive-card-lead,
+[data-theme="dark"] .adiagram-intro,
+[data-theme="dark"] .adiagram-note,
+[data-theme="dark"] .step-text,
+[data-theme="dark"] .step-instruction,
+[data-theme="dark"] .step-text-label,
+[data-theme="dark"] .checklist-sub,
+[data-theme="dark"] .matching-def-text,
+body.dark-mode .interactive-card-lead,
+body.dark-mode .adiagram-intro,
+body.dark-mode .adiagram-note,
+body.dark-mode .step-text,
+body.dark-mode .step-instruction,
+body.dark-mode .step-text-label,
+body.dark-mode .checklist-sub,
+body.dark-mode .matching-def-text {
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .matching-item,
+[data-theme="dark"] .fill-sentence-row,
+[data-theme="dark"] .step-check-item,
+[data-theme="dark"] .category-sorter-row,
+[data-theme="dark"] .checklist-item,
+[data-theme="dark"] .adiagram-node,
+[data-theme="dark"] .bug-card,
+[data-theme="dark"] .swipe-card,
+[data-theme="dark"] .wildcard-card,
+[data-theme="dark"] .wildcard-tester-box,
+[data-theme="dark"] .venn-info-panel,
+[data-theme="dark"] .slider-side,
+[data-theme="dark"] .qb-palette-area,
+[data-theme="dark"] .qb-target-search-bar,
+[data-theme="dark"] .sandbox-result-card,
+[data-theme="dark"] .hotspots-info,
+[data-theme="dark"] .iwi-preview-box,
+[data-theme="dark"] .iwi-cm-node,
+[data-theme="dark"] .iwi-wc-card,
+body.dark-mode .matching-item,
+body.dark-mode .fill-sentence-row,
+body.dark-mode .step-check-item,
+body.dark-mode .category-sorter-row,
+body.dark-mode .checklist-item,
+body.dark-mode .adiagram-node,
+body.dark-mode .bug-card,
+body.dark-mode .swipe-card,
+body.dark-mode .wildcard-card,
+body.dark-mode .wildcard-tester-box,
+body.dark-mode .venn-info-panel,
+body.dark-mode .slider-side,
+body.dark-mode .qb-palette-area,
+body.dark-mode .qb-target-search-bar,
+body.dark-mode .sandbox-result-card,
+body.dark-mode .hotspots-info,
+body.dark-mode .iwi-preview-box,
+body.dark-mode .iwi-cm-node,
+body.dark-mode .iwi-wc-card {
+  background: #1e243a !important;
+  border-color: #334155 !important;
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .matching-num,
+[data-theme="dark"] .step-num,
+[data-theme="dark"] .bug-card-num,
+[data-theme="dark"] .swipe-num,
+body.dark-mode .matching-num,
+body.dark-mode .step-num,
+body.dark-mode .bug-card-num,
+body.dark-mode .swipe-num {
+  background: rgba(241, 122, 62, 0.2) !important;
+  color: #fdba74 !important;
+}
+
+[data-theme="dark"] .adiagram-label,
+[data-theme="dark"] .adiagram-title,
+[data-theme="dark"] .hotspots-info-title,
+[data-theme="dark"] .checklist-q,
+[data-theme="dark"] .swipe-statement,
+[data-theme="dark"] .quiz-question-text,
+[data-theme="dark"] .modal-header h3,
+[data-theme="dark"] .activity-card-header,
+[data-theme="dark"] .card-title,
+body.dark-mode .adiagram-label,
+body.dark-mode .adiagram-title,
+body.dark-mode .hotspots-info-title,
+body.dark-mode .checklist-q,
+body.dark-mode .swipe-statement,
+body.dark-mode .quiz-question-text,
+body.dark-mode .modal-header h3,
+body.dark-mode .activity-card-header,
+body.dark-mode .card-title {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .adiagram-sub,
+[data-theme="dark"] .hotspots-info-desc,
+[data-theme="dark"] .hotspots-counter,
+[data-theme="dark"] .bug-progress,
+[data-theme="dark"] .swipe-score,
+[data-theme="dark"] .slider-desc,
+[data-theme="dark"] .venn-info-effect,
+[data-theme="dark"] .venn-info-files,
+[data-theme="dark"] .sandbox-snippet,
+[data-theme="dark"] .iwi-instruction-text,
+[data-theme="dark"] .iwi-preview-title,
+[data-theme="dark"] .iwi-tb-sub,
+[data-theme="dark"] .iwi-fe-sub,
+[data-theme="dark"] .activity-card p,
+[data-theme="dark"] .exercise-instructions p,
+[data-theme="dark"] .exercise-instructions li,
+body.dark-mode .adiagram-sub,
+body.dark-mode .hotspots-info-desc,
+body.dark-mode .hotspots-counter,
+body.dark-mode .bug-progress,
+body.dark-mode .swipe-score,
+body.dark-mode .slider-desc,
+body.dark-mode .venn-info-effect,
+body.dark-mode .venn-info-files,
+body.dark-mode .sandbox-snippet,
+body.dark-mode .iwi-instruction-text,
+body.dark-mode .iwi-preview-title,
+body.dark-mode .iwi-tb-sub,
+body.dark-mode .iwi-fe-sub,
+body.dark-mode .activity-card p,
+body.dark-mode .exercise-instructions p,
+body.dark-mode .exercise-instructions li {
+  color: #cbd5e1 !important;
+}
+
+/* Feedback and Explanation Boxes */
+[data-theme="dark"] .matching-feedback,
+[data-theme="dark"] .fill-feedback,
+[data-theme="dark"] .qb-feedback,
+[data-theme="dark"] .category-sorter-feedback,
+[data-theme="dark"] .swipe-expl,
+[data-theme="dark"] .bug-card-expl,
+[data-theme="dark"] .quiz-result,
+body.dark-mode .matching-feedback,
+body.dark-mode .fill-feedback,
+body.dark-mode .qb-feedback,
+body.dark-mode .category-sorter-feedback,
+body.dark-mode .swipe-expl,
+body.dark-mode .bug-card-expl,
+body.dark-mode .quiz-result {
+  background: #1e243a !important;
+  border-color: #334155 !important;
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .matching-feedback.is-correct,
+[data-theme="dark"] .fill-feedback.is-correct,
+[data-theme="dark"] .category-sorter-feedback.is-correct,
+[data-theme="dark"] .quiz-result-success,
+body.dark-mode .matching-feedback.is-correct,
+body.dark-mode .fill-feedback.is-correct,
+body.dark-mode .category-sorter-feedback.is-correct,
+body.dark-mode .quiz-result-success {
+  background: rgba(34, 197, 94, 0.18) !important;
+  border-color: #16a34a !important;
+  color: #86efac !important;
+}
+
+[data-theme="dark"] .matching-feedback.is-error,
+[data-theme="dark"] .fill-feedback.is-error,
+[data-theme="dark"] .category-sorter-feedback.is-error,
+[data-theme="dark"] .quiz-result-error,
+body.dark-mode .matching-feedback.is-error,
+body.dark-mode .fill-feedback.is-error,
+body.dark-mode .category-sorter-feedback.is-error,
+body.dark-mode .quiz-result-error {
+  background: rgba(239, 68, 68, 0.18) !important;
+  border-color: #dc2626 !important;
+  color: #fca5a5 !important;
+}
+
+/* Quiz Options */
+[data-theme="dark"] .quiz-options label,
+body.dark-mode .quiz-options label {
+  background: #1e243a !important;
+  border-color: #334155 !important;
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .quiz-options label:hover,
+body.dark-mode .quiz-options label:hover {
+  background: #252e4a !important;
+  border-color: var(--accent-orange) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .quiz-options label.correct,
+body.dark-mode .quiz-options label.correct {
+  background: rgba(34, 197, 94, 0.2) !important;
+  border-color: #22c55e !important;
+  color: #86efac !important;
+}
+
+[data-theme="dark"] .quiz-options label.incorrect,
+body.dark-mode .quiz-options label.incorrect {
+  background: rgba(239, 68, 68, 0.2) !important;
+  border-color: #ef4444 !important;
+  color: #fca5a5 !important;
+}
+
+/* Chips, Tokens and Inputs in Dark Mode */
+[data-theme="dark"] .wildcard-chip,
+[data-theme="dark"] .sandbox-chip,
+[data-theme="dark"] .qb-block-chip,
+[data-theme="dark"] .glossary-tags span,
+body.dark-mode .wildcard-chip,
+body.dark-mode .sandbox-chip,
+body.dark-mode .qb-block-chip,
+body.dark-mode .glossary-tags span {
+  background: #151828 !important;
+  border-color: #3b4566 !important;
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .qb-assembled-container,
+[data-theme="dark"] .sandbox-input-box,
+[data-theme="dark"] .hotspots-stage,
+[data-theme="dark"] .hotspots-mockup,
+[data-theme="dark"] .adiagram-image,
+body.dark-mode .qb-assembled-container,
+body.dark-mode .sandbox-input-box,
+body.dark-mode .hotspots-stage,
+body.dark-mode .hotspots-mockup,
+body.dark-mode .adiagram-image {
+  background: #151828 !important;
+  border-color: #3b4566 !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .glossary-card,
+[data-theme="dark"] .flash-card,
+[data-theme="dark"] .flash-face,
+body.dark-mode .glossary-card,
+body.dark-mode .flash-card,
+body.dark-mode .flash-face {
+  background: var(--card-bg) !important;
+  border-color: var(--card-border) !important;
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .glossary-card h3,
+[data-theme="dark"] .flash-card-term,
+[data-theme="dark"] .flash-term-title,
+[data-theme="dark"] .flash-back-title,
+body.dark-mode .glossary-card h3,
+body.dark-mode .flash-card-term,
+body.dark-mode .flash-term-title,
+body.dark-mode .flash-back-title {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .glossary-card p,
+[data-theme="dark"] .flash-definition-text,
+body.dark-mode .glossary-card p,
+body.dark-mode .flash-definition-text {
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .glossary-letter,
+body.dark-mode .glossary-letter {
+  background: #1e243a !important;
+  color: #cbd5e1 !important;
+  border-color: #334155 !important;
+}
+
+[data-theme="dark"] .glossary-letter.active,
+[data-theme="dark"] .glossary-mode.active,
+body.dark-mode .glossary-letter.active,
+body.dark-mode .glossary-mode.active {
+  background: var(--accent-orange) !important;
+  color: #ffffff !important;
+  border-color: var(--accent-orange) !important;
+}
+
+/* Calculators Modal in Dark Mode */
+[data-theme="dark"] .calc-popup,
+body.dark-mode .calc-popup {
+  background: var(--card-bg) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--card-border) !important;
+}
+
+[data-theme="dark"] .calc-display,
+body.dark-mode .calc-display {
+  background: #151828 !important;
+  color: #ffffff !important;
+  border-color: #3b4566 !important;
+}
+
+[data-theme="dark"] .calc-tabs,
+body.dark-mode .calc-tabs {
+  background: #1e243a !important;
+  border-bottom-color: #334155 !important;
+}
+
+[data-theme="dark"] .calc-tab,
+body.dark-mode .calc-tab {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .calc-tab.active,
+body.dark-mode .calc-tab.active {
+  color: var(--accent-orange) !important;
+  background: var(--card-bg) !important;
+  border-bottom-color: var(--accent-orange) !important;
+}
+
+[data-theme="dark"] .calc-keys button,
+body.dark-mode .calc-keys button {
+  background: #1e243a !important;
+  border-color: #334155 !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .calc-keys button.op,
+body.dark-mode .calc-keys button.op {
+  background: #2b3352 !important;
+  color: var(--accent-orange) !important;
+  border-color: #2b3352 !important;
+}
+
+[data-theme="dark"] .calc-keys button.eq,
+body.dark-mode .calc-keys button.eq {
+  background: var(--accent-orange) !important;
+  color: #ffffff !important;
+  border-color: var(--accent-orange) !important;
+}
+
+[data-theme="dark"] .calc-row input,
+[data-theme="dark"] .calc-row select,
+body.dark-mode .calc-row input,
+body.dark-mode .calc-row select {
+  background: #151828 !important;
+  color: #ffffff !important;
+  border-color: #3b4566 !important;
+}
+
+[data-theme="dark"] .calc-btn,
+body.dark-mode .calc-btn {
+  background: #2b3352 !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .calc-result,
+body.dark-mode .calc-result {
+  background: #151828 !important;
+  border-color: #3b4566 !important;
+  color: #e2e8f0 !important;
+}
+
+/* ==========================================================================
+   Lesson Body, Subsections & Content Blocks in Dark Mode
+   ========================================================================== */
+
+[data-theme="dark"] .lb-subsection,
+body.dark-mode .lb-subsection {
+  background: rgba(30, 36, 58, 0.75) !important;
+  border-left: 4px solid var(--accent-orange) !important;
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .lb-subsection-heading,
+body.dark-mode .lb-subsection-heading {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .lb-subsection p,
+[data-theme="dark"] .lb-subsection ul,
+[data-theme="dark"] .lb-subsection ol,
+[data-theme="dark"] .lb-subsection li,
+[data-theme="dark"] .lb-text,
+[data-theme="dark"] .lb-text p,
+[data-theme="dark"] .lb-text ul,
+[data-theme="dark"] .lb-text ol,
+[data-theme="dark"] .lb-text li,
+[data-theme="dark"] .lesson-text-content,
+[data-theme="dark"] .lesson-text-content p,
+[data-theme="dark"] .lesson-text-content ul,
+[data-theme="dark"] .lesson-text-content ol,
+[data-theme="dark"] .lesson-text-content li,
+body.dark-mode .lb-subsection p,
+body.dark-mode .lb-subsection ul,
+body.dark-mode .lb-subsection ol,
+body.dark-mode .lb-subsection li,
+body.dark-mode .lb-text,
+body.dark-mode .lb-text p,
+body.dark-mode .lb-text ul,
+body.dark-mode .lb-text ol,
+body.dark-mode .lb-text li,
+body.dark-mode .lesson-text-content,
+body.dark-mode .lesson-text-content p,
+body.dark-mode .lesson-text-content ul,
+body.dark-mode .lesson-text-content ol,
+body.dark-mode .lesson-text-content li {
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .lb-subsection b,
+[data-theme="dark"] .lb-subsection strong,
+[data-theme="dark"] .lb-text b,
+[data-theme="dark"] .lb-text strong,
+[data-theme="dark"] .lesson-text-content b,
+[data-theme="dark"] .lesson-text-content strong,
+body.dark-mode .lb-subsection b,
+body.dark-mode .lb-subsection strong,
+body.dark-mode .lb-text b,
+body.dark-mode .lb-text strong,
+body.dark-mode .lesson-text-content b,
+body.dark-mode .lesson-text-content strong {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .lb-viz,
+[data-theme="dark"] .lb-gallery,
+[data-theme="dark"] .lb-gallery-item,
+[data-theme="dark"] .lb-feature-list,
+[data-theme="dark"] .split-diagram,
+[data-theme="dark"] .mindmap,
+[data-theme="dark"] .chat-mockup,
+[data-theme="dark"] .flow-steps,
+body.dark-mode .lb-viz,
+body.dark-mode .lb-gallery,
+body.dark-mode .lb-gallery-item,
+body.dark-mode .lb-feature-list,
+body.dark-mode .split-diagram,
+body.dark-mode .mindmap,
+body.dark-mode .chat-mockup,
+body.dark-mode .flow-steps {
+  background: #1e243a !important;
+  border-color: #334155 !important;
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .viz-nodes.split .viz-node,
+[data-theme="dark"] .viz-node,
+[data-theme="dark"] .sd-branch,
+[data-theme="dark"] .mm-node,
+[data-theme="dark"] .flow-step,
+[data-theme="dark"] .mockup-phone,
+[data-theme="dark"] .mockup-side,
+body.dark-mode .viz-nodes.split .viz-node,
+body.dark-mode .viz-node,
+body.dark-mode .sd-branch,
+body.dark-mode .mm-node,
+body.dark-mode .flow-step,
+body.dark-mode .mockup-phone,
+body.dark-mode .mockup-side {
+  background: #151828 !important;
+  border-color: #334155 !important;
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .lb-viz-title,
+[data-theme="dark"] .lb-gallery-title,
+[data-theme="dark"] .lb-feature-title,
+[data-theme="dark"] .viz-node-label,
+[data-theme="dark"] .sd-branch-label,
+[data-theme="dark"] .mm-node-title,
+[data-theme="dark"] .flow-step-title,
+[data-theme="dark"] .mockup-side-title,
+[data-theme="dark"] .lb-table-title,
+body.dark-mode .lb-viz-title,
+body.dark-mode .lb-gallery-title,
+body.dark-mode .lb-feature-title,
+body.dark-mode .viz-node-label,
+body.dark-mode .sd-branch-label,
+body.dark-mode .mm-node-title,
+body.dark-mode .flow-step-title,
+body.dark-mode .mockup-side-title,
+body.dark-mode .lb-table-title {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .viz-flow,
+[data-theme="dark"] .viz-node-desc,
+[data-theme="dark"] .sd-branch-sub,
+[data-theme="dark"] .mm-node-desc,
+[data-theme="dark"] .flow-step-desc,
+[data-theme="dark"] .lb-feature-items li,
+[data-theme="dark"] .lb-table-intro,
+body.dark-mode .viz-flow,
+body.dark-mode .viz-node-desc,
+body.dark-mode .sd-branch-sub,
+body.dark-mode .mm-node-desc,
+body.dark-mode .flow-step-desc,
+body.dark-mode .lb-feature-items li,
+body.dark-mode .lb-table-intro {
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .lb-feature-advantage,
+body.dark-mode .lb-feature-advantage {
+  background: rgba(245, 158, 11, 0.15) !important;
+  border-color: #d97706 !important;
+  color: #fde68a !important;
+}
+
+[data-theme="dark"] .chat-bubble,
+body.dark-mode .chat-bubble {
+  background: #252e4a !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .chat-sender,
+body.dark-mode .chat-sender {
+  color: #fdba74 !important;
+}
+
+[data-theme="dark"] .chat-text,
+body.dark-mode .chat-text {
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .lesson-image-placeholder,
+[data-theme="dark"] .placeholder-body,
+body.dark-mode .lesson-image-placeholder,
+body.dark-mode .placeholder-body {
+  background: #1e243a !important;
+  border-color: #334155 !important;
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .placeholder-heading,
+body.dark-mode .placeholder-heading {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .placeholder-desc,
+body.dark-mode .placeholder-desc {
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .accordion-content,
+body.dark-mode .accordion-content {
+  background: var(--card-bg) !important;
+  color: #e2e8f0 !important;
+}
+
+
+
+
 

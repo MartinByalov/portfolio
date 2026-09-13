@@ -135,7 +135,7 @@
       "items": [
         {
           "id": "task-checklist-item",
-          "title": "Чек-лист преди предаване",
+          "title": "Чек-лист",
           "tone": "orange",
           "icon": "fas fa-list-check",
           "variant": "task",

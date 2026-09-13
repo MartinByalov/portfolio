@@ -11,15 +11,18 @@ function esc(s) {
 export async function fetchLesson(jsonPath) {
   const res = await fetch(jsonPath);
   if (!res.ok) throw new Error(`HTTP ${res.status} loading ${jsonPath}`);
-  return res.json();
+  return await res.json();
 }
 
 export function buildLesson(lesson) {
+  const gradeLabel = lesson.grade ? ` · ${lesson.grade} клас` : '';
+  const goalLabel = 'Цел:';
+
   const headerHtml = `
     <div class="course-header-info">
-      <span class="sidebar-badge-inline">${lesson.subject || ''}${lesson.grade ? ' · ' + lesson.grade + ' клас' : ''}</span>
+      <span class="sidebar-badge-inline">${lesson.subject || ''}${gradeLabel}</span>
       <h1 class="page-title">${lesson.title}</h1>
-      ${lesson.goal ? `<div class="lesson-goal-line tone-orange tag-goal"><span class="lesson-goal-ico"><i class="fas fa-bullseye"></i></span><span class="lesson-goal-text"><strong>Цел:</strong> ${esc(lesson.goal)}</span></div>` : ''}
+      ${lesson.goal ? `<div class="lesson-goal-line tone-orange tag-goal"><span class="lesson-goal-ico"><i class="fas fa-bullseye"></i></span><span class="lesson-goal-text"><strong>${goalLabel}</strong> ${esc(lesson.goal)}</span></div>` : ''}
     </div>
   `;
 

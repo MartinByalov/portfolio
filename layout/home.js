@@ -1,12 +1,12 @@
 // Home landing page with subject cards and news feed
 
 const SUBJECT_CARDS = [
-  { badge: '8 клас',  icon: 'fas fa-desktop',       title: 'ИТ',                       description: 'Основи на работа с компютър и MS Office.',                                 href: '#/course/it-8' },
-  { badge: '9 клас',  icon: 'fas fa-file-excel',   title: 'ИТ',                       description: 'Работа с електронни таблици и презентации.',                                href: '#' },
-  { badge: '10 клас', icon: 'fas fa-network-wired',title: 'ИТ',                       description: 'Интернет, мрежи, сигурност и уеб основи.',                                   href: '#' },
-  { badge: '12 клас', icon: 'fas fa-chart-line',   title: 'Икономическа Информатика', description: 'Информационни системи в бизнеса и управлението.',                              href: '#/course/up-ii-12' },
-  { badge: '12 клас', icon: 'fas fa-code',         title: 'Програмиране',             description: 'Програмиране на Python и структури от данни.',                                href: '#/course/programming-12' },
-  { badge: '12 клас', icon: 'fas fa-microchip',    title: 'Компютърни Архитектури',   description: 'Хардуер, процесори, памет и операционни системи.',                           href: '#/course/kaos-12' }
+  { id: 'it-8', badge: '8 клас',  icon: 'fas fa-desktop',       title: 'ИТ',                       description: 'Основи на работа с компютър и MS Office.',                                 href: '#/course/it-8' },
+  { id: 'it-9', badge: '9 клас',  icon: 'fas fa-file-excel',   title: 'ИТ',                       description: 'Работа с електронни таблици и презентации.',                                href: '#' },
+  { id: 'it-10', badge: '10 клас', icon: 'fas fa-network-wired',title: 'ИТ',                       description: 'Интернет, мрежи, сигурност и уеб основи.',                                   href: '#' },
+  { id: 'up-ii-12', badge: '12 клас', icon: 'fas fa-chart-line',   title: 'Икономическа Информатика', description: 'Информационни системи в бизнеса и управлението.',                              href: '#/course/up-ii-12' },
+  { id: 'programming-12', badge: '12 клас', icon: 'fas fa-code',         title: 'Програмиране',             description: 'Програмиране на Python и структури от данни.',                                href: '#/course/programming-12' },
+  { id: 'kaos-12', badge: '12 клас', icon: 'fas fa-microchip',    title: 'Компютърни Архитектури',   description: 'Хардуер, процесори, памет и операционни системи.',                           href: '#/course/kaos-12' }
 ];
 
 function escapeHtmlLanding(value) {
@@ -66,7 +66,7 @@ export function renderLandingPage(catalog) {
         <h3>${escapeHtmlLanding(course.title)}</h3>
         <p>${course.available
           ? escapeHtmlLanding(course.description)
-          : `${escapeHtmlLanding(course.grade)} · Coming soon.`}</p>
+          : `${escapeHtmlLanding(course.grade)} · Предстои.`}</p>
         ${course.available
           ? `<a href="#/course/${course.id}" class="exp-item-link">Уроци <i class="fas fa-arrow-right"></i></a>`
           : '<span class="exp-item-soon">Скоро</span>'}
@@ -414,7 +414,7 @@ export function initLandingPage() {
           card.querySelector('h3').textContent = course.title;
           card.querySelector('p').textContent = course.available
             ? course.description
-            : `${course.grade} · Coming soon.`;
+            : `${course.grade} · Предстои.`;
           const link = card.querySelector('a.exp-item-link, span.exp-item-soon');
           if (course.available) {
             const a = document.createElement('a');

@@ -149,6 +149,123 @@ function getMockIllustration(id) {
         </div>
       `;
 
+    case 'img-drive-permissions-it8-6':
+      return `
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl max-w-xl mx-auto text-left font-sans">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+            <div class="flex items-center gap-2 text-slate-800 font-semibold text-sm">
+              <i class="fas fa-user-plus text-blue-600"></i> Споделяне на „Проект_Екип.docx“
+            </div>
+            <span class="text-xs text-slate-400"><i class="fas fa-gear"></i> Настройки</span>
+          </div>
+          <div class="py-3">
+            <div class="text-xs font-medium text-slate-500 mb-1">Потребители с достъп:</div>
+            <div class="flex items-center justify-between py-2 border-b border-slate-100">
+              <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold">ИИ</div>
+                <div>
+                  <div class="text-xs font-semibold text-slate-800">Иван Иванов (Вие)</div>
+                  <div class="text-[11px] text-slate-400">ivan@school.edu</div>
+                </div>
+              </div>
+              <span class="text-xs text-slate-500 font-medium">Собственик</span>
+            </div>
+            <div class="flex items-center justify-between py-2 border-b border-slate-100">
+              <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold">АК</div>
+                <div>
+                  <div class="text-xs font-semibold text-slate-800">Ани Колева</div>
+                  <div class="text-[11px] text-slate-400">ani@school.edu</div>
+                </div>
+              </div>
+              <div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-blue-300 rounded-md text-xs font-semibold text-blue-700 shadow-sm">
+                <span>Редактиране (Editor)</span> <i class="fas fa-chevron-down text-[10px]"></i>
+              </div>
+            </div>
+          </div>
+          <div class="pt-2 bg-blue-50/60 p-2.5 rounded-lg border border-blue-100 text-xs text-slate-600">
+            <div class="font-semibold text-blue-900 mb-0.5"><i class="fas fa-link text-blue-600"></i> Общ достъп с линк:</div>
+            <div class="flex items-center justify-between mt-1">
+              <span>Всеки с връзката: <strong>Преглед (Viewer)</strong></span>
+              <button class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 text-xs hover:bg-slate-50">Копирай линк</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+    case 'img-search-operators-it8-6':
+      return `
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl max-w-xl mx-auto text-left font-sans">
+          <div class="bg-white border border-slate-300 rounded-full px-4 py-2 flex items-center gap-2 shadow-sm mb-3">
+            <i class="fas fa-search text-slate-400 text-sm"></i>
+            <div class="flex flex-wrap gap-1.5 text-xs">
+              <span class="px-2 py-0.5 bg-blue-100 text-blue-800 rounded font-mono font-semibold">site:mon.bg</span>
+              <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded font-mono font-semibold">"правилник"</span>
+              <span class="px-2 py-0.5 bg-purple-100 text-purple-800 rounded font-mono font-semibold">filetype:pdf</span>
+            </div>
+          </div>
+          <div class="space-y-2.5">
+            <div class="p-2.5 bg-white rounded-lg border border-slate-200">
+              <div class="text-xs text-emerald-700 font-mono">https://www.mon.bg › documents › pravilnik_2026.pdf</div>
+              <div class="text-sm font-semibold text-blue-700 hover:underline flex items-center gap-1.5 mt-0.5">
+                <span class="px-1.5 py-0.2 bg-red-100 text-red-700 text-[10px] font-bold rounded">PDF</span>
+                Правилник за устройството и дейността на училището (Официален)
+              </div>
+              <div class="text-xs text-slate-600 mt-1">Официален документ на МОН: общи разпоредби, вътрешен ред, права и задължения...</div>
+            </div>
+            <div class="p-2.5 bg-white rounded-lg border border-slate-200">
+              <div class="text-xs text-emerald-700 font-mono">https://www.mon.bg › safety › pravila_vutreshen_red.pdf</div>
+              <div class="text-sm font-semibold text-blue-700 hover:underline flex items-center gap-1.5 mt-0.5">
+                <span class="px-1.5 py-0.2 bg-red-100 text-red-700 text-[10px] font-bold rounded">PDF</span>
+                Насоки за училищна сигурност и вътрешен ред
+              </div>
+              <div class="text-xs text-slate-600 mt-1">Нормативен акт, регулиращ реда в училищната компютърна мрежа и кабинети...</div>
+            </div>
+          </div>
+        </div>
+      `;
+
+    case 'img-explorer-wildcards-it8-6':
+      return `
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl max-w-xl mx-auto text-left font-sans">
+          <div class="flex items-center justify-between bg-white border border-slate-300 rounded-lg px-3 py-1.5 mb-3 shadow-sm">
+            <div class="flex items-center gap-2 text-xs text-slate-500">
+              <i class="fas fa-folder text-amber-500"></i> D:\\Училище\\Проекти
+            </div>
+            <div class="flex items-center gap-1.5 bg-slate-100 px-2.5 py-1 rounded border border-slate-200 text-xs">
+              <i class="fas fa-search text-blue-500"></i>
+              <code class="text-blue-700 font-bold">Проект_*.pptx</code>
+            </div>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-lg divide-y divide-slate-100 text-xs">
+            <div class="flex items-center justify-between p-2 hover:bg-slate-50">
+              <div class="flex items-center gap-2">
+                <i class="fas fa-file-powerpoint text-orange-600 text-sm"></i>
+                <span class="font-medium text-slate-800">Проект_Ани.pptx</span>
+              </div>
+              <span class="text-slate-400">Презентация • 2.4 MB</span>
+            </div>
+            <div class="flex items-center justify-between p-2 hover:bg-slate-50">
+              <div class="flex items-center gap-2">
+                <i class="fas fa-file-powerpoint text-orange-600 text-sm"></i>
+                <span class="font-medium text-slate-800">Проект_Иван.pptx</span>
+              </div>
+              <span class="text-slate-400">Презентация • 3.1 MB</span>
+            </div>
+            <div class="flex items-center justify-between p-2 hover:bg-slate-50">
+              <div class="flex items-center gap-2">
+                <i class="fas fa-file-powerpoint text-orange-600 text-sm"></i>
+                <span class="font-medium text-slate-800">Проект_ИТ_Окончателен.pptx</span>
+              </div>
+              <span class="text-slate-400">Презентация • 1.8 MB</span>
+            </div>
+          </div>
+          <div class="mt-2 text-[11px] text-slate-500 text-center">
+            <i class="fas fa-info-circle text-blue-500"></i> Звездичката <code>*</code> замества всяко име на ученик след префикса „Проект_“.
+          </div>
+        </div>
+      `;
+
     case 'windows11-search-comparison-image':
     default:
       return `

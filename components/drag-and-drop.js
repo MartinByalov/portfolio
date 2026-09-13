@@ -155,7 +155,7 @@ export function init(comp) {
       rc.classList.add(ok ? 'dd-correct' : 'dd-wrong');
     }
     if (correct === total && total > 0) {
-      feedback.innerHTML = '<i class="fas fa-circle-check"></i> Отлично! Всички двойки са свързани правилно!';
+      feedback.innerHTML = '<i class="fas fa-circle-check"></i> Отлично!';
       feedback.className = 'dd-feedback feedback-success';
     } else {
       feedback.innerHTML = '<i class="fas fa-triangle-exclamation"></i> Резултат: ' + correct + ' от ' + total + ' верни.';

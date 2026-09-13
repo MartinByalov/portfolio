@@ -544,6 +544,7 @@ export function initLandingPage() {
       }
     })
     .catch(() => {
+      if (controller.signal.aborted) return;
       // Direct client-side RSS loading as resilient fallback
       NEWS_SOURCES.forEach(source => {
         loadNewsBox(source, controller.signal, items => {

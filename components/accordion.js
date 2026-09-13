@@ -20,6 +20,7 @@ import * as QueryBuilder from './query-builder.js';
 import * as LiveSearchSandbox from './live-search-sandbox.js';
 import * as CategorySorter from './category-sorter.js';
 import * as ImageWithInstruction from './image-with-instruction.js';
+import * as SearchMissionLab from './search-mission-lab.js';
 import * as Tag from './tag.js';
 
 function esc(s) {
@@ -239,7 +240,7 @@ function formatMarkdown(text) {
   const blocks = s.split(/\n\s*\n/).map(b => {
     b = b.trim();
     if (!b) return '';
-    if (/^<h[1-6]/.test(b)) return b;
+    if (/^<(h[1-6]|p|div|ul|ol|table|blockquote|figure)/i.test(b)) return b;
     return '<p>' + b.replace(/\n/g, '<br>') + '</p>';
   });
   return blocks.join('');
@@ -283,6 +284,7 @@ function renderBlock(b) {
     case 'live-search-sandbox':    return LiveSearchSandbox.render(b);
     case 'category-sorter':        return CategorySorter.render(b);
     case 'image-with-instruction': return ImageWithInstruction.render(b);
+    case 'search-mission-lab':     return SearchMissionLab.render(b);
     case 'tag':                    return Tag.render(b);
     case 'accordion':              return render(b);
     default:                       return '<!-- unknown lesson block type: ' + esc(b.type) + ' -->';
@@ -354,6 +356,7 @@ function initBlock(b, root) {
   if (b.type === 'live-search-sandbox') LiveSearchSandbox.init(b);
   if (b.type === 'category-sorter') CategorySorter.init(b);
   if (b.type === 'image-with-instruction') ImageWithInstruction.init(b);
+  if (b.type === 'search-mission-lab') SearchMissionLab.init(b);
   if (b.type === 'tag') Tag.init(b);
   if (b.type === 'accordion') init(b);
   if (b.type === 'subsection' && Array.isArray(b.content)) {

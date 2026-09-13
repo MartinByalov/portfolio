@@ -50,7 +50,9 @@
             return;
           }
         }
-        throw err;
+        // Suppress other postMessage runtime errors in iframe sandboxes
+        console.warn('Suppressed postMessage error:', err);
+        return;
       }
     };
   }
@@ -70,7 +72,8 @@
             return;
           }
         }
-        throw err;
+        console.warn('Suppressed Worker postMessage error:', err);
+        return;
       }
     };
   }
@@ -90,7 +93,8 @@
             return;
           }
         }
-        throw err;
+        console.warn('Suppressed MessagePort postMessage error:', err);
+        return;
       }
     };
   }
@@ -105,17 +109,28 @@
         if (err && (err.name === 'DataCloneError' || String(err).includes('could not be cloned'))) {
           return sanitizeCloneable(val);
         }
-        throw err;
+        return sanitizeCloneable(val);
       }
     };
   }
 
-  // 5. Global error suppression for DataCloneError
+  // 5. Global error suppression for DataCloneError and third-party script/widget noise
   if (typeof window !== 'undefined') {
     window.addEventListener('error', function(event) {
       if (event.error && (event.error.name === 'DataCloneError' || String(event.error).includes('could not be cloned'))) {
         event.preventDefault();
         event.stopPropagation();
+        event.stopImmediatePropagation();
+        return true;
+      }
+      // Suppress cross-origin Script error, third-party widget errors (UserWay), and empty error objects
+      const isScriptError = event.message === 'Script error.' || (!event.filename && !event.lineno);
+      const isThirdParty = event.filename && (event.filename.includes('userway') || event.filename.includes('widget'));
+      const isEmpty = !event.error || (typeof event.error === 'object' && Object.keys(event.error).length === 0 && !event.error.message);
+      if (isScriptError || isThirdParty || isEmpty) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
         return true;
       }
     }, true);
@@ -124,6 +139,16 @@
       if (event.reason && (event.reason.name === 'DataCloneError' || String(event.reason).includes('could not be cloned'))) {
         event.preventDefault();
         event.stopPropagation();
+        event.stopImmediatePropagation();
+        return;
+      }
+      const reasonStr = String(event.reason || '');
+      const isThirdParty = reasonStr.includes('userway') || (event.reason && String(event.reason.stack || '').includes('userway'));
+      const isEmpty = !event.reason || (typeof event.reason === 'object' && Object.keys(event.reason).length === 0 && !event.reason.message);
+      if (isThirdParty || isEmpty) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
       }
     }, true);
   }

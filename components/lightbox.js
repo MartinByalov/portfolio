@@ -58,4 +58,6 @@ export function initLightbox(scope) {
 
 let escHandler = (e) => { if (e.key === 'Escape') closeLightbox(); };
 
-document.addEventListener('keydown', escHandler);
+if (typeof document !== 'undefined') {
+  document.addEventListener('keydown', escHandler);
+}

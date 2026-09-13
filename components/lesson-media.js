@@ -832,7 +832,8 @@ function renderInfographicGrid2x2(spec) {
     + '</div>'
     ).join('');
 
-  return '<div class="infographic-2x2-grid">' + cards + '</div>';
+  const layoutClass = spec.layout || 'grid-2x2';
+  return '<div class="infographic-2x2-grid ' + esc(layoutClass) + '">' + cards + '</div>';
 }
 
 // Session rules cards with optional start button

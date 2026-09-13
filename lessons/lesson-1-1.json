@@ -415,7 +415,7 @@
             {
               "type": "image",
               "id": "project-presentation",
-              "src": "/assets/it-8-1/project-work-vector.jpg",
+              "src": "/assets/it-8-1/20945496.jpg",
               "alt": "Проектна работа – векторно изкуство",
               "caption": "Проектната работа обединява планиране, екипност, изпълнение и изпитване."
             },
@@ -427,12 +427,12 @@
                 {
                   "label": "Идея",
                   "description": "цели и целева аудитория",
-                  "image": "/assets/it-8-1/project-plan.jpg"
+                  "image": "/assets/it-8-1/projIdea.jpg"
                 },
                 {
                   "label": "Планиране",
                   "description": "разпределяне на роли и срокове",
-                  "image": "/assets/it-8-1/project-planning.jpg"
+                  "image": "/assets/it-8-1/projPlan.jpg"
                 },
                 {
                   "label": "Изпълнение",
@@ -442,12 +442,12 @@
                 {
                   "label": "Изпитване",
                   "description": "тестване, проверка и редакция",
-                  "image": "/assets/it-8-1/project-testing.jpg"
+                  "image": "/assets/it-8-1/systemTesting.jpg"
                 },
                 {
                   "label": "Представяне",
                   "description": "защита и отговори на въпроси",
-                  "image": "/assets/it-8-1/project-defense.jpg"
+                  "image": "/assets/it-8-1/projPresent.jpg"
                 }
               ],
               "diagram": {

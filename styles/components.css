@@ -3728,6 +3728,14 @@ button.about-btn-primary {
   gap: 14px;
   margin: 14px 0;
 }
+.infographic-2x2-grid.grid-2x3 {
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (max-width: 640px) {
+  .infographic-2x2-grid.grid-2x3 {
+    grid-template-columns: 1fr;
+  }
+}
 .info-card {
   background: #fff;
   border: 1px solid #e2e8f0;

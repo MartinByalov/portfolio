@@ -26,6 +26,7 @@ import * as QueryBuilder from '../components/query-builder.js';
 import * as LiveSearchSandbox from '../components/live-search-sandbox.js';
 import * as CategorySorter from '../components/category-sorter.js';
 import * as ImageWithInstruction from '../components/image-with-instruction.js';
+import * as SearchMissionLab from '../components/search-mission-lab.js';
 
 const registry = {
   'text-group': TextGroup,
@@ -54,6 +55,7 @@ const registry = {
   'live-search-sandbox': LiveSearchSandbox,
   'category-sorter': CategorySorter,
   'image-with-instruction': ImageWithInstruction,
+  'search-mission-lab': SearchMissionLab,
 };
 
 export function renderComponent(comp) {

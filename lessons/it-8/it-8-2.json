@@ -86,7 +86,7 @@
               "type": "media-types",
               "id": "chat-media-types",
               "image": {
-                "src": "/assets/it-8-2/smartApp.png",
+                "src": "it-8-2/smartApp.png",
                 "alt": "Приложение за чат на смарт устройство"
               },
               "title": "Медийни типове",
@@ -133,7 +133,7 @@
             {
               "type": "titled-image",
               "id": "blog-title-image",
-              "src": "/assets/it-8-2/blogPost.png",
+              "src": "it-8-2/blogPost.png",
               "alt": "Примерни блогове — уеб дневници с публикации и списък на последни постове"
             },
             {
@@ -435,7 +435,7 @@
               "type": "titled-image",
               "id": "privacy-settings-image",
               "title": "Панел с настройки за поверителност",
-              "src": "/assets/it-8-2/privacyPanel.png",
+              "src": "it-8-2/privacyPanel.png",
               "alt": "Панел с настройки за поверителност — кой вижда публикациите, кой може да пише и да отбелязва"
             },
             {
@@ -499,27 +499,27 @@
       "rightItems": [
         {
           "id": "fb",
-          "image": "/assets/it-8-2/facebook.png",
+          "image": "it-8-2/facebook.png",
           "alt": "Facebook"
         },
         {
           "id": "ig",
-          "image": "/assets/it-8-2/instagram.png",
+          "image": "it-8-2/instagram.png",
           "alt": "Instagram"
         },
         {
           "id": "x",
-          "image": "/assets/it-8-2/x_logo.png",
+          "image": "it-8-2/x_logo.png",
           "alt": "X (Twitter)"
         },
         {
           "id": "li",
-          "image": "/assets/it-8-2/LinkedIn.png",
+          "image": "it-8-2/LinkedIn.png",
           "alt": "LinkedIn"
         },
         {
           "id": "yt",
-          "image": "/assets/it-8-2/youtube.png",
+          "image": "it-8-2/youtube.png",
           "alt": "Youtube"
         }
       ]

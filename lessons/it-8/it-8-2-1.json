@@ -42,7 +42,7 @@
             },
             {
               "type": "image",
-              "src": "assets/it-8-2-1/pascaline_and_leibniz.jpg",
+              "src": "it-8-2-1/pascaline_and_leibniz.jpg",
               "alt": "Паскалината на Блез Паскал и машината на Лайбниц",
               "caption": "Фиг. 1: Механичните калкулатори на Блез Паскал и Готфрид Лайбниц"
             }
@@ -72,7 +72,7 @@
             },
             {
               "type": "image",
-              "src": "assets/it-8-2-1/john_atanasoff_abc_computer.jpg",
+              "src": "it-8-2-1/john_atanasoff_abc_computer.jpg",
               "alt": "Джон Атанасов и компютърът ABC",
               "caption": "Фиг. 2: Проф. Джон Атанасов и реконструираният компютър ABC"
             }

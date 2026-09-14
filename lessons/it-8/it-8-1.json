@@ -45,7 +45,7 @@
             {
               "type": "image",
               "id": "ks-real-computer",
-              "src": "/assets/it-8-1/compSystem.jpeg",
+              "src": "it-8-1/compSystem.jpeg",
               "alt": "Съвременна компютърна система (компютър, монитор, периферия)"
             },
             {
@@ -56,17 +56,17 @@
                 {
                   "label": "ХАРДУЕР",
                   "description": "Физически компоненти",
-                  "image": "/assets/it-8-1/hardware.png"
+                  "image": "it-8-1/hardware.png"
                 },
                 {
                   "label": "СОФТУЕР",
                   "description": "Операционна система и програми",
-                  "image": "/assets/it-8-1/windows11.jpg"
+                  "image": "it-8-1/windows11.jpg"
                 },
                 {
                   "label": "ДАННИ",
                   "description": "Информация за цифрова обработка",
-                  "image": "/assets/it-8-1/data.jpg"
+                  "image": "it-8-1/data.jpg"
                 }
               ],
               "diagram": {
@@ -85,7 +85,7 @@
                 {
                   "type": "image",
                   "id": "data-image",
-                  "src": "/assets/it-8-1/data.jpg",
+                  "src": "it-8-1/data.jpg",
                   "alt": "Цифрови данни и структури от данни",
                   "caption": "Данните са съдържанието, което софтуерът обработва чрез физическия хардуер."
                 }
@@ -108,32 +108,32 @@
                   "items": [
                     {
                       "title": "Дънна платка (Motherboard)",
-                      "src": "/assets/it-8-1/motherboard.jpg",
+                      "src": "it-8-1/motherboard.jpg",
                       "alt": "Съвременна компютърна дънна платка"
                     },
                     {
                       "title": "Централен процесор (CPU)",
-                      "src": "/assets/it-8-1/cpu.jpg",
+                      "src": "it-8-1/cpu.jpg",
                       "alt": "Съвременен централен процесор CPU"
                     },
                     {
                       "title": "Оперативна памет (RAM)",
-                      "src": "/assets/it-8-1/ramHyper.jpg",
+                      "src": "it-8-1/ramHyper.jpg",
                       "alt": "Съвременна оперативна памет (RAM)"
                     },
                     {
                       "title": "Статичен диск (SSD)",
-                      "src": "/assets/it-8-1/nvme.jpg",
+                      "src": "it-8-1/nvme.jpg",
                       "alt": "Съвременно бързо SSD M.2 NVMe устройство"
                     },
                     {
                       "title": "Хард диск (HDD)",
-                      "src": "/assets/it-8-1/hardDrive.jpg",
+                      "src": "it-8-1/hardDrive.jpg",
                       "alt": "Класически твърд диск (HDD) за постоянно съхранение на данни"
                     },
                     {
                       "title": "Видеокарта (GPU)",
-                      "src": "/assets/it-8-1/videocard.png",
+                      "src": "it-8-1/videocard.png",
                       "alt": "Съвременна видеокарта за обработка на графика"
                     }
                   ]
@@ -161,17 +161,17 @@
                   "items": [
                     {
                       "title": "Операционна система",
-                      "src": "/assets/it-8-1/LinuxFedora.png",
+                      "src": "it-8-1/LinuxFedora.png",
                       "alt": "Съвременна Linux операционна система"
                     },
                     {
                       "title": "Уеб браузър",
-                      "src": "/assets/it-8-1/googleChrome.jpg",
+                      "src": "it-8-1/googleChrome.jpg",
                       "alt": "Уеб браузър Mozilla Firefox"
                     },
                     {
                       "title": "Приложна програма",
-                      "src": "/assets/it-8-1/software.png",
+                      "src": "it-8-1/software.png",
                       "alt": "Adobe Photoshop – съвременна приложна програма"
                     }
                   ]
@@ -191,22 +191,22 @@
                 {
                   "label": "Програма",
                   "description": "изпраща инструкции",
-                  "image": "/assets/it-8-1/wordSVG.svg"
+                  "image": "it-8-1/wordSVG.svg"
                 },
                 {
                   "label": "Инструкция",
                   "description": "програмен код за обработка",
-                  "image": "/assets/it-8-1/compProgram.jpg"
+                  "image": "it-8-1/compProgram.jpg"
                 },
                 {
                   "label": "Хардуер",
                   "description": "изчислява",
-                  "image": "/assets/it-8-1/pcConf.jpg"
+                  "image": "it-8-1/pcConf.jpg"
                 },
                 {
                   "label": "Резултат",
                   "description": "работещо приложение",
-                  "image": "/assets/it-8-1/Microsoft_Word.png"
+                  "image": "it-8-1/Microsoft_Word.png"
                 }
               ],
               "diagram": {
@@ -227,7 +227,7 @@
                 {
                   "type": "image",
                   "id": "cpu-image",
-                  "src": "/assets/it-8-1/cpuInside.jpg",
+                  "src": "it-8-1/cpuInside.jpg",
                   "alt": "Съвременен централен процесор (CPU)",
                   "caption": "Съвременният процесор изпълнява милиарди инструкции за секунда."
                 }
@@ -246,7 +246,7 @@
                 {
                   "type": "image",
                   "id": "ram-image",
-                  "src": "/assets/it-8-1/ramHyper.jpg",
+                  "src": "it-8-1/ramHyper.jpg",
                   "alt": "Съвременен RAM модул",
                   "caption": "RAM е бърза оперативна памет за текущи задачи – изтрива се при изключване."
                 }
@@ -266,7 +266,7 @@
             {
               "type": "image",
               "id": "internet-network",
-              "src": "/assets/it-8-1/router.jpg",
+              "src": "it-8-1/router.jpg",
               "alt": "Съвременен безжичен рутер (маршрутизатор)",
               "caption": "Маршрутизатор (Рутер) - свързва устройствата в локалната мрежа и осигурява достъп до интернет."
             },
@@ -278,17 +278,17 @@
                 {
                   "label": "Браузър",
                   "description": "изпраща заявка",
-                  "image": "/assets/it-8-1/mozilla.png"
+                  "image": "it-8-1/mozilla.png"
                 },
                 {
                   "label": "Интернет доставчик (ISP)",
                   "description": "маршрутизира пакетите в глобалната мрежа",
-                  "image": "/assets/it-8-1/ispMan.jpg"
+                  "image": "it-8-1/ispMan.jpg"
                 },
                 {
                   "label": "Сървър",
                   "description": "обработва заявката и връща резултат",
-                  "image": "/assets/it-8-1/serverRack.png"
+                  "image": "it-8-1/serverRack.png"
                 }
               ],
               "diagram": {
@@ -309,7 +309,7 @@
                 {
                   "type": "image",
                   "id": "internet-packet-journey",
-                  "src": "/assets/it-8-1/networkProtocols.png",
+                  "src": "it-8-1/networkProtocols.png",
                   "alt": "Internet packet journey – пътуване на пакетите с данни по TCP/IP"
                 }
               ]
@@ -331,22 +331,22 @@
               "items": [
                 {
                   "title": "Текстообработка",
-                  "src": "/assets/it-8-1/wordPNG.png",
+                  "src": "it-8-1/wordPNG.png",
                   "alt": "Съвременен Microsoft Word за работа с текстови документи"
                 },
                 {
                   "title": "Табличен процесор",
-                  "src": "/assets/it-8-1/excelPNG.png",
+                  "src": "it-8-1/excelPNG.png",
                   "alt": "Съвременен Microsoft Excel за изчисления и таблици с формули"
                 },
                 {
                   "title": "Уеб браузър",
-                  "src": "/assets/it-8-1/torBrowser.png",
+                  "src": "it-8-1/torBrowser.png",
                   "alt": "Google Chrome – съвременен уеб браузър за достъп до интернет ресурси"
                 },
                 {
                   "title": "Презентации",
-                  "src": "/assets/it-8-1/powerPointPNG.png",
+                  "src": "it-8-1/powerPointPNG.png",
                   "alt": "Съвременен Microsoft PowerPoint за визуално представяне на информация"
                 }
               ]
@@ -371,17 +371,17 @@
                 {
                   "label": "Таблица",
                   "description": "данни в клетки",
-                  "image": "/assets/it-8-1/tablePNG.png"
+                  "image": "it-8-1/tablePNG.png"
                 },
                 {
                   "label": "Формула",
                   "description": "=SUM(A1:A4) =AVERAGE(B2:B10)",
-                  "image": "/assets/it-8-1/excelFormula.jpg"
+                  "image": "it-8-1/excelFormula.jpg"
                 },
                 {
                   "label": "Диаграма",
                   "description": "(стълбовидна, линейна, кръгова, др.)",
-                  "image": "/assets/it-8-1/chartTypesPNG.png"
+                  "image": "it-8-1/chartTypesPNG.png"
                 }
               ],
               "diagram": {
@@ -427,7 +427,7 @@
             {
               "type": "image",
               "id": "project-presentation",
-              "src": "/assets/it-8-1/20945496.jpg",
+              "src": "it-8-1/20945496.jpg",
               "alt": "Проектна работа – векторно изкуство",
               "caption": "Проектната работа обединява планиране, екипност, изпълнение и изпитване."
             },
@@ -439,27 +439,27 @@
                 {
                   "label": "Идея",
                   "description": "цели и целева аудитория",
-                  "image": "/assets/it-8-1/projIdea.jpg"
+                  "image": "it-8-1/projIdea.jpg"
                 },
                 {
                   "label": "Планиране",
                   "description": "разпределяне на роли и срокове",
-                  "image": "/assets/it-8-1/projPlan.jpg"
+                  "image": "it-8-1/projPlan.jpg"
                 },
                 {
                   "label": "Изпълнение",
                   "description": "създаване на крайния продукт",
-                  "image": "/assets/it-8-1/project-execution.jpg"
+                  "image": "it-8-1/project-execution.jpg"
                 },
                 {
                   "label": "Изпитване",
                   "description": "тестване, проверка и редакция",
-                  "image": "/assets/it-8-1/systemTesting.jpg"
+                  "image": "it-8-1/systemTesting.jpg"
                 },
                 {
                   "label": "Представяне",
                   "description": "защита и отговори на въпроси",
-                  "image": "/assets/it-8-1/projPresent.jpg"
+                  "image": "it-8-1/projPresent.jpg"
                 }
               ],
               "diagram": {

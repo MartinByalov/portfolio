@@ -2,6 +2,7 @@
 
 import { renderComponent, initComponent } from './registry.js';
 import { resetAccordionState } from '../components/accordion.js';
+import { resolveLessonMedia } from '../utils/media.js';
 
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
@@ -12,7 +13,7 @@ function esc(s) {
 export async function fetchLesson(jsonPath) {
   const res = await fetch(jsonPath);
   if (!res.ok) throw new Error(`HTTP ${res.status} loading ${jsonPath}`);
-  return await res.json();
+  return resolveLessonMedia(await res.json());
 }
 
 export function buildLesson(lesson) {

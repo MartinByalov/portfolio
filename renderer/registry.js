@@ -55,6 +55,9 @@ import * as TextBlock from '../components/text.js';
 import * as InteractiveCards from '../components/interactive-cards.js';
 import * as InteractiveDiagram from '../components/interactive-diagram.js';
 import * as GlossaryList from '../components/glossary-list.js';
+import * as SystemBuilderLab from '../components/system-builder-lab.js';
+import * as SystemAnatomyMap from '../components/system-anatomy-map.js';
+import * as SequenceBuilder from '../components/sequence-builder.js';
 
 const registry = {
   'text-group': TextGroup,
@@ -113,6 +116,9 @@ const registry = {
   'interactive-cards': InteractiveCards,
   'interactive-diagram': InteractiveDiagram,
   'glossary-list': GlossaryList,
+  'system-builder-lab': SystemBuilderLab,
+  'system-anatomy-map': SystemAnatomyMap,
+  'sequence-builder': SequenceBuilder,
 };
 
 export function renderComponent(comp) {

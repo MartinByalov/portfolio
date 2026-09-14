@@ -38,7 +38,7 @@
               "mediaInstruction": "(добави безплатна интерактивна диаграма)",
               "mediaSpec": {
                 "aspectRatio": "16:9",
-                "assetPath": "assets/it-8-3/classRoom.jpg",
+                "assetPath": "it-8-3/classRoom.jpg",
                 "centerDevice": {
                   "title": "Моят курс (LMS)",
                   "screenPrompt": "Educational UI dashboard showing course units, calendar, assignments, and progress circle"
@@ -147,7 +147,7 @@
               "mediaInstruction": "(добави безплатно изображение)",
               "mediaSpec": {
                 "component": "CloudStorageMockup",
-                "assetPath": "assets/it-8-3/googleDrive.png",
+                "assetPath": "it-8-3/googleDrive.png",
                 "leftSidebar": [
                   "Моят диск",
                   "Споделени с мен",
@@ -558,7 +558,7 @@
           "id": "section-glossary",
           "title": "Речник",
           "tone": "dark",
-          "icon": "fas fa-book-bookmark",
+          "icon": "fas fa-book-open",
           "content": [
             {
               "type": "glossary-list",
@@ -632,8 +632,7 @@
                 }
               ]
             }
-          ],
-          "icon": "fas fa-book-open"
+          ]
         }
       ],
       "icon": "fas fa-book-open"

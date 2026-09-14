@@ -100,7 +100,7 @@ export function init(comp) {
     });
 
     if (score === rows.length) {
-      feedback.innerHTML = `<i class="fas fa-circle-check"></i> Отлично! Всички ${rows.length} филтъра са разпределени правилно!`;
+      feedback.innerHTML = `<i class="fas fa-circle-check"></i> Отлично! Всички ${rows.length} елемента са разпределени правилно!`;
       feedback.className = 'category-sorter-feedback feedback-success';
     } else {
       feedback.innerHTML = `<i class="fas fa-triangle-exclamation"></i> Резултат: ${score} от ${rows.length} верни категории.`;

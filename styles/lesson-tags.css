@@ -92,6 +92,14 @@
   letter-spacing: 0.01em;
 }
 
+/* Sandbox: experimental space inside a lesson, not a separate exercise modal */
+.lesson-tag.tag-sandbox {
+  letter-spacing: 0.04em;
+  border-width: 2px;
+  border-style: dashed;
+}
+.lesson-tag.tag-sandbox .lesson-tag-ico { border-radius: 8px; }
+
 /* Упражнение: slightly stronger border so the modal CTA stands out */
 .lesson-tag.tag-exercise {
   border-width: 2px;

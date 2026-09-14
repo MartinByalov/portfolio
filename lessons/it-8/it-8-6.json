@@ -43,7 +43,7 @@
             {
               "type": "titled-image",
               "id": "img-search-operators-it8-6",
-              "src": "assets/it-8-6/search_operators_mon.png",
+              "src": "it-8-6/search_operators_mon.png",
               "alt": "Екранна снимка: Комбинирано търсене на официални PDF документи",
               "caption": "Комбинирано търсене на официални PDF документи (site:mon.bg \"правилник\" filetype:pdf)"
             }
@@ -61,7 +61,7 @@
             {
               "type": "titled-image",
               "id": "img-drive-permissions-it8-6",
-              "src": "assets/it-8-6/drive_sharing_permissions.png",
+              "src": "it-8-6/drive_sharing_permissions.png",
               "alt": "Екранна снимка: Настройки за споделяне в Google Drive",
               "caption": "Настройки за споделяне в Google Drive (Роли: Viewer, Commenter, Editor)"
             },
@@ -121,7 +121,7 @@
             {
               "type": "titled-image",
               "id": "img-explorer-wildcards-it8-6",
-              "src": "assets/it-8-6/file_explorer_wildcards.png",
+              "src": "it-8-6/file_explorer_wildcards.png",
               "alt": "Екранна снимка: Търсене по маска във File Explorer (Windows 11)",
               "caption": "Търсене по маска във File Explorer (Windows 11)"
             },

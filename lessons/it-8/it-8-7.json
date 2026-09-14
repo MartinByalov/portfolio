@@ -102,48 +102,56 @@
               "items": [
                 {
                   "name": "Блез Паскал",
+                  "wikipedia": "https://bg.wikipedia.org/wiki/Блез_Паскал",
                   "image": "it-8-7/blaise-pascal.jpg",
                   "fact": "Създава „Паскалин“ през 1642 г.",
                   "match": "механично смятане"
                 },
                 {
                   "name": "Готфрид Лайбниц",
+                  "wikipedia": "https://bg.wikipedia.org/wiki/Готфрид_Лайбниц",
                   "image": "it-8-7/gottfried-leibniz.jpg",
                   "fact": "Усъвършенства механичното смятане и използва двоичната система.",
                   "match": "двоична система"
                 },
                 {
                   "name": "Чарлз Бабидж",
+                  "wikipedia": "https://bg.wikipedia.org/wiki/Чарлз_Бабидж",
                   "image": "it-8-7/charles-babbage.jpg",
                   "fact": "Проектира аналитична машина със склад, мелница и управление.",
                   "match": "идея за универсален компютър"
                 },
                 {
                   "name": "Ада Лъвлейс",
+                  "wikipedia": "https://bg.wikipedia.org/wiki/Ада_Лъвлейс",
                   "image": "it-8-7/ada-lovelace.jpg",
                   "fact": "Създава метод за изчисление за аналитичната машина.",
                   "match": "първа програма"
                 },
                 {
                   "name": "Херман Холерит",
+                  "wikipedia": "https://bg.wikipedia.org/wiki/Херман_Холерит",
                   "image": "it-8-7/herman-hollerith.jpg",
                   "fact": "Използва перфокарти за автоматизирана обработка на данни.",
                   "match": "табулиране на данни"
                 },
                 {
                   "name": "Джон Атанасов",
+                  "wikipedia": "https://bg.wikipedia.org/wiki/Джон_Атанасов",
                   "image": "it-8-7/john-atanasoff.jpg",
                   "fact": "Свързан с ABC — електронна машина, използваща двоична система.",
                   "match": "ранен електронен компютър"
                 },
                 {
                   "name": "Алън Тюринг",
+                  "wikipedia": "https://bg.wikipedia.org/wiki/Алън_Тюринг",
                   "image": "it-8-7/alan-turing.jpg",
                   "fact": "Разработва теоретичен модел на изчислителна машина и е свързан с Colossus.",
                   "match": "теория и електронно изчисление"
                 },
                 {
                   "name": "Джон фон Нойман",
+                  "wikipedia": "https://bg.wikipedia.org/wiki/Джон_фон_Нойман",
                   "image": "it-8-7/john-von-neumann.jpg",
                   "fact": "Формулира принципите на съхранената програма.",
                   "match": "архитектура на съвременния компютър"

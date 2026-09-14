@@ -254,7 +254,9 @@ function formatMarkdown(text) {
 
 function renderBlock(b) {
   switch (b.type) {
-    case 'text':                   return '<div class="lb-text">' + formatMarkdown(b.content || '') + '</div>';
+    case 'text':                   
+      const toneCls = b.tone ? ' lb-tone-' + esc(b.tone) : '';
+      return '<div class="lb-text' + toneCls + '">' + formatMarkdown(b.content || '') + '</div>';
     case 'feature-list':           return renderFeatureListBlock(b);
     case 'discussion':             return renderDiscussionBlock(b);
     case 'image':                  return renderImageBlock(b);

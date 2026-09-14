@@ -11,7 +11,6 @@ function optionMarkup(group, selected) {
     <button type="button" class="sbl-part ${option.id === selected ? 'selected' : ''}" data-group="${esc(group.id)}" data-option="${esc(option.id)}">
       <span class="sbl-part-icon"><i class="${esc(option.icon)}"></i></span>
       <span><strong>${esc(option.label)}</strong><small>${esc(option.fact)}</small></span>
-      <i class="fas fa-circle-check sbl-part-check"></i>
     </button>
   `).join('');
 }
@@ -58,15 +57,6 @@ export function render(comp) {
         <div class="sbl-stage-copy"><span class="sbl-step">СТЪПКА 02</span><h3>Сглобете балансирана система</h3><p>Прочетете ролята на всяка част. Дънната платка свързва компонентите чрез слотове и шини, а захранването трябва да осигури нужната мощност.</p></div>
         <div class="sbl-build-layout">
           <div class="sbl-parts-panel">${partGroups}</div>
-          <aside class="sbl-board-xray">
-            <div class="sbl-placeholder"><i class="fas fa-microchip"></i><strong style="font-family: monospace;">it-8-8/labeled-modern-motherboard.png</strong><span>Снимка отгоре на дънна платка с означени CPU socket, RAM slots, PCIe, M.2, chipset и power connectors</span></div>
-            <h4>Рентген на системата</h4>
-            <button type="button" class="sbl-xray-node" data-note="CPU се поставя в съвместим цокъл. АЛУ извършва операции, управляващото устройство координира, а регистрите пазят междинни стойности."><i class="fas fa-microchip"></i> CPU socket</button>
-            <button type="button" class="sbl-xray-node" data-note="RAM пази програмите и данните в момента. Тя е енергозависима — съдържанието се губи при изключване."><i class="fas fa-memory"></i> RAM slots</button>
-            <button type="button" class="sbl-xray-node" data-note="PCIe е високоскоростна връзка за видеокарта и други разширителни устройства."><i class="fas fa-grip-lines"></i> PCIe</button>
-            <button type="button" class="sbl-xray-node" data-note="M.2 слотът може да свърже бърз NVMe SSD за дълготрайно съхранение."><i class="fas fa-hard-drive"></i> M.2</button>
-            <div class="sbl-xray-note">Изберете означение, за да видите ролята му.</div>
-          </aside>
         </div>
         <div class="sbl-build-actions"><button type="button" class="btn-activity sbl-check-build"><i class="fas fa-wrench"></i> Провери</button><div class="sbl-build-feedback" aria-live="polite"></div></div>
       </div>
@@ -107,17 +97,12 @@ export function render(comp) {
         </div>
         <div class="sbl-meter"><div class="sbl-meter-fill"></div></div>
         <div class="sbl-stress-result" aria-live="polite"></div>
-        <div class="sbl-units"><strong>Езикът на капацитета:</strong> 1 бит = 0 или 1 · 1 байт = 8 бита · паметта и файловете се измерват в KB, MB, GB и TB.</div>
       </div>
 
       <div class="sbl-stage" data-stage-panel="explain">
-        <div class="sbl-stage-copy"><span class="sbl-step">СТЪПКА 06</span><h3>Предайте системата на клиента</h3><p>Инженерният избор не завършва с „работи“. Той завършва с обяснение защо системата е подходяща.</p></div>
+        <div class="sbl-stage-copy"><span class="sbl-step">СТЪПКА 06</span><h3>Финална конфигурация</h3></div>
         <div class="sbl-handover">
           <div class="sbl-handover-summary"></div>
-          <label>Най-важният компонент за тази поръчка е…<textarea class="sbl-answer-one" rows="2" placeholder="Посочете компонент и обяснете ролята му."></textarea></label>
-          <label>Данните преминават през системата така…<textarea class="sbl-answer-two" rows="2" placeholder="Използвайте поне три от думите: вход, RAM, CPU, шина, SSD, изход."></textarea></label>
-          <button type="button" class="btn-activity sbl-finish"><i class="fas fa-stamp"></i> Предай проекта</button>
-          <div class="sbl-finish-feedback" aria-live="polite"></div>
         </div>
       </div>
     </section>
@@ -236,18 +221,6 @@ export function init(comp) {
   updateStress();
 
   const selectedLabel = group => group.options.find(option => option.id === selections[group.id])?.label || '—';
-  root.querySelector('.sbl-finish').addEventListener('click', () => {
-    const answerOne = root.querySelector('.sbl-answer-one').value.trim();
-    const answerTwo = root.querySelector('.sbl-answer-two').value.trim();
-    const feedback = root.querySelector('.sbl-finish-feedback');
-    if (answerOne.length < 20 || answerTwo.length < 30) {
-      feedback.className = 'sbl-finish-feedback warning';
-      feedback.textContent = 'Развийте обясненията: посочете компонент, роля и път на данните.';
-      return;
-    }
-    feedback.className = 'sbl-finish-feedback success';
-    feedback.innerHTML = '<i class="fas fa-certificate"></i><strong>Проектът е предаден.</strong> Вече описвате компютъра като система от взаимозависими части, а не като списък от характеристики.';
-  });
   root.querySelector('.sbl-handover-summary').innerHTML = `<span>Клиент</span><strong>${esc(activeProfile?.label)}</strong>${groups.map(group => `<span>${esc(group.label)}</span><strong>${esc(selectedLabel(group))}</strong>`).join('')}`;
   root.querySelector('.sbl-stage-tab[data-stage="explain"]').addEventListener('click', () => {
     root.querySelector('.sbl-handover-summary').innerHTML = `<span>Клиент</span><strong>${esc(activeProfile?.label)}</strong>${groups.map(group => `<span>${esc(group.label)}</span><strong>${esc(selectedLabel(group))}</strong>`).join('')}`;

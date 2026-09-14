@@ -63,11 +63,13 @@ export function render(comp) {
   }
 
   // Fallback to text search before-after slider
+  const titleIcon = comp.showIcon !== false ? '<i class="fas fa-sliders"></i> ' : '';
+
   return `
     <div class="interactive-slider-card" id="${id}">
       <div class="interactive-card-header">
         <div class="interactive-card-badge">
-          <i class="fas fa-sliders"></i> <span>${title}</span>
+          ${titleIcon}<span>${title}</span>
         </div>
       </div>
 

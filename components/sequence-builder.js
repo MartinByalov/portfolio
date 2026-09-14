@@ -26,14 +26,15 @@ function stepsMarkup(steps) {
 
 export function render(comp) {
   const steps = comp.steps || [];
+  const borderCls = comp.lightBorder ? ' lb-light-border' : '';
   return `
-    <section class="sequence-builder" id="${esc(comp.id)}">
+    <section class="sequence-builder${borderCls}" id="${esc(comp.id)}">
       <div class="seq-header"><h3>${esc(comp.title)}</h3><p>${esc(comp.instruction)}</p></div>
       <ol class="seq-list">${stepsMarkup(shuffled(steps))}</ol>
       <div class="seq-actions">
         <div class="seq-buttons-row">
           <button type="button" class="btn-activity seq-check">Провери</button>
-          <button type="button" class="btn-activity seq-reset">Нов Опит</button>
+          <button type="button" class="btn-activity seq-reset">Нов опит</button>
         </div>
         <div class="seq-feedback" aria-live="polite"></div>
       </div>

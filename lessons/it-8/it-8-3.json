@@ -531,6 +531,7 @@
       },
       "items": [
         {
+          "id": "section-reflection",
           "title": "Емоциометър",
           "content": [
             {

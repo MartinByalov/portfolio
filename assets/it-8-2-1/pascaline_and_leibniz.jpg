@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="brassGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="50%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgGrad)"/>
+  
+  <!-- Left Box: Pascaline -->
+  <g transform="translate(60, 80)">
+    <rect x="0" y="0" width="300" height="220" rx="12" fill="#78350f" stroke="url(#brassGrad)" stroke-width="4"/>
+    <rect x="15" y="15" width="270" height="190" rx="8" fill="#451a03"/>
+    <text x="150" y="45" fill="#fef3c7" font-family="sans-serif" font-size="18" font-weight="bold" text-anchor="middle">Паскалина (1642 г.)</text>
+    
+    <!-- Gears -->
+    <circle cx="70" cy="110" r="30" fill="url(#brassGrad)"/>
+    <circle cx="150" cy="110" r="30" fill="url(#brassGrad)"/>
+    <circle cx="230" cy="110" r="30" fill="url(#brassGrad)"/>
+    <circle cx="70" cy="110" r="10" fill="#78350f"/>
+    <circle cx="150" cy="110" r="10" fill="#78350f"/>
+    <circle cx="230" cy="110" r="10" fill="#78350f"/>
+    
+    <text x="150" y="180" fill="#fde68a" font-family="sans-serif" font-size="14" text-anchor="middle">Блез Паскал</text>
+  </g>
+
+  <!-- Right Box: Leibniz Stepped Reckoner -->
+  <g transform="translate(440, 80)">
+    <rect x="0" y="0" width="300" height="220" rx="12" fill="#1e3a8a" stroke="#3b82f6" stroke-width="4"/>
+    <rect x="15" y="15" width="270" height="190" rx="8" fill="#1e1b4b"/>
+    <text x="150" y="45" fill="#dbeafe" font-family="sans-serif" font-size="18" font-weight="bold" text-anchor="middle">Машина на Лайбниц (1671)</text>
+    
+    <!-- Stepped Drum -->
+    <rect x="60" y="80" width="180" height="50" rx="6" fill="#3b82f6"/>
+    <line x1="80" y1="80" x2="80" y2="130" stroke="#93c5fd" stroke-width="3"/>
+    <line x1="120" y1="80" x2="120" y2="130" stroke="#93c5fd" stroke-width="3"/>
+    <line x1="160" y1="80" x2="160" y2="130" stroke="#93c5fd" stroke-width="3"/>
+    <line x1="200" y1="80" x2="200" y2="130" stroke="#93c5fd" stroke-width="3"/>
+    
+    <text x="150" y="180" fill="#bfdbfe" font-family="sans-serif" font-size="14" text-anchor="middle">Готфрид Лайбниц</text>
+  </g>
+  
+  <text x="400" y="380" fill="#94a3b8" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle">Еволюция на механичните калкулатори (XVII век)</text>
+</svg>

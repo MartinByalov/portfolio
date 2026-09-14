@@ -49,11 +49,20 @@ async function renderCourseView(courseId) {
 async function renderLessonView(courseId, lessonId) {
   const course = await getCourse(courseId);
   const allLessons = course.sections.flatMap(s => s.lessons);
-  const lessonMeta = allLessons.find(l => l.id === lessonId);
+  let lessonMeta = allLessons.find(l => l.id === lessonId);
+  if (!lessonMeta) {
+    lessonMeta = allLessons.find(l =>
+      l.id === lessonId ||
+      l.lessonPath?.includes(lessonId) ||
+      (lessonId.includes('2-1') && (l.id === 'it-8-7' || l.id === 'it-8-2-1')) ||
+      (lessonId === 'it-8-7' && (l.id === 'it-8-2-1' || l.title?.includes('2.1.'))) ||
+      (lessonId === 'it-8-2-1' && (l.id === 'it-8-7' || l.title?.includes('2.1.')))
+    );
+  }
   if (!lessonMeta || !lessonMeta.lessonPath) {
     throw new Error('Урокът все още не е добавен.');
   }
-  const lessonIndex = allLessons.findIndex(l => l.id === lessonId);
+  const lessonIndex = allLessons.findIndex(l => l.id === lessonMeta.id);
   const lessonTitleNum = lessonMeta.title ? (lessonMeta.title.match(/^(\d+\.\d+)/)?.[1] || String(lessonIndex + 1)) : String(lessonIndex + 1);
 
   const lesson = await fetchLesson(lessonMeta.lessonPath);
@@ -89,43 +98,40 @@ function getLessonNumLabel(item) {
 
 // Navigation tags at the end of a lesson pointing to previous and next lessons
 function renderLessonNavTags(course, lessonId) {
-  for (const section of course.sections || []) {
-    const lessons = section.lessons || [];
-    for (let i = 0; i < lessons.length; i++) {
-      if (lessons[i].id !== lessonId) continue;
-      const prev = lessons[i - 1];
-      const next = lessons[i + 1];
+  const allLessons = (course.sections || []).flatMap(s => s.lessons || []);
+  const currentIndex = allLessons.findIndex(l => l.id === lessonId);
+  if (currentIndex === -1) return '';
 
-      let prevHtml = '';
-      if (prev && prev.lessonPath) {
-        const prevLabel = getLessonNumLabel(prev);
-        prevHtml = `
-          <a class="lesson-nav-tag prev-lesson-tag" href="#/lesson/${course.id}/${prev.id}">
-            <i class="fas fa-arrow-left lesson-nav-arrow"></i>
-            <span class="lesson-nav-title">${prevLabel}</span>
-          </a>`;
-      }
+  const prev = allLessons[currentIndex - 1];
+  const next = allLessons[currentIndex + 1];
 
-      let nextHtml = '';
-      if (next && next.lessonPath) {
-        const nextLabel = getLessonNumLabel(next);
-        nextHtml = `
-          <a class="lesson-nav-tag next-lesson-tag" href="#/lesson/${course.id}/${next.id}">
-            <span class="lesson-nav-title">${nextLabel}</span>
-            <i class="fas fa-arrow-right lesson-nav-arrow"></i>
-          </a>`;
-      }
-
-      if (!prevHtml && !nextHtml) return '';
-
-      return `
-        <div class="lesson-nav-wrap">
-          <div class="lesson-nav-prev">${prevHtml}</div>
-          <div class="lesson-nav-next">${nextHtml}</div>
-        </div>`;
-    }
+  let prevHtml = '';
+  if (prev && prev.lessonPath) {
+    const prevLabel = getLessonNumLabel(prev);
+    prevHtml = `
+      <a class="lesson-nav-tag prev-lesson-tag" href="#/lesson/${course.id}/${prev.id}">
+        <i class="fas fa-arrow-left lesson-nav-arrow"></i>
+        <span class="lesson-nav-title">${prevLabel}</span>
+      </a>`;
   }
-  return '';
+
+  let nextHtml = '';
+  if (next && next.lessonPath) {
+    const nextLabel = getLessonNumLabel(next);
+    nextHtml = `
+      <a class="lesson-nav-tag next-lesson-tag" href="#/lesson/${course.id}/${next.id}">
+        <span class="lesson-nav-title">${nextLabel}</span>
+        <i class="fas fa-arrow-right lesson-nav-arrow"></i>
+      </a>`;
+  }
+
+  if (!prevHtml && !nextHtml) return '';
+
+  return `
+    <div class="lesson-nav-wrap">
+      <div class="lesson-nav-prev">${prevHtml}</div>
+      <div class="lesson-nav-next">${nextHtml}</div>
+    </div>`;
 }
 
 async function redirectToFirstCourse() {

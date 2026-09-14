@@ -21,7 +21,13 @@ import * as LiveSearchSandbox from './live-search-sandbox.js';
 import * as CategorySorter from './category-sorter.js';
 import * as ImageWithInstruction from './image-with-instruction.js';
 import * as SearchMissionLab from './search-mission-lab.js';
+import * as InteractiveTimelineMachine from './interactive-timeline-machine.js';
+import * as InventorInvestigationCards from './inventor-investigation-cards.js';
+import * as GenerationHardwareSorter from './generation-hardware-sorter.js';
+import * as AppleVsPravetzComparator from './apple-vs-pravetz-comparator.js';
+import * as Infographic from './infographic.js';
 import * as Tag from './tag.js';
+import { renderComponent, initComponent } from '../renderer/registry.js';
 
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
@@ -255,8 +261,8 @@ function renderBlock(b) {
     case 'image-placeholder':      return renderImagePlaceholderBlock(b);
     case 'image-gallery':          return renderGalleryBlock(b);
     case 'visualization':          return b.visualType ? renderRichBlock(b) : renderVizBlock(b);
+    case 'infographic':            return b.sections ? Infographic.render(b) : renderRichBlock(b);
     case 'ui-mockup':
-    case 'infographic':
     case 'table':
     case 'glossary-list':
     case 'titled-image':
@@ -285,9 +291,13 @@ function renderBlock(b) {
     case 'category-sorter':        return CategorySorter.render(b);
     case 'image-with-instruction': return ImageWithInstruction.render(b);
     case 'search-mission-lab':     return SearchMissionLab.render(b);
+    case 'interactive-timeline-machine': return InteractiveTimelineMachine.render(b);
+    case 'inventor-investigation-cards': return InventorInvestigationCards.render(b);
+    case 'generation-hardware-sorter':    return GenerationHardwareSorter.render(b);
+    case 'apple-vs-pravetz-comparator':   return AppleVsPravetzComparator.render(b);
     case 'tag':                    return Tag.render(b);
     case 'accordion':              return render(b);
-    default:                       return '<!-- unknown lesson block type: ' + esc(b.type) + ' -->';
+    default:                       return renderComponent(b);
   }
 }
 
@@ -337,27 +347,8 @@ export function render(comp) {
 
 function initBlock(b, root) {
   if (!b) return;
+  initComponent(b);
   if (b.type === 'quiz' && b.id) initQuizBlock(root, b);
-  if (b.type === 'interactive-matching' || b.type === 'scattered-matching' || b.type === 'match-pairs') InteractiveMatching.init(b);
-  if (b.type === 'interactive-fill') InteractiveFill.init(b);
-  if (b.type === 'interactive-step-guide') InteractiveStepGuide.init(b);
-  if (b.type === 'emotiometer') Emotiometer.init(b);
-  if (b.type === 'mood-animal-generator') MoodAnimalGenerator.init(b);
-  if (b.type === 'ui-hotspots') UiHotspots.init(b);
-  if (b.type === 'spot-the-bug') SpotTheBug.init(b);
-  if (b.type === 'interactive-checklist') InteractiveChecklist.init(b);
-  if (b.type === 'true-false-swipe') TrueFalseSwipe.init(b);
-  if (b.type === 'resource-download-box') ResourceDownloadBox.init(b);
-  if (b.type === 'drag-and-drop') DragAndDrop.init(b);
-  if (b.type === 'wildcard-visualizer') WildcardVisualizer.init(b);
-  if (b.type === 'venn-logic-diagram') VennLogicDiagram.init(b);
-  if (b.type === 'before-after-slider') BeforeAfterSlider.init(b);
-  if (b.type === 'query-builder') QueryBuilder.init(b);
-  if (b.type === 'live-search-sandbox') LiveSearchSandbox.init(b);
-  if (b.type === 'category-sorter') CategorySorter.init(b);
-  if (b.type === 'image-with-instruction') ImageWithInstruction.init(b);
-  if (b.type === 'search-mission-lab') SearchMissionLab.init(b);
-  if (b.type === 'tag') Tag.init(b);
   if (b.type === 'accordion') init(b);
   if (b.type === 'subsection' && Array.isArray(b.content)) {
     b.content.forEach(subB => initBlock(subB, root));

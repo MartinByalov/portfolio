@@ -103,29 +103,14 @@
       "type": "exercise-modal",
       "id": "exerciseModal",
       "title": "Тема: Изкуственият интелект – наш помощник или заплаха?",
+      "skipNav": true,
       "instructions": "<div class='exercise-instructions'><ol><li>В <b>Google Drive</b> създайте нов текстов документ с име <b>AI_Екип_[Номер]</b>. Споделете документа с всички останали от екипа, като им дадете права за Редактиране (Editor).</li><li>В документа, всеки член на екипа да напише кратък абзац (3-4 изречения) със своето мнение по темата.</li><li>Всеки да маркира изречение от абзаца на свой съученик, да добави коментар и да зададе въпрос или да даде градивна идея.</li><li>Всеки да отговори на коментарите отправени към него.</li></ol></div>",
-      "resources": []
-    },
-    {
-      "type": "tag",
-      "id": "discussion-tag-1",
-      "icon": "fas fa-comments",
-      "text": "Дискусия",
-      "modalTarget": "discussionModal1",
-      "tone": "purple",
-      "variant": "discussion",
-      "skipNav": true
-    },
-    {
-      "type": "exercise-modal",
-      "id": "discussionModal1",
-      "title": "Дискусия: Възстановяване на версия",
-      "instructions": "<div class='exercise-instructions'><p>Представете си, че Ученик А без да иска изтрива текста на Ученик Б: обсъдете какви стъпки ще предприемете в документа, за да върнете състоянието му отпреди 5 минути, запазвайки новите допълнения.</p></div>",
       "resources": []
     },
     {
       "type": "accordion",
       "id": "task-section",
+      "skipNav": true,
       "options": {
         "itemsAlign": "stretch",
         "titleAlign": "left",
@@ -140,6 +125,7 @@
           "icon": "fas fa-list-check",
           "variant": "task",
           "defaultOpen": false,
+          "skipNav": true,
           "content": [
             {
               "type": "interactive-checklist",
@@ -155,6 +141,24 @@
           ]
         }
       ]
+    },
+    {
+      "type": "tag",
+      "id": "discussion-tag-1",
+      "icon": "fas fa-comments",
+      "text": "Дискусия",
+      "modalTarget": "discussionModal1",
+      "tone": "purple",
+      "variant": "discussion",
+      "skipNav": true
+    },
+    {
+      "type": "exercise-modal",
+      "id": "discussionModal1",
+      "title": "Дискусия: Възстановяване на версия",
+      "skipNav": true,
+      "instructions": "<div class='exercise-instructions'><p>Представете си, че Ученик А без да иска изтрива текста на Ученик Б: обсъдете какви стъпки ще предприемете в документа, за да върнете състоянието му отпреди 5 минути, запазвайки новите допълнения.</p></div>",
+      "resources": []
     },
     {
       "type": "accordion",
@@ -216,6 +220,7 @@
       "type": "exercise-modal",
       "id": "discussionModal2",
       "title": "Употреба на групов адрес",
+      "skipNav": true,
       "instructions": "<div class='exercise-instructions'><p>Посочете три ситуации от училищния живот, в които групов електронен адрес би улеснил комуникацията.</p></div>",
       "resources": []
     },

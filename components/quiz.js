@@ -19,7 +19,7 @@ export function render(comp) {
 
   return `
     <section class="component quiz" id="${comp.id || ''}">
-      ${comp.heading ? `<h2 class="component-heading">${comp.heading}</h2>` : ''}
+      ${(comp.heading || comp.title) ? `<h2 class="component-heading">${comp.heading || comp.title}</h2>` : ''}
       <form class="quiz-form">
         ${questions}
         <div class="quiz-actions">

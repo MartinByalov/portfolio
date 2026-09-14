@@ -473,6 +473,7 @@
       "type": "drag-and-drop",
       "id": "social-network-matching",
       "title": "Свържете социалните мрежи с техните лога",
+      "skipNav": true,
       "leftItems": [
         {
           "id": "fb",
@@ -536,6 +537,7 @@
       "type": "exercise-modal",
       "id": "exerciseModal",
       "title": "Снимка от рождения ден",
+      "skipNav": true,
       "mediaSpec": {
         "illustration": {
           "alt": "Група от 6-ма тийнейджъри на рожден ден с екран на смартфон, предупредителна пин иконка за GPS метаданни и бутон Изтрий",

@@ -7723,3 +7723,178 @@ input.fill-input-text:focus {
     display: none;
   }
 }
+
+/* ============================ NEW LESSON COMPONENTS ============================ */
+
+/* Interactive Timeline Machine */
+.itm-container {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+  margin: 20px 0;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+}
+.itm-header { margin-bottom: 20px; }
+.itm-main-title { font-size: 1.25rem; color: #1e293b; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+.itm-main-title i { color: #f17a3e; }
+.itm-sub { font-size: 0.9rem; color: #64748b; margin: 0; }
+.itm-nav-bar {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #f1f5f9;
+}
+.itm-stage-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: #f8fafc;
+  border: 2px solid #cbd5e1;
+  border-radius: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: #475569;
+  transition: all 0.2s ease;
+}
+.itm-stage-btn:hover { border-color: #f17a3e; color: #1e293b; }
+.itm-stage-btn.active {
+  background: #f17a3e;
+  border-color: #f17a3e;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(241, 122, 62, 0.25);
+}
+.itm-panels-wrap { position: relative; }
+.itm-stage-panel { display: none; animation: fadeInResult 0.3s ease; }
+.itm-stage-panel.active { display: block; }
+.itm-panel-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+.itm-panel-badge { background: #fff3ec; color: #d97706; padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 6px; }
+.itm-panel-title { font-size: 1.15rem; color: #0f172a; margin: 0; }
+.itm-panel-desc { font-size: 0.95rem; color: #334155; line-height: 1.6; margin: 0; }
+
+/* Inventor Investigation Cards */
+.inv-container {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+  margin: 20px 0;
+}
+.inv-header { margin-bottom: 20px; }
+.inv-main-title { font-size: 1.25rem; color: #1e293b; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+.inv-main-title i { color: #d97706; }
+.inv-sub { font-size: 0.9rem; color: #64748b; margin: 0; }
+.inv-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.inv-card {
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 18px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.inv-card:hover, .inv-card.inv-highlight {
+  border-color: #d97706;
+  box-shadow: 0 6px 20px rgba(217, 119, 6, 0.15);
+  transform: translateY(-2px);
+}
+.inv-card-header { margin-bottom: 12px; }
+.inv-case-badge { font-size: 0.75rem; font-weight: 800; color: #d97706; text-transform: uppercase; letter-spacing: 0.5px; display: inline-block; margin-bottom: 4px; }
+.inv-case-title { font-size: 1.05rem; color: #0f172a; margin: 0 0 6px 0; }
+.inv-inventors { font-size: 0.85rem; color: #475569; }
+.inv-evidence-text { font-size: 0.88rem; color: #334155; line-height: 1.5; margin-bottom: 12px; }
+.inv-verdict-box { background: #fffbe2; border-left: 4px solid #d97706; border-radius: 6px; padding: 10px 12px; font-size: 0.85rem; color: #78350f; }
+
+/* Generation Hardware Sorter */
+.ghs-container {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+  margin: 20px 0;
+}
+.ghs-header { margin-bottom: 20px; }
+.ghs-main-title { font-size: 1.25rem; color: #1e293b; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+.ghs-main-title i { color: #2563eb; }
+.ghs-sub { font-size: 0.9rem; color: #64748b; margin: 0; }
+.ghs-table-wrap { display: flex; flex-direction: column; gap: 12px; }
+.ghs-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px 18px;
+  transition: all 0.2s ease;
+}
+.ghs-row:hover, .ghs-row-active {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+.ghs-gen-col { display: flex; align-items: center; gap: 12px; min-width: 180px; }
+.ghs-gen-num { width: 32px; height: 32px; border-radius: 50%; background: #2563eb; color: #ffffff; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
+.ghs-gen-title { font-size: 0.95rem; color: #0f172a; }
+.ghs-spec-col { display: flex; flex-wrap: wrap; gap: 8px; flex: 1; }
+.ghs-chip { background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 6px 12px; font-size: 0.82rem; color: #334155; display: inline-flex; align-items: center; gap: 6px; }
+
+/* Apple vs Pravetz Comparator */
+.avp-container {
+  background: var(--surface-alt, #f8fafc);
+  color: var(--text-color, #1e293b);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 16px;
+  padding: 24px;
+  margin: 24px 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+.avp-header { margin-bottom: 18px; text-align: center; }
+.avp-main-title { font-size: 1.35rem; color: var(--text-color, #0f172a); margin: 0; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 700; }
+
+/* Accordion internal component spacing */
+.accordion-content > .timeline-component-container,
+.accordion-content > .interactive-cards-container,
+.accordion-content > .infographic-container,
+.accordion-content > .before-after-container,
+.accordion-content > .avp-container {
+  margin-top: 0.25rem !important;
+  margin-bottom: 0.5rem !important;
+  padding: 1.25rem !important;
+}
+.avp-comparison-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: stretch; margin-bottom: 22px; }
+@media (max-width: 768px) { .avp-comparison-grid { grid-template-columns: 1fr; } }
+.avp-card {
+  background: var(--card-bg, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+}
+.avp-card.pravetz {
+  border-top: 3px solid #f59e0b;
+}
+.avp-card.modern {
+  border-top: 3px solid #2563eb;
+}
+.avp-card-badge { display: inline-flex; align-items: center; gap: 6px; width: fit-content; background: #fef3c7; color: #92400e; font-size: 0.8rem; font-weight: 700; padding: 4px 10px; border-radius: 12px; margin-bottom: 12px; }
+.avp-card-badge.modern-badge { background: #dbeafe; color: #1e40af; }
+.avp-card-title { font-size: 1.12rem; color: var(--text-color, #0f172a); margin: 0 0 14px 0; font-weight: 700; }
+.avp-specs-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; color: var(--text-color, #334155); }
+.avp-specs-list li { display: flex; align-items: center; gap: 8px; }
+.avp-specs-list i { color: #2563eb; width: 18px; }
+.avp-vs-divider { display: flex; justify-content: center; align-items: center; }
+.avp-vs-circle { width: 44px; height: 44px; border-radius: 50%; background: #e0e7ff; color: #3730a3; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; border: 2px solid #c7d2fe; }
+.avp-growth-banner { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 16px 20px; }
+.avp-growth-heading { font-size: 0.95rem; color: #166534; margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px; font-weight: 700; }
+.avp-growth-items { display: flex; flex-wrap: wrap; gap: 10px; }
+.avp-growth-chip { background: #ffffff; border: 1px solid #86efac; border-radius: 8px; padding: 8px 14px; font-size: 0.85rem; color: #14532d; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
+.avp-growth-chip i { color: #16a34a; }
+

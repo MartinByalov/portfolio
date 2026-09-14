@@ -1,5 +1,7 @@
 // Rich-media lesson blocks component
 
+import * as Infographic from './infographic.js';
+
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
     return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch];
@@ -897,6 +899,7 @@ export function renderRichBlock(b) {
     return vizWrapper(b, inner);
   }
   if (b.type === 'infographic') {
+    if (b.sections) return Infographic.render(b);
     if (spec.permissions)                      return vizWrapper(b, renderPermissionMatrix(spec));
     if (spec.layout === 'vertical-checklist') return vizWrapper(b, renderChecklist(spec));
     if (spec.layout === 'grid-2x2' || spec.layout === 'grid-2x3') return vizWrapper(b, renderInfographicGrid2x2(spec));

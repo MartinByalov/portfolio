@@ -1,5 +1,21 @@
-// Before-After Slider Component
-// Compares broad search vs exact phrase matching with quotes
+function renderImageOrPlaceholder(src, alt = '') {
+  if (!src) return '';
+  if (src.includes('IMAGE_PLACEHOLDER')) {
+    const filename = src.replace(/^\[IMAGE_PLACEHOLDER:\s*/, '').replace(/\]$/, '').trim();
+    return `
+      <div class="image-placeholder-box" style="background: var(--surface-alt, #f8fafc); border: 2px dashed #cbd5e1; border-radius: 10px; padding: 1.25rem 1rem; text-align: center; color: #64748b; margin: 0.75rem 0; height: 240px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <i class="fas fa-desktop" style="font-size: 2rem; color: #94a3b8; margin-bottom: 0.35rem; display: block;"></i>
+        <strong style="display: block; font-size: 0.85rem; color: #334155;">[IMAGE_PLACEHOLDER: ${filename}]</strong>
+        ${alt ? `<span style="font-size: 0.8rem; color: #64748b;">${alt}</span>` : ''}
+      </div>
+    `;
+  }
+  return `
+    <div style="height: 240px; width: 100%; display: flex; align-items: center; justify-content: center; margin: 0.75rem 0; overflow: hidden; border-radius: 10px; background: rgba(0,0,0,0.02);">
+      <img src="${src}" alt="${alt}" style="max-width: 100%; max-height: 100%; height: 240px; width: 100%; object-fit: contain; border-radius: 10px;" />
+    </div>
+  `;
+}
 
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
@@ -9,37 +25,53 @@ function esc(s) {
 
 export function render(comp) {
   const id = comp.id || 'before-after-slider';
-  const title = comp.title || 'Плъзгач „Преди и След“: Обикновено търсене vs Точна фраза в кавички';
-  const beforeLabel = comp.beforeLabel || 'Без кавички: безопасен интернет';
-  const beforeDesc = comp.beforeDescription || 'Намира над 15 000 000 резултата, съдържащи думите разпръснати на различни места в текста.';
-  const afterLabel = comp.afterLabel || 'С кавички: "безопасен интернет"';
-  const afterDesc = comp.afterDescription || 'Стеснява резултатите точно до страниците, в които двете думи се срещат една след друга като точен израз.';
+  const title = comp.title || 'Колко се е променил компютърът?';
+  const beforeLabel = comp.beforeLabel || 'Преди';
+  const beforeDesc = comp.beforeDescription || '';
+  const afterLabel = comp.afterLabel || 'След';
+  const afterDesc = comp.afterDescription || '';
 
-  const showIcon = comp.showIcon !== false && comp.icon !== false && comp.icon !== "";
-  const iconHtml = showIcon ? `<i class="${esc(typeof comp.icon === 'string' ? comp.icon : 'fas fa-sliders')}"></i> ` : '';
+  const hasImages = comp.beforeImage || comp.afterImage;
 
-  const showToggle = comp.showToggle !== false && comp.toggle !== false;
-  const toggleHtml = showToggle ? `
-        <div class="slider-interactive-toggle">
-          <div class="toggle-track">
-            <button type="button" class="toggle-mode-btn active" data-mode="split">
-              <i class="fas fa-columns"></i> Сравнение едно до друго
-            </button>
-            <button type="button" class="toggle-mode-btn" data-mode="before">
-              <i class="fas fa-arrow-left"></i> Само без кавички
-            </button>
-            <button type="button" class="toggle-mode-btn" data-mode="after">
-              <i class="fas fa-arrow-right"></i> Само с кавички
-            </button>
+  if (hasImages) {
+    return `
+      <div class="interactive-slider-card" id="${id}" style="margin: 3rem 0; padding: 2rem; background: var(--surface-alt, #f8fafc); border-radius: 16px; border: 1px solid var(--border-color, #e2e8f0);">
+        <div style="text-align: center; max-width: 700px; margin: 0 auto 1.75rem auto;">
+          ${comp.badge ? `<span style="background: #fef2f2; color: #991b1b; padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase;">${esc(comp.badge)}</span>` : ''}
+          <h3 style="margin: 0.5rem 0 0.25rem 0; font-size: 1.6rem; color: var(--text-color);">${title}</h3>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; align-items: stretch;">
+          <div style="background: var(--surface, #ffffff); border: 2px solid #ef4444; border-radius: 12px; padding: 1.5rem; text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span style="background: #fef2f2; color: #991b1b; padding: 0.35rem 0.85rem; border-radius: 20px; font-weight: 700; font-size: 0.9rem; display: inline-block; margin-bottom: 0.5rem;">
+                ${beforeLabel}
+              </span>
+              ${renderImageOrPlaceholder(comp.beforeImage, beforeLabel)}
+            </div>
+            <p style="margin: 0.5rem 0 0 0; font-size: 0.95rem; color: var(--text-color); font-weight: 500; line-height: 1.5;">${beforeDesc}</p>
+          </div>
+
+          <div style="background: var(--surface, #ffffff); border: 2px solid #10b981; border-radius: 12px; padding: 1.5rem; text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span style="background: #f0fdf4; color: #166534; padding: 0.35rem 0.85rem; border-radius: 20px; font-weight: 700; font-size: 0.9rem; display: inline-block; margin-bottom: 0.5rem;">
+                ${afterLabel}
+              </span>
+              ${renderImageOrPlaceholder(comp.afterImage, afterLabel)}
+            </div>
+            <p style="margin: 0.5rem 0 0 0; font-size: 0.95rem; color: var(--text-color); font-weight: 500; line-height: 1.5;">${afterDesc}</p>
           </div>
         </div>
-  ` : '';
+      </div>
+    `;
+  }
 
+  // Fallback to text search before-after slider
   return `
-    <div class="interactive-slider-card" id="${esc(id)}">
+    <div class="interactive-slider-card" id="${id}">
       <div class="interactive-card-header">
         <div class="interactive-card-badge">
-          ${iconHtml}<span>${esc(title)}</span>
+          <i class="fas fa-sliders"></i> <span>${title}</span>
         </div>
       </div>
 
@@ -47,60 +79,23 @@ export function render(comp) {
         <div class="slider-views-container">
           <div class="slider-side slider-side-before">
             <div class="slider-side-header">
-              <span class="slider-badge badge-before"><i class="fas fa-search"></i> Без кавички</span>
-              <code class="slider-query">безопасен интернет</code>
+              <span class="slider-badge badge-before"><i class="fas fa-search"></i> ${beforeLabel}</span>
             </div>
-            <div class="slider-metrics-box">
-              <div class="metric-number text-slate-600">~15 400 000</div>
-              <div class="metric-label">общи намерени резултата</div>
-            </div>
-            <p class="slider-desc">${esc(beforeDesc)}</p>
-            <div class="sample-search-result">
-              <div class="sr-url">https://news.bg/tech/tips</div>
-              <div class="sr-title">Съвети за работа в <strong>интернет</strong> и <strong>безопасен</strong> софтуер...</div>
-              <div class="sr-snippet">Как да изберем <mark>безопасен</mark> антивирусен пакет при сваляне на файлове от <mark>интернет</mark>.</div>
-            </div>
+            <p class="slider-desc">${beforeDesc}</p>
           </div>
 
           <div class="slider-side slider-side-after">
             <div class="slider-side-header">
-              <span class="slider-badge badge-after"><i class="fas fa-quote-left"></i> С точни кавички</span>
-              <code class="slider-query">"безопасен интернет"</code>
+              <span class="slider-badge badge-after"><i class="fas fa-check"></i> ${afterLabel}</span>
             </div>
-            <div class="slider-metrics-box">
-              <div class="metric-number text-emerald-600">~84 200</div>
-              <div class="metric-label">прецизни точни съвпадения</div>
-            </div>
-            <p class="slider-desc">${esc(afterDesc)}</p>
-            <div class="sample-search-result result-highlighted">
-              <div class="sr-url">https://safenet.bg/kids</div>
-              <div class="sr-title">Национален център за <mark>„безопасен интернет“</mark></div>
-              <div class="sr-snippet">Всички ресурси, правила и уроци за <mark>„безопасен интернет“</mark> за ученици и учители.</div>
-            </div>
+            <p class="slider-desc">${afterDesc}</p>
           </div>
         </div>
-
-        ${toggleHtml}
       </div>
     </div>
   `;
 }
 
 export function init(comp) {
-  const id = comp.id || 'before-after-slider';
-  const root = document.getElementById(id);
-  if (!root) return;
-
-  const container = root.querySelector('.slider-views-container');
-  const btns = root.querySelectorAll('.toggle-mode-btn');
-
-  btns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const mode = btn.dataset.mode;
-      btns.forEach(b => b.classList.toggle('active', b === btn));
-      if (container) {
-        container.className = 'slider-views-container mode-' + mode;
-      }
-    });
-  });
+  // Simple slider view
 }

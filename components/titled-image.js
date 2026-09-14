@@ -1,16 +1,17 @@
+function sanitizePath(src) {
+  if (!src) return '';
+  return src.replace(/^\[IMAGE_PLACEHOLDER:\s*/, '').replace(/\]$/, '').trim();
+}
+
 function renderImageOrPlaceholder(src, alt = '', caption = '') {
   if (!src) return '';
-  if (src.includes('IMAGE_PLACEHOLDER')) {
-    const filename = src.replace(/^\[IMAGE_PLACEHOLDER:\s*/, '').replace(/\]$/, '').trim();
-    return `
-      <div class="image-placeholder-box" style="background: var(--surface-alt, #f8fafc); border: 2px dashed #cbd5e1; border-radius: 12px; padding: 2rem 1.5rem; text-align: center; color: #64748b; margin: 1rem 0;">
-        <i class="fas fa-history" style="font-size: 3rem; color: #3b82f6; margin-bottom: 0.75rem; display: block;"></i>
-        <strong style="display: block; font-size: 1.05rem; color: #1e293b; margin-bottom: 0.35rem;">[IMAGE_PLACEHOLDER: ${filename}]</strong>
-        ${alt ? `<span style="font-size: 0.9rem; color: #64748b;">${alt}</span>` : ''}
-      </div>
-    `;
-  }
-  return `<img src="${src}" alt="${alt || caption}" style="max-width: 100%; height: auto; display: block; border-radius: 12px;" />`;
+  const cleanPath = sanitizePath(src);
+  
+  return `
+    <div class="titled-img-wrapper" style="position: relative; width: 100%;">
+      <img src="${src}" alt="${alt || caption}" data-path="${cleanPath}" style="max-width: 100%; height: auto; display: block; border-radius: 12px; margin: 0 auto;" onerror="if(this.src.includes('cdn.jsdelivr.net')){this.src=this.src.replace('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/','raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/');}else{this.onerror=null;this.outerHTML='<div class=\\'image-placeholder-box\\' style=\\'background: var(--surface-alt, #f8fafc); border: 2px dashed #cbd5e1; border-radius: 12px; padding: 2rem 1.5rem; text-align: center; color: #64748b; margin: 0.5rem auto;\\'><i class=\\'fas fa-image\\' style=\\'font-size: 2.5rem; color: #3b82f6; margin-bottom: 0.75rem; display: block;\\'></i><strong style=\\'display: block; font-size: 1rem; color: #1e293b; margin-bottom: 0.35rem; font-family: monospace;\\'>' + this.getAttribute('data-path') + '</strong><span>' + (this.getAttribute('alt') || '') + '</span></div>';}" />
+    </div>
+  `;
 }
 
 export function render(comp) {

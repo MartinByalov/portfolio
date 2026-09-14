@@ -37,7 +37,6 @@ export function render(comp) {
     <div class="interactive-category-sorter-card" id="${esc(id)}">
       <div class="interactive-card-header">
         <div class="interactive-card-badge">
-          <i class="fas fa-filter"></i>
           <span>${esc(title)}</span>
         </div>
       </div>

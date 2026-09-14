@@ -1,5 +1,10 @@
+function formatText(text) {
+  if (!text) return '';
+  return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+}
+
 export function render(comp) {
-  const content = comp.content || '';
+  const content = formatText(comp.content || '');
   const title = comp.title || comp.heading || '';
 
   return `

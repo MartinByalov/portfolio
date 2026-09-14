@@ -1,18 +1,14 @@
+function sanitizePath(src) {
+  if (!src) return '';
+  return src.replace(/^\[IMAGE_PLACEHOLDER:\s*/, '').replace(/\]$/, '').trim();
+}
+
 function renderImageOrPlaceholder(src, alt = '') {
   if (!src) return '';
-  if (src.includes('IMAGE_PLACEHOLDER')) {
-    const filename = src.replace(/^\[IMAGE_PLACEHOLDER:\s*/, '').replace(/\]$/, '').trim();
-    return `
-      <div class="image-placeholder-box" style="background: var(--surface-alt, #f8fafc); border: 2px dashed #cbd5e1; border-radius: 10px; padding: 1.25rem 1rem; text-align: center; color: #64748b; margin: 0.75rem 0; height: 240px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-        <i class="fas fa-desktop" style="font-size: 2rem; color: #94a3b8; margin-bottom: 0.35rem; display: block;"></i>
-        <strong style="display: block; font-size: 0.85rem; color: #334155;">[IMAGE_PLACEHOLDER: ${filename}]</strong>
-        ${alt ? `<span style="font-size: 0.8rem; color: #64748b;">${alt}</span>` : ''}
-      </div>
-    `;
-  }
+  const cleanPath = sanitizePath(src);
   return `
     <div style="height: 240px; width: 100%; display: flex; align-items: center; justify-content: center; margin: 0.75rem 0; overflow: hidden; border-radius: 10px; background: rgba(0,0,0,0.02);">
-      <img src="${src}" alt="${alt}" style="max-width: 100%; max-height: 100%; height: 240px; width: 100%; object-fit: contain; border-radius: 10px;" />
+      <img src="${src}" alt="${alt}" data-path="${cleanPath}" style="max-width: 100%; max-height: 100%; height: 240px; width: 100%; object-fit: contain; border-radius: 10px;" onerror="if(this.src.includes('cdn.jsdelivr.net')){this.src=this.src.replace('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/','raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/');}else{this.onerror=null;this.parentElement.innerHTML='<div class=\\'image-placeholder-box\\' style=\\'background: var(--surface-alt, #f8fafc); border: 2px dashed #cbd5e1; border-radius: 10px; padding: 1.25rem 1rem; text-align: center; color: #64748b; height: 240px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;\\'><i class=\\'fas fa-desktop\\' style=\\'font-size: 2rem; color: #94a3b8; margin-bottom: 0.35rem; display: block;\\'></i><strong style=\\'display: block; font-size: 0.85rem; color: #334155; font-family: monospace;\\'>' + this.getAttribute('data-path') + '</strong><span>' + (this.getAttribute('alt') || '') + '</span></div>';}" />
     </div>
   `;
 }

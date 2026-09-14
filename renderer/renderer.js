@@ -60,28 +60,40 @@ export function buildLesson(lesson) {
 
   const navItems = [];
   components.forEach(c => {
-    // Modals are never course sidebar navigation destinations
-    if (c.type === 'exercise-modal') return;
+    // Modals, tags, and components with skipNav are never course sidebar navigation destinations
+    if (c.type === 'exercise-modal' || c.skipNav) return;
+    if (c.type === 'tag' && !c.includeInNav) return;
 
-    const label = c.heading || c.title;
-    if (label && c.id && !c.skipNav) navItems.push({ id: c.id, label: label });
-    // Accordion lesson points become direct in-page nav targets too.
+    // Accordion points: only numbered main points and glossary enter sidebar navigation
     if (c.type === 'accordion') {
       (c.items || []).forEach(it => {
-        if (it.title && it.id && !it.skipNav) navItems.push({ id: it.id, label: it.title });
+        if (it.skipNav) return;
+        const title = (it.title || '').trim();
+        const isMainPoint = /^\d+[\.\)]/.test(title);
+        const isGlossary = title.toLowerCase().includes('речник');
+        const isExplicitNav = it.includeInNav === true;
+
+        if ((isMainPoint || isGlossary || isExplicitNav) && it.id) {
+          navItems.push({ id: it.id, label: it.title });
+        }
       });
+      return;
     }
-    if (c.type === 'tag' && c.text && c.id && !c.skipNav) {
-      navItems.push({ id: c.id, label: c.text });
+
+    // Top-level standalone sections with explicit navigation request
+    if (c.includeInNav && c.id && (c.title || c.heading)) {
+      navItems.push({ id: c.id, label: c.heading || c.title });
     }
   });
 
   if (lesson.glossary && Array.isArray(lesson.glossary) && lesson.glossary.length > 0) {
-    navItems.push({ id: 'glossary', label: 'Речник' });
+    if (!navItems.some(it => it.id === 'glossary')) {
+      navItems.push({ id: 'glossary', label: 'Речник' });
+    }
   }
 
   // Ensure "Речник" is placed at the very bottom of course sidebar if present
-  const glossaryIdx = navItems.findIndex(it => it.label === 'Речник');
+  const glossaryIdx = navItems.findIndex(it => it.label && it.label.toLowerCase().includes('речник'));
   if (glossaryIdx !== -1 && glossaryIdx !== navItems.length - 1) {
     const [glossaryItem] = navItems.splice(glossaryIdx, 1);
     navItems.push(glossaryItem);

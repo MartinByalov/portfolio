@@ -1,15 +1,14 @@
+function sanitizePath(src) {
+  if (!src) return '';
+  return src.replace(/^\[IMAGE_PLACEHOLDER:\s*/, '').replace(/\]$/, '').trim();
+}
+
 function renderImageOrPlaceholder(src, alt = '') {
   if (!src) return '';
-  if (src.includes('IMAGE_PLACEHOLDER')) {
-    const filename = src.replace(/^\[IMAGE_PLACEHOLDER:\s*/, '').replace(/\]$/, '').trim();
-    return `
-      <div class="image-placeholder-box" style="background: var(--surface-alt, #f8fafc); border: 1px dashed #cbd5e1; border-radius: 8px; padding: 1rem 0.5rem; text-align: center; color: #64748b; margin-bottom: 0.75rem; aspect-ratio: 4 / 5; max-height: 340px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;">
-        <i class="fas fa-portrait" style="font-size: 2.2rem; color: #94a3b8; margin-bottom: 0.35rem; display: block;"></i>
-        <strong style="display: block; font-size: 0.8rem; color: #334155;">[IMAGE_PLACEHOLDER: ${filename}]</strong>
-      </div>
-    `;
-  }
-  return `<img src="${src}" alt="${alt}" style="width: 100%; aspect-ratio: 4 / 5; max-height: 340px; object-fit: cover; object-position: top center; border-radius: 8px; margin-bottom: 0.75rem; display: block;" />`;
+  const cleanPath = sanitizePath(src);
+  return `
+    <img src="${src}" alt="${alt}" data-path="${cleanPath}" style="width: 100%; aspect-ratio: 4 / 5; max-height: 340px; object-fit: cover; object-position: top center; border-radius: 8px; margin-bottom: 0.75rem; display: block;" onerror="if(this.src.includes('cdn.jsdelivr.net')){this.src=this.src.replace('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/','raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/');}else{this.onerror=null;this.outerHTML='<div class=\\'image-placeholder-box\\' style=\\'background: var(--surface-alt, #f8fafc); border: 1px dashed #cbd5e1; border-radius: 8px; padding: 1rem 0.5rem; text-align: center; color: #64748b; margin-bottom: 0.75rem; aspect-ratio: 4 / 5; max-height: 340px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;\\'><i class=\\'fas fa-portrait\\' style=\\'font-size: 2.2rem; color: #94a3b8; margin-bottom: 0.35rem; display: block;\\'></i><strong style=\\'display: block; font-size: 0.8rem; color: #334155; font-family: monospace;\\'>' + this.getAttribute('data-path') + '</strong></div>';}" />
+  `;
 }
 
 export function render(comp) {

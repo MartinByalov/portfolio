@@ -18,7 +18,6 @@ function shuffled(items) {
 function stepsMarkup(steps) {
   return steps.map(step => `
     <li class="seq-step" data-step-id="${esc(step.id)}">
-      <span class="seq-grip"><i class="fas fa-grip-vertical"></i></span>
       <span class="seq-icon"><i class="${esc(step.icon)}"></i></span>
       <span><strong>${esc(step.label)}</strong><small>${esc(step.description)}</small></span>
       <span class="seq-controls"><button type="button" class="seq-up" aria-label="Премести нагоре"><i class="fas fa-arrow-up"></i></button><button type="button" class="seq-down" aria-label="Премести надолу"><i class="fas fa-arrow-down"></i></button></span>
@@ -29,9 +28,15 @@ export function render(comp) {
   const steps = comp.steps || [];
   return `
     <section class="sequence-builder" id="${esc(comp.id)}">
-      <div class="seq-header"><span><i class="fas fa-shuffle"></i> ПОДРЕДИ ПРОЦЕСА</span><h3>${esc(comp.title)}</h3><p>${esc(comp.instruction)}</p></div>
+      <div class="seq-header"><h3>${esc(comp.title)}</h3><p>${esc(comp.instruction)}</p></div>
       <ol class="seq-list">${stepsMarkup(shuffled(steps))}</ol>
-      <div class="seq-actions"><button type="button" class="btn-activity seq-check">Провери реда</button><button type="button" class="btn-activity seq-reset">Разбъркай</button><div class="seq-feedback" aria-live="polite"></div></div>
+      <div class="seq-actions">
+        <div class="seq-buttons-row">
+          <button type="button" class="btn-activity seq-check">Провери</button>
+          <button type="button" class="btn-activity seq-reset">Нов Опит</button>
+        </div>
+        <div class="seq-feedback" aria-live="polite"></div>
+      </div>
     </section>`;
 }
 
@@ -57,9 +62,7 @@ export function init(comp) {
     const correct = actual.filter((id, index) => id === expected[index]).length;
     list.querySelectorAll('.seq-step').forEach((item, index) => item.classList.toggle('correct', item.dataset.stepId === expected[index]));
     feedback.className = `seq-feedback ${correct === expected.length ? 'success' : 'info'}`;
-    feedback.textContent = correct === expected.length
-      ? 'Пътят е подреден. Данните са въведени, заредени, обработени и представени като резултат.'
-      : `${correct} от ${expected.length} стъпки са на правилното място. Проследете кой компонент има нужда от данните преди следващия.`;
+    feedback.textContent = `Резултат ${correct} от ${expected.length}`;
   });
   root.querySelector('.seq-reset').addEventListener('click', () => {
     list.innerHTML = stepsMarkup(shuffled(comp.steps || []));

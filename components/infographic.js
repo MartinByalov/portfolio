@@ -1,15 +1,14 @@
+function sanitizePath(src) {
+  if (!src) return '';
+  return src.replace(/^\[IMAGE_PLACEHOLDER:\s*/, '').replace(/\]$/, '').trim();
+}
+
 function renderImageOrPlaceholder(src, alt = '') {
   if (!src) return '';
-  if (src.includes('IMAGE_PLACEHOLDER')) {
-    const filename = src.replace(/^\[IMAGE_PLACEHOLDER:\s*/, '').replace(/\]$/, '').trim();
-    return `
-      <div class="image-placeholder-box" style="background: var(--surface-alt, #f8fafc); border: 1px dashed #cbd5e1; border-radius: 8px; padding: 0.75rem 0.5rem; text-align: center; color: #64748b; margin: 0.5rem 0;">
-        <i class="fas fa-microchip" style="font-size: 1.5rem; color: #94a3b8; margin-bottom: 0.25rem; display: block;"></i>
-        <strong style="display: block; font-size: 0.8rem; color: #334155;">[IMAGE_PLACEHOLDER: ${filename}]</strong>
-      </div>
-    `;
-  }
-  return `<img src="${src}" alt="${alt}" style="width: 100%; height: 120px; object-fit: cover; border-radius: 8px; margin: 0.5rem 0;" />`;
+  const cleanPath = sanitizePath(src);
+  return `
+    <img src="${src}" alt="${alt}" data-path="${cleanPath}" style="width: 100%; height: 120px; object-fit: cover; border-radius: 8px; margin: 0.5rem 0;" onerror="if(this.src.includes('cdn.jsdelivr.net')){this.src=this.src.replace('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/','raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/');}else{this.onerror=null;this.outerHTML='<div class=\\'image-placeholder-box\\' style=\\'background: var(--surface-alt, #f8fafc); border: 1px dashed #cbd5e1; border-radius: 8px; padding: 0.75rem 0.5rem; text-align: center; color: #64748b; margin: 0.5rem 0;\\'><i class=\\'fas fa-microchip\\' style=\\'font-size: 1.5rem; color: #94a3b8; margin-bottom: 0.25rem; display: block;\\'></i><strong style=\\'display: block; font-size: 0.8rem; color: #334155; font-family: monospace;\\'>' + this.getAttribute('data-path') + '</strong></div>';}" />
+  `;
 }
 
 export function render(comp) {
@@ -35,6 +34,10 @@ export function render(comp) {
   }).join('');
 
   const hasHeader = Boolean(comp.badge || comp.title || comp.subtitle);
+  const is2x2 = comp.layout === '2x2' || comp.id === 'memory-hierarchy-infographic';
+  const gridStyle = is2x2
+    ? 'display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem;'
+    : 'display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem;';
 
   return `
     <div id="${comp.id}" class="infographic-container" style="margin: 0.5rem 0 1.25rem 0; padding: 1.25rem; background: var(--surface-alt, #f8fafc); border-radius: 16px; border: 1px solid var(--border-color, #e2e8f0);">
@@ -46,7 +49,7 @@ export function render(comp) {
         </div>
       ` : ''}
 
-      <div class="infographic-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem;">
+      <div class="infographic-grid" style="${gridStyle}">
         ${sectionsHtml}
       </div>
     </div>

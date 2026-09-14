@@ -35,8 +35,7 @@ export function render(comp) {
   return `
     <section class="system-builder-lab" id="${esc(comp.id)}">
       <header class="sbl-console-header">
-        <div><span class="sbl-eyebrow"><i class="fas fa-screwdriver-wrench"></i> SYSTEMS LAB / CASE 2.2</span><h2>${esc(comp.title)}</h2><p>${esc(comp.intro)}</p></div>
-        <div class="sbl-status"><span class="sbl-status-light"></span><span class="sbl-status-text">Очаква проект</span></div>
+        <div><h2>${esc(comp.title)}</h2><p>${esc(comp.intro)}</p></div>
       </header>
 
       <nav class="sbl-stage-nav" aria-label="Етапи на лабораторията">
@@ -52,7 +51,7 @@ export function render(comp) {
         <div class="sbl-stage-copy"><span class="sbl-step">СТЪПКА 01</span><h3>Получавате поръчка. За какво ще служи системата?</h3><p>Няма универсално „най-добър компютър“. Предназначението определя кои ресурси са важни. Изберете клиент и запомнете ограниченията му.</p></div>
         <div class="sbl-profile-grid">${profileCards}</div>
         <div class="sbl-brief-card"><div><span>АКТИВНА ПОРЪЧКА</span><strong class="sbl-brief-title">${esc(firstProfile.label)}</strong></div><p class="sbl-brief-text">${esc(firstProfile.challenge)}</p><div class="sbl-budget"><i class="fas fa-coins"></i> Бюджет: <strong class="sbl-budget-value">${esc(firstProfile.budget)}</strong></div></div>
-        <button type="button" class="btn-activity sbl-next" data-next="build">Към работната маса <i class="fas fa-arrow-right"></i></button>
+        <button type="button" class="btn-activity sbl-next" data-next="build">Напред <i class="fas fa-arrow-right"></i></button>
       </div>
 
       <div class="sbl-stage" data-stage-panel="build">
@@ -60,7 +59,7 @@ export function render(comp) {
         <div class="sbl-build-layout">
           <div class="sbl-parts-panel">${partGroups}</div>
           <aside class="sbl-board-xray">
-            <div class="sbl-placeholder"><i class="fas fa-microchip"></i><strong>[IMAGE_PLACEHOLDER: labeled-modern-motherboard.png]</strong><span>Снимка отгоре на дънна платка с означени CPU socket, RAM slots, PCIe, M.2, chipset и power connectors</span></div>
+            <div class="sbl-placeholder"><i class="fas fa-microchip"></i><strong style="font-family: monospace;">it-8-8/labeled-modern-motherboard.png</strong><span>Снимка отгоре на дънна платка с означени CPU socket, RAM slots, PCIe, M.2, chipset и power connectors</span></div>
             <h4>Рентген на системата</h4>
             <button type="button" class="sbl-xray-node" data-note="CPU се поставя в съвместим цокъл. АЛУ извършва операции, управляващото устройство координира, а регистрите пазят междинни стойности."><i class="fas fa-microchip"></i> CPU socket</button>
             <button type="button" class="sbl-xray-node" data-note="RAM пази програмите и данните в момента. Тя е енергозависима — съдържанието се губи при изключване."><i class="fas fa-memory"></i> RAM slots</button>
@@ -69,7 +68,7 @@ export function render(comp) {
             <div class="sbl-xray-note">Изберете означение, за да видите ролята му.</div>
           </aside>
         </div>
-        <div class="sbl-build-actions"><button type="button" class="btn-activity sbl-check-build"><i class="fas fa-wrench"></i> Провери конфигурацията</button><div class="sbl-build-feedback" aria-live="polite"></div></div>
+        <div class="sbl-build-actions"><button type="button" class="btn-activity sbl-check-build"><i class="fas fa-wrench"></i> Провери</button><div class="sbl-build-feedback" aria-live="polite"></div></div>
       </div>
 
       <div class="sbl-stage" data-stage-panel="post">
@@ -170,8 +169,10 @@ export function init(comp) {
     }
     feedback.className = 'sbl-build-feedback success';
     feedback.innerHTML = '<i class="fas fa-circle-check"></i><span><strong>Съвместима и подходяща конфигурация.</strong> Свържете захранването и изпълнете POST.</span>';
-    root.querySelector('.sbl-status-text').textContent = 'Сглобена система';
-    root.querySelector('.sbl-status-light').classList.add('ready');
+    const statusText = root.querySelector('.sbl-status-text');
+    if (statusText) statusText.textContent = 'Сглобена система';
+    const statusLight = root.querySelector('.sbl-status-light');
+    if (statusLight) statusLight.classList.add('ready');
     setTimeout(() => showStage('post'), 900);
   });
 
@@ -183,7 +184,8 @@ export function init(comp) {
       screen.insertAdjacentHTML('beforeend', `<div class="sbl-post-line">${line}</div>`);
       screen.scrollTop = screen.scrollHeight;
       if (index === lines.length - 1) {
-        root.querySelector('.sbl-status-text').textContent = 'Системата работи';
+        const postStatus = root.querySelector('.sbl-status-text');
+        if (postStatus) postStatus.textContent = 'Системата работи';
         setTimeout(() => showStage('run'), 650);
       }
     }, index * 420));

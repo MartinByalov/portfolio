@@ -1,9 +1,11 @@
+function sanitizePath(src) {
+  if (!src) return '';
+  return src.replace(/^\[IMAGE_PLACEHOLDER:\s*/, '').replace(/\]$/, '').trim();
+}
+
 function renderMedia(item) {
-  if ((item.src || '').includes('IMAGE_PLACEHOLDER')) {
-    const filename = item.src.replace(/^\[IMAGE_PLACEHOLDER:\s*/, '').replace(/\]$/, '').trim();
-    return `<div class="gallery-placeholder"><i class="fas fa-image"></i><strong>[IMAGE_PLACEHOLDER: ${filename}]</strong><span>${item.alt || ''}</span></div>`;
-  }
-  return `<img src="${item.src}" alt="${item.alt}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\'><rect width=\\'100%\\' height=\\'100%\\' fill=\\'%23e5e7eb\\'/><text x=\\'50%\\' y=\\'50%\\' font-family=\\'sans-serif\\' font-size=\\'14\\' fill=\\'%239ca3af\\' text-anchor=\\'middle\\' dominant-baseline=\\'middle\\'>Изображение</text></svg>'" />`;
+  const cleanPath = sanitizePath(item.src || '');
+  return `<img src="${item.src}" alt="${item.alt || ''}" data-path="${cleanPath}" style="width: 100%; height: 100%; object-fit: cover;" onerror="if(this.src.includes('cdn.jsdelivr.net')){this.src=this.src.replace('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/','raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/');}else{this.onerror=null;this.parentElement.innerHTML='<div class=\\'gallery-placeholder\\'><i class=\\'fas fa-image\\'></i><strong style=\\'font-family: monospace;\\'>' + this.getAttribute('data-path') + '</strong><span>' + (this.getAttribute('alt') || '') + '</span></div>';}" />`;
 }
 
 export function render(comp) {

@@ -1,16 +1,14 @@
+function sanitizePath(src) {
+  if (!src) return '';
+  return src.replace(/^\[IMAGE_PLACEHOLDER:\s*/, '').replace(/\]$/, '').trim();
+}
+
 function renderImageOrPlaceholder(src, alt = '') {
   if (!src) return '';
-  if (src.includes('IMAGE_PLACEHOLDER')) {
-    const filename = src.replace(/^\[IMAGE_PLACEHOLDER:\s*/, '').replace(/\]$/, '').trim();
-    return `
-      <div class="image-placeholder-box" style="background: var(--surface-alt, #f8fafc); border: 2px dashed #cbd5e1; border-radius: 12px; padding: 1.5rem 1rem; text-align: center; color: #64748b; margin: 1rem 0;">
-        <i class="fas fa-image" style="font-size: 2rem; color: #94a3b8; margin-bottom: 0.5rem; display: block;"></i>
-        <strong style="display: block; font-size: 0.9rem; color: #334155; margin-bottom: 0.25rem;">[IMAGE_PLACEHOLDER: ${filename}]</strong>
-        ${alt ? `<span style="font-size: 0.85rem; color: #64748b;">${alt}</span>` : ''}
-      </div>
-    `;
-  }
-  return `<img src="${src}" alt="${alt}" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);" />`;
+  const cleanPath = sanitizePath(src);
+  return `
+    <img src="${src}" alt="${alt}" data-path="${cleanPath}" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: block;" onerror="if(this.src.includes('cdn.jsdelivr.net')){this.src=this.src.replace('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/','raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/');}else{this.onerror=null;this.outerHTML='<div class=\\'image-placeholder-box\\' style=\\'background: var(--surface-alt, #f8fafc); border: 2px dashed #cbd5e1; border-radius: 12px; padding: 1.5rem 1rem; text-align: center; color: #64748b; margin: 0.5rem 0;\\'><i class=\\'fas fa-image\\' style=\\'font-size: 2rem; color: #94a3b8; margin-bottom: 0.5rem; display: block;\\'></i><strong style=\\'display: block; font-size: 0.95rem; color: #334155; margin-bottom: 0.25rem; font-family: monospace;\\'>' + this.getAttribute('data-path') + '</strong><span>' + (this.getAttribute('alt') || '') + '</span></div>';}" />
+  `;
 }
 
 export function render(comp) {

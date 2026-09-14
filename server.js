@@ -53,7 +53,8 @@ express.static.mime.define({
   'application/epub+zip': ['epub']
 });
 
-// Serve static assets from project root
+// Serve static assets from project root and assets directory
+app.use(express.static(path.join(__dirname, 'assets')));
 app.use(express.static(__dirname, {
   extensions: ['html', 'htm'],
   index: ['index.html']

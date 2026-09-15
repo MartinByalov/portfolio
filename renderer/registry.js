@@ -58,6 +58,7 @@ import * as GlossaryList from '../components/glossary-list.js';
 import * as SystemBuilderLab from '../components/system-builder-lab.js';
 import * as SystemAnatomyMap from '../components/system-anatomy-map.js';
 import * as SequenceBuilder from '../components/sequence-builder.js';
+import * as OsControlRoom from '../components/os-control-room.js';
 
 const registry = {
   'text-group': TextGroup,
@@ -119,6 +120,7 @@ const registry = {
   'system-builder-lab': SystemBuilderLab,
   'system-anatomy-map': SystemAnatomyMap,
   'sequence-builder': SequenceBuilder,
+  'os-control-room': OsControlRoom,
 };
 
 export function renderComponent(comp) {

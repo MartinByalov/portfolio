@@ -1,9 +1,9 @@
 export function render(comp) {
   const items = comp.items || [
-    { label: "Пръсти", desc: "Най-старият калкулатор — римската пръстова система, описана от Беда Достопочтени.", icon: "fas fa-hand-paper", year: "Древност" },
-    { label: "Камъчета", desc: "Използвани в Месопотамия и Древен Гърция — думата 'calculus' означава каменно камъче.", icon: "fas fa-gem", year: "V хил. пр.Хр." },
+    { label: "Пръсти", desc: "Най-старият калкулатор - римската пръстова система, описана от Беда Достопочтени.", icon: "fas fa-hand-paper", year: "Древност" },
+    { label: "Камъчета", desc: "Използвани в Месопотамия и Древен Гърция - думата 'calculus' означава каменно камъче.", icon: "fas fa-gem", year: "V хил. пр.Хр." },
     { label: "Връвчици с възли (Кипу)", desc: "Инките и древните китайци кодирали търговски и данъчни записи чрез възли.", icon: "fas fa-ribbon", year: "III хил. пр.Хр." },
-    { label: "Абак", desc: "Дъска с камъчета в улейчета — ползван в Египет, Индия, Китай и Рим.", icon: "fas fa-border-all", year: "III хил. пр.Хр." },
+    { label: "Абак", desc: "Дъска с камъчета в улейчета - ползван в Египет, Индия, Китай и Рим.", icon: "fas fa-border-all", year: "III хил. пр.Хр." },
     { label: "Сметало", desc: "Арабите пренасят абака в Европа; камъчетата стават мъниста на метални телове.", icon: "fas fa-calculator", year: "VIII–XV в." }
   ];
 
@@ -38,7 +38,7 @@ export function render(comp) {
         </button>
         <div style="margin-top: 1rem; font-style: italic; color: #059669; font-weight: 600; font-size: 1rem;">
           <i class="fas fa-quote-left" style="margin-right: 0.4rem; color: #10b981;"></i>
-          Идеята не се променя — променя се инструментът!
+          Идеята не се променя - променя се инструментът!
           <i class="fas fa-quote-right" style="margin-left: 0.4rem; color: #10b981;"></i>
         </div>
       </div>

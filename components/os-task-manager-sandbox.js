@@ -10,7 +10,7 @@ function esc(value) {
 export function render(comp) {
   const id = comp.id || 'os-task-manager-sandbox';
   const title = comp.title || 'Симулатор: Диспечер на задачите (Task Manager)';
-  const subtitle = comp.subtitle || 'Влезте в ролята на системен администратор — открийте претоварените ресурси и спасете замръзналия компютър';
+  const subtitle = comp.subtitle || 'Влезте в ролята на системен администратор - открийте претоварените ресурси и спасете замръзналия компютър';
 
   return `
     <div id="${esc(id)}" class="os-task-manager-sandbox">

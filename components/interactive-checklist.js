@@ -1,4 +1,4 @@
-// Interactive checklist — pre-submission check before handing in the task
+// Interactive checklist - pre-submission check before handing in the task
 
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
@@ -68,7 +68,7 @@ export function init(comp) {
     });
     if (result) {
       if (done === boxes.length && boxes.length > 0) {
-        result.innerHTML = '<i class="fas fa-circle-check"></i> Отлично! Готови сте да предадете задачата — всички точки са изпълнени.';
+        result.innerHTML = '<i class="fas fa-circle-check"></i> Отлично! Готови сте да предадете задачата - всички точки са изпълнени.';
         result.className = 'check-q-result checklist-result result-success';
         result.style.display = 'block';
       } else {

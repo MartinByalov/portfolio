@@ -41,7 +41,7 @@ export function render(comp) {
 
       <div class="program-result-box" style="display: none; margin-top: 1.5rem; max-width: 700px; margin-left: auto; margin-right: auto; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 1.25rem; border-radius: 12px; color: #065f46; font-size: 0.95rem; line-height: 1.5;">
         <i class="fas fa-check-circle" style="color: #10b981; font-size: 1.25rem; margin-right: 0.5rem;"></i>
-        <strong>Успешно изпълнение!</strong> Жакард доказа, че дупчените карти могат да командват машината. Ада Лъвлейс написа първите цикли и условни преходи. Машината вече не просто смята — тя изпълнява алгоритъм!
+        <strong>Успешно изпълнение!</strong> Жакард доказа, че дупчените карти могат да командват машината. Ада Лъвлейс написа първите цикли и условни преходи. Машината вече не просто смята - тя изпълнява алгоритъм!
       </div>
     </div>
   `;

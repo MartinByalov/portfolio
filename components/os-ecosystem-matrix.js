@@ -80,34 +80,38 @@ export function render(comp) {
     }
   ];
 
-  const cases = [
+  const consultantCases = [
     {
       id: 'case-gamer',
-      title: 'Казус 1: Мартин — Гейминг и училище',
-      desc: 'Мартин иска настолен компютър, на който да играе най-новите състезателни и AAA игри, да ползва Discord и училищния софтуер.',
+      tabTitle: '1. Гейминг и училище',
+      cardTitle: 'Казус 1: Клиент - Гейминг и училище',
+      desc: 'Клиентът иска настолен компютър, на който да играе най-новите състезателни и AAA игри, да ползва Discord и училищния софтуер.',
       correct: 'windows',
-      explanation: 'Windows предлага най-богатата поддръжка за видеокарти, DirectX технологии, античийт системи и практически всяка игра в Steam и Epic Games.'
+      explanation: 'Правилно! Windows предлага най-богатата съвместимост за съвременни видеокарти, DirectX 12 технологии, античийт системи и практически всяка игра в Steam и Epic Games.'
     },
     {
       id: 'case-server',
-      title: 'Казус 2: Инж. Димитров — Училищен уеб сървър',
-      desc: 'Училището иска денонощен уеб и файлов сървър с нулев бюджет за лицензи, който да не се рестартира с години и да има висша защита.',
+      tabTitle: '2. Училищен уеб сървър',
+      cardTitle: 'Казус 2: Клиент - Училищен уеб сървър',
+      desc: 'Клиентът иска денонощен уеб и файлов сървър за училище с нулев бюджет за лицензи, който да не се рестартира с години и да има висша защита.',
       correct: 'linux',
-      explanation: 'Linux (напр. Ubuntu Server или Debian) е де факто световният стандарт за интернет сървъри — 100% безплатен, с висока сигурност и минимално потребление на ресурси.'
+      explanation: 'Точно така! Linux (напр. Ubuntu Server или Debian) е златният стандарт за интернет сървъри - 100% безплатен, изключително стабилен, лек и сигурен.'
     },
     {
       id: 'case-video',
-      title: 'Казус 3: София — Графичен дизайн и монтаж',
-      desc: 'София учи видеообработка, ползва iPhone и иска лаптоп с прецизен екран, безшумна работа, изключителна батерия и софтуер като Final Cut Pro.',
+      tabTitle: '3. Графичен дизайн и монтаж',
+      cardTitle: 'Казус 3: Клиент - Графичен дизайн и монтаж',
+      desc: 'Клиентът учи видеообработка, ползва iPhone и иска лаптоп с прецизен екран, безшумна работа, изключителна батерия и софтуер като Final Cut Pro.',
       correct: 'macos',
-      explanation: 'macOS в комбинация с MacBook предлага водеща в индустрията енергийна ефективност, стабилност при тежък видеомонтаж и перфектна връзка с нейния iPhone чрез AirDrop и iCloud.'
+      explanation: 'Отличен избор! macOS в съчетание с MacBook предлага водеща в света енергийна ефективност, оптимизация за 4K/8K видео и мигновена връзка с неговия iPhone чрез AirDrop.'
     },
     {
       id: 'case-dev',
-      title: 'Казус 4: Калоян — Пътуващ блогър с бюджетен смартфон',
-      desc: 'Калоян търси достъпен телефон, който да зарежда бързо снимки на флашка без iTunes и да му дава пълен контрол над инсталирането на приложения.',
+      tabTitle: '4. Пътуващ блогър (смартфон)',
+      cardTitle: 'Казус 4: Клиент - Пътуващ блогър с бюджетен смартфон',
+      desc: 'Клиентът търси достъпен телефон, който да зарежда бързо снимки на флашка без iTunes и да му дава пълен контрол над файловете.',
       correct: 'android',
-      explanation: 'Android осигурява директен свободен достъп до файловата система през USB кабел, поддръжка на OTG флашки и богат избор от устройства на всякакви цени.'
+      explanation: 'Браво! Android осигурява пълен свободен достъп до файловата система през USB кабел, поддържа OTG флашки и позволява избор от стотици модели на достъпни цени.'
     }
   ];
 
@@ -120,7 +124,6 @@ export function render(comp) {
 
       <!-- Filter Controls -->
       <div class="os-matrix-filters">
-        <span class="os-filter-label"><i class="fas fa-filter"></i> Филтър по платформа:</span>
         <button type="button" class="os-filter-btn active" data-filter="all">Всички (5)</button>
         <button type="button" class="os-filter-btn" data-filter="desktop">Компютри &amp; Лаптопи</button>
         <button type="button" class="os-filter-btn" data-filter="mobile">Смартфони &amp; Мобилни</button>
@@ -163,23 +166,23 @@ export function render(comp) {
         <div class="os-consultant-head">
           <div class="os-consultant-icon"><i class="fas fa-user-tie"></i></div>
           <div>
-            <h4>Мисия: ИТ Консултант — Изберете правилната ОС за клиента</h4>
+            <h4>Мисия: ИТ Консултант - Изберете правилната ОС за клиента</h4>
             <p>Прочетете изискванията на клиента и посочете най-подходящата операционна система:</p>
           </div>
         </div>
 
         <div class="os-case-selector">
-          ${cases.map((c, i) => `
+          ${consultantCases.map((c, i) => `
             <button type="button" class="os-case-tab ${i === 0 ? 'active' : ''}" data-case-idx="${i}">
-              ${esc(c.title)}
+              ${esc(c.tabTitle)}
             </button>
           `).join('')}
         </div>
 
         <div class="os-active-case-card">
           <div class="os-case-brief">
-            <strong class="os-case-heading">${esc(cases[0].title)}</strong>
-            <p class="os-case-text">${esc(cases[0].desc)}</p>
+            <strong class="os-case-heading">${esc(consultantCases[0].cardTitle)}</strong>
+            <p class="os-case-text">${esc(consultantCases[0].desc)}</p>
           </div>
 
           <div class="os-case-choices">
@@ -228,38 +231,6 @@ export function init(comp) {
     });
   });
 
-  // Consultant Cases
-  const cases = [
-    {
-      id: 'case-gamer',
-      title: 'Казус 1: Мартин — Гейминг и училище',
-      desc: 'Мартин иска настолен компютър, на който да играе най-новите състезателни и AAA игри, да ползва Discord и училищния софтуер.',
-      correct: 'windows',
-      explanation: 'Правилно! Windows предлага най-богатата съвместимост за съвременни видеокарти, DirectX 12 технологии, античийт системи и практически всяка игра в Steam и Epic Games.'
-    },
-    {
-      id: 'case-server',
-      title: 'Казус 2: Инж. Димитров — Училищен уеб сървър',
-      desc: 'Училището иска денонощен уеб и файлов сървър с нулев бюджет за лицензи, който да не се рестартира с години и да има висша защита.',
-      correct: 'linux',
-      explanation: 'Точно така! Linux (напр. Ubuntu Server или Debian) е златният стандарт за интернет сървъри — 100% безплатен, изключително стабилен, лек и сигурен.'
-    },
-    {
-      id: 'case-video',
-      title: 'Казус 3: София — Графичен дизайн и монтаж',
-      desc: 'София учи видеообработка, ползва iPhone и иска лаптоп с прецизен екран, безшумна работа, изключителна батерия и софтуер като Final Cut Pro.',
-      correct: 'macos',
-      explanation: 'Отличен избор! macOS в съчетание с MacBook предлага водеща в света енергийна ефективност, оптимизация за 4K/8K видео и мигновена връзка с нейния iPhone чрез AirDrop.'
-    },
-    {
-      id: 'case-dev',
-      title: 'Казус 4: Калоян — Пътуващ блогър с бюджетен смартфон',
-      desc: 'Калоян търси достъпен телефон, който да зарежда бързо снимки на флашка без iTunes и да му дава пълен контрол над файловете.',
-      correct: 'android',
-      explanation: 'Браво! Android осигурява пълен свободен достъп до файловата система през USB кабел, поддържа OTG флашки и позволява избор от стотици модели на достъпни цени.'
-    }
-  ];
-
   let currentCaseIdx = 0;
   const caseTabs = root.querySelectorAll('.os-case-tab');
   const caseHeading = root.querySelector('.os-case-heading');
@@ -270,8 +241,8 @@ export function init(comp) {
   function updateCase(idx) {
     currentCaseIdx = idx;
     caseTabs.forEach((tab, i) => tab.classList.toggle('active', i === idx));
-    const c = cases[idx];
-    if (caseHeading) caseHeading.textContent = c.title;
+    const c = consultantCases[idx];
+    if (caseHeading) caseHeading.textContent = c.cardTitle;
     if (caseText) caseText.textContent = c.desc;
     choiceBtns.forEach(btn => {
       btn.classList.remove('selected-correct', 'selected-wrong');
@@ -293,7 +264,7 @@ export function init(comp) {
   choiceBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const choice = btn.dataset.choice;
-      const c = cases[currentCaseIdx];
+      const c = consultantCases[currentCaseIdx];
       const isCorrect = choice === c.correct;
 
       choiceBtns.forEach(b => {

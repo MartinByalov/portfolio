@@ -50,7 +50,7 @@ export function render(comp) {
 
         <div class="os-cpu-sim-box">
           <div class="os-cpu-core-status">
-            <div class="os-cpu-badge"><i class="fas fa-bolt"></i> Процесорно ядро (CPU Core 1)</div>
+            <div class="os-cpu-badge"><i class="fas fa-bolt"></i> CPU Core 1</div>
             <div class="os-cpu-current-task">Текущо изпълнение: <strong class="os-cpu-active-label">Браузър</strong></div>
             <button type="button" class="btn-activity os-cpu-toggle-btn"><i class="fas fa-pause"></i> Пауза</button>
           </div>
@@ -98,16 +98,18 @@ export function render(comp) {
               <span>Заета: <strong class="os-mem-used-label">3.8 GB</strong> (<span class="os-mem-pct-label">47%</span>)</span>
             </div>
             <div class="os-mem-actions">
-              <button type="button" class="btn-activity os-mem-add-app" data-app="chrome"><i class="fas fa-plus"></i> Отвори още раздели в браузъра (+1.5 GB)</button>
-              <button type="button" class="btn-activity os-mem-add-app" data-app="video"><i class="fas fa-video"></i> Стартирай 4K видеообработка (+4.5 GB)</button>
-              <button type="button" class="btn-activity os-mem-reset-btn"><i class="fas fa-rotate-left"></i> Изчисти</button>
+              <div class="os-mem-app-buttons">
+                <button type="button" class="btn-activity os-mem-add-app" data-app="chrome"><i class="fas fa-plus"></i> Отвори още раздели в браузъра (+1.5 GB)</button>
+                <button type="button" class="btn-activity os-mem-add-app" data-app="video"><i class="fas fa-video"></i> Стартирай 4K видеообработка (+4.5 GB)</button>
+              </div>
+              <button type="button" class="btn-activity os-mem-reset-btn">Изчисти</button>
             </div>
           </div>
 
           <!-- Physical RAM bar -->
           <div class="os-mem-bar-wrap">
             <div class="os-mem-bar-header">
-              <span>Оперативна памет (RAM) — Бърза, енергозависима</span>
+              <span>Оперативна памет (RAM) - Бърза, енергозависима</span>
               <span class="os-mem-bar-legend"><span class="legend-box ram-active"></span> Активни програми</span>
             </div>
             <div class="os-mem-bar-track">
@@ -118,7 +120,7 @@ export function render(comp) {
           <!-- Virtual Memory / Swap on SSD bar -->
           <div class="os-swap-bar-wrap">
             <div class="os-mem-bar-header">
-              <span>Виртуална памет на SSD (Pagefile.sys / Swap) — Резервна памет при недостиг</span>
+              <span>Виртуална памет на SSD - Резервна памет при недостиг</span>
               <span class="os-swap-status">Статус: <strong class="os-swap-label">Неактивна (Има достатъчно свободна RAM)</strong></span>
             </div>
             <div class="os-swap-bar-track">
@@ -127,7 +129,6 @@ export function render(comp) {
           </div>
 
           <div class="os-mem-insight-card" aria-live="polite">
-            <i class="fas fa-info-circle"></i>
             <span class="os-mem-insight-text">Системата работи нормално. Всички активни програми се побират изцяло в бързата физическа памет (RAM).</span>
           </div>
         </div>
@@ -210,7 +211,6 @@ export function render(comp) {
             </div>
 
             <div class="os-inspect-tip">
-              <i class="fas fa-lightbulb"></i>
               <span><strong>Защо разширението (.ext) има значение?</strong> То казва на ОС кое приложно приложение да отвори файла по подразбиране при двоен клик.</span>
             </div>
           </div>
@@ -255,14 +255,24 @@ export function render(comp) {
           </div>
 
           <div class="os-pnp-simulator">
-            <span class="os-pnp-title"><i class="fas fa-bolt"></i> Симулация: Включване на ново устройство (Plug and Play)</span>
+            <span class="os-pnp-title"><i class="fas fa-bolt"></i> Включване на ново устройство (Plug and Play)</span>
             <div class="os-pnp-buttons">
-              <button type="button" class="btn-activity os-pnp-btn" data-device="gamepad"><i class="fas fa-gamepad"></i> Включи геймпад контролер (USB)</button>
+              <button type="button" class="btn-activity os-pnp-btn" data-device="gamepad"><i class="fas fa-gamepad"></i> Включи контролер (USB)</button>
               <button type="button" class="btn-activity os-pnp-btn" data-device="camera"><i class="fas fa-video"></i> Включи уеб камера (USB 3.0)</button>
-              <button type="button" class="btn-activity os-pnp-btn" data-device="flash"><i class="fas fa-usb"></i> Включи USB флаш памет</button>
+              <button type="button" class="btn-activity os-pnp-btn" data-device="flash"><i class="fab fa-usb"></i> Включи USB флаш памет</button>
             </div>
-            <div class="os-pnp-log" aria-live="polite">
-              <div class="os-log-item"><span class="os-log-time">[Система]</span> Изберете устройство по-горе, за да проследите Plug &amp; Play разпознаването.</div>
+            <div class="os-pnp-cli-window">
+              <div class="os-pnp-cli-titlebar">
+                <div class="os-win-dots">
+                  <span class="win-dot red"></span>
+                  <span class="win-dot yellow"></span>
+                  <span class="win-dot green"></span>
+                </div>
+                <div class="os-pnp-cli-caption"><i class="fas fa-terminal"></i> Kernel Device Manager (Plug &amp; Play Monitor)</div>
+              </div>
+              <div class="os-pnp-log" aria-live="polite">
+                <div class="os-log-item os-log-intro"><span class="cli-prompt">[kernel@sys-bus ~]$</span> Изберете устройство по-горе, за да проследите Plug &amp; Play разпознаването.</div>
+              </div>
             </div>
           </div>
         </div>
@@ -343,7 +353,7 @@ export function init(comp) {
         swapLabel.innerHTML = `<span style="color:#ef4444; font-weight:700;">АКТИВНА: ${swapNeeded} GB на SSD диска!</span>`;
       }
       if (memInsight) {
-        memInsight.innerHTML = `<strong>Внимание — RAM е препълнена!</strong> Операционната система активира виртуалната памет на SSD диска. Тъй като SSD е по-бавен от RAM, забелязвате леко забавяне при превключване между тежките програми (Paging thrashing).`;
+        memInsight.innerHTML = `<strong>Внимание - RAM е препълнена!</strong> Операционната система активира виртуалната памет на SSD диска. Тъй като SSD е по-бавен от RAM, забелязвате леко забавяне при превключване между тежките програми (Paging thrashing).`;
       }
     } else {
       if (swapBarFill) swapBarFill.style.width = '0%';
@@ -465,15 +475,16 @@ export function init(comp) {
       const lines = pnpScenarios[dev];
       if (!lines || !pnpLog) return;
 
-      pnpLog.innerHTML = `<div class="os-log-item header"><strong><i class="fas fa-circle-notch fa-spin"></i> Plug &amp; Play протокол в действие...</strong></div>`;
+      pnpLog.innerHTML = `<div class="os-log-item os-log-header"><span class="cli-prompt">[kernel@sys-bus ~]$</span> <strong><i class="fas fa-circle-notch fa-spin"></i> Plug &amp; Play протокол в действие...</strong></div>`;
 
       lines.forEach((line, i) => {
         setTimeout(() => {
           const item = document.createElement('div');
           item.className = 'os-log-item';
-          item.innerHTML = `<span class="os-log-step">Стъпка ${i + 1}:</span> ${line}`;
+          item.innerHTML = `<span class="os-log-step">[Стъпка ${i + 1}]</span> ${line}`;
           pnpLog.appendChild(item);
-        }, (i + 1) * 600);
+          pnpLog.scrollTop = pnpLog.scrollHeight;
+        }, (i + 1) * 550);
       });
     });
   });

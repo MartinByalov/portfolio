@@ -715,7 +715,7 @@
                 },
                 {
                   "term": "Данни",
-                  "definition": "Цифровото представяне на информацията — текстове, числа, изображения, звук, бази от данни.",
+                  "definition": "Цифровото представяне на информацията - текстове, числа, изображения, звук, бази от данни.",
                   "image_prompt": "Realistic eye-level photograph inside a high-security modern enterprise data center corridor. Clean perspective view of tall server racks with blinking green and amber status LEDs, neatly bundled blue and yellow Ethernet patch cables, polished reflective raised floor tiles, cool ambient overhead illumination, sharp focus, professional industrial architectural photography.",
                   "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },
@@ -763,7 +763,7 @@
                 },
                 {
                   "term": "Приложни програми",
-                  "definition": "Програми за конкретни потребителски задачи — писане на текст, таблици, презентации, браузване.",
+                  "definition": "Програми за конкретни потребителски задачи - писане на текст, таблици, презентации, браузване.",
                   "image_prompt": "Realistic photograph of a creative professional designer using a stylus pen on an active graphics tablet beside a large color-calibrated display showing an open productivity application and spreadsheet, bright minimalist desk environment, natural morning illumination.",
                   "negative_prompt": "cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, distorted, deformed, blurry, low quality, oversaturated, bad anatomy, duplicate objects, text, watermark, logo"
                 },

@@ -64,6 +64,13 @@ import * as OsSubsystemsWorkbench from '../components/os-subsystems-workbench.js
 import * as OsTerminalLab from '../components/os-terminal-lab.js';
 import * as OsEcosystemMatrix from '../components/os-ecosystem-matrix.js';
 import * as OsTaskManagerSandbox from '../components/os-task-manager-sandbox.js';
+import * as MobileSocAnatomy from '../components/mobile-soc-anatomy.js';
+import * as MobileSensorLab from '../components/mobile-sensor-lab.js';
+import * as MobileConnectivityWorkbench from '../components/mobile-connectivity-workbench.js';
+import * as MobileDeviceProfiler from '../components/mobile-device-profiler.js';
+import * as MobileTransferCalculator from '../components/mobile-transfer-calculator.js';
+import * as MobilePermissionsAuditor from '../components/mobile-permissions-auditor.js';
+import * as MobileBatteryOptimizer from '../components/mobile-battery-optimizer.js';
 
 const registry = {
   'text-group': TextGroup,
@@ -133,6 +140,13 @@ const registry = {
   'os-terminal-lab': OsTerminalLab,
   'os-ecosystem-matrix': OsEcosystemMatrix,
   'os-task-manager-sandbox': OsTaskManagerSandbox,
+  'mobile-soc-anatomy': MobileSocAnatomy,
+  'mobile-sensor-lab': MobileSensorLab,
+  'mobile-connectivity-workbench': MobileConnectivityWorkbench,
+  'mobile-device-profiler': MobileDeviceProfiler,
+  'mobile-transfer-calculator': MobileTransferCalculator,
+  'mobile-permissions-auditor': MobilePermissionsAuditor,
+  'mobile-battery-optimizer': MobileBatteryOptimizer,
 };
 
 export function renderComponent(comp) {

@@ -1,5 +1,5 @@
 {
-  "id": "it-8-5",
+  "id": "it-8-1-4",
   "slug": "it-8-information-search",
   "title": "Урок 1.4: Ефективно търсене на информация",
   "grade": 8,
@@ -28,7 +28,7 @@
             {
               "type": "titled-image",
               "id": "img-concept-map",
-              "src": "it-8-5/infoSearch.jpg",
+              "src": "it-8-1-4/infoSearch.jpg",
               "alt": "Концептуална схема: Ефективно търсене на информация"
             },
             {
@@ -42,12 +42,12 @@
               "title": "Taskbar Search vs File Explorer",
               "items": [
                 {
-                  "src": "it-8-5/win11_search_ui.jpg",
+                  "src": "it-8-1-4/win11_search_ui.jpg",
                   "alt": "Taskbar Search",
                   "title": "Taskbar Search"
                 },
                 {
-                  "src": "it-8-5/fileExplorer.png",
+                  "src": "it-8-1-4/fileExplorer.png",
                   "alt": "File Explorer",
                   "title": "File Explorer"
                 }
@@ -96,7 +96,7 @@
             {
               "type": "titled-image",
               "id": "img-explorer-filters",
-              "src": "it-8-5/fileExplorerFilter.png",
+              "src": "it-8-1-4/fileExplorerFilter.png",
               "alt": "Филтри за търсене в File Explorer",
               "caption": "Филтри за търсене в File Explorer"
             },
@@ -121,7 +121,7 @@
             {
               "type": "titled-image",
               "id": "img-browser-vs-engine",
-              "src": "it-8-5/internetSearch.jpg",
+              "src": "it-8-1-4/internetSearch.jpg",
               "alt": "Разлика между Уеб Браузър и Търсачка",
               "caption": "Разлика между Уеб Браузър и Търсачка"
             },
@@ -295,7 +295,7 @@
             {
               "type": "titled-image",
               "id": "img-credibility-grid",
-              "src": "it-8-5/6criteria.jpg",
+              "src": "it-8-1-4/6criteria.jpg",
               "alt": "6-те критерия за оценка на източник",
               "caption": "6-те критерия за оценка на източник"
             }

@@ -1,4 +1,4 @@
-// Sequence Builder — arrange process steps and verify their order
+// Sequence Builder - arrange process steps and verify their order
 
 function esc(value) {
   return String(value == null ? '' : value).replace(/[&<>"']/g, ch => ({

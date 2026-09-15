@@ -1,4 +1,4 @@
-// UI Hotspots — interactive mockup with clickable dots explaining UI buttons
+// UI Hotspots - interactive mockup with clickable dots explaining UI buttons
 // Used for: Google Docs / Word Online collaborative editing mockup
 
 function esc(s) {
@@ -31,7 +31,7 @@ export function render(comp) {
     + '</div>'
     + '<div class="hotspots-stage">'
     + '<div class="hotspots-mockup">'
-    + '<div class="hotspots-doc-bar"><span class="hotspots-doc-dot red"></span><span class="hotspots-doc-dot yellow"></span><span class="hotspots-doc-dot green"></span><span class="hotspots-doc-title"><i class="fas fa-file-word"></i> Етичен_код_Екип1.docx — споделен документ</span></div>'
+    + '<div class="hotspots-doc-bar"><span class="hotspots-doc-dot red"></span><span class="hotspots-doc-dot yellow"></span><span class="hotspots-doc-dot green"></span><span class="hotspots-doc-title"><i class="fas fa-file-word"></i> Етичен_код_Екип1.docx - споделен документ</span></div>'
     + '<div class="hotspots-doc-body">'
     + '<div class="hotspots-doc-lines"><span></span><span></span><span class="short"></span><span></span><span class="short"></span></div>'
     + '<div class="hotspots-doc-side"><span></span><span></span><span></span></div>'

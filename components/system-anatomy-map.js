@@ -1,4 +1,4 @@
-// System Anatomy Map — Interactive Hardware Components & Characteristics Explorer
+// System Anatomy Map - Interactive Hardware Components & Characteristics Explorer
 // Layout:
 // 1. Top: Hardware selection buttons arranged in a structured table/grid
 // 2. Middle Left: Image preview container

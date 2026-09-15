@@ -37,7 +37,7 @@ export function render(comp) {
             </div>
             <div class="os-cli-prompt-line">
               <span class="cli-path">C:\\Users\\Student&gt;</span>
-              <input type="text" class="os-cli-input" placeholder="напишете команда (напр. dir, mkdir Proekti, del referat.docx, rmdir Снимки, ipconfig)..." autocomplete="off" spellcheck="false" aria-label="Въвеждане на команден ред" />
+              <input type="text" class="os-cli-input" placeholder="напишете команда" autocomplete="off" spellcheck="false" aria-label="Въвеждане на команден ред" />
               <button type="button" class="os-cli-send-btn" title="Изпълни команда (Enter)" aria-label="Изпълни команда (Enter)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display: block;"><polyline points="9 10 4 15 9 20"></polyline><path d="M20 4v7a4 4 0 0 1-4 4H4"></path></svg></button>
             </div>
             <div class="os-cli-helpers">
@@ -121,7 +121,7 @@ export function render(comp) {
           <div class="os-comp-side">
             <h5><i class="fas fa-mouse-pointer"></i> Графичен потребителски интерфейс (GUI)</h5>
             <ul>
-              <li><strong>Интуитивност и визуалност:</strong> Потребителят вижда веднага какво прави — икони, папки, кошче, плъзгане (Drag &amp; Drop).</li>
+              <li><strong>Интуитивност и визуалност:</strong> Потребителят вижда веднага какво прави - икони, папки, кошче, плъзгане (Drag &amp; Drop).</li>
               <li><strong>Минимално заучаване:</strong> Дори дете на 5 години може да стартира игра с кликване върху картинка.</li>
               <li><strong>Къде се използва:</strong> Лични компютри, смартфони, таблети, графичен дизайн и мултимедия.</li>
               <li><strong>Недостатък:</strong> Изразходва значително повече RAM и видео памет; повтарящите се действия с мишката са бавни.</li>
@@ -316,13 +316,13 @@ export function init(comp) {
     } else if (lower === 'help') {
       appendCli(`
         Поддържани команди в симулатора:<br>
-        • <strong>dir</strong> — показва съдържанието на текущата папка (синхронизира се и с GUI)<br>
-        • <strong>mkdir &lt;име&gt;</strong> — създава нова папка (напр. <code>mkdir Proekti</code>)<br>
-        • <strong>del &lt;файл&gt;</strong> — изтрива файл (напр. <code>del referat.docx</code>)<br>
-        • <strong>rmdir &lt;папка&gt;</strong> — изтрива папка (напр. <code>rmdir Документи</code>)<br>
-        • <strong>ipconfig</strong> — показва IP адрес и мрежови параметри (показва се и в GUI)<br>
-        • <strong>systeminfo</strong> — системни параметри и хардуер<br>
-        • <strong>cls</strong> — изчистване на екрана
+        • <strong>dir</strong> - показва съдържанието на текущата папка (синхронизира се и с GUI)<br>
+        • <strong>mkdir &lt;име&gt;</strong> - създава нова папка (напр. <code>mkdir Proekti</code>)<br>
+        • <strong>del &lt;файл&gt;</strong> - изтрива файл (напр. <code>del referat.docx</code>)<br>
+        • <strong>rmdir &lt;папка&gt;</strong> - изтрива папка (напр. <code>rmdir Документи</code>)<br>
+        • <strong>ipconfig</strong> - показва IP адрес и мрежови параметри (показва се и в GUI)<br>
+        • <strong>systeminfo</strong> - системни параметри и хардуер<br>
+        • <strong>cls</strong> - изчистване на екрана
       `);
     } else {
       appendCli(`<span style="color:#ef4444;">'${esc(cmd)}' не се разпознава като вътрешна или външна команда. Въведете <strong>help</strong> или кликнете на бързите команди отдолу.</span>`);

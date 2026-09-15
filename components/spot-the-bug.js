@@ -1,4 +1,4 @@
-// Spot-the-bug — find collaboration mistakes in a shared document
+// Spot-the-bug - find collaboration mistakes in a shared document
 
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {

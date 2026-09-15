@@ -139,7 +139,7 @@ function getMockIllustration(id) {
     case 'img-workbook-page8':
       return `
         <div class="iwi-workbook-mock">
-          <div class="wb-header-bar"><i class="fas fa-book-open"></i> Учебна тетрадка по ИТ за 8. клас — Стр. 8 (Урок 3)</div>
+          <div class="wb-header-bar"><i class="fas fa-book-open"></i> Учебна тетрадка по ИТ за 8. клас - Стр. 8 (Урок 3)</div>
           <div class="wb-tasks-overview">
             <span class="wb-task-badge"><i class="fas fa-check"></i> Задача 1: Дефиниции (Ключови думи, Заявка, Поле)</span>
             <span class="wb-task-badge"><i class="fas fa-check"></i> Задача 2: Попълване (Търсещи машини, Метатърсачки, Клиент)</span>

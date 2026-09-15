@@ -1093,12 +1093,14 @@ button.lesson-tag:hover {
 .accordion-item.tone-green {
   border-color: #bfe6cc;
   border-left: 4px solid #27ae60;
-  overflow: visible;
 }
 .accordion-item.tone-green .accordion-header {
   background: #e6f6ec;
   color: #1c7a3d;
-  border-top-left-radius: 11px;
+  border-radius: 11px 11px 0 0;
+}
+.accordion-item.tone-green:not(.active) .accordion-header {
+  border-radius: 11px;
 }
 .accordion-item.tone-green.active .accordion-header,
 .accordion-item.tone-green .card-title {
@@ -1107,12 +1109,14 @@ button.lesson-tag:hover {
 .accordion-item.tone-blue {
   border-color: #c4dbf7;
   border-left: 4px solid #1558a8;
-  overflow: visible;
 }
 .accordion-item.tone-blue .accordion-header {
   background: #e8f1fd;
   color: #1e3a8a;
-  border-top-left-radius: 11px;
+  border-radius: 11px 11px 0 0;
+}
+.accordion-item.tone-blue:not(.active) .accordion-header {
+  border-radius: 11px;
 }
 .accordion-item.tone-blue.active .accordion-header,
 .accordion-item.tone-blue .card-title {
@@ -1121,12 +1125,14 @@ button.lesson-tag:hover {
 .accordion-item.tone-orange {
   border-color: #f6c9a8;
   border-left: 4px solid var(--accent-orange, #f17a3e);
-  overflow: visible;
 }
 .accordion-item.tone-orange .accordion-header {
   background: #fdeadd;
   color: #c2410c;
-  border-top-left-radius: 11px;
+  border-radius: 11px 11px 0 0;
+}
+.accordion-item.tone-orange:not(.active) .accordion-header {
+  border-radius: 11px;
 }
 .accordion-item.tone-orange.active .accordion-header,
 .accordion-item.tone-orange .card-title {
@@ -1135,12 +1141,14 @@ button.lesson-tag:hover {
 .accordion-item.tone-purple {
   border-color: #d6bdf0;
   border-left: 4px solid #8e44ad;
-  overflow: visible;
 }
 .accordion-item.tone-purple .accordion-header {
   background: #f1e8fa;
   color: #4c1d95;
-  border-top-left-radius: 11px;
+  border-radius: 11px 11px 0 0;
+}
+.accordion-item.tone-purple:not(.active) .accordion-header {
+  border-radius: 11px;
 }
 .accordion-item.tone-purple.active .accordion-header,
 .accordion-item.tone-purple .card-title {
@@ -1149,12 +1157,14 @@ button.lesson-tag:hover {
 .accordion-item.tone-accent {
   border-color: #c7d2fe;
   border-left: 4px solid #6366f1;
-  overflow: visible;
 }
 .accordion-item.tone-accent .accordion-header {
   background: #ede9fe;
   color: #4338ca;
-  border-top-left-radius: 11px;
+  border-radius: 11px 11px 0 0;
+}
+.accordion-item.tone-accent:not(.active) .accordion-header {
+  border-radius: 11px;
 }
 .accordion-item.tone-accent.active .accordion-header {
   color: #4338ca;
@@ -1162,12 +1172,14 @@ button.lesson-tag:hover {
 .accordion-item.tone-info {
   border-color: #bae6fd;
   border-left: 4px solid #0284c7;
-  overflow: visible;
 }
 .accordion-item.tone-info .accordion-header {
   background: #e0f2fe;
   color: #0369a1;
-  border-top-left-radius: 11px;
+  border-radius: 11px 11px 0 0;
+}
+.accordion-item.tone-info:not(.active) .accordion-header {
+  border-radius: 11px;
 }
 .accordion-item.tone-info.active .accordion-header {
   color: #0369a1;
@@ -1177,14 +1189,18 @@ button.lesson-tag:hover {
 .accordion-item.tone-yellow {
   border-color: #fde68a;
   border-left: 4px solid #d97706;
-  overflow: visible;
 }
 .accordion-item.tone-warning .accordion-header,
 .accordion-item.tone-amber .accordion-header,
 .accordion-item.tone-yellow .accordion-header {
   background: #fef3c7;
   color: #b45309;
-  border-top-left-radius: 11px;
+  border-radius: 11px 11px 0 0;
+}
+.accordion-item.tone-warning:not(.active) .accordion-header,
+.accordion-item.tone-amber:not(.active) .accordion-header,
+.accordion-item.tone-yellow:not(.active) .accordion-header {
+  border-radius: 11px;
 }
 .accordion-item.tone-warning.active .accordion-header,
 .accordion-item.tone-amber.active .accordion-header,
@@ -1196,12 +1212,14 @@ button.lesson-tag:hover {
 .accordion-item.tone-success {
   border-color: #bbf7d0;
   border-left: 4px solid #16a34a;
-  overflow: visible;
 }
 .accordion-item.tone-success .accordion-header {
   background: #dcfce7;
   color: #15803d;
-  border-top-left-radius: 11px;
+  border-radius: 11px 11px 0 0;
+}
+.accordion-item.tone-success:not(.active) .accordion-header {
+  border-radius: 11px;
 }
 .accordion-item.tone-success.active .accordion-header {
   color: #15803d;
@@ -1209,12 +1227,14 @@ button.lesson-tag:hover {
 .accordion-item.tone-dark {
   border-color: #d5d9e5;
   border-left: 4px solid #1d1b31;
-  overflow: visible;
 }
 .accordion-item.tone-dark .accordion-header {
   background: #eef0f6;
   color: #1d1b31;
-  border-top-left-radius: 11px;
+  border-radius: 11px 11px 0 0;
+}
+.accordion-item.tone-dark:not(.active) .accordion-header {
+  border-radius: 11px;
 }
 .accordion-item.tone-dark.active .accordion-header,
 .accordion-item.tone-dark .card-title {

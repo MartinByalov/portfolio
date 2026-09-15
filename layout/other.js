@@ -226,14 +226,14 @@ function renderNftTutorial() {
             </p>
 
             <ul class="ilist blue">
-              <li><strong>background</strong> — Цветов градиент на заден план (Gradient 1 до 10).</li>
-              <li><strong>chart</strong> — Графична борсова линия от свещи (Chart 1 до 5).</li>
-              <li><strong>body</strong> — Форма и цвят на свещта (Golden Candle, Bullish Green, Bearish Red).</li>
-              <li><strong>dress</strong> — Облекло според типа тяло (костюм, верижка, вратовръзка).</li>
-              <li><strong>hat</strong> — Аксесоар за глава (шапка с козирка, цилиндър, корона, слушалки).</li>
-              <li><strong>faceFeature</strong> — Лицева черта (пура, мустак, брада, вежди).</li>
-              <li><strong>eyes</strong> — Очи и очила (Nerd очила, очи Thug Life, златни очи).</li>
-              <li><strong>bag</strong> — Предмет в преден план (лаптоп, куфар, сейф).</li>
+              <li><strong>background</strong> - Цветов градиент на заден план (Gradient 1 до 10).</li>
+              <li><strong>chart</strong> - Графична борсова линия от свещи (Chart 1 до 5).</li>
+              <li><strong>body</strong> - Форма и цвят на свещта (Golden Candle, Bullish Green, Bearish Red).</li>
+              <li><strong>dress</strong> - Облекло според типа тяло (костюм, верижка, вратовръзка).</li>
+              <li><strong>hat</strong> - Аксесоар за глава (шапка с козирка, цилиндър, корона, слушалки).</li>
+              <li><strong>faceFeature</strong> - Лицева черта (пура, мустак, брада, вежди).</li>
+              <li><strong>eyes</strong> - Очи и очила (Nerd очила, очи Thug Life, златни очи).</li>
+              <li><strong>bag</strong> - Предмет в преден план (лаптоп, куфар, сейф).</li>
             </ul>
 
             <div class="callout c-blue">

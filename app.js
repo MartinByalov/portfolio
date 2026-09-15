@@ -46,33 +46,51 @@ async function renderCourseView(courseId) {
   CourseList.init(document.querySelector('.course-main'));
 }
 
+const LEGACY_LESSON_ID_MAP = {
+  'it-8-2': 'it-8-1-1',
+  'it-8-3': 'it-8-1-2',
+  'it-8-4': 'it-8-1-3',
+  'it-8-5': 'it-8-1-4',
+  'it-8-6': 'it-8-1-5',
+  'it-8-7': 'it-8-2-1',
+  'it-8-8': 'it-8-2-2',
+  'it-8-9': 'it-8-2-3',
+  'it-8-10': 'it-8-2-4',
+  'it-8-11': 'it-8-2-5'
+};
+
 async function renderLessonView(courseId, lessonId) {
+  const normalizedLessonId = LEGACY_LESSON_ID_MAP[lessonId] || lessonId;
   const course = await getCourse(courseId);
   const allLessons = course.sections.flatMap(s => s.lessons);
-  let lessonMeta = allLessons.find(l => l.id === lessonId);
+  let lessonMeta = allLessons.find(l => l.id === normalizedLessonId || l.id === lessonId);
   if (!lessonMeta) {
     lessonMeta = allLessons.find(l =>
+      l.id === normalizedLessonId ||
       l.id === lessonId ||
+      l.lessonPath?.includes(normalizedLessonId) ||
       l.lessonPath?.includes(lessonId) ||
-      (lessonId.includes('2-1') && (l.id === 'it-8-7' || l.id === 'it-8-2-1')) ||
-      (lessonId === 'it-8-7' && (l.id === 'it-8-2-1' || l.title?.includes('2.1.'))) ||
-      (lessonId === 'it-8-2-1' && (l.id === 'it-8-7' || l.title?.includes('2.1.')))
+      (lessonId.includes('2-1') && (l.id === 'it-8-2-1' || l.id === 'it-8-7'))
     );
   }
   if (!lessonMeta || !lessonMeta.lessonPath) {
     throw new Error('Урокът все още не е добавен.');
   }
   const lessonIndex = allLessons.findIndex(l => l.id === lessonMeta.id);
-  const lessonTitleNum = lessonMeta.title ? (lessonMeta.title.match(/^(\d+\.\d+)/)?.[1] || String(lessonIndex + 1)) : String(lessonIndex + 1);
+  const isReview = lessonMeta.title && lessonMeta.title.toLowerCase().includes('преговор');
+  const secLessonMatch = lessonMeta.id ? lessonMeta.id.match(/^it-\d+-(\d+)-(\d+)$/) : null;
+  const lessonTitleNum = isReview
+    ? 'Преговор'
+    : (lessonMeta.title ? (lessonMeta.title.match(/^(\d+\.\d+)/)?.[1] || (secLessonMatch ? `${secLessonMatch[1]}.${secLessonMatch[2]}` : String(lessonIndex + 1))) : (secLessonMatch ? `${secLessonMatch[1]}.${secLessonMatch[2]}` : String(lessonIndex + 1)));
 
   const lesson = await fetchLesson(lessonMeta.lessonPath);
   const lessonDisplayTitle = lesson.title || lessonMeta.title || 'Урок';
   Header.setTitle(lessonDisplayTitle, 'fa-solid fa-file-lines');
-  document.title = `${lessonDisplayTitle} — Учебна платформа`;
+  document.title = `${lessonDisplayTitle} - Учебна платформа`;
 
   const { headerHtml, bodyHtml, navItems } = buildLesson(lesson);
   const asideHtml = CourseShell.renderLessonNav(courseId, navItems, lessonTitleNum);
-  const mainHtml = headerHtml + `<div class="lesson-body">${bodyHtml}</div>` + renderLessonNavTags(course, lessonId);
+  const mainHtml = headerHtml + `<div class="lesson-body">${bodyHtml}</div>` + renderLessonNavTags(course, lessonMeta.id);
 
   document.getElementById('view-root').innerHTML = CourseShell.render(asideHtml, mainHtml);
   initLesson(lesson);
@@ -88,6 +106,10 @@ function getLessonNumLabel(item) {
   const prefix = 'Урок';
   const match = item.title ? item.title.match(/^(\d+\.\d+)/) : null;
   if (match) return `${prefix} ${match[1]}`;
+  const secLessonMatch = item.id ? item.id.match(/^it-\d+-(\d+)-(\d+)$/) : null;
+  if (secLessonMatch) {
+    return `${prefix} ${secLessonMatch[1]}.${secLessonMatch[2]}`;
+  }
   const idMatch = item.id ? item.id.match(/^it-(\d+)-(\d+)$/) : null;
   if (idMatch) {
     const num = Math.max(0, parseInt(idMatch[2], 10) - 1);
@@ -180,7 +202,7 @@ async function route() {
     if (parts.length === 0) {
       // Public landing page
       Header.setTitle('Начало', 'fa-solid fa-house');
-      document.title = `Начало — ${siteSuffix}`;
+      document.title = `Начало - ${siteSuffix}`;
       document.body.classList.add('landing-mode');
       const catalog = await getCatalog();
       viewRoot.innerHTML = Home.renderLandingPage(catalog);
@@ -193,7 +215,7 @@ async function route() {
       }
       body.classList.add('portfolio-mode');
       Header.setTitle('Учителско портфолио', 'fa-solid fa-graduation-cap');
-      document.title = `Учителско портфолио — ${siteSuffix}`;
+      document.title = `Учителско портфолио - ${siteSuffix}`;
       viewRoot.innerHTML = Portfolio.renderPortfolioPage();
       requestAnimationFrame(() => Portfolio.initPortfolioPage());
     } else if (parts[0] === 'about') {
@@ -202,7 +224,7 @@ async function route() {
       if (sidebarRoot) sidebarRoot.style.display = 'none';
       if (footerRoot) footerRoot.style.display = 'none';
       Header.setTitle('Код за достъп', 'fa-solid fa-lock');
-      document.title = `Код за достъп — ${siteSuffix}`;
+      document.title = `Код за достъп - ${siteSuffix}`;
       viewRoot.innerHTML = About.renderAboutPage();
       About.initAboutPage();
       About.initAboutAudio();
@@ -217,50 +239,50 @@ async function route() {
       }
       body.classList.add('portfolio-mode');
       Header.setTitle('Професионален опит', 'fa-solid fa-briefcase');
-      document.title = `Професионален опит — ${siteSuffix}`;
+      document.title = `Професионален опит - ${siteSuffix}`;
       viewRoot.innerHTML = Experience.renderExperiencePage();
     } else if (parts[0] === 'lesson' && parts[1] && parts[2]) {
       Header.setTitle('Урок', 'fa-solid fa-file-lines');
-      document.title = `Урок — ${siteSuffix}`;
+      document.title = `Урок - ${siteSuffix}`;
       await renderLessonView(parts[1], parts[2]);
     } else if (parts[0] === 'course' && parts[1]) {
       const course = await getCourse(parts[1]);
       let courseName = course?.title || 'Курс';
       Header.setTitle(courseName, 'fa-solid fa-book');
-      document.title = `${courseName} — ${siteSuffix}`;
+      document.title = `${courseName} - ${siteSuffix}`;
       await renderCourseView(parts[1]);
     } else if (parts[0] === 'subjects') {
       Header.setTitle('Учебни ресурси', 'fa-solid fa-book-open');
-      document.title = `Учебни ресурси — ${siteSuffix}`;
+      document.title = `Учебни ресурси - ${siteSuffix}`;
       viewRoot.innerHTML = Home.renderSubjectsPage();
     } else if (parts[0] === 'dictionary') {
       Header.setTitle('Речник', 'fa-solid fa-book');
-      document.title = `Речник — ${siteSuffix}`;
+      document.title = `Речник - ${siteSuffix}`;
       Glossary.cleanupGlossaryPage?.();
       viewRoot.innerHTML = Glossary.renderGlossaryPage();
       requestAnimationFrame(() => Glossary.initGlossaryPage());
     } else if (parts[0] === 'software') {
       Header.setTitle('Софтуер', 'fa-solid fa-code');
-      document.title = `Софтуер — ${siteSuffix}`;
+      document.title = `Софтуер - ${siteSuffix}`;
       viewRoot.innerHTML = Software.renderSoftwarePage();
       requestAnimationFrame(() => Software.initSoftwarePage());
     } else if (parts[0] === 'other' || parts[0] === 'tutorials') {
       const sub = parts[1];
       if (sub === 'nft-generator') {
         Header.setTitle('Генератор на NFT', 'fa-solid fa-cube');
-        document.title = `Генератор на NFT — ${siteSuffix}`;
+        document.title = `Генератор на NFT - ${siteSuffix}`;
       } else if (sub === 'charts' || sub === 'graph-js') {
         Header.setTitle('Диаграми с Graph.js', 'fa-solid fa-chart-line');
-        document.title = `Диаграми с Graph.js — ${siteSuffix}`;
+        document.title = `Диаграми с Graph.js - ${siteSuffix}`;
       } else {
         Header.setTitle('Други', 'fa-solid fa-shapes');
-        document.title = `Други — ${siteSuffix}`;
+        document.title = `Други - ${siteSuffix}`;
       }
       viewRoot.innerHTML = Other.renderOtherPage(sub);
       requestAnimationFrame(() => Other.initOtherPage(sub));
     } else {
       Header.setTitle('Учебни ресурси', 'fa-solid fa-book-open');
-      document.title = `Учебни ресурси — ${siteSuffix}`;
+      document.title = `Учебни ресурси - ${siteSuffix}`;
       viewRoot.innerHTML = Home.renderSubjectsPage();
     }
   } catch (err) {

@@ -158,7 +158,7 @@ export function initGlossaryPage() {
     if (loading) loading.remove();
     if (!terms.length) {
       empty.classList.remove('is-hidden');
-      empty.textContent = 'Още няма термини — добавете „Речник“ акордеон в края на даден урок.';
+      empty.textContent = 'Още няма термини - добавете „Речник“ акордеон в края на даден урок.';
       return;
     }
     const letters = [...new Set(terms.map(t => t.term[0].toUpperCase()))].sort((a, b) => a.localeCompare(b, 'bg'));

@@ -222,7 +222,7 @@ export function init(comp) {
     // Populate result card
     if (resBadge) {
       resBadge.className = `emot-result-badge-quad ${data.badgeClass}`;
-      resBadge.textContent = `${data.name} — ${data.subtitle}`;
+      resBadge.textContent = `${data.name} - ${data.subtitle}`;
     }
     if (resAvatar) resAvatar.textContent = emoji;
     if (resTitle) resTitle.textContent = animalName;

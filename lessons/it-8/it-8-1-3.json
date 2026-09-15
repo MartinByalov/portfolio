@@ -1,5 +1,5 @@
 {
-  "id": "it-8-4",
+  "id": "it-8-1-3",
   "title": "1.3. ИТ за социално общуване и споделена работа (упражнение)",
   "grade": 8,
   "subject": "Информационни технологии",
@@ -183,7 +183,7 @@
             {
               "type": "image",
               "id": "group-email-image",
-              "src": "it-8-4/groupAddress_cleanup.jpg",
+              "src": "it-8-1-3/groupAddress_cleanup.jpg",
               "alt": "Групов електронен адрес"
             },
             {

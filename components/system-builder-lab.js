@@ -1,4 +1,4 @@
-// System Builder Lab — a complete lesson experienced as an engineering workbench
+// System Builder Lab - a complete lesson experienced as an engineering workbench
 
 function esc(value) {
   return String(value == null ? '' : value).replace(/[&<>"']/g, ch => ({
@@ -62,7 +62,7 @@ export function render(comp) {
       </div>
 
       <div class="sbl-stage" data-stage-panel="post">
-        <div class="sbl-stage-copy"><span class="sbl-step">СТЪПКА 03</span><h3>Натиснете POWER — какво става преди екрана?</h3><p>POST е първата проверка на хардуера. Стартиращият код е във firmware памет, която запазва съдържанието си без електрозахранване.</p></div>
+        <div class="sbl-stage-copy"><span class="sbl-step">СТЪПКА 03</span><h3>Натиснете POWER - какво става преди екрана?</h3><p>POST е първата проверка на хардуера. Стартиращият код е във firmware памет, която запазва съдържанието си без електрозахранване.</p></div>
         <div class="sbl-post-machine">
           <button type="button" class="sbl-power"><i class="fas fa-power-off"></i><span>POWER</span></button>
           <div class="sbl-post-screen"><div class="sbl-post-line">SYSTEM OFFLINE_</div></div>
@@ -71,7 +71,7 @@ export function render(comp) {
       </div>
 
       <div class="sbl-stage" data-stage-panel="run">
-        <div class="sbl-stage-copy"><span class="sbl-step">СТЪПКА 04</span><h3>Проследете една команда</h3><p>Изберете действие и гледайте как данните се движат. Това е архитектурата на фон Нойман в действие — програма и данни в паметта, двоично представяне и циклично изпълнение.</p></div>
+        <div class="sbl-stage-copy"><span class="sbl-step">СТЪПКА 04</span><h3>Проследете една команда</h3><p>Изберете действие и гледайте как данните се движат. Това е архитектурата на фон Нойман в действие - програма и данни в паметта, двоично представяне и циклично изпълнение.</p></div>
         <div class="sbl-command-picker">
           <button type="button" class="sbl-command selected" data-command="photo"><i class="fas fa-image"></i> Приложи филтър</button>
           <button type="button" class="sbl-command" data-command="sum"><i class="fas fa-calculator"></i> Изчисли сума</button>
@@ -220,7 +220,7 @@ export function init(comp) {
   ramSlider.addEventListener('input', updateStress);
   updateStress();
 
-  const selectedLabel = group => group.options.find(option => option.id === selections[group.id])?.label || '—';
+  const selectedLabel = group => group.options.find(option => option.id === selections[group.id])?.label || '-';
   root.querySelector('.sbl-handover-summary').innerHTML = `<span>Клиент</span><strong>${esc(activeProfile?.label)}</strong>${groups.map(group => `<span>${esc(group.label)}</span><strong>${esc(selectedLabel(group))}</strong>`).join('')}`;
   root.querySelector('.sbl-stage-tab[data-stage="explain"]').addEventListener('click', () => {
     root.querySelector('.sbl-handover-summary').innerHTML = `<span>Клиент</span><strong>${esc(activeProfile?.label)}</strong>${groups.map(group => `<span>${esc(group.label)}</span><strong>${esc(selectedLabel(group))}</strong>`).join('')}`;

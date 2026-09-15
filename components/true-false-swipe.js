@@ -1,4 +1,4 @@
-// True/False swipe — swipe-style check of collaboration rules
+// True/False swipe - swipe-style check of collaboration rules
 
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {

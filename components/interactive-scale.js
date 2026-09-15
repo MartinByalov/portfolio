@@ -18,7 +18,7 @@ export function render(comp) {
     <div id="${comp.id}" class="interactive-scale-container" style="margin: 3rem 0; padding: 2.25rem; background: var(--surface-alt, #f8fafc); border-radius: 16px; border: 1px solid var(--border-color, #e2e8f0);">
       <div style="text-align: center; max-width: 750px; margin: 0 auto 2rem auto;">
         <span style="background: #e0e7ff; color: #4338ca; padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase;">Еволюция на хардуера</span>
-        <h3 style="margin: 0.5rem 0 0.25rem 0; font-size: 1.6rem; color: var(--text-color);">${comp.title || 'Пет поколения — една огромна промяна'}</h3>
+        <h3 style="margin: 0.5rem 0 0.25rem 0; font-size: 1.6rem; color: var(--text-color);">${comp.title || 'Пет поколения - една огромна промяна'}</h3>
         <p style="margin: 0; color: #64748b; font-size: 0.95rem;">Превключвайте през поколенията, за да проследите технологичния скок:</p>
       </div>
 

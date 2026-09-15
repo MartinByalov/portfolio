@@ -8,7 +8,7 @@ export const STANDARD_NEGATIVE_PROMPT =
 
 // High-fidelity curated prompts for educational & IT curriculum terms
 const PRECOMPUTED_PROMPTS = {
-  // Historical computing & calculating machines (it-8-7)
+  // Historical computing & calculating machines (it-8-2-1)
   'абак': {
     image_prompt:
       'Authentic macro photography of a traditional vintage wooden abacus (counting frame) with smooth polished dark hardwood beads arranged on brass rods inside a carved solid wood frame, resting on a weathered rustic oak desk with an old parchment manuscript beside it. 50mm lens, shallow depth of field, warm directional studio lighting, extremely sharp details of wood grain and brass texture.',
@@ -85,7 +85,7 @@ const PRECOMPUTED_PROMPTS = {
     negative_prompt: STANDARD_NEGATIVE_PROMPT
   },
 
-  // Computer systems & Hardware (it-8-1, it-8-8)
+  // Computer systems & Hardware (it-8-1, it-8-2-2)
   'компютърна система': {
     image_prompt:
       'Documentary studio photography of a complete modern desktop computer workstation on a solid natural oak desk. Showing a sleek brushed aluminum tower with a transparent tempered glass side panel displaying an illuminated motherboard with copper heatpipes and RAM modules, paired with dual ultra-thin bezel monitors showing data charts, an ergonomic mechanical keyboard, and a precision mouse. Natural daylight streaming from an office window, authentic depth of field, 50mm lens.',
@@ -172,7 +172,7 @@ const PRECOMPUTED_PROMPTS = {
     negative_prompt: STANDARD_NEGATIVE_PROMPT
   },
 
-  // Operating systems & System software (it-8-9)
+  // Operating systems & System software (it-8-2-3)
   'операционна система (ос)': {
     image_prompt:
       'Realistic photograph of a dual-monitor workstation showing a modern operating system desktop environment with organized application windows, terminal emulator, file manager, and system performance widgets, natural office lighting.',
@@ -383,7 +383,7 @@ const PRECOMPUTED_PROMPTS = {
     negative_prompt: STANDARD_NEGATIVE_PROMPT
   },
 
-  // E-Learning & Cloud collaboration (it-8-3, it-8-4, it-8-6)
+  // E-Learning & Cloud collaboration (it-8-1-2, it-8-1-3, it-8-1-5)
   'електронно обучение (e-learning)': {
     image_prompt:
       'Realistic documentary photograph of a student participating in an interactive online lecture on a laptop with headphones on, sitting at a clean study desk by a sunlit window with open textbooks and handwritten summary notes, authentic learning atmosphere.',
@@ -460,7 +460,7 @@ const PRECOMPUTED_PROMPTS = {
     negative_prompt: STANDARD_NEGATIVE_PROMPT
   },
 
-  // Search engines & Operators (it-8-5)
+  // Search engines & Operators (it-8-1-4)
   'ефективно търсене': {
     image_prompt:
       'Realistic eye-level photograph of a student researcher seated at a minimalist wooden desk using an advanced search engine on a slim laptop with filtered search operators, coffee cup and open notebook with highlighted notes, warm natural daylight.',

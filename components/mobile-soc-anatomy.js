@@ -54,9 +54,9 @@ export function render(comp) {
         </div>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; align-items: start;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; align-items: stretch;">
         <!-- Left: SoC Silicon Chip Window (Theme styled after Sandbox Dual Windows) -->
-        <div class="os-cli-window" style="background: #0f172a; border-radius: 12px; border: 1px solid #334155; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.25);">
+        <div class="os-cli-window" style="background: #0f172a; border-radius: 12px; border: 1px solid #334155; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.25); display: flex; flex-direction: column;">
           <div class="os-window-titlebar dark" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 1rem; background: #1e293b; color: #f1f5f9; border-bottom: 1px solid #334155;">
             <div class="os-win-dots" style="display: flex; gap: 6px;">
               <span class="win-dot red" style="width: 10px; height: 10px; border-radius: 50%; background: #ef4444; display: inline-block;"></span>
@@ -68,8 +68,8 @@ export function render(comp) {
             </div>
           </div>
 
-          <div style="padding: 1.15rem 1rem;">
-            <div class="soc-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem;">
+          <div style="padding: 1.25rem 1rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <div class="soc-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; width: 100%; margin: auto 0;">
               ${blocks.map(b => {
                 const isActive = modes[0].activeBlocks.includes(b.id);
                 return `

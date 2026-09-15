@@ -37,7 +37,7 @@
             {
               "type": "image",
               "id": "shared-work-image",
-              "src": "/images/sharedWork.png",
+              "src": "other/sharedWork.png",
               "alt": "Работа в споделен документ"
             },
             {

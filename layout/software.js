@@ -16,15 +16,6 @@ export function renderSoftwarePage() {
 
       <div class="hall-grid" id="hallGrid"></div>
 
-      <section class="hall-statement">
-        <p>
-          Не просто използвай технологиите.
-          <span>
-            Разбери ги.
-          </span>
-        </p>
-      </section>
-
     </section>
   `;
 }
@@ -64,7 +55,7 @@ const SOURCES = [
   },
   {
     name: "GIMP",
-    logo: "/src/assets/images/gimpLogo.svg",
+    logo: "https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/gimpLogo.svg",
     category: "Графика",
     desc: "Свободен инструмент за обработка и редактиране на изображения.",
     tags: ["Графика", "Дизайн", "Свободен софтуер"],
@@ -72,7 +63,7 @@ const SOURCES = [
   },
   {
     name: "Inkscape",
-    logo: "/src/assets/images/inskapeLogo.png",
+    logo: "https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/inskapeLogo.png",
     category: "Графика",
     desc: "Векторен графичен редактор за създаване на илюстрации, диаграми и графични проекти.",
     tags: ["Векторна графика", "Дизайн", "SVG"],
@@ -80,7 +71,7 @@ const SOURCES = [
   },
   {
     name: "BCUninstaller",
-    logo: "/src/assets/images/bcuninstallerLogo.png",
+    logo: "https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/bcuninstallerLogo.png",
     category: "Система",
     desc: "Инструмент за управление и премахване на инсталиран софтуер от Windows.",
     tags: ["Windows", "Система", "Управление"],
@@ -112,7 +103,7 @@ const SOURCES = [
   },
   {
     name: "WinRAR",
-    logo: "/src/assets/images/winrarLogo.png",
+    logo: "https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/winrarLogo.png",
     category: "Система",
     desc: "Инструмент за компресиране, архивиране и управление на файлове.",
     tags: ["Архиви", "Файлове", "Windows"],

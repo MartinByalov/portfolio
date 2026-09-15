@@ -248,7 +248,7 @@ app.post('/api/glossary/image', async (req, res) => {
   let activeNegativePrompt = (customNegativePrompt || '').trim();
 
   if (!activePrompt) {
-    const promptObj = buildRealisticImagePrompt(term, definition || '');
+    const promptObj = await generateRealisticPromptWithGemini(term, definition || '');
     activePrompt = promptObj.image_prompt;
     if (!activeNegativePrompt) activeNegativePrompt = promptObj.negative_prompt;
   }

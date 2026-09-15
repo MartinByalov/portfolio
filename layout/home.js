@@ -80,6 +80,19 @@ export function renderLandingPage(catalog) {
     <section class="home-section subject-section">
       <div class="home-content">
         <div class="main-portfolio-content">
+          <div class="landing-quote-card" id="landing-quote-card">
+            <div class="landing-quote-icon-wrap">
+              <i class="fas fa-quote-left"></i>
+            </div>
+            <blockquote class="landing-quote-text">
+              &ldquo;The happiness of your life depends upon the quality of your thoughts.&rdquo;
+            </blockquote>
+            <div class="landing-quote-meta">
+              <span class="landing-quote-line"></span>
+              <cite class="landing-quote-author">Marcus Aurelius</cite>
+              <span class="landing-quote-line"></span>
+            </div>
+          </div>
           <div class="exp-slider" id="exp-slider" data-pool="${poolJson}">${expCards}</div>
         </div>
       </div>

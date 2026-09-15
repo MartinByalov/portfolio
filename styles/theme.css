@@ -277,19 +277,42 @@ body.dark-mode .source-download {
   color: var(--accent-orange);
 }
 
-[data-theme="dark"] .hall-statement,
-body.dark-mode .hall-statement {
-  border-color: var(--card-border);
+[data-theme="dark"] .landing-quote-card,
+body.dark-mode .landing-quote-card {
+  background: var(--card-bg, #181726);
+  border-color: var(--card-border, #2d2b45);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.25);
 }
 
-[data-theme="dark"] .hall-statement p,
-body.dark-mode .hall-statement p {
+[data-theme="dark"] .landing-quote-icon-wrap,
+body.dark-mode .landing-quote-icon-wrap {
+  background: #090812;
+  color: #fb923c;
+  border-color: rgba(251, 146, 60, 0.35);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="dark"] .landing-quote-card:hover .landing-quote-icon-wrap,
+body.dark-mode .landing-quote-card:hover .landing-quote-icon-wrap {
+  background: #000000;
+  color: #ff9d5c;
+  border-color: rgba(251, 146, 60, 0.6);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .landing-quote-text,
+body.dark-mode .landing-quote-text {
   color: #f1f5f9;
 }
 
-[data-theme="dark"] .hall-statement span,
-body.dark-mode .hall-statement span {
-  color: #94a3b8;
+[data-theme="dark"] .landing-quote-author,
+body.dark-mode .landing-quote-author {
+  color: #fb923c;
+}
+
+[data-theme="dark"] .landing-quote-line,
+body.dark-mode .landing-quote-line {
+  background: #fb923c;
 }
 
 /* Other / Tutorials page in Dark Mode */

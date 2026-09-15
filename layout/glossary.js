@@ -102,7 +102,7 @@ export function renderGlossaryPage() {
       <div class="home-content">
         <div class="main-portfolio-content">
           <h2 class="page-title">Речник на термините</h2>
-          <p class="page-description">Всички термини, дефиниции и понятия от уроците по Информационни технологии.</p>
+          <p class="page-description" id="glossary-description">Всички термини, дефиниции и понятия от уроците по Информационни технологии.</p>
           <div class="glossary-tools">
             <input type="text" id="glossary-filter" class="glossary-filter" placeholder="Търсене на термин или понятие...">
             <div class="glossary-modes" id="glossary-modes" role="tablist" aria-label="Речник">
@@ -139,7 +139,11 @@ export function initGlossaryPage() {
   const empty = document.getElementById('glossary-empty');
   const modes = document.getElementById('glossary-modes');
   const flashGrid = document.getElementById('flash-grid');
+  const descEl = document.getElementById('glossary-description');
   if (!input || !alphabet || !grid) return;
+
+  const LIST_DESCRIPTION = 'Всички термини, дефиниции и понятия от уроците по Информационни технологии.';
+  const FLASH_DESCRIPTION = 'Интерактивни флаш карти с илюстрации, генерирани чрез AI (Cloudflare Workers AI & Gemini). Възможни са несъответствия при визуализацията на някои термини.';
 
   let activeLetter = '';
   let query = '';
@@ -278,6 +282,9 @@ export function initGlossaryPage() {
     modes.querySelectorAll('.glossary-mode').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     mode = btn.dataset.mode || 'list';
+    if (descEl) {
+      descEl.textContent = mode === 'flash' ? FLASH_DESCRIPTION : LIST_DESCRIPTION;
+    }
     grid.classList.toggle('is-hidden', mode === 'flash');
     flashGrid?.classList.toggle('is-hidden', mode !== 'flash');
     apply();

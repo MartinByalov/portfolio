@@ -19,16 +19,18 @@ export function resolveMediaUrl(value) {
   const path = value.trim();
   if (!path || path.includes('IMAGE_PLACEHOLDER')) return value;
   if (/^(?:https?:|data:|blob:)/i.test(path)) return path;
-  if (path.startsWith('/images/') || path.startsWith('images/')) return path;
 
   const normalized = path
     .replace(/^\.\//, '')
     .replace(/^\/assets\//, '')
-    .replace(/^assets\//, '');
+    .replace(/^assets\//, '')
+    .replace(/^\/images\//, 'other/')
+    .replace(/^images\//, 'other/')
+    .replace(/^\/src\/assets\/images\//, 'other/')
+    .replace(/^src\/assets\/images\//, 'other/');
 
-  // Only lesson-scoped paths are hosted in the external media repository.
-  // Other relative application resources remain local.
-  if (!/^(?:it-\d+(?:-\d+)+|kaos-\d+(?:-\d+)*)\//i.test(normalized)) return value;
+  // Lesson-scoped and shared assets hosted in external media repository
+  if (!/^(?:it-\d+(?:-\d+)+|kaos-\d+(?:-\d+)*|other)\//i.test(normalized)) return value;
 
   return MEDIA_BASE_URL + normalized.split('/').map(encodeURIComponent).join('/');
 }

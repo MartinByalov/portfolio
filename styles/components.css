@@ -804,7 +804,7 @@ body.about-mode .home-content {
   align-items: center;
   justify-content: center;
   background-color: #000;
-  background-image: url("../images/loginWallpaper.png");
+  background-image: url("https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/loginWallpaper.png");
   background-size: cover;
   background-position: center;
   animation: aboutSlowZoom 20s infinite alternate linear;
@@ -1120,7 +1120,7 @@ body.portfolio-mode .footer-phone-only { display: block; }
 }
 
 .slide-1 .slide__bg {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/slider-Backgr.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/slider-Backgr.jpg');
 }
 
 .slide__content {
@@ -1819,6 +1819,107 @@ body.portfolio-mode .main-portfolio-content {
 }
 
 /* ============================ LEARNING RESOURCES LANDING ============================ */
+
+/* Inspiring Landing Quote Card Showcase */
+.landing-quote-card {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 36px 0;
+  text-align: center;
+  padding: 40px 48px 34px 48px;
+  background: var(--card-bg, #ffffff);
+  border: 1px solid var(--card-border, #edf2f7);
+  border-radius: 22px;
+  box-shadow: 0 10px 32px rgba(17, 16, 29, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.landing-quote-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(241, 122, 62, 0.08);
+}
+
+.landing-quote-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #11101d;
+  color: #f17a3e;
+  font-size: 1.35rem;
+  margin-bottom: 22px;
+  border: 1.5px solid rgba(241, 122, 62, 0.25);
+  box-shadow: 0 6px 16px rgba(17, 16, 29, 0.16);
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.landing-quote-card:hover .landing-quote-icon-wrap {
+  transform: scale(1.08) rotate(-4deg);
+  background: #000000;
+  color: #ff8547;
+  border-color: rgba(241, 122, 62, 0.5);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+}
+
+.landing-quote-text {
+  margin: 0 0 20px 0;
+  font-size: clamp(1.15rem, 2.3vw, 1.45rem);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.6;
+  color: #1e293b;
+  letter-spacing: -0.015em;
+  font-family: Georgia, 'Playfair Display', 'Times New Roman', serif;
+}
+
+.landing-quote-meta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  max-width: 100%;
+}
+
+.landing-quote-line {
+  display: block;
+  width: 44px;
+  height: 2px;
+  background: #f17a3e;
+  opacity: 0.5;
+  border-radius: 2px;
+}
+
+.landing-quote-author {
+  display: inline-block;
+  font-size: 0.88rem;
+  font-weight: 700;
+  font-style: normal;
+  color: #f17a3e;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: var(--font-primary, inherit);
+}
+
+@media (max-width: 768px) {
+  .landing-quote-card {
+    padding: 28px 20px 24px 20px;
+    margin-bottom: 26px;
+    border-radius: 16px;
+  }
+  .landing-quote-icon-wrap {
+    width: 46px;
+    height: 46px;
+    font-size: 1.15rem;
+    margin-bottom: 16px;
+  }
+  .landing-quote-line {
+    width: 24px;
+  }
+}
 
 /* Subject slider cards with expanding interaction */
 .exp-slider {
@@ -2570,8 +2671,8 @@ body.portfolio-mode .main-portfolio-content {
 
 .lb-subsection {
   margin: 18px 0;
-  background: linear-gradient(#f8fafc, #f1f5f9);
-  border-left: 4px solid var(--accent-orange);
+  background: #f2f6f9;
+  border-left: 4px solid var(--accent-orange, #f97316);
   border-radius: 0 10px 10px 0;
   padding: 16px 20px;
 }

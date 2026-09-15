@@ -14,14 +14,14 @@ const ZADANIE_TOOLS = [
 ];
 
 const TRAINING_TOOLS = [
-  { img: '/images/smartest.png',        alt: 'SmarTest',          label: 'СмарТест',        href: 'https://www.smartest.bg/' },
-  { img: '/images/googleClassroom.png', alt: 'Google Classroom', label: 'Google Classroom', href: 'https://edu.google.com/workspace-for-education/products/classroom/' },
-  { img: '/images/prepodavame.png',     alt: 'Prepodavame.bg',    label: 'Prepodavame.bg',    href: 'https://prepodavame.bg/' },
-  { img: '/images/uchase.png',          alt: 'Ucha.se',           label: 'Уча.се',            href: 'https://ucha.se/' },
-  { img: '/images/domino.png',          alt: 'Domino Pub.',       label: 'Изд. ДОМИНО',       href: 'https://ebook.domino.bg/' },
-  { img: '/images/smartDraw.png',       alt: 'SmartDraw',         label: 'SmartDraw',         href: 'https://www.smartdraw.com/' },
-  { img: '/images/sqlOnline.png',       alt: 'SQLite Online',     label: 'SQLite Online',     href: 'https://sqliteonline.com/' },
-  { img: '/images/logicLy.png',         alt: 'Logic.ly',          label: 'Logic.ly',          href: 'https://logic.ly/demo/' }
+  { img: 'https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/smartest.png',        alt: 'SmarTest',          label: 'СмарТест',        href: 'https://www.smartest.bg/' },
+  { img: 'https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/googleClassroom.png', alt: 'Google Classroom', label: 'Google Classroom', href: 'https://edu.google.com/workspace-for-education/products/classroom/' },
+  { img: 'https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/prepodavame.png',     alt: 'Prepodavame.bg',    label: 'Prepodavame.bg',    href: 'https://prepodavame.bg/' },
+  { img: 'https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/uchase.png',          alt: 'Ucha.se',           label: 'Уча.се',            href: 'https://ucha.se/' },
+  { img: 'https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/domino.png',          alt: 'Domino Pub.',       label: 'Изд. ДОМИНО',       href: 'https://ebook.domino.bg/' },
+  { img: 'https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/smartDraw.png',       alt: 'SmartDraw',         label: 'SmartDraw',         href: 'https://www.smartdraw.com/' },
+  { img: 'https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/sqlOnline.png',       alt: 'SQLite Online',     label: 'SQLite Online',     href: 'https://sqliteonline.com/' },
+  { img: 'https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/logicLy.png',         alt: 'Logic.ly',          label: 'Logic.ly',          href: 'https://logic.ly/demo/' }
 ];
 
 const SKILLS_PROG = [
@@ -117,7 +117,7 @@ export function renderPortfolioPage() {
 
           <div class="profile-summary-row">
             <div class="profile-square-img">
-              <img src="images/profile.jpg" alt="Мартин Бялов" onerror="this.style.display='none'">
+              <img src="https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/profile.jpg" alt="Мартин Бялов" onerror="this.style.display='none'">
             </div>
             <div class="profile-info-text">
               <p class="teacher-degree">Бакалавър по Педагогика на обучението по математика и информатика</p>

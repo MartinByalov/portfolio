@@ -29,7 +29,7 @@ export function render(comp) {
   const borderCls = comp.lightBorder ? ' lb-light-border' : '';
   return `
     <section class="sequence-builder${borderCls}" id="${esc(comp.id)}">
-      <div class="seq-header"><h3>${esc(comp.title)}</h3><p>${esc(comp.instruction)}</p></div>
+      <header class="seq-header"><h3>${esc(comp.title)}</h3><p>${esc(comp.instruction)}</p></header>
       <ol class="seq-list">${stepsMarkup(shuffled(steps))}</ol>
       <div class="seq-actions">
         <div class="seq-buttons-row">

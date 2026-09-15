@@ -1,18 +1,27 @@
 {
   "title": "Learning Interaction Pattern Library",
-  "version": "0.1",
+  "version": "0.2",
   "count": 300,
-  "principle": "Idea bank, not a lesson template. Start from the learning action, then select or invent an interaction.",
+  "principle": "Idea bank, not a lesson template and not a component catalog. Use only after lesson architecture and learning moments are defined. Describe the ideal interaction first, then use this library to widen the option space; inspect the component registry only afterwards.",
   "rules": [
     "Do not select a pattern merely because it exists.",
+    "Do not use this library to invent the lesson architecture; architecture must already be selected.",
+    "Describe the ideal interaction and required mechanics before checking existing components.",
     "Tags describe pedagogical role; they do not prescribe the internal interaction.",
-    "A pattern may use an existing component, a generic renderer, a composition of components, or a new component.",
-    "Do not repeat the same family in one lesson without pedagogical reason.",
-    "'Бързи 5 въпроса' may mix five completely different response mechanics.",
+    "A pattern may use an existing component, an adapted component, a composition, a generic renderer, or a new component.",
+    "Reuse is preferred only when it preserves the core learning mechanic. Never downgrade a simulation, construction, exploration or stateful interaction merely to fit an existing component.",
+    "If the selected mechanic requires a new component, implementing that component is part of the lesson task.",
+    "Do not repeat the same pedagogical recipe in consecutive learning moments without a clear reason.",
+    "Do not place a light check immediately after text that already gives the complete answer the check asks the learner to reproduce.",
+    "LIGHT interactions are useful for recall and checking, but a lesson must not consist only of LIGHT major interactions when the content supports deeper digital learning.",
+    "MEDIUM and HEAVY interactions may carry new learning content; do not pre-explain all of their discoveries in text.",
+    "Consider a persistent learning object or evolving state when several moments can naturally operate on the same model, artifact, system, case or dataset.",
+    "'Бързи 5 въпроса' may use different response mechanics when pedagogically useful; variety itself is not a goal.",
     "Exercise tasks may include agent-generated DOCX, PPTX, XLSX, CSV, ZIP, images, datasets or starter files.",
-    "Sandbox should permit safe experimentation with visible consequences.",
-    "Visualizations may be static, explorable or manipulable; choose the lightest adequate form.",
-    "Game framing is optional and must serve a learning action."
+    "Sandbox should permit safe experimentation with visible consequences or state changes.",
+    "For visualizations, choose the simplest form that preserves the intended cognitive action and learning mechanic - not merely the simplest available component.",
+    "Game framing is optional and must serve a learning action.",
+    "A fancy title or story wrapper does not make a familiar mechanic new."
   ],
   "composition_axes": {
     "learning_action": [
@@ -106,6 +115,39 @@
       "whole-class",
       "peer-review",
       "teacher-led"
+    ],
+    "knowledge_role": [
+      "activate-prior-knowledge",
+      "introduce",
+      "discover",
+      "explain",
+      "practice",
+      "apply",
+      "transfer",
+      "assess",
+      "reflect"
+    ],
+    "interaction_weight": [
+      "light",
+      "medium",
+      "heavy"
+    ],
+    "learning_carrier": [
+      "support-only",
+      "shared-with-explanation",
+      "interaction-primary"
+    ],
+    "state_model": [
+      "stateless",
+      "local-state",
+      "evolving-state",
+      "persistent-object-capable"
+    ],
+    "implementation_mode": [
+      "generic-renderer-friendly",
+      "existing-component-friendly",
+      "adapt-or-compose",
+      "specialized-component-likely"
     ]
   },
   "patterns": [
@@ -114,2100 +156,3913 @@
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Един верен отговор",
-      "description": "Един най-добър отговор с правдоподобни distractors."
+      "description": "Един най-добър отговор с правдоподобни distractors.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-002",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Множество верни отговори",
-      "description": "Маркират се всички приложими отговори."
+      "description": "Маркират се всички приложими отговори.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-003",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Вярно/Невярно",
-      "description": "Бинарна оценка на твърдение с обяснение."
+      "description": "Бинарна оценка на твърдение с обяснение.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-004",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Да/Не + защо",
-      "description": "След избора се посочва причина."
+      "description": "След избора се посочва причина.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-005",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Отговор + увереност",
-      "description": "Отговор и отделна оценка на увереността."
+      "description": "Отговор и отделна оценка на увереността.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-006",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Попълване с клавиатура",
-      "description": "Липсваща дума или фраза се въвежда."
+      "description": "Липсваща дума или фраза се въвежда.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-007",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Drag-the-words",
-      "description": "Думи се влачат в пропуски."
+      "description": "Думи се влачат в пропуски.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-008",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Dropdown gaps",
-      "description": "Всеки пропуск има падащ избор."
+      "description": "Всеки пропуск има падащ избор.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-009",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Кратък свободен отговор",
-      "description": "Термин, команда или кратка фраза."
+      "description": "Термин, команда или кратка фраза.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-010",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Свободен отговор по ключови идеи",
-      "description": "Оценява се наличието на очаквани идеи."
+      "description": "Оценява се наличието на очаквани идеи.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-011",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Числов отговор с толеранс",
-      "description": "Допуска се диапазон или отклонение."
+      "description": "Допуска се диапазон или отклонение.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-012",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Оценка със слайдер",
-      "description": "Ученикът задава приблизителна стойност."
+      "description": "Ученикът задава приблизителна стойност.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-013",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Избери изображение",
-      "description": "Отговорите са изображения или screenshots."
+      "description": "Отговорите са изображения или screenshots.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-014",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Избери аудио",
-      "description": "Отговорите са аудио примери."
+      "description": "Отговорите са аудио примери.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-015",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Въпрос върху кадър",
-      "description": "Въпросът е върху конкретен screenshot/video frame."
+      "description": "Въпросът е върху конкретен screenshot/video frame.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-016",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Маркирай думите",
-      "description": "Маркират се термини, рискови фрази или доказателства."
+      "description": "Маркират се термини, рискови фрази или доказателства.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-017",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Открий грешката в изречение",
-      "description": "Посочва се и се поправя грешната част."
+      "description": "Посочва се и се поправя грешната част.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-018",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Твърдение + доказателство",
-      "description": "Избира се отговор и после доказателство."
+      "description": "Избира се отговор и после доказателство.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-019",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Кое не принадлежи?",
-      "description": "Открива се изключението и се обяснява."
+      "description": "Открива се изключението и се обяснява.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-020",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Двустъпков въпрос",
-      "description": "Отговор + причина в две отделни стъпки."
+      "description": "Отговор + причина в две отделни стъпки.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-021",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Матрица Вярно/Невярно",
-      "description": "Няколко твърдения се оценяват в таблица."
+      "description": "Няколко твърдения се оценяват в таблица.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-022",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Твърдение и причина",
-      "description": "Оценяват се истинност и логическа връзка."
+      "description": "Оценяват се истинност и логическа връзка.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-023",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Избери всички изображения",
-      "description": "Множество визуални отговори по условие."
+      "description": "Множество визуални отговори по условие.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-024",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Минимално достатъчен отговор",
-      "description": "Избира се най-точният неизлишен вариант."
+      "description": "Избира се най-точният неизлишен вариант.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-025",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Кое доказателство е най-силно?",
-      "description": "Избира се най-добрият източник или наблюдение."
+      "description": "Избира се най-добрият източник или наблюдение.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-026",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Предвиди, после провери",
-      "description": "Първо прогноза, после reveal на резултата."
+      "description": "Първо прогноза, после reveal на резултата.",
+      "profile": {
+        "typical_weight": "medium",
+        "learning_carrier": "shared-with-explanation",
+        "state_model": "stateless",
+        "persistent_object_fit": "low",
+        "discovery_potential": "high"
+      }
     },
     {
       "id": "IP-027",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Поправи почти верния отговор",
-      "description": "Редактира се само грешната част."
+      "description": "Редактира се само грешната част.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-028",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Прогресивни подсказки",
-      "description": "Подсказките стават все по-конкретни."
+      "description": "Подсказките стават все по-конкретни.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-029",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
       "name": "Обясни защо отговорът е грешен",
-      "description": "Анализира се конкретна заблуда."
+      "description": "Анализира се конкретна заблуда.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-030",
       "family_id": "quick_checks",
       "family": "Бързи проверки и тестове",
-      "name": "Mixed five",
-      "description": "Пет въпроса използват пет различни механики."
+      "name": "Mixed five (optional)",
+      "description": "Пет кратки assessment items могат да използват различни механики само когато това е подходящо за различните цели; разнообразието само по себе си не е цел.",
+      "profile": {
+        "typical_weight": "light",
+        "learning_carrier": "support-only",
+        "state_model": "stateless",
+        "persistent_object_fit": "low"
+      }
     },
     {
       "id": "IP-031",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Термин-определение",
-      "description": "Свързване на понятие с точно значение."
+      "description": "Свързване на понятие с точно значение.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-032",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Термин-пример",
-      "description": "Абстрактно понятие се свързва с пример."
+      "description": "Абстрактно понятие се свързва с пример.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-033",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Изображение-термин",
-      "description": "Снимка или screenshot се свързва с название."
+      "description": "Снимка или screenshot се свързва с название.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-034",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Икона-действие",
-      "description": "UI икона се свързва с функция."
+      "description": "UI икона се свързва с функция.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-035",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Screenshot-инструмент",
-      "description": "Интерфейс се свързва с правилното приложение."
+      "description": "Интерфейс се свързва с правилното приложение.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-036",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Аудио-понятие",
-      "description": "Звук се свързва с описание."
+      "description": "Звук се свързва с описание.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-037",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Причина-следствие",
-      "description": "Причини се свързват с последствия."
+      "description": "Причини се свързват с последствия.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-038",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Проблем-решение",
-      "description": "Симптом се свързва с диагностична стъпка."
+      "description": "Симптом се свързва с диагностична стъпка.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-039",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Команда-резултат",
-      "description": "Команда се свързва с ефекта си."
+      "description": "Команда се свързва с ефекта си.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-040",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Разширение-тип файл",
-      "description": "Файлово разширение се свързва с тип."
+      "description": "Файлово разширение се свързва с тип.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-041",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Софтуер-категория",
-      "description": "Програми се класифицират по предназначение."
+      "description": "Програми се класифицират по предназначение.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-042",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Хардуер-функция",
-      "description": "Компонент се свързва с роля."
+      "description": "Компонент се свързва с роля.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-043",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Роля-разрешение",
-      "description": "Потребителска роля се свързва с права."
+      "description": "Потребителска роля се свързва с права.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-044",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Протокол-предназначение",
-      "description": "Протокол се свързва с функция."
+      "description": "Протокол се свързва с функция.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-045",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Много към една категория",
-      "description": "Много елементи се влачат в кошници."
+      "description": "Много елементи се влачат в кошници.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-046",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Матрица 2x2",
-      "description": "Класификация по две независими оси."
+      "description": "Класификация по две независими оси.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-047",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Venn placement",
-      "description": "Елементи се поставят в множества и пресечни области."
+      "description": "Елементи се поставят в множества и пресечни области.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-048",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Континуум",
-      "description": "Обекти се позиционират по скала."
+      "description": "Обекти се позиционират по скала.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-049",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Квадрант",
-      "description": "Позициониране по две характеристики."
+      "description": "Позициониране по две характеристики.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-050",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Таксономично дърво",
-      "description": "Класиране от общ клас към подвид."
+      "description": "Класиране от общ клас към подвид.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-051",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Мрежа от зависимости",
-      "description": "Възли се свързват с отношения."
+      "description": "Възли се свързват с отношения.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "stateless",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-052",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Намери грешната двойка",
-      "description": "Сред готови връзки се открива грешната."
+      "description": "Сред готови връзки се открива грешната.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-053",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Pair/No Pair",
-      "description": "Бързо решение дали две карти образуват двойка."
+      "description": "Бързо решение дали две карти образуват двойка.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-054",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Memory pairs",
-      "description": "Обръщане на карти и намиране на свързани двойки."
+      "description": "Обръщане на карти и намиране на свързани двойки.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-055",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Домино от понятия",
-      "description": "Всяка карта се закача чрез логическа връзка."
+      "description": "Всяка карта се закача чрез логическа връзка.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-056",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Етикетиране на схема",
-      "description": "Термини се поставят върху части на изображение."
+      "description": "Термини се поставят върху части на изображение.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-057",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Таблично разпределяне",
-      "description": "Елементи се влачат в клетки на таблица."
+      "description": "Елементи се влачат в клетки на таблица.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-058",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Концептуално съзвездие",
-      "description": "Централно понятие се свързва с примери и функции."
+      "description": "Централно понятие се свързва с примери и функции.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-059",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Двойно класифициране",
-      "description": "Категория и подкатегория за един елемент."
+      "description": "Категория и подкатегория за един елемент.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-060",
       "family_id": "matching_classification",
       "family": "Свързване и класифициране",
       "name": "Класифицирай и обоснови",
-      "description": "След класиране се дава причина."
+      "description": "След класиране се дава причина.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless",
+        "persistent_object_fit": "low-to-medium"
+      }
     },
     {
       "id": "IP-061",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Линейно подреждане",
-      "description": "Карти се нареждат в правилна последователност."
+      "description": "Карти се нареждат в правилна последователност.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-062",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Image sequencing",
-      "description": "Изображения се подреждат по процес или време."
+      "description": "Изображения се подреждат по процес или време.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-063",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Разбъркани редове код",
-      "description": "Редове код се нареждат в работещ алгоритъм."
+      "description": "Редове код се нареждат в работещ алгоритъм.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-064",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Командна последователност",
-      "description": "Команди се нареждат безопасно и логично."
+      "description": "Команди се нареждат безопасно и логично.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-065",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Boot sequence",
-      "description": "Етапи от включване до работна среда."
+      "description": "Етапи от включване до работна среда.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-066",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Troubleshooting sequence",
-      "description": "Диагностика от безопасно към по-инвазивно."
+      "description": "Диагностика от безопасно към по-инвазивно.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-067",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Времева линия",
-      "description": "Събития се поставят на дати или периоди."
+      "description": "Събития се поставят на дати или периоди.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-068",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Числова линия",
-      "description": "Стойности или години се поставят на скала."
+      "description": "Стойности или години се поставят на скала.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-069",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Ранг по приоритет",
-      "description": "Елементи от най-важен към най-маловажен."
+      "description": "Елементи от най-важен към най-маловажен.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-070",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Причинна верига",
-      "description": "Причина -> междинен ефект -> резултат."
+      "description": "Причина -> междинен ефект -> резултат.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-071",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Преди/След",
-      "description": "Елементи около ключова промяна."
+      "description": "Елементи около ключова промяна.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-072",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Разбъркан разказ",
-      "description": "Фрагменти се възстановяват логично."
+      "description": "Фрагменти се възстановяват логично.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-073",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Flowchart builder",
-      "description": "Стъпки и решения се сглобяват като процес."
+      "description": "Стъпки и решения се сглобяват като процес.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-074",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Разклонена последователност",
-      "description": "Редът зависи от избор."
+      "description": "Редът зависи от избор.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-075",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Подреди слоевете",
-      "description": "Архитектурни нива се нареждат вертикално."
+      "description": "Архитектурни нива се нареждат вертикално.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-076",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Dependency order",
-      "description": "Нареждане според зависимости."
+      "description": "Нареждане според зависимости.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-077",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Конкретно към абстрактно",
-      "description": "Примери и понятия по ниво на абстракция."
+      "description": "Примери и понятия по ниво на абстракция.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-078",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Ранг по риск",
-      "description": "Действия се нареждат по риск."
+      "description": "Действия се нареждат по риск.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-079",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Ранг по скорост",
-      "description": "Технологии се нареждат по производителност."
+      "description": "Технологии се нареждат по производителност.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-080",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Algorithm cards",
-      "description": "Блокове с условия и действия се сглобяват."
+      "description": "Блокове с условия и действия се сглобяват.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-081",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Път на пакет",
-      "description": "Етапи на мрежов пакет от източник до получател."
+      "description": "Етапи на мрежов пакет от източник до получател.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-082",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Сглоби файлов път",
-      "description": "Устройство, папки, име и разширение."
+      "description": "Устройство, папки, име и разширение.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-083",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "UI navigation path",
-      "description": "Стъпки до конкретна настройка."
+      "description": "Стъпки до конкретна настройка.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-084",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Swimlane workflow",
-      "description": "Ред + отговорна роля."
+      "description": "Ред + отговорна роля.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-085",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Многолентова времева линия",
-      "description": "Паралелни развития в отделни линии."
+      "description": "Паралелни развития в отделни линии.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-086",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Screenshot sequence",
-      "description": "Екранни снимки се подреждат като процедура."
+      "description": "Екранни снимки се подреждат като процедура.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-087",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Ранг на доказателства",
-      "description": "Източници от най-надежден към слаб."
+      "description": "Източници от най-надежден към слаб.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-088",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Подреди и обясни",
-      "description": "След реда се обосновава ключова връзка."
+      "description": "След реда се обосновава ключова връзка.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-089",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Вмъкни липсващата стъпка",
-      "description": "Попълва се празно място в процес."
+      "description": "Попълва се празно място в процес.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-090",
       "family_id": "ordering",
       "family": "Подреждане и последователност",
       "name": "Намери излишната стъпка",
-      "description": "Открива се ненужно или опасно действие."
+      "description": "Открива се ненужно или опасно действие.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-091",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Информационни hotspots",
-      "description": "Клик върху части разкрива обяснения."
+      "description": "Клик върху части разкрива обяснения.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-092",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Find hotspot",
-      "description": "Ученикът посочва правилна област."
+      "description": "Ученикът посочва правилна област.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-093",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Find multiple hotspots",
-      "description": "Трябва да бъдат открити няколко области."
+      "description": "Трябва да бъдат открити няколко области.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-094",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Hidden clues",
-      "description": "Скрити hotspots разкриват улики."
+      "description": "Скрити hotspots разкриват улики.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-095",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Labelled diagram",
-      "description": "Етикети се влачат върху схема."
+      "description": "Етикети се влачат върху схема.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-096",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Свободно анотиране",
-      "description": "Рисуване, маркиране и текст върху изображение."
+      "description": "Рисуване, маркиране и текст върху изображение.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-097",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Before/After slider",
-      "description": "Плъзгач сравнява две версии."
+      "description": "Плъзгач сравнява две версии.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-098",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Agamotto image sequence",
-      "description": "Плъзгач показва постепенна промяна."
+      "description": "Плъзгач показва постепенна промяна.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-099",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Image slider",
-      "description": "Поредица изображения с навигация."
+      "description": "Поредица изображения с навигация.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-100",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Сравнителна галерия",
-      "description": "Няколко изображения се сравняват."
+      "description": "Няколко изображения се сравняват.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-101",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Zoom inspection",
-      "description": "Изследване с увеличение и панорама."
+      "description": "Изследване с увеличение и панорама.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-102",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Interactive cutaway",
-      "description": "Отваряне на слоеве към вътрешна структура."
+      "description": "Отваряне на слоеве към вътрешна структура.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-103",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Exploded view",
-      "description": "Частите на система се раздалечават визуално."
+      "description": "Частите на система се раздалечават визуално.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-104",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "X-ray layers",
-      "description": "Слоеве се включват и изключват."
+      "description": "Слоеве се включват и изключват.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-105",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "System map",
-      "description": "Интерактивна карта на компоненти и връзки."
+      "description": "Интерактивна карта на компоненти и връзки.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-106",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Interactive flowchart",
-      "description": "Възли на процес се изследват."
+      "description": "Възли на процес се изследват.",
+      "profile": {
+        "typical_weight": "medium",
+        "learning_carrier": "shared-with-explanation",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-107",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Data-flow animation",
-      "description": "Данни се движат между елементи."
+      "description": "Данни се движат между елементи.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-108",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Network topology explorer",
-      "description": "Изследване на възли и връзки."
+      "description": "Изследване на възли и връзки.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-109",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Hierarchy tree",
-      "description": "Йерархия от корен към поднива."
+      "description": "Йерархия от корен към поднива.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-110",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Interactive mind map",
-      "description": "Клонове се разгъват и свиват."
+      "description": "Клонове се разгъват и свиват.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-111",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Venn explorer",
-      "description": "Общите и различни области са интерактивни."
+      "description": "Общите и различни области са интерактивни.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-112",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Matrix explorer",
-      "description": "Клетки разкриват примери по две измерения."
+      "description": "Клетки разкриват примери по две измерения.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-113",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Interactive scale",
-      "description": "Обекти върху обща скала."
+      "description": "Обекти върху обща скала.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-114",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Scale comparison",
-      "description": "Сравнение на много различни величини."
+      "description": "Сравнение на много различни величини.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-115",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Multimedia timeline",
-      "description": "Събития с текст, снимка, аудио и видео."
+      "description": "Събития с текст, снимка, аудио и видео.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-116",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Interactive map",
-      "description": "Точки, области и маршрути."
+      "description": "Точки, области и маршрути.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-117",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Virtual tour 360",
-      "description": "Панорамна среда с hotspots и задачи."
+      "description": "Панорамна среда с hotspots и задачи.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-118",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Screenshot walkthrough",
-      "description": "Реален интерфейс като интерактивно ръководство."
+      "description": "Реален интерфейс като интерактивно ръководство.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-119",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Interface lens",
-      "description": "Един процес през различни UI режими."
+      "description": "Един процес през различни UI режими.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-120",
       "family_id": "visualization",
       "family": "Визуализации и пространствено изследване",
       "name": "Interactive chart",
-      "description": "Графика с hover, филтри, избор и сравнение."
+      "description": "Графика с hover, филтри, избор и сравнение.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-121",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Стани богат",
-      "description": "Нива, нарастваща трудност и помощни механики."
+      "description": "Нива, нарастваща трудност и помощни механики.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-122",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Gameshow quiz",
-      "description": "Точки, време, бонуси и рундове."
+      "description": "Точки, време, бонуси и рундове.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-123",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Time to Climb",
-      "description": "Верните отговори движат аватар нагоре."
+      "description": "Верните отговори движат аватар нагоре.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-124",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Horse race",
-      "description": "Отговорите придвижват участник по писта."
+      "description": "Отговорите придвижват участник по писта.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-125",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Maze chase",
-      "description": "Движение към правилна зона и избягване на грешни."
+      "description": "Движение към правилна зона и избягване на грешни.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-126",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Whack-a-mole",
-      "description": "Избират се само правилните появяващи се елементи."
+      "description": "Избират се само правилните появяващи се елементи.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-127",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Balloon pop",
-      "description": "Балони носят отговори или понятия."
+      "description": "Балони носят отговори или понятия.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-128",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Airplane target",
-      "description": "Обект се насочва към правилния отговор."
+      "description": "Обект се насочва към правилния отговор.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-129",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Random wheel",
-      "description": "Случайна задача, термин или сценарий."
+      "description": "Случайна задача, термин или сценарий.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-130",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Random cards",
-      "description": "Теглене на случайни карти."
+      "description": "Теглене на случайни карти.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-131",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Open the box",
-      "description": "Кутии разкриват въпроси или clues."
+      "description": "Кутии разкриват въпроси или clues.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-132",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Bingo",
-      "description": "Клетки се маркират при разпознаване."
+      "description": "Клетки се маркират при разпознаване.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-133",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Escape room",
-      "description": "Пъзели отключват кодове и следващи пространства."
+      "description": "Пъзели отключват кодове и следващи пространства.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-134",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Breakout locks",
-      "description": "Всеки проблем дава част от код."
+      "description": "Всеки проблем дава част от код.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-135",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Scavenger hunt",
-      "description": "Търсене на clues в различни ресурси."
+      "description": "Търсене на clues в различни ресурси.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-136",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Detective case",
-      "description": "Доказателства водят до заключение."
+      "description": "Доказателства водят до заключение.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-137",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Boss battle",
-      "description": "Финална комплексна задача обединява знания."
+      "description": "Финална комплексна задача обединява знания.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-138",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Level ladder",
-      "description": "Постепенно усложняващи се нива."
+      "description": "Постепенно усложняващи се нива.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-139",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Pixel reveal",
-      "description": "Верни отговори разкриват изображение."
+      "description": "Верни отговори разкриват изображение.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-140",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Jigsaw puzzle",
-      "description": "Сглобяване на изображение или схема."
+      "description": "Сглобяване на изображение или схема.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-141",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Team puzzle",
-      "description": "Групите решават различни части на общ проблем."
+      "description": "Групите решават различни части на общ проблем.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-142",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Board game",
-      "description": "Полета по дъска отключват задачи."
+      "description": "Полета по дъска отключват задачи.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-143",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Dice path",
-      "description": "Зар определя движение или тип задача."
+      "description": "Зар определя движение или тип задача.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-144",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Card battle",
-      "description": "Карти се сравняват по характеристика."
+      "description": "Карти се сравняват по характеристика.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-145",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Jeopardy board",
-      "description": "Категории и стойности на въпросите."
+      "description": "Категории и стойности на въпросите.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-146",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Knowledge auction",
-      "description": "Групи наддават увереност за решение."
+      "description": "Групи наддават увереност за решение.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-147",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Resource management",
-      "description": "Ограничени ресурси се разпределят за цел."
+      "description": "Ограничени ресурси се разпределят за цел.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-148",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Speed sorting",
-      "description": "Бързо класифициране под умерено време."
+      "description": "Бързо класифициране под умерено време.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-149",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Streak challenge",
-      "description": "Серия от последователни правилни решения."
+      "description": "Серия от последователни правилни решения.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-150",
       "family_id": "games",
       "family": "Игрови формати",
       "name": "Impostor",
-      "description": "Един елемент нарушава правилото и трябва да бъде открит."
+      "description": "Един елемент нарушава правилото и трябва да бъде открит.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "varies",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-151",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Branching scenario",
-      "description": "Изборите определят следващата ситуация."
+      "description": "Изборите определят следващата ситуация.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-152",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Choose your own adventure",
-      "description": "Различни пътища през съдържанието."
+      "description": "Различни пътища през съдържанието.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-153",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Incident triage",
-      "description": "Проблеми се подреждат по спешност."
+      "description": "Проблеми се подреждат по спешност.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-154",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Helpdesk ticket",
-      "description": "Ticket със симптоми и избор на следваща проверка."
+      "description": "Ticket със симптоми и избор на следваща проверка.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-155",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "User persona",
-      "description": "Решение според нужди на конкретен потребител."
+      "description": "Решение според нужди на конкретен потребител.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-156",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Ethics dilemma",
-      "description": "Сравнение на решения по последствия."
+      "description": "Сравнение на решения по последствия.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-157",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Permissions decision",
-      "description": "Задаване на минимално необходими права."
+      "description": "Задаване на минимално необходими права.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-158",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Security warning scenario",
-      "description": "Реакция на подозрителен prompt, файл или линк."
+      "description": "Реакция на подозрителен prompt, файл или линк.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-159",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Diagnose from symptoms",
-      "description": "Причина от набор симптоми."
+      "description": "Причина от набор симптоми.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-160",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Compare solutions",
-      "description": "Две решения по критерии."
+      "description": "Две решения по критерии.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-161",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Budget configuration",
-      "description": "Конфигурация при ограничен бюджет."
+      "description": "Конфигурация при ограничен бюджет.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-162",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Procurement decision",
-      "description": "Избор между предложения и компромиси."
+      "description": "Избор между предложения и компромиси.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-163",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Migration plan",
-      "description": "Планиране на преминаване между системи."
+      "description": "Планиране на преминаване между системи.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-164",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Upgrade decision",
-      "description": "Обновяване според ограничения и полза."
+      "description": "Обновяване според ограничения и полза.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-165",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Choose the OS",
-      "description": "Избор на ОС по хардуер и приложения."
+      "description": "Избор на ОС по хардуер и приложения.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-166",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Device recommendation",
-      "description": "Избор на устройство за потребност."
+      "description": "Избор на устройство за потребност.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-167",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Trade-off challenge",
-      "description": "Баланс цена, скорост, сигурност и удобство."
+      "description": "Баланс цена, скорост, сигурност и удобство.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-168",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Role-play chat",
-      "description": "Разговор с потребител или администратор."
+      "description": "Разговор с потребител или администратор.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-169",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Virtual colleague",
-      "description": "Персона реагира според отговорите."
+      "description": "Персона реагира според отговорите.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-170",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Inbox simulation",
-      "description": "Съобщения се преглеждат и приоритизират."
+      "description": "Съобщения се преглеждат и приоритизират.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-171",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Support queue",
-      "description": "Няколко заявки чакат решение."
+      "description": "Няколко заявки чакат решение.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-172",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Repair console",
-      "description": "Логове и симптоми водят до диагностични действия."
+      "description": "Логове и симптоми водят до диагностични действия.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-173",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Code review",
-      "description": "Търсене на грешки и рискове в решение."
+      "description": "Търсене на грешки и рискове в решение.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-174",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Evidence courtroom",
-      "description": "Твърдение се защитава чрез доказателства."
+      "description": "Твърдение се защитава чрез доказателства.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-175",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "News verification case",
-      "description": "Публикация се проверява чрез източници."
+      "description": "Публикация се проверява чрез източници.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-176",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Source triangulation",
-      "description": "Няколко източника се сравняват."
+      "description": "Няколко източника се сравняват.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-177",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "What next?",
-      "description": "Сценарият спира за избор на следващо действие."
+      "description": "Сценарият спира за избор на следващо действие.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-178",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Consequence chain",
-      "description": "Всяко решение показва последствие."
+      "description": "Всяко решение показва последствие.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-179",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Counterfactual",
-      "description": "Какво би станало при промяна на предпоставка."
+      "description": "Какво би станало при промяна на предпоставка.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-180",
       "family_id": "scenarios",
       "family": "Казуси и решения",
       "name": "Decision matrix",
-      "description": "Варианти по критерии и тежести."
+      "description": "Варианти по критерии и тежести.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "shared-or-interaction-primary",
+        "state_model": "local-to-evolving",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-181",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Live search sandbox",
-      "description": "Оператори се въвеждат и резултатът се променя."
+      "description": "Оператори се въвеждат и резултатът се променя.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high",
+        "new_component_likely": true
+      }
     },
     {
       "id": "IP-182",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Query builder",
-      "description": "Заявка се конструира от блокове."
+      "description": "Заявка се конструира от блокове.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-183",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Filesystem sandbox",
-      "description": "Създаване, местене, преименуване и търсене на файлове."
+      "description": "Създаване, местене, преименуване и търсене на файлове.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high",
+        "new_component_likely": true
+      }
     },
     {
       "id": "IP-184",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Wildcard sandbox",
-      "description": "Маски с * и ? филтрират виртуална папка."
+      "description": "Маски с * и ? филтрират виртуална папка.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-185",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Command-line sandbox",
-      "description": "Ограничен безопасен терминал."
+      "description": "Ограничен безопасен терминал.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high",
+        "new_component_likely": true
+      }
     },
     {
       "id": "IP-186",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Packet journey simulator",
-      "description": "Мрежов пакет преминава през устройства."
+      "description": "Мрежов пакет преминава през устройства.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high",
+        "new_component_likely": true
+      }
     },
     {
       "id": "IP-187",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Topology builder",
-      "description": "Изграждане на мрежова топология."
+      "description": "Изграждане на мрежова топология.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high",
+        "new_component_likely": true
+      }
     },
     {
       "id": "IP-188",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Process scheduler",
-      "description": "Приоритети и CPU време."
+      "description": "Приоритети и CPU време.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high",
+        "new_component_likely": true
+      }
     },
     {
       "id": "IP-189",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Memory allocation lab",
-      "description": "RAM и виртуална памет."
+      "description": "RAM и виртуална памет.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high",
+        "new_component_likely": true
+      }
     },
     {
       "id": "IP-190",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "CPU queue lab",
-      "description": "Задачи с различна продължителност в опашка."
+      "description": "Задачи с различна продължителност в опашка.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high",
+        "new_component_likely": true
+      }
     },
     {
       "id": "IP-191",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Permissions sandbox",
-      "description": "Права върху файлове и ресурси."
+      "description": "Права върху файлове и ресурси.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high",
+        "new_component_likely": true
+      }
     },
     {
       "id": "IP-192",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "User-role simulator",
-      "description": "Смяна на роля и достъп."
+      "description": "Смяна на роля и достъп.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high",
+        "new_component_likely": true
+      }
     },
     {
       "id": "IP-193",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Boot simulator",
-      "description": "Firmware -> kernel -> работна среда."
+      "description": "Firmware -> kernel -> работна среда.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high",
+        "new_component_likely": true
+      }
     },
     {
       "id": "IP-194",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Service manager simulator",
-      "description": "Стартиране и спиране на услуги."
+      "description": "Стартиране и спиране на услуги.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high",
+        "new_component_likely": true
+      }
     },
     {
       "id": "IP-195",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Spreadsheet formula lab",
-      "description": "Формули и незабавно преизчисляване."
+      "description": "Формули и незабавно преизчисляване.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-196",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Data cleaning lab",
-      "description": "Почистване на замърсени данни."
+      "description": "Почистване на замърсени данни.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-197",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Chart builder lab",
-      "description": "Различни визуализации на едни данни."
+      "description": "Различни визуализации на едни данни.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-198",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Database query sandbox",
-      "description": "Опростени заявки върху учебна таблица."
+      "description": "Опростени заявки върху учебна таблица.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-199",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Code sandbox",
-      "description": "Редактиране и изпълнение на кратък код."
+      "description": "Редактиране и изпълнение на кратък код.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-200",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Algorithm runner",
-      "description": "Стъпково изпълнение със състояния."
+      "description": "Стъпково изпълнение със състояния.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-201",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Sorting visualizer",
-      "description": "Визуализация на алгоритъм за сортиране."
+      "description": "Визуализация на алгоритъм за сортиране.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-202",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Storage lab",
-      "description": "Капацитет, файлове и свободно място."
+      "description": "Капацитет, файлове и свободно място.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-203",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Device configuration lab",
-      "description": "Настройки на виртуално устройство."
+      "description": "Настройки на виртуално устройство.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-204",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Backup/Restore lab",
-      "description": "Архивиране, загуба и възстановяване."
+      "description": "Архивиране, загуба и възстановяване.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-205",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Cloud sync simulator",
-      "description": "Синхронизация и конфликтни версии."
+      "description": "Синхронизация и конфликтни версии.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-206",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Version-control mini lab",
-      "description": "Версии, diff и възстановяване."
+      "description": "Версии, diff и възстановяване.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-207",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Collaboration permissions lab",
-      "description": "Viewer/Commenter/Editor в симулиран документ."
+      "description": "Viewer/Commenter/Editor в симулиран документ.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-208",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Password-strength lab",
-      "description": "Промяна на параметри и наблюдение на устойчивост."
+      "description": "Промяна на параметри и наблюдение на устойчивост.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-209",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "System builder lab",
-      "description": "Комбиниране и проверка на съвместимост."
+      "description": "Комбиниране и проверка на съвместимост.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-210",
       "family_id": "sandbox",
       "family": "Sandbox и симулации",
       "name": "Fault injection lab",
-      "description": "Умишлена грешка и наблюдение на симптомите."
+      "description": "Умишлена грешка и наблюдение на симптомите.",
+      "profile": {
+        "typical_weight": "heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "evolving-state",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-211",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Starter file",
-      "description": "Генериран начален DOCX/PPTX/XLSX/CSV/ZIP."
+      "description": "Генериран начален DOCX/PPTX/XLSX/CSV/ZIP.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-212",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Broken starter file",
-      "description": "Файл с нарочни грешки за поправяне."
+      "description": "Файл с нарочни грешки за поправяне.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-213",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Partially completed file",
-      "description": "Довършване на частично готов артефакт."
+      "description": "Довършване на частично готов артефакт.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-214",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Two-version comparison",
-      "description": "Сравнение на две версии на файл."
+      "description": "Сравнение на две версии на файл.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-215",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Document formatting task",
-      "description": "Форматиране по конкретни критерии."
+      "description": "Форматиране по конкретни критерии.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-216",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Spreadsheet task",
-      "description": "Формули, филтри, сортиране и графики."
+      "description": "Формули, филтри, сортиране и графики.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-217",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Presentation task",
-      "description": "Изграждане на слайдове от сурово съдържание."
+      "description": "Изграждане на слайдове от сурово съдържание.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-218",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Image editing task",
-      "description": "Редактиране на предоставено изображение."
+      "description": "Редактиране на предоставено изображение.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-219",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "File organization pack",
-      "description": "ZIP с разбъркани файлове за организиране."
+      "description": "ZIP с разбъркани файлове за организиране.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-220",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Naming convention task",
-      "description": "Преименуване по стандарт."
+      "description": "Преименуване по стандарт.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-221",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Search-in-files task",
-      "description": "Търсене в предоставена папка."
+      "description": "Търсене в предоставена папка.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-222",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Data import task",
-      "description": "Импорт и преобразуване на CSV/TXT."
+      "description": "Импорт и преобразуване на CSV/TXT.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-223",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Template completion",
-      "description": "Попълване на структуриран шаблон."
+      "description": "Попълване на структуриран шаблон.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-224",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Generate report",
-      "description": "Кратък отчет от извършена дейност."
+      "description": "Кратък отчет от извършена дейност.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-225",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Screenshot evidence",
-      "description": "Заснемане на конкретно състояние на интерфейс."
+      "description": "Заснемане на конкретно състояние на интерфейс.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-226",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Export challenge",
-      "description": "Експорт в правилен формат и настройки."
+      "description": "Експорт в правилен формат и настройки.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-227",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Create infographic",
-      "description": "Създаване на визуално резюме."
+      "description": "Създаване на визуално резюме.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-228",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Create diagram",
-      "description": "Блок-схема, mind map или архитектурна схема."
+      "description": "Блок-схема, mind map или архитектурна схема.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-229",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Build checklist",
-      "description": "Създаване на контролен списък."
+      "description": "Създаване на контролен списък.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-230",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Search log",
-      "description": "Запис на заявка, промяна, резултат и извод."
+      "description": "Запис на заявка, промяна, резултат и извод.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-231",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Source record",
-      "description": "Автор, дата, URL и оценка на надеждност."
+      "description": "Автор, дата, URL и оценка на надеждност.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-232",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Folder tree deliverable",
-      "description": "Проектиране на папкова структура."
+      "description": "Проектиране на папкова структура.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-233",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Peer review file",
-      "description": "Оценяване на чужд артефакт по рубрика."
+      "description": "Оценяване на чужд артефакт по рубрика.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-234",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Self-check before submit",
-      "description": "Самопроверка преди предаване."
+      "description": "Самопроверка преди предаване.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-235",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Before/after artifact",
-      "description": "Оригинал и подобрена версия."
+      "description": "Оригинал и подобрена версия.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-236",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Annotated screenshot",
-      "description": "Screenshot със стрелки и бележки."
+      "description": "Screenshot със стрелки и бележки.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-237",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Micro-screencast",
-      "description": "30-90 секунди екранно обяснение."
+      "description": "30-90 секунди екранно обяснение.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-238",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Audio explanation",
-      "description": "Кратко устно обяснение."
+      "description": "Кратко устно обяснение.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-239",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Create a tutorial",
-      "description": "Ръководство със стъпки и screenshots."
+      "description": "Ръководство със стъпки и screenshots.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-240",
       "family_id": "authentic_tasks",
       "family": "Реални практически задачи и ресурсни файлове",
       "name": "Create a peer activity",
-      "description": "Ученикът създава задача за съучениците."
+      "description": "Ученикът създава задача за съучениците.",
+      "profile": {
+        "typical_weight": "medium-to-heavy",
+        "learning_carrier": "interaction-primary",
+        "state_model": "persistent-object-capable",
+        "persistent_object_fit": "high"
+      }
     },
     {
       "id": "IP-241",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Think-Pair-Share",
-      "description": "Самостоятелно, по двойки, после клас."
+      "description": "Самостоятелно, по двойки, после клас.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-242",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Poll-Discuss-Poll",
-      "description": "Гласуване, обсъждане и второ гласуване."
+      "description": "Гласуване, обсъждане и второ гласуване.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-243",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Agree/Disagree spectrum",
-      "description": "Позиция по континуум."
+      "description": "Позиция по континуум.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-244",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Four corners",
-      "description": "Избор между четири позиции."
+      "description": "Избор между четири позиции.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-245",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Structured debate",
-      "description": "Аргументи, доказателства и rebuttal."
+      "description": "Аргументи, доказателства и rebuttal.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-246",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Predict-Vote-Reveal",
-      "description": "Прогноза, гласуване, демонстрация."
+      "description": "Прогноза, гласуване, демонстрация.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-247",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Misconception poll",
-      "description": "Гласуване между чести заблуди."
+      "description": "Гласуване между чести заблуди.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-248",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Rank and defend",
-      "description": "Подреждане и защита на първите позиции."
+      "description": "Подреждане и защита на първите позиции.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-249",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Case discussion",
-      "description": "Казус с отворени въпроси."
+      "description": "Казус с отворени въпроси.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-250",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Compare two solutions",
-      "description": "Анализ на две ученически решения."
+      "description": "Анализ на две ученически решения.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-251",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Peer explanation",
-      "description": "Обяснение на партньор."
+      "description": "Обяснение на партньор.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-252",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "One-minute paper",
-      "description": "Най-важната идея за една минута."
+      "description": "Най-важната идея за една минута.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-253",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Muddiest point",
-      "description": "Най-неясната част."
+      "description": "Най-неясната част.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-254",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "3-2-1 reflection",
-      "description": "3 идеи, 2 връзки, 1 въпрос."
+      "description": "3 идеи, 2 връзки, 1 въпрос.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-255",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Exit ticket",
-      "description": "Един кратък финален въпрос."
+      "description": "Един кратък финален въпрос.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-256",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Confidence scale",
-      "description": "Самооценка на увереност по умение."
+      "description": "Самооценка на увереност по умение.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-257",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Before/after confidence",
-      "description": "Сравнение преди и след."
+      "description": "Сравнение преди и след.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-258",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Reflection journal",
-      "description": "Кратък дневник за стратегия и трудност."
+      "description": "Кратък дневник за стратегия и трудност.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-259",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Plus/Delta",
-      "description": "Какво работи и какво да се промени."
+      "description": "Какво работи и какво да се промени.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-260",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Two stars and a wish",
-      "description": "Две силни страни и едно подобрение."
+      "description": "Две силни страни и едно подобрение.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-261",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Self-assessment rubric",
-      "description": "Самооценка по критерии."
+      "description": "Самооценка по критерии.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-262",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Peer feedback rubric",
-      "description": "Структурирана обратна връзка."
+      "description": "Структурирана обратна връзка.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-263",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Question parking lot",
-      "description": "Събиране на оставащи въпроси."
+      "description": "Събиране на оставащи въпроси.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-264",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Anonymous board",
-      "description": "Анонимни идеи и въпроси."
+      "description": "Анонимни идеи и въпроси.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-265",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Collaborative board",
-      "description": "Общи карти с примери и решения."
+      "description": "Общи карти с примери и решения.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-266",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Collective mind map",
-      "description": "Обща концептуална карта."
+      "description": "Обща концептуална карта.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-267",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Jigsaw experts",
-      "description": "Групи стават експерти по различни части."
+      "description": "Групи стават експерти по различни части.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-268",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Role cards",
-      "description": "Позиции от различни роли."
+      "description": "Позиции от различни роли.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-269",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Silent debate",
-      "description": "Писмено аргументиране без устен спор."
+      "description": "Писмено аргументиране без устен спор.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-270",
       "family_id": "discussion_reflection",
       "family": "Дискусия и рефлексия",
       "name": "Consensus challenge",
-      "description": "Едно общо решение и документиран компромис."
+      "description": "Едно общо решение и документиран компромис.",
+      "profile": {
+        "typical_weight": "light-to-medium",
+        "learning_carrier": "support-or-shared",
+        "state_model": "stateless-to-local",
+        "persistent_object_fit": "medium"
+      }
     },
     {
       "id": "IP-271",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Interactive video",
-      "description": "Видео с въпроси и пояснения в ключови моменти."
+      "description": "Видео с въпроси и пояснения в ключови моменти.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-272",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Branching video",
-      "description": "Изборът прехвърля към различен сегмент."
+      "description": "Изборът прехвърля към различен сегмент.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-273",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Video hotspots",
-      "description": "Интерактивни области върху видео."
+      "description": "Интерактивни области върху видео.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-274",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Timestamp challenge",
-      "description": "Посочване на точен момент."
+      "description": "Посочване на точен момент.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-275",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Video annotation",
-      "description": "Маркиране на ключови моменти."
+      "description": "Маркиране на ключови моменти.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-276",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Audio dictation",
-      "description": "Слушане и възстановяване на текст/команда."
+      "description": "Слушане и възстановяване на текст/команда.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-277",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Audio identification",
-      "description": "Разпознаване на аудио пример."
+      "description": "Разпознаване на аудио пример.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-278",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Transcript highlighter",
-      "description": "Маркиране на ключови фрази в транскрипт."
+      "description": "Маркиране на ключови фрази в транскрипт.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-279",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Podcast segments",
-      "description": "Подреждане и анализ на аудио откъси."
+      "description": "Подреждане и анализ на аудио откъси.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-280",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Narrated infographic",
-      "description": "Инфографика с озвучени пояснения."
+      "description": "Инфографика с озвучени пояснения.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-281",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Interactive slideshow",
-      "description": "Слайдове с reveal, hotspots и въпроси."
+      "description": "Слайдове с reveal, hotspots и въпроси.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-282",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Card carousel",
-      "description": "Хоризонтална поредица от карти."
+      "description": "Хоризонтална поредица от карти.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-283",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Scrollytelling",
-      "description": "Скролването управлява разказ и визуализация."
+      "description": "Скролването управлява разказ и визуализация.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-284",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Visual story",
-      "description": "Изображения и кратък текст изграждат разказ."
+      "description": "Изображения и кратък текст изграждат разказ.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-285",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Interactive comic",
-      "description": "Диалогови сцени с избори."
+      "description": "Диалогови сцени с избори.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-286",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Storyboard",
-      "description": "Процес или история като кадри."
+      "description": "Процес или история като кадри.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-287",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Timeline story",
-      "description": "Медиен разказ по времева линия."
+      "description": "Медиен разказ по времева линия.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-288",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Before/after narrative",
-      "description": "Промяна чрез две състояния."
+      "description": "Промяна чрез две състояния.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-289",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Photo essay",
-      "description": "Поредица снимки носи основната информация."
+      "description": "Поредица снимки носи основната информация.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-290",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Virtual museum",
-      "description": "Свободно изследване на експонати."
+      "description": "Свободно изследване на експонати.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-291",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Map story",
-      "description": "Разказ по места и маршрути."
+      "description": "Разказ по места и маршрути.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-292",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "360 guided tour",
-      "description": "Панорамна среда с задачи."
+      "description": "Панорамна среда с задачи.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-293",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Guided screenshot tour",
-      "description": "Фокус върху части на истински интерфейс."
+      "description": "Фокус върху части на истински интерфейс.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-294",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Screencast walkthrough",
-      "description": "Екранна демонстрация със стопове за мислене."
+      "description": "Екранна демонстрация със стопове за мислене.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-295",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Animated diagram",
-      "description": "Контролирана анимация на структура или поток."
+      "description": "Контролирана анимация на структура или поток.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-296",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Step guide",
-      "description": "Стъпки една по една."
+      "description": "Стъпки една по една.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-297",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Progressive disclosure",
-      "description": "Сложността се разкрива постепенно."
+      "description": "Сложността се разкрива постепенно.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-298",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Click/Hover reveal",
-      "description": "Обяснение при взаимодействие с обект."
+      "description": "Обяснение при взаимодействие с обект.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-299",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Layered image",
-      "description": "Превключваеми информационни слоеве."
+      "description": "Превключваеми информационни слоеве.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     },
     {
       "id": "IP-300",
       "family_id": "media_story",
       "family": "Медия и интерактивен разказ",
       "name": "Digital bookshelf",
-      "description": "Визуална библиотека от ресурси."
+      "description": "Визуална библиотека от ресурси.",
+      "profile": {
+        "typical_weight": "light-to-heavy",
+        "learning_carrier": "support-to-interaction-primary",
+        "state_model": "stateless-to-evolving",
+        "persistent_object_fit": "medium-to-high"
+      }
     }
   ],
   "research_sources": [
@@ -2239,5 +4094,427 @@
       "name": "Articulate Advanced Interactivity",
       "url": "https://www.articulate.com/features/advanced-interactivity/"
     }
-  ]
+  ],
+  "family_profiles": {
+    "quick_checks": {
+      "typical_weight": "light",
+      "learning_carrier": "support-only",
+      "state_model": "stateless",
+      "persistent_object_fit": "low",
+      "best_for": [
+        "retrieval",
+        "misconception-check",
+        "short-assessment",
+        "confidence-check"
+      ],
+      "risk": "Easy to turn into text-to-check duplication. Do not use as the dominant learning engine."
+    },
+    "matching_classification": {
+      "typical_weight": "light-to-medium",
+      "learning_carrier": "support-or-shared",
+      "state_model": "stateless",
+      "persistent_object_fit": "low-to-medium",
+      "best_for": [
+        "relationships",
+        "classification",
+        "evidence-linking",
+        "concept-structure"
+      ],
+      "risk": "Becomes trivial when the mapping or categories were just stated explicitly."
+    },
+    "ordering": {
+      "typical_weight": "light-to-medium",
+      "learning_carrier": "support-or-shared",
+      "state_model": "stateless-to-local",
+      "persistent_object_fit": "medium",
+      "best_for": [
+        "process",
+        "dependency",
+        "causal-order",
+        "workflow"
+      ],
+      "risk": "Fails when the preceding text already lists the exact order."
+    },
+    "visualization": {
+      "typical_weight": "light-to-heavy",
+      "learning_carrier": "shared-or-interaction-primary",
+      "state_model": "stateless-to-evolving",
+      "persistent_object_fit": "medium-to-high",
+      "best_for": [
+        "structure",
+        "spatial-relations",
+        "change",
+        "layers",
+        "systems",
+        "data"
+      ],
+      "risk": "A clickable reveal is not automatically meaningful interaction. Prefer exploration, comparison or manipulation when the concept needs it."
+    },
+    "games": {
+      "typical_weight": "light-to-heavy",
+      "learning_carrier": "varies",
+      "state_model": "local-to-evolving",
+      "persistent_object_fit": "medium",
+      "best_for": [
+        "retrieval-practice",
+        "decision-making",
+        "resource-management",
+        "multi-round-practice"
+      ],
+      "risk": "Do not mistake game framing for cognitive depth. A quiz in a game skin remains a light check."
+    },
+    "scenarios": {
+      "typical_weight": "medium-to-heavy",
+      "learning_carrier": "shared-or-interaction-primary",
+      "state_model": "local-to-evolving",
+      "persistent_object_fit": "high",
+      "best_for": [
+        "diagnosis",
+        "decision",
+        "trade-offs",
+        "consequences",
+        "transfer"
+      ],
+      "risk": "Do not reduce a branching or consequence-driven scenario to static multiple choice."
+    },
+    "sandbox": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "state_model": "evolving-state",
+      "persistent_object_fit": "high",
+      "best_for": [
+        "experiment",
+        "construction",
+        "system-behavior",
+        "configuration",
+        "cause-effect"
+      ],
+      "risk": "If the learner cannot change state or observe consequences, it is probably not a real sandbox."
+    },
+    "authentic_tasks": {
+      "typical_weight": "medium-to-heavy",
+      "learning_carrier": "interaction-primary",
+      "state_model": "persistent-object-capable",
+      "persistent_object_fit": "high",
+      "best_for": [
+        "real-work-practice",
+        "artifact-creation",
+        "transfer",
+        "evidence-of-skill"
+      ],
+      "risk": "Do not replace authentic file work with a description of what the learner would have done."
+    },
+    "discussion_reflection": {
+      "typical_weight": "light-to-medium",
+      "learning_carrier": "support-or-shared",
+      "state_model": "stateless-to-local",
+      "persistent_object_fit": "medium",
+      "best_for": [
+        "argumentation",
+        "metacognition",
+        "peer-learning",
+        "judgment"
+      ],
+      "risk": "Do not append automatically at the end; place where the decision or reflection is actually needed."
+    },
+    "media_story": {
+      "typical_weight": "light-to-heavy",
+      "learning_carrier": "support-to-interaction-primary",
+      "state_model": "stateless-to-evolving",
+      "persistent_object_fit": "medium-to-high",
+      "best_for": [
+        "narrative",
+        "progressive-reveal",
+        "observation",
+        "multimedia-analysis",
+        "guided-exploration"
+      ],
+      "risk": "Narrative continuity alone is not learning continuity. The learner's action/state must also carry the throughline."
+    }
+  },
+  "pattern_overrides": {
+    "IP-026": {
+      "typical_weight": "medium",
+      "learning_carrier": "shared-with-explanation",
+      "discovery_potential": "high"
+    },
+    "IP-051": {
+      "typical_weight": "medium-to-heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-073": {
+      "typical_weight": "medium-to-heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-074": {
+      "typical_weight": "medium-to-heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-102": {
+      "typical_weight": "medium-to-heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-104": {
+      "typical_weight": "medium-to-heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-105": {
+      "typical_weight": "medium-to-heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-106": {
+      "typical_weight": "medium",
+      "learning_carrier": "shared-with-explanation",
+      "persistent_object_fit": "medium"
+    },
+    "IP-107": {
+      "typical_weight": "medium-to-heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-119": {
+      "typical_weight": "medium-to-heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-133": {
+      "typical_weight": "medium-to-heavy",
+      "learning_carrier": "varies",
+      "persistent_object_fit": "high"
+    },
+    "IP-136": {
+      "typical_weight": "medium-to-heavy",
+      "learning_carrier": "shared-or-interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-147": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-151": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-154": {
+      "typical_weight": "medium-to-heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-159": {
+      "typical_weight": "medium-to-heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-170": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-171": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-172": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-178": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-181": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high",
+      "new_component_likely": true
+    },
+    "IP-183": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high",
+      "new_component_likely": true
+    },
+    "IP-185": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high",
+      "new_component_likely": true
+    },
+    "IP-186": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high",
+      "new_component_likely": true
+    },
+    "IP-187": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high",
+      "new_component_likely": true
+    },
+    "IP-188": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high",
+      "new_component_likely": true
+    },
+    "IP-189": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high",
+      "new_component_likely": true
+    },
+    "IP-190": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high",
+      "new_component_likely": true
+    },
+    "IP-191": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high",
+      "new_component_likely": true
+    },
+    "IP-192": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high",
+      "new_component_likely": true
+    },
+    "IP-193": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high",
+      "new_component_likely": true
+    },
+    "IP-194": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high",
+      "new_component_likely": true
+    },
+    "IP-195": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-196": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-197": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-198": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-199": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-200": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-202": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-203": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-204": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-205": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-206": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-207": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-208": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "medium"
+    },
+    "IP-209": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    },
+    "IP-210": {
+      "typical_weight": "heavy",
+      "learning_carrier": "interaction-primary",
+      "persistent_object_fit": "high"
+    }
+  },
+  "selection_protocol": {
+    "precondition": [
+      "Lesson architecture has already been selected.",
+      "Structural fingerprint exists.",
+      "Major learning moments have already been defined."
+    ],
+    "steps": [
+      "State the learner action and the new understanding required.",
+      "Describe the ideal interaction without considering the component registry.",
+      "List the mechanics required by that ideal interaction.",
+      "Use this library to shortlist several patterns or pattern combinations.",
+      "Reject patterns that would reduce discovery, construction, simulation, state change or consequence to simple recall.",
+      "Choose the pattern or composition that best preserves the intended cognitive action.",
+      "Only now inspect the component registry.",
+      "Reuse only if the existing component preserves the core mechanic; otherwise adapt, compose or build a new component."
+    ],
+    "hard_fail_conditions": [
+      "All major interactions in the lesson are LIGHT.",
+      "The preceding text already contains the complete answer required by the interaction.",
+      "A stateful/simulation/construction design is replaced with a simpler existing component solely for implementation convenience.",
+      "Several consecutive learning moments repeat the same exposition-then-check recipe.",
+      "A pattern is chosen mainly because it already exists as a component.",
+      "A fancy title or game/story skin is used to claim novelty without changing the learning mechanic."
+    ]
+  },
+  "weight_guidance": {
+    "LIGHT": "Recall, recognition or short verification of knowledge already available to the learner.",
+    "MEDIUM": "Application, comparison, diagnosis, decision or reorganization in a meaningfully new case.",
+    "HEAVY": "The interaction/environment itself carries substantial new learning through construction, manipulation, exploration, changing state or consequences.",
+    "important": [
+      "Weight is contextual, not immutable. A matching task can become MEDIUM if it requires inference from novel evidence; a game can remain LIGHT if it only skins recall questions.",
+      "Do not pre-explain all discoveries of a MEDIUM or HEAVY interaction in the text immediately above it.",
+      "The goal is not to maximize HEAVY interactions. The goal is to use enough depth for the learning objective while keeping the lesson moderate."
+    ]
+  },
+  "profile_note": "Pattern profiles are defaults for ideation, not fixed truth. The same pattern can change weight depending on prior information, task novelty, feedback, state and learner action. The lesson plan must assign the final contextual weight."
 }

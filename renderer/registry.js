@@ -59,6 +59,11 @@ import * as SystemBuilderLab from '../components/system-builder-lab.js';
 import * as SystemAnatomyMap from '../components/system-anatomy-map.js';
 import * as SequenceBuilder from '../components/sequence-builder.js';
 import * as SessionReconstructor from '../components/session-reconstructor.js';
+import * as OsArchitectureStack from '../components/os-architecture-stack.js';
+import * as OsSubsystemsWorkbench from '../components/os-subsystems-workbench.js';
+import * as OsTerminalLab from '../components/os-terminal-lab.js';
+import * as OsEcosystemMatrix from '../components/os-ecosystem-matrix.js';
+import * as OsTaskManagerSandbox from '../components/os-task-manager-sandbox.js';
 
 const registry = {
   'text-group': TextGroup,
@@ -121,6 +126,12 @@ const registry = {
   'system-builder-lab': SystemBuilderLab,
   'sequence-builder': SequenceBuilder,
   'session-reconstructor': SessionReconstructor,
+  'image-placeholder': ImagePlaceholder,
+  'os-architecture-stack': OsArchitectureStack,
+  'os-subsystems-workbench': OsSubsystemsWorkbench,
+  'os-terminal-lab': OsTerminalLab,
+  'os-ecosystem-matrix': OsEcosystemMatrix,
+  'os-task-manager-sandbox': OsTaskManagerSandbox,
 };
 
 export function renderComponent(comp) {

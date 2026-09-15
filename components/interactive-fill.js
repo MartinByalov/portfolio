@@ -82,11 +82,9 @@ export function render(comp) {
 
   return `
     <div class="interactive-fill-card" id="${id}">
-      <div class="interactive-card-header">
-        <div class="interactive-card-badge">
-          <span>${esc(title)}</span>
-        </div>
-      </div>
+      <header class="interactive-fill-header">
+        <h3>${esc(title)}</h3>
+      </header>
       <div class="fill-sentences-wrap">
         ${rows}
       </div>
@@ -154,13 +152,8 @@ export function init(comp) {
       }
     });
 
-    if (score === rows.length) {
-      feedback.innerHTML = `<i class="fas fa-circle-check"></i> Браво! Всички ${rows.length} изречения са попълнени напълно вярно!`;
-      feedback.className = 'fill-feedback feedback-success';
-    } else {
-      feedback.innerHTML = `<i class="fas fa-triangle-exclamation"></i> Резултат: ${score} от ${rows.length} верни.`;
-      feedback.className = 'fill-feedback feedback-info';
-    }
+    feedback.textContent = `Резултат ${score} от ${rows.length}`;
+    feedback.className = `fill-feedback ${score === rows.length ? 'feedback-success' : 'feedback-info'}`;
     feedback.style.display = 'block';
     submitBtn.style.display = 'none';
     resetBtn.style.display = 'inline-flex';

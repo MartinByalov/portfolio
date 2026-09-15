@@ -35,11 +35,9 @@ export function render(comp) {
 
   return `
     <div class="interactive-category-sorter-card" id="${esc(id)}">
-      <div class="interactive-card-header">
-        <div class="interactive-card-badge">
-          <span>${esc(title)}</span>
-        </div>
-      </div>
+      <header class="category-sorter-header">
+        <h3>${esc(title)}</h3>
+      </header>
 
       <div class="category-sorter-rows-container">
         ${rows}
@@ -98,13 +96,8 @@ export function init(comp) {
       }
     });
 
-    if (score === rows.length) {
-      feedback.innerHTML = `<i class="fas fa-circle-check"></i> Отлично! Всички ${rows.length} елемента са разпределени правилно!`;
-      feedback.className = 'category-sorter-feedback feedback-success';
-    } else {
-      feedback.innerHTML = `<i class="fas fa-triangle-exclamation"></i> Резултат: ${score} от ${rows.length} верни категории.`;
-      feedback.className = 'category-sorter-feedback feedback-info';
-    }
+    feedback.textContent = `Резултат ${score} от ${rows.length}`;
+    feedback.className = `category-sorter-feedback ${score === rows.length ? 'feedback-success' : 'feedback-info'}`;
     feedback.style.display = 'block';
     submitBtn.style.display = 'none';
     resetBtn.style.display = 'inline-flex';

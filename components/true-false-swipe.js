@@ -23,9 +23,7 @@ export function render(comp) {
   ).join('');
 
   return '<div class="true-false-swipe-card" id="' + esc(id) + '">'
-    + '<div class="interactive-card-header">'
-    + '<div class="interactive-card-badge"><i class="fas fa-arrows-left-right"></i><span>' + esc(title) + '</span></div>'
-    + '</div>'
+    + '<header class="true-false-swipe-header"><h3>' + esc(title) + '</h3></header>'
     + '<div class="swipe-list">' + list + '</div>'
     + '<div class="swipe-score"><span class="swipe-score-counter">Резултат 0 от ' + cards.length + '</span></div>'
     + '</div>';

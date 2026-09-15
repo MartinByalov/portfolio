@@ -72,7 +72,7 @@ export function init(comp) {
       if (userChoice === correct) score++;
     });
 
-    showResult(`Резултат: ${score} от ${questions.length} верни.`, 'info');
+    showResult(`Резултат ${score} от ${questions.length}`, 'info');
     submitBtn.style.display = 'none';
     resetBtn.style.display = 'inline-block';
   });

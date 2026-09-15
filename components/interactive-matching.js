@@ -66,11 +66,9 @@ export function render(comp) {
 
     return `
       <div class="interactive-matching-card scattered-matching-container" id="${id}">
-        <div class="interactive-card-header">
-          <div class="interactive-card-badge">
-            <span>${esc(title)}</span>
-          </div>
-        </div>
+        <header class="scattered-matching-header">
+          <h3>${esc(title)}</h3>
+        </header>
 
         <div class="scattered-board-wrapper">
           <div class="scattered-board">
@@ -115,11 +113,9 @@ export function render(comp) {
 
   return `
     <div class="interactive-matching-card" id="${id}">
-      <div class="interactive-card-header">
-        <div class="interactive-card-badge">
-          <span>${esc(title)}</span>
-        </div>
-      </div>
+      <header class="interactive-matching-header">
+        <h3>${esc(title)}</h3>
+      </header>
       <div class="matching-list">
         ${rows}
       </div>
@@ -319,13 +315,8 @@ export function init(comp) {
       }
     });
 
-    if (correctCount === items.length) {
-      feedback.innerHTML = `<i class="fas fa-circle-check"></i> Отлично! Всички ${correctCount} понятия са свързани правилно с техните дефиниции!`;
-      feedback.className = 'matching-feedback feedback-success';
-    } else {
-      feedback.innerHTML = `<i class="fas fa-triangle-exclamation"></i> Резултат: ${correctCount} от ${items.length} верни.`;
-      feedback.className = 'matching-feedback feedback-info';
-    }
+    feedback.textContent = `Резултат ${correctCount} от ${items.length}`;
+    feedback.className = `matching-feedback ${correctCount === items.length ? 'feedback-success' : 'feedback-info'}`;
 
     feedback.style.display = 'block';
     submitBtn.style.display = 'none';

@@ -1,0 +1,2243 @@
+{
+  "title": "Learning Interaction Pattern Library",
+  "version": "0.1",
+  "count": 300,
+  "principle": "Idea bank, not a lesson template. Start from the learning action, then select or invent an interaction.",
+  "rules": [
+    "Do not select a pattern merely because it exists.",
+    "Tags describe pedagogical role; they do not prescribe the internal interaction.",
+    "A pattern may use an existing component, a generic renderer, a composition of components, or a new component.",
+    "Do not repeat the same family in one lesson without pedagogical reason.",
+    "'Бързи 5 въпроса' may mix five completely different response mechanics.",
+    "Exercise tasks may include agent-generated DOCX, PPTX, XLSX, CSV, ZIP, images, datasets or starter files.",
+    "Sandbox should permit safe experimentation with visible consequences.",
+    "Visualizations may be static, explorable or manipulable; choose the lightest adequate form.",
+    "Game framing is optional and must serve a learning action."
+  ],
+  "composition_axes": {
+    "learning_action": [
+      "recall",
+      "recognize",
+      "compare",
+      "classify",
+      "sequence",
+      "explain",
+      "diagnose",
+      "decide",
+      "predict",
+      "construct",
+      "experiment",
+      "create",
+      "reflect"
+    ],
+    "response_mechanic": [
+      "single-choice",
+      "multi-select",
+      "typed-input",
+      "drag-drop",
+      "dropdown",
+      "hotspot",
+      "draw",
+      "order",
+      "rank",
+      "match",
+      "slider",
+      "open-response",
+      "file-output",
+      "simulation-action",
+      "branch-choice"
+    ],
+    "surface": [
+      "text",
+      "card",
+      "screenshot",
+      "photo",
+      "diagram",
+      "timeline",
+      "map",
+      "table",
+      "matrix",
+      "video",
+      "audio",
+      "terminal",
+      "desktop-simulation",
+      "game-board",
+      "story-scene"
+    ],
+    "framing": [
+      "neutral",
+      "mission",
+      "detective",
+      "laboratory",
+      "control-room",
+      "helpdesk",
+      "escape-room",
+      "gameshow",
+      "competition",
+      "construction",
+      "investigation",
+      "role-play",
+      "real-work-task"
+    ],
+    "feedback": [
+      "immediate",
+      "explanatory",
+      "progressive-hints",
+      "show-consequence",
+      "model-comparison",
+      "partial-credit",
+      "retry-new-data",
+      "confidence-calibration"
+    ],
+    "progression": [
+      "single-shot",
+      "multi-round",
+      "increasing-difficulty",
+      "branching",
+      "randomized",
+      "mastery-gated",
+      "optional-timed",
+      "cumulative"
+    ],
+    "social_mode": [
+      "individual",
+      "pair",
+      "small-group",
+      "whole-class",
+      "peer-review",
+      "teacher-led"
+    ]
+  },
+  "patterns": [
+    {
+      "id": "IP-001",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Един верен отговор",
+      "description": "Един най-добър отговор с правдоподобни distractors."
+    },
+    {
+      "id": "IP-002",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Множество верни отговори",
+      "description": "Маркират се всички приложими отговори."
+    },
+    {
+      "id": "IP-003",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Вярно/Невярно",
+      "description": "Бинарна оценка на твърдение с обяснение."
+    },
+    {
+      "id": "IP-004",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Да/Не + защо",
+      "description": "След избора се посочва причина."
+    },
+    {
+      "id": "IP-005",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Отговор + увереност",
+      "description": "Отговор и отделна оценка на увереността."
+    },
+    {
+      "id": "IP-006",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Попълване с клавиатура",
+      "description": "Липсваща дума или фраза се въвежда."
+    },
+    {
+      "id": "IP-007",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Drag-the-words",
+      "description": "Думи се влачат в пропуски."
+    },
+    {
+      "id": "IP-008",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Dropdown gaps",
+      "description": "Всеки пропуск има падащ избор."
+    },
+    {
+      "id": "IP-009",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Кратък свободен отговор",
+      "description": "Термин, команда или кратка фраза."
+    },
+    {
+      "id": "IP-010",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Свободен отговор по ключови идеи",
+      "description": "Оценява се наличието на очаквани идеи."
+    },
+    {
+      "id": "IP-011",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Числов отговор с толеранс",
+      "description": "Допуска се диапазон или отклонение."
+    },
+    {
+      "id": "IP-012",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Оценка със слайдер",
+      "description": "Ученикът задава приблизителна стойност."
+    },
+    {
+      "id": "IP-013",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Избери изображение",
+      "description": "Отговорите са изображения или screenshots."
+    },
+    {
+      "id": "IP-014",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Избери аудио",
+      "description": "Отговорите са аудио примери."
+    },
+    {
+      "id": "IP-015",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Въпрос върху кадър",
+      "description": "Въпросът е върху конкретен screenshot/video frame."
+    },
+    {
+      "id": "IP-016",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Маркирай думите",
+      "description": "Маркират се термини, рискови фрази или доказателства."
+    },
+    {
+      "id": "IP-017",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Открий грешката в изречение",
+      "description": "Посочва се и се поправя грешната част."
+    },
+    {
+      "id": "IP-018",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Твърдение + доказателство",
+      "description": "Избира се отговор и после доказателство."
+    },
+    {
+      "id": "IP-019",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Кое не принадлежи?",
+      "description": "Открива се изключението и се обяснява."
+    },
+    {
+      "id": "IP-020",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Двустъпков въпрос",
+      "description": "Отговор + причина в две отделни стъпки."
+    },
+    {
+      "id": "IP-021",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Матрица Вярно/Невярно",
+      "description": "Няколко твърдения се оценяват в таблица."
+    },
+    {
+      "id": "IP-022",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Твърдение и причина",
+      "description": "Оценяват се истинност и логическа връзка."
+    },
+    {
+      "id": "IP-023",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Избери всички изображения",
+      "description": "Множество визуални отговори по условие."
+    },
+    {
+      "id": "IP-024",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Минимално достатъчен отговор",
+      "description": "Избира се най-точният неизлишен вариант."
+    },
+    {
+      "id": "IP-025",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Кое доказателство е най-силно?",
+      "description": "Избира се най-добрият източник или наблюдение."
+    },
+    {
+      "id": "IP-026",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Предвиди, после провери",
+      "description": "Първо прогноза, после reveal на резултата."
+    },
+    {
+      "id": "IP-027",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Поправи почти верния отговор",
+      "description": "Редактира се само грешната част."
+    },
+    {
+      "id": "IP-028",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Прогресивни подсказки",
+      "description": "Подсказките стават все по-конкретни."
+    },
+    {
+      "id": "IP-029",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Обясни защо отговорът е грешен",
+      "description": "Анализира се конкретна заблуда."
+    },
+    {
+      "id": "IP-030",
+      "family_id": "quick_checks",
+      "family": "Бързи проверки и тестове",
+      "name": "Mixed five",
+      "description": "Пет въпроса използват пет различни механики."
+    },
+    {
+      "id": "IP-031",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Термин-определение",
+      "description": "Свързване на понятие с точно значение."
+    },
+    {
+      "id": "IP-032",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Термин-пример",
+      "description": "Абстрактно понятие се свързва с пример."
+    },
+    {
+      "id": "IP-033",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Изображение-термин",
+      "description": "Снимка или screenshot се свързва с название."
+    },
+    {
+      "id": "IP-034",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Икона-действие",
+      "description": "UI икона се свързва с функция."
+    },
+    {
+      "id": "IP-035",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Screenshot-инструмент",
+      "description": "Интерфейс се свързва с правилното приложение."
+    },
+    {
+      "id": "IP-036",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Аудио-понятие",
+      "description": "Звук се свързва с описание."
+    },
+    {
+      "id": "IP-037",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Причина-следствие",
+      "description": "Причини се свързват с последствия."
+    },
+    {
+      "id": "IP-038",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Проблем-решение",
+      "description": "Симптом се свързва с диагностична стъпка."
+    },
+    {
+      "id": "IP-039",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Команда-резултат",
+      "description": "Команда се свързва с ефекта си."
+    },
+    {
+      "id": "IP-040",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Разширение-тип файл",
+      "description": "Файлово разширение се свързва с тип."
+    },
+    {
+      "id": "IP-041",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Софтуер-категория",
+      "description": "Програми се класифицират по предназначение."
+    },
+    {
+      "id": "IP-042",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Хардуер-функция",
+      "description": "Компонент се свързва с роля."
+    },
+    {
+      "id": "IP-043",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Роля-разрешение",
+      "description": "Потребителска роля се свързва с права."
+    },
+    {
+      "id": "IP-044",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Протокол-предназначение",
+      "description": "Протокол се свързва с функция."
+    },
+    {
+      "id": "IP-045",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Много към една категория",
+      "description": "Много елементи се влачат в кошници."
+    },
+    {
+      "id": "IP-046",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Матрица 2x2",
+      "description": "Класификация по две независими оси."
+    },
+    {
+      "id": "IP-047",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Venn placement",
+      "description": "Елементи се поставят в множества и пресечни области."
+    },
+    {
+      "id": "IP-048",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Континуум",
+      "description": "Обекти се позиционират по скала."
+    },
+    {
+      "id": "IP-049",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Квадрант",
+      "description": "Позициониране по две характеристики."
+    },
+    {
+      "id": "IP-050",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Таксономично дърво",
+      "description": "Класиране от общ клас към подвид."
+    },
+    {
+      "id": "IP-051",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Мрежа от зависимости",
+      "description": "Възли се свързват с отношения."
+    },
+    {
+      "id": "IP-052",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Намери грешната двойка",
+      "description": "Сред готови връзки се открива грешната."
+    },
+    {
+      "id": "IP-053",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Pair/No Pair",
+      "description": "Бързо решение дали две карти образуват двойка."
+    },
+    {
+      "id": "IP-054",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Memory pairs",
+      "description": "Обръщане на карти и намиране на свързани двойки."
+    },
+    {
+      "id": "IP-055",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Домино от понятия",
+      "description": "Всяка карта се закача чрез логическа връзка."
+    },
+    {
+      "id": "IP-056",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Етикетиране на схема",
+      "description": "Термини се поставят върху части на изображение."
+    },
+    {
+      "id": "IP-057",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Таблично разпределяне",
+      "description": "Елементи се влачат в клетки на таблица."
+    },
+    {
+      "id": "IP-058",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Концептуално съзвездие",
+      "description": "Централно понятие се свързва с примери и функции."
+    },
+    {
+      "id": "IP-059",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Двойно класифициране",
+      "description": "Категория и подкатегория за един елемент."
+    },
+    {
+      "id": "IP-060",
+      "family_id": "matching_classification",
+      "family": "Свързване и класифициране",
+      "name": "Класифицирай и обоснови",
+      "description": "След класиране се дава причина."
+    },
+    {
+      "id": "IP-061",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Линейно подреждане",
+      "description": "Карти се нареждат в правилна последователност."
+    },
+    {
+      "id": "IP-062",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Image sequencing",
+      "description": "Изображения се подреждат по процес или време."
+    },
+    {
+      "id": "IP-063",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Разбъркани редове код",
+      "description": "Редове код се нареждат в работещ алгоритъм."
+    },
+    {
+      "id": "IP-064",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Командна последователност",
+      "description": "Команди се нареждат безопасно и логично."
+    },
+    {
+      "id": "IP-065",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Boot sequence",
+      "description": "Етапи от включване до работна среда."
+    },
+    {
+      "id": "IP-066",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Troubleshooting sequence",
+      "description": "Диагностика от безопасно към по-инвазивно."
+    },
+    {
+      "id": "IP-067",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Времева линия",
+      "description": "Събития се поставят на дати или периоди."
+    },
+    {
+      "id": "IP-068",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Числова линия",
+      "description": "Стойности или години се поставят на скала."
+    },
+    {
+      "id": "IP-069",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Ранг по приоритет",
+      "description": "Елементи от най-важен към най-маловажен."
+    },
+    {
+      "id": "IP-070",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Причинна верига",
+      "description": "Причина -> междинен ефект -> резултат."
+    },
+    {
+      "id": "IP-071",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Преди/След",
+      "description": "Елементи около ключова промяна."
+    },
+    {
+      "id": "IP-072",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Разбъркан разказ",
+      "description": "Фрагменти се възстановяват логично."
+    },
+    {
+      "id": "IP-073",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Flowchart builder",
+      "description": "Стъпки и решения се сглобяват като процес."
+    },
+    {
+      "id": "IP-074",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Разклонена последователност",
+      "description": "Редът зависи от избор."
+    },
+    {
+      "id": "IP-075",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Подреди слоевете",
+      "description": "Архитектурни нива се нареждат вертикално."
+    },
+    {
+      "id": "IP-076",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Dependency order",
+      "description": "Нареждане според зависимости."
+    },
+    {
+      "id": "IP-077",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Конкретно към абстрактно",
+      "description": "Примери и понятия по ниво на абстракция."
+    },
+    {
+      "id": "IP-078",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Ранг по риск",
+      "description": "Действия се нареждат по риск."
+    },
+    {
+      "id": "IP-079",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Ранг по скорост",
+      "description": "Технологии се нареждат по производителност."
+    },
+    {
+      "id": "IP-080",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Algorithm cards",
+      "description": "Блокове с условия и действия се сглобяват."
+    },
+    {
+      "id": "IP-081",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Път на пакет",
+      "description": "Етапи на мрежов пакет от източник до получател."
+    },
+    {
+      "id": "IP-082",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Сглоби файлов път",
+      "description": "Устройство, папки, име и разширение."
+    },
+    {
+      "id": "IP-083",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "UI navigation path",
+      "description": "Стъпки до конкретна настройка."
+    },
+    {
+      "id": "IP-084",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Swimlane workflow",
+      "description": "Ред + отговорна роля."
+    },
+    {
+      "id": "IP-085",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Многолентова времева линия",
+      "description": "Паралелни развития в отделни линии."
+    },
+    {
+      "id": "IP-086",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Screenshot sequence",
+      "description": "Екранни снимки се подреждат като процедура."
+    },
+    {
+      "id": "IP-087",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Ранг на доказателства",
+      "description": "Източници от най-надежден към слаб."
+    },
+    {
+      "id": "IP-088",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Подреди и обясни",
+      "description": "След реда се обосновава ключова връзка."
+    },
+    {
+      "id": "IP-089",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Вмъкни липсващата стъпка",
+      "description": "Попълва се празно място в процес."
+    },
+    {
+      "id": "IP-090",
+      "family_id": "ordering",
+      "family": "Подреждане и последователност",
+      "name": "Намери излишната стъпка",
+      "description": "Открива се ненужно или опасно действие."
+    },
+    {
+      "id": "IP-091",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Информационни hotspots",
+      "description": "Клик върху части разкрива обяснения."
+    },
+    {
+      "id": "IP-092",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Find hotspot",
+      "description": "Ученикът посочва правилна област."
+    },
+    {
+      "id": "IP-093",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Find multiple hotspots",
+      "description": "Трябва да бъдат открити няколко области."
+    },
+    {
+      "id": "IP-094",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Hidden clues",
+      "description": "Скрити hotspots разкриват улики."
+    },
+    {
+      "id": "IP-095",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Labelled diagram",
+      "description": "Етикети се влачат върху схема."
+    },
+    {
+      "id": "IP-096",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Свободно анотиране",
+      "description": "Рисуване, маркиране и текст върху изображение."
+    },
+    {
+      "id": "IP-097",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Before/After slider",
+      "description": "Плъзгач сравнява две версии."
+    },
+    {
+      "id": "IP-098",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Agamotto image sequence",
+      "description": "Плъзгач показва постепенна промяна."
+    },
+    {
+      "id": "IP-099",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Image slider",
+      "description": "Поредица изображения с навигация."
+    },
+    {
+      "id": "IP-100",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Сравнителна галерия",
+      "description": "Няколко изображения се сравняват."
+    },
+    {
+      "id": "IP-101",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Zoom inspection",
+      "description": "Изследване с увеличение и панорама."
+    },
+    {
+      "id": "IP-102",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Interactive cutaway",
+      "description": "Отваряне на слоеве към вътрешна структура."
+    },
+    {
+      "id": "IP-103",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Exploded view",
+      "description": "Частите на система се раздалечават визуално."
+    },
+    {
+      "id": "IP-104",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "X-ray layers",
+      "description": "Слоеве се включват и изключват."
+    },
+    {
+      "id": "IP-105",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "System map",
+      "description": "Интерактивна карта на компоненти и връзки."
+    },
+    {
+      "id": "IP-106",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Interactive flowchart",
+      "description": "Възли на процес се изследват."
+    },
+    {
+      "id": "IP-107",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Data-flow animation",
+      "description": "Данни се движат между елементи."
+    },
+    {
+      "id": "IP-108",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Network topology explorer",
+      "description": "Изследване на възли и връзки."
+    },
+    {
+      "id": "IP-109",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Hierarchy tree",
+      "description": "Йерархия от корен към поднива."
+    },
+    {
+      "id": "IP-110",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Interactive mind map",
+      "description": "Клонове се разгъват и свиват."
+    },
+    {
+      "id": "IP-111",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Venn explorer",
+      "description": "Общите и различни области са интерактивни."
+    },
+    {
+      "id": "IP-112",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Matrix explorer",
+      "description": "Клетки разкриват примери по две измерения."
+    },
+    {
+      "id": "IP-113",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Interactive scale",
+      "description": "Обекти върху обща скала."
+    },
+    {
+      "id": "IP-114",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Scale comparison",
+      "description": "Сравнение на много различни величини."
+    },
+    {
+      "id": "IP-115",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Multimedia timeline",
+      "description": "Събития с текст, снимка, аудио и видео."
+    },
+    {
+      "id": "IP-116",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Interactive map",
+      "description": "Точки, области и маршрути."
+    },
+    {
+      "id": "IP-117",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Virtual tour 360",
+      "description": "Панорамна среда с hotspots и задачи."
+    },
+    {
+      "id": "IP-118",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Screenshot walkthrough",
+      "description": "Реален интерфейс като интерактивно ръководство."
+    },
+    {
+      "id": "IP-119",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Interface lens",
+      "description": "Един процес през различни UI режими."
+    },
+    {
+      "id": "IP-120",
+      "family_id": "visualization",
+      "family": "Визуализации и пространствено изследване",
+      "name": "Interactive chart",
+      "description": "Графика с hover, филтри, избор и сравнение."
+    },
+    {
+      "id": "IP-121",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Стани богат",
+      "description": "Нива, нарастваща трудност и помощни механики."
+    },
+    {
+      "id": "IP-122",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Gameshow quiz",
+      "description": "Точки, време, бонуси и рундове."
+    },
+    {
+      "id": "IP-123",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Time to Climb",
+      "description": "Верните отговори движат аватар нагоре."
+    },
+    {
+      "id": "IP-124",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Horse race",
+      "description": "Отговорите придвижват участник по писта."
+    },
+    {
+      "id": "IP-125",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Maze chase",
+      "description": "Движение към правилна зона и избягване на грешни."
+    },
+    {
+      "id": "IP-126",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Whack-a-mole",
+      "description": "Избират се само правилните появяващи се елементи."
+    },
+    {
+      "id": "IP-127",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Balloon pop",
+      "description": "Балони носят отговори или понятия."
+    },
+    {
+      "id": "IP-128",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Airplane target",
+      "description": "Обект се насочва към правилния отговор."
+    },
+    {
+      "id": "IP-129",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Random wheel",
+      "description": "Случайна задача, термин или сценарий."
+    },
+    {
+      "id": "IP-130",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Random cards",
+      "description": "Теглене на случайни карти."
+    },
+    {
+      "id": "IP-131",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Open the box",
+      "description": "Кутии разкриват въпроси или clues."
+    },
+    {
+      "id": "IP-132",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Bingo",
+      "description": "Клетки се маркират при разпознаване."
+    },
+    {
+      "id": "IP-133",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Escape room",
+      "description": "Пъзели отключват кодове и следващи пространства."
+    },
+    {
+      "id": "IP-134",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Breakout locks",
+      "description": "Всеки проблем дава част от код."
+    },
+    {
+      "id": "IP-135",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Scavenger hunt",
+      "description": "Търсене на clues в различни ресурси."
+    },
+    {
+      "id": "IP-136",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Detective case",
+      "description": "Доказателства водят до заключение."
+    },
+    {
+      "id": "IP-137",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Boss battle",
+      "description": "Финална комплексна задача обединява знания."
+    },
+    {
+      "id": "IP-138",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Level ladder",
+      "description": "Постепенно усложняващи се нива."
+    },
+    {
+      "id": "IP-139",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Pixel reveal",
+      "description": "Верни отговори разкриват изображение."
+    },
+    {
+      "id": "IP-140",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Jigsaw puzzle",
+      "description": "Сглобяване на изображение или схема."
+    },
+    {
+      "id": "IP-141",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Team puzzle",
+      "description": "Групите решават различни части на общ проблем."
+    },
+    {
+      "id": "IP-142",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Board game",
+      "description": "Полета по дъска отключват задачи."
+    },
+    {
+      "id": "IP-143",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Dice path",
+      "description": "Зар определя движение или тип задача."
+    },
+    {
+      "id": "IP-144",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Card battle",
+      "description": "Карти се сравняват по характеристика."
+    },
+    {
+      "id": "IP-145",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Jeopardy board",
+      "description": "Категории и стойности на въпросите."
+    },
+    {
+      "id": "IP-146",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Knowledge auction",
+      "description": "Групи наддават увереност за решение."
+    },
+    {
+      "id": "IP-147",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Resource management",
+      "description": "Ограничени ресурси се разпределят за цел."
+    },
+    {
+      "id": "IP-148",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Speed sorting",
+      "description": "Бързо класифициране под умерено време."
+    },
+    {
+      "id": "IP-149",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Streak challenge",
+      "description": "Серия от последователни правилни решения."
+    },
+    {
+      "id": "IP-150",
+      "family_id": "games",
+      "family": "Игрови формати",
+      "name": "Impostor",
+      "description": "Един елемент нарушава правилото и трябва да бъде открит."
+    },
+    {
+      "id": "IP-151",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Branching scenario",
+      "description": "Изборите определят следващата ситуация."
+    },
+    {
+      "id": "IP-152",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Choose your own adventure",
+      "description": "Различни пътища през съдържанието."
+    },
+    {
+      "id": "IP-153",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Incident triage",
+      "description": "Проблеми се подреждат по спешност."
+    },
+    {
+      "id": "IP-154",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Helpdesk ticket",
+      "description": "Ticket със симптоми и избор на следваща проверка."
+    },
+    {
+      "id": "IP-155",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "User persona",
+      "description": "Решение според нужди на конкретен потребител."
+    },
+    {
+      "id": "IP-156",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Ethics dilemma",
+      "description": "Сравнение на решения по последствия."
+    },
+    {
+      "id": "IP-157",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Permissions decision",
+      "description": "Задаване на минимално необходими права."
+    },
+    {
+      "id": "IP-158",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Security warning scenario",
+      "description": "Реакция на подозрителен prompt, файл или линк."
+    },
+    {
+      "id": "IP-159",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Diagnose from symptoms",
+      "description": "Причина от набор симптоми."
+    },
+    {
+      "id": "IP-160",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Compare solutions",
+      "description": "Две решения по критерии."
+    },
+    {
+      "id": "IP-161",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Budget configuration",
+      "description": "Конфигурация при ограничен бюджет."
+    },
+    {
+      "id": "IP-162",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Procurement decision",
+      "description": "Избор между предложения и компромиси."
+    },
+    {
+      "id": "IP-163",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Migration plan",
+      "description": "Планиране на преминаване между системи."
+    },
+    {
+      "id": "IP-164",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Upgrade decision",
+      "description": "Обновяване според ограничения и полза."
+    },
+    {
+      "id": "IP-165",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Choose the OS",
+      "description": "Избор на ОС по хардуер и приложения."
+    },
+    {
+      "id": "IP-166",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Device recommendation",
+      "description": "Избор на устройство за потребност."
+    },
+    {
+      "id": "IP-167",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Trade-off challenge",
+      "description": "Баланс цена, скорост, сигурност и удобство."
+    },
+    {
+      "id": "IP-168",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Role-play chat",
+      "description": "Разговор с потребител или администратор."
+    },
+    {
+      "id": "IP-169",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Virtual colleague",
+      "description": "Персона реагира според отговорите."
+    },
+    {
+      "id": "IP-170",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Inbox simulation",
+      "description": "Съобщения се преглеждат и приоритизират."
+    },
+    {
+      "id": "IP-171",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Support queue",
+      "description": "Няколко заявки чакат решение."
+    },
+    {
+      "id": "IP-172",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Repair console",
+      "description": "Логове и симптоми водят до диагностични действия."
+    },
+    {
+      "id": "IP-173",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Code review",
+      "description": "Търсене на грешки и рискове в решение."
+    },
+    {
+      "id": "IP-174",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Evidence courtroom",
+      "description": "Твърдение се защитава чрез доказателства."
+    },
+    {
+      "id": "IP-175",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "News verification case",
+      "description": "Публикация се проверява чрез източници."
+    },
+    {
+      "id": "IP-176",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Source triangulation",
+      "description": "Няколко източника се сравняват."
+    },
+    {
+      "id": "IP-177",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "What next?",
+      "description": "Сценарият спира за избор на следващо действие."
+    },
+    {
+      "id": "IP-178",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Consequence chain",
+      "description": "Всяко решение показва последствие."
+    },
+    {
+      "id": "IP-179",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Counterfactual",
+      "description": "Какво би станало при промяна на предпоставка."
+    },
+    {
+      "id": "IP-180",
+      "family_id": "scenarios",
+      "family": "Казуси и решения",
+      "name": "Decision matrix",
+      "description": "Варианти по критерии и тежести."
+    },
+    {
+      "id": "IP-181",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Live search sandbox",
+      "description": "Оператори се въвеждат и резултатът се променя."
+    },
+    {
+      "id": "IP-182",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Query builder",
+      "description": "Заявка се конструира от блокове."
+    },
+    {
+      "id": "IP-183",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Filesystem sandbox",
+      "description": "Създаване, местене, преименуване и търсене на файлове."
+    },
+    {
+      "id": "IP-184",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Wildcard sandbox",
+      "description": "Маски с * и ? филтрират виртуална папка."
+    },
+    {
+      "id": "IP-185",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Command-line sandbox",
+      "description": "Ограничен безопасен терминал."
+    },
+    {
+      "id": "IP-186",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Packet journey simulator",
+      "description": "Мрежов пакет преминава през устройства."
+    },
+    {
+      "id": "IP-187",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Topology builder",
+      "description": "Изграждане на мрежова топология."
+    },
+    {
+      "id": "IP-188",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Process scheduler",
+      "description": "Приоритети и CPU време."
+    },
+    {
+      "id": "IP-189",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Memory allocation lab",
+      "description": "RAM и виртуална памет."
+    },
+    {
+      "id": "IP-190",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "CPU queue lab",
+      "description": "Задачи с различна продължителност в опашка."
+    },
+    {
+      "id": "IP-191",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Permissions sandbox",
+      "description": "Права върху файлове и ресурси."
+    },
+    {
+      "id": "IP-192",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "User-role simulator",
+      "description": "Смяна на роля и достъп."
+    },
+    {
+      "id": "IP-193",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Boot simulator",
+      "description": "Firmware -> kernel -> работна среда."
+    },
+    {
+      "id": "IP-194",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Service manager simulator",
+      "description": "Стартиране и спиране на услуги."
+    },
+    {
+      "id": "IP-195",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Spreadsheet formula lab",
+      "description": "Формули и незабавно преизчисляване."
+    },
+    {
+      "id": "IP-196",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Data cleaning lab",
+      "description": "Почистване на замърсени данни."
+    },
+    {
+      "id": "IP-197",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Chart builder lab",
+      "description": "Различни визуализации на едни данни."
+    },
+    {
+      "id": "IP-198",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Database query sandbox",
+      "description": "Опростени заявки върху учебна таблица."
+    },
+    {
+      "id": "IP-199",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Code sandbox",
+      "description": "Редактиране и изпълнение на кратък код."
+    },
+    {
+      "id": "IP-200",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Algorithm runner",
+      "description": "Стъпково изпълнение със състояния."
+    },
+    {
+      "id": "IP-201",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Sorting visualizer",
+      "description": "Визуализация на алгоритъм за сортиране."
+    },
+    {
+      "id": "IP-202",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Storage lab",
+      "description": "Капацитет, файлове и свободно място."
+    },
+    {
+      "id": "IP-203",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Device configuration lab",
+      "description": "Настройки на виртуално устройство."
+    },
+    {
+      "id": "IP-204",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Backup/Restore lab",
+      "description": "Архивиране, загуба и възстановяване."
+    },
+    {
+      "id": "IP-205",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Cloud sync simulator",
+      "description": "Синхронизация и конфликтни версии."
+    },
+    {
+      "id": "IP-206",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Version-control mini lab",
+      "description": "Версии, diff и възстановяване."
+    },
+    {
+      "id": "IP-207",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Collaboration permissions lab",
+      "description": "Viewer/Commenter/Editor в симулиран документ."
+    },
+    {
+      "id": "IP-208",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Password-strength lab",
+      "description": "Промяна на параметри и наблюдение на устойчивост."
+    },
+    {
+      "id": "IP-209",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "System builder lab",
+      "description": "Комбиниране и проверка на съвместимост."
+    },
+    {
+      "id": "IP-210",
+      "family_id": "sandbox",
+      "family": "Sandbox и симулации",
+      "name": "Fault injection lab",
+      "description": "Умишлена грешка и наблюдение на симптомите."
+    },
+    {
+      "id": "IP-211",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Starter file",
+      "description": "Генериран начален DOCX/PPTX/XLSX/CSV/ZIP."
+    },
+    {
+      "id": "IP-212",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Broken starter file",
+      "description": "Файл с нарочни грешки за поправяне."
+    },
+    {
+      "id": "IP-213",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Partially completed file",
+      "description": "Довършване на частично готов артефакт."
+    },
+    {
+      "id": "IP-214",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Two-version comparison",
+      "description": "Сравнение на две версии на файл."
+    },
+    {
+      "id": "IP-215",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Document formatting task",
+      "description": "Форматиране по конкретни критерии."
+    },
+    {
+      "id": "IP-216",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Spreadsheet task",
+      "description": "Формули, филтри, сортиране и графики."
+    },
+    {
+      "id": "IP-217",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Presentation task",
+      "description": "Изграждане на слайдове от сурово съдържание."
+    },
+    {
+      "id": "IP-218",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Image editing task",
+      "description": "Редактиране на предоставено изображение."
+    },
+    {
+      "id": "IP-219",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "File organization pack",
+      "description": "ZIP с разбъркани файлове за организиране."
+    },
+    {
+      "id": "IP-220",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Naming convention task",
+      "description": "Преименуване по стандарт."
+    },
+    {
+      "id": "IP-221",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Search-in-files task",
+      "description": "Търсене в предоставена папка."
+    },
+    {
+      "id": "IP-222",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Data import task",
+      "description": "Импорт и преобразуване на CSV/TXT."
+    },
+    {
+      "id": "IP-223",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Template completion",
+      "description": "Попълване на структуриран шаблон."
+    },
+    {
+      "id": "IP-224",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Generate report",
+      "description": "Кратък отчет от извършена дейност."
+    },
+    {
+      "id": "IP-225",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Screenshot evidence",
+      "description": "Заснемане на конкретно състояние на интерфейс."
+    },
+    {
+      "id": "IP-226",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Export challenge",
+      "description": "Експорт в правилен формат и настройки."
+    },
+    {
+      "id": "IP-227",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Create infographic",
+      "description": "Създаване на визуално резюме."
+    },
+    {
+      "id": "IP-228",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Create diagram",
+      "description": "Блок-схема, mind map или архитектурна схема."
+    },
+    {
+      "id": "IP-229",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Build checklist",
+      "description": "Създаване на контролен списък."
+    },
+    {
+      "id": "IP-230",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Search log",
+      "description": "Запис на заявка, промяна, резултат и извод."
+    },
+    {
+      "id": "IP-231",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Source record",
+      "description": "Автор, дата, URL и оценка на надеждност."
+    },
+    {
+      "id": "IP-232",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Folder tree deliverable",
+      "description": "Проектиране на папкова структура."
+    },
+    {
+      "id": "IP-233",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Peer review file",
+      "description": "Оценяване на чужд артефакт по рубрика."
+    },
+    {
+      "id": "IP-234",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Self-check before submit",
+      "description": "Самопроверка преди предаване."
+    },
+    {
+      "id": "IP-235",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Before/after artifact",
+      "description": "Оригинал и подобрена версия."
+    },
+    {
+      "id": "IP-236",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Annotated screenshot",
+      "description": "Screenshot със стрелки и бележки."
+    },
+    {
+      "id": "IP-237",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Micro-screencast",
+      "description": "30-90 секунди екранно обяснение."
+    },
+    {
+      "id": "IP-238",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Audio explanation",
+      "description": "Кратко устно обяснение."
+    },
+    {
+      "id": "IP-239",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Create a tutorial",
+      "description": "Ръководство със стъпки и screenshots."
+    },
+    {
+      "id": "IP-240",
+      "family_id": "authentic_tasks",
+      "family": "Реални практически задачи и ресурсни файлове",
+      "name": "Create a peer activity",
+      "description": "Ученикът създава задача за съучениците."
+    },
+    {
+      "id": "IP-241",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Think-Pair-Share",
+      "description": "Самостоятелно, по двойки, после клас."
+    },
+    {
+      "id": "IP-242",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Poll-Discuss-Poll",
+      "description": "Гласуване, обсъждане и второ гласуване."
+    },
+    {
+      "id": "IP-243",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Agree/Disagree spectrum",
+      "description": "Позиция по континуум."
+    },
+    {
+      "id": "IP-244",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Four corners",
+      "description": "Избор между четири позиции."
+    },
+    {
+      "id": "IP-245",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Structured debate",
+      "description": "Аргументи, доказателства и rebuttal."
+    },
+    {
+      "id": "IP-246",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Predict-Vote-Reveal",
+      "description": "Прогноза, гласуване, демонстрация."
+    },
+    {
+      "id": "IP-247",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Misconception poll",
+      "description": "Гласуване между чести заблуди."
+    },
+    {
+      "id": "IP-248",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Rank and defend",
+      "description": "Подреждане и защита на първите позиции."
+    },
+    {
+      "id": "IP-249",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Case discussion",
+      "description": "Казус с отворени въпроси."
+    },
+    {
+      "id": "IP-250",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Compare two solutions",
+      "description": "Анализ на две ученически решения."
+    },
+    {
+      "id": "IP-251",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Peer explanation",
+      "description": "Обяснение на партньор."
+    },
+    {
+      "id": "IP-252",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "One-minute paper",
+      "description": "Най-важната идея за една минута."
+    },
+    {
+      "id": "IP-253",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Muddiest point",
+      "description": "Най-неясната част."
+    },
+    {
+      "id": "IP-254",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "3-2-1 reflection",
+      "description": "3 идеи, 2 връзки, 1 въпрос."
+    },
+    {
+      "id": "IP-255",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Exit ticket",
+      "description": "Един кратък финален въпрос."
+    },
+    {
+      "id": "IP-256",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Confidence scale",
+      "description": "Самооценка на увереност по умение."
+    },
+    {
+      "id": "IP-257",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Before/after confidence",
+      "description": "Сравнение преди и след."
+    },
+    {
+      "id": "IP-258",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Reflection journal",
+      "description": "Кратък дневник за стратегия и трудност."
+    },
+    {
+      "id": "IP-259",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Plus/Delta",
+      "description": "Какво работи и какво да се промени."
+    },
+    {
+      "id": "IP-260",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Two stars and a wish",
+      "description": "Две силни страни и едно подобрение."
+    },
+    {
+      "id": "IP-261",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Self-assessment rubric",
+      "description": "Самооценка по критерии."
+    },
+    {
+      "id": "IP-262",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Peer feedback rubric",
+      "description": "Структурирана обратна връзка."
+    },
+    {
+      "id": "IP-263",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Question parking lot",
+      "description": "Събиране на оставащи въпроси."
+    },
+    {
+      "id": "IP-264",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Anonymous board",
+      "description": "Анонимни идеи и въпроси."
+    },
+    {
+      "id": "IP-265",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Collaborative board",
+      "description": "Общи карти с примери и решения."
+    },
+    {
+      "id": "IP-266",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Collective mind map",
+      "description": "Обща концептуална карта."
+    },
+    {
+      "id": "IP-267",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Jigsaw experts",
+      "description": "Групи стават експерти по различни части."
+    },
+    {
+      "id": "IP-268",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Role cards",
+      "description": "Позиции от различни роли."
+    },
+    {
+      "id": "IP-269",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Silent debate",
+      "description": "Писмено аргументиране без устен спор."
+    },
+    {
+      "id": "IP-270",
+      "family_id": "discussion_reflection",
+      "family": "Дискусия и рефлексия",
+      "name": "Consensus challenge",
+      "description": "Едно общо решение и документиран компромис."
+    },
+    {
+      "id": "IP-271",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Interactive video",
+      "description": "Видео с въпроси и пояснения в ключови моменти."
+    },
+    {
+      "id": "IP-272",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Branching video",
+      "description": "Изборът прехвърля към различен сегмент."
+    },
+    {
+      "id": "IP-273",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Video hotspots",
+      "description": "Интерактивни области върху видео."
+    },
+    {
+      "id": "IP-274",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Timestamp challenge",
+      "description": "Посочване на точен момент."
+    },
+    {
+      "id": "IP-275",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Video annotation",
+      "description": "Маркиране на ключови моменти."
+    },
+    {
+      "id": "IP-276",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Audio dictation",
+      "description": "Слушане и възстановяване на текст/команда."
+    },
+    {
+      "id": "IP-277",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Audio identification",
+      "description": "Разпознаване на аудио пример."
+    },
+    {
+      "id": "IP-278",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Transcript highlighter",
+      "description": "Маркиране на ключови фрази в транскрипт."
+    },
+    {
+      "id": "IP-279",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Podcast segments",
+      "description": "Подреждане и анализ на аудио откъси."
+    },
+    {
+      "id": "IP-280",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Narrated infographic",
+      "description": "Инфографика с озвучени пояснения."
+    },
+    {
+      "id": "IP-281",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Interactive slideshow",
+      "description": "Слайдове с reveal, hotspots и въпроси."
+    },
+    {
+      "id": "IP-282",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Card carousel",
+      "description": "Хоризонтална поредица от карти."
+    },
+    {
+      "id": "IP-283",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Scrollytelling",
+      "description": "Скролването управлява разказ и визуализация."
+    },
+    {
+      "id": "IP-284",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Visual story",
+      "description": "Изображения и кратък текст изграждат разказ."
+    },
+    {
+      "id": "IP-285",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Interactive comic",
+      "description": "Диалогови сцени с избори."
+    },
+    {
+      "id": "IP-286",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Storyboard",
+      "description": "Процес или история като кадри."
+    },
+    {
+      "id": "IP-287",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Timeline story",
+      "description": "Медиен разказ по времева линия."
+    },
+    {
+      "id": "IP-288",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Before/after narrative",
+      "description": "Промяна чрез две състояния."
+    },
+    {
+      "id": "IP-289",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Photo essay",
+      "description": "Поредица снимки носи основната информация."
+    },
+    {
+      "id": "IP-290",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Virtual museum",
+      "description": "Свободно изследване на експонати."
+    },
+    {
+      "id": "IP-291",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Map story",
+      "description": "Разказ по места и маршрути."
+    },
+    {
+      "id": "IP-292",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "360 guided tour",
+      "description": "Панорамна среда с задачи."
+    },
+    {
+      "id": "IP-293",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Guided screenshot tour",
+      "description": "Фокус върху части на истински интерфейс."
+    },
+    {
+      "id": "IP-294",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Screencast walkthrough",
+      "description": "Екранна демонстрация със стопове за мислене."
+    },
+    {
+      "id": "IP-295",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Animated diagram",
+      "description": "Контролирана анимация на структура или поток."
+    },
+    {
+      "id": "IP-296",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Step guide",
+      "description": "Стъпки една по една."
+    },
+    {
+      "id": "IP-297",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Progressive disclosure",
+      "description": "Сложността се разкрива постепенно."
+    },
+    {
+      "id": "IP-298",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Click/Hover reveal",
+      "description": "Обяснение при взаимодействие с обект."
+    },
+    {
+      "id": "IP-299",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Layered image",
+      "description": "Превключваеми информационни слоеве."
+    },
+    {
+      "id": "IP-300",
+      "family_id": "media_story",
+      "family": "Медия и интерактивен разказ",
+      "name": "Digital bookshelf",
+      "description": "Визуална библиотека от ресурси."
+    }
+  ],
+  "research_sources": [
+    {
+      "name": "H5P",
+      "url": "https://h5p.org/content-types-and-applications"
+    },
+    {
+      "name": "LearningApps",
+      "url": "https://learningapps.org/createApp.php"
+    },
+    {
+      "name": "Wordwall",
+      "url": "https://wordwall.net/features"
+    },
+    {
+      "name": "Genially Gamification",
+      "url": "https://genially.com/features/gamification/"
+    },
+    {
+      "name": "Moodle Question Types",
+      "url": "https://docs.moodle.org/501/en/question_types"
+    },
+    {
+      "name": "Nearpod Formative Assessment",
+      "url": "https://nearpod.com/formative-assessment"
+    },
+    {
+      "name": "Articulate Advanced Interactivity",
+      "url": "https://www.articulate.com/features/advanced-interactivity/"
+    }
+  ]
+}

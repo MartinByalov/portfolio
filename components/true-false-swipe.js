@@ -27,7 +27,7 @@ export function render(comp) {
     + '<div class="interactive-card-badge"><i class="fas fa-arrows-left-right"></i><span>' + esc(title) + '</span></div>'
     + '</div>'
     + '<div class="swipe-list">' + list + '</div>'
-    + '<div class="swipe-score"><span class="swipe-score-counter">Резултат: 0 от ' + cards.length + '</span></div>'
+    + '<div class="swipe-score"><span class="swipe-score-counter">Резултат 0 от ' + cards.length + '</span></div>'
     + '</div>';
 }
 
@@ -44,7 +44,7 @@ export function init(comp) {
       if (c.classList.contains('answered-ok')) { score++; answered++; }
       else if (c.classList.contains('answered-bad')) { answered++; }
     });
-    if (scoreEl) scoreEl.textContent = 'Резултат: ' + score + ' от ' + cards.length + ' верни.';
+    if (scoreEl) scoreEl.textContent = 'Резултат ' + score + ' от ' + cards.length;
   }
 
   cards.forEach(card => {

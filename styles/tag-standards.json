@@ -70,6 +70,16 @@
       "borderColor": "#d5d9e5",
       "icon": "fas fa-book-bookmark",
       "description": "Основни понятия и терминология по урока."
+    },
+    {
+      "name": "Sandbox",
+      "variant": "sandbox",
+      "tone": "accent",
+      "color": "#9a3412",
+      "backgroundColor": "#fff7ed",
+      "borderColor": "#fdba74",
+      "icon": "fas fa-flask",
+      "description": "Безопасна среда за експериментиране и проследяване на процеси."
     }
   ]
 }

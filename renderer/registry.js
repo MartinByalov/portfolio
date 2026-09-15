@@ -58,7 +58,7 @@ import * as GlossaryList from '../components/glossary-list.js';
 import * as SystemBuilderLab from '../components/system-builder-lab.js';
 import * as SystemAnatomyMap from '../components/system-anatomy-map.js';
 import * as SequenceBuilder from '../components/sequence-builder.js';
-import * as OsControlRoom from '../components/os-control-room.js';
+import * as SessionReconstructor from '../components/session-reconstructor.js';
 
 const registry = {
   'text-group': TextGroup,
@@ -117,10 +117,10 @@ const registry = {
   'interactive-cards': InteractiveCards,
   'interactive-diagram': InteractiveDiagram,
   'glossary-list': GlossaryList,
-  'system-builder-lab': SystemBuilderLab,
   'system-anatomy-map': SystemAnatomyMap,
+  'system-builder-lab': SystemBuilderLab,
   'sequence-builder': SequenceBuilder,
-  'os-control-room': OsControlRoom,
+  'session-reconstructor': SessionReconstructor,
 };
 
 export function renderComponent(comp) {

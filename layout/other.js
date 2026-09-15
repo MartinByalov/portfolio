@@ -57,7 +57,7 @@ function renderCardsCatalog() {
     <div class="other-catalog-container">
       <div class="other-cards-grid">
         <!-- КАРТА 1: NFT ГЕНЕРАТОР (с avatar.png за фон) -->
-        <a href="#/other/nft-generator" class="other-card nft-card" id="cardNftGenerator">
+        <a href="#/blog/nft-generator" class="other-card nft-card" id="cardNftGenerator">
           <div class="other-card-content">
             <div class="other-card-badge-row">
               <span class="other-card-badge orange">
@@ -84,7 +84,7 @@ function renderCardsCatalog() {
         </a>
 
         <!-- КАРТА 2: ДИАГРАМИ С GRAPH.JS -->
-        <a href="#/other/charts" class="other-card charts-card" id="cardCharts">
+        <a href="#/blog/charts" class="other-card charts-card" id="cardCharts">
           <div class="other-card-content">
             <div class="other-card-badge-row">
               <span class="other-card-badge blue">
@@ -121,7 +121,7 @@ function renderNftTutorial() {
   return `
     <div class="tutorial-view-container">
       <div class="tutorial-top-bar">
-        <a href="#/other" class="tutorial-back-btn">
+        <a href="#/blog" class="tutorial-back-btn">
           <i class="fa-solid fa-arrow-left"></i> Обратно
         </a>
       </div>
@@ -447,7 +447,7 @@ function renderChartsTutorial() {
   return `
     <div class="tutorial-view-container">
       <div class="tutorial-top-bar">
-        <a href="#/other" class="tutorial-back-btn">
+        <a href="#/blog" class="tutorial-back-btn">
           <i class="fa-solid fa-arrow-left"></i> Обратно
         </a>
       </div>

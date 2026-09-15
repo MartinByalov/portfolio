@@ -38,7 +38,7 @@ function getNavItems(mode) {
       { icon: 'bx bx-calculator',  label: 'Калкулатори',       href: 'tools/calculators/index.html?mode=learning', 'data-nav': 'learning' },
       { icon: 'bx bx-book',        label: 'Речник',            href: '#/dictionary', 'data-nav': 'learning' },
       { icon: 'bx bx-code-alt',    label: 'Софтуер',           href: '#/software',   'data-nav': 'learning' },
-      { icon: 'bx bx-layer',       label: 'Други',             href: '#/other',      'data-nav': 'learning' },
+      { icon: 'bx bx-layer',       label: 'Блог',              href: '#/blog',       'data-nav': 'learning' },
       { icon: 'bx bx-user-pin',    label: 'За мен',            href: '#/about',      'data-nav': 'learning' }
     ];
   }

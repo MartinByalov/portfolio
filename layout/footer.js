@@ -7,7 +7,7 @@ export function render() {
         <div class="footer-col col-contact">
           <h4 class="col-title">Контакти</h4>
           <p class="footer-phone-only">Тел: <a href="tel:+359876311455">+359876311455</a></p>
-          <p class="footer-email-only">Имейл: <a href="mailto:byalov.v.martin@gmail.com">byalov.v.martin@gmail.com</a></p>
+          <p class="footer-email-only">Email: <a href="mailto:byalov.v.martin@gmail.com">byalov.v.martin@gmail.com</a></p>
           <div class="map-widget">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2934.282173809726!2d23.326219650804765!3d42.65393897916878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa844f44a22e1d%3A0x8b0a4e232c8f84bc!2z0KTQsNC60YPQu9GM0YLQtdGCINCc0LjRg9C70LjQuSDQvNC10LvQuNGH0LXQu9Cw!5e0!3m2!1sbg!2sbg"

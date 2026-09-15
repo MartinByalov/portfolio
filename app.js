@@ -266,7 +266,7 @@ async function route() {
       document.title = `Софтуер - ${siteSuffix}`;
       viewRoot.innerHTML = Software.renderSoftwarePage();
       requestAnimationFrame(() => Software.initSoftwarePage());
-    } else if (parts[0] === 'other' || parts[0] === 'tutorials') {
+    } else if (parts[0] === 'blog' || parts[0] === 'other' || parts[0] === 'tutorials') {
       const sub = parts[1];
       if (sub === 'nft-generator') {
         Header.setTitle('Генератор на NFT', 'fa-solid fa-cube');
@@ -275,8 +275,8 @@ async function route() {
         Header.setTitle('Диаграми с Graph.js', 'fa-solid fa-chart-line');
         document.title = `Диаграми с Graph.js - ${siteSuffix}`;
       } else {
-        Header.setTitle('Други', 'fa-solid fa-shapes');
-        document.title = `Други - ${siteSuffix}`;
+        Header.setTitle('Блог', 'fa-solid fa-shapes');
+        document.title = `Блог - ${siteSuffix}`;
       }
       viewRoot.innerHTML = Other.renderOtherPage(sub);
       requestAnimationFrame(() => Other.initOtherPage(sub));

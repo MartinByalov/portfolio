@@ -49,6 +49,24 @@ function renderImagePlaceholderBlock(b) {
   const desc = b.description || b.desc || '';
   const icon = b.icon || 'fas fa-image';
   const step = b.step ? '<span class="placeholder-step">' + esc(b.step) + '</span>' : '';
+  const path = b.src || b.path || b.fileName || '';
+  if (path) {
+    return '<figure class="lb-image image-placeholder-wrapper" style="margin: 1.5rem 0; text-align: center;">'
+      + '<img src="' + esc(path) + '" alt="' + esc(label) + '" loading="lazy" style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #e2e8f0; display: block; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.05);" onerror="this.style.display=\'none\'; if(this.nextElementSibling) this.nextElementSibling.style.display=\'block\';">'
+      + '<div class="lesson-image-placeholder" style="display: none;">'
+      + '<div class="placeholder-badge"><i class="fas fa-camera"></i> ' + (step || 'Екранна снимка (Placeholder)') + '</div>'
+      + '<div class="placeholder-body">'
+      + '<div class="placeholder-icon-wrap"><i class="' + esc(icon) + '"></i></div>'
+      + '<div class="placeholder-text-wrap">'
+      + '<h4 class="placeholder-heading">' + esc(label) + '</h4>'
+      + (desc ? '<p class="placeholder-desc">' + esc(desc) + '</p>' : '')
+      + '<div class="placeholder-file-path" style="margin-top: 8px; font-family: monospace; font-size: 0.85rem; color: #475569; background: #e2e8f0; padding: 4px 10px; border-radius: 6px; display: inline-block;"><i class="fas fa-file-image" style="margin-right: 6px; color: #64748b;"></i>' + esc(path) + '</div>'
+      + '</div>'
+      + '</div>'
+      + '</div>'
+      + (label || desc ? '<figcaption style="margin-top: 0.6rem; font-size: 0.88rem; color: #64748b;"><strong>' + esc(label) + '</strong>' + (desc ? ' – ' + esc(desc) : '') + '</figcaption>' : '')
+      + '</figure>';
+  }
   return '<div class="lesson-image-placeholder">'
     + '<div class="placeholder-badge"><i class="fas fa-camera"></i> ' + (step || 'Екранна снимка (Placeholder)') + '</div>'
     + '<div class="placeholder-body">'

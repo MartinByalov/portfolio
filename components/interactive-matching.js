@@ -315,7 +315,7 @@ export function init(comp) {
       }
     });
 
-    feedback.textContent = `Резултат ${correctCount} от ${items.length}`;
+    feedback.textContent = `Резултат ${correctCount} от ${items.length}.`;
     feedback.className = `matching-feedback ${correctCount === items.length ? 'feedback-success' : 'feedback-info'}`;
 
     feedback.style.display = 'block';

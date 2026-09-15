@@ -15,7 +15,6 @@ export function render(comp) {
   return `
     <div id="${esc(id)}" class="os-subsystems-workbench">
       <div class="os-wb-header">
-        <span class="os-wb-badge"><i class="fas fa-cubes"></i> Системни подсистеми</span>
         <h3>${esc(title)}</h3>
         <p>${esc(subtitle)}</p>
       </div>

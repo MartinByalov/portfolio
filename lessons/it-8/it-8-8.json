@@ -311,7 +311,7 @@
           "id": "peripherals-task-item",
           "title": "Задача",
           "tone": "blue",
-          "icon": "fas fa-laptop-code",
+          "icon": "fas fa-list-check",
           "content": [
             {
               "type": "text",
@@ -606,7 +606,7 @@
     {
       "type": "tag",
       "id": "exercise-tag",
-      "icon": "fas fa-laptop-code",
+      "icon": "fas fa-dumbbell",
       "text": "Упражнение",
       "modalTarget": "exerciseModal",
       "tone": "green",

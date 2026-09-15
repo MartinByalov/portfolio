@@ -18,7 +18,7 @@ export function render(comp) {
     + '<button type="button" class="btn-activity swipe-btn swipe-true" data-val="true"><i class="fas fa-check"></i> Вярно</button>'
     + '<button type="button" class="btn-activity swipe-btn swipe-false" data-val="false"><i class="fas fa-xmark"></i> Лъжа</button>'
     + '</div>'
-    + '<div class="swipe-expl" style="display:none;"><i class="fas fa-lightbulb"></i> <span>' + esc(c.explanation || '') + '</span></div>'
+    + '<div class="swipe-expl" style="display:none;"><span>' + esc(c.explanation || '') + '</span></div>'
     + '</div>'
   ).join('');
 

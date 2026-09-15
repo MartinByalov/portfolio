@@ -15,7 +15,7 @@ export function render(comp) {
   const scenarios = comp.scenarios || [
     {
       id: 'save-file',
-      title: 'Запазване на документ',
+      title: 'Запазване',
       icon: 'fas fa-floppy-disk',
       desc: 'Потребителят натиска „Запази“ в текстов редактор (Word / Writer).',
       steps: [
@@ -29,7 +29,7 @@ export function render(comp) {
     },
     {
       id: 'print-doc',
-      title: 'Печат на документ',
+      title: 'Печат',
       icon: 'fas fa-print',
       desc: 'Потребителят изпраща доклад към мастиленоструен или лазерен принтер.',
       steps: [
@@ -43,7 +43,7 @@ export function render(comp) {
     },
     {
       id: 'play-game',
-      title: 'Стартиране на 3D игра',
+      title: 'Игра',
       icon: 'fas fa-gamepad',
       desc: 'Стартиране на видеоигра с 3D графика, звук и мрежова игра.',
       steps: [
@@ -58,50 +58,47 @@ export function render(comp) {
   ];
 
   const layers = [
-    { id: 'user', name: '1. Потребител (User)', role: 'Човекът, който работи, учи, твори или играе', icon: 'fas fa-user', color: '#6366f1' },
-    { id: 'apps', name: '2. Приложен софтуер (Applications)', role: 'Програми за конкретни задачи (Word, Chrome, Игри, Photoshop)', icon: 'fas fa-shapes', color: '#0ea5e9' },
-    { id: 'shell', name: '3. Потребителски интерфейс / Обвивка (Shell)', role: 'Графична среда (GUI) или команден ред (CLI) за взаимодействие', icon: 'fas fa-desktop', color: '#10b981' },
-    { id: 'kernel', name: '4. Ядро на ОС (Kernel)', role: 'Сърцето на ОС — разпределя CPU, памет, процеси и сигурност', icon: 'fas fa-microchip', color: '#f59e0b' },
-    { id: 'drivers', name: '5. Системни услуги и драйвери (Drivers)', role: 'Специален софтуер, превеждащ командите на ОС към конкретния хардуер', icon: 'fas fa-cogs', color: '#ec4899' },
-    { id: 'hardware', name: '6. Компютърен хардуер (Hardware)', role: 'Физическите компоненти (CPU, RAM, SSD, Видеокарта, Периферия)', icon: 'fas fa-server', color: '#64748b' }
+    { id: 'user', name: 'Потребител (User)', role: 'Човекът, който работи, учи, твори или играе', icon: 'fas fa-user', color: '#6366f1' },
+    { id: 'apps', name: 'Приложен софтуер (Applications)', role: 'Програми за конкретни задачи (Word, Chrome, Игри, Photoshop)', icon: 'fas fa-shapes', color: '#0ea5e9' },
+    { id: 'shell', name: 'Потребителски интерфейс / Обвивка (Shell)', role: 'Графична среда (GUI) или команден ред (CLI) за взаимодействие', icon: 'fas fa-desktop', color: '#10b981' },
+    { id: 'kernel', name: 'Ядро на ОС (Kernel)', role: 'Сърцето на ОС — разпределя CPU, памет, процеси и сигурност', icon: 'fas fa-microchip', color: '#f59e0b' },
+    { id: 'drivers', name: 'Системни услуги и драйвери (Drivers)', role: 'Специален софтуер, превеждащ командите на ОС към конкретния хардуер', icon: 'fas fa-cogs', color: '#ec4899' },
+    { id: 'hardware', name: 'Компютърен хардуер (Hardware)', role: 'Физическите компоненти (CPU, RAM, SSD, Видеокарта, Периферия)', icon: 'fas fa-server', color: '#64748b' }
   ];
 
   return `
     <div id="${esc(id)}" class="os-architecture-stack" data-active-scenario="0">
       <div class="os-stack-header">
-        <span class="os-stack-badge"><i class="fas fa-layer-group"></i> Интерактивна архитектура</span>
         <h3>${esc(title)}</h3>
         <p>${esc(subtitle)}</p>
       </div>
 
       <div class="os-scenario-selector">
-        <span class="os-scenario-label">Изберете сценарий за проследяване:</span>
-        <div class="os-scenario-buttons">
+        <div class="os-scenario-top-bar">
           ${scenarios.map((sc, idx) => `
             <button type="button" class="os-scenario-btn ${idx === 0 ? 'active' : ''}" data-scenario-idx="${idx}">
               <i class="${esc(sc.icon)}"></i> ${esc(sc.title)}
             </button>
           `).join('')}
+          <button type="button" class="btn-activity os-trace-play-btn">
+            <i class="fas fa-play"></i> Стартирай
+          </button>
         </div>
       </div>
 
       <div class="os-scenario-details">
         <div class="os-scenario-desc-box">
-          <strong class="os-scenario-desc-title"><i class="fas fa-play-circle"></i> Действие:</strong>
+          <strong class="os-scenario-desc-title">Сценарий:</strong>
           <span class="os-scenario-desc-text">${esc(scenarios[0].desc)}</span>
-          <button type="button" class="btn-activity os-trace-play-btn" style="margin-left: auto;">
-            <i class="fas fa-play"></i> Проследи стъпка по стъпка
-          </button>
         </div>
       </div>
 
       <div class="os-stack-layout">
-        <!-- Vertical Stack of Layers -->
-        <div class="os-layers-column">
-          ${layers.map((l, idx) => `
+        <!-- 6 слоя, подредени в 2 колони от по 3 -->
+        <div class="os-layers-grid">
+          ${layers.map((l) => `
             <div class="os-layer-card" data-layer-id="${esc(l.id)}" style="--layer-color: ${l.color};">
               <div class="os-layer-indicator">
-                <span class="os-layer-num">${idx + 1}</span>
                 <i class="${esc(l.icon)}"></i>
               </div>
               <div class="os-layer-body">
@@ -114,10 +111,10 @@ export function render(comp) {
           `).join('')}
         </div>
 
-        <!-- Layer Isolation Probe & Insights -->
+        <!-- Layer Isolation Probe & Insights (отдолу под 6-те слоя) -->
         <div class="os-stack-insight-panel">
           <div class="os-insight-header">
-            <h4><i class="fas fa-microscope"></i> Изследване на изолацията</h4>
+            <h4>Изследване на изолацията</h4>
             <p>Какво би се случило, ако липсва даден софтуерен слой?</p>
           </div>
 
@@ -133,12 +130,7 @@ export function render(comp) {
             </button>
           </div>
 
-          <div class="os-isolation-result-box" aria-live="polite">
-            <div class="os-isolation-default">
-              <i class="fas fa-hand-pointer"></i>
-              <span>Кликнете върху бутон по-горе, за да симулирате липсата на компонент в архитектурата.</span>
-            </div>
-          </div>
+          <div class="os-isolation-result-box" aria-live="polite"></div>
         </div>
       </div>
     </div>
@@ -222,7 +214,7 @@ export function init(comp) {
       }
     });
     if (playBtn) {
-      playBtn.innerHTML = '<i class="fas fa-play"></i> Проследи стъпка по стъпка';
+      playBtn.innerHTML = '<i class="fas fa-play"></i> Стартирай';
       playBtn.disabled = false;
     }
   }
@@ -233,7 +225,7 @@ export function init(comp) {
     let stepIndex = 0;
 
     if (playBtn) {
-      playBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Симулиране...';
+      playBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Стартиране...';
       playBtn.disabled = true;
     }
 
@@ -241,7 +233,7 @@ export function init(comp) {
       if (stepIndex >= sc.steps.length) {
         clearInterval(traceTimer);
         if (playBtn) {
-          playBtn.innerHTML = '<i class="fas fa-check"></i> Завършено (Пусни отново)';
+          playBtn.innerHTML = '<i class="fas fa-rotate-right"></i> Стартирай отново';
           playBtn.disabled = false;
         }
         return;
@@ -309,9 +301,6 @@ export function init(comp) {
       if (data && isolationResult) {
         isolationResult.innerHTML = `
           <div class="os-isolation-card" style="border-left: 4px solid ${data.color};">
-            <h5 style="color: ${data.color}; margin: 0 0 0.5rem 0; display: flex; align-items: center; gap: 0.5rem;">
-              <i class="${data.icon}"></i> ${data.title}
-            </h5>
             <p style="margin: 0; color: #334155; line-height: 1.55; font-size: 0.95rem;">${data.content}</p>
           </div>
         `;

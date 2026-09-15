@@ -1156,11 +1156,15 @@ alt: Диспечер на задачите с колони за процесо�
 
 ## 19H.3. PRODUCTION JSON
 
-Не записвай placeholder prose като fake `src`.
-
 Когато platform има `image-placeholder` component, използвай него за липсващ asset.
 
-Когато asset съществува, използвай normal short relative path.
+**Задължително изискване за Image Placeholder:**
+Във всеки `image-placeholder` задължително се включва:
+- `label`: кратко, ясно заглавие;
+- `description`: детайлно концептуално описание на съдържанието на диаграмата или екранната снимка;
+- `src`: точен релативен път и предполагаемо име на файла (напр. `"src": "it-8-8/computer-case.png"` или `"src": "it-8-9/os-layers-diagram.png"`). Този път се изписва както в JSON кода, така и като ясна индикация в интерфейса на компонента за лесно качване и съответствие.
+
+Когато asset съществува физически, използвай нормален компонент за изображение с normal short relative path.
 
 Placeholder е design contract за бъдещия visual, не декоративен празен правоъгълник.
 
@@ -1351,7 +1355,7 @@ Accordion item може да съдържа:
 
 - чисти;
 - без decorative kicker;
-- без badge над заглавието;
+- без badge / етикет над заглавието (категорично БЕЗ излишни баджове/етикети както на секциите, така и вътре в компонентите в акордеона, като например „Интерактивна архитектура“, „Интерактивна лаборатория“, „Системни подсистеми“ и др.);
 - без grip handle;
 - без излишна декоративна икона;
 - без tone само за украса.
@@ -1427,20 +1431,50 @@ Tags са **семантични action labels**, не decorative badges.
 }
 ```
 
+### Glossary tag (Речник)
+
+Всеки урок задължително съдържа Речник (всеки урок има Речник):
+
+```json
+{
+  "type": "tag",
+  "id": "glossary-tag",
+  "icon": "fas fa-book-bookmark",
+  "text": "Речник",
+  "tone": "dark",
+  "variant": "glossary",
+  "skipNav": true
+}
+```
+
+Всеки урок завършва с раздел Речник в акордеон (`id: "lesson-glossary"`, секция `section-glossary`) с дефиниции на новите понятия (`type: "glossary-list"`).
+
 ---
 
-# 24. SANDBOX TAG
+# 24. SANDBOX TAG И АКОРДЕОН
 
-`Sandbox` е установена педагогическа функция за експериментиране.
+`Sandbox` е установена педагогическа функция за експериментиране (каноничен стандарт от `it-8-8` и `it-8-5`).
 
-При използване на отделен tag:
+При използване на Sandbox акордеон или tag:
 
-- text: `Sandbox`
 - variant: `sandbox`
-- tone: `accent`
-- icon: `fas fa-flask`
+- tone: `orange`
+- icon: `fas fa-laptop-code`
+- Иконата в акордеона (`.acc-tone-ico`): задължително бяла (`color: #ffffff;`) върху оранжев фон (`background: var(--accent-orange, #f97316);`).
 
-Той трябва да следва общата tag grammar и да бъде дефиниран в `styles/tag-standards.json`.
+Примерен блок:
+```json
+{
+  "id": "sandbox-accordion-item",
+  "title": "Sandbox: Заглавие",
+  "tone": "orange",
+  "icon": "fas fa-laptop-code",
+  "variant": "sandbox",
+  "skipNav": true,
+  "defaultOpen": true,
+  "content": [ ... ]
+}
+```
 
 ---
 
@@ -1554,18 +1588,18 @@ Tone card е семантичен акцент.
 
 ```html
 <div class="callout-highlight-box">
-  <i class="fas fa-triangle-exclamation"></i>
-  <div><strong>Важно:</strong> Текст...</div>
+  <span>Текст на съобщението...</span>
 </div>
 ```
 
 Standard:
 
-- светъл amber background;
-- border;
-- 4px amber left border;
+- **БЕЗ икона** и **БЕЗ предварителен надпис „Важно:“ / „Важно е да запомните:“**;
+- светъл amber background (`#fffbeb`);
+- фин контур (`border: 1px solid #fef3c7;`);
+- удебелена 4px amber лява граница (`border-left: 4px solid #f59e0b;`);
 - radius `8px`;
-- icon вляво;
+- цвят на текста: `#92400e;`;
 - dark-mode variant.
 
 Използвай само за действително важна информация.
@@ -2269,7 +2303,7 @@ PASS само ако `goal` е синтезиран learning outcome в 1, ма�
 
 ## 44.12. Label & Title Hygiene
 
-PASS само ако titles не повтарят UI type, няма излишни meta labels, subtitle не е автоматичен и main accordion titles са визуално чисти.
+PASS само ако titles не повтарят UI type, няма излишни meta labels и badges над заглавията (категорично без излишни етикети в акордеоните и техните компоненти като „Интерактивна архитектура“, „Интерактивна лаборатория“ и подобни), subtitle не е автоматичен и main accordion titles са визуално чисти.
 
 ## 44.13. Media Placeholder Pass
 
@@ -2609,6 +2643,87 @@ Local activities, tags, modals, quizzes и secondary blocks използват `
 28. Попълни Gate Report с evidence.
 29. Не започвай JSON при FAIL.
 30. След PASS implement, register, validate и test.
+31. Ако се налага задача да има 1, 2, 3, 4 като номериране/маркиране на въпроси или елементи (както при „Кой каква роля има?“), за номерирането им задължително се използва стилът на номерата от „Кой каква роля има?“ с цвят `#e2e8f0`.
+32. Стандартизирани стилове на етикети, подточки и карета (Канонични образци):
+   - **От course it-8:**
+     - Електронен учебник: `icon: "fas fa-book-open"`, `label: "Електронен учебник"`.
+     - Учебна програма: `icon: "fas fa-graduation-cap"`, `label: "Учебна програма"`.
+   - **От it-8-1:**
+     - Цел: свойство `goal` в заглавната част на урока.
+     - Инструктаж: `text: "Инструктаж"`, `tone: "blue"`, `icon: "fas fa-clipboard-check"`.
+     - Упражнение: `text: "Упражнение"`, `variant: "exercise"`, `tone: "green"`, `icon: "fas fa-dumbbell"`, `modalTarget: "exerciseModal"`, `skipNav: true`.
+     - Пробно Входно ниво (Тест): `tone: "green"`, `icon: "fas fa-clipboard-question"`, `variant: "trial-quiz"`, `skipNav: true`.
+     - Речник: `tone: "dark"`, `icon: "fas fa-book-bookmark"`, `variant: "glossary"`, `skipNav: true`.
+   - **От it-8-2:**
+     - Подточка (sub section / subsection): тип `"subsection"`, CSS клас `.lb-subsection`, лява оранжева граница (`border-left: 4px solid var(--accent-orange, #f97316);`), фон `#f2f6f9`, `border-radius: 0 10px 10px 0;`, `padding: 16px 20px;`, заглавие `h4.lb-subsection-heading`.
+     - Дискусия: `text: "Дискусия"`, `variant: "discussion"`, `tone: "purple"`, `icon: "fas fa-comments"`.
+     - Бързи 5 въпроса: `title: "Бързи 5 въпроса"`, `tone: "green"`, `icon: "fas fa-bolt"`, `skipNav: true`.
+     - Презентация: `text: "Презентация"`, `tone: "orange"`, `icon: "fas fa-file-powerpoint"`.
+   - **От it-8-3:**
+     - Задача / Задачи: `title: "Задача"` / `"Задачи"`, `tone: "blue"`, `icon: "fas fa-list-check"`, `variant: "task"`, `skipNav: true`.
+     - Емоциометър: `title: "Емоциометър"`, `tone: "purple"`, `icon: "fas fa-face-smile"`, `variant: "reflection"`, `skipNav: true`.
+   - **От it-8-4:**
+     - Чек-лист: `title: "Чек-лист"`, `tone: "orange"`, `icon: "fas fa-list-check"`, `variant: "checklist"`, `skipNav: true`.
+   - **От it-8-5:**
+     - Sandbox: `tone: "orange"`, `icon: "fas fa-laptop-code"`, `variant: "sandbox"`.
+   - **От it-8-6 и it-8-9 (Important Card / Callout Highlight Box):**
+     - Клас `.callout-highlight-box`: **БЕЗ икона** и **БЕЗ предварителен надпис „Важно:“ / „Важно е да запомните:“**.
+     - Стил: фон `#fffbeb`, лява удебелена цветна граница (`border-left: 4px solid #f59e0b;`), фин контур (`border: 1px solid #fef3c7;`), `border-radius: 8px;`, цвят на текста `#92400e;`.
+
+---
+
+# 50. UI & DESIGN RULES (ПРАВИЛА ЗА ДИЗАЙН, ИНТЕРФЕЙС И КАНОНИЧНИ СТИЛОВЕ)
+
+## 50.1. Хигиена на заглавията и баджовете (Label & Title Hygiene)
+- В акордеоните и в компонентите вътре в тях **НЕ се добавят излишни етикети/баджове над заглавията** (като например „Интерактивна архитектура“, „Интерактивна лаборатория“, „Системни подсистеми“, „Практически тренажор“, „Панорамен сравнителен анализ“ и др.).
+- Всички заглавия на секции и компоненти трябва да бъдат кратки, изчистени и семантични, без декоративни баджове, кикъри или излишни икони.
+
+## 50.2. Етикети (Tags)
+- Използват се само утвърдените семантични етикети от `styles/tag-standards.json` (напр. стандартен етикет за „Упражнение“ с `skipNav: true`).
+
+## 50.3. Задължителен Речник (Glossary Requirement)
+- Всеки урок задължително съдържа Речник (всеки урок има Речник). Добавя се семантичен етикет за Речник (`tag-glossary` с `variant: "glossary"`, `tone: "dark"`, `icon: "fas fa-book-bookmark"`, `skipNav: true`) и финален акордеон `lesson-glossary` с отваряща се секция `section-glossary` (`type: "glossary-list"`), дефинираща основните понятия от урока.
+
+## 50.4. Image Placeholder с път към файл
+- Всеки `image-placeholder` задължително включва не само заглавие (`label`) и описание (`description`), но и конкретен предвиден път и очаквано име на файл в свойството `src` (напр. `"src": "it-8-9/os-layers-diagram.png"` или `"src": "it-8-8/computer-case.png"`), който се визуализира в кода и в интерфейса на компонента.
+
+## 50.5. Без изкуствени форми за изпращане
+- Не се добавят финални текстови рефлексии (exit tickets) или форми, изискващи бекенд сървър/база данни, освен ако изрично не е поискано. Оценяването и практиката се извършват локално чрез реалната операционна система или интерактивни проверки на място.
+
+## 50.6. Стил на номериране на задачи и въпроси (1, 2, 3, 4)
+- Ако се налага задача да има номериране 1, 2, 3, 4 като маркиране на въпроси/твърдения (както при „Кой каква роля има?“), за номерирането им задължително се използва стилът на номерата от „Кой каква роля има?“ с фонов цвят `#e2e8f0` (`background: #e2e8f0; color: #334155; border-radius: 50%; width: 24px; height: 24px; font-weight: 700;`).
+
+## 50.7. Стил на Sandbox етикет и акордеон (каноничен стандарт от it-8-5 и it-8-8)
+- При използване на Sandbox акордеон или етикет: `tone: "orange"`, `icon: "fas fa-laptop-code"`, `variant: "sandbox"`.
+- Иконата на акордеона (`.acc-tone-ico`) задължително е БЯЛА (`color: #ffffff;`) върху оранжев фон (`background: var(--accent-orange, #f97316);`).
+
+## 50.8. Стил на връзките на курса (от course it-8)
+- Електронен учебник: `icon: "fas fa-book-open"`, `label: "Електронен учебник"`.
+- Учебна програма: `icon: "fas fa-graduation-cap"`, `label: "Учебна програма"`.
+
+## 50.9. Стил на основните елементи и етикети от it-8-1
+- **Цел:** свойство `goal` в урока, показва се в заглавната част.
+- **Инструктаж:** `text: "Инструктаж"`, `tone: "blue"`, `icon: "fas fa-clipboard-check"`.
+- **Упражнение:** `text: "Упражнение"`, `variant: "exercise"`, `tone: "green"`, `icon: "fas fa-dumbbell"`, `modalTarget: "exerciseModal"`, `skipNav: true`.
+- **Пробно Входно ниво (Тест):** `tone: "green"`, `icon: "fas fa-clipboard-question"`, `variant: "trial-quiz"`, `skipNav: true`.
+- **Речник:** `tone: "dark"`, `icon: "fas fa-book-bookmark"`, `variant: "glossary"`, `skipNav: true`.
+
+## 50.10. Стил на подточка (subsection) и елементи от it-8-2
+- **Подточка (sub section / subsection):** тип `"subsection"`, CSS клас `.lb-subsection` с лява оранжева граница (`border-left: 4px solid var(--accent-orange, #f97316);`), фон `#f2f6f9`, `border-radius: 0 10px 10px 0;`, `padding: 16px 20px;`, заглавие `h4.lb-subsection-heading`.
+- **Дискусия:** `text: "Дискусия"`, `variant: "discussion"`, `tone: "purple"`, `icon: "fas fa-comments"`.
+- **Бързи 5 въпроса:** `title: "Бързи 5 въпроса"`, `tone: "green"`, `icon: "fas fa-bolt"`, `skipNav: true`.
+- **Презентация:** `text: "Презентация"`, `tone: "orange"`, `icon: "fas fa-file-powerpoint"`.
+
+## 50.11. Стил на задачи и емоциометър от it-8-3
+- **Задача / Задачи:** `title: "Задача"` / `"Задачи"`, `tone: "blue"`, `icon: "fas fa-list-check"`, `variant: "task"`, `skipNav: true`.
+- **Емоциометър:** `title: "Емоциометър"`, `tone: "purple"`, `icon: "fas fa-face-smile"`, `variant: "reflection"`, `skipNav: true`.
+
+## 50.12. Стил на Чек-лист от it-8-4
+- **Чек-лист:** `title: "Чек-лист"`, `tone: "orange"`, `icon: "fas fa-list-check"`, `variant: "checklist"`, `skipNav: true`.
+
+## 50.13. Стил за Important Card (каре за важно съобщение от it-8-6 и it-8-9)
+- Клас `.callout-highlight-box`: **БЕЗ икона** и **БЕЗ предварителен надпис „Важно:“ / „Важно е да запомните:“**.
+- Стил: фон `#fffbeb` (`background: #fffbeb;`), удебелена лява цветна граница (`border-left: 4px solid #f59e0b;`), фин контур (`border: 1px solid #fef3c7;`), заобляне `border-radius: 8px;`, цвят на текста `#92400e;`.
 
 > **Не дигитализирай учебника. Трансформирай ученето.**
 

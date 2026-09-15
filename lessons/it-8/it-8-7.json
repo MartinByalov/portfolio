@@ -269,10 +269,11 @@
     {
       "type": "tag",
       "id": "exercise-tag",
-      "icon": "fas fa-laptop-code",
+      "icon": "fas fa-dumbbell",
       "text": "Упражнение",
       "modalTarget": "exerciseModal",
       "tone": "green",
+      "variant": "exercise",
       "skipNav": true
     },
     {

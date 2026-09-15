@@ -101,6 +101,7 @@ const registry = {
   'interactive-timeline': InteractiveTimeline,
   'image-gallery': ImageGallery,
   'titled-image': TitledImage,
+  'image': TitledImage,
   'timeline': Timeline,
   'infographic': Infographic,
   'history-detective-case': HistoryDetectiveCase,

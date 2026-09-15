@@ -114,7 +114,6 @@ export function render(comp) {
   return `
     <div id="${esc(id)}" class="os-ecosystem-matrix">
       <div class="os-matrix-header">
-        <span class="os-matrix-badge"><i class="fas fa-network-wired"></i> Панорамен сравнителен анализ</span>
         <h3>${esc(title)}</h3>
         <p>${esc(subtitle)}</p>
       </div>

@@ -52,14 +52,54 @@
       "description": "Пробни тестове и контролни въпроси за самопроверка."
     },
     {
-      "name": "Рефлексия",
+      "name": "Инструктаж",
+      "variant": "instruction",
+      "tone": "blue",
+      "color": "#1e3a8a",
+      "backgroundColor": "#e8f1fd",
+      "borderColor": "#c4dbf7",
+      "icon": "fas fa-clipboard-check",
+      "description": "Инструктаж за безопасна работа и указания."
+    },
+    {
+      "name": "Презентация",
+      "variant": "presentation",
+      "tone": "orange",
+      "color": "#c2410c",
+      "backgroundColor": "#fdeadd",
+      "borderColor": "#f6c9a8",
+      "icon": "fas fa-file-powerpoint",
+      "description": "Линкове към презентационни материали."
+    },
+    {
+      "name": "Електронен учебник",
+      "variant": "textbook",
+      "tone": "blue",
+      "color": "#1e3a8a",
+      "backgroundColor": "#e8f1fd",
+      "borderColor": "#c4dbf7",
+      "icon": "fas fa-book-open",
+      "description": "Връзка към официалния електронен учебник."
+    },
+    {
+      "name": "Учебна програма",
+      "variant": "curriculum",
+      "tone": "blue",
+      "color": "#1e3a8a",
+      "backgroundColor": "#e8f1fd",
+      "borderColor": "#c4dbf7",
+      "icon": "fas fa-graduation-cap",
+      "description": "Връзка към официалната учебна програма на МОН."
+    },
+    {
+      "name": "Рефлексия (Емоциометър)",
       "variant": "reflection",
       "tone": "purple",
       "color": "#4c1d95",
       "backgroundColor": "#f1e8fa",
       "borderColor": "#d6bdf0",
-      "icon": "fas fa-paw",
-      "description": "Самооценка и размисъл върху наученото в урока."
+      "icon": "fas fa-face-smile",
+      "description": "Самооценка, настроение и размисъл върху наученото в урока."
     },
     {
       "name": "Речник",
@@ -74,12 +114,12 @@
     {
       "name": "Sandbox",
       "variant": "sandbox",
-      "tone": "accent",
-      "color": "#9a3412",
-      "backgroundColor": "#fff7ed",
-      "borderColor": "#fdba74",
-      "icon": "fas fa-flask",
-      "description": "Безопасна среда за експериментиране и проследяване на процеси."
+      "tone": "orange",
+      "color": "#c2410c",
+      "backgroundColor": "#fdeadd",
+      "borderColor": "#f6c9a8",
+      "icon": "fas fa-laptop-code",
+      "description": "Безопасна среда за експериментиране, симулации и проследяване на процеси."
     }
   ]
 }

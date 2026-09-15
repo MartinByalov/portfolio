@@ -16,7 +16,6 @@ export function render(comp) {
     <div id="${esc(id)}" class="os-task-manager-sandbox">
       <div class="tm-header">
         <div class="tm-title-wrap">
-          <span class="tm-badge"><i class="fas fa-gauge-high"></i> Практически тренажор</span>
           <h3>${esc(title)}</h3>
           <p>${esc(subtitle)}</p>
         </div>

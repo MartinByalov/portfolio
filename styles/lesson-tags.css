@@ -99,6 +99,24 @@
   border-style: dashed;
 }
 .lesson-tag.tag-sandbox .lesson-tag-ico { border-radius: 8px; }
+.accordion-item.tag-sandbox {
+  border-color: #fdba74;
+  border-left: 4px solid #f97316;
+}
+.accordion-item.tag-sandbox .accordion-header {
+  background: #fff7ed;
+  color: #9a3412;
+}
+.accordion-item.tag-sandbox .accordion-header .card-title {
+  color: #9a3412;
+}
+.accordion-item.tag-sandbox .acc-tone-ico {
+  background: var(--accent-orange, #f97316);
+  color: #ffffff;
+}
+.accordion-item.tag-sandbox .acc-tone-ico i {
+  color: #ffffff;
+}
 
 /* Упражнение: slightly stronger border so the modal CTA stands out */
 .lesson-tag.tag-exercise {

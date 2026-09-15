@@ -9,33 +9,12 @@ function esc(value) {
 
 export function render(comp) {
   const id = comp.id || 'os-terminal-lab';
-  const title = comp.title || 'Двете лица на интерфейса: Команден ред (CLI) срещу Работен плот (GUI)';
-  const subtitle = comp.subtitle || 'Изпълнете еднакви практически задачи в текстов терминал и в графична среда, за да разберете предимствата на всеки подход';
+  const title = comp.title || 'Една задача, два интерфейса';
 
   return `
     <div id="${esc(id)}" class="os-terminal-lab">
       <div class="os-term-header">
-        <span class="os-term-badge"><i class="fas fa-terminal"></i> Интерактивна лаборатория</span>
         <h3>${esc(title)}</h3>
-        <p>${esc(subtitle)}</p>
-      </div>
-
-      <div class="os-term-missions">
-        <span class="os-mission-title"><i class="fas fa-crosshairs"></i> Изберете практическа мисия:</span>
-        <div class="os-mission-chips">
-          <button type="button" class="os-mission-chip active" data-mission="list">
-            <span>Мисия 1</span><strong>Списък на файловете</strong>
-          </button>
-          <button type="button" class="os-mission-chip" data-mission="mkdir">
-            <span>Мисия 2</span><strong>Създаване на нова папка</strong>
-          </button>
-          <button type="button" class="os-mission-chip" data-mission="sysinfo">
-            <span>Мисия 3</span><strong>Системна информация</strong>
-          </button>
-          <button type="button" class="os-mission-chip" data-mission="net">
-            <span>Мисия 4</span><strong>Мрежова диагностика</strong>
-          </button>
-        </div>
       </div>
 
       <div class="os-term-dual-layout">
@@ -47,7 +26,7 @@ export function render(comp) {
               <span class="win-dot yellow"></span>
               <span class="win-dot green"></span>
             </div>
-            <div class="os-win-title"><i class="fas fa-terminal"></i> Command Prompt / Bash Terminal (CLI)</div>
+            <div class="os-win-title"><i class="fas fa-terminal"></i> Command Prompt</div>
           </div>
           <div class="os-cli-body">
             <div class="os-cli-history" aria-live="polite">
@@ -57,17 +36,17 @@ export function render(comp) {
               <div class="cli-line"><br></div>
             </div>
             <div class="os-cli-prompt-line">
-              <span class="cli-path">C:\Users\Student&gt;</span>
-              <input type="text" class="os-cli-input" placeholder="напишете команда тук (напр. dir или help)..." autocomplete="off" spellcheck="false" aria-label="Въвеждане на команден ред" />
-              <button type="button" class="os-cli-send-btn" title="Изпълни команда"><i class="fas fa-arrow-turn-down"></i></button>
+              <span class="cli-path">C:\\Users\\Student&gt;</span>
+              <input type="text" class="os-cli-input" placeholder="напишете команда (напр. dir, mkdir Proekti, del referat.docx, rmdir Снимки, ipconfig)..." autocomplete="off" spellcheck="false" aria-label="Въвеждане на команден ред" />
+              <button type="button" class="os-cli-send-btn" title="Изпълни команда (Enter)" aria-label="Изпълни команда (Enter)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display: block;"><polyline points="9 10 4 15 9 20"></polyline><path d="M20 4v7a4 4 0 0 1-4 4H4"></path></svg></button>
             </div>
             <div class="os-cli-helpers">
-              <span class="cli-helper-label">Бързи команди:</span>
-              <button type="button" class="cli-quick-btn" data-cmd="dir"><code>dir</code> (списък)</button>
-              <button type="button" class="cli-quick-btn" data-cmd="mkdir Proekti"><code>mkdir Proekti</code> (нова папка)</button>
-              <button type="button" class="cli-quick-btn" data-cmd="systeminfo"><code>systeminfo</code> (система)</button>
-              <button type="button" class="cli-quick-btn" data-cmd="ipconfig"><code>ipconfig</code> (мрежа)</button>
-              <button type="button" class="cli-quick-btn" data-cmd="cls"><code>cls</code> (изчисти)</button>
+              <button type="button" class="cli-quick-btn" data-cmd="dir" data-tooltip="Списък на файлове и папки"><code>dir</code></button>
+              <button type="button" class="cli-quick-btn" data-cmd="mkdir Proekti" data-tooltip="Създаване на нова папка Proekti"><code>mkdir Proekti</code></button>
+              <button type="button" class="cli-quick-btn" data-cmd="del referat.docx" data-tooltip="Изтриване на файл referat.docx"><code>del referat.docx</code></button>
+              <button type="button" class="cli-quick-btn" data-cmd="rmdir Документи" data-tooltip="Изтриване на папка Документи"><code>rmdir Документи</code></button>
+              <button type="button" class="cli-quick-btn" data-cmd="ipconfig" data-tooltip="Мрежова информация и IP адрес"><code>ipconfig</code></button>
+              <button type="button" class="cli-quick-btn" data-cmd="cls" data-tooltip="Изчистване на екрана"><code>cls</code></button>
             </div>
           </div>
         </div>
@@ -87,32 +66,30 @@ export function render(comp) {
             <div class="os-gui-ribbon">
               <div class="os-gui-path-box"><i class="fas fa-folder-open"></i> Този компютър &gt; Диск (C:) &gt; Потребители &gt; Student</div>
               <div class="os-gui-toolbar">
-                <button type="button" class="os-gui-tool-btn os-gui-new-folder"><i class="fas fa-folder-plus"></i> Нова папка</button>
-                <button type="button" class="os-gui-tool-btn os-gui-sys-props"><i class="fas fa-info-circle"></i> Свойства</button>
+                <button type="button" class="os-gui-tool-btn os-gui-new-folder" title="Създай нова папка в текущата директория"><i class="fas fa-folder-plus"></i> Нова папка</button>
+                <button type="button" class="os-gui-tool-btn os-gui-net-btn" title="Преглед на мрежовото състояние"><i class="fas fa-network-wired"></i> Мрежа</button>
               </div>
             </div>
 
-            <!-- Visual Folder Contents Canvas -->
-            <div class="os-gui-files-grid">
-              <div class="os-gui-item folder">
-                <i class="fas fa-folder"></i>
-                <span>Документи</span>
+            <!-- View Modes in GUI: File Explorer vs Info View -->
+            <div class="os-gui-views-container">
+              <!-- Network Info Card Banner if ipconfig called -->
+              <div class="os-gui-net-banner" style="display: none;">
+                <div class="os-gui-net-header">
+                  <span><i class="fas fa-wifi"></i> Мрежови свойства (Wi-Fi адаптер)</span>
+                  <button type="button" class="os-gui-net-close" title="Затвори мрежовия панел">&times;</button>
+                </div>
+                <div class="os-gui-net-body">
+                  <div class="net-grid-row"><span>IPv4 адрес:</span> <strong>192.168.1.105</strong></div>
+                  <div class="net-grid-row"><span>Маска на подмрежа:</span> <strong>255.255.255.0</strong></div>
+                  <div class="net-grid-row"><span>Шлюз (Gateway):</span> <strong>192.168.1.1</strong></div>
+                  <div class="net-grid-row"><span>DNS сървъри:</span> <strong>8.8.8.8, 1.1.1.1</strong></div>
+                </div>
               </div>
-              <div class="os-gui-item folder">
-                <i class="fas fa-folder"></i>
-                <span>Снимки</span>
-              </div>
-              <div class="os-gui-item file">
-                <i class="fas fa-file-lines"></i>
-                <span>notes.txt</span>
-              </div>
-              <div class="os-gui-item file">
-                <i class="fas fa-file-word"></i>
-                <span>referat.docx</span>
-              </div>
-              <div class="os-gui-item folder os-new-folder-item" style="display: none;">
-                <i class="fas fa-folder" style="color: #f59e0b;"></i>
-                <span class="os-new-folder-name">Proekti</span>
+
+              <!-- Visual Folder Contents Canvas -->
+              <div class="os-gui-files-grid" aria-label="Файлове и папки">
+                <!-- Will be dynamically populated and synchronized -->
               </div>
             </div>
 
@@ -164,17 +141,53 @@ export function init(comp) {
   const cliInput = root.querySelector('.os-cli-input');
   const cliSendBtn = root.querySelector('.os-cli-send-btn');
   const quickBtns = root.querySelectorAll('.cli-quick-btn');
-  const missionChips = root.querySelectorAll('.os-mission-chip');
 
-  const newFolderItem = root.querySelector('.os-new-folder-item');
+  const filesGrid = root.querySelector('.os-gui-files-grid');
   const guiNewFolderBtn = root.querySelector('.os-gui-new-folder');
-  const guiSysPropsBtn = root.querySelector('.os-gui-sys-props');
-  const guiModal = root.querySelector('.os-gui-modal');
-  const guiModalTitle = root.querySelector('.os-modal-title');
-  const guiModalContent = root.querySelector('.os-modal-content');
-  const guiModalClose = root.querySelector('.os-modal-close');
+  const guiNetBtn = root.querySelector('.os-gui-net-btn');
+  const guiNetBanner = root.querySelector('.os-gui-net-banner');
+  const guiNetClose = root.querySelector('.os-gui-net-close');
 
-  let folderCreated = false;
+  // Unified File System State
+  let fileSystem = [
+    { name: 'Документи', type: 'folder', size: '&lt;DIR&gt;', date: '14.09.2026  11:20', icon: 'fas fa-folder' },
+    { name: 'Снимки', type: 'folder', size: '&lt;DIR&gt;', date: '14.09.2026  12:05', icon: 'fas fa-folder' },
+    { name: 'notes.txt', type: 'file', size: '1,024', bytes: 1024, date: '14.09.2026  13:40', icon: 'fas fa-file-lines' },
+    { name: 'referat.docx', type: 'file', size: '253,952', bytes: 253952, date: '14.09.2026  14:20', icon: 'fas fa-file-word' }
+  ];
+
+  function hideNetworkInGui() {
+    if (guiNetBanner) guiNetBanner.style.display = 'none';
+    if (filesGrid) filesGrid.style.display = 'grid';
+  }
+
+  function renderGuiFiles(highlightName = null) {
+    hideNetworkInGui();
+    if (!filesGrid) return;
+    filesGrid.innerHTML = '';
+    fileSystem.forEach(item => {
+      const el = document.createElement('div');
+      el.className = `os-gui-item ${item.type}`;
+      if (highlightName && item.name.toLowerCase() === highlightName.toLowerCase()) {
+        el.classList.add('highlight-pulse');
+      }
+      el.dataset.name = item.name;
+      el.innerHTML = `
+        <i class="${item.icon}"></i>
+        <span title="${esc(item.name)}">${esc(item.name)}</span>
+      `;
+      // Allow clicking an item in GUI to delete or view
+      el.addEventListener('click', () => {
+        // Toggle selected state
+        filesGrid.querySelectorAll('.os-gui-item').forEach(i => i.classList.remove('selected'));
+        el.classList.add('selected');
+      });
+      filesGrid.appendChild(el);
+    });
+  }
+
+  // Initial render of files
+  renderGuiFiles();
 
   function appendCli(text, isCommand = false) {
     if (!cliHistory) return;
@@ -183,6 +196,15 @@ export function init(comp) {
     line.innerHTML = isCommand ? `<span class="cli-path">C:\\Users\\Student&gt;</span> ${esc(text)}` : text;
     cliHistory.appendChild(line);
     cliHistory.scrollTop = cliHistory.scrollHeight;
+  }
+
+  function showNetworkInGui() {
+    if (filesGrid) filesGrid.style.display = 'none';
+    if (guiNetBanner) {
+      guiNetBanner.style.display = 'block';
+      guiNetBanner.classList.add('highlight-pulse');
+      setTimeout(() => guiNetBanner.classList.remove('highlight-pulse'), 1200);
+    }
   }
 
   function executeCommand(rawCmd) {
@@ -199,30 +221,87 @@ export function init(comp) {
     }
 
     if (lower === 'dir' || lower === 'ls') {
-      const proektiLine = folderCreated ? '<br>&nbsp;&nbsp;14.09.2026&nbsp;&nbsp;14:35&nbsp;&nbsp;&lt;DIR&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Proekti' : '';
+      // Highlight files in GUI and sync dir display
+      renderGuiFiles();
+      if (filesGrid) {
+        filesGrid.classList.add('highlight-pulse');
+        setTimeout(() => filesGrid.classList.remove('highlight-pulse'), 1000);
+      }
+
+      let filesCount = 0;
+      let filesBytes = 0;
+      let dirsCount = 2; // . and ..
+
+      const rows = fileSystem.map(item => {
+        if (item.type === 'folder') {
+          dirsCount++;
+          const namePad = esc(item.name);
+          return `&nbsp;&nbsp;${item.date}&nbsp;&nbsp;&lt;DIR&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${namePad}`;
+        } else {
+          filesCount++;
+          filesBytes += (item.bytes || 1024);
+          const sizeStr = String(item.size).padStart(14, ' ');
+          return `&nbsp;&nbsp;${item.date}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${sizeStr}&nbsp;${esc(item.name)}`;
+        }
+      }).join('<br>');
+
       appendCli(`
         Томът в устройство C няма етикет.<br>
         Сериен номер на тома е 4A8B-91E2<br>
         Директория на C:\\Users\\Student<br><br>
         &nbsp;&nbsp;14.09.2026&nbsp;&nbsp;10:12&nbsp;&nbsp;&lt;DIR&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br>
         &nbsp;&nbsp;14.09.2026&nbsp;&nbsp;10:12&nbsp;&nbsp;&lt;DIR&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..<br>
-        &nbsp;&nbsp;14.09.2026&nbsp;&nbsp;11:20&nbsp;&nbsp;&lt;DIR&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Документи<br>
-        &nbsp;&nbsp;14.09.2026&nbsp;&nbsp;12:05&nbsp;&nbsp;&lt;DIR&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Снимки${proektiLine}<br>
-        &nbsp;&nbsp;14.09.2026&nbsp;&nbsp;13:40&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1,024 notes.txt<br>
-        &nbsp;&nbsp;14.09.2026&nbsp;&nbsp;14:20&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;253,952 referat.docx<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 Файл(а)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;254,976 байта<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${folderCreated ? '5' : '4'} Директори(и)&nbsp;&nbsp;185,249,153,024 байта свободно
+        ${rows}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${filesCount} Файл(а)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${filesBytes.toLocaleString()} байта<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dirsCount} Директори(и)&nbsp;&nbsp;185,249,153,024 байта свободно<br>
+        <span class="cli-info-note"><i class="fas fa-eye"></i> Списъкът на файловете се синхронизира и освежи и във Файловия браузър (вдясно).</span>
       `);
-    } else if (lower.startsWith('mkdir') || lower.startsWith('md')) {
-      const parts = cmd.split(/\s+/);
-      const name = parts[1] || 'НоваПапка';
-      folderCreated = true;
-      if (newFolderItem) {
-        newFolderItem.style.display = 'flex';
-        const label = newFolderItem.querySelector('.os-new-folder-name');
-        if (label) label.textContent = name;
+    } else if (lower.startsWith('mkdir ') || lower.startsWith('md ')) {
+      const name = cmd.replace(/^(mkdir|md)\s+/i, '').trim().replace(/['"]/g, '');
+      if (!name) {
+        appendCli('<span style="color:#ef4444;">Синтаксична грешка: Посочете име на новата папка. Пример: mkdir Proekti</span>');
+        return;
       }
-      appendCli(`<span style="color:#22c55e;">[OK] Папката „${esc(name)}“ беше успешно създадена в директорията!</span> (Погледнете в десния GUI прозорец — тя вече се появи и там!)`);
+      const existing = fileSystem.find(f => f.name.toLowerCase() === name.toLowerCase());
+      if (existing) {
+        appendCli(`<span style="color:#eab308;">Поддиректорията или файлът „${esc(name)}“ вече съществува.</span>`);
+        return;
+      }
+      fileSystem.push({
+        name: name,
+        type: 'folder',
+        size: '&lt;DIR&gt;',
+        date: '15.09.2026  14:35',
+        icon: 'fas fa-folder'
+      });
+      renderGuiFiles(name);
+      appendCli(`<span style="color:#22c55e;">[OK] Папката „${esc(name)}“ беше успешно създадена!</span><br><span class="cli-info-note"><i class="fas fa-folder-plus"></i> Новата папка се появи моментално и във Файловия браузър (вдясно).</span>`);
+    } else if (lower.startsWith('del ') || lower.startsWith('erase ') || lower.startsWith('rmdir ') || lower.startsWith('rd ') || lower.startsWith('rm ')) {
+      const targetName = cmd.replace(/^(del|erase|rmdir|rd|rm)\s+/i, '').trim().replace(/['"]/g, '');
+      if (!targetName) {
+        appendCli('<span style="color:#ef4444;">Синтаксична грешка: Посочете име на файла или папката за изтриване. Пример: del referat.docx или rmdir Документи</span>');
+        return;
+      }
+      const index = fileSystem.findIndex(f => f.name.toLowerCase() === targetName.toLowerCase());
+      if (index === -1) {
+        appendCli(`<span style="color:#ef4444;">Грешка: Не може да се намери „${esc(targetName)}“. Проверете точното изписване чрез dir.</span>`);
+      } else {
+        const removed = fileSystem.splice(index, 1)[0];
+        renderGuiFiles();
+        appendCli(`<span style="color:#22c55e;">[OK] Обектът „${esc(removed.name)}“ беше изтрит от диска.</span><br><span class="cli-info-note"><i class="fas fa-trash-can"></i> „${esc(removed.name)}“ изчезна автоматично и от Файловия браузър (вдясно).</span>`);
+      }
+    } else if (lower === 'ipconfig') {
+      showNetworkInGui();
+      appendCli(`
+        Настройка на IP за Windows:<br><br>
+        Адаптер за безжична локална мрежа Wi-Fi:<br>
+        &nbsp;&nbsp;Състояние на носителя . . . . . . . : Свързан<br>
+        &nbsp;&nbsp;IPv4 адрес . . . . . . . . . . . . . : 192.168.1.105<br>
+        &nbsp;&nbsp;Маска на подмрежата. . . . . . . . . : 255.255.255.0<br>
+        &nbsp;&nbsp;Шлюз по подразбиране . . . . . . . . : 192.168.1.1<br>
+        &nbsp;&nbsp;DNS сървъри. . . . . . . . . . . . . : 8.8.8.8, 1.1.1.1<br>
+        <span class="cli-info-note"><i class="fas fa-network-wired"></i> Мрежовата информация се визуализира в панел „Мрежа“ и във Файловия браузър!</span>
+      `);
     } else if (lower === 'systeminfo') {
       appendCli(`
         Име на хост:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SCHOOL-LAB-08<br>
@@ -234,26 +313,19 @@ export function init(comp) {
         Обща физическа памет:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;16,384 MB (16 GB)<br>
         Налична физическа памет:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10,412 MB свободна
       `);
-    } else if (lower === 'ipconfig') {
-      appendCli(`
-        Настройка на IP за Windows:<br><br>
-        Адаптер за безжична локална мрежа Wi-Fi:<br>
-        &nbsp;&nbsp;IPv4 адрес . . . . . . . . . : 192.168.1.105<br>
-        &nbsp;&nbsp;Маска на подмрежата. . . . . : 255.255.255.0<br>
-        &nbsp;&nbsp;Шлюз по подразбиране . . . . : 192.168.1.1<br>
-        &nbsp;&nbsp;DNS сървъри. . . . . . . . . : 8.8.8.8, 1.1.1.1
-      `);
     } else if (lower === 'help') {
       appendCli(`
-        Поддържани примерни команди в симулатора:<br>
-        • <strong>dir</strong> — показва файловете и папките в текущата директория<br>
-        • <strong>mkdir &lt;име&gt;</strong> — създава нова директория (папка)<br>
-        • <strong>systeminfo</strong> — извежда хардуерни и софтуерни параметри на ОС<br>
-        • <strong>ipconfig</strong> — показва мрежовия IP адрес и интернет връзката<br>
-        • <strong>cls</strong> — изчиства терминалния екран
+        Поддържани команди в симулатора:<br>
+        • <strong>dir</strong> — показва съдържанието на текущата папка (синхронизира се и с GUI)<br>
+        • <strong>mkdir &lt;име&gt;</strong> — създава нова папка (напр. <code>mkdir Proekti</code>)<br>
+        • <strong>del &lt;файл&gt;</strong> — изтрива файл (напр. <code>del referat.docx</code>)<br>
+        • <strong>rmdir &lt;папка&gt;</strong> — изтрива папка (напр. <code>rmdir Документи</code>)<br>
+        • <strong>ipconfig</strong> — показва IP адрес и мрежови параметри (показва се и в GUI)<br>
+        • <strong>systeminfo</strong> — системни параметри и хардуер<br>
+        • <strong>cls</strong> — изчистване на екрана
       `);
     } else {
-      appendCli(`<span style="color:#ef4444;">'${esc(cmd)}' не се разпознава като вътрешна или външна команда. Въведете <strong>help</strong> за списък.</span>`);
+      appendCli(`<span style="color:#ef4444;">'${esc(cmd)}' не се разпознава като вътрешна или външна команда. Въведете <strong>help</strong> или кликнете на бързите команди отдолу.</span>`);
     }
   }
 
@@ -278,56 +350,38 @@ export function init(comp) {
     });
   });
 
-  // Missions selector
-  missionChips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      missionChips.forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      const mission = chip.dataset.mission;
-
-      if (mission === 'list') {
-        executeCommand('dir');
-      } else if (mission === 'mkdir') {
-        executeCommand('mkdir Proekti');
-      } else if (mission === 'sysinfo') {
-        executeCommand('systeminfo');
-      } else if (mission === 'net') {
-        executeCommand('ipconfig');
-      }
-    });
-  });
-
   // GUI interaction handlers
   if (guiNewFolderBtn) {
     guiNewFolderBtn.addEventListener('click', () => {
-      folderCreated = true;
-      if (newFolderItem) newFolderItem.style.display = 'flex';
-      appendCli('[GUI събитие] Потребителят създаде нова папка чрез десен бутон / лента в GUI. Системата изпълни същата вътрешна системна заявка за създаване на папка.');
-    });
-  }
-
-  if (guiSysPropsBtn) {
-    guiSysPropsBtn.addEventListener('click', () => {
-      if (guiModal && guiModalContent && guiModalTitle) {
-        guiModalTitle.textContent = 'Свойства на системата (Windows Settings)';
-        guiModalContent.innerHTML = `
-          <div style="font-size:0.9rem; line-height:1.6; color:#334155;">
-            <p><strong>Устройство:</strong> SCHOOL-LAB-08</p>
-            <p><strong>Процесор:</strong> 8-Core Intel Core i7 / AMD Ryzen @ 3.80GHz</p>
-            <p><strong>RAM:</strong> 16.0 GB (15.8 GB използваема)</p>
-            <p><strong>Издание:</strong> Windows 11 Pro, Версия 23H2</p>
-            <hr style="margin:0.75rem 0; border:0; border-top:1px solid #e2e8f0;">
-            <p style="font-size:0.82rem; color:#64748b;"><i class="fas fa-check-circle" style="color:#10b981;"></i> Забележете: Графичният прозорец ви показва същата информация като командата <code>systeminfo</code>, но в естетичен визуален стил с бутони!</p>
-          </div>
-        `;
-        guiModal.style.display = 'flex';
+      let counter = 1;
+      let newName = 'Нова папка';
+      while (fileSystem.find(f => f.name.toLowerCase() === newName.toLowerCase())) {
+        counter++;
+        newName = `Нова папка (${counter})`;
       }
+      fileSystem.push({
+        name: newName,
+        type: 'folder',
+        size: '&lt;DIR&gt;',
+        date: '15.09.2026  14:35',
+        icon: 'fas fa-folder'
+      });
+      renderGuiFiles(newName);
+      appendCli(`[GUI събитие] Потребителят създаде „${esc(newName)}“ чрез бутона в GUI. Ядрото изпълни същата системна операция, както при <code>mkdir "${esc(newName)}"</code>.`);
     });
   }
 
-  if (guiModalClose) {
-    guiModalClose.addEventListener('click', () => {
-      if (guiModal) guiModal.style.display = 'none';
+  if (guiNetBtn) {
+    guiNetBtn.addEventListener('click', () => {
+      showNetworkInGui();
+      appendCli('[GUI събитие] Отворен е мрежовият панел в GUI (съответства на командата <code>ipconfig</code> в CLI).');
+    });
+  }
+
+  if (guiNetClose) {
+    guiNetClose.addEventListener('click', () => {
+      hideNetworkInGui();
     });
   }
 }
+

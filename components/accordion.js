@@ -2,6 +2,7 @@
 
 import { initAccordion } from './accordion-behavior.js';
 import { renderRichBlock } from './lesson-media.js';
+import { getCleanMediaInfo } from '../utils/media.js';
 import * as InteractiveMatching from './interactive-matching.js';
 import * as InteractiveFill from './interactive-fill.js';
 import * as InteractiveStepGuide from './interactive-step-guide.js';
@@ -44,61 +45,58 @@ function renderImageBlock(b) {
     + '</figure>';
 }
 
+function getCleanDescription(desc) {
+  if (!desc) return '';
+  return String(desc).replace(/(?:[\.\,\s\-\—]*)(?:\(|\[)?(?:Файл|файл|File|file):\s*([a-zA-Z0-9_\-\.\/]+)(?:\)|\])?/gi, '').trim();
+}
+
 function renderImagePlaceholderBlock(b) {
   const label = b.label || b.title || 'Място за екранна снимка';
   const desc = b.description || b.desc || '';
+  const cleanDesc = getCleanDescription(desc);
   const icon = b.icon || 'fas fa-image';
-  const step = b.step ? '<span class="placeholder-step">' + esc(b.step) + '</span>' : '';
-  const path = b.src || b.path || b.fileName || '';
+  const stepText = b.step || b.badge || 'Екранна снимка (Placeholder)';
+  const rawPath = b.src || b.path || b.fileName || '';
   const isMini = b.size === 'mini' || b.variant === 'mini' || b.size === 'compact' || b.variant === 'compact';
   const isFloat = b.float === 'right' || b.align === 'right';
 
-  const rawFileName = path ? path.replace(/^https?:\/\/[^\/]+\/(?:[^\/]+\/)*assets\//, '').split('/').pop() : '';
-  const displayTitle = rawFileName && !label.includes(rawFileName) ? (label + ' - ' + rawFileName) : label;
+  const { fullPath, relativePath, fileName } = getCleanMediaInfo(rawPath);
+  const displayTitle = fileName && !label.includes(fileName) ? (label + ' - ' + fileName) : label;
+  const displayFile = relativePath || fileName;
 
   if (isMini) {
     const wrapClass = isFloat ? 'lesson-media-float' : 'lesson-inline-media-wrap';
     const wrapStyle = isFloat ? '' : 'margin: 1rem 0; max-width: 260px;';
     return '<div class="' + wrapClass + '"' + (wrapStyle ? ' style="' + wrapStyle + '"' : '') + '>'
       + '<div class="lesson-inline-media-card">'
-      + (path ? '<img src="' + esc(path) + '" alt="' + esc(label) + '" loading="lazy" style="width: 100%; height: auto; max-height: 140px; object-fit: cover; border-radius: 8px; border: 1px solid #e2e8f0; display: block; margin-bottom: 8px;" onload="this.style.display=\'block\'; if(this.nextElementSibling) this.nextElementSibling.style.display=\'none\';" onerror="if(this.src.includes(\'cdn.jsdelivr.net\')){this.src=this.src.replace(\'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/\',\'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/\');}else{this.style.display=\'none\'; if(this.nextElementSibling) this.nextElementSibling.style.display=\'flex\';}">' : '')
-      + '<div class="lesson-micro-placeholder-box"' + (path ? ' style="display: none;"' : '') + '>'
-      + '<span class="lesson-micro-badge"><i class="' + esc(icon) + '"></i> ' + (step || 'Визуален детайл') + '</span>'
+      + (rawPath ? '<img src="' + esc(fullPath || rawPath) + '" alt="' + esc(label) + '" loading="eager" class="lesson-placeholder-img" onload="const c = this.closest(\'.lesson-inline-media-card\'); if(c){ c.classList.add(\'image-loaded\'); c.classList.remove(\'image-failed\'); }" onerror="const c = this.closest(\'.lesson-inline-media-card\'); if(this.src && this.src.includes(\'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/\')){ this.src = this.src.replace(\'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/\', \'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/\'); } else if(this.src && this.src.includes(\'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/\')){ this.src = this.src.replace(\'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/\', \'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/\'); } else { if(c){ c.classList.remove(\'image-loaded\'); c.classList.add(\'image-failed\'); } }">' : '')
+      + '<div class="lesson-micro-placeholder-box">'
+      + '<span class="lesson-micro-badge"><i class="' + esc(icon) + '"></i> ' + esc(stepText) + '</span>'
       + '<div class="lesson-micro-title">' + esc(displayTitle) + '</div>'
-      + (path ? '<div class="lesson-micro-path">' + esc(path) + '</div>' : '')
+      + (displayFile ? '<div class="lesson-micro-path" title="Очакван файл: ' + esc(displayFile) + '"><i class="fas fa-file-image" style="margin-right: 4px;"></i>' + esc(fileName || displayFile) + '</div>' : '')
       + '</div>'
-      + (desc ? '<div class="lesson-micro-caption">' + esc(desc) + '</div>' : '')
+      + ((cleanDesc || displayFile) ? '<div class="lesson-micro-caption">' + (cleanDesc ? esc(cleanDesc) : '') + (fileName ? '<span class="lesson-media-file-tag" title="Очакван файл"><i class="fas fa-file-image"></i> Файл: ' + esc(fileName) + '</span>' : '') + '</div>' : '')
       + '</div>'
       + '</div>';
   }
 
-  if (path) {
-    return '<figure class="lb-image image-placeholder-wrapper" style="margin: 1.5rem 0; text-align: center;">'
-      + '<img src="' + esc(path) + '" alt="' + esc(label) + '" loading="lazy" style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #e2e8f0; display: block; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.05);" onload="this.style.display=\'block\'; if(this.nextElementSibling) this.nextElementSibling.style.display=\'none\';" onerror="if(this.src.includes(\'cdn.jsdelivr.net\')){this.src=this.src.replace(\'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/\',\'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/\');}else{this.style.display=\'none\'; if(this.nextElementSibling) this.nextElementSibling.style.display=\'block\';}">'
-      + '<div class="lesson-image-placeholder" style="display: none;">'
-      + '<div class="placeholder-badge"><i class="fas fa-camera"></i> ' + (step || 'Екранна снимка (Placeholder)') + '</div>'
-      + '<div class="placeholder-body">'
-      + '<div class="placeholder-icon-wrap"><i class="' + esc(icon) + '"></i></div>'
-      + '<div class="placeholder-text-wrap">'
-      + '<h4 class="placeholder-heading">' + esc(displayTitle) + '</h4>'
-      + (desc ? '<p class="placeholder-desc">' + esc(desc) + '</p>' : '')
-      + '<div class="placeholder-file-path" style="margin-top: 8px; font-family: monospace; font-size: 0.85rem; color: #475569; background: #e2e8f0; padding: 4px 10px; border-radius: 6px; display: inline-block;"><i class="fas fa-file-image" style="margin-right: 6px; color: #64748b;"></i>' + esc(path) + '</div>'
-      + '</div>'
-      + '</div>'
-      + '</div>'
-      + (label || desc ? '<figcaption style="margin-top: 0.6rem; font-size: 0.88rem; color: #64748b;"><strong>' + esc(label) + '</strong>' + (desc ? ' – ' + esc(desc) : '') + '</figcaption>' : '')
-      + '</figure>';
-  }
-  return '<div class="lesson-image-placeholder">'
-    + '<div class="placeholder-badge"><i class="fas fa-camera"></i> ' + (step || 'Екранна снимка (Placeholder)') + '</div>'
+  return '<figure class="lb-image image-placeholder-wrapper" style="margin: 1.5rem 0; text-align: center;">'
+    + (rawPath ? '<img src="' + esc(fullPath || rawPath) + '" alt="' + esc(label) + '" loading="eager" class="lesson-placeholder-img" onload="const c = this.closest(\'.image-placeholder-wrapper\'); if(c){ c.classList.add(\'image-loaded\'); c.classList.remove(\'image-failed\'); }" onerror="const c = this.closest(\'.image-placeholder-wrapper\'); if(this.src && this.src.includes(\'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/\')){ this.src = this.src.replace(\'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/\', \'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/\'); } else if(this.src && this.src.includes(\'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/\')){ this.src = this.src.replace(\'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/\', \'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/\'); } else { if(c){ c.classList.remove(\'image-loaded\'); c.classList.add(\'image-failed\'); } }">' : '')
+    + '<div class="lesson-image-placeholder">'
+    + '<div class="placeholder-badge"><i class="fas fa-camera"></i> ' + esc(stepText)
+    + (fileName ? ' <span class="placeholder-filename-badge" style="margin-left: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-weight: 700; text-transform: none; color: #1e40af; background: #dbeafe; padding: 2px 8px; border-radius: 4px; border: 1px solid #bfdbfe;"><i class="fas fa-file-image" style="margin-right: 4px;"></i>' + esc(fileName) + '</span>' : '')
+    + '</div>'
     + '<div class="placeholder-body">'
     + '<div class="placeholder-icon-wrap"><i class="' + esc(icon) + '"></i></div>'
     + '<div class="placeholder-text-wrap">'
     + '<h4 class="placeholder-heading">' + esc(displayTitle) + '</h4>'
     + (desc ? '<p class="placeholder-desc">' + esc(desc) + '</p>' : '')
+    + (displayFile ? '<div class="placeholder-file-path" style="margin-top: 10px; display: inline-flex; align-items: center; gap: 6px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.84rem; font-weight: 600; color: #334155; background: #e2e8f0; padding: 4px 10px; border-radius: 6px; border: 1px solid #cbd5e1;"><i class="fas fa-file-image" style="color: #64748b;"></i> <span>Очакван файл:</span> <code style="color: #0f172a; background: #ffffff; padding: 2px 6px; border-radius: 4px; border: 1px solid #cbd5e1;">' + esc(displayFile) + '</code></div>' : '')
     + '</div>'
     + '</div>'
-    + '</div>';
+    + '</div>'
+    + (label || cleanDesc ? '<figcaption class="image-placeholder-caption" style="margin-top: 0.6rem; font-size: 0.88rem; color: #64748b;"><strong>' + esc(label) + '</strong>' + (cleanDesc ? ' – ' + esc(cleanDesc) : '') + (fileName ? '<span class="lesson-media-file-tag" title="Очакван файл"><i class="fas fa-file-image"></i> Файл: ' + esc(fileName) + '</span>' : '') + '</figcaption>' : '')
+    + '</figure>';
 }
 
 function renderGalleryBlock(b) {

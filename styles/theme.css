@@ -1360,12 +1360,63 @@ body.dark-mode .chat-text {
 }
 
 [data-theme="dark"] .lesson-image-placeholder,
+[data-theme="dark"] .image-placeholder,
+[data-theme="dark"] .image-placeholder-box,
 [data-theme="dark"] .placeholder-body,
 body.dark-mode .lesson-image-placeholder,
+body.dark-mode .image-placeholder,
+body.dark-mode .image-placeholder-box,
 body.dark-mode .placeholder-body {
   background: #1e243a !important;
   border-color: #334155 !important;
   color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .placeholder-file-path,
+body.dark-mode .placeholder-file-path {
+  background: #0f172a !important;
+  border-color: #334155 !important;
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .placeholder-file-path code,
+[data-theme="dark"] .placeholder-file-code,
+body.dark-mode .placeholder-file-path code,
+body.dark-mode .placeholder-file-code {
+  background: #1e293b !important;
+  border-color: #475569 !important;
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .placeholder-filename-badge,
+body.dark-mode .placeholder-filename-badge {
+  background: rgba(30, 58, 138, 0.4) !important;
+  border-color: #3b82f6 !important;
+  color: #93c5fd !important;
+}
+
+[data-theme="dark"] .lb-lightbox-stage,
+body.dark-mode .lb-lightbox-stage {
+  background: #1e293b !important;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8) !important;
+}
+
+[data-theme="dark"] .lb-lightbox-caption,
+body.dark-mode .lb-lightbox-caption {
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .flash-image-zoom-btn,
+body.dark-mode .flash-image-zoom-btn {
+  background: rgba(15, 23, 42, 0.9) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .flash-image-zoom-btn:hover,
+body.dark-mode .flash-image-zoom-btn:hover {
+  background: var(--accent-orange, #f97316) !important;
+  color: #ffffff !important;
 }
 
 [data-theme="dark"] .lesson-inline-media-card,

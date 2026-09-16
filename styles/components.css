@@ -2691,13 +2691,34 @@ body.portfolio-mode .main-portfolio-content {
 
 /* ---------- Lightbox modal for lesson images ---------- */
 
-.lb-zoomable {
+.lb-zoomable,
+.lesson-body img:not(.no-lightbox):not(.lb-lightbox-img),
+.titled-image-container img,
+.image-placeholder-container.image-loaded img,
+.image-placeholder-wrapper.image-loaded img,
+.lesson-inline-media-card.image-loaded img,
+.interactive-workbench-container img,
+.timeline-component-container img,
+.lb-image img,
+.lb-gallery-item img {
   cursor: zoom-in !important;
-  transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), filter 0.2s ease, box-shadow 0.2s ease;
 }
-.lb-zoomable:hover {
+
+.lb-zoomable:hover,
+.lesson-body img:not(.no-lightbox):not(.lb-lightbox-img):hover,
+.titled-image-container img:hover,
+.image-placeholder-container.image-loaded img:hover,
+.image-placeholder-wrapper.image-loaded img:hover,
+.lesson-inline-media-card.image-loaded img:hover,
+.interactive-workbench-container img:hover,
+.timeline-component-container img:hover,
+.lb-image img:hover,
+.lb-gallery-item img:hover {
+  cursor: zoom-in !important;
   filter: brightness(1.03);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12) !important;
+  transform: scale(1.015);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12) !important;
 }
 
 .lb-lightbox {
@@ -2744,6 +2765,7 @@ body.portfolio-mode .main-portfolio-content {
   max-width: 90vw;
   max-height: 90vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: 12px;
@@ -2752,6 +2774,14 @@ body.portfolio-mode .main-portfolio-content {
   box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
   position: relative;
   overflow: hidden;
+}
+.lb-lightbox-caption {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e293b;
+  padding: 8px 14px 4px;
+  text-align: center;
+  max-width: 100%;
 }
 .lb-lightbox-img {
   max-width: 88vw;
@@ -3516,6 +3546,41 @@ button.about-btn-primary {
   height: 100%;
   object-fit: cover;
   display: block;
+  cursor: zoom-in;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.flash-image-wrapper:hover .flash-term-img {
+  transform: scale(1.03);
+}
+.flash-image-zoom-btn {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(6px);
+  color: #ffffff;
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease;
+  z-index: 4;
+}
+.flash-image-zoom-btn:hover {
+  background: var(--accent-orange, #f97316);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.06);
+  box-shadow: 0 6px 16px rgba(249, 115, 22, 0.4);
+  color: #ffffff;
+}
+.flash-image-zoom-btn i {
+  font-size: 0.82rem;
 }
 .flash-image-loading {
   font-size: 0.8rem;

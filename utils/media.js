@@ -1,7 +1,8 @@
 // Central media URL resolver for lesson content hosted in the public assets repository.
 
-export const MEDIA_BASE_URL = 'https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/';
 export const RAW_GITHUB_BASE_URL = 'https://raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/';
+export const CDN_BASE_URL = 'https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/';
+export const MEDIA_BASE_URL = RAW_GITHUB_BASE_URL;
 
 const MEDIA_KEYS = new Set([
   'src',
@@ -65,4 +66,21 @@ export function resolveLessonMedia(value, key = '') {
     }
   }
   return value;
+}
+
+export function getCleanMediaInfo(rawPath) {
+  if (!rawPath || typeof rawPath !== 'string') return { fullPath: '', fileName: '', relativePath: '' };
+  const trimmed = rawPath.trim();
+  let clean = trimmed
+    .replace(/^https?:\/\/(?:cdn\.jsdelivr\.net\/gh\/[^\/]+\/[^\/]+(?:@[^\/]+)?\/assets\/|raw\.githubusercontent\.com\/[^\/]+\/[^\/]+\/[^\/]+\/assets\/)/i, '')
+    .replace(/^\/?(?:assets\/)?/, '')
+    .replace(/^\.\//, '');
+
+  const fileName = clean.split('/').pop() || '';
+  const resolved = resolveMediaUrl(clean);
+  return {
+    fullPath: resolved || trimmed,
+    relativePath: clean,
+    fileName: fileName
+  };
 }

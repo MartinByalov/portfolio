@@ -1503,6 +1503,57 @@ button.lesson-tag:hover {
   margin: 0;
   line-height: 1.5;
 }
+.placeholder-file-path {
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #334155;
+  background: #e2e8f0;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  word-break: break-all;
+}
+.placeholder-file-path code,
+.placeholder-file-code {
+  color: #0f172a;
+  background: #ffffff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #cbd5e1;
+  word-break: break-all;
+}
+.placeholder-filename-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 700;
+  font-size: 0.74rem;
+  text-transform: none;
+  color: #1e40af;
+  background: #dbeafe;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid #bfdbfe;
+  word-break: break-all;
+}
+.image-placeholder-box {
+  background: #f8fafc;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  color: #64748b;
+  margin: 0.5rem auto;
+  box-sizing: border-box;
+}
 .flash-ai-badge {
   position: absolute;
   bottom: 8px;
@@ -1549,18 +1600,83 @@ button.lesson-tag:hover {
   margin-bottom: 6px;
 }
 
-/* Automatically hide placeholder box when image is loaded and visible */
-.lesson-inline-media-card:has(img:not([style*="display: none"]):not([style*="display:none"])) .lesson-micro-placeholder-box,
-.lesson-inline-media-card img:not([style*="display: none"]):not([style*="display:none"]) ~ .lesson-micro-placeholder-box {
+/* Automatically hide placeholder box and show image when loaded */
+.image-placeholder-container.image-loaded .lesson-image-placeholder,
+.image-placeholder-container.image-loaded .image-placeholder,
+.image-placeholder-wrapper.image-loaded .lesson-image-placeholder,
+.image-placeholder-wrapper.image-loaded .image-placeholder,
+.lesson-inline-media-card.image-loaded .lesson-micro-placeholder-box {
   display: none !important;
 }
 
-/* Automatically show placeholder box when image is missing or hidden due to error */
-.lesson-inline-media-card:has(img[style*="display: none"]) .lesson-micro-placeholder-box,
-.lesson-inline-media-card:has(img[style*="display:none"]) .lesson-micro-placeholder-box,
-.lesson-inline-media-card img[style*="display: none"] ~ .lesson-micro-placeholder-box,
-.lesson-inline-media-card img[style*="display:none"] ~ .lesson-micro-placeholder-box {
+.image-placeholder-container.image-loaded img,
+.image-placeholder-wrapper.image-loaded img,
+.lesson-inline-media-card.image-loaded img {
+  position: static !important;
+  opacity: 1 !important;
+  display: block !important;
+  pointer-events: auto !important;
+  cursor: zoom-in !important;
+}
+
+.lesson-inline-media-card.image-loaded {
+  cursor: zoom-in;
+}
+
+/* When image is loaded, hide file tags and file badges so only the clean description remains */
+.image-placeholder-container.image-loaded .lesson-media-file-tag,
+.image-placeholder-wrapper.image-loaded .lesson-media-file-tag,
+.lesson-inline-media-card.image-loaded .lesson-media-file-tag,
+.image-placeholder-container.image-loaded .placeholder-file-path,
+.image-placeholder-container.image-loaded .placeholder-filename-badge,
+.image-placeholder-container.image-loaded + p .lesson-media-file-tag,
+.lesson-inline-media-card.image-loaded + .lesson-micro-caption .lesson-media-file-tag,
+.lesson-inline-media-card.image-loaded .lesson-micro-caption .lesson-media-file-tag {
+  display: none !important;
+}
+
+/* In placeholder mode (image not loaded or failed), show placeholder box */
+.image-placeholder-container:not(.image-loaded) .lesson-image-placeholder,
+.image-placeholder-container:not(.image-loaded) .image-placeholder,
+.image-placeholder-wrapper:not(.image-loaded) .lesson-image-placeholder,
+.image-placeholder-wrapper:not(.image-loaded) .image-placeholder {
+  display: block !important;
+}
+
+.lesson-inline-media-card:not(.image-loaded) .lesson-micro-placeholder-box {
   display: flex !important;
+}
+
+/* While image is loading or when failed, keep image element non-empty in DOM so browser downloads it, but visually hidden */
+.image-placeholder-container:not(.image-loaded) img,
+.image-placeholder-wrapper:not(.image-loaded) img,
+.lesson-inline-media-card:not(.image-loaded) img {
+  position: absolute !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+}
+
+/* File tag badge when image is missing / in placeholder mode */
+.lesson-media-file-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.73rem;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-left: 5px;
+  vertical-align: middle;
+  transition: all 0.2s ease;
+  user-select: all;
+  cursor: text;
 }
 
 .lesson-media-float {
@@ -1616,16 +1732,21 @@ button.lesson-tag:hover {
 }
 
 .lesson-micro-path {
-  font-family: monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.72rem;
+  font-weight: 600;
   background: #e2e8f0;
-  color: #334155;
+  border: 1px solid #cbd5e1;
+  color: #1e293b;
   padding: 2px 6px;
   border-radius: 4px;
   max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  word-break: break-all;
+  white-space: normal;
+  display: inline-flex;
+  align-items: center;
+  user-select: all;
+  cursor: text;
 }
 
 .lesson-micro-caption {

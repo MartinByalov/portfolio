@@ -95,6 +95,13 @@ export function buildLesson(lesson) {
       return;
     }
 
+    if (c.type === 'step-block') {
+      if (c.id && (c.title || c.navLabel)) {
+        navItems.push({ id: c.id, label: c.navLabel || c.title });
+      }
+      return;
+    }
+
     if (c.type === 'it10-sandbox' || c.type === 'live-sandbox-block' || c.type === 'sandbox') {
       if (c.id) navItems.push({ id: c.id, label: c.navLabel || c.title || 'Лаборатория' });
       return;
@@ -105,16 +112,17 @@ export function buildLesson(lesson) {
       return;
     }
 
-    // Accordion points: only numbered main points and glossary enter sidebar navigation
+    // Accordion points: numbered main points, trial tests, and glossary enter sidebar navigation
     if (c.type === 'accordion') {
       (c.items || []).forEach(it => {
         if (it.skipNav) return;
         const title = (it.title || '').trim();
         const isMainPoint = /^\d+[\.\)]/.test(title);
         const isGlossary = title.toLowerCase().includes('речник');
+        const isTrial = title.toLowerCase().includes('входно ниво') || title.toLowerCase().includes('пробно');
         const isExplicitNav = it.includeInNav === true;
 
-        if ((isMainPoint || isGlossary || isExplicitNav) && it.id) {
+        if ((isMainPoint || isGlossary || isTrial || isExplicitNav) && it.id) {
           navItems.push({ id: it.id, label: it.title });
         }
       });
@@ -145,65 +153,61 @@ export function buildLesson(lesson) {
 
 export function initMediaPlaceholders() {
   if (typeof document === 'undefined') return;
-  document.querySelectorAll('.lesson-inline-media-card').forEach(card => {
-    const img = card.querySelector('img');
-    const placeholder = card.querySelector('.lesson-micro-placeholder-box');
-    if (img && placeholder) {
-      const handleSuccess = () => {
-        img.style.display = 'block';
-        placeholder.style.display = 'none';
-      };
-      const handleFailure = () => {
-        if (img.src && img.src.includes('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/')) {
-          img.src = img.src.replace('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/', 'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/');
-          return;
-        }
-        img.style.display = 'none';
-        placeholder.style.display = 'flex';
-      };
 
-      if (img.complete) {
-        if (img.naturalWidth > 0) {
-          handleSuccess();
-        } else {
-          handleFailure();
-        }
-      } else {
-        img.addEventListener('load', handleSuccess);
-        img.addEventListener('error', handleFailure);
-      }
-    }
-  });
-
-  document.querySelectorAll('.image-placeholder-container').forEach(container => {
+  const bindMediaContainer = (container) => {
     const img = container.querySelector('img');
-    const placeholder = container.querySelector('.image-placeholder');
-    if (img && placeholder) {
-      const handleSuccess = () => {
-        img.style.display = 'block';
-        placeholder.style.display = 'none';
-      };
-      const handleFailure = () => {
+    if (!img) return;
+
+    let retried = false;
+
+    const handleSuccess = () => {
+      container.classList.add('image-loaded');
+      container.classList.remove('image-failed');
+      img.classList.add('lb-zoomable');
+      if (!img.getAttribute('title')) {
+        img.setAttribute('title', 'Кликнете за преглед в пълен размер');
+      }
+    };
+
+    const handleFailure = () => {
+      if (!retried) {
+        retried = true;
+        if (img.src && img.src.includes('raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/')) {
+          img.src = img.src.replace('raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/', 'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/');
+          return;
+        }
         if (img.src && img.src.includes('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/')) {
           img.src = img.src.replace('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/', 'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/');
           return;
         }
-        img.style.display = 'none';
-        placeholder.style.display = 'block';
-      };
-
-      if (img.complete) {
-        if (img.naturalWidth > 0) {
-          handleSuccess();
-        } else {
-          handleFailure();
-        }
-      } else {
-        img.addEventListener('load', handleSuccess);
-        img.addEventListener('error', handleFailure);
       }
+      container.classList.remove('image-loaded');
+      container.classList.add('image-failed');
+    };
+
+    img.addEventListener('load', handleSuccess);
+    img.addEventListener('error', handleFailure);
+
+    if (img.complete) {
+      if (img.naturalWidth > 0) {
+        handleSuccess();
+      } else if (img.src) {
+        handleFailure();
+      }
+    } else if (img.src) {
+      // Actively ensure browser triggers load
+      const preloader = new Image();
+      preloader.onload = () => handleSuccess();
+      preloader.onerror = () => handleFailure();
+      preloader.src = img.src;
     }
-  });
+  };
+
+  // 1. Inline / micro media cards
+  document.querySelectorAll('.lesson-inline-media-card').forEach(bindMediaContainer);
+
+  // 2. Full-sized image placeholder containers and wrappers
+  document.querySelectorAll('.image-placeholder-container, .image-placeholder-wrapper').forEach(bindMediaContainer);
 }
 
 export function initLesson(lesson) {

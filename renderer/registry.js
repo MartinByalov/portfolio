@@ -76,6 +76,7 @@ import * as StepHeader from '../components/step-header.js';
 import * as StepBlock from '../components/step-block.js';
 import * as It10Sandbox from '../components/it10-sandbox.js';
 import * as EntryLevelQuiz from '../components/entry-level-quiz.js';
+import * as IframeViewer from '../components/iframe-viewer.js';
 
 const registry = {
   'text-group': TextGroup,
@@ -159,6 +160,11 @@ const registry = {
   'it10-sandbox': It10Sandbox,
   'live-sandbox-block': It10Sandbox,
   'entry-level-quiz': EntryLevelQuiz,
+  'iframe-viewer': IframeViewer,
+  'sheet-embed': IframeViewer,
+  'iframe': IframeViewer,
+  'document-viewer': IframeViewer,
+  'embed': IframeViewer,
 };
 
 export function renderComponent(comp) {

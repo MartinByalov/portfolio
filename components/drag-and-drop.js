@@ -52,7 +52,7 @@ function shuffle(arr) {
 
 function renderCard(item, col) {
   const img = item.image
-    ? '<img src="' + esc(item.image) + '" alt="' + esc(item.alt) + '" class="dd-card-img">'
+    ? '<img src="' + esc(item.image) + '" alt="' + esc(item.alt) + '" class="dd-card-img" onerror="if(this.src.includes(\'cdn.jsdelivr.net\')){this.src=this.src.replace(\'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/\',\'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/\');}">'
     : '';
   const txt = item.text ? '<span class="dd-card-text">' + esc(item.text) + '</span>' : '';
   return '<div class="dd-card dd-draggable" draggable="true" data-dd-id="' + esc(item.id) + '" data-dd-col="' + esc(col) + '">'

@@ -2,8 +2,8 @@
 
 const SUBJECT_CARDS = [
   { id: 'it-8', badge: '8 клас',  icon: 'fas fa-desktop',       title: 'ИТ',                       description: 'Основи на работа с компютър и MS Office.',                                 href: '#/course/it-8' },
-  { id: 'it-9', badge: '9 клас',  icon: 'fas fa-file-excel',   title: 'ИТ',                       description: 'Работа с електронни таблици и презентации.',                                href: '#' },
-  { id: 'it-10', badge: '10 клас', icon: 'fas fa-network-wired',title: 'ИТ',                       description: 'Интернет, мрежи, сигурност и уеб основи.',                                   href: '#' },
+  { id: 'it-9', badge: '9 клас',  icon: 'fas fa-file-excel',   title: 'ИТ',                       description: 'Работа с електронни таблици и презентации.',                                href: '#/course/it-9' },
+  { id: 'it-10', badge: '10 клас', icon: 'fas fa-network-wired',title: 'ИТ',                       description: 'Интернет, мрежи, сигурност и уеб основи.',                                   href: '#/course/it-10' },
   { id: 'up-ii-12', badge: '12 клас', icon: 'fas fa-chart-line',   title: 'Икономическа Информатика', description: 'Информационни системи в бизнеса и управлението.',                              href: '#/course/up-ii-12' },
   { id: 'programming-12', badge: '12 клас', icon: 'fas fa-code',         title: 'Програмиране',             description: 'Програмиране на Python и структури от данни.',                                href: '#/course/programming-12' },
   { id: 'kaos-12', badge: '12 клас', icon: 'fas fa-microchip',    title: 'Компютърни Архитектури',   description: 'Хардуер, процесори, памет и операционни системи.',                           href: '#/course/kaos-12' }

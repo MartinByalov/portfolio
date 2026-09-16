@@ -4,6 +4,7 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { GoogleGenAI } from '@google/genai';
 import { buildRealisticImagePrompt, generateRealisticPromptWithGemini, STANDARD_NEGATIVE_PROMPT } from './utils/promptGenerator.js';
+import { resolveGlossaryImageUrl, getGlossaryFilename } from './utils/glossaryMedia.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -53,8 +54,12 @@ express.static.mime.define({
   'application/epub+zip': ['epub']
 });
 
-// Serve static assets from project root and assets directory
+// Serve static assets from project root, assets directory, and lesson directories
 app.use(express.static(path.join(__dirname, 'assets')));
+app.use('/lessons', express.static(path.join(__dirname, 'lessons')));
+app.use('/it-8-2-5', express.static(path.join(__dirname, 'it-8-2-5')));
+app.use('/it-8-2-5', express.static(path.join(__dirname, 'assets', 'it-8-2-5')));
+app.use('/it-8-2-5', express.static(path.join(__dirname, 'lessons', 'it-8', 'it-8-2-5')));
 app.use(express.static(__dirname, {
   extensions: ['html', 'htm'],
   index: ['index.html']
@@ -228,78 +233,61 @@ app.post('/api/glossary/generate-prompt', async (req, res) => {
   }
 });
 
-// Realistic Image Generation for glossary & flashcards via Cloudflare Workers AI
+// Helper to check for local pre-rendered glossary image
+function getLocalGlossaryImagePath(term) {
+  if (!term) return null;
+  const bgToLat = {
+    "а":"a","б":"b","в":"v","г":"g","д":"d","е":"e","ж":"zh","з":"z","и":"i","й":"y",
+    "к":"k","л":"l","м":"m","н":"n","о":"o","п":"p","р":"r","с":"s","т":"t","у":"u",
+    "ф":"f","х":"h","ц":"ts","ч":"ch","ш":"sh","щ":"sht","ъ":"a","ь":"y","ю":"yu","я":"ya"
+  };
+  const s = String(term).toLowerCase().trim();
+  let translit = "";
+  for (let ch of s) {
+    translit += bgToLat[ch] !== undefined ? bgToLat[ch] : ch;
+  }
+  const slug = translit.replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+
+  const glossaryDir = path.join(__dirname, 'assets', 'glossary');
+  if (fs.existsSync(glossaryDir)) {
+    try {
+      const files = fs.readdirSync(glossaryDir);
+      for (const f of files) {
+        const fLower = f.toLowerCase();
+        const baseName = fLower.replace(/\.[^/.]+$/, '');
+        if (baseName === slug || fLower === `${slug}.png` || baseName === s) {
+          return `/glossary/${f}`;
+        }
+      }
+    } catch (e) {
+      console.warn('Error checking glossary images:', e);
+    }
+  }
+  return null;
+}
+
+// Static Image URL resolver for glossary & flashcards
 app.post('/api/glossary/image', async (req, res) => {
-  const { term, definition, prompt: customPrompt, negative_prompt: customNegativePrompt } = req.body || {};
+  const { term } = req.body || {};
   if (!term) {
     return res.status(400).json({ status: 'error', message: 'Missing term' });
   }
 
-  const cacheKey = String(term).trim().toLowerCase();
-  if (glossaryImageCache.has(cacheKey)) {
-    const cachedItem = glossaryImageCache.get(cacheKey);
-    const imageUrl = typeof cachedItem === 'string' ? cachedItem : cachedItem.imageUrl;
-    const promptUsed = typeof cachedItem === 'string' ? '' : cachedItem.prompt;
-    return res.json({ status: 'ok', imageUrl, prompt: promptUsed, cached: true, source: 'cache' });
+  // 1. Check if a local pre-generated image exists in assets/glossary/
+  const localImage = getLocalGlossaryImagePath(term);
+  if (localImage) {
+    return res.json({ status: 'ok', imageUrl: localImage, fileName: getGlossaryFilename(term), source: 'local_file' });
   }
 
-  // Derive photorealistic prompt and negative prompt
-  let activePrompt = (customPrompt || '').trim();
-  let activeNegativePrompt = (customNegativePrompt || '').trim();
-
-  if (!activePrompt) {
-    const promptObj = await generateRealisticPromptWithGemini(term, definition || '');
-    activePrompt = promptObj.image_prompt;
-    if (!activeNegativePrompt) activeNegativePrompt = promptObj.negative_prompt;
-  }
-  if (!activeNegativePrompt) {
-    activeNegativePrompt = STANDARD_NEGATIVE_PROMPT;
-  }
-
-  const authToken = (process.env.CLOUDFLARE_AI_TOKEN || process.env.WORKER_AI_TOKEN || process.env.CF_AI_TOKEN || '').trim();
-
-  // If a valid Cloudflare AI token is configured, execute realistic image generation
-  if (authToken) {
-    try {
-      const endpoint = 'https://lucky-cloud-1c42.byalov-v-martin.workers.dev';
-      const payload = {
-        prompt: activePrompt,
-        negative_prompt: activeNegativePrompt,
-        width: 1024,
-        height: 1024,
-        steps: 4,
-        guidance: 7.5
-      };
-
-      const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': authToken.startsWith('Bearer ') ? authToken : `Bearer ${authToken}`
-      };
-
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify(payload)
-      });
-
-      const contentType = response.headers.get('content-type') || '';
-      if (response.ok && (contentType.includes('image') || contentType.includes('application/octet-stream'))) {
-        const arrayBuffer = await response.arrayBuffer();
-        const base64 = Buffer.from(arrayBuffer).toString('base64');
-        const mimeType = contentType.includes('jpeg') || contentType.includes('jpg') ? 'image/jpeg' : 'image/png';
-        const dataUrl = `data:${mimeType};base64,${base64}`;
-        glossaryImageCache.set(cacheKey, { imageUrl: dataUrl, prompt: activePrompt });
-        return res.json({ status: 'ok', imageUrl: dataUrl, prompt: activePrompt, source: 'cloudflare-workers-ai' });
-      }
-    } catch (_) {
-      // Fall through to fallback SVG below
-    }
-  }
-
-  // Graceful fallback to SVG vector card for the term
-  const fallbackSvg = generateTermFallbackSvg(term, definition);
-  glossaryImageCache.set(cacheKey, { imageUrl: fallbackSvg, prompt: activePrompt });
-  return res.json({ status: 'ok', imageUrl: fallbackSvg, prompt: activePrompt, source: 'vector-fallback' });
+  // 2. Return primary CDN URL for ready-made glossary image
+  const cdnUrl = resolveGlossaryImageUrl(term);
+  const fileName = getGlossaryFilename(term);
+  return res.json({
+    status: 'ok',
+    imageUrl: cdnUrl,
+    fileName,
+    source: 'static_assets'
+  });
 });
 
 // Dynamic AI explanation for glossary flashcards on the fly

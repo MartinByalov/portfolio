@@ -71,6 +71,11 @@ import * as MobileDeviceProfiler from '../components/mobile-device-profiler.js';
 import * as MobileTransferCalculator from '../components/mobile-transfer-calculator.js';
 import * as MobilePermissionsAuditor from '../components/mobile-permissions-auditor.js';
 import * as MobileBatteryOptimizer from '../components/mobile-battery-optimizer.js';
+import * as Overview from '../components/overview.js';
+import * as StepHeader from '../components/step-header.js';
+import * as StepBlock from '../components/step-block.js';
+import * as It10Sandbox from '../components/it10-sandbox.js';
+import * as EntryLevelQuiz from '../components/entry-level-quiz.js';
 
 const registry = {
   'text-group': TextGroup,
@@ -147,6 +152,13 @@ const registry = {
   'mobile-transfer-calculator': MobileTransferCalculator,
   'mobile-permissions-auditor': MobilePermissionsAuditor,
   'mobile-battery-optimizer': MobileBatteryOptimizer,
+  'overview': Overview,
+  'step-header': StepHeader,
+  'sh': StepHeader,
+  'step-block': StepBlock,
+  'it10-sandbox': It10Sandbox,
+  'live-sandbox-block': It10Sandbox,
+  'entry-level-quiz': EntryLevelQuiz,
 };
 
 export function renderComponent(comp) {

@@ -15,10 +15,11 @@ export function render(asideHtml, mainHtml) {
 
 // Catalog and course sidebar navigation
 export function renderClassPicker(catalog, activeCourseId) {
-  const links = catalog.grades.flatMap(grade => grade.courses).map(course => {
+  const links = (catalog?.grades || []).flatMap(grade => grade.courses).map(course => {
     const activeClass = course.id === activeCourseId ? ' active' : '';
-    const target = course.available ? `#/course/${course.id}` : '#';
-    const disabled = course.available ? '' : ' course-link-disabled';
+    const isAvailable = course.available || ['it-8', 'it-9', 'it-10', 'kaos-12'].includes(course.id);
+    const target = isAvailable ? `#/course/${course.id}` : '#';
+    const disabled = isAvailable ? '' : ' course-link-disabled';
     return `<a href="${target}" class="course-link${activeClass}${disabled}"><i class='bx bx-chevron-right'></i> ${course.title}</a>`;
   }).join('');
 

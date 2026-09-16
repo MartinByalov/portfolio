@@ -39,7 +39,7 @@ function esc(s) {
 
 function renderImageBlock(b) {
   return '<figure class="lb-image">'
-    + '<img src="' + esc(b.src) + '" alt="' + esc(b.alt || '') + '" loading="lazy">'
+    + '<img src="' + esc(b.src) + '" alt="' + esc(b.alt || '') + '" loading="lazy" onerror="if(this.src.includes(\'cdn.jsdelivr.net\')){this.src=this.src.replace(\'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/\',\'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/\');}">'
     + (b.caption ? '<figcaption>' + esc(b.caption) + '</figcaption>' : '')
     + '</figure>';
 }
@@ -50,15 +50,37 @@ function renderImagePlaceholderBlock(b) {
   const icon = b.icon || 'fas fa-image';
   const step = b.step ? '<span class="placeholder-step">' + esc(b.step) + '</span>' : '';
   const path = b.src || b.path || b.fileName || '';
+  const isMini = b.size === 'mini' || b.variant === 'mini' || b.size === 'compact' || b.variant === 'compact';
+  const isFloat = b.float === 'right' || b.align === 'right';
+
+  const rawFileName = path ? path.replace(/^https?:\/\/[^\/]+\/(?:[^\/]+\/)*assets\//, '').split('/').pop() : '';
+  const displayTitle = rawFileName && !label.includes(rawFileName) ? (label + ' - ' + rawFileName) : label;
+
+  if (isMini) {
+    const wrapClass = isFloat ? 'lesson-media-float' : 'lesson-inline-media-wrap';
+    const wrapStyle = isFloat ? '' : 'margin: 1rem 0; max-width: 260px;';
+    return '<div class="' + wrapClass + '"' + (wrapStyle ? ' style="' + wrapStyle + '"' : '') + '>'
+      + '<div class="lesson-inline-media-card">'
+      + (path ? '<img src="' + esc(path) + '" alt="' + esc(label) + '" loading="lazy" style="width: 100%; height: auto; max-height: 140px; object-fit: cover; border-radius: 8px; border: 1px solid #e2e8f0; display: block; margin-bottom: 8px;" onload="this.style.display=\'block\'; if(this.nextElementSibling) this.nextElementSibling.style.display=\'none\';" onerror="if(this.src.includes(\'cdn.jsdelivr.net\')){this.src=this.src.replace(\'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/\',\'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/\');}else{this.style.display=\'none\'; if(this.nextElementSibling) this.nextElementSibling.style.display=\'flex\';}">' : '')
+      + '<div class="lesson-micro-placeholder-box"' + (path ? ' style="display: none;"' : '') + '>'
+      + '<span class="lesson-micro-badge"><i class="' + esc(icon) + '"></i> ' + (step || 'Визуален детайл') + '</span>'
+      + '<div class="lesson-micro-title">' + esc(displayTitle) + '</div>'
+      + (path ? '<div class="lesson-micro-path">' + esc(path) + '</div>' : '')
+      + '</div>'
+      + (desc ? '<div class="lesson-micro-caption">' + esc(desc) + '</div>' : '')
+      + '</div>'
+      + '</div>';
+  }
+
   if (path) {
     return '<figure class="lb-image image-placeholder-wrapper" style="margin: 1.5rem 0; text-align: center;">'
-      + '<img src="' + esc(path) + '" alt="' + esc(label) + '" loading="lazy" style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #e2e8f0; display: block; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.05);" onerror="this.style.display=\'none\'; if(this.nextElementSibling) this.nextElementSibling.style.display=\'block\';">'
+      + '<img src="' + esc(path) + '" alt="' + esc(label) + '" loading="lazy" style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #e2e8f0; display: block; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.05);" onload="this.style.display=\'block\'; if(this.nextElementSibling) this.nextElementSibling.style.display=\'none\';" onerror="if(this.src.includes(\'cdn.jsdelivr.net\')){this.src=this.src.replace(\'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/\',\'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/\');}else{this.style.display=\'none\'; if(this.nextElementSibling) this.nextElementSibling.style.display=\'block\';}">'
       + '<div class="lesson-image-placeholder" style="display: none;">'
       + '<div class="placeholder-badge"><i class="fas fa-camera"></i> ' + (step || 'Екранна снимка (Placeholder)') + '</div>'
       + '<div class="placeholder-body">'
       + '<div class="placeholder-icon-wrap"><i class="' + esc(icon) + '"></i></div>'
       + '<div class="placeholder-text-wrap">'
-      + '<h4 class="placeholder-heading">' + esc(label) + '</h4>'
+      + '<h4 class="placeholder-heading">' + esc(displayTitle) + '</h4>'
       + (desc ? '<p class="placeholder-desc">' + esc(desc) + '</p>' : '')
       + '<div class="placeholder-file-path" style="margin-top: 8px; font-family: monospace; font-size: 0.85rem; color: #475569; background: #e2e8f0; padding: 4px 10px; border-radius: 6px; display: inline-block;"><i class="fas fa-file-image" style="margin-right: 6px; color: #64748b;"></i>' + esc(path) + '</div>'
       + '</div>'
@@ -72,7 +94,7 @@ function renderImagePlaceholderBlock(b) {
     + '<div class="placeholder-body">'
     + '<div class="placeholder-icon-wrap"><i class="' + esc(icon) + '"></i></div>'
     + '<div class="placeholder-text-wrap">'
-    + '<h4 class="placeholder-heading">' + esc(label) + '</h4>'
+    + '<h4 class="placeholder-heading">' + esc(displayTitle) + '</h4>'
     + (desc ? '<p class="placeholder-desc">' + esc(desc) + '</p>' : '')
     + '</div>'
     + '</div>'

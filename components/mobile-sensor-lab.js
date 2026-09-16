@@ -57,7 +57,7 @@ export function render(comp) {
               <span class="win-dot green" style="width: 10px; height: 10px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
             </div>
             <div class="os-win-title" style="font-size: 0.82rem; font-family: monospace; letter-spacing: 0.05em; color: #94a3b8; font-weight: 600;">
-              <i class="fas fa-mobile-screen" style="color: #38bdf8; margin-right: 0.35rem;"></i> VIRTUAL HARDWARE SIMULATOR
+              VIRTUAL HARDWARE
             </div>
           </div>
           
@@ -103,7 +103,7 @@ export function render(comp) {
               <span class="win-dot" style="width: 10px; height: 10px; border-radius: 50%; background: #cbd5e1; display: inline-block;"></span>
             </div>
             <div class="os-win-title" style="font-size: 0.82rem; font-weight: 600; color: #475569;">
-              <i class="fas fa-sliders" style="color: #3b82f6; margin-right: 0.35rem;"></i> Контрол и показания на сензора
+              Контрол и показания на сензора
             </div>
           </div>
 
@@ -114,7 +114,7 @@ export function render(comp) {
 
             <div style="padding: 0.85rem; background: var(--surface-alt, #f8fafc); border-radius: 10px; border-left: 4px solid var(--accent-blue, #3b82f6);">
               <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-color, #1e293b); margin-bottom: 0.35rem;">
-                <i class="fas fa-circle-info" style="color: #3b82f6; margin-right: 0.3rem;"></i> Как работи този сензор?
+                Как работи този сензор?
               </div>
               <div id="${esc(id)}-explanation-text" style="font-size: 0.84rem; color: var(--text-color, #334155); line-height: 1.55; word-break: normal; overflow-wrap: break-word;">
                 Акселерометърът измерва силата на земното притегляне и линейното ускорение по три оси (X, Y, Z). Когато завъртите устройството, софтуерът засича промяната на гравитационния вектор и автоматично завърта съдържанието на екрана.
@@ -229,12 +229,9 @@ export function init(comp) {
         <div style="display: flex; flex-direction: column; gap: 0.85rem;">
           <!-- Proximity Visual Status Box -->
           <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.75rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
+            <div style="margin-bottom: 0.6rem;">
               <span style="font-size: 0.82rem; font-weight: 700; color: #0f172a;">
                 <i class="fas fa-satellite-dish" style="color: #ef4444; margin-right: 0.35rem;"></i> Инфрачервен (IR) сензор
-              </span>
-              <span id="prox-status-badge" style="font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 12px; background: #e0f2fe; color: #0369a1;">
-                Няма обект (&gt; 5 cm)
               </span>
             </div>
 
@@ -266,7 +263,6 @@ export function init(comp) {
         const btn = root.querySelector('#btn-toggle-proximity');
         const btnText = root.querySelector('#prox-btn-text');
         const btnIcon = root.querySelector('#prox-btn-icon');
-        const badge = root.querySelector('#prox-status-badge');
         const sliderDist = root.querySelector('#slider-prox-dist');
         const labelDist = root.querySelector('#label-prox-dist');
 
@@ -290,11 +286,6 @@ export function init(comp) {
             }
             if (textEl) textEl.innerHTML = '<span style="color: #ef4444;">ЕКРАНЪТ Е ИЗКЛЮЧЕН</span>';
             if (subEl) subEl.textContent = '🔒 Защита от допир с бузата (IR отражение)';
-            if (badge) {
-              badge.textContent = `🚨 Близо (${distCm} cm) · Екран OFF`;
-              badge.style.background = '#fee2e2';
-              badge.style.color = '#991b1b';
-            }
             if (btn) {
               btn.style.background = '#fef2f2';
               btn.style.borderColor = '#ef4444';
@@ -318,11 +309,6 @@ export function init(comp) {
             if (iconEl) iconEl.innerHTML = '<i class="fas fa-phone-volume" style="font-size: 2rem; color: #ffffff;"></i>';
             if (textEl) textEl.textContent = 'Разговор: 00:42';
             if (subEl) subEl.textContent = 'Сензор: Няма обект наблизо (> 5 см)';
-            if (badge) {
-              badge.textContent = `Далеч (${distCm} cm) · Екран ON`;
-              badge.style.background = '#e0f2fe';
-              badge.style.color = '#0369a1';
-            }
             if (btn) {
               btn.style.background = '#ecfdf5';
               btn.style.borderColor = '#059669';

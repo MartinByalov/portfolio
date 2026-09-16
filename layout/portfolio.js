@@ -1,16 +1,16 @@
 // Portfolio page renderer and slider
 
 const ZADANIE_TOOLS = [
-  { emoji: '📢', label: 'Регулировчик',   href: '/tools/control/control.html'             },
-  { emoji: '⏱️', label: 'Планировчик',    href: '/tools/planner/planner.html'             },
-  { emoji: '🎲', label: 'Случайни групи', href: '/tools/random-groups/random-groups.html' },
-  { emoji: '⛶',  label: 'QR Code Генератор', href: '/tools/qr_code/qr_code.html'          },
-  { emoji: '⌨️', label: 'WPM',            href: '/tools/wpm/wpm.html'                     },
-  { emoji: '⏳', label: 'Таймер',         href: '/tools/timer/timer.html'                 },
-  { emoji: '🗝️', label: 'Шифър',          href: '/tools/cipher/cipher.html'               },
-  { emoji: '🌐', label: 'PockeTracer',    href: '/tools/pockeTracer/index.html'           },
-  { emoji: '📐', label: 'Чертожник',      href: '/tools/geometry/geometry.html'           },
-  { emoji: '🧮', label: 'Калкулатори',    href: '/tools/calculators/calculators.html'     }
+  { emoji: '📢', label: 'Регулировчик',   href: 'tools/control/control.html'             },
+  { emoji: '⏱️', label: 'Планировчик',    href: 'tools/planner/planner.html'             },
+  { emoji: '🎲', label: 'Случайни групи', href: 'tools/random-groups/random-groups.html' },
+  { emoji: '⛶',  label: 'QR Code Генератор', href: 'tools/qr_code/qr_code.html'          },
+  { emoji: '⌨️', label: 'WPM',            href: 'tools/wpm/wpm.html'                     },
+  { emoji: '⏳', label: 'Таймер',         href: 'tools/timer/timer.html'                 },
+  { emoji: '🗝️', label: 'Шифър',          href: 'tools/cipher/cipher.html'               },
+  { emoji: '🌐', label: 'PockeTracer',    href: 'tools/pockeTracer/index.html'           },
+  { emoji: '📐', label: 'Чертожник',      href: 'tools/geometry/geometry.html'           },
+  { emoji: '🧮', label: 'Калкулатори',    href: 'tools/calculators/calculators.html'     }
 ];
 
 const TRAINING_TOOLS = [

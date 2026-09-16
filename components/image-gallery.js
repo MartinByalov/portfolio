@@ -5,7 +5,10 @@ function sanitizePath(src) {
 
 function renderMedia(item) {
   const cleanPath = sanitizePath(item.src || '');
-  return `<img src="${item.src}" alt="${item.alt || ''}" data-path="${cleanPath}" style="width: 100%; height: 100%; object-fit: cover;" onerror="if(this.src.includes('cdn.jsdelivr.net')){this.src=this.src.replace('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/','raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/');}else{this.onerror=null;this.parentElement.innerHTML='<div class=\\'gallery-placeholder\\'><i class=\\'fas fa-image\\'></i><strong style=\\'font-family: monospace;\\'>' + this.getAttribute('data-path') + '</strong><span>' + (this.getAttribute('alt') || '') + '</span></div>';}" />`;
+  const rawFileName = cleanPath.split('/').pop();
+  const label = item.alt || item.title || 'Изображение';
+  const displayTitle = rawFileName && !label.includes(rawFileName) ? `${label} - ${rawFileName}` : label;
+  return `<img src="${item.src}" alt="${displayTitle}" data-path="${cleanPath}" style="width: 100%; height: 100%; object-fit: cover;" onerror="if(this.src.includes('cdn.jsdelivr.net')){this.src=this.src.replace('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/','raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/');}else{this.onerror=null;this.parentElement.innerHTML='<div class=\\'gallery-placeholder\\'><i class=\\'fas fa-image\\'></i><strong style=\\'font-family: monospace;\\'>' + this.getAttribute('data-path') + '</strong><span>' + (this.getAttribute('alt') || '') + '</span></div>';}" />`;
 }
 
 export function render(comp) {

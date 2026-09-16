@@ -21,14 +21,40 @@ export function buildLesson(lesson) {
   const gradeLabel = lesson.grade ? ` · ${lesson.grade} клас` : '';
   const goalLabel = 'Цел:';
 
-  const headerHtml = `
-    <div class="course-header-info">
-      <span class="sidebar-badge-inline">${lesson.subject || ''}${gradeLabel}</span>
-      <h1 class="page-title">${esc(lesson.title)}</h1>
-      ${lesson.subtitle ? `<p class="page-subtitle" style="font-size: 1.15rem; color: var(--text-muted); font-weight: normal; margin-top: 0.35rem;">${esc(lesson.subtitle)}</p>` : ''}
-      ${lesson.goal ? `<div class="lesson-goal-line tone-orange tag-goal" style="margin-top: 1rem;"><span class="lesson-goal-ico"><i class="fas fa-bullseye"></i></span><span class="lesson-goal-text"><strong>${goalLabel}</strong> ${esc(lesson.goal)}</span></div>` : ''}
-    </div>
-  `;
+  const isBlogStyle = lesson.style === 'blog' || lesson.layoutStyle === 'tutorial' || (lesson.grade && Number(lesson.grade) >= 10);
+
+  let headerHtml = '';
+  if (isBlogStyle) {
+    const pills = (lesson.pills || []).map(p => `
+      <a href="#${esc(p.id)}" class="tut-header-pill">${esc(p.label)}</a>
+    `).join('');
+
+    headerHtml = `
+      <header class="tut-header ${lesson.themeClass || 'theme-blue'}" style="margin-top: 10px; margin-bottom: 24px; max-width: 100%;">
+        <div class="tut-header-inner">
+          <div class="tut-header-logo" style="color: ${lesson.logoColor || '#60a5fa'};">
+            <i class="${lesson.icon || 'fa-solid fa-graduation-cap'}"></i>
+          </div>
+          <div>
+            <div class="tut-header-meta">${esc(lesson.meta || `${lesson.grade || 10}. КЛАС // ИНФОРМАЦИОННИ ТЕХНОЛОГИИ`)}</div>
+            <h1>${esc(lesson.title)}</h1>
+            <p>${esc(lesson.subtitle || lesson.description || '')}</p>
+            ${pills ? `<div class="tut-header-nav">${pills}</div>` : ''}
+          </div>
+        </div>
+      </header>
+      ${lesson.goal ? `<div class="lesson-goal-line tone-orange tag-goal" style="margin-bottom: 24px;"><span class="lesson-goal-ico"><i class="fas fa-bullseye"></i></span><span class="lesson-goal-text"><strong>${goalLabel}</strong> ${esc(lesson.goal)}</span></div>` : ''}
+    `;
+  } else {
+    headerHtml = `
+      <div class="course-header-info">
+        <span class="sidebar-badge-inline">${lesson.subject || ''}${gradeLabel}</span>
+        <h1 class="page-title">${esc(lesson.title)}</h1>
+        ${lesson.subtitle ? `<p class="page-subtitle" style="font-size: 1.15rem; color: var(--text-muted); font-weight: normal; margin-top: 0.35rem;">${esc(lesson.subtitle)}</p>` : ''}
+        ${lesson.goal ? `<div class="lesson-goal-line tone-orange tag-goal" style="margin-top: 1rem;"><span class="lesson-goal-ico"><i class="fas fa-bullseye"></i></span><span class="lesson-goal-text"><strong>${goalLabel}</strong> ${esc(lesson.goal)}</span></div>` : ''}
+      </div>
+    `;
+  }
 
   const rawComponents = lesson.components || lesson.sections || [];
   const components = rawComponents.map(c => {
@@ -64,6 +90,21 @@ export function buildLesson(lesson) {
     if (c.type === 'exercise-modal' || c.skipNav) return;
     if (c.type === 'tag' && !c.includeInNav) return;
 
+    if (c.type === 'step-header' || c.type === 'sh') {
+      if (c.id) navItems.push({ id: c.id, label: c.navLabel || c.title });
+      return;
+    }
+
+    if (c.type === 'it10-sandbox' || c.type === 'live-sandbox-block' || c.type === 'sandbox') {
+      if (c.id) navItems.push({ id: c.id, label: c.navLabel || c.title || 'Лаборатория' });
+      return;
+    }
+
+    if (c.type === 'entry-level-quiz' || c.type === 'quiz') {
+      if (c.id) navItems.push({ id: c.id, label: c.navLabel || c.title || c.heading || 'Тест за входно ниво' });
+      return;
+    }
+
     // Accordion points: only numbered main points and glossary enter sidebar navigation
     if (c.type === 'accordion') {
       (c.items || []).forEach(it => {
@@ -81,8 +122,8 @@ export function buildLesson(lesson) {
     }
 
     // Top-level standalone sections with explicit navigation request
-    if (c.includeInNav && c.id && (c.title || c.heading)) {
-      navItems.push({ id: c.id, label: c.heading || c.title });
+    if (c.includeInNav && c.id && (c.title || c.heading || c.navLabel)) {
+      navItems.push({ id: c.id, label: c.navLabel || c.heading || c.title });
     }
   });
 
@@ -102,7 +143,71 @@ export function buildLesson(lesson) {
   return { headerHtml, bodyHtml, navItems };
 }
 
+export function initMediaPlaceholders() {
+  if (typeof document === 'undefined') return;
+  document.querySelectorAll('.lesson-inline-media-card').forEach(card => {
+    const img = card.querySelector('img');
+    const placeholder = card.querySelector('.lesson-micro-placeholder-box');
+    if (img && placeholder) {
+      const handleSuccess = () => {
+        img.style.display = 'block';
+        placeholder.style.display = 'none';
+      };
+      const handleFailure = () => {
+        if (img.src && img.src.includes('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/')) {
+          img.src = img.src.replace('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/', 'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/');
+          return;
+        }
+        img.style.display = 'none';
+        placeholder.style.display = 'flex';
+      };
+
+      if (img.complete) {
+        if (img.naturalWidth > 0) {
+          handleSuccess();
+        } else {
+          handleFailure();
+        }
+      } else {
+        img.addEventListener('load', handleSuccess);
+        img.addEventListener('error', handleFailure);
+      }
+    }
+  });
+
+  document.querySelectorAll('.image-placeholder-container').forEach(container => {
+    const img = container.querySelector('img');
+    const placeholder = container.querySelector('.image-placeholder');
+    if (img && placeholder) {
+      const handleSuccess = () => {
+        img.style.display = 'block';
+        placeholder.style.display = 'none';
+      };
+      const handleFailure = () => {
+        if (img.src && img.src.includes('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/')) {
+          img.src = img.src.replace('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/', 'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/');
+          return;
+        }
+        img.style.display = 'none';
+        placeholder.style.display = 'block';
+      };
+
+      if (img.complete) {
+        if (img.naturalWidth > 0) {
+          handleSuccess();
+        } else {
+          handleFailure();
+        }
+      } else {
+        img.addEventListener('load', handleSuccess);
+        img.addEventListener('error', handleFailure);
+      }
+    }
+  });
+}
+
 export function initLesson(lesson) {
   const components = lesson.components || lesson.sections || [];
   components.forEach(initComponent);
+  initMediaPlaceholders();
 }

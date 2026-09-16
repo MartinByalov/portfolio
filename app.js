@@ -232,6 +232,9 @@ async function route() {
       // Redirect to standalone tools dashboard preserving mode
       location.replace(`tools/index.html?mode=${newMode}`);
       return;
+    } else if (parts[0]?.toLowerCase() === 'pocketracer') {
+      location.replace('tools/pockeTracer/index.html');
+      return;
     } else if (parts[0] === 'experience') {
       if (!About.isPortfolioUnlocked()) {
         location.hash = '#/about';

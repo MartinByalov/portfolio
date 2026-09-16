@@ -1,6 +1,7 @@
 // Central media URL resolver for lesson content hosted in the public assets repository.
 
 export const MEDIA_BASE_URL = 'https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/';
+export const RAW_GITHUB_BASE_URL = 'https://raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/';
 
 const MEDIA_KEYS = new Set([
   'src',
@@ -11,7 +12,12 @@ const MEDIA_KEYS = new Set([
   'poster',
   'assetPath',
   'thumbnail',
-  'backgroundImage'
+  'backgroundImage',
+  'path',
+  'fileName',
+  'img',
+  'logo',
+  'iconImage'
 ]);
 
 export function resolveMediaUrl(value) {
@@ -29,8 +35,8 @@ export function resolveMediaUrl(value) {
     .replace(/^\/src\/assets\/images\//, 'other/')
     .replace(/^src\/assets\/images\//, 'other/');
 
-  // Lesson-scoped and shared assets hosted in external media repository
-  if (!/^(?:it-\d+(?:-\d+)+|kaos-\d+(?:-\d+)*|other)\//i.test(normalized)) return value;
+  // Lesson-scoped, shared, and glossary assets hosted in external media repository
+  if (!/^(?:it-\d+(?:-\d+)*|kaos-\d+(?:-\d+)*|other|glossary)\//i.test(normalized)) return value;
 
   return MEDIA_BASE_URL + normalized.split('/').map(encodeURIComponent).join('/');
 }
@@ -47,5 +53,16 @@ export function resolveLessonMedia(value, key = '') {
       ])
     );
   }
-  return MEDIA_KEYS.has(key) ? resolveMediaUrl(value) : value;
+  if (typeof value === 'string') {
+    if (MEDIA_KEYS.has(key)) {
+      return resolveMediaUrl(value);
+    }
+    // Also resolve relative image src in HTML content strings
+    if (value.includes('<img') || value.includes('src=')) {
+      return value.replace(/src=["']((?:\.?\/?assets\/)?(?:it-\d+(?:-\d+)+|kaos-\d+(?:-\d+)*|other)\/[^"']+)["']/gi, (match, p1) => {
+        return `src="${resolveMediaUrl(p1)}"`;
+      });
+    }
+  }
+  return value;
 }

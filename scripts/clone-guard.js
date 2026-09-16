@@ -114,20 +114,36 @@
     };
   }
 
-  // 5. Global error suppression for DataCloneError and third-party script/widget noise
+  // 5. Global error suppression for DataCloneError, resource load errors, and third-party script/widget noise
   if (typeof window !== 'undefined') {
     window.addEventListener('error', function(event) {
+      if (!event) return;
+
+      // Check if this is an element resource load error (e.g. <img>, <link>, <script>, <audio>, <video>)
+      if (event.target && event.target !== window && (typeof HTMLElement !== 'undefined' && event.target instanceof HTMLElement || event.target.nodeType || event.target.tagName)) {
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        return;
+      }
+
+      // Check for DataCloneError
       if (event.error && (event.error.name === 'DataCloneError' || String(event.error).includes('could not be cloned'))) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
         return true;
       }
-      // Suppress cross-origin Script error, third-party widget errors (UserWay), and empty error objects
+
+      // Suppress cross-origin Script error, third-party widget errors (UserWay), and empty / event-like error objects
       const isScriptError = event.message === 'Script error.' || (!event.filename && !event.lineno);
-      const isThirdParty = event.filename && (event.filename.includes('userway') || event.filename.includes('widget'));
-      const isEmpty = !event.error || (typeof event.error === 'object' && Object.keys(event.error).length === 0 && !event.error.message);
-      if (isScriptError || isThirdParty || isEmpty) {
+      const isThirdParty = (event.filename && (event.filename.includes('userway') || event.filename.includes('widget'))) ||
+                           (event.message && (event.message.includes('userway') || event.message.includes('UserWay')));
+      const isEmptyOrEvent = !event.error ||
+                             (typeof event.error === 'object' && !event.error.message && !event.error.stack) ||
+                             (typeof Event !== 'undefined' && event.error instanceof Event) ||
+                             (event.isTrusted && !event.error);
+
+      if (isScriptError || isThirdParty || isEmptyOrEvent) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();
@@ -136,7 +152,21 @@
     }, true);
 
     window.addEventListener('unhandledrejection', function(event) {
+      if (!event || !event.reason) {
+        if (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+        }
+        return;
+      }
       if (event.reason && (event.reason.name === 'DataCloneError' || String(event.reason).includes('could not be cloned'))) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        return;
+      }
+      if ((typeof Event !== 'undefined' && event.reason instanceof Event) || (typeof event.reason === 'object' && event.reason.isTrusted && !event.reason.message)) {
         event.preventDefault();
         event.stopPropagation();
         event.stopImmediatePropagation();

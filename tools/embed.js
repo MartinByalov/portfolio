@@ -61,7 +61,7 @@ function absolutizeLinks(root, mode) {
     if (hash.startsWith('#/')) {
       a.setAttribute('href', mode ? `${indexUrl}?mode=${mode}${hash}` : `${indexUrl}${hash}`);
     } else if (hash === '#/' || hash === '#') {
-      a.setAttribute('href', mode ? `${indexUrl}?mode=${mode}` : indexUrl);
+      a.setAttribute('href', mode ? `${indexUrl}?mode=${mode}#/` : `${indexUrl}#/`);
     }
   });
   root.querySelectorAll('a[href^="/#/"], a[href^="/?"]').forEach(a => {

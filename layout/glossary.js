@@ -1,4 +1,5 @@
 // Interactive glossary and flashcards component
+import { resolveGlossaryImageUrl, resolveGlossaryRawUrl, getGlossaryFilename } from '../utils/glossaryMedia.js';
 
 let TERMS = [];
 
@@ -22,60 +23,104 @@ function blockToDefinition(content) {
 // Load terms from all courses and lessons
 async function loadTerms() {
   if (TERMS.length) return TERMS;
-  const terms = [];
+  const termsMap = new Map();
+
+  function addTerm(term, definition, tags, image_prompt = '', negative_prompt = '') {
+    const cleanTerm = String(term || '').trim();
+    const cleanDef = String(definition || '').trim();
+    if (!cleanTerm || !cleanDef) return;
+    const key = cleanTerm.toLowerCase();
+    if (termsMap.has(key)) {
+      const existing = termsMap.get(key);
+      if (tags && !existing.tags.includes(tags)) {
+        existing.tags = `${existing.tags} ${tags}`.trim();
+      }
+      if (!existing.image_prompt && image_prompt) existing.image_prompt = image_prompt;
+      return;
+    }
+    termsMap.set(key, {
+      term: cleanTerm,
+      definition: cleanDef,
+      tags: String(tags || '').trim(),
+      image_prompt: image_prompt || '',
+      negative_prompt: negative_prompt || ''
+    });
+  }
+
   try {
     const catalogRes = await fetch('data/catalog.json');
     const catalog = await catalogRes.json();
-    const courses = catalog.grades.flatMap(g => g.courses).filter(c => c.available);
-    for (const course of courses) {
-      const courseRes = await fetch(`data/courses/${course.id}.json`);
-      if (!courseRes.ok) continue;
-      const courseData = await courseRes.json();
-      for (const section of courseData.sections || []) {
-        for (const lessonMeta of section.lessons || []) {
-          if (!lessonMeta.lessonPath) continue;
-          const res = await fetch(lessonMeta.lessonPath);
-          if (!res.ok) continue;
-          const lesson = await res.json();
-          const glossary = (lesson.components || []).find(c =>
-            c.type === 'accordion' && (c.heading === 'Речник' || c.id === 'lesson-glossary'));
-          if (!glossary) continue;
-          const lessonTags = [lesson.grade ? lesson.grade + ' клас' : '', lesson.id || course.id].filter(Boolean).join(' ');
-          for (const item of glossary.items || []) {
-            // Modern format: glossary-list block
-            for (const block of item.content || []) {
-              if (block && block.type === 'glossary-list') {
-                for (const it of block.items || []) {
-                  if (it.term && it.definition) {
-                    terms.push({
-                      term: it.term,
-                      definition: it.definition,
-                      tags: lessonTags,
-                      image_prompt: it.image_prompt || it.prompt || '',
-                      negative_prompt: it.negative_prompt || ''
-                    });
+    const catalogCourseIds = catalog.grades.flatMap(g => g.courses).map(c => c.id);
+    const knownCourses = Array.from(new Set([...catalogCourseIds, 'it-8', 'it-9', 'it-10', 'kaos-12']));
+
+    for (const courseId of knownCourses) {
+      try {
+        const courseRes = await fetch(`data/courses/${courseId}.json`);
+        if (!courseRes.ok) continue;
+        const courseData = await courseRes.json();
+        for (const section of courseData.sections || []) {
+          for (const lessonMeta of section.lessons || []) {
+            if (!lessonMeta.lessonPath) continue;
+            try {
+              const res = await fetch(lessonMeta.lessonPath);
+              if (!res.ok) continue;
+              const lesson = await res.json();
+              const lessonTags = [
+                lesson.grade ? `${lesson.grade} клас` : (courseData.title?.includes('8') ? '8 клас' : (courseData.title?.includes('10') ? '10 клас' : '')),
+                lesson.id || lessonMeta.id || courseId
+              ].filter(Boolean).join(' ');
+
+              // 1. Top-level lesson.glossary (e.g. 10th grade format)
+              if (Array.isArray(lesson.glossary)) {
+                for (const it of lesson.glossary) {
+                  if (it && it.term && (it.definition || it.text)) {
+                    addTerm(it.term, it.definition || it.text, lessonTags, it.image_prompt || it.prompt, it.negative_prompt);
+                  } else if (it && it.title && it.definition) {
+                    addTerm(it.title, it.definition, lessonTags, it.image_prompt || it.prompt, it.negative_prompt);
                   }
                 }
               }
-            }
-            // Legacy format: item itself is a term
-            if (item.title && item.title !== 'Речник' && item.definition) {
-              terms.push({
-                term: item.title,
-                definition: item.definition,
-                tags: lessonTags,
-                image_prompt: item.image_prompt || item.prompt || '',
-                negative_prompt: item.negative_prompt || ''
-              });
+
+              // 2. Component-level glossary
+              for (const comp of lesson.components || []) {
+                if (!comp) continue;
+                if (comp.type === 'glossary-list' && Array.isArray(comp.items)) {
+                  for (const it of comp.items) {
+                    if (it && it.term && it.definition) {
+                      addTerm(it.term, it.definition, lessonTags, it.image_prompt || it.prompt, it.negative_prompt);
+                    }
+                  }
+                } else if (comp.type === 'accordion' && Array.isArray(comp.items)) {
+                  for (const item of comp.items) {
+                    for (const block of item.content || []) {
+                      if (block && block.type === 'glossary-list' && Array.isArray(block.items)) {
+                        for (const it of block.items) {
+                          if (it && it.term && it.definition) {
+                            addTerm(it.term, it.definition, lessonTags, it.image_prompt || it.prompt, it.negative_prompt);
+                          }
+                        }
+                      }
+                    }
+                    if (item.title && item.title !== 'Речник' && item.definition) {
+                      addTerm(item.title, item.definition, lessonTags, item.image_prompt || item.prompt, item.negative_prompt);
+                    }
+                  }
+                }
+              }
+            } catch (err) {
+              console.warn('[glossary] Проблем при зареждане на урок:', lessonMeta.lessonPath, err);
             }
           }
         }
+      } catch (err) {
+        console.warn('[glossary] Проблем при зареждане на курс:', courseId, err);
       }
     }
   } catch (err) {
     console.error('[glossary] Неуспешно зареждане на термините:', err);
   }
-  TERMS = terms;
+
+  TERMS = Array.from(termsMap.values()).sort((a, b) => a.term.localeCompare(b.term, 'bg'));
   return TERMS;
 }
 
@@ -143,7 +188,7 @@ export function initGlossaryPage() {
   if (!input || !alphabet || !grid) return;
 
   const LIST_DESCRIPTION = 'Всички термини, дефиниции и понятия от уроците по Информационни технологии.';
-  const FLASH_DESCRIPTION = 'Интерактивни флаш карти с илюстрации, генерирани чрез AI (Cloudflare Workers AI & Gemini). Възможни са несъответствия при визуализацията на някои термини.';
+  const FLASH_DESCRIPTION = 'Интерактивни флаш карти с илюстрации за бързо преговаряне и самопроверка на основните понятия.';
 
   let activeLetter = '';
   let query = '';
@@ -198,24 +243,44 @@ export function initGlossaryPage() {
     const term = TERMS[idx];
     if (!term) return;
     closeFlash();
+
+    const cdnUrl = resolveGlossaryImageUrl(term.term);
+    const rawFallbackUrl = resolveGlossaryRawUrl(term.term);
+    const safeTerm = escapeHtmlGlossary(term.term);
+    const safeFilename = escapeHtmlGlossary(getGlossaryFilename(term.term));
+
     const overlay = document.createElement('div');
     overlay.className = 'flash-overlay';
     overlay.id = 'flash-overlay';
     overlay.innerHTML = `
-      <div class="flash-modal" role="dialog" aria-modal="true" aria-label="${escapeHtmlGlossary(term.term)}">
+      <div class="flash-modal" role="dialog" aria-modal="true" aria-label="${safeTerm}">
         <button type="button" class="flash-close" id="flash-close" aria-label="Затвори">&times;</button>
         <div class="flash-inner" id="flash-inner">
           <div class="flash-face flash-front">
-            <h3 class="flash-term-title">${escapeHtmlGlossary(term.term)}</h3>
+            <h3 class="flash-term-title">${safeTerm}</h3>
             <div class="flash-body-centered">
               <div class="flash-image-wrapper" id="flash-image-wrapper">
-                <div class="flash-image-loading"><i class="fas fa-spinner fa-spin"></i></div>
+                <div class="flash-image-loading" id="flash-image-loading">
+                  <i class="fas fa-spinner fa-spin"></i>
+                </div>
+                <img src="${cdnUrl}"
+                     alt="${safeTerm}"
+                     class="flash-term-img"
+                     loading="eager"
+                     onload="this.style.opacity='1'; const spin = document.getElementById('flash-image-loading'); if(spin) spin.style.display='none';"
+                     onerror="if(this.src.includes('cdn.jsdelivr.net')){this.src='${rawFallbackUrl}';}else{this.style.display='none'; const fb = document.getElementById('flash-fallback-icon'); if(fb) fb.style.display='flex'; const spin = document.getElementById('flash-image-loading'); if(spin) spin.style.display='none';}"
+                     style="opacity: 0; transition: opacity 0.25s ease;"
+                     title="glossary/${safeFilename}" />
+                <div class="flash-micro-fallback" id="flash-fallback-icon" style="display: none;">
+                  <i class="fas fa-layer-group"></i>
+                  <span>${safeTerm}</span>
+                </div>
               </div>
             </div>
             <span class="flash-flip-hint" aria-hidden="true" title="Завърти картата"><i class="fas fa-rotate"></i></span>
           </div>
           <div class="flash-face flash-back">
-            <h3 class="flash-back-title">${escapeHtmlGlossary(term.term)}</h3>
+            <h3 class="flash-back-title">${safeTerm}</h3>
             <div class="flash-body-centered">
               <p class="flash-definition-text">${escapeHtmlGlossary(term.definition)}</p>
             </div>
@@ -225,35 +290,6 @@ export function initGlossaryPage() {
       </div>`;
     document.body.appendChild(overlay);
     requestAnimationFrame(() => overlay.classList.add('open'));
-
-    // Fetch realistic photograph image generated via Cloudflare Workers AI
-    fetch('/api/glossary/image', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        term: term.term,
-        definition: term.definition,
-        prompt: term.image_prompt,
-        negative_prompt: term.negative_prompt
-      })
-    })
-      .then(res => res.json())
-      .then(data => {
-        const imgWrap = document.getElementById('flash-image-wrapper');
-        if (!imgWrap) return;
-        if (data && data.imageUrl) {
-          const promptInfo = data.prompt ? escapeHtmlGlossary(data.prompt) : '';
-          imgWrap.innerHTML = `
-            <img src="${escapeHtmlGlossary(data.imageUrl)}" alt="${escapeHtmlGlossary(term.term)}" class="flash-term-img" title="${promptInfo}" />
-          `;
-        } else {
-          imgWrap.style.display = 'none';
-        }
-      })
-      .catch(() => {
-        const imgWrap = document.getElementById('flash-image-wrapper');
-        if (imgWrap) imgWrap.style.display = 'none';
-      });
 
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) closeFlash();

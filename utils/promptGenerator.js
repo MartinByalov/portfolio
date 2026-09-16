@@ -661,7 +661,7 @@ cartoon, anime, illustration, 3d render, CGI, fantasy, surreal, unrealistic, dis
     const userPrompt = `Term:\n"${term}"\n\nDefinition:\n"${definition}"`;
 
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3.8-flash',
       contents: [
         { role: 'user', parts: [{ text: `${systemInstruction}\n\n${userPrompt}` }] }
       ]

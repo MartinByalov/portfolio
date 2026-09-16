@@ -38,7 +38,7 @@ export function render(comp) {
               <span class="win-dot green" style="width: 10px; height: 10px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
             </div>
             <div class="os-win-title" style="font-size: 0.82rem; font-family: monospace; letter-spacing: 0.05em; color: #94a3b8; font-weight: 600;">
-              <i class="fas fa-tower-broadcast" style="color: #38bdf8; margin-right: 0.35rem;"></i> КЛЕТЪЧЕН HANDOVER СИМУЛАТОР
+              КЛЕТЪЧЕН HANDOVER
             </div>
           </div>
           <span id="${esc(id)}-handover-status" style="font-size: 0.78rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 6px; background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3);">
@@ -93,7 +93,7 @@ export function render(comp) {
             <input type="range" id="${esc(id)}-car-slider" min="0" max="100" value="10" style="width: 100%; cursor: pointer; margin-bottom: 0.65rem;">
             
             <div style="display: flex; gap: 0.5rem;">
-              <button type="button" id="${esc(id)}-btn-drive" style="flex: 1; padding: 0.55rem 0.75rem; border-radius: 8px; border: 1.5px solid #38bdf8; background: rgba(56, 189, 248, 0.12); color: #38bdf8; font-weight: 700; font-size: 0.82rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.4rem; transition: all 0.2s ease;">
+              <button type="button" id="${esc(id)}-btn-drive" style="flex: 1; padding: 0.55rem 0.75rem; border-radius: 8px; border: 1.5px solid #ea580c; background: #f97316; color: #ffffff; font-weight: 700; font-size: 0.82rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.4rem; transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(249, 115, 22, 0.35);">
                 <i class="fas fa-play" id="${esc(id)}-btn-drive-icon"></i>
                 <span id="${esc(id)}-btn-drive-text">Автоматично движение</span>
               </button>
@@ -112,7 +112,7 @@ export function render(comp) {
               <span class="win-dot" style="width: 10px; height: 10px; border-radius: 50%; background: #cbd5e1; display: inline-block;"></span>
             </div>
             <div class="os-win-title" style="font-size: 0.82rem; font-weight: 600; color: #475569;">
-              <i class="fas fa-network-wired" style="color: #3b82f6; margin-right: 0.35rem;"></i> Сравнение на безжичните технологии за свързаност
+              Сравнение на безжичните технологии за свързаност
             </div>
           </div>
         </div>
@@ -124,9 +124,6 @@ export function render(comp) {
                 <div>
                   <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.45rem;">
                     <span style="font-size: 0.95rem; font-weight: 700; color: var(--text-color, #1e293b);">${esc(t.name)}</span>
-                    <span style="width: 28px; height: 28px; border-radius: 6px; background: ${t.color}18; color: ${t.color}; display: flex; align-items: center; justify-content: center; font-size: 0.85rem;">
-                      <i class="${t.icon}"></i>
-                    </span>
                   </div>
                   <div style="font-size: 0.78rem; color: var(--text-muted, #64748b); margin-bottom: 0.3rem;">
                     <strong>Обхват:</strong> <span style="color: #2563eb; font-weight: 600;">${esc(t.range)}</span> · <strong>Скорост:</strong> <span style="color: #059669; font-weight: 600;">${esc(t.speed)}</span>

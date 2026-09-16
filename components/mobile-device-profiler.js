@@ -9,15 +9,14 @@ function esc(s) {
 
 export function render(comp) {
   const id = comp.id || 'comp-device-profiler-' + Math.random().toString(36).substr(2, 9);
-  const title = comp.title || 'Хардуерен диагностичен стенд и профилиране';
+  const title = comp.title || 'Хардуерен диагностичен стенд: Четири класа устройства';
   const subtitle = comp.subtitle || 'Сравнете техническите параметри на четири класа устройства и изберете оптималната конфигурация според целта и бюджета.';
 
   const devices = [
     {
       id: 'budget',
-      name: 'Бюджетен учебен клас',
+      name: 'Бюджетен модел',
       subtitle: 'Базов модел за училище и комуникация',
-      badge: 'Бюджетен',
       badgeColor: '#10b981',
       icon: 'fas fa-mobile-screen',
       soc: 'MediaTek Helio G85 (12nm, 8 ядра, до 2.0 GHz)',
@@ -35,7 +34,6 @@ export function render(comp) {
       id: 'creator',
       name: 'Мултимедиен флагман',
       subtitle: 'За професионална фотография и 4K/8K видео',
-      badge: 'Флагман',
       badgeColor: '#8b5cf6',
       icon: 'fas fa-camera-retro',
       soc: 'Snapdragon 8 Gen 3 / Apple A17 Pro (3-4nm, мощен NPU/ISP)',
@@ -51,9 +49,8 @@ export function render(comp) {
     },
     {
       id: 'tablet',
-      name: 'Компактен образователен таблет',
+      name: 'Образователен таблет',
       subtitle: 'За дигитални учебници, чертане и бележки',
-      badge: 'Таблет',
       badgeColor: '#0ea5e9',
       icon: 'fas fa-tablet-screen-button',
       soc: '8-ядрен енергоспестяващ процесор (6nm, до 2.4 GHz)',
@@ -69,9 +66,8 @@ export function render(comp) {
     },
     {
       id: 'gaming',
-      name: 'Геймърски модел с охлаждане',
+      name: 'Геймърски модел',
       subtitle: 'Максимална графична мощ и ниска латентност',
-      badge: 'Гейминг',
       badgeColor: '#ef4444',
       icon: 'fas fa-gamepad',
       soc: 'Овърклокнат 4nm SoC с медна изпарителна камера (Vapor Chamber)',
@@ -90,43 +86,42 @@ export function render(comp) {
   const scenarios = [
     {
       id: 'scen-1',
-      title: 'Казус А: Видеовлогър и училищен репортер',
+      title: '1. Видеовлогър и училищен репортер',
       task: 'Ани подготвя училищни видеорепортажи. Изисква се запис на 4K видео при 60 кадъра/сек, бърз монтаж на телефона и светкавично прехвърляне на 20 GB файлове към лаптоп без интернет.',
       bestDeviceId: 'creator',
       explanation: 'Правилният избор е **Мултимедийният флагман**. Защо? Защото разполага с мощен ISP за 4K видео, бърза UFS 4.0 памет за гладък монтаж и най-важното - **USB 3.2 Gen 2 порт**, който прехвърля 20 GB за по-малко от 30 секунди! Бюджетният телефон има USB 2.0 порт и същият трансфер би отнел над 9 минути.'
     },
     {
       id: 'scen-2',
-      title: 'Казус Б: Математика, чертане и електронни учебници',
+      title: '2. Математика, чертане и електронни учебници',
       task: 'Борис търси дигитално устройство за училище, на което да отваря едновременно PDF учебник и електронен тетрадков лист, да чертае геометрични фигури с писалка и батерията да издържа цял учебен ден.',
       bestDeviceId: 'tablet',
-      explanation: 'Правилният избор е **Компактният образователен таблет**. 11-инчовият екран дава достатъчно площ за разделен екран (Split-screen), писалката позволява прецизни математически чертежи, а голямата батерия от 7500 mAh осигурява надеждна автономност.'
+      explanation: 'Правилният избор е **Образователният таблет**. 11-инчовият екран дава достатъчно площ за разделен екран (Split-screen), писалката позволява прецизни математически чертежи, а голямата батерия от 7500 mAh осигурява надеждна автономност.'
     },
     {
       id: 'scen-3',
-      title: 'Казус В: Ежедневна комуникация при разумен бюджет',
+      title: '3. Ежедневна комуникация при разумен бюджет',
       task: 'Калоян иска надежден телефон за ежедневни разговори, WhatsApp, чат с приятели, навигация в града и социални мрежи, като бюджетът му е ограничен до 300 лв.',
       bestDeviceId: 'budget',
-      explanation: 'Правилният избор е **Бюджетният учебен телефон**. За тези задачи не е необходим скъп 4nm процесор или 8K камера. 4 GB RAM и 5000 mAh батерия с енергоспестяващ IPS екран осигуряват над 1.5 дни комфортна работа на достъпна цена.'
+      explanation: 'Правилният избор е **Бюджетният модел**. За тези задачи не е необходим скъп 4nm процесор или 8K камера. 4 GB RAM и 5000 mAh батерия с енергоспестяващ IPS екран осигуряват над 1.5 дни комфортна работа на достъпна цена.'
     }
   ];
 
   return `
     <div id="${esc(id)}" class="mobile-device-profiler-wrapper" style="margin: 1.5rem 0; background: var(--surface-alt, #f8fafc); border: 1px solid var(--border-color, #e2e8f0); border-radius: 16px; padding: 1.5rem;">
       <div style="margin-bottom: 1.25rem;">
-        <h3 style="margin: 0 0 0.4rem 0; font-size: 1.25rem; color: var(--text-color, #1e293b); font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
-          <i class="fas fa-sliders" style="color: var(--accent-blue, #3b82f6);"></i>
+        <h3 style="margin: 0 0 0.4rem 0; font-size: 1.25rem; color: var(--text-color, #1e293b); font-weight: 700;">
           ${esc(title)}
         </h3>
         ${subtitle ? `<p style="margin: 0; font-size: 0.95rem; color: var(--text-muted, #64748b); line-height: 1.5;">${esc(subtitle)}</p>` : ''}
       </div>
 
-      <!-- Device Tabs Navigation -->
-      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem;">
+      <!-- Device Tabs Navigation (All 4 on one line) -->
+      <div style="display: flex; gap: 0.5rem; margin-bottom: 1.25rem; width: 100%;">
         ${devices.map((d, idx) => `
-          <button type="button" class="device-tab-btn ${idx === 0 ? 'active' : ''}" data-device="${d.id}" style="padding: 0.6rem 1rem; border-radius: 10px; border: 1px solid ${idx === 0 ? 'var(--accent-blue, #3b82f6)' : 'var(--border-color, #e2e8f0)'}; background: ${idx === 0 ? '#eff6ff' : '#ffffff'}; color: ${idx === 0 ? '#1d4ed8' : 'var(--text-color, #1e293b)'}; font-size: 0.9rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; transition: all 0.2s ease;">
-            <i class="${d.icon}" style="color: ${d.badgeColor};"></i>
-            <span>${esc(d.name)}</span>
+          <button type="button" class="device-tab-btn ${idx === 0 ? 'active' : ''}" data-device="${d.id}" style="flex: 1 1 0; min-width: 0; padding: 0.65rem 0.4rem; border-radius: 10px; border: 1px solid ${idx === 0 ? 'var(--accent-blue, #3b82f6)' : 'var(--border-color, #e2e8f0)'}; background: ${idx === 0 ? '#eff6ff' : '#ffffff'}; color: ${idx === 0 ? '#1d4ed8' : 'var(--text-color, #1e293b)'}; font-size: 0.85rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.4rem; transition: all 0.2s ease; white-space: nowrap; text-align: center;">
+            <i class="${d.icon}" style="color: ${d.badgeColor}; flex-shrink: 0;"></i>
+            <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${esc(d.name)}</span>
           </button>
         `).join('')}
       </div>
@@ -137,10 +132,7 @@ export function render(comp) {
           <div class="device-spec-card" id="spec-${d.id}" style="display: ${idx === 0 ? 'block' : 'none'};">
             <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid #f1f5f9;">
               <div>
-                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                  <h4 style="margin: 0; font-size: 1.15rem; color: #0f172a; font-weight: 700;">${esc(d.name)}</h4>
-                  <span style="background: ${d.badgeColor}15; color: ${d.badgeColor}; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 20px; border: 1px solid ${d.badgeColor}30;">${esc(d.badge)}</span>
-                </div>
+                <h4 style="margin: 0; font-size: 1.15rem; color: #0f172a; font-weight: 700;">${esc(d.name)}</h4>
                 <div style="font-size: 0.85rem; color: #64748b; margin-top: 0.2rem;">${esc(d.subtitle)}</div>
               </div>
               <div style="background: #f8fafc; padding: 0.4rem 0.75rem; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 0.85rem; font-weight: 700; color: #334155;">
@@ -177,7 +169,7 @@ export function render(comp) {
             </div>
 
             <div style="margin-top: 0.85rem; padding: 0.6rem 0.85rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; font-size: 0.88rem; color: #166534;">
-              <strong><i class="fas fa-check-circle" style="margin-right: 0.35rem;"></i>Оптимално приложение:</strong> ${esc(d.idealFor)}
+              <strong>Оптимално приложение:</strong> ${esc(d.idealFor)}
             </div>
           </div>
         `).join('')}
@@ -185,13 +177,12 @@ export function render(comp) {
 
       <!-- Interactive Scenario Challenge -->
       <div style="background: #ffffff; border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; padding: 1.25rem;">
-        <div style="font-size: 0.95rem; font-weight: 700; color: #1e293b; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.45rem;">
-          <i class="fas fa-clipboard-question" style="color: #f59e0b;"></i>
+        <div style="font-size: 0.95rem; font-weight: 700; color: #1e293b; margin-bottom: 0.75rem;">
           Практически казуси за консултация: Кое устройство е най-подходящо?
         </div>
         
         <div style="display: flex; flex-direction: column; gap: 1rem;">
-          ${scenarios.map((sc, idx) => `
+          ${scenarios.map((sc) => `
             <div class="scenario-box" data-scenario="${sc.id}" style="border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem; background: #fafafa;">
               <div style="font-weight: 700; font-size: 0.92rem; color: #334155; margin-bottom: 0.3rem;">
                 ${esc(sc.title)}
@@ -199,10 +190,9 @@ export function render(comp) {
               <div style="font-size: 0.87rem; color: #475569; margin-bottom: 0.75rem; line-height: 1.45;">
                 ${esc(sc.task)}
               </div>
-              <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center;">
-                <span style="font-size: 0.82rem; font-weight: 600; color: #64748b; margin-right: 0.3rem;">Изберете:</span>
+              <div style="display: flex; gap: 0.4rem; width: 100%;">
                 ${devices.map(d => `
-                  <button type="button" class="scenario-choice-btn" data-scenario="${sc.id}" data-chosen="${d.id}" data-correct="${sc.bestDeviceId}" style="padding: 0.35rem 0.7rem; font-size: 0.82rem; font-weight: 600; border-radius: 6px; border: 1px solid #cbd5e1; background: #ffffff; color: #334155; cursor: pointer; transition: all 0.15s ease;">
+                  <button type="button" class="scenario-choice-btn" data-scenario="${sc.id}" data-chosen="${d.id}" data-correct="${sc.bestDeviceId}" style="flex: 1 1 0; min-width: 0; padding: 0.45rem 0.35rem; font-size: 0.8rem; font-weight: 600; border-radius: 6px; border: 1px solid #cbd5e1; background: #ffffff; color: #334155; cursor: pointer; transition: all 0.15s ease; white-space: nowrap; text-align: center; overflow: hidden; text-overflow: ellipsis;">
                     ${esc(d.name)}
                   </button>
                 `).join('')}

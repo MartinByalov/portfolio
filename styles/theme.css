@@ -1368,6 +1368,55 @@ body.dark-mode .placeholder-body {
   color: #e2e8f0 !important;
 }
 
+[data-theme="dark"] .lesson-inline-media-card,
+[data-theme="dark"] .lesson-feature-media-card,
+body.dark-mode .lesson-inline-media-card,
+body.dark-mode .lesson-feature-media-card {
+  background: #1e243a !important;
+  border-color: #334155 !important;
+  color: #e2e8f0 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+}
+
+[data-theme="dark"] .lesson-feature-media-card h4,
+body.dark-mode .lesson-feature-media-card h4 {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .lesson-feature-media-card p,
+body.dark-mode .lesson-feature-media-card p {
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .lesson-micro-placeholder-box,
+body.dark-mode .lesson-micro-placeholder-box {
+  background: #0f172a !important;
+  border-color: #334155 !important;
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .lesson-micro-title,
+body.dark-mode .lesson-micro-title {
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .lesson-micro-path,
+body.dark-mode .lesson-micro-path {
+  background: #1e293b !important;
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .lesson-micro-badge,
+body.dark-mode .lesson-micro-badge {
+  background: rgba(2, 132, 199, 0.2) !important;
+  color: #38bdf8 !important;
+}
+
+[data-theme="dark"] .lesson-micro-caption,
+body.dark-mode .lesson-micro-caption {
+  color: #94a3b8 !important;
+}
+
 [data-theme="dark"] .placeholder-heading,
 body.dark-mode .placeholder-heading {
   color: #ffffff !important;

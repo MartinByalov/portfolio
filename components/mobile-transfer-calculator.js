@@ -14,8 +14,8 @@ export function render(comp) {
 
   const filePresets = [
     { label: 'Снимка с висока резолюция', sizeMB: 5, icon: 'fas fa-image', desc: '5 MB' },
-    { label: 'Учебна презентация с видео', sizeMB: 45, icon: 'fas fa-file-powerpoint', desc: '45 MB' },
     { label: '4K Видеоклип (10 минути)', sizeMB: 12000, icon: 'fas fa-video', desc: '12 GB (12 000 MB)' },
+    { label: 'Учебна презентация с видео', sizeMB: 45, icon: 'fas fa-file-powerpoint', desc: '45 MB' },
     { label: 'Пълен бекъп на смартфона', sizeMB: 60000, icon: 'fas fa-box-archive', desc: '60 GB (60 000 MB)' }
   ];
 
@@ -32,24 +32,25 @@ export function render(comp) {
   return `
     <div id="${esc(id)}" class="mobile-transfer-calc-wrapper" style="margin: 1.5rem 0; background: var(--surface-alt, #f8fafc); border: 1px solid var(--border-color, #e2e8f0); border-radius: 16px; padding: 1.5rem;">
       <div style="margin-bottom: 1.25rem;">
-        <h3 style="margin: 0 0 0.4rem 0; font-size: 1.25rem; color: var(--text-color, #1e293b); font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
-          <i class="fas fa-gauge-high" style="color: var(--accent-blue, #3b82f6);"></i>
+        <h3 style="margin: 0 0 0.4rem 0; font-size: 1.25rem; color: var(--text-color, #1e293b); font-weight: 700;">
           ${esc(title)}
         </h3>
         ${subtitle ? `<p style="margin: 0; font-size: 0.95rem; color: var(--text-muted, #64748b); line-height: 1.5;">${esc(subtitle)}</p>` : ''}
       </div>
 
-      <!-- Step 1: Choose File Size -->
+      <!-- Step 1: Choose File Size (2x2 Grid) -->
       <div style="margin-bottom: 1.25rem;">
         <div style="font-size: 0.85rem; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 0.5rem;">
           1. Изберете обем на данните за прехвърляне:
         </div>
-        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.65rem;">
           ${filePresets.map((p, idx) => `
-            <button type="button" class="calc-file-btn ${idx === 2 ? 'active' : ''}" data-size="${p.sizeMB}" style="padding: 0.6rem 0.9rem; border-radius: 10px; border: 1px solid ${idx === 2 ? '#3b82f6' : '#cbd5e1'}; background: ${idx === 2 ? '#eff6ff' : '#ffffff'}; color: ${idx === 2 ? '#1d4ed8' : '#334155'}; font-size: 0.88rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; transition: all 0.2s ease;">
-              <i class="${p.icon}"></i>
-              <span>${esc(p.label)}</span>
-              <span style="background: rgba(0,0,0,0.06); padding: 0.15rem 0.45rem; border-radius: 6px; font-size: 0.78rem;">${esc(p.desc)}</span>
+            <button type="button" class="calc-file-btn ${idx === 1 ? 'active' : ''}" data-size="${p.sizeMB}" style="width: 100%; box-sizing: border-box; padding: 0.65rem 0.85rem; border-radius: 10px; border: 1.5px solid ${idx === 1 ? '#3b82f6' : '#cbd5e1'}; background: ${idx === 1 ? '#eff6ff' : '#ffffff'}; color: ${idx === 1 ? '#1d4ed8' : '#334155'}; font-size: 0.88rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; transition: all 0.2s ease;">
+              <span style="display: flex; align-items: center; gap: 0.5rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                <i class="${p.icon}"></i>
+                <span style="overflow: hidden; text-overflow: ellipsis;">${esc(p.label)}</span>
+              </span>
+              <span style="background: rgba(0,0,0,0.06); padding: 0.15rem 0.45rem; border-radius: 6px; font-size: 0.78rem; font-weight: 700; flex-shrink: 0;">${esc(p.desc)}</span>
             </button>
           `).join('')}
         </div>
@@ -80,37 +81,63 @@ export function render(comp) {
         </div>
       </div>
 
-      <!-- Live Calculation Dashboard -->
-      <div style="background: #0f172a; color: #ffffff; border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
-          <div>
-            <div style="font-size: 0.82rem; color: #94a3b8; text-transform: uppercase; font-weight: 600;">Текуща калкулация:</div>
-            <div id="calc-summary-text" style="font-size: 1.1rem; font-weight: 700; color: #f8fafc; margin-top: 0.2rem;">
-              Прехвърляне на 12 GB през USB-C 3.2 Gen 1 (MTP)
+      <!-- Live Calculation Dashboard (Styled after Sandbox: SoC) -->
+      <div class="os-cli-window" style="background: #0f172a; border-radius: 12px; border: 1px solid #334155; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.25); display: flex; flex-direction: column; margin-bottom: 1.5rem;">
+        <div class="os-window-titlebar dark" style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1rem; background: #1e293b; color: #f1f5f9; border-bottom: 1px solid #334155;">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div class="os-win-dots" style="display: flex; gap: 6px;">
+              <span class="win-dot red" style="width: 10px; height: 10px; border-radius: 50%; background: #ef4444; display: inline-block;"></span>
+              <span class="win-dot yellow" style="width: 10px; height: 10px; border-radius: 50%; background: #f59e0b; display: inline-block;"></span>
+              <span class="win-dot green" style="width: 10px; height: 10px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
+            </div>
+            <div class="os-win-title" style="font-size: 0.82rem; font-family: monospace; letter-spacing: 0.05em; color: #94a3b8; font-weight: 600;">
+              <i class="fas fa-terminal" style="color: #38bdf8; margin-right: 0.35rem;"></i> ТЕКУЩА КАЛКУЛАЦИЯ И СИМУЛАЦИЯ НА ТРАНСФЕР
             </div>
           </div>
-          <div style="text-align: right;">
-            <div style="font-size: 0.82rem; color: #94a3b8; text-transform: uppercase; font-weight: 600;">Необходимо време:</div>
-            <div id="calc-time-result" style="font-size: 1.6rem; font-weight: 800; color: #38bdf8; font-family: monospace;">
-              30 секунди
-            </div>
+          <div style="font-size: 0.72rem; font-family: monospace; color: #38bdf8; background: rgba(56, 189, 248, 0.12); padding: 0.2rem 0.5rem; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.25);">
+            BENCHMARK REAL-TIME
           </div>
         </div>
 
-        <!-- Animated Progress Simulation -->
-        <div style="background: #1e293b; border-radius: 8px; padding: 0.85rem; border: 1px solid #334155;">
-          <div style="display: flex; justify-content: space-between; font-size: 0.82rem; color: #cbd5e1; margin-bottom: 0.4rem;">
-            <span>Симулация на трансфер: <span id="calc-sim-status" style="color: #94a3b8;">В покой</span></span>
-            <span id="calc-sim-percent" style="font-weight: 700; color: #38bdf8;">0%</span>
+        <div style="padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">
+          <!-- Telemetry Summary Row -->
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; background: rgba(30, 41, 59, 0.6); padding: 0.9rem 1.15rem; border-radius: 10px; border: 1px solid #334155;">
+            <div>
+              <div style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; font-family: monospace; letter-spacing: 0.05em; font-weight: 600;">
+                Параметри на трансфера:
+              </div>
+              <div id="calc-summary-text" style="font-size: 1.05rem; font-weight: 700; color: #f8fafc; margin-top: 0.25rem;">
+                Прехвърляне на 12 GB през USB-C 3.2 Gen 1 (MTP кабел)
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; font-family: monospace; letter-spacing: 0.05em; font-weight: 600;">
+                Необходимо време:
+              </div>
+              <div id="calc-time-result" style="font-size: 1.65rem; font-weight: 800; color: #38bdf8; font-family: monospace; text-shadow: 0 0 12px rgba(56,189,248,0.25);">
+                30 секунди
+              </div>
+            </div>
           </div>
-          <div style="background: #0f172a; height: 14px; border-radius: 7px; overflow: hidden; border: 1px solid #475569;">
-            <div id="calc-sim-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #0284c7, #38bdf8); transition: width 0.1s linear; border-radius: 7px;"></div>
-          </div>
-          <div style="margin-top: 0.6rem; display: flex; justify-content: flex-end;">
-            <button type="button" id="calc-sim-start-btn" style="padding: 0.45rem 1rem; border-radius: 8px; border: none; background: #0284c7; color: #ffffff; font-weight: 700; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; transition: background 0.15s ease;">
-              <i class="fas fa-play"></i>
-              <span>Тествай скоростта</span>
-            </button>
+
+          <!-- Progress Simulation Container -->
+          <div style="background: #0f172a; border-radius: 10px; padding: 0.9rem 1rem; border: 1px solid #334155;">
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; font-family: monospace; color: #cbd5e1; margin-bottom: 0.5rem;">
+              <span style="display: flex; align-items: center; gap: 0.45rem;">
+                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #38bdf8;"></span>
+                Симулация: <span id="calc-sim-status" style="color: #94a3b8;">В покой</span>
+              </span>
+              <span id="calc-sim-percent" style="font-weight: 700; color: #38bdf8; font-size: 0.95rem;">0%</span>
+            </div>
+            <div style="background: #1e293b; height: 14px; border-radius: 7px; overflow: hidden; border: 1px solid #475569;">
+              <div id="calc-sim-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #0284c7, #38bdf8); transition: width 0.1s linear; border-radius: 7px; box-shadow: 0 0 8px rgba(56,189,248,0.5);"></div>
+            </div>
+            <div style="margin-top: 0.85rem; display: flex; justify-content: flex-end;">
+              <button type="button" id="calc-sim-start-btn" style="padding: 0.5rem 1.15rem; border-radius: 8px; border: 1px solid #0284c7; background: #0284c7; color: #ffffff; font-weight: 700; font-size: 0.85rem; font-family: monospace; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; transition: all 0.2s ease;">
+                <i class="fas fa-play"></i>
+                <span>ТЕСТВАЙ СКОРОСТТА</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

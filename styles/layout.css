@@ -799,9 +799,13 @@ body.dark-mode .course-link.active {
 
 /* Vertical alignment for expand arrow */
 .course-main .accordion-header .card-icon-mini {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   align-self: center;
+  transform-origin: center center;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
 }
 
 .page-title {

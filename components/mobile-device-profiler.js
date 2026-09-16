@@ -27,7 +27,7 @@ export function render(comp) {
       battery: '5000 mAh (18W жично зареждане)',
       connectivity: '4G LTE, Wi-Fi 5 (ac), Bluetooth 5.0, NFC, 3.5mm жак',
       port: 'USB-C (стандарт USB 2.0, до 40 MB/s)',
-      priceIndex: '~250 – 350 лв.',
+      priceIndex: '~130 – 180 €',
       idealFor: 'Текстови съобщения, телефонни разговори, социални мрежи, електронно банкиране и леки приложения за обучение.'
     },
     {
@@ -44,7 +44,7 @@ export function render(comp) {
       battery: '5000 mAh (45W жично + 15W безжично зареждане)',
       connectivity: '5G Dual-SIM, Wi-Fi 7, Bluetooth 5.4, Ultra-Wideband (UWB)',
       port: 'USB-C (стандарт USB 3.2 Gen 2, до 10 Gbps + DisplayPort)',
-      priceIndex: '~1800 – 2500 лв.',
+      priceIndex: '~900 – 1300 €',
       idealFor: 'Тежък мобилен видеомонтаж, 4K/8K заснемане, мобилен изкуствен интелект на устройството (on-device AI) и професионална фотография.'
     },
     {
@@ -61,7 +61,7 @@ export function render(comp) {
       battery: '7500 mAh (целодневна работа в училище)',
       connectivity: 'Wi-Fi 6, Bluetooth 5.2, 4 стерео говорителя с Dolby Atmos',
       port: 'USB-C (стандарт USB 2.0 с OTG поддръжка)',
-      priceIndex: '~450 – 650 лв.',
+      priceIndex: '~230 – 330 €',
       idealFor: 'Четене на електронни учебници и PDF материали, водене на ръкописни бележки с писалка, онлайн уроци и мултитаскинг с два прозореца.'
     },
     {
@@ -78,7 +78,7 @@ export function render(comp) {
       battery: '6000 mAh (двуклетъчна батерия с 120W хиперзареждане)',
       connectivity: '5G с оптимизирана антенен масив, Wi-Fi 7, ултразвукови тригери за пръсти',
       port: 'Двоен USB-C (страничен порт за зареждане по време на игра)',
-      priceIndex: '~1400 – 1900 лв.',
+      priceIndex: '~700 – 970 €',
       idealFor: 'Тежки 3D мобилни игри с постоянни 90-120 кадъра в секунда (FPS), продължително натоварване без прегряване (термален throttling).'
     }
   ];
@@ -101,7 +101,7 @@ export function render(comp) {
     {
       id: 'scen-3',
       title: '3. Ежедневна комуникация при разумен бюджет',
-      task: 'Калоян иска надежден телефон за ежедневни разговори, WhatsApp, чат с приятели, навигация в града и социални мрежи, като бюджетът му е ограничен до 300 лв.',
+      task: 'Калоян иска надежден телефон за ежедневни разговори, WhatsApp, чат с приятели, навигация в града и социални мрежи, като бюджетът му е ограничен до 150 €.',
       bestDeviceId: 'budget',
       explanation: 'Правилният избор е **Бюджетният модел**. За тези задачи не е необходим скъп 4nm процесор или 8K камера. 4 GB RAM и 5000 mAh батерия с енергоспестяващ IPS екран осигуряват над 1.5 дни комфортна работа на достъпна цена.'
     }
@@ -262,11 +262,11 @@ export function init(comp) {
         
         let explanation = '';
         if (scenId === 'scen-1') {
-          explanation = '<strong><i class="fas fa-check-circle" style="margin-right: 0.35rem;"></i>Отличен избор!</strong> Мултимедийният флагман разполага с UFS 4.0 за бърз 4K монтаж и <strong>USB 3.2 Gen 2 порт (до 10 Gbps)</strong>, който прехвърля 20 GB за ~25 секунди. На бюджетен модел с USB 2.0 това би отнело 9 минути.';
+          explanation = '<strong>Отличен избор!</strong> Мултимедийният флагман разполага с UFS 4.0 за бърз 4K монтаж и <strong>USB 3.2 Gen 2 порт (до 10 Gbps)</strong>, който прехвърля 20 GB за ~25 секунди. На бюджетен модел с USB 2.0 това би отнело 9 минути.';
         } else if (scenId === 'scen-2') {
-          explanation = '<strong><i class="fas fa-check-circle" style="margin-right: 0.35rem;"></i>Точно така!</strong> 11-инчовият екран дава нужната площ за разделяне на екрана между учебник и тетрадка, стилусът е перфектен за чертане, а батерията 7500 mAh издържа над 10 часа учене.';
+          explanation = '<strong>Точно така!</strong> 11-инчовият екран дава нужната площ за разделяне на екрана между учебник и тетрадка, стилусът е перфектен за чертане, а батерията 7500 mAh издържа над 10 часа учене.';
         } else {
-          explanation = '<strong><i class="fas fa-check-circle" style="margin-right: 0.35rem;"></i>Правилен избор!</strong> За чат, WhatsApp и браузване няма нужда от скъп флагмански чип - бюджетният модел с 5000 mAh батерия изпълнява тези задачи перфектно на ниска цена.';
+          explanation = '<strong>Правилен избор!</strong> За чат, WhatsApp и браузване няма нужда от скъп флагмански чип - бюджетният модел с 5000 mAh батерия изпълнява тези задачи перфектно на ниска цена.';
         }
         fbBox.innerHTML = explanation;
       } else {
@@ -278,7 +278,7 @@ export function init(comp) {
         fbBox.style.background = '#fef2f2';
         fbBox.style.border = '1px solid #fecaca';
         fbBox.style.color = '#991b1b';
-        fbBox.innerHTML = '<strong><i class="fas fa-circle-xmark" style="margin-right: 0.35rem;"></i>Не съвсем оптимален избор.</strong> Проверете изискванията за скорост на пренос (USB стандарт), размер на екрана или бюджета и опитайте отново.';
+        fbBox.innerHTML = '<strong>Не съвсем оптимален избор.</strong> Проверете изискванията за скорост на пренос (USB стандарт), размер на екрана или бюджета и опитайте отново.';
       }
     });
   });

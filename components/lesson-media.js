@@ -588,7 +588,7 @@ function renderVideoBlock(b) {
     + '</div>'
     + '</div>'
     + '<div class="video-info-pane">'
-    + '<div class="video-info-title">' + esc(b.title || 'Видео урок: Правила за онлайн сесия') + '</div>'
+    + (b.title ? '<div class="video-info-title">' + esc(b.title) + '</div>' : '')
     + '<div class="video-topics-list">'
     + '<div class="topics-heading"><i class="fas fa-list-check"></i> Ключови акценти:</div>'
     + topics

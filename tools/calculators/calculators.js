@@ -802,7 +802,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <form class="calculator-form">
                         <div class="calc-row">
                             <div class="calc-group">
-                                <label for="vatAmount">Сума (лв.)</label>
+                                <label for="vatAmount">Сума (€)</label>
                                 <input type="number" step="any" id="vatAmount" placeholder="100.00">
                             </div>
                             <div class="calc-group">
@@ -872,9 +872,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
 
                     resBox.style.display = 'block';
-                    netEl.textContent = `${formatNumber(net)} лв.`;
-                    taxEl.textContent = `${formatNumber(tax)} лв.`;
-                    grossEl.textContent = `${formatNumber(gross)} лв.`;
+                    netEl.textContent = `${formatNumber(net)} €`;
+                    taxEl.textContent = `${formatNumber(tax)} €`;
+                    grossEl.textContent = `${formatNumber(gross)} €`;
                 }
 
                 amountIn.addEventListener('input', calculate);
@@ -927,8 +927,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     const finalPrice = orig - saved;
 
                     resBox.style.display = 'block';
-                    finalVal.textContent = `${formatNumber(finalPrice)} лв.`;
-                    savedDetail.textContent = `Спестяваш: ${formatNumber(saved)} лв. (${pct}%)`;
+                    finalVal.textContent = `${formatNumber(finalPrice)} €`;
+                    savedDetail.textContent = `Спестяваш: ${formatNumber(saved)} € (${pct}%)`;
                 }
 
                 origIn.addEventListener('input', calculate);
@@ -944,7 +944,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <form class="calculator-form">
                         <div class="calc-row">
                             <div class="calc-group">
-                                <label for="ciPrincipal">Главница (лв.)</label>
+                                <label for="ciPrincipal">Главница (€)</label>
                                 <input type="number" step="any" id="ciPrincipal" placeholder="Напр. 1000">
                             </div>
                             <div class="calc-group">
@@ -1000,8 +1000,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     const earned = A - P;
 
                     resBox.style.display = 'block';
-                    finalVal.textContent = `${formatNumber(A)} лв.`;
-                    earnedDetail.textContent = `Спечелена лихва: ${formatNumber(earned)} лв.`;
+                    finalVal.textContent = `${formatNumber(A)} €`;
+                    earnedDetail.textContent = `Спечелена лихва: ${formatNumber(earned)} €`;
                 }
 
                 pIn.addEventListener('input', calculate);
@@ -1019,7 +1019,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <form class="calculator-form">
                         <div class="calc-row">
                             <div class="calc-group">
-                                <label for="infAmount">Текуща сума (лв.)</label>
+                                <label for="infAmount">Текуща сума (€)</label>
                                 <input type="number" step="any" id="infAmount" placeholder="1000">
                             </div>
                             <div class="calc-group">
@@ -1064,8 +1064,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     const realPower = amount / Math.pow(1 + rate, years);
 
                     resBox.style.display = 'block';
-                    resVal.textContent = `${formatNumber(realPower)} лв.`;
-                    resDetail.textContent = `За да купиш същото след ${years} г., ще са ти нужни ${formatNumber(futureCost)} лв.`;
+                    resVal.textContent = `${formatNumber(realPower)} €`;
+                    resDetail.textContent = `За да купиш същото след ${years} г., ще са ти нужни ${formatNumber(futureCost)} €.`;
                 }
 
                 aIn.addEventListener('input', calculate);
@@ -1082,11 +1082,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <form class="calculator-form">
                         <div class="calc-row">
                             <div class="calc-group">
-                                <label for="invInit">Първоначална сума (лв.)</label>
+                                <label for="invInit">Първоначална сума (€)</label>
                                 <input type="number" step="any" id="invInit" placeholder="Напр. 5000" value="5000">
                             </div>
                             <div class="calc-group">
-                                <label for="invMonthly">Месечна вноска (лв.)</label>
+                                <label for="invMonthly">Месечна вноска (€)</label>
                                 <input type="number" step="any" id="invMonthly" placeholder="Напр. 300" value="300">
                             </div>
                         </div>
@@ -1151,9 +1151,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     const interest = balance - totalInvested;
 
-                    totalValEl.textContent = `${formatNumber(balance)} лв.`;
-                    principalValEl.textContent = `${formatNumber(totalInvested)} лв.`;
-                    interestValEl.textContent = `+${formatNumber(interest)} лв.`;
+                    totalValEl.textContent = `${formatNumber(balance)} €`;
+                    principalValEl.textContent = `${formatNumber(totalInvested)} €`;
+                    interestValEl.textContent = `+${formatNumber(interest)} €`;
                 }
 
                 initIn.addEventListener('input', calculate);

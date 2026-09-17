@@ -21,7 +21,7 @@
       "id": "instruktazh-tag",
       "icon": "fas fa-clipboard-check",
       "text": "Инструктаж",
-      "href": "https://drive.google.com/file/d/1AkbFcTekUHRwGJTehBzsmEssHhBa8fLi/view?usp=drive_link",
+      "href": "https://drive.google.com/file/d/11tS1PgFSKFEBc27RxfxaV8LljNiaSxi3/view?usp=drive_link",
       "tone": "blue"
     },
     {
@@ -166,7 +166,7 @@
                     },
                     {
                       "title": "Уеб браузър",
-                      "src": "it-8-1/googleChrome.jpg",
+                      "src": "it-8-1/googleChrome.png",
                       "alt": "Уеб браузър Mozilla Firefox"
                     },
                     {

@@ -23,7 +23,13 @@
       "title": "Лабораторен диагностичен протокол на мобилно устройство",
       "skipNav": true,
       "instructions": "<div class='exercise-instructions'><p>Използвайте вашето лично мобилно устройство (смартфон/таблет) или училищно тестово устройство и попълнете следния диагностичен протокол, използвайки системното меню <strong>Настройки (Settings)</strong>:</p><ol><li><strong>Идентификация на модела и софтуера:</strong> Отворете <em>За телефона / About phone</em>. Запишете търговското наименование на модела, точния продуктов номер, версията на операционната система (Android или iOS) и датата на последната актуализация на сигурността (Security Patch Level).</li><li><strong>Процесор и памет:</strong> Намерете модела на чипа (SoC), тактовата честота и броя ядра. Запишете общия размер на оперативната памет (RAM), както и общия и свободния обем на вътрешната памет за съхранение.</li><li><strong>Екран и визуализация:</strong> Запишете размера на диагонала (в инчове), типа матрица (AMOLED или IPS LCD), резолюцията в пиксели и поддържаната честота на опресняване (60 Hz, 90 Hz или 120 Hz).</li><li><strong>Батерия и автономност:</strong> Запишете капацитета на батерията в милиамперчаса (mAh). Проверете в меню <em>Батерия</em> кое приложение е изразходвало най-много енергия през последните 24 часа.</li><li><strong>Одит на сигурността:</strong> Отворете <em>Настройки &rarr; Поверителност &rarr; Мениджър на разрешения (Permission Manager)</em>. Проверете колко приложения имат пълен достъп до <strong>Камерата</strong> и <strong>Микрофона</strong>. Има ли приложение, на което трябва да отнемете достъпа?</li><li><strong>Практически казус за файлов трансфер:</strong> Опишете стъпка по стъпка как ще прехвърлите 12 GB видеоклип от телефона си към училищния лаптоп, ако в компютърния кабинет няма достъп до интернет.</li></ol></div>",
-      "resources": []
+      "resources": [
+        {
+          "icon": "fas fa-file-word",
+          "label": "Диагностичен протокол - шаблон Word",
+          "href": "it-8-2-5-diagnostic-template.docx"
+        }
+      ]
     },
     {
       "type": "accordion",
@@ -63,19 +69,19 @@
             {
               "type": "mobile-transfer-calculator",
               "id": "comp-transfer-calc-lab",
-              "title": "Лаборатория за пренос на данни: Калкулатор на скорости",
+              "title": "Калкулатор на скорости",
               "subtitle": "Изберете обем на файла и канал за трансфер, изчислете времето и стартирайте интерактивната симулация."
             },
             {
               "type": "text",
               "id": "transfer-rules-summary",
-              "content": "<div class=\"callout-highlight-box\"><i class=\"fas fa-lightbulb\"></i><span><b>Златно правило за трансфер:</b> За ежедневни снимки и презентации между съученици в класната стая използвайте <b>Quick Share (Android/Windows)</b> или <b>AirDrop (Apple)</b>. За големи 4K видеофайлове или архиви над 10 GB без достъп до интернет използвайте <b>качествен USB кабел</b>, свързан към USB 3.0+ порт на компютъра!</span></div>"
+              "content": "<div class=\"callout-highlight-box\"><span><b>Златно правило за трансфер:</b> За ежедневни снимки и презентации между съученици в класната стая използвайте <b>Quick Share (Android/Windows)</b> или <b>AirDrop (Apple)</b>. За големи 4K видеофайлове или архиви над 10 GB без достъп до интернет използвайте <b>качествен USB кабел</b>, свързан към USB 3.0+ порт на компютъра!</span></div>"
             }
           ]
         },
         {
           "id": "station-permissions-security",
-          "title": "3. Системните разрешения и сигурност",
+          "title": "3. Системни разрешения и сигурност",
           "content": [
             {
               "type": "text",
@@ -85,11 +91,21 @@
             {
               "type": "mobile-permissions-auditor",
               "id": "comp-perms-auditor-lab",
-              "title": "Одит на сигурността: Инспектор на системните разрешения",
-              "subtitle": "Инспектирайте четирите инсталирани приложения, включвайте и изключвайте разрешенията и анализирайте динамичния Risk Score."
+              "title": "Системни разрешения"
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "type": "accordion",
+      "id": "lesson-additional",
+      "options": {
+        "itemsAlign": "stretch",
+        "titleAlign": "left",
+        "singleOpen": false
+      },
+      "items": [
         {
           "id": "station-battery-optimizer",
           "title": "4. Оптимизация на ресурсите",
@@ -97,7 +113,7 @@
             {
               "type": "text",
               "id": "battery-science-text",
-              "content": "<div class=\"lesson-media-float\"><div class=\"lesson-inline-media-card\"><img src=\"https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/it-8-2-5/amoled-dark-mode-power.png\" alt=\"AMOLED консумация\" loading=\"lazy\" style=\"width: 100%; height: auto; max-height: 130px; object-fit: cover; border-radius: 8px; border: 1px solid #e2e8f0; display: block; margin-bottom: 6px;\" onload=\"this.style.display='block'; if(this.nextElementSibling) this.nextElementSibling.style.display='none';\" onerror=\"if(this.src.includes('cdn.jsdelivr.net')){this.src=this.src.replace('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/','raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/');}else{this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';}\" /><div class=\"lesson-micro-placeholder-box\" style=\"display: none;\"><span class=\"lesson-micro-badge\"><i class=\"fas fa-bolt\"></i> Енергийна матрица</span><div class=\"lesson-micro-title\">AMOLED Dark Mode - изключени черни пиксели и 0 mA консумация - amoled-dark-mode-power.png</div><div class=\"lesson-micro-path\">it-8-2-5/amoled-dark-mode-power.png</div></div><div class=\"lesson-micro-caption\">Черните пиксели са напълно изключени = 0 mA консумация</div></div></div><p>Всяко мобилно устройство се захранва от литиево-йонна (Li-Ion) или литиево-полимерна (Li-Po) батерия. Капацитетът се измерва в <strong>милиамперчаса (mAh)</strong> - например 5000 mAh батерия може теоретично да отдава ток от 500 mA в продължение на 10 часа.</p><p>Къде отива енергията? Разгледайте четирите най-големи енергийни консуматора:</p><p>1. <strong>Дисплеят:</strong> Консумира между 40% и 65% от общата енергия. Високата яркост (над 70%) и опресняването със <strong>120 Hz</strong> удвояват натоварването върху контролера на дисплея и графичния ускорител (GPU). Включването на тъмен режим (Dark Mode) при AMOLED екрани изключва напълно черните пиксели и пести до 25% батерия!<br>2. <strong>Радиомодемите при лош сигнал:</strong> Търсенето на 5G мрежа в район със слабо покритие кара предавателя на телефона да работи на максимална мощност, което загрява чипа и топи батерията за часове.<br>3. <strong>Непрекъсната сателитна навигация (GPS):</strong> Фоновите приложения, които следят местоположението 24/7, не позволяват на процесора да премине в режим на дълбок покой (Deep Sleep).</p><div style=\"clear: both;\"></div><div class=\"callout-highlight-box\"><i class=\"fas fa-circle-info\"></i><span><b>Мит в мобилните технологии:</b> „Затварянето на всички приложения от списъка с последни задачи пести батерия.“ <b>Не, това е грешно!</b> Съвременните ОС (Android/iOS) замразяват фоновите приложения в RAM паметта с нулева консумация на ток. Ако ги затворите принудително, при следващото им отваряне процесорът трябва да ги чете наново от флаш паметта, което хаби повече ток!</span></div>"
+              "content": "<div class=\"lesson-media-float\"><div class=\"lesson-inline-media-card\"><img src=\"https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/it-8-2-5/amoled-dark-mode-power.png\" alt=\"AMOLED консумация\" loading=\"lazy\" style=\"width: 100%; height: auto; max-height: 130px; object-fit: cover; border-radius: 8px; border: 1px solid #e2e8f0; display: block; margin-bottom: 6px;\" onload=\"this.style.display='block'; if(this.nextElementSibling) this.nextElementSibling.style.display='none';\" onerror=\"if(this.src.includes('cdn.jsdelivr.net')){this.src=this.src.replace('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/','raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/');}else{this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';}\" /><div class=\"lesson-micro-placeholder-box\" style=\"display: none;\"><span class=\"lesson-micro-badge\"><i class=\"fas fa-bolt\"></i> Енергийна матрица</span><div class=\"lesson-micro-title\">AMOLED Dark Mode - изключени черни пиксели и 0 mA консумация - amoled-dark-mode-power.png</div><div class=\"lesson-micro-path\">it-8-2-5/amoled-dark-mode-power.png</div></div><div class=\"lesson-micro-caption\">Черните пиксели са напълно изключени = 0 mA консумация</div></div></div><p>Всяко мобилно устройство се захранва от литиево-йонна (Li-Ion) или литиево-полимерна (Li-Po) батерия. Капацитетът се измерва в <strong>милиамперчаса (mAh)</strong> - например 5000 mAh батерия може теоретично да отдава ток от 500 mA в продължение на 10 часа.</p><p>Къде отива енергията? Разгледайте четирите най-големи енергийни консуматора:</p><p>1. <strong>Дисплеят:</strong> Консумира между 40% и 65% от общата енергия. Високата яркост (над 70%) и опресняването със <strong>120 Hz</strong> удвояват натоварването върху контролера на дисплея и графичния ускорител (GPU). Включването на тъмен режим (Dark Mode) при AMOLED екрани изключва напълно черните пиксели и пести до 25% батерия!<br>2. <strong>Радиомодемите при лош сигнал:</strong> Търсенето на 5G мрежа в район със слабо покритие кара предавателя на телефона да работи на максимална мощност, което загрява чипа и топи батерията за часове.<br>3. <strong>Непрекъсната сателитна навигация (GPS):</strong> Фоновите приложения, които следят местоположението 24/7, не позволяват на процесора да премине в режим на дълбок покой (Deep Sleep).</p><div style=\"clear: both;\"></div><div class=\"callout-highlight-box\"><span><b>Мит в мобилните технологии:</b> „Затварянето на всички приложения от списъка с последни задачи пести батерия.“ <b>Не, това е грешно!</b> Съвременните ОС (Android/iOS) замразяват фоновите приложения в RAM паметта с нулева консумация на ток. Ако ги затворите принудително, при следващото им отваряне процесорът трябва да ги чете наново от флаш паметта, което хаби повече ток!</span></div>"
             },
             {
               "type": "mobile-battery-optimizer",
@@ -111,6 +127,16 @@
           "id": "station-worksheet-reflection",
           "title": "5. Практическо задание: Диагностичен протокол",
           "content": [
+            {
+              "type": "tag",
+              "id": "worksheet-exercise-tag",
+              "icon": "fas fa-dumbbell",
+              "text": "Упражнение",
+              "modalTarget": "mobile-audit-worksheet-modal",
+              "tone": "green",
+              "variant": "exercise",
+              "skipNav": true
+            },
             {
               "type": "text",
               "id": "worksheet-instructions-text",
@@ -136,12 +162,15 @@
         },
         {
           "id": "station-quick-quiz",
-          "title": "Бързи 5 въпроса (Формиращ тест)",
+          "title": "Бързи 5 въпроса",
+          "tone": "green",
+          "icon": "fas fa-bolt",
+          "skipNav": true,
           "content": [
             {
               "type": "quiz",
               "id": "quiz-mobile-practice-5q",
-              "title": "Проверете вашите практически умения:",
+              "title": "",
               "questions": [
                 {
                   "question": "Защо телефон с модерен USB-C конектор може да прехвърля 15 GB видеофайл бавно (~9 минути) към компютър?",
@@ -196,10 +225,50 @@
               ]
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "type": "accordion",
+      "id": "lesson-reflection",
+      "options": {
+        "itemsAlign": "stretch",
+        "titleAlign": "left",
+        "singleOpen": false
+      },
+      "items": [
         {
-          "id": "station-glossary",
-          "title": "Речник на термините",
+          "id": "section-reflection",
+          "title": "Рефлексия",
+          "tone": "purple",
+          "icon": "fas fa-paw",
+          "content": [
+            {
+              "type": "emotiometer",
+              "id": "reflection-emotiometer",
+              "title": "Посочете вашето настроение и енергия",
+              "prompt": "Как се чувствате след работата с мобилните устройства, трансфера на данни, разрешенията и оптимизацията на батерията?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "accordion",
+      "id": "lesson-glossary",
+      "options": {
+        "itemsAlign": "stretch",
+        "titleAlign": "left",
+        "singleOpen": false,
+        "startClosed": true
+      },
+      "items": [
+        {
+          "id": "section-glossary",
+          "title": "Речник",
+          "tone": "dark",
+          "icon": "fas fa-book-bookmark",
+          "variant": "glossary",
           "content": [
             {
               "type": "glossary-list",
@@ -237,16 +306,6 @@
             }
           ]
         }
-      ]
-    },
-    {
-      "type": "exit-ticket",
-      "id": "mobile-practice-exit-ticket",
-      "title": "Финална практическа рефлексия (Exit Ticket)",
-      "question": "Ваш съученик се оплаква, че новият му телефон с 5000 mAh батерия пада до 15% още по обяд, а при прехвърляне на 10 GB видео през USB-C кабел трансферът отнема 8 минути. Кои са двете най-вероятни технически причини за тези проблеми и какви съвети ще му дадете?",
-      "prompts": [
-        "1. За батерията: проверете дали екранът не работи на 120Hz при 100% яркост, дали не е включено 24/7 фоново GPS проследяване или слабо 5G покритие.",
-        "2. За кабела: обяснете, че USB-C буксата на телефона му вероятно използва вътрешен контролер USB 2.0 (до ~35-40 MB/s), и му покажете как да ползва Quick Share / AirDrop за директен безжичен трансфер със скорост 50-80 MB/s."
       ]
     }
   ]

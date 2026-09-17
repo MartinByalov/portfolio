@@ -251,6 +251,15 @@ textarea#storyTextArea:focus {
 #ShiftRight { width: 8em; }
 #back { width: 5em; }
 
+.book-page-indicator {
+    width: 100%;
+    margin: 12px 0 0;
+    color: #6b7280;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-align: center;
+}
+
 .big { background-color: crimson; border: 2px solid crimson; }
 .big.selected { color: #fff !important; }
 
@@ -271,6 +280,11 @@ textarea#storyTextArea:focus {
 
 .fill-out-key { background-color: slategrey; border: 2px solid slategrey; }
 
+/* Keep the special-key labels readable while retaining the pressed animation. */
+.fill-out-key.selected {
+    color: rgba(0, 0, 0, 0.82) !important;
+}
+
 .keyboard li.wrong-press {
     background-color: #ff4757 !important;
     border-color: #ff4757 !important;
@@ -281,7 +295,6 @@ textarea#storyTextArea:focus {
 .selected {
     background-color: transparent !important;
     border-color: #fff !important;
-    color: #fff !important;
     box-shadow: 0 0 14px rgba(255, 255, 255, 0.9), inset 0 0 8px rgba(255, 255, 255, 0.4) !important;
     animation: vibrate-1 0.3s linear infinite both;
 }

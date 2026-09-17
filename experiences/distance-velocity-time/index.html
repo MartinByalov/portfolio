@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Път, скорост и време на движение</title>
+	<script src="suica.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+
+	<script>
+		var v = 0; // Скорост
+		var S = 0; // Път 
+		var t = 0; // Време
+
+		var engine = false; // Двигател (по подразбиране: изключен).
+		var accelerate = false; // Ускоряване (по подразбиране: изключено).
+		var brakes = false; // Намаляване (по подразбиране: изключено).
+
+		var ahead = false; // Превключване на движение напред
+		var back = false; // Превключване на движението назад
+
+		var blink = false; // Подсветка на скоростомера
+
+		function main() {
+
+			s = new Suica();
+
+			orthographic(-100000, 100000);
+			lookAt([0, 0, 100], [0, 0, 0], [0, 1, 0]);
+			background([135 / 255, 206 / 255, 235 / 255]);
+
+			// Следим за натискането и пускането на бутон на мишката
+			s.gl.canvas.addEventListener('mousedown', mouseDown, false);
+			s.gl.canvas.addEventListener('mouseup', mouseUp, false);
+
+			// След натискане на бутон за "Начало", връщаме фокусът върху интерактивното поле (тук малко не можах да го направя, както трябва).
+			document.getElementById('a').focus(document.getElementById('suica_canvas'));
+
+			// Път
+			road = group([]);
+
+			road.add(rectangle([0, -190, 0], [55000, 30]).custom({
+				color: [34 / 255, 139 / 255, 34 / 255]
+			}));
+
+			for (var j = 0; j <= 750; j++) {
+
+				var x = random(-350, 27500);
+				var y = random(-170, -200);
+				var v = random(-170, -200);
+
+				road.add(segment([x, y, 1], [x, v, 0]).custom({
+					color: [random((64 / 255), 0), random((191 / 255), 0), 0]
+				}));
+			}
+
+			road.add(rectangle([0, -80, 0], [55000, 40]).custom({
+				color: [34 / 255, 139 / 255, 34 / 255]
+			}));
+
+			for (var j = 0; j <= 750; j++) {
+
+				var x = random(-350, 27500);
+				var y = random(-55, -100);
+				var v = random(-55, -100);
+
+				road.add(segment([x, y, 1], [x, v, 0]).custom({
+					color: [random((64 / 255), 0), random((191 / 255), 0), 0]
+				}));
+			}
+
+			// Долна бяла линия
+			road.add(rectangle([0, -175, 0], [55000, 7]).custom({
+				color: [1, 1, 1]
+			}));
+
+			// Горна бяла линия
+			road.add(rectangle([0, -105, 0], [55000, 3]).custom({
+				color: [1, 1, 1]
+			}));
+
+			// Настилка
+			road.add(rectangle([0, -140, 0], [55000, 70]).custom({
+				color: [64 / 255, 64 / 255, 64 / 255]
+			}));
+
+			// Единична прекъсната линия
+			var x = -350;
+
+			for (var i = 0; i < 500; i++) {
+
+				road.add(rectangle([x, -130, 1], [40, 10]).custom({
+					color: [1, 1, 1]
+				}));
+
+				x += 80;
+			}
+
+			// Ограда
+			fence = group([]);
+
+			fence.add(rectangle([0, -103, 5], [55000, 5]));
+
+			fence.add(rectangle([0, -90, 10], [55000, 5]));
+
+			fence.mergeColor();
+			fence.color = [160 / 255, 82 / 255, 45 / 255];
+
+			var f = -350;
+
+			for (var i = 0; i < 1000; i++) {
+
+				fence.add(rectangle([f, -92, 5], [5, 20]));
+
+				f += 100;
+			}
+
+			fence.mergeColor();
+			fence.color = [160 / 255, 82 / 255, 45 / 255];
+
+			road.add(fence);
+
+			// Пътни табели
+			drawTables();
+
+			// град София
+			generateCity(-250);
+
+			// табела на град София
+			sofia = group([]);
+
+			sofia_base = cuboid([-200, -50, 20], [40, 70, 1]).custom({
+				color: [220 / 255, 220 / 255, 220 / 255]
+			});
+			sofia_base.spin = -1.57;
+
+			sofia.add(sofia_base);
+
+			sofia.add(cuboid([-220, -75, 2], [5, 60, 1]).custom({
+				color: [105 / 255, 105 / 255, 105 / 255]
+			}));
+			sofia.add(cuboid([-180, -75, 2], [5, 60, 1]).custom({
+				color: [105 / 255, 105 / 255, 105 / 255]
+			}));
+			road.add(sofia);
+
+			sofia_base.image = new Suica.Image('data:image/jpeg;base64,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');
+
+
+			// град Варна
+			generateCity(25100);
+
+			// табела на град Варна
+			varna = cuboid([25000, -20, 20], [40, 70, 1]).custom({
+				color: [220 / 255, 220 / 255, 220 / 255]
+			});
+			varna.spin = -1.57;
+
+			road.add(varna);
+
+			varna.image = new Suica.Image('data:image/jpeg;base64,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');
+
+			// Кола
+			car = group([]);
+
+			base = cuboid([-250, -120, 25], [120, 30, 10]);
+			base.spin = 0.02;
+			car.add(base);
+
+			tilt_u = cube([-295, -112, 2], [30]);
+			tilt_u.spin = 1;
+			car.add(tilt_u);
+
+			tilt_d = cube([-310, -125, 2], [10]);
+			tilt_d.spin = 1;
+			car.add(tilt_d);
+
+			tilt_m = cube([-305, -115, 2], [20]);
+			car.add(tilt_m);
+
+			front_d = cube([-190, -123, 2], [20]);
+			front_d.spin = 0.7;
+			car.add(front_d);
+
+			front_u = spheroid([-185, -114, 2], [12, 3, 1]);
+			front_u.spin = 0.7;
+			car.add(front_u);
+
+			frame = spheroid([-253, -105, 20], [42, 15, 1]);
+			frame.spin = 0.2;
+			car.add(frame);
+
+			car.mergeColor();
+			car.color = [128 / 255, 0, 0];
+
+			// Задна гума
+			tyre_b = group([]);
+
+			tyre_b.add(spheroid([-290, -130, 30], [13, 13, 13]).custom({
+				color: [0, 0, 0]
+			}));
+
+			// Задна джанта
+			tyre_b.add(spheroid([-290, -130, 40], [8, 8, 8]).custom({
+				color: [169 / 255, 169 / 255, 169 / 255]
+			}));
+
+			// Задна вертикална линия на джанта
+			tyre_b_v_r = cuboid([-290, -130, 50], [1, 10, 0]).custom({
+				color: [0, 0, 0]
+			});
+			tyre_b.add(tyre_b_v_r);
+
+			// Задна хоризонтална линия на джанта
+			tyre_b_h_r = cuboid([-290, -130, 50], [10, 1, 0]).custom({
+				color: [0, 0, 0]
+			});
+
+			tyre_b.add(tyre_b_h_r);
+
+			tyre_b.add(spheroid([-290, -130, 60], [2, 2, 2]).custom({
+				color: [1, 1, 1]
+			}));
+
+			car.add(tyre_b);
+
+			// Предна гума
+			tyre_f = group([]);
+
+			tyre_f.add(spheroid([-210, -130, 30], [13, 13, 13]).custom({
+				color: [0, 0, 0]
+			}));
+
+			// Предна джанта
+			tyre_f.add(spheroid([-210, -130, 40], [8, 8, 8]).custom({
+				color: [169 / 255, 169 / 255, 169 / 255]
+			}));
+
+			// Предна вертикална линия на джанта
+			tyre_f_h_r = cuboid([-210, -130, 50], [1, 10, 0]).custom({
+				color: [0, 0, 0]
+			});
+
+			tyre_f.add(tyre_f_h_r);
+
+			// Предна хоризонтална линия на джанта
+			tyre_f_v_r = cuboid([-210, -130, 50], [10, 1, 0]).custom({
+				color: [0, 0, 0]
+			});
+
+			tyre_f.add(tyre_f_v_r);
+
+			tyre_f.add(spheroid([-210, -130, 60], [2, 2, 2]).custom({
+				color: [1, 1, 1]
+			}));
+
+			car.add(tyre_f);
+
+			// Стъкла
+			glass = spheroid([-260, -105, 25], [35, 10, 1]).custom({
+				color: [224 / 255, 1, 1]
+			});
+			glass.spin = 0.1;
+
+			car.add(glass);
+
+			car.add(segment([-260, -95, 150], [-255, -105, 2]).custom({
+				color: [0, 0, 0]
+			}));
+
+			// Дръжки на вратите
+			car.add(segment([-278, -110, 50], [-273, -110, 20]).custom({
+				color: [0, 0, 0]
+			}));
+
+			car.add(segment([-248, -110, 50], [-243, -110, 20]).custom({
+				color: [0, 0, 0]
+			}));
+
+			// Фар
+			light = spheroid([-185, -114, 20], [5, 2, 1]).custom({
+				color: [240 / 255, 1, 1]
+			});
+			light.spin = 0.7;
+
+			car.add(light);
+
+			// Скорости
+			sun = circle([270, 120, 0], 50).custom({
+				color: [240 / 255, 230 / 255, 140 / 255]
+			});
+
+			// Бутон за ускоряване
+			acc = polygon([270, 140, 1], 30, 3).custom({
+				color: [1, 215 / 255, 0]
+			});
+			acc.spin = 0.52;
+
+			acc_m = polygon([270, 140, 2], 15, 3).custom({
+				color: [220 / 255, 20 / 255, 60 / 255]
+			});
+			acc_m.spin = 0.52;
+
+			// Бутон за намаляне
+			br = polygon([270, 100, 1], 30, 3).custom({
+				color: [1, 215 / 255, 0]
+			});
+			br.spin = -0.52;
+
+			br_m = polygon([270, 100, 2], 15, 3).custom({
+				color: [220 / 255, 20 / 255, 60 / 255]
+			});
+			br_m.spin = -0.52;
+
+			// Скоростомер
+			text_field = (cuboid([-280, 110, 0], [120, 150, 1]).custom({
+				color: [135 / 255, 206 / 255, 235 / 255]
+			}));
+		}
+
+		function generateCity(x) {
+
+			city = group([]);
+			block_1 = group([]);
+
+			block_1.add(cuboid([x, 15, 5], [80, 150, 1]));
+			block_1.add(cuboid([x, 90, 0], [60, 10, 1]));
+			block_1.add(cuboid([x, 100, 0], [40, 10, 1]));
+
+			block_1.mergeColor();
+			block_1.color = [95 / 255, 158 / 255, 160 / 255];
+
+			city.add(block_1);
+
+			city.add(cuboid([x, -85, 10], [50, 50, 1]).custom({
+				color: [64 / 255, 64 / 255, 64 / 255]
+			}));
+			city.add(cuboid([x, -95, 15], [10, 12, 1]).custom({
+				color: [1, 1, 1]
+			}));
+			city.add(cuboid([x, -70, 15], [10, 12, 1]).custom({
+				color: [1, 1, 1]
+			}));
+
+			// Прозорци
+			windows_1 = group([]);
+
+			// Трети етаж
+			windows_1.add(cuboid([x - 20, 60, 10], [10, 15, 1]));
+			windows_1.add(cuboid([x, 60, 10], [10, 15, 1]));
+			windows_1.add(cuboid([x + 20, 60, 10], [10, 15, 1]));
+
+			// Втори етаж
+			windows_1.add(cuboid([x - 20, 30, 10], [10, 15, 1]));
+			windows_1.add(cuboid([x, 30, 10], [10, 15, 1]));
+			windows_1.add(cuboid([x + 20, 30, 10], [10, 15, 1]));
+
+			// Първи етаж
+			windows_1.add(cuboid([x - 20, 0, 10], [10, 15, 1]));
+			windows_1.add(cuboid([x + 20, 0, 10], [10, 15, 1]));
+
+			windows_1.mergeColor();
+			windows_1.color = [105 / 255, 105 / 255, 105 / 255];
+			block_1.add(windows_1);
+
+			// Партер
+			city.add(cuboid([x, -45, 10], [20, 35, 1]).custom({
+				color: [169 / 255, 169 / 255, 169 / 255]
+			}));
+
+			block_2 = group([]);
+
+			block_2.add(cuboid([x + 90, -5, 5], [70, 110, 1]).custom({
+				color: [1, 160 / 255, 122 / 255]
+			}));
+			block_2.add(cuboid([x + 110, 55, 0], [10, 15, 1]).custom({
+				color: [160 / 255, 82 / 255, 45 / 255]
+			}));
+			block_2.add(cuboid([x + 95, 55, 0], [10, 10, 1]).custom({
+				color: [160 / 255, 82 / 255, 45 / 255]
+			}));
+
+			city.add(block_2);
+
+			// Прозорци
+			windows_2 = group([]);
+
+			// Трети етаж
+			windows_2.add(cuboid([x + 70, 30, 10], [10, 15, 1]));
+			windows_2.add(cuboid([x + 90, 30, 10], [10, 15, 1]));
+			windows_2.add(cuboid([x + 110, 30, 10], [10, 15, 1]));
+
+			// Втори етаж
+			windows_2.add(cuboid([x + 70, 10, 10], [10, 15, 1]));
+			windows_2.add(cuboid([x + 90, 10, 10], [10, 15, 1]));
+			windows_2.add(cuboid([x + 115, 10, 10], [20, 15, 1]));
+
+			// Първи етаж
+			windows_2.add(cuboid([x + 70, -10, 10], [10, 15, 1]));
+			windows_2.add(cuboid([x + 90, -10, 10], [10, 15, 1]));
+			windows_2.add(cuboid([x + 115, -10, 10], [20, 15, 1]));
+
+			// Партер
+			windows_2.add(cuboid([x + 110, -30, 10], [10, 15, 1]));
+			city.add(cuboid([x + 75, -45, 10], [20, 30, 1]).custom({
+				color: [160 / 255, 82 / 255, 45 / 255]
+			}));
+			windows_2.mergeColor();
+			windows_2.color = [240 / 255, 230 / 255, 140 / 255];
+			block_2.add(windows_2);
+
+			road.add(city);
+		}
+
+		// Изграждане на пътна табела от няколко куба
+		function generateTable(x) {
+
+			table = group([]);
+
+			t_base = cuboid([x, -50, 20], [40, 70, 1]).custom({
+				color: [220 / 255, 220 / 255, 220 / 255]
+			});
+			t_base.spin = -1.57;
+
+			table.add(t_base);
+
+			table.add(cuboid([(x - 20), -75, 2], [5, 60, 1]).custom({
+				color: [105 / 255, 105 / 255, 105 / 255]
+			}));
+			table.add(cuboid([(x + 20), -75, 2], [5, 60, 1]).custom({
+				color: [105 / 255, 105 / 255, 105 / 255]
+			}));
+			road.add(table);
+		}
+
+		// Нанасяне на текстурите върху табелите
+		function drawTables() {
+
+			for (var i = 2500; i <= 25000; ++i) {
+
+				switch (i) {
+
+					case 2500:
+
+						generateTable(i);
+						t_base.image = new Suica.Image('data:image/jpeg;base64,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');
+
+
+					case 5000:
+						generateTable(i);
+						t_base.image = new Suica.Image('data:image/jpeg;base64,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');
+
+					case 7500:
+						generateTable(i);
+						t_base.image = new Suica.Image('data:image/jpeg;base64,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');
+
+					case 10000:
+						generateTable(i);
+						t_base.image = new Suica.Image('data:image/jpeg;base64,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');
+
+					case 12500:
+						generateTable(i);
+						t_base.image = new Suica.Image('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAeAB4AAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCABAAIADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9cKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoJwCScADJJ7Cisj4geGJPG/gPWNFhvZdNk1W0e1F1F9+33DG5enP41Mm0vd3GrX12Pif9qv/AIOMf2ef2SPipd+ENSj8UeKtTsMC5k0WKMwwMf4SXIyfpX0z+x9+2h4D/bn+Edr4z8A38lzp9woMttOu24smORskHTOQenHFeT/G3/gk1+zjefs1a7od58NvC9vFb2Ulw2rm0T+0jKAW3m5/1hy3Yt3xXxV/wanfA/xF4D034p+J7kXsfhTUJ0ttMjcMIrvY8gLJng4xjj1qsBy1J1sPUd5U4KXMtFq7bavVq1td1q9SMY3CNOtT0UpcvK9XtffTZav0eiumffX/AAUF/wCCoHw2/wCCafhDTNX8e2+tamdWnEEFjpIRrgAhj5hDkDb8pFfNvwn/AODoX4CfGr4laJ4T0LwR8TpdY8Q3kdhZq8VsFMkjBVz8/TJr4n/4K5/FH9ovxF+2/wCIvHOmfBbVtQ8A6ZBHYWP/AAkfhKLU7VIVwWKCVGVctu5HrXsn/BJf/gqr+z38ePjR4c8D+K/2f/h78O/iGZEj0zXLXQ7SIS3KjqW8tDE5YDbtzyaWU/7QlOT5ru/LtLl6L1t6Py0NMyXsG4RVrKzluubr8k/Vabn6bftV/tq+B/2LvhhZ+KfHs91YRajPHaWmnxKJLu4nfpEAOM9eenHWuQtP+Cl/hDT/AIueFfBPjHwn4v8AhtrPjeNZNBOueQ8WpBum1oXbaen3sdRX5b/8FmvihefE3/guR4M8EX1zcy6J4dhtF+yGU+U0jJ5u/b0z8/WvSP8Ag7G1668G+C/gdq+mzPZ6jp11dSW9xEdskTKsJXDDkYpwajh6OMq/DUqyhbtGNtb9W737WW2oKDniZ4Gm/fhSU+Z7OTTklbtaNu93e+h+j/7c/wC3NoP/AAT9+GkPi7xV4V8UeIdBaUwz3OimE/Y2AJAcOwJyAcYz0pf2Df27vCH/AAUV+CE3j/wRp2t6Xo0N82nmHVVQTlwoYn5CRjmvhv8A4KC/FC4+M/8Awb3+DvEl3O9zeX2nWyXErvuaWRLd1Zie5JFTf8G5Xj68+Ff/AARy8W+JLCz02/udD1q4vBb6hdm0t5VSJSwaQAleAccdcUk/Z1cZSrPShy2fq9b/ACKt7ShhKtJa1ua/y2P1Gor5m/Yi/be+KX7Y3h/Utau/g3o3g3QrZXFjeXGtzN/ajgkKYwYgDGcZ3Z7jivnWy/4OHh4f/bkm+Cfjf4V6d4dntJXiuNVs9be5VSIjIgRGRdxbgfU0pTUakaL+KUXJLrZWbf4rTfXYzWtKdZfDF2b89fv2e3Y/SOivzK07/g5Gg8OftYaZ8NviN8FNb+HGm6vc+XbarqV0yXHksxWOZoWUAKxHPzVT+O//AAcvRfs//G+y8Oa58B/FGmeGdTdfses6pM1rcXUTNt81ISNpXcDg7ulVC01Bx2nt/k+z8mDuub+6rv07+fyP1BorO8HeKLXxz4P0rXLBi9jrFpHeW7HujjIrRqpRcZOMt0TGSlFSjswoHNFZvjDw63i/wpqOlLqN7pB1G3e3+2WYUz224Y3JuBG4dsis5NqLcVdlqzep8G/8FMv2zfB3x1+IA/Zr0z4m+EvA8epolz4q8T3msRQJpdup3eQm5lDSMQg4J4Y8cV9K/sofGb4JaN4c8PfCr4XeNfC3iY+H9KAig0K8ivQsUQVXmmaIkKzEgnOMkmvj7X/+DUr9nrxTrNzqGoeO/itdXl3I0s0sk9uzOxOSc7K+gP8Agnh/wRq+FP8AwTK8W63rfgPVfFOr3+v2v2OdtYeNhFH3C7FHWtMLaNPlq7vVtLd2fKvRbLtq92wxc3NxdJaR0Xld+8/Nv5bJH0F4c/aC8B+NvGVz4a0nxr4U1bX7Nd1xpdtqkM11CPVogxYde4r8zP8Agu1+wdo2v/tRfA7xl4H0620fxlq+uJbXEOn26o94VmjPnkLg7huJLe1fQXj3/ggB8GfF/wC0NL8TdH8TeP8AwN4imcSsmi3UZh3/AN794GJz6HivpDwV+ylo3hvxxp3inXdb1vx54q0eI29hq+s+Ws1pERtKqkSqnQnkrn3qKEE/YV6j5akGpO2u3RPtLZ32Wur0Kqz5XWo01zU5xcVfTdWu1/d+JWvdq2i1Pxl/4KofBHWPgl/wWL+GninXYrz+zdW0zTo5tQeMmI3EcKwsu7puJQnGa9i/4OxvD934z8E/A7SdMgkvNQ1G6uore3iXdJKzLCFAA5Oa/Tb9rf8AY88E/ttfDOPwt44tZ5LS2ukvbS6tm2XNnMvR0b+h4ri7D/gmr4Pvfit4Y8Z+MfFPi34la14KjWPQTrvkpHpYXpsWFVDHp97PQVbm61Knh6692FaVS66xnb3UujTVl0s99CKaWHrPFUdZOkqdn3inFP0ald9bq1tbnxx/wUF+F9x8GP8Ag3v8HeG7uB7a8sdOtnuInTa0Uj27sykdiCa+G/2UNa+Nvw2/4I52Pjzwh9j1j4feDfHsOo63ocVuxlu0jCtumYNhod23K7e2c8V+4/7c/wCwzoP/AAUC+GkPhHxV4q8UeHtBWUzT22iiEfbGIIBcupIwCcYx1rzn9nH/AIJAeDf2WP2dPFvwq8L/ABF+ITeDPGUEkN3aXSWjm3aQBXkjPl53FRt545Pesl7R4jFYtO0puMordXi07S8n/wAE1tS+rYXCvanzKT20krXXmd//AME/P22fB37c/wCzjoPijwxqGjm/Nin9qaRZyrv0mbGGRo/vIuQcZHIFfkH8KLeO6/4OkI0kjSVDfv8AK65B/wBCPav0W/Y7/wCCFHw+/YO8f3fiT4bfFD4o6Tf6hEYLpHNpJFcRk5KspjI/Ec1W0v8A4II/DnRv2pB8Zbf4o/FJPiAs5uP7Q/0P7xXYRt8vGNvHStGoLNqOPh8KhNNdU5OO3de7fp0Rz1YuWU18vTvKTXK/JRktez95bXPhj/g4QQP/AMFsvgQGUEGDSAQR1H2s1c/4OyYwnir4YfKARZWwHGDjL192ftK/8EOvAX7Wvx/0r4meNPif8TrzxVobRHTpYxZolmsT70VQI+QG9ak/bL/4Ih+A/wBvjxFpmp/Ej4nfEzU59Ht0trRYhaRrEiZx0jHPJrgo4SUcDQw7fvU6vO/Ty8zto4iMcRUqNaSpKC9V+mv4H0B+xV/yZd8Jf+xVsf8A0WK9Krif2efggv7Ofwo0vwdb+J9f8VadokK21jcausQnt4FUKsQ8tVBUY6kZ5rtq9bFzjOvOpDZtv73c4KEXClGEt0kvuQUUUVzmoUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAf/2Q==');
+
+					case 15000:
+						generateTable(i);
+						t_base.image = new Suica.Image('data:image/jpeg;base64,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');
+
+					case 17500:
+						generateTable(i);
+						t_base.image = new Suica.Image('data:image/jpeg;base64,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');
+
+					case 20000:
+						generateTable(i);
+						t_base.image = new Suica.Image('data:image/jpeg;base64,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');
+
+					case 22500:
+						generateTable(i);
+						t_base.image = new Suica.Image('data:image/jpeg;base64,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');
+
+					case 25000:
+						generateTable(i);
+						t_base.image = new Suica.Image('data:image/jpeg;base64,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');
+						break;
+				}
+			}
+		}
+
+		// Функция за стартиране на двигателя
+		function startEngine() {
+			// console.log("startEngine()...");
+
+			// Не стартирай, ако не е зададена скорост 
+			if (v == 0) {
+
+				return;
+			}
+
+			engine = true;
+			s.nextFrame = motion;
+
+			// Цвят на фара при стартиране/движение - Gold
+			light.color = [1, 215 / 255, 0];
+
+		}
+
+		// Функция за спиране на двигателя/симулацията на движение
+		function stopEngine() {
+			// console.log("stopEngine()...");
+
+			engine = false;
+			s.nextFrame = undefined;
+
+			light.color = [240 / 255, 1, 1];
+			sun.color = [240 / 255, 230 / 255, 140 / 255];
+
+		}
+
+		// Функция за увеличаване на скоростта
+		function acceleration() {
+			// console.log("acceleration()...");
+
+			// Не изпълнявай, ако текущата скорост е 200km/h (1000 единици) или автомобилът е в движение(второто е заради условието за постоянна скорост).
+			if (v == 1000 || engine == true) {
+				//console.log("!acceleration()...");
+				return;
+			}
+
+			v += 25;
+
+			document.getElementById('v').innerHTML = "v = " + (v / 5) + "km/h";
+		}
+
+		// Функция за намаляне на скоростта
+		function slowDown() {
+			// console.log("slowDown()...");
+
+			// Не изпълнявай, ако текущата скорост е 0km/h или автомобилът е в движение(второто е заради условието за постоянна скорост).
+			if (v == 0 || engine == true) {
+				//console.log("!slowDown()...");
+
+				return;
+			}
+
+			v -= 25;
+
+			document.getElementById('v').innerHTML = "v = " + (v / 5) + "km/h";
+
+		}
+
+		// Функция за превключване на движението напред
+		function forward() {
+			// console.log("forward()...");
+
+			ahead = true;
+			back = false;
+		}
+
+		// Функция за превключване на движението назад
+		function reverse() {
+			// console.log("reverse()...");
+
+			if (engine == true) {
+
+				stopEngine();
+			}
+
+			ahead = false;
+			back = true;
+		}
+
+		// Изчисляване на стойностите на "S" и "t"
+		function distanceTime() {
+
+			S = Math.abs((-road.center[0] * 20)).toFixed(0);
+
+			document.getElementById('S').innerHTML = "S = " + S + "m";
+
+			// Време - делейки на 1000, получаваме представянето в km, а чрез деленето на скоростта на 5 получаваме желаната скорост: 0, 5, 10... 200km/h. Накрая използваме формулата, че t = S/v
+			t = ((S / 1000) / (v / 5)).toFixed(2);
+
+			document.getElementById('t').innerHTML = "t = " + t + "h";
+
+		}
+
+		// Функция за симулиране на движението на колата по пътя
+		function motion() {
+			// console.log("motion()...");
+
+			// Ако сме в началото, позволяваме единствено движението напред
+			if (road.center[0] > 0) {
+
+				stopEngine();
+				ahead = true;
+				back = false;
+			}
+
+			// Ако сме в края, позволяваме единствено движението назад
+			if (S >= 500000) {
+
+				stopEngine();
+
+				blink = true;
+				ahead = false;
+				back = true;
+			}
+
+			// Ако се движим напред изменяме центъра на пътя по оста X назад симулирайки движението на автомобила напред
+			if (back == false) {
+
+				sun.color = ([240 / 255, 230 / 255, 140 / 255]);
+
+				// Скорост - изменението на центъра на пътя по оста X (25 единици в секунда - 5km/h, макс. скорост: 1000 единици за секунда или 200km/h)
+				road.center[0] -= Suica.dTime * v;
+				r = Suica.time;
+
+				// Ако се движим напред...
+			} else {
+
+				road.center[0] += Suica.dTime * v;
+				r = -Suica.time;
+
+				if (blink == false) {
+
+					sun.color = [220 / 255, 20 / 255, 60 / 255];
+					blink = true;
+
+				} else {
+
+					sun.color = [240 / 255, 230 / 255, 140 / 255];
+					blink = false;
+				}
+			}
+
+			tyre_b_v_r.spin = r * (v / 5);
+			tyre_b_h_r.spin = r * (v / 5);
+			tyre_f_v_r.spin = r * (v / 5);
+			tyre_f_h_r.spin = r * (v / 5);
+
+			distanceTime();
+		}
+
+		// Изчисляване на лице на триъгълник по координати на три върха по формулата:
+		// За триъг.: ABC и координати: x, y => Лицето: S = |Ax(By-Cy)+Bx(Cy-Ay)+Cx(Ay-By)|/|2|
+		function area(a, b, c) {
+
+			return Math.abs((a[0] * (b[1] - c[1]) + b[0] * (c[1] - a[1]) + c[0] * (a[1] - b[1])) / 2);
+		}
+
+		// Помощна функция за определяне дали се натиска върху бутон за ускоряване/намаляне
+		function isInsideTriangle(p, a, b, c) {
+
+			var ABC = area(a, b, c);
+			var PAB = area(p, a, b);
+			var PBC = area(p, b, c);
+			var PAC = area(p, a, c);
+
+			// Ако лицата на трите триъгълника с обща точка "p" не съвпадат с лицето на големият триъгълник, то точката "p" не лежи в него
+			if ((PAB + PBC + PAC) == ABC) {
+
+				return true;
+
+			} else {
+
+				return false;
+			}
+		}
+
+		// Отчитане на величината за преобразуване от една стойност към друга
+		function getValue_1() {
+
+			return document.getElementById('sel_1').value;
+		}
+
+		// Отчитане на преобразуваната величина
+		function getValue_2() {
+
+			return document.getElementById('sel_2').value;
+		}
+
+		// Задаване на преобразуваната стойност
+		function setValue_2(v) {
+
+			document.getElementById('txt_area_2').value = v;
+		}
+
+		// Функция за конвертиране на стойностти от една величина към друга
+		function convert() {
+
+			var number = document.getElementById('txt_area_1').value;
+
+			var value_1 = getValue_1();
+			var value_2 = getValue_2();
+
+			// Запазване на стойността ако преобразуването е от една величина към същата величина
+			if (value_1 == value_2) {
+
+				setValue_2(number);
+
+			}
+
+			// Преобразуване от метър към друга величина
+			else if (value_1 == 1) {
+
+				// Преобразуване от метри в километри
+				if (value_2 == 2) {
+
+					setValue_2(number / 1000);
+				}
+
+				// Забраняване на преобразуването от метри в секунди, минути, часове
+				else if (value_2 == 3 || value_2 == 4 || value_2 == 5) {
+					setValue_2(null);
+				}
+
+			}
+
+			// Преобразуване от километър към друга величина
+			else if (value_1 == 2) {
+
+				// Преобразуване от километри в метри
+				if (value_2 == 1) {
+
+					setValue_2(number * 1000);
+				}
+
+				// Забраняване на преобразуването от километри в секунди, минути, часове
+				else if (value_2 == 3 || value_2 == 4 || value_2 == 5) {
+
+					setValue_2(null);
+
+				}
+			}
+
+			// Преобразуване от секунда към друга величина
+			else if (value_1 == 3) {
+
+				// Преобразуване от секунди в минути
+				if (value_2 == 4) {
+
+					setValue_2(number / 60);
+				}
+
+				// Преобразуване от секунди в часове
+				else if (value_2 == 5) {
+
+					setValue_2(number / 3600);
+				}
+
+				// Забраняване на преобразуването от секунди в метри, километри
+				else if (value_2 == 1 || value_2 == 2) {
+
+					setValue_2(null);
+				}
+
+			}
+
+			// Преобразуване от минута към друга величина
+			else if (value_1 == 4) {
+
+				// Преобразуване от минути в секунди
+				if (value_2 == 3) {
+
+					setValue_2(number * 60);
+
+				}
+
+				// Преобразуване от минути в часове
+				else if (value_2 == 5) {
+
+					setValue_2(number / 60);
+
+				}
+
+				// Забраняване на преобразуването от минути в метри, километри
+				else if (value_2 == 1 || value_2 == 2) {
+
+					setValue_2(null);
+
+				}
+
+			}
+
+			// Преобразуване от час към друга величина
+			else if (value_1 == 5) {
+
+				// Преобразуване от часове в секунди
+				if (value_2 == 3) {
+
+					setValue_2(number * 3600);
+
+				}
+
+				// Преобразуване от часове в минути
+				else if (value_2 == 4) {
+
+					setValue_2(number * 60);
+
+				}
+
+				// Забраняване на преобразуването от часове в метри, километри
+				else if (value_2 == 1 || value_2 == 2) {
+
+					setValue_2(null);
+
+				}
+			}
+
+		}
+
+		// Показване/скриване на секцията с формули за преобразуване
+		function showFormulas() {
+
+			var e = document.getElementById('formulas');
+
+			if (e.style.display != 'block') {
+
+				e.style.display = 'block';
+
+			} else {
+
+				e.style.display = 'none';
+			}
+		}
+
+		// Показване/скриване на бутона отговарящ за секцията с формули за преобразуване
+		function showFormulasButton() {
+
+			var e = document.getElementById('formulasbutton');
+
+			if (e.style.visibility == 'hidden') {
+
+				e.style.visibility = 'visible';
+
+			} else {
+
+				e.style.visibility = 'hidden';
+			}
+		}
+
+		// Обработване на натискане на бутон на мишката - следим дали натискането е върху някои от двата бутона за промяна на скоростта
+		function mouseDown(event) {
+
+			// Позиция на курсора на мишката спрямо локалната координатна система
+			var x = event.clientX - s.gl.canvas.offsetLeft - 5 - s.gl.canvas.clientWidth / 2 + (window.scrollX | window.pageXOffset);
+			var y = -(event.clientY - s.gl.canvas.offsetTop - 5 - s.gl.canvas.clientHeight / 2 + (window.scrollY | window.pageYOffset));
+
+			// три точки определящо бутона за увеличаване на скоростта
+			var a = [270, 170, 0];
+			var b = [245, 130, 0];
+			var c = [295, 130, 0];
+
+			// три точки определящи бутона за намаляване на скоростта
+			var d = [245, 115, 0];
+			var e = [295, 115, 0];
+			var f = [270, 70, 0];
+
+			// Ако точката "p" с координати: координатите на мишката, се намира в триъгълника отчитам натискането на бутона
+			if (isInsideTriangle([x, y], a, b, c)) {
+
+				accelerate = true;
+
+				acc.color = [220 / 255, 20 / 255, 60 / 255];
+				acc_m.color = [1, 215 / 255, 0];
+
+			} else if (isInsideTriangle([x, y], d, e, f)) {
+
+				brakes = true;
+
+				br.color = [220 / 255, 20 / 255, 60 / 255];
+				br_m.color = [1, 215 / 255, 0];
+
+			}
+		}
+
+		// Обработване на пускането на бутон на мишката - симулираме натискането със смяна на цвета на бутоните
+		function mouseUp(event) {
+
+			if (accelerate == true) {
+
+				acceleration();
+				accelerate = false;
+
+				acc.color = [1, 215 / 255, 0];
+				acc_m.color = [220 / 255, 20 / 255, 60 / 255];
+
+
+			} else if (brakes == true) {
+
+				slowDown();
+				brakes = false;
+
+				br.color = [1, 215 / 255, 0];
+				br_m.color = [220 / 255, 20 / 255, 60 / 255];
+			}
+		}
+
+	</script>
+</head>
+
+<body onload="main()">
+	<noscript>За съжаление, браузърът Ви не поддържа JavaScript!</noscript>
+
+	<h1>Път, скорост и време на движение</h1>
+	<h4>Проект по Езици и среди за програмиране<br><a href="https://github.com/MartinByalov">Мартин Бялов</a> | 50438 | 2018</h4>
+
+	<div class="section">
+
+		<a id="1">
+			<h2>I. Увод</h2>
+		</a>
+
+		<p><em>Скоростта</em> на даден е обект e мярка за бързината на промяна на неговото положение по отношение на изминатия <em>път</em> за единица <em>време</em>.<br></p>
+
+		<img src="images/train.jpg">
+
+		<p><em>Път</em> се нарича дължината на <em>траекторията</em> (мислената линия), която обекта описва при своето движение за определено <em>време</em>. Пътят се измерва с единиците за дължина – милиметри (<em>mm</em>), сантиметри (<em>cm</em>), метри (<em>m</em>), километри (<em>km</em>) и други, аналогично за времето – секунди (<em>s</em>), минути (<em>min</em>), часове (<em>h</em>) и други.</p>
+	</div>
+
+	<div class="section">
+
+		<a id="2">
+			<h2>II. Урок</h2>
+		</a>
+
+		<p>Скоростта, изминатия път и времето са <em>величини</em> (характеристиките на отделните обекти, вещества и процеси изразени с числа), които характеризират процеса на движение на даден обект. Прието е скоростта да се изразява с латинската буква <em>v</em>, изминатия път с <em>S</em> и времето с <em>t</em>. При равномерно движение (движение, при което за равни интервали от време обекта изминава равни пътища) скоростта <em>v</em> e равна на отношението на изминатия път <em>S</em> към времето <em>t</em>, за което този път е изминат:</p>
+
+		<p formula><em>скорост = път / времето</em></p>
+		<p>или:</p>
+		<p formula><em>v = S / t<br>t = S / v<br>S = v . t<br></em></p>
+
+	</div>
+
+	<div class="section">
+
+		<a id="3">
+			<h2>III. Задачи</h2>
+		</a>
+		<p>За решаването на следните задачи използвайте формулите в <a href="#2">II</a> и интерактивното поле в <a href="#4">IV</a>. Указания за работа с интерактивното поле ще намерите в <a href="#5">V</a>, а примерни решения на задачите в <a href="#6">VI</a>.</p>
+		<p class="task"><a id="31">Задача №1</a></p>
+		<p>Колко време ще е необходимо на автомобил тръгващ от град София да стигне до град Варна, ако се движи с постоянна скорост от
+			<em_2>80 km/h</em_2>?
+		</p>
+		<p class="task"><a id="32">Задача №2</a></p>
+		<p>Колко километра ще е изминал автомобил за
+			<em_2>15 минути</em_2>, ако се е движил със постоянна скорост от
+			<em_2>50 m/s</em_2>?
+		</p>
+		<p class="task"><a id="33">Задача №3</a></p>
+		<p>Двама състезатели се надпреварвали на писта с дължина
+			<em_2>100km</em_2>. С каква постоянна скорост (в
+			<em_2>km/h</em_2>) се е движил вторият състезател, ако първият се е движил със скорост от
+			<em_2>125 km/h</em_2> и е завършил трасето с
+			<em_2>30 минути</em_2> по – рано от първия?
+		</p>
+	</div>
+
+
+	<a id="4">
+
+		<h5>IV. Интерактивно поле</h5>
+	</a>
+
+	<div id='b' class="border"></div>
+	<div id='v' class="label">v =</div>
+	<div id='S' class="label">S =</div>
+	<div id='t' class="label">t =</div>
+
+	<div class="button"><a id='a' href="index.html">Начало</a></div>
+	<div class="button" onclick="startEngine()">Стартиране</div>
+	<div class="button" onclick="stopEngine()">Спиране</div>
+	<div class="button" onclick="forward()">Напред</div>
+	<div class="button" onclick="reverse()">Назад</div>
+
+	<canvas id='suica_canvas' width="700" height="400">За съжаление, графичното съдържание не може да бъде заредено!</canvas>
+
+	<div class="block" onmouseover="showFormulasButton()">
+
+		<txt>Конвертиране от:</txt><textarea onkeyup="convert()" id='txt_area_1' rows="1" cols="1" maxlength="12"></textarea>
+		<select id='sel_1' onchange="getValue()" onclick="convert()">
+			<option value="1">метра</option>
+			<option value="2">километра</option>
+			<option value="3">секунда/и</option>
+			<option value="4">минута/и</option>
+			<option value="5">час/а</option>
+
+		</select>
+
+		<txt_2>към:</txt_2>
+		<textarea id='txt_area_2' rows="1" cols="1" maxlength="12" disabled></textarea>
+
+		<select id='sel_2' onclick="convert()">
+			<option value="1">метра</option>
+			<option value="2">километра</option>
+			<option value="3">секунда/и</option>
+			<option value="4">минута/и</option>
+			<option value="5">час/а</option>
+		</select>
+	</div>
+
+	<div class="buttonbottom" id='formulasbutton' onclick="showFormulas()">Формули</div>
+	<div class="section" id="formulas" hidden>
+
+		<h3>метър &harr; километър</h3>
+		<p formula><em>1m = 1km / 1000</em></p>
+		<h3>секунда &harr; минута &harr; час</h3>
+		<p formula><em>1s = 1min / 60 = 1h / 3600</em></p>
+
+	</div>
+
+	<div class="section">
+
+		<a id="5">
+			<h5>V. Указания за работа</h5>
+		</a>
+
+
+		<em_2>Лента с опции</em_2> (над интерактивното поле):
+		<ul>
+			<li><em>Начало</em> – връща автомобила в началното му състояние и изчиства таблото със стойности;</li>
+			<li><em>Стартиране</em> – ако е зададена скорост различна от
+				<em_2>0</em_2> автомобилът започва да се движи в определената посока със зададената скорост;
+			</li>
+			<li><em>Спиране</em> – автомобилът спира да се движи;</li>
+			<li><em>Напред</em> – ако тази опция е включена автомобилът се движи напред (ако е достигнат края на пътя опцията се блокира позволявайки единствено движението назад);</li>
+			<li><em>Назад</em> - ако тази опция е включена автомобилът се движи назад (ако автомобила е в начална позиция опцията се блокира позволявайки единствено движението напред).</li>
+		</ul>
+
+		<em_2>Бутони за смяна на скоростта</em_2> (горен десен ъгъл на полето):
+		<ul>
+			<li><em>Нагоре</em> – с натискане върху бутона с мишката скоростта на автомобила се увеличава автоматично с
+				<em_2>5km/h</em_2>. Скоростта се увеличава предварително, преди стартирането на автомобила, като максималната такава е
+				<em_2>200km/h</em_2>;
+			</li>
+			<li><em>Надолу</em> – с натискане върху бутона с мишката скоростта на автомобила се намалява автоматично с
+				<em_2>5km/h</em_2>.
+			</li>
+		</ul>
+
+
+		<em_2>Табло с изчислени стойностти</em_2> (горен ляв ъгъл на полето):
+		<ul>
+			<li>Показва стойностите за скорост (в
+				<em_2>километри в час</em_2>), път (в
+				<em_2>метри</em_2>) и време (в
+				<em_2>часове</em_2>) отговарящи на състоянието на автомобила в даденият момент.
+			</li>
+		</ul>
+
+		<em_2>Панел за конвертиране на стойностти</em_2> (под полето):
+		<ul>
+			<li>В първото текстово поле указваме желаната стойност за преобразуване. След избиране на мерни единици, преобразуваната стойност се показва във второто текстово поле. Панелът конвертира стойности от/към:
+				<em_2>метър</em_2>,
+				<em_2>километър</em_2>,
+				<em_2>секунда</em_2>,
+				<em_2>минута</em_2>,
+				<em_2>час</em_2>. Ако е избрано неподходящо преобразование стойността няма да се конвертира.
+			</li>
+		</ul>
+
+	</div>
+
+	<div class="section">
+		<a id="6">
+			<h5>VI. Решения на задачите</h5>
+		</a>
+
+		<p class="task"><a href="#31">Задача №1</a></p>
+		<a href="solution_1.2.jpg" target="_blank"><img src="images/solution_1.1.jpg" style="border:none; float: right; margin-right: 35px;"></a>
+		<br>
+		<p style="text-align: left">От бутона за скорости задаваме началната скорост на автомобила да бъде
+			<em_2>80km/h</em_2>. Стартираме двигателя и след като автомобилът преустанови движението си получаваме резултат за
+			<em_2>t = 6,25h</em_2>. Проверяваме резултата по формулата:
+			<em_2>t = S / v</em_2> и получаваме, че
+			<em_2>t = 500 / 6,25 = 80km/h</em_2>.
+		</p>
+
+		<br>
+		<p class="task"><a href="#32">Задача №2</a></p>
+		<p>Предварително чрез панела за конвертиране преобразуваме дадените ни стойности за време и скорост, като за
+			<em_2>t = 15min</em_2> получаваме, че
+			<em_2>t = 0,25h</em_2>, а за
+			<em_2>v = 50m/s</em_2> получаваме, че
+			<em_2>v = 0,05km/s</em_2>.<br><br><img src="images/solution_2.1.jpg" style="border: none; width: 535px">
+		</p>
+		<p>След бърз поглед върху формулата (под таблото за конвертиране) за преобразуване на секунди в часове (в обратен ред:
+			<em_2>1h = 1s . 3600</em_2>) получаваме за
+			<em_2>v = 0,05 . 3600 = 180km/h</em_2>.
+		</p>
+
+		<a href="solution_2.3.jpg" target="_blank"><img src="images/solution_2.2.jpg" style="border:none; float: right; margin-right: 35px;"></a>
+
+		<br>
+		<p style="text-align: left">Задаваме началната скорост на автомобила да бъде
+			<em_2>180km/h</em_2>, стартираме двигателя, отчитаме
+			<em_2>25 минути</em_2> (или
+			<em_2>0,25h</em_2>) и така достигаме до крайният резултат
+			<em_2>45km</em_2>. Проверяваме резултата по формулата
+			<em_2>S = v . t</em_2> и получаваме, че
+			<em_2>S = 180 . 0,25 = 45km/h</em_2>.
+		</p>
+		<br><br>
+
+		<p class="task"><a href="#33">Задача №3</a></p>
+		<a href="solution_3.2.jpg" target="_blank"><img src="images/solution_3.1.jpg" style="border:none; float: right; height: 150px; width: 100px; margin: 15px 48px 0 0;"></a>
+		<br>
+		<p style="text-align: left">Задаваме началната скорост на автомобила на първият състезател да бъде
+			<em_2>125km/h</em_2>, стартираме двигателя, поглеждаме формулата за преобразуване на километри в метри (в обратен ред:
+			<em_2>1km = 1 . 1000m</em_2>) и отчитаме изминато разстояние
+			<em_2>100000m</em_2>, така получаваме за
+			<em_2>t1 = 0,80h</em_2> (или
+			<em_2>48 минути</em_2>).<img src="images/solution_3.3.jpg" style="border: none; width: 535px">
+		</p>
+
+		<p>От условието на задачата за времето на вторият състезател получаваме, че
+			<em_2>t2 = t1 + 48min</em_2> (завършил трасето с 4 минути по-късно от първия) или
+			<em_2>t2 = 48 + 4 = 52min</em_2> (или
+			<em_2>≈ 0,87h</em_2>),
+
+			<img src="images/solution_3.4.jpg" style="border: none; width: 535px; margin: 1.5em 0 0 0"><a href="solution_3.6.jpg" target="_blank">
+				<img src="images/solution_3.5.jpg" style="border:none; float: right; height: 150px; width: 100px;"></a>
+		</p>
+
+
+		<p>откъдето за скоростта му ще следва, че
+			<em_2>v2 = S / t2 = 100 / 0,87 ≈ 115km/h</em_2>. Сверяваме полученият резултат с този от таблото с изчислени стойностти при
+			<em_2>v = 115km/h</em_2>,
+			<em_2>S = 100km</em_2> и получаваме, че
+			<em_2>t = 0,87h</em_2>, колкото и получихме за времето на вторият състезател.
+		</p>
+		<br>
+	</div>
+	<br>
+	<h4 style="color: darkslategray"><b>2018</b></h4>
+
+</body>
+
+</html>

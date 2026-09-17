@@ -70,6 +70,12 @@ CHAR_MAP[' '] = { code: 'Space', shift: false };
 const keyboardEl = document.getElementById('keyboard');
 keyboardEl.innerHTML = '';
 const keyEls = {};
+const SPECIAL_KEY_IDS = {
+    CapsLock: 'caps',
+    Tab: 'tab',
+    Enter: 'enter',
+    Backspace: 'back'
+};
 
 function attachKeyEvents(el, id, kObj) {
     el.addEventListener('pointerdown', (e) => {
@@ -243,7 +249,7 @@ function showNextKey() {
 }
 
 function pressKeyVisual(code, isShift) {
-    const pressed = keyEls[code];
+    const pressed = keyEls[code] || keyEls[SPECIAL_KEY_IDS[code]];
     if (pressed) {
         pressed.classList.add('hit');
         pressed.classList.add('active-pressed');
@@ -256,7 +262,7 @@ function pressKeyVisual(code, isShift) {
 }
 
 function releaseKeyVisual(code, isShift) {
-    const released = keyEls[code];
+    const released = keyEls[code] || keyEls[SPECIAL_KEY_IDS[code]];
     if (released) {
         released.classList.remove('active-pressed');
     }
@@ -363,7 +369,7 @@ storyTextArea.addEventListener('keydown', (event) => {
 
 // EPUB book loader
 
-// Load random chapter from selected book
+// Load a complete page from the selected book
 function loadRandomChapter() {
     const book = books.find(b => b.file === bookSelect.value) || books[0];
     if (!book || !book.chapters || !book.chapters.length) {
@@ -372,12 +378,12 @@ function loadRandomChapter() {
         updateStats();
         return;
     }
-    const chapter = book.chapters[Math.floor(Math.random() * book.chapters.length)];
-    const sentences = chapter.match(/[^.!?…]+[.!?…]*\s*/g) || [chapter];
-    const start = Math.floor(Math.random() * sentences.length);
-    let text = sentences.slice(start).join(' ').replace(/\s+/g, ' ').trim();
-    if (text.length > 280) text = text.slice(0, 280);
+    if (!book || !book.chapters.length) return;
+    const start = Math.floor(Math.random() * book.chapters.length);
+    const text = book.chapters[start].replace(/\s+/g, ' ').trim();
     targetText = text;
+    const bookCaption = document.getElementById('bookCaption');
+    if (bookCaption) bookCaption.textContent = `Страница ${start + 1} от ${book.chapters.length} - ${book.title}`;
     position = 0;
     wrongCharacters = 0;
     totalKeystrokes = 0;
@@ -420,7 +426,9 @@ async function readBook(book) {
             const html = await file.async('string');
             const doc = new DOMParser().parseFromString(html, 'application/xhtml+xml');
             const text = (doc.body ? doc.body.textContent : doc.textContent).replace(/\s+/g, ' ').trim();
-            if (text.length > 200) book.chapters.push(text);
+            // Keep every readable spine item so the uploaded complete book is
+            // available, including short title and final pages.
+            if (text.length > 20) book.chapters.push(text);
         }
     } catch (err) {
         console.error('Грешка при четене на книгата:', err);
@@ -466,6 +474,6 @@ bookSelect.addEventListener('change', async () => {
     }
     loadRandomChapter();
 });
-document.getElementById('newChapterBtn').addEventListener('click', loadRandomChapter);
+document.getElementById('newPageBtn').addEventListener('click', loadRandomChapter);
 
 loadBooks();

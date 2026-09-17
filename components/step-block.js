@@ -74,7 +74,7 @@ function renderItemMedia(media) {
 
 function renderItemContent(it) {
   const text = typeof it === 'string' ? it : it.text;
-  const desc = typeof it === 'object' && it.desc ? `<span style="display:block; font-size:13.5px; line-height:1.65; color:var(--tut-muted); margin-top:4px;">${formatContent(it.desc)}</span>` : '';
+  const desc = typeof it === 'object' && it.desc ? `<span class="step-item-desc">${formatContent(it.desc)}</span>` : '';
   const media = typeof it === 'object' ? (it.media || it.image) : null;
   const callout = typeof it === 'object' ? (it.callout || it.importantCard) : null;
 
@@ -186,8 +186,9 @@ export function render(comp) {
     const listColor = comp.listColor || comp.tone || 'blue';
     const listItems = comp.items.map(it => {
       const hasMedia = typeof it === 'object' && (it.media || it.image);
-      const liStyle = hasMedia ? 'style="margin-bottom: 20px; align-items: flex-start;"' : '';
-      return `<li ${liStyle}><div style="flex: 1; min-width: 0;">${renderItemContent(it)}</div></li>`;
+      const itemClass = comp.mediaCards && hasMedia ? 'step-item-media-card' : '';
+      const liStyle = hasMedia && !comp.mediaCards ? 'style="margin-bottom: 20px; align-items: flex-start;"' : '';
+      return `<li class="${itemClass}" ${liStyle}><div style="flex: 1; min-width: 0;">${renderItemContent(it)}</div></li>`;
     }).join('');
     bodyHtml += `<ul class="ilist ${listColor}">${listItems}</ul>`;
   }
@@ -199,6 +200,10 @@ export function render(comp) {
         <strong>${esc(comp.callout.title || 'Важно:')}</strong> ${formatContent(comp.callout.text || '')}
       </div>
     `;
+  }
+
+  if (comp.hideHeader) {
+    return `<div class="step-body">${bodyHtml}</div>`;
   }
 
   return `

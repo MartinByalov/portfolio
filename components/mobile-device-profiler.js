@@ -278,7 +278,7 @@ export function init(comp) {
         fbBox.style.background = '#fef2f2';
         fbBox.style.border = '1px solid #fecaca';
         fbBox.style.color = '#991b1b';
-        fbBox.innerHTML = '<strong>Не съвсем оптимален избор.</strong> Проверете изискванията за скорост на пренос (USB стандарт), размер на екрана или бюджета и опитайте отново.';
+        fbBox.innerHTML = '<strong>Не съвсем.</strong> Проверете изискванията за скорост на пренос (USB стандарт), размер на екрана или бюджета и опитайте отново.';
       }
     });
   });

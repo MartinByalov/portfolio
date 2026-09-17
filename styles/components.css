@@ -165,6 +165,7 @@ body.dark-mode .sam-char-desc { color: #94a3b8; }
 
 /* Highlight Callout Box */
 .callout-highlight-box { margin: 16px 0 8px; padding: 12px 16px; background: #fffbeb; border: 1px solid #fef3c7; border-left: 4px solid #f59e0b; border-radius: 8px; color: #92400e; font-size: 0.95rem; line-height: 1.55; display: flex; align-items: flex-start; gap: 10px; }
+.callout-highlight-box { text-align: left; justify-content: flex-start; }
 .callout-highlight-box i { color: #d97706; font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
 .callout-highlight-box strong { color: #78350f; }
 
@@ -309,6 +310,33 @@ body.dark-mode .callout-highlight-box strong { color: #fef3c7; }
 
 .accordion-item.active .accordion-header {
   color: var(--accent-orange);
+}
+
+/* Neutral blog-style accordions used by the it-10-1 review sections. */
+#lesson-main > .accordion > .accordion-item {
+  background: #ffffff;
+  border-color: #e2e8f0;
+}
+
+#lesson-main > .accordion > .accordion-item > .accordion-header {
+  background: #f1f5f9;
+  color: #334155;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+#lesson-main > .accordion > .accordion-item.active > .accordion-header {
+  color: #1e293b;
+}
+
+#lesson-main > .accordion > .accordion-item > .accordion-content {
+  background: #ffffff;
+  padding: 0;
+}
+
+#lesson-main > .accordion > .accordion-item > .accordion-content > .step-body {
+  width: min(100%, 920px);
+  margin: 0 auto;
+  padding: 22px 24px;
 }
 
 .card-icon-mini {
@@ -1428,7 +1456,7 @@ body.portfolio-mode .main-portfolio-content {
   letter-spacing: 1px;
   border-bottom: 1px solid #333;
   padding: 12px 0 12px;
-  text-align: left;
+  text-align: center;
 }
 
 .skills-grid {
@@ -1795,8 +1823,15 @@ body.portfolio-mode .main-portfolio-content {
 .extra-activities {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 4px;
   margin-top: 8px;
+}
+
+.extra-activities .badge-link {
+  width: fit-content;
+  max-width: 100%;
+  text-align: left;
 }
 
 /* Experience tile icon sizing */
@@ -8854,6 +8889,40 @@ input.fill-input-text:focus {
   flex-direction: column;
   gap: 0.5rem;
   align-items: flex-start;
+}
+
+.perms-auditor-header .risk-gauge-box {
+  margin-left: auto;
+}
+
+.perms-auditor-header h3 {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.mobile-transfer-calc-wrapper .os-cli-window {
+  height: auto;
+}
+
+.battery-main-grid > .battery-controls-panel,
+.battery-main-grid > .battery-gauge-panel {
+  min-height: 100%;
+}
+
+@media (max-width: 560px) {
+  .perms-auditor-header {
+    flex-direction: column;
+  }
+
+  .perms-auditor-header .risk-gauge-box {
+    width: 100%;
+  }
+
+  .perms-auditor-header h3 {
+    width: 100%;
+  }
 }
 .os-mem-reset-btn {
   margin-left: auto;

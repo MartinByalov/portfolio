@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Formatting helper
     function fmt(num) {
-        return Math.round(num).toLocaleString("bg-BG") + " лв.";
+        return Math.round(num).toLocaleString("bg-BG") + " €";
     }
 
     function recalculate() {
@@ -210,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btnExportCsv.addEventListener("click", () => {
         if (!currentYearlyData || currentYearlyData.length === 0) return;
 
-        let csvContent = "Година;Внесени общо (лв);Годишна лихва (лв);Натрупана лихва (лв);Краен баланс (лв)\n";
+        let csvContent = "Година;Внесени общо (€);Годишна лихва (€);Натрупана лихва (€);Краен баланс (€)\n";
         currentYearlyData.forEach(d => {
             csvContent += `${d.year};${d.totalInvested};${d.yearInterest};${d.cumulativeInterest};${d.balance}\n`;
         });

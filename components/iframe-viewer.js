@@ -46,6 +46,9 @@ export function render(comp) {
   const externalLink = comp.externalUrl || comp.fullscreenLink || rawUrl;
   const downloadUrl = comp.downloadUrl || comp.resourceFile || '';
   const downloadLabel = comp.downloadLabel || 'Изтегли изходен файл (.xlsx)';
+  const showHeader = comp.showHeader !== false;
+  const showBadge = comp.showBadge !== false;
+  const showExternalLink = comp.showExternalLink !== false;
 
   const toneClassMap = {
     blue: 'border-blue-200 dark:border-blue-900/40 bg-blue-50/20 dark:bg-blue-950/10',
@@ -70,14 +73,15 @@ export function render(comp) {
     <section class="lesson-embed-section my-8 w-full" id="${esc(id)}">
       <div class="rounded-2xl border ${containerTone} p-5 md:p-6 shadow-sm transition-all duration-200">
         
+        ${showHeader ? `
         <!-- Header: Clean typography without leading decorative icons per AGENTS_md -->
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-4 border-b border-slate-200 dark:border-slate-800/80">
           <div class="space-y-1">
-            <div class="flex items-center gap-2">
+            ${showBadge ? `<div class="flex items-center gap-2">
               <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold tracking-wide uppercase ${badgeTone}">
                 ${esc(comp.badgeText || 'Електронна таблица')}
               </span>
-            </div>
+            </div>` : ''}
             <h3 class="text-xl font-bold text-slate-900 dark:text-slate-100 tracking-tight m-0">
               ${esc(title)}
             </h3>
@@ -92,7 +96,7 @@ export function render(comp) {
               </a>
             ` : ''}
             
-            ${externalLink ? `
+            ${showExternalLink && externalLink ? `
               <a href="${esc(externalLink)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-medium rounded-lg text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700/80 border border-slate-300 dark:border-slate-700 transition-colors shadow-xs" title="Отвори в нов таб">
                 <i class="fas fa-arrow-up-right-from-square text-xs"></i>
                 <span>Отвори в цял прозорец</span>
@@ -100,9 +104,10 @@ export function render(comp) {
             ` : ''}
           </div>
         </div>
+        ` : ''}
 
         <!-- Embed Viewport -->
-        <div class="relative w-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 mt-4 shadow-inner">
+        <div class="relative w-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 ${showHeader ? 'mt-4 ' : ''}shadow-inner">
           ${embedUrl ? `
             <iframe
               id="${esc(id)}-iframe"
@@ -111,7 +116,6 @@ export function render(comp) {
               style="height: ${esc(height)}; min-height: 380px;"
               loading="lazy"
               allowfullscreen="true"
-              allow="clipboard-write"
               title="${esc(title)}">
             </iframe>
           ` : `
@@ -122,7 +126,7 @@ export function render(comp) {
           `}
         </div>
 
-        ${comp.callout ? `
+        ${showHeader && comp.callout ? `
           <div class="mt-4 p-3.5 rounded-lg bg-blue-50/60 dark:bg-blue-950/40 border border-blue-200/70 dark:border-blue-800/60 text-xs text-blue-900 dark:text-blue-200 flex items-start gap-2.5">
             <i class="fas fa-circle-info text-blue-500 mt-0.5 shrink-0"></i>
             <div class="leading-relaxed">${esc(comp.callout)}</div>

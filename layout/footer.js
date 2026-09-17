@@ -22,8 +22,8 @@ export function render() {
             <li><a href="https://edu.google.com/workspace-for-education/products/classroom/" target="_blank" rel="noopener">Google Classroom</a></li>
             <li><a href="https://learningapps.org/" target="_blank" rel="noopener">LearningApps</a></li>
             <li><a href="https://ebook.domino.bg/" target="_blank" rel="noopener">изд. Домино</a></li>
-            <li><a href="https://planeta42.com/it/bg.html" target="_blank" rel="noopener">planeta42</a></li>
             <li><a href="https://www.w3schools.com/" target="_blank" rel="noopener">w3schools</a></li>
+            <li><a href="https://planeta42.com/it/bg.html" target="_blank" rel="noopener">planeta42</a></li>
             <li><a href="https://safenet.bg/" target="_blank" rel="noopener">safenet</a></li>
           </ul>
         </div>

@@ -664,6 +664,28 @@ body.landing-mode .home-section.subject-section {
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
+/* The IT-10 review lesson has seven long navigation points. Keep them readable
+   without changing the sidebar width for the other courses. */
+.lesson-course-it-10 .course-layout {
+  max-width: 1440px;
+}
+
+.lesson-course-it-10 .course-sidebar {
+  flex-basis: 360px;
+}
+
+.lesson-course-it-10 .course-link {
+  padding-left: 16px;
+  padding-right: 16px;
+  line-height: 1.45;
+}
+
+@media (max-width: 900px) {
+  .lesson-course-it-10 .course-sidebar {
+    flex-basis: 280px;
+  }
+}
+
 .course-main {
   flex: 1;
   min-width: 0;

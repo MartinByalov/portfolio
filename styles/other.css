@@ -558,6 +558,30 @@
 }
 
 /* Step blocks */
+.step-item-desc {
+  display: block;
+  margin-top: 4px;
+  color: #475569;
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+
+/* Semantic media cards used when each step has its own explanatory image. */
+.step-item-media-card {
+  list-style: none;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.1rem;
+  margin: 0 0 1rem;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+  box-sizing: border-box;
+}
+
+.step-item-media-card > div {
+  width: 100%;
+}
+
 .step-block {
   background: var(--tut-white);
   border: 1px solid var(--tut-border);
@@ -650,10 +674,18 @@
   flex-shrink: 0;
 }
 
-.ilist.orange li::before { background: var(--tut-orange); }
-.ilist.blue li::before   { background: var(--tut-blue); }
-.ilist.green li::before  { background: var(--tut-green); }
-.ilist.purple li::before { background: var(--tut-purple); }
+.ilist.orange li::before { background: #d97706; }
+.ilist.blue li::before   { background: #2563eb; }
+.ilist.green li::before  { background: #059669; }
+.ilist.purple li::before { background: #7c3aed; }
+.ilist.red li::before    { background: #dc2626; }
+.ilist.cyan li::before   { background: #0891b2; }
+.ilist.pink li::before   { background: #db2777; }
+.ilist.indigo li::before { background: #4f46e5; }
+.ilist.teal li::before   { background: #0f766e; }
+.ilist.slate li::before  { background: #475569; }
+
+/* Ten-color section sequence used by the blog-style lessons. */
 
 /* Code windows */
 .code-wrap {

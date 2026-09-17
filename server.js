@@ -33,10 +33,67 @@ function loadEnv() {
 loadEnv();
 
 const app = express();
-const PORT = 3000;
+const PORT = Number(process.env.PORT || 3000);
 const HOST = '0.0.0.0';
+const liveReloadClients = new Set();
+const liveReloadExtensions = new Set(['.html', '.htm', '.css', '.js', '.json', '.md', '.mdx']);
+const liveReloadIgnoredDirectories = new Set(['.git', 'node_modules']);
+let liveReloadTimer = null;
 
 app.use(express.json());
+
+// Server-Sent Events endpoint for browser live reload during local development.
+app.get('/__live_reload', (req, res) => {
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache, no-transform');
+  res.setHeader('Connection', 'keep-alive');
+  res.flushHeaders();
+  res.write(': connected\n\n');
+
+  liveReloadClients.add(res);
+  req.on('close', () => liveReloadClients.delete(res));
+});
+
+function notifyLiveReload(filePath) {
+  if (liveReloadTimer) clearTimeout(liveReloadTimer);
+  liveReloadTimer = setTimeout(() => {
+    liveReloadTimer = null;
+    broadcastReload(filePath);
+  }, 100);
+}
+
+function broadcastReload(filePath) {
+  const relativePath = path.relative(__dirname, filePath);
+  const payload = JSON.stringify({ path: relativePath, timestamp: Date.now() });
+  for (const client of liveReloadClients) {
+    try {
+      client.write(`event: reload\ndata: ${payload}\n\n`);
+    } catch {
+      liveReloadClients.delete(client);
+    }
+  }
+}
+
+function watchForLiveReload(directory) {
+  if (!fs.existsSync(directory)) return;
+  try {
+    fs.watch(directory, { recursive: true }, (eventType, filename) => {
+      if (!filename) return;
+      const fileName = String(filename);
+      const parts = fileName.split(/[\\/]/);
+      if (parts.some(part => liveReloadIgnoredDirectories.has(part))) return;
+      const extension = path.extname(fileName).toLowerCase();
+      if (liveReloadExtensions.has(extension)) {
+        notifyLiveReload(path.join(directory, fileName));
+      }
+    });
+  } catch (error) {
+    console.warn(`[live-reload] Could not watch ${directory}: ${error.message}`);
+  }
+}
+
+// One recursive watcher covers the complete project and avoids duplicate events.
+watchForLiveReload(__dirname);
 
 // Lazy-initialized Gemini AI client
 let genAI = null;
@@ -60,6 +117,10 @@ app.use('/lessons', express.static(path.join(__dirname, 'lessons')));
 app.use('/it-8-2-5', express.static(path.join(__dirname, 'it-8-2-5')));
 app.use('/it-8-2-5', express.static(path.join(__dirname, 'assets', 'it-8-2-5')));
 app.use('/it-8-2-5', express.static(path.join(__dirname, 'lessons', 'it-8', 'it-8-2-5')));
+// Keep the legacy root URL working for links that predate the tools directory.
+app.get('/inv.html', (req, res) => {
+  res.redirect('/tools/inv.html');
+});
 app.use(express.static(__dirname, {
   extensions: ['html', 'htm'],
   index: ['index.html']
@@ -326,5 +387,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, HOST, () => {
-  console.log(`Server running on http://${HOST}:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });

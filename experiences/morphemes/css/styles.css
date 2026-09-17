@@ -1,0 +1,542 @@
+body {
+
+    width: 1000px;
+    background-image: url(../images/background.jpg);
+    margin: auto;
+    text-align: center;
+    font-family: Helvetica, "Times New Roman", sans-serif;
+
+}
+
+h1 {
+
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0.5em 0 0.5em 0;
+    color: #222;
+
+}
+
+h2 {
+
+    font-size: 30px;
+    font-weight: bold;
+    text-align: left;
+    margin: 1.5em 0 1em 2.5em;
+
+    font-family: "Verdana";
+    color: #222;
+    text-shadow: 0px 2px 3px #666;
+}
+
+h3 {
+    font-weight: normal;
+    font-size: 95%;
+    margin: 0.5em 0 1.5em 0;
+    font-style: italic;
+}
+
+h4 {
+
+    text-align: center;
+
+    font-family: "Verdana";
+    font-size: 26px;
+    color: #222;
+    text-shadow: 0px 2px 3px #666;
+}
+
+/* Подравняване на заглавието на точка: IV. Интерактивно поле*/
+
+h5 {
+
+    font-size: 30px;
+    font-weight: bold;
+    text-align: left;
+    margin: 1em 0 1em 3.65em;
+    color: darkslategray;
+    text-shadow: 1px 1px 2px #bcd6e7;
+}
+
+hr{
+
+    width: 80%;
+    margin: auto;
+    border: 1px solid;
+    border-color: gainsboro;
+    box-shadow: 0 3px 0 0 rgba(255, 192, 0, 0.25), 0 -3px 0 0 rgba(255, 64, 0, 0.25), 3px 0 0 0 rgba(255, 192, 0, 0.25), -3px 0 0 0 rgba(255, 64, 0, 0.25), 4px -3px 0 0 rgba(255, 128, 0, 0.5), -3px 3px 0 0 rgba(255, 128, 0, 0.5), 3px 3px 0 0 rgba(255, 255, 0, 0.75), -3px -3px 0 0 rgba(255, 0, 0, 0.75);
+}
+
+em {
+
+    font-style: font-size: 110%;
+    font-weight: bold;
+    font-style: normal;
+    color: crimson;
+    text-shadow: 1px 1px 2px #bcd6e7;
+}
+
+em_2 {
+
+    font-weight: bold;
+    font-style: normal;
+    color: darkslategray;
+    text-shadow: 1px 1px 2px #bcd6e7;
+
+}
+
+p{
+
+    text-align: left;
+    margin-left: 104px;
+    font-size: 18px;
+    margin-right: 104px;
+}
+
+p#countScore{
+
+    text-align: center;
+    font-size: 10px;
+
+}
+
+p#storyParagraph{
+
+    background-color: whitesmoke;
+    border-radius: 0 4px 4px 0;
+    color: black;
+    font-style: italic;
+    line-height: 1.7;
+    margin: 20px 20px 20px 20px;
+    padding: 20px 60px 20px 70px;
+    position: relative;
+    font-size: 20px;
+    width: 830px;
+    text-align: left;
+}
+
+textarea#storyTextArea{
+
+    border-radius: 0 4px 4px 0;
+    font-size: 20px;
+    font-family: serif;
+    width: 956px;
+
+}
+
+canvas#wordCanvas{
+
+    width: 300px;
+    height: 100px;
+    background-color: white;
+
+}
+
+canvas#rightWordCanvas{
+
+    width: 300px;
+    height: 120px;
+    background-color: white;
+
+}
+
+canvas#keyboardCanvas{
+
+    height:300px;
+    width:300px;
+    border-width: 1px;
+    background: white;
+}
+#keyboardText { 
+
+    font-size: 20px;
+}
+
+/* Мишка */
+/* Бутон "Да" */
+button#button1 {
+    position:relative;
+    background-color: green;
+    color: rgba(255, 255, 255, 1);
+    font-family: "Verdana";
+    font-weight: bold;
+    font-size: 3.5em;
+    text-decoration: none;
+
+    padding: 4px;
+    border-radius: 100px;
+    box-shadow: 0 9px 0 green,0px 9px 25px rgba(0, 0, 0, .7);
+
+    width: 220px;
+    height: 150px;
+    text-align: center;
+
+    top: -50px;
+    right: 50px;
+}
+
+button#button1:active {
+    box-shadow: 0 3px 0 green,0px 3px 6px rgba(0, 0, 0, .7);
+    position: relative;
+
+    top: -50px;
+    right: 50px;
+}
+
+
+/* Бутон "Не" */
+button#button2 {
+    position: relative;
+    background-color: red;  
+    color: rgba(255, 255, 255, 1);
+    font-family: "Verdana";
+    font-weight: bold;
+    font-size: 3.5em;
+    text-decoration: none;
+
+    padding: 4px;
+    border-radius: 100px;
+    box-shadow: 0 9px 0 rgba(219, 31, 5, 1),0px 9px 25px rgba(0, 0, 0, .7);
+
+    width: 220px;
+    height: 150px;
+    text-align: center;
+
+    top: -50px;
+    left: 50px;
+}
+button#button2:active {
+    box-shadow: 0 3px 0 rgba(219, 31, 5, 1),0px 3px 6px rgba(0, 0, 0, .7);
+    position: relative;
+    top: -50px;
+    left: 50px;
+
+}
+
+/* Бутон "Следваща дума" */
+button#button3{
+
+    position: relative;
+    background-color: goldenrod;
+    color: rgba(255, 255, 255, 1);
+    font-family: "Verdana";
+    font-weight: bold;
+    font-size: 1em;
+    text-decoration: none;
+
+    padding: 4px;
+    border-radius: 100px;
+    box-shadow: 0 9px 0 goldenrod,0px 9px 25px rgba(0, 0, 0, .7);
+
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 100px;
+
+}
+
+button#button3:active {
+    box-shadow: 0 3px 0 goldenrod,0px 3px 6px rgba(0, 0, 0, .7);
+    position: relative;
+
+}
+
+.section0{
+    width: 70%;
+    margin: auto;
+    border: 2px solid;
+    border-color: gainsboro;
+    box-shadow: 0 3px 0 0 rgba(255, 192, 0, 0.25), 0 -3px 0 0 rgba(255, 64, 0, 0.25), 3px 0 0 0 rgba(255, 192, 0, 0.25), -3px 0 0 0 rgba(255, 64, 0, 0.25), 4px -3px 0 0 rgba(255, 128, 0, 0.5), -3px 3px 0 0 rgba(255, 128, 0, 0.5), 3px 3px 0 0 rgba(255, 255, 0, 0.75), -3px -3px 0 0 rgba(255, 0, 0, 0.75);
+
+
+}
+.section1 {
+
+    width: 70%;
+    margin: auto;
+    border: 2px solid;
+    border-color: gainsboro;
+    box-shadow: 0 3px 0 0 rgba(255, 192, 0, 0.25), 0 -3px 0 0 rgba(255, 64, 0, 0.25), 3px 0 0 0 rgba(255, 192, 0, 0.25), -3px 0 0 0 rgba(255, 64, 0, 0.25), 4px -3px 0 0 rgba(255, 128, 0, 0.5), -3px 3px 0 0 rgba(255, 128, 0, 0.5), 3px 3px 0 0 rgba(255, 255, 0, 0.75), -3px -3px 0 0 rgba(255, 0, 0, 0.75);
+
+}
+
+.section2{
+
+    background-color: black;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    height: 115.8vh;
+    width: 100%;
+    margin: auto;
+
+
+    border: 2px solid;
+    border-color: gainsboro;
+    box-shadow: 0 3px 0 0 rgba(255, 192, 0, 0.25), 0 -3px 0 0 rgba(255, 64, 0, 0.25), 3px 0 0 0 rgba(255, 192, 0, 0.25), -3px 0 0 0 rgba(255, 64, 0, 0.25), 4px -3px 0 0 rgba(255, 128, 0, 0.5), -3px 3px 0 0 rgba(255, 128, 0, 0.5), 3px 3px 0 0 rgba(255, 255, 0, 0.75), -3px -3px 0 0 rgba(255, 0, 0, 0.75);
+
+}
+
+.section3 {
+
+    width: 100%;
+    margin: auto;
+    border: 2px solid;
+    border-color: gainsboro;
+    box-shadow: 0 3px 0 0 rgba(255, 192, 0, 0.25), 0 -3px 0 0 rgba(255, 64, 0, 0.25), 3px 0 0 0 rgba(255, 192, 0, 0.25), -3px 0 0 0 rgba(255, 64, 0, 0.25), 4px -3px 0 0 rgba(255, 128, 0, 0.5), -3px 3px 0 0 rgba(255, 128, 0, 0.5), 3px 3px 0 0 rgba(255, 255, 0, 0.75), -3px -3px 0 0 rgba(255, 0, 0, 0.75);
+
+}
+
+/* Клавиатура */
+
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+
+    width: 100%;
+    margin-top: 20px;
+    margin-left: -5px;
+}
+
+.row {
+    list-style: none;
+    display: flex;
+
+    width: 100%;
+    margin: auto;
+
+}
+
+span#span0{
+
+
+    background-color: #87CEFA;
+}
+
+span{
+
+    font-size: 21.7px;
+    font-weight: bold;
+    font-style: oblique;
+}
+
+li {
+    height: 3em;
+    width: 3em;
+    color: rgba(0,0,0,0.7);
+    border-radius: 0.4em;
+    line-height: 3em;
+    letter-spacing: 1px;
+    margin: 0.4em;
+    transition: 0.3s;
+    text-align: center;
+    font-size: 1em;
+
+}
+
+#Space {
+
+    margin-left: 272px;
+    width: 24em;
+}
+
+#tab {
+    width: 5em;
+}
+
+#caps {
+    width: 6em;
+}
+
+#ShiftLeft {
+    width: 8em;
+}
+
+#enter {
+    width: 6em;
+}
+
+#ShiftRight {
+    width: 8em;
+}
+
+#back {
+    width: 5em;
+}
+
+.big {
+
+    background-color: crimson;
+    border: 2px solid crimson;
+
+}
+.big.selected{
+
+    color: crimson;
+}
+
+.pinky { 
+    background-color: crimson;
+    border: 2px solid crimson;
+}
+.pinky.selected {
+    color: crimson;
+}
+
+.ring { 
+    background-color: coral;
+    border: 2px solid coral;
+}
+.ring.selected {
+    color: coral;
+}
+
+.middle { 
+    background-color: darkorange;
+    border: 2px solid darkorange;
+}
+.middle.selected {
+    color: darkorange;
+}
+
+.pointer1st { 
+    background-color: gold;
+    border: 2px solid gold;
+}
+.pointer1st.selected {
+    color: gold;
+}
+
+.pointer2nd { 
+    background-color: khaki;
+    border: 2px solid khaki;
+}
+.pointer2nd.selected {
+    color: khaki;
+}
+
+.fill-out-key {
+    background-color: slategrey;
+    border: 2px solid slategrey;
+}
+
+.selected {
+    background-color: transparent;
+    -webkit-animation: vibrate-1 0.3s linear infinite both;
+    animation: vibrate-1 0.3s linear infinite both;
+}
+
+.hit {
+    -webkit-animation: hit 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    animation: hit 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@-webkit-keyframes hit {
+    0% {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+@keyframes hit {
+    0% {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes vibrate-1 {
+    0% {
+        -webkit-transform: translate(0);
+        transform: translate(0);
+    }
+    20% {
+        -webkit-transform: translate(-2px, 2px);
+        transform: translate(-2px, 2px);
+    }
+    40% {
+        -webkit-transform: translate(-2px, -2px);
+        transform: translate(-2px, -2px);
+    }
+    60% {
+        -webkit-transform: translate(2px, 2px);
+        transform: translate(2px, 2px);
+    }
+    80% {
+        -webkit-transform: translate(2px, -2px);
+        transform: translate(2px, -2px);
+    }
+    100% {
+        -webkit-transform: translate(0);
+        transform: translate(0);
+    }
+}
+@keyframes vibrate-1 {
+    0% {
+        -webkit-transform: translate(0);
+        transform: translate(0);
+    }
+    20% {
+        -webkit-transform: translate(-2px, 2px);
+        transform: translate(-2px, 2px);
+    }
+    40% {
+        -webkit-transform: translate(-2px, -2px);
+        transform: translate(-2px, -2px);
+    }
+    60% {
+        -webkit-transform: translate(2px, 2px);
+        transform: translate(2px, 2px);
+    }
+    80% {
+        -webkit-transform: translate(2px, -2px);
+        transform: translate(2px, -2px);
+    }
+    100% {
+        -webkit-transform: translate(0);
+        transform: translate(0);
+    }
+}
+
+.highlight {
+    background: gold;
+}
+
+figcaption#figcaptionTwo {
+    color: darkslategray;
+    font-size: 14px;
+    font-style: italic;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+figcaption {
+    color: #aaa;
+    font-size: 14px;
+    font-style: italic;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+blockquote {
+    color: #ccc;
+    content: '”';
+    font-size: 80px;
+    position: absolute;
+    right: 30px;
+    top: -20px;
+}

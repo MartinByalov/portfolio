@@ -9,8 +9,7 @@ function esc(s) {
 
 export function render(comp) {
   const id = comp.id || 'comp-perms-auditor-' + Math.random().toString(36).substr(2, 9);
-  const title = comp.title || 'Одит на сигурността: Инспектор на системните разрешения';
-  const subtitle = comp.subtitle || 'Инспектирайте инсталираните приложения, превключвайте техните права за достъп и анализирайте индекса на риск (Risk Score).';
+  const title = comp.title || 'Системни разрешения';
 
   const apps = [
     {
@@ -81,18 +80,23 @@ export function render(comp) {
 
   return `
     <div id="${esc(id)}" class="mobile-perms-auditor-wrapper" style="margin: 1.5rem 0; background: var(--surface-alt, #f8fafc); border: 1px solid var(--border-color, #e2e8f0); border-radius: 16px; padding: 1.5rem;">
-      <div style="margin-bottom: 1.25rem;">
-        <h3 style="margin: 0 0 0.4rem 0; font-size: 1.25rem; color: var(--text-color, #1e293b); font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
-          <i class="fas fa-user-shield" style="color: var(--accent-blue, #3b82f6);"></i>
+      <div class="perms-auditor-header" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 1.25rem;">
+        <h3 style="margin: 0 0 0.4rem 0; font-size: 1.25rem; color: var(--text-color, #1e293b); font-weight: 700;">
           ${esc(title)}
         </h3>
-        ${subtitle ? `<p style="margin: 0; font-size: 0.95rem; color: var(--text-muted, #64748b); line-height: 1.5;">${esc(subtitle)}</p>` : ''}
+        <div class="risk-gauge-box" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.6rem 1rem; text-align: right; min-width: 200px; flex-shrink: 0;">
+          <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #64748b;">Ниво на заплаха (Risk Score)</div>
+          <div style="display: flex; align-items: center; justify-content: flex-end; gap: 0.5rem; margin-top: 0.2rem;">
+            <span class="risk-score-value" style="font-size: 1.4rem; font-weight: 800; font-family: monospace; color: #dc2626;">0</span>
+            <span class="risk-badge" style="font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 6px; background: #fee2e2; color: #b91c1c;">Изчисляване...</span>
+              </div>
+            </div>
       </div>
 
       <!-- App Selection Selector -->
-      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem;">
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; margin-bottom: 1.25rem;">
         ${apps.map((app, idx) => `
-          <button type="button" class="perm-app-btn ${idx === 0 ? 'active' : ''}" data-app="${app.id}" style="padding: 0.55rem 0.9rem; border-radius: 10px; border: 1px solid ${idx === 0 ? 'var(--accent-blue, #3b82f6)' : 'var(--border-color, #e2e8f0)'}; background: ${idx === 0 ? '#eff6ff' : '#ffffff'}; color: ${idx === 0 ? '#1d4ed8' : 'var(--text-color, #1e293b)'}; font-size: 0.88rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; transition: all 0.2s ease;">
+          <button type="button" class="perm-app-btn ${idx === 0 ? 'active' : ''}" data-app="${app.id}" style="width: 100%; min-height: 58px; padding: 0.55rem 0.75rem; border-radius: 10px; border: 1px solid ${idx === 0 ? 'var(--accent-blue, #3b82f6)' : 'var(--border-color, #e2e8f0)'}; background: ${idx === 0 ? '#eff6ff' : '#ffffff'}; color: ${idx === 0 ? '#1d4ed8' : 'var(--text-color, #1e293b)'}; font-size: 0.88rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; transition: all 0.2s ease; text-align: left;">
             <i class="${app.icon}" style="color: ${app.iconColor};"></i>
             <span>${esc(app.name)}</span>
           </button>
@@ -117,17 +121,7 @@ export function render(comp) {
                   </div>
                 </div>
                 <div style="font-size: 0.85rem; color: #475569; margin-top: 0.35rem;">${esc(app.description)}</div>
-              </div>
-
-              <!-- Risk Score Gauge -->
-              <div class="risk-gauge-box" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 0.6rem 1rem; text-align: right; min-width: 200px;">
-                <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #64748b;">Ниво на заплаха (Risk Score)</div>
-                <div style="display: flex; align-items: center; justify-content: flex-end; gap: 0.5rem; margin-top: 0.2rem;">
-                  <span class="risk-score-value" style="font-size: 1.4rem; font-weight: 800; font-family: monospace; color: #dc2626;">0</span>
-                  <span class="risk-badge" style="font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 6px; background: #fee2e2; color: #b91c1c;">Изчисляване...</span>
                 </div>
-              </div>
-            </div>
 
             <!-- Permission Checklist -->
             <div style="font-size: 0.88rem; font-weight: 700; color: #334155; margin-bottom: 0.75rem; text-transform: uppercase;">
@@ -186,6 +180,9 @@ export function init(comp) {
   function calculateScoreForCard(card) {
     const checkboxes = card.querySelectorAll('.perm-checkbox');
     let totalScore = 0;
+    const maxScore = Array.from(checkboxes).reduce((sum, checkbox) => {
+      return sum + (parseInt(checkbox.getAttribute('data-risk'), 10) || 0);
+    }, 0);
     let dangerousActive = 0;
 
     checkboxes.forEach(cb => {
@@ -197,13 +194,16 @@ export function init(comp) {
       }
     });
 
-    const scoreVal = card.querySelector('.risk-score-value');
-    const badge = card.querySelector('.risk-badge');
+    const scoreVal = root.querySelector('.risk-score-value');
+    const badge = root.querySelector('.risk-badge');
     const adviceBox = card.querySelector('.auditor-advice-box');
 
-    if (scoreVal) scoreVal.textContent = `${totalScore}/100`;
+    // Normalize against the maximum risk of the selected app. This keeps the
+    // initial fully enabled state at 100/100 and makes every toggle visible.
+    const normalizedScore = maxScore > 0 ? Math.round((totalScore / maxScore) * 100) : 0;
+    if (scoreVal) scoreVal.textContent = `${normalizedScore}/100`;
 
-    if (totalScore <= 15) {
+    if (normalizedScore <= 15) {
       if (scoreVal) scoreVal.style.color = '#16a34a';
       if (badge) {
         badge.textContent = 'Безопасно ниво';
@@ -214,9 +214,9 @@ export function init(comp) {
         adviceBox.style.background = '#f0fdf4';
         adviceBox.style.border = '1px solid #bbf7d0';
         adviceBox.style.color = '#166534';
-        adviceBox.innerHTML = '<strong><i class="fas fa-circle-check" style="margin-right: 0.35rem;"></i>Отличен одит:</strong> Приложението има само необходимите му функционални права. Личните ви данни и сензори са защитени!';
+        adviceBox.innerHTML = '<strong>Отличен одит:</strong> Приложението има само необходимите му функционални права. Личните ви данни и сензори са защитени!';
       }
-    } else if (totalScore <= 45) {
+    } else if (normalizedScore <= 45) {
       if (scoreVal) scoreVal.style.color = '#d97706';
       if (badge) {
         badge.textContent = 'Умерено предупреждение';
@@ -227,7 +227,7 @@ export function init(comp) {
         adviceBox.style.background = '#fffbeb';
         adviceBox.style.border = '1px solid #fde68a';
         adviceBox.style.color = '#92400e';
-        adviceBox.innerHTML = `<strong><i class="fas fa-triangle-exclamation" style="margin-right: 0.35rem;"></i>Внимание:</strong> Има ${dangerousActive} активно разрешение, което не е критично за работата на програмата. Препоръчва се да го деактивирате от системните настройки.`;
+        adviceBox.innerHTML = `<strong>Внимание:</strong> Има ${dangerousActive} активно разрешение, което не е критично за работата на програмата. Препоръчва се да го деактивирате от системните настройки.`;
       }
     } else {
       if (scoreVal) scoreVal.style.color = '#dc2626';
@@ -240,22 +240,22 @@ export function init(comp) {
         adviceBox.style.background = '#fef2f2';
         adviceBox.style.border = '1px solid #fecaca';
         adviceBox.style.color = '#991b1b';
-        adviceBox.innerHTML = `<strong><i class="fas fa-ban" style="margin-right: 0.35rem;"></i>Критична заплаха:</strong> Това приложение изисква достъп до чувствителни данни (${dangerousActive} неоправдани права, включително SMS/микрофон/контакти). Риск от зловреден софтуер (Spyware)! Препоръчва се незабавно спиране на правата или пълно изтриване.`;
+        adviceBox.innerHTML = `<strong>Критична заплаха:</strong> Това приложение изисква достъп до чувствителни данни (${dangerousActive} неоправдани права, включително SMS/микрофон/контакти). Риск от зловреден софтуер (Spyware)! Препоръчва се незабавно спиране на правата или пълно изтриване.`;
       }
     }
   }
 
-  // Init scores for all cards
-  appCards.forEach(card => {
-    calculateScoreForCard(card);
-
-    const checkboxes = card.querySelectorAll('.perm-checkbox');
-    checkboxes.forEach(cb => {
-      cb.addEventListener('change', () => {
-        calculateScoreForCard(card);
-      });
-    });
+  // Keep one source of truth for the visible score and update it for every
+  // permission toggle, including toggles in dynamically shown app cards.
+  let selectedCard = appCards[0] || null;
+  root.addEventListener('change', (event) => {
+    const checkbox = event.target.closest('.perm-checkbox');
+    if (!checkbox) return;
+    const card = checkbox.closest('.perm-app-card');
+    if (card && card === selectedCard) calculateScoreForCard(card);
   });
+
+  if (selectedCard) calculateScoreForCard(selectedCard);
 
   appBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -272,6 +272,11 @@ export function init(comp) {
       appCards.forEach(card => {
         card.style.display = card.id === `perm-card-${appId}` ? 'block' : 'none';
       });
+      const nextCard = root.querySelector(`#perm-card-${appId}`);
+      if (nextCard) {
+        selectedCard = nextCard;
+        calculateScoreForCard(selectedCard);
+      }
     });
   });
 }

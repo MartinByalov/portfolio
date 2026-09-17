@@ -62,16 +62,22 @@ export function renderExperiencePage() {
                             <hr class="experience-separator">
 
                             <div class="extra-activities">
-                                <a href="https://www.zadanie.lol/" target="_blank" class="badge-link"><i
-                                        class="fas fa-chevron-right"></i> zadanie.lol</a><br>
-                                <a href="https://martinbyalov.github.io/morphemes/" target="_blank"
-                                    class="badge-link"><i class="fas fa-chevron-right"></i> Морфеми</a><br>
-                                <a href="https://martinbyalov.github.io/equal-triangles/" target="_blank"
-                                    class="badge-link"><i class="fas fa-chevron-right"></i> Еднакви триъгълници</a><br>
-                                <a href="https://martinbyalov.github.io/distance-velocity-time/" target="_blank"
-                                    class="badge-link"><i class="fas fa-chevron-right"></i> Път, скорост, време</a><br>
-                                <a href="https://martinbyalov.github.io/littlePhysics/" target="_blank"
+                                <a href="experiences/ai-bot/ai-bot.exe" download="ai-bot.exe" class="badge-link">
+                                    <i class="fas fa-download"></i> AI Bot</a>
+                                <a href="experiences/morphemes/index.html" target="_blank"
+                                    class="badge-link"><i class="fas fa-chevron-right"></i> Морфеми</a>
+                                <a href="experiences/redhood/index.html" target="_blank"
+                                    class="badge-link"><i class="fas fa-chevron-right"></i> Олимпиада по компютърно моделиране · III клас</a>
+                                <a href="experiences/newfriend/index.html" target="_blank"
+                                    class="badge-link"><i class="fas fa-chevron-right"></i> Олимпиада по компютърно моделиране · IV клас</a>
+                                <a href="experiences/triangle-game/index.html" target="_blank"
+                                    class="badge-link"><i class="fas fa-chevron-right"></i> Еднакви триъгълници</a>
+                                <a href="experiences/littlePhysics/index.html" target="_blank"
                                     class="badge-link"><i class="fas fa-chevron-right"></i> Трети принцип на механиката</a>
+                                <a href="experiences/distance-velocity-time/index.html" target="_blank"
+                                    class="badge-link"><i class="fas fa-chevron-right"></i> Път, скорост, време</a>
+                                <a href="experiences/gallery/index.html" target="_blank"
+                                    class="badge-link"><i class="fas fa-chevron-right"></i> Галерия</a>
                             </div>
                         </div>
                     </div>

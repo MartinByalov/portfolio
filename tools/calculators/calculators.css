@@ -311,7 +311,8 @@ main {
 
 .modal-header {
     margin-bottom: 1.5rem;
-    padding-right: 2rem;
+    padding: 0 2rem;
+    text-align: center;
 }
 
 .modal-header h2 {
@@ -324,6 +325,7 @@ main {
 .modal-header p {
     font-size: 0.875rem;
     color: var(--text-secondary);
+    margin-bottom: 0;
 }
 
 /* ================================================= */

@@ -15,18 +15,17 @@ export function render(comp) {
   return `
     <div id="${esc(id)}" class="mobile-battery-opt-wrapper" style="margin: 1.5rem 0; background: var(--surface-alt, #f8fafc); border: 1px solid var(--border-color, #e2e8f0); border-radius: 16px; padding: 1.5rem;">
       <div style="margin-bottom: 1.25rem;">
-        <h3 style="margin: 0 0 0.4rem 0; font-size: 1.25rem; color: var(--text-color, #1e293b); font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
-          <i class="fas fa-battery-half" style="color: var(--accent-blue, #3b82f6);"></i>
+        <h3 style="margin: 0 0 0.4rem 0; font-size: 1.25rem; color: var(--text-color, #1e293b); font-weight: 700;">
           ${esc(title)}
         </h3>
         ${subtitle ? `<p style="margin: 0; font-size: 0.95rem; color: var(--text-muted, #64748b); line-height: 1.5;">${esc(subtitle)}</p>` : ''}
       </div>
 
       <!-- Main Grid: Controls vs Live Battery Gauge -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; align-items: start;">
+      <div class="battery-main-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; align-items: stretch;">
         
         <!-- Controls Column -->
-        <div style="background: #ffffff; border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">
+        <div class="battery-controls-panel" style="background: #ffffff; border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; height: 100%;">
           
           <!-- Brightness -->
           <div>
@@ -96,11 +95,11 @@ export function render(comp) {
         </div>
 
         <!-- Live Battery Gauge & Prediction Dashboard -->
-        <div style="background: #0f172a; color: #ffffff; border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 380px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+        <div class="battery-gauge-panel" style="background: #0f172a; color: #ffffff; border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 380px; height: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
           
           <div>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-              <span style="font-size: 0.8rem; text-transform: uppercase; font-weight: 700; color: #94a3b8;">Прогнозна автономност</span>
+              <span style="font-size: 0.8rem; text-transform: uppercase; font-weight: 700; color: #94a3b8;">Прогноза</span>
               <span style="font-size: 0.75rem; background: #1e293b; padding: 0.2rem 0.6rem; border-radius: 20px; color: #38bdf8; border: 1px solid #334155;">Капацитет: 5000 mAh</span>
             </div>
 

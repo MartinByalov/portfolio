@@ -25,7 +25,7 @@ export function render(comp) {
     { id: 'direct', name: 'Quick Share / AirDrop (Wi-Fi Direct)', speedMBs: 50, speedLabel: '50 MB/s (400 Mbps)', icon: 'fas fa-share-nodes', color: '#8b5cf6', note: 'Директна peer-to-peer Wi-Fi връзка между устройства в една стая без нужда от интернет.' },
     { id: 'wifi6', name: 'Домашен Wi-Fi 6 рутер (LAN)', speedMBs: 90, speedLabel: '90 MB/s (720 Mbps)', icon: 'fas fa-wifi', color: '#3b82f6', note: 'Локален пренос през високоскоростен домашен или училищен рутер.' },
     { id: 'c5g', name: '5G Облачен качване (Cloud)', speedMBs: 20, speedLabel: '20 MB/s (160 Mbps)', icon: 'fas fa-tower-cell', color: '#f59e0b', note: 'Качване в Google Drive / iCloud през бърза клетъчна 5G мрежа (изразходва мобилен трафик).' },
-    { id: 'c4g', name: '4G LTE Облачно качване', speedMBs: 3, speedLabel: '3 MB/s (24 Mbps)', icon: 'fas fa-signal', color: '#ea580c', note: 'Стандартна скорост на мобилен ъплоуд при 4G покритие.' },
+    { id: 'c4g', name: '4G LTE Cloud', speedMBs: 3, speedLabel: '3 MB/s (24 Mbps)', icon: 'fas fa-signal', color: '#ea580c', note: 'Стандартна скорост на мобилен ъплоуд при 4G покритие.' },
     { id: 'bt', name: 'Bluetooth 5.3', speedMBs: 0.2, speedLabel: '0.2 MB/s (1.6 Mbps)', icon: 'fab fa-bluetooth-b', color: '#64748b', note: 'Енергоспестяващ протокол, напълно неподходящ за видеоклипове и архиви.' }
   ];
 
@@ -82,7 +82,7 @@ export function render(comp) {
       </div>
 
       <!-- Live Calculation Dashboard (Styled after Sandbox: SoC) -->
-      <div class="os-cli-window" style="background: #0f172a; border-radius: 12px; border: 1px solid #334155; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.25); display: flex; flex-direction: column; margin-bottom: 1.5rem;">
+      <div class="os-cli-window" style="background: #0f172a; border-radius: 12px; border: 1px solid #334155; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.25); display: flex; flex-direction: column; margin-bottom: 1rem;">
         <div class="os-window-titlebar dark" style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1rem; background: #1e293b; color: #f1f5f9; border-bottom: 1px solid #334155;">
           <div style="display: flex; align-items: center; gap: 0.75rem;">
             <div class="os-win-dots" style="display: flex; gap: 6px;">
@@ -91,7 +91,7 @@ export function render(comp) {
               <span class="win-dot green" style="width: 10px; height: 10px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
             </div>
             <div class="os-win-title" style="font-size: 0.82rem; font-family: monospace; letter-spacing: 0.05em; color: #94a3b8; font-weight: 600;">
-              <i class="fas fa-terminal" style="color: #38bdf8; margin-right: 0.35rem;"></i> ТЕКУЩА КАЛКУЛАЦИЯ И СИМУЛАЦИЯ НА ТРАНСФЕР
+              СИМУЛАЦИЯ НА ТРАНСФЕР
             </div>
           </div>
           <div style="font-size: 0.72rem; font-family: monospace; color: #38bdf8; background: rgba(56, 189, 248, 0.12); padding: 0.2rem 0.5rem; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.25);">
@@ -99,7 +99,7 @@ export function render(comp) {
           </div>
         </div>
 
-        <div style="padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">
+        <div style="padding: 0.9rem 1.25rem 0.55rem; display: flex; flex-direction: column; gap: 0.7rem;">
           <!-- Telemetry Summary Row -->
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; background: rgba(30, 41, 59, 0.6); padding: 0.9rem 1.15rem; border-radius: 10px; border: 1px solid #334155;">
             <div>
@@ -121,21 +121,19 @@ export function render(comp) {
           </div>
 
           <!-- Progress Simulation Container -->
-          <div style="background: #0f172a; border-radius: 10px; padding: 0.9rem 1rem; border: 1px solid #334155;">
+          <div style="background: #0f172a; border-radius: 10px; padding: 0.9rem 1rem 0.55rem; border: 1px solid #334155;">
             <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; font-family: monospace; color: #cbd5e1; margin-bottom: 0.5rem;">
-              <span style="display: flex; align-items: center; gap: 0.45rem;">
-                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #38bdf8;"></span>
-                Симулация: <span id="calc-sim-status" style="color: #94a3b8;">В покой</span>
-              </span>
+              <span></span>
               <span id="calc-sim-percent" style="font-weight: 700; color: #38bdf8; font-size: 0.95rem;">0%</span>
             </div>
-            <div style="background: #1e293b; height: 14px; border-radius: 7px; overflow: hidden; border: 1px solid #475569;">
-              <div id="calc-sim-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #0284c7, #38bdf8); transition: width 0.1s linear; border-radius: 7px; box-shadow: 0 0 8px rgba(56,189,248,0.5);"></div>
+            <div style="position: relative; background: #1e293b; height: 22px; border-radius: 11px; overflow: visible; border: 1px solid #475569;">
+              <div id="calc-sim-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #0284c7, #38bdf8); transition: width 0.1s linear, background 0.25s ease; border-radius: 11px; box-shadow: 0 0 8px rgba(56,189,248,0.5);"></div>
+              <span id="calc-sim-animal" aria-label="Животно, което показва скоростта на трансфера" style="position: absolute; left: 0%; top: 50%; transform: translate(-50%, -50%) scaleX(-1); font-size: 1.35rem; line-height: 1; transition: left 0.1s linear; pointer-events: none;">🐌</span>
             </div>
-            <div style="margin-top: 0.85rem; display: flex; justify-content: flex-end;">
+            <div style="margin-top: 0.55rem; display: flex; justify-content: flex-start;">
               <button type="button" id="calc-sim-start-btn" style="padding: 0.5rem 1.15rem; border-radius: 8px; border: 1px solid #0284c7; background: #0284c7; color: #ffffff; font-weight: 700; font-size: 0.85rem; font-family: monospace; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; transition: all 0.2s ease;">
                 <i class="fas fa-play"></i>
-                <span>ТЕСТВАЙ СКОРОСТТА</span>
+                <span>Тест</span>
               </button>
             </div>
           </div>
@@ -144,9 +142,8 @@ export function render(comp) {
 
       <!-- Comparative Breakdown Matrix -->
       <div style="background: #ffffff; border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; padding: 1.25rem;">
-        <div style="font-size: 0.95rem; font-weight: 700; color: #1e293b; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.45rem;">
-          <i class="fas fa-chart-column" style="color: #3b82f6;"></i>
-          Сравнителна таблица: Колко време ще отнеме избраният файл през всички канали?
+        <div style="font-size: 0.95rem; font-weight: 700; color: #1e293b; margin-bottom: 0.75rem;">
+          Колко време ще отнеме избраният файл през всички канали?
         </div>
         <div class="calc-matrix-table-wrap" style="overflow-x: auto;">
           <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left;">
@@ -184,7 +181,7 @@ export function init(comp) {
     { id: 'direct', name: 'Quick Share / AirDrop', speedMBs: 50 },
     { id: 'wifi6', name: 'Wi-Fi 6 LAN', speedMBs: 90 },
     { id: 'c5g', name: '5G Cloud Upload', speedMBs: 20 },
-    { id: 'c4g', name: '4G LTE Upload', speedMBs: 3 },
+    { id: 'c4g', name: '4G LTE Cloud', speedMBs: 3 },
     { id: 'bt', name: 'Bluetooth 5.3', speedMBs: 0.2 }
   ];
 
@@ -274,8 +271,18 @@ export function init(comp) {
   // Simulation start button
   const startBtn = root.querySelector('#calc-sim-start-btn');
   const simBar = root.querySelector('#calc-sim-bar');
-  const simStatus = root.querySelector('#calc-sim-status');
   const simPercent = root.querySelector('#calc-sim-percent');
+  const simAnimal = root.querySelector('#calc-sim-animal');
+
+  function getTransferAnimal(speed) {
+    if (speed < 1) return '🐌';
+    if (speed < 5) return '🐢';
+    if (speed < 30) return '🚶';
+    if (speed < 100) return '🐇';
+    if (speed < 250) return '🦌';
+    if (speed < 500) return '🐆';
+    return '🦅';
+  }
 
   if (startBtn) {
     startBtn.addEventListener('click', () => {
@@ -286,9 +293,12 @@ export function init(comp) {
 
       let progress = 0;
       simBar.style.width = '0%';
+      simBar.style.background = 'linear-gradient(90deg, #0284c7, #38bdf8)';
+      if (simAnimal) {
+        simAnimal.textContent = getTransferAnimal(currentSpeedMBs);
+        simAnimal.style.left = '0%';
+      }
       simPercent.textContent = '0%';
-      simStatus.textContent = 'Прехвърляне на файлови блокове...';
-      simStatus.style.color = '#38bdf8';
 
       // Duration: relative scaled duration (between 1.5s and 5s for UX responsiveness)
       const realSeconds = currentSizeMB / currentSpeedMBs;
@@ -305,10 +315,11 @@ export function init(comp) {
           isSimulating = false;
           startBtn.disabled = false;
           startBtn.style.opacity = '1';
-          simStatus.textContent = 'Успешно завършен трансфер!';
-          simStatus.style.color = '#4ade80';
+          simBar.style.background = '#16a34a';
+          simBar.style.boxShadow = '0 0 8px rgba(34,197,94,0.55)';
         }
         simBar.style.width = `${progress}%`;
+        if (simAnimal) simAnimal.style.left = `${progress}%`;
         simPercent.textContent = `${Math.round(progress)}%`;
       }, intervalMs);
     });

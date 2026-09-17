@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Трети принцип на механиката</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;600;800;200&display=swap" rel="stylesheet">
+
+    <style>
+        /* ОСНОВНИ СТИЛОВЕ */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1f2937;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #3b82f6;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            color: white;
+        }
+
+        .header-title {
+            font-size: 1.875rem;
+            font-weight: 800;
+        }
+
+        .header-subtitle {
+            margin-top: 0.5rem;
+            font-size: 1.125rem;
+            color: #c7d2fe;
+        }
+
+        /* ГЛАВЕН КОНТЕЙНЕР */
+        .main-container {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 2rem auto 0 auto;
+            align-items: stretch;
+            justify-content: center;
+        }
+
+        /* КОНТЕЙНЕР ЗА КОНТРОЛИТЕ И РЕЗУЛТАТИТЕ */
+        .left-panel {
+            width: 500px;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* CANVAS И КОНТЕЙНЕР ЗА CANVAS */
+        .canvas-container {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            width: 950px;
+        }
+
+        /* !!! ПРОМЯНА: Чисто бял фон на canvas-а */
+        #physicsCanvas {
+            background: #ffffff;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 0.75rem;
+            width: 100%;
+            min-height: 400px;
+            height: 598px;
+        }
+
+        /* КОНТРОЛИ (ФОРМА) */
+        .controls {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            flex-grow: 1;
+            flex-basis: 0;
+        }
+
+        /* --- НОВ ОБЩ СТИЛ ЗА H3 ЗАГЛАВИЯТА В ПАНЕЛИТЕ --- */
+        .unified-panel-title {
+            padding-top: 0.2rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3b82f6;
+            /* Унифициран син цвят */
+            padding-bottom: 0.5rem;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* --- НОВ СТИЛ: ОРАНЖЕВО И УДЕБЕЛЕНО ЗА СТОЙНОСТИ --- */
+        .orange-bold-value {
+            color: #f97316;
+            /* Наситен оранжев цвят */
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        /* АНАЛИЗ НА СИЛИТЕ */
+        #vector-components {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            justify-content: space-between;
+            position: relative;
+            padding-top: 4.5rem;
+            align-items: flex-start;
+            flex-grow: 1;
+            flex-basis: 0;
+        }
+
+        #vector-components h3 {
+            position: absolute;
+            top: 18px;
+            left: 0;
+        }
+
+        .analysis-column {
+            flex: 1;
+            padding: 0 0.5rem;
+        }
+
+        .analysis-column p {
+            margin-bottom: 0.2rem;
+            font-size: 0.9rem;
+        }
+
+        .section-title {
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px dashed #d1d5db;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .section-title:first-of-type {
+            border-top: none;
+        }
+
+        /* --- НОВА ДОЛНА СЕКЦИЯ (Нютон и Принципи) --- */
+        .bottom-section {
+            display: flex;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 1rem;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        /* Нютон контейнер */
+        .newton-container {
+            width: 520px;
+            margin-top: 0;
+            padding: 1.5rem;
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 300px;
+        }
+
+        .newton-container h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .newton-content {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .newton-content img {
+            width: 200px;
+            height: auto;
+            border-radius: 0.5rem;
+            flex-shrink: 0;
+            object-fit: contain;
+            border: 1px solid #d1d5db;
+            padding: 5px;
+            background-color: #f9fafb;
+        }
+
+        .newton-text {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* Определения контейнер */
+        .definitions-container {
+            width: 950px;
+            height: 254px;
+            padding: 1.5rem;
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+            padding-top: 4.5rem;
+        }
+
+        .definitions-container h3 {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .definitions-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: flex-start;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .definition-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 0.5rem;
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .definition-item img {
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+            border-radius: 0.5rem;
+            flex-shrink: 0;
+            object-fit: contain;
+            border: 1px solid #d1d5db;
+            padding: 10px;
+            background-color: #f9fafb;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .definition-text {
+            text-align: center;
+            width: 100%;
+            flex-grow: 1;
+            padding-top: 0.5rem;
+        }
+
+        .definition-text h4 {
+            margin-top: 0;
+            color: #f97316;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .definition-text p {
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .desc-image {
+            width: 80%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 0.5rem;
+            border: 1px solid #d1d5db;
+            padding: 10px;
+            background-color: #f9fafb;
+            margin-top: 1rem;
+        }
+
+        /* --- МОДАЛЕН ПРОЗОРЕЦ СТИЛОВЕ --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            /* !!! ПРОМЯНА: Добавено центриране */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            /* Премахваме 'margin: auto' и 'margin-top' за по-добро центриране */
+            display: block;
+            width: 90%;
+            max-width: 700px;
+        }
+
+        .modal-content,
+        .caption {
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+        @keyframes zoom {
+            from {
+                transform: scale(0)
+            }
+
+            to {
+                transform: scale(1)
+            }
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Останалите стилове */
+        #inputForm {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #input-groups-container {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .input-group {
+            flex: 1;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid;
+            margin-bottom: 1rem;
+        }
+
+        .input-group.mass {
+            background-color: #eff6ff;
+            border-color: #bfdbfe;
+            min-width: 100px;
+        }
+
+        .input-group.force1 {
+            background-color: #ecfdf5;
+            border-color: #d1fae5;
+            min-width: 120px;
+        }
+
+        .input-group.force2 {
+            background-color: #fff1f2;
+            border-color: #fecaca;
+            min-width: 120px;
+        }
+
+        .input-group h3 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .input-group.mass h3 {
+            color: #1d4ed8;
+        }
+
+        .input-group.force1 h3 {
+            color: #059669;
+        }
+
+        .input-group.force2 h3 {
+            color: #b91c1c;
+        }
+
+        label {
+            display: block;
+            margin-top: 0.75rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #374151;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 0.4rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            margin-top: 0.25rem;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            background-color: #f97316;
+            color: white;
+            font-weight: 700;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px #e06000;
+            transition: all 0.1s ease;
+        }
+
+        button:hover {
+            background-color: #e06000;
+        }
+
+        button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px #c25200;
+        }
+
+        button:disabled {
+            background-color: #9ca3af;
+            box-shadow: 0 4px #6b7280;
+            cursor: not-allowed;
+        }
+
+        .success {
+            color: #10b981;
+        }
+
+        .neutral {
+            color: #3b82f6;
+        }
+
+        .error {
+            color: #ef4444;
+        }
+
+        /* ПРЕМАХНАТИ МЕДИЙНИ ЗАЯВКИ ЗА МОБИЛНИ УСТРОЙСТВА */
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1 class="header-title">Трети принцип на механиката</h1>
+            <p class="header-subtitle">
+                ➤ описание на взаимодействието на телата чрез сили;<br>
+                ➤ събиране на сили с еднакви или противоположни посоки;<br>
+                ➤ формулиране и прилагане на втория принцип на механиката.
+            </p>
+        </div>
+    </header>
+
+    <div class="main-container">
+
+        <div class="left-panel">
+            <div class="controls">
+                <form id="inputForm">
+                    <div id="input-groups-container">
+                        <div class="input-group mass">
+                            <h3>Маса</h3>
+                            <label for="mass">Маса (kg):</label>
+                            <input type="number" id="mass" value="250" min="0.1" step="0.1" required>
+                        </div>
+
+                        <div class="input-group force1">
+                            <h3>Сила 1 (F1)</h3>
+                            <label>Големина (N):</label>
+                            <input type="number" id="force1" value="100" step="0.1" required>
+
+                            <label>Ъгъл (°):</label>
+                            <input type="number" id="angle1" value="45" min="0" max="360" required>
+                        </div>
+
+                        <div class="input-group force2">
+                            <h3>Сила 2 (F2)</h3>
+                            <label>Големина (N):</label>
+                            <input type="number" id="force2" value="100" step="0.1" required>
+
+                            <label>Ъгъл (°):</label>
+                            <input type="number" id="angle2" value="5" min="0" max="360" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="startButton">Старт</button>
+                </form>
+            </div>
+
+            <div id="vector-components">
+                <h3 class="unified-panel-title" style="margin-top: 5px;">Анализ на силите</h3>
+
+                <div class="analysis-column">
+                    <p class="section-title">Mаса (m)</p>
+                    <p>Маса: <span id="mass-display" class="orange-bold-value">5.00 kg</span></p>
+
+                    <p class="section-title">Равнодействаща сила (F)</p>
+                    <p>Големина: <span id="fnet-mag-display" class="orange-bold-value">0.00 N</span></p>
+                </div>
+
+                <div class="analysis-column">
+                    <p class="section-title">Ускорение (a)</p>
+                    <p>Големина: <span id="accel-mag-display" class="orange-bold-value">0.00 m/s²</span></p>
+                    <p>Посока: <span id="fnet-angle-display" class="orange-bold-value">0.00°</span></p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="canvas-container">
+            <canvas id="physicsCanvas" width="950" height="600"></canvas>
+        </div>
+    </div>
+
+    <div class="bottom-section">
+        <div class="newton-container">
+            <h3 class="unified-panel-title">Исак Нютон (1643–1727)</h3>
+
+            <div class="newton-content">
+                <img src="newton.jpg" alt="Портрет на Исак Нютон">
+
+                <div class="newton-text">
+                    <p>
+                        Английски физик и математик, формулирал основните закони на механиката и закона за всеобщото
+                        привличане. <br><br>В областта на механиката Нютон открива закона за всемирното привличане и чрез
+                        предложените Закони за движение поставя основите на класическата механика.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="definitions-container">
+            <h3 class="unified-panel-title">Основни физични определения</h3>
+
+            <div class="definitions-row">
+                <div class="definition-item">
+                    <div class="definition-text">
+                        <h4>1. Равнодействаща сила</h4>
+                        <img src="1.png" id="img1" alt="Векторно събиране на сили: Правило на успоредника">
+                    </div>
+                </div>
+
+                <div class="definition-item">
+                    <div class="definition-text">
+                        <h4>2. Втори принцип на механиката</h4>
+                        <img src="2.png" id="img2" alt="Формула: F = ma">
+                    </div>
+                </div>
+
+                <div class="definition-item">
+                    <div class="definition-text">
+                        <h4>3. Основни зависимости</h4>
+                        <img src="3.png" id="img3" alt="Зависимости: a ~ F и a ~ 1/m">
+                    </div>
+                </div>
+            </div>
+
+            <img src="desc.png" class="desc-image" alt="Допълнително описание"
+                style="margin-top: -15px; height:  115px; width: 600px;">
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+    <script>
+        // =================================================================
+        // 0. ГЛОБАЛНИ ДЕКЛАРАЦИИ И КОНСТАНТИ
+        // =================================================================
+
+        const GROUND_HEIGHT = 50;
+        const BASE_BOX_SIZE = 20;
+        const SIZE_MASS_FACTOR = 4;
+        const TIME_SCALE = 1 / 60;
+
+        let canvas, ctx, form, startButton;
+        let isRunning = false;
+        let animationFrameId = null;
+
+        let box = {
+            x: 0,
+            y: 0,
+            vx: 0,
+            vy: 0,
+            m: 250, // !!! ПРОМЯНА: Начална стойност
+            size: 40
+        };
+
+        let forces = {
+            F1: { mag: 100, angle: 45 }, // !!! ПРОМЯНА: Начална стойност
+            F2: { mag: 100, angle: 5 } // !!! ПРОМЯНА: Начална стойност
+        };
+
+        let F_net = { mag: 0, x: 0, y: 0, angle: 0 };
+        let acceleration = { mag: 0, x: 0, y: 0 };
+
+        // =================================================================
+        // 1. ФУНКЦИИ ЗА МАТЕМАТИЧЕСКИ ИЗЧИСЛЕНИЯ
+        // =================================================================
+
+        function degToRad(degrees) {
+            return degrees * (Math.PI / 180);
+        }
+
+        function radToDeg(radians) {
+            let degrees = radians * (180 / Math.PI);
+            if (degrees < 0) degrees += 360;
+            return degrees % 360;
+        }
+
+        function calculatePhysics() {
+            if (!form) return;
+
+            const m = parseFloat(document.getElementById('mass').value);
+            const F1_mag = parseFloat(document.getElementById('force1').value);
+            const F1_angle = parseFloat(document.getElementById('angle1').value);
+            const F2_mag = parseFloat(document.getElementById('force2').value);
+            const F2_angle = parseFloat(document.getElementById('angle2').value);
+
+            if (m <= 0) return;
+
+            box.m = m;
+            box.size = BASE_BOX_SIZE + Math.sqrt(box.m) * SIZE_MASS_FACTOR;
+
+            forces.F1.mag = F1_mag;
+            forces.F1.angle = F1_angle;
+            forces.F2.mag = F2_mag;
+            forces.F2.angle = F2_angle;
+
+            const F1x = F1_mag * Math.cos(degToRad(F1_angle));
+            const F1y = F1_mag * Math.sin(degToRad(F1_angle));
+            const F2x = F2_mag * Math.cos(degToRad(F2_angle));
+            const F2y = F2_mag * Math.sin(degToRad(F2_angle));
+
+            // Нетна сила (Равнодействаща)
+            F_net.x = F1x + F2x;
+            F_net.y = F1y + F2y;
+
+            F_net.mag = Math.sqrt(F_net.x ** 2 + F_net.y ** 2);
+            F_net.angle = radToDeg(Math.atan2(F_net.y, F_net.x));
+
+            // Ускорение (Само по X ос)
+            acceleration.x = F_net.x / m;
+            acceleration.y = 0; // ВАЖНО: Игнорираме вертикалното ускорение
+            acceleration.mag = Math.abs(acceleration.x);
+
+            updateResultsDisplay();
+
+            if (!isRunning && canvas) {
+                // !!! ПРОМЯНА: Позициониране точно в началото на координатната система (0,0)
+                box.x = canvas.width / 2 - box.size / 2;
+                box.y = canvas.height - GROUND_HEIGHT - box.size;
+            }
+
+            drawScene();
+        }
+
+        function updateResultsDisplay() {
+            document.getElementById('mass-display').textContent = `${box.m.toFixed(2)} kg`;
+            document.getElementById('fnet-mag-display').textContent = `${F_net.mag.toFixed(2)} N`;
+            document.getElementById('accel-mag-display').textContent = `${acceleration.mag.toFixed(2)} m/s²`;
+            document.getElementById('fnet-angle-display').textContent = `${F_net.angle.toFixed(2)}°`;
+        }
+
+        // =================================================================
+        // 2. ФУНКЦИИ ЗА ВИЗУАЛИЗАЦИЯ (CANVAS DRAWING)
+        // =================================================================
+
+        // !!! НОВА/КОРИГИРАНА ФУНКЦИЯ за стрелката (за да поддържа и осите)
+        function drawArrow(startX, startY, endX, endY, color, arrowHeadSize = 10, label = '', isAxis = false) {
+            ctx.strokeStyle = color;
+            ctx.fillStyle = color;
+            ctx.lineWidth = isAxis ? 2 : 3;
+            ctx.beginPath();
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(endX, endY);
+            ctx.stroke();
+
+            const angle = Math.atan2(endY - startY, endX - startX);
+            ctx.lineTo(endX - arrowHeadSize * Math.cos(angle - Math.PI / 6), endY - arrowHeadSize * Math.sin(angle - Math.PI / 6));
+            ctx.moveTo(endX, endY);
+            ctx.lineTo(endX - arrowHeadSize * Math.cos(angle + Math.PI / 6), endY - arrowHeadSize * Math.sin(angle + Math.PI / 6));
+            ctx.stroke();
+
+            if (label) {
+                ctx.save();
+                ctx.fillStyle = color;
+                ctx.font = 'bold 14px Inter';
+
+                if (isAxis && label === 'X') {
+                    // !!! ПРОМЯНА: X буквата по-вляво от стрелката
+                    ctx.textAlign = 'right';
+                    ctx.textBaseline = 'top';
+                    ctx.fillText(label, endX - 20, endY + 5);
+                } else if (isAxis && label === 'Y') {
+                    // !!! ПРОМЯНА: Y буквата по-долу от стрелката
+                    ctx.textAlign = 'left';
+                    ctx.textBaseline = 'top';
+                    ctx.fillText(label, endX + 5, endY + 20);
+                } else {
+                    // Обикновени етикети за сили
+                    const midX = (startX + endX) / 2;
+                    const midY = (startY + endY) / 2;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+                    ctx.fillText(label, midX, midY - 10);
+                }
+
+                ctx.restore();
+            }
+        }
+
+        function drawGrid() {
+            const actualCanvasHeight = canvas.height;
+            const actualCanvasWidth = canvas.width;
+            const groundY = actualCanvasHeight - GROUND_HEIGHT;
+            const centerX = actualCanvasWidth / 2;
+
+            ctx.strokeStyle = '#cccccc';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([2, 2]);
+
+            // !!! ПРОМЯНА: Центриране на мрежата спрямо ординатата
+            // Изчисляваме отместването, за да центрираме мрежата спрямо ординатата
+            const gridOffsetX = centerX % 50;
+
+            // Вертикални линии
+            for (let x = gridOffsetX; x <= actualCanvasWidth; x += 50) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, actualCanvasHeight);
+                ctx.stroke();
+            }
+
+            // Хоризонтални линии
+            for (let y = 0; y <= actualCanvasHeight; y += 50) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(actualCanvasWidth, y);
+                ctx.stroke();
+            }
+
+            ctx.setLineDash([]);
+
+            // !!! КОРИГИРАНЕ: Използваме drawArrow за осите
+            const axisColor = '#333333';
+            const axisHeadSize = 10;
+
+            // X ос (Земята) - Стрелка надясно
+            drawArrow(0, groundY, actualCanvasWidth - 5, groundY, axisColor, axisHeadSize, 'X', true);
+
+            // Y ос (Вертикала в центъра) - Стрелка нагоре
+            drawArrow(centerX, groundY, centerX, 5, axisColor, axisHeadSize, 'Y', true);
+
+            // Начало на координатната система (0,0)
+            ctx.fillStyle = 'red';
+            ctx.beginPath();
+            ctx.arc(centerX, groundY, 5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // !!! ПРОМЯНА: Надпис на началото - ЦЕНТРИРАН
+            ctx.fillStyle = '#333333';
+            ctx.font = '16px Inter';
+            ctx.textAlign = 'center'; // Променено от 'left' на 'center'
+            ctx.textBaseline = 'top';
+            ctx.fillText('(0,0)', centerX, groundY + 15); // Променено от centerX + 10 на centerX
+        }
+
+        function drawBox() {
+            if (!ctx) return;
+
+            // Настройваме стила на текста/емоджито
+            ctx.font = `${box.size}px serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            // !!! КОРИГИРАНЕ: Позициониране на сандъка МАЛКО ПОД абсцисата
+            // Добавяме още 5-10 пиксела надолу, за да "потъне" в пътя
+            const offsetY = 5; // Колко пиксела да потъне в земята
+            const newY = box.y + box.size / 2 + offsetY;
+
+            // Рисуваме емоджито 🎁
+            ctx.fillText('🎁', box.x + box.size / 2, newY);
+
+            box.cx = box.x + box.size / 2;
+            box.cy = newY; // Обновяваме центъра за силите
+        }
+
+        function drawForces() {
+            if (!ctx) return;
+
+            // Коефициент на мащабиране (трябва да е по-малък за големи сили)
+            const maxForce = Math.max(forces.F1.mag, forces.F2.mag, F_net.mag);
+            // Адаптиран мащабен фактор, който намалява с увеличаване на силата
+            const scaleFactor = 100 / (maxForce + 10);
+
+            // F1 (Зелена)
+            const F1_endX = box.cx + forces.F1.mag * Math.cos(degToRad(forces.F1.angle)) * scaleFactor;
+            const F1_endY = box.cy - forces.F1.mag * Math.sin(degToRad(forces.F1.angle)) * scaleFactor;
+            drawArrow(box.cx, box.cy, F1_endX, F1_endY, '#10b981', 10, 'F1');
+
+            // F2 (Червена)
+            const F2_endX = box.cx + forces.F2.mag * Math.cos(degToRad(forces.F2.angle)) * scaleFactor;
+            const F2_endY = box.cy - forces.F2.mag * Math.sin(degToRad(forces.F2.angle)) * scaleFactor;
+            drawArrow(box.cx, box.cy, F2_endX, F2_endY, '#ef4444', 10, 'F2');
+
+            // F_net (Синя - Пунктирана)
+            ctx.setLineDash([5, 5]);
+            const Fnet_endX = box.cx + F_net.x * scaleFactor;
+            const Fnet_endY = box.cy - F_net.y * scaleFactor;
+            drawArrow(box.cx, box.cy, Fnet_endX, Fnet_endY, '#3b82f6', 15, 'F');
+            ctx.setLineDash([]);
+        }
+
+        function drawScene() {
+            if (!ctx) return;
+
+            // Адаптираме размерите на Canvas
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+
+            // Позиционираме сандъка винаги на земята
+            const groundLevel = canvas.height - GROUND_HEIGHT - box.size;
+
+            // !!! ПРОМЯНА: Използваме центъра на координатната система за позициониране
+            const centerX = canvas.width / 2 - box.size / 2;
+
+            if (!isRunning) {
+                // !!! КОРИГИРАНО: Позиционираме точно в началото на координатната система (0,0)
+                box.x = centerX;
+                // !!! ПРОМЯНА: Поставяме сандъка по-надолу, за да лежи на абсцисата
+                box.y = groundLevel;
+            } else if (box.y > groundLevel) {
+                // Ако се движи, спираме на земята (за сигурност)
+                box.y = groundLevel;
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawGrid();
+            drawBox();
+
+            if (F_net.mag > 0.01) { // Показвай сили, само ако има осезаема равнодействаща
+                drawForces();
+            }
+        }
+
+        // =================================================================
+        // 3. АНИМАЦИОНЕН ЦИКЪЛ И КОНТРОЛ
+        // =================================================================
+
+        function updatePhysics() {
+            if (!isRunning) return;
+
+            box.vx += acceleration.x * TIME_SCALE;
+            box.vy = 0; // ПРЕМАХВА ВЕРТИКАЛНОТО ДВИЖЕНИЕ
+
+            box.x += box.vx * TIME_SCALE;
+
+            // Сандъкът винаги е на земята
+            const groundLevel = canvas.height - GROUND_HEIGHT - box.size;
+            box.y = groundLevel;
+
+            // Проверка за граници
+            if (box.x < 0 || box.x + box.size > canvas.width) {
+                stopSimulation();
+                box.x = Math.max(0, Math.min(box.x, canvas.width - box.size));
+            }
+
+            drawScene();
+            animationFrameId = requestAnimationFrame(updatePhysics);
+        }
+
+        function startSimulation() {
+            drawScene();
+            calculatePhysics();
+
+            // Позиционираме центрирано спрямо новия размер и височина
+            box.x = canvas.width / 2 - box.size / 2;
+            box.y = canvas.height - GROUND_HEIGHT - box.size;
+            box.vx = 0;
+            box.vy = 0;
+
+            // Проверяваме ускорението по X (само хоризонтално)
+            if (Math.abs(acceleration.x) > 0.001) {
+                isRunning = true;
+                startButton.textContent = 'Стоп';
+                startButton.style.backgroundColor = '#ef4444';
+                startButton.style.boxShadow = '0 4px #b91c1c';
+                animationFrameId = requestAnimationFrame(updatePhysics);
+            } else {
+                alert("Нетната хоризонтална сила е нула. Няма да има движение.");
+            }
+        }
+
+        function stopSimulation() {
+            isRunning = false;
+            cancelAnimationFrame(animationFrameId);
+            startButton.textContent = 'Старт';
+            startButton.style.backgroundColor = '#f97316';
+            startButton.style.boxShadow = '0 4px #e06000';
+            drawScene();
+        }
+
+        function toggleSimulation(event) {
+            if (event) event.preventDefault();
+
+            if (isRunning) {
+                stopSimulation();
+            } else {
+                startSimulation();
+            }
+        }
+
+        // =================================================================
+        // 4. ФУНКЦИИ ЗА МОДАЛНИЯ ПРОЗОРЕЦ
+        // =================================================================
+        function setupModal() {
+            const modal = document.getElementById("myModal");
+            const modalImage = document.getElementById("modalImage");
+            const closeButton = document.querySelector(".close");
+            const definitionImages = document.querySelectorAll('.definition-item img');
+
+            definitionImages.forEach(img => {
+                img.addEventListener('click', function () {
+                    // !!! Коригирано показване на модала за правилно центриране
+                    modal.style.display = "flex";
+                    modalImage.src = this.src;
+                    modalImage.alt = this.alt;
+                });
+            });
+
+            closeButton.addEventListener('click', function () {
+                modal.style.display = "none";
+            });
+
+            window.addEventListener('click', function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            });
+        }
+
+        // =================================================================
+        // 5. ИНИЦИАЛИЗАЦИЯ
+        // =================================================================
+
+        window.onload = function () {
+            canvas = document.getElementById('physicsCanvas');
+            ctx = canvas.getContext('2d');
+            form = document.getElementById('inputForm');
+            startButton = document.getElementById('startButton');
+
+            // !!! КОРИГИРАНА ИНИЦИАЛИЗАЦИЯ НА MODAL DISPLAY
+            document.getElementById('myModal').style.display = "none";
+
+            // Инициализиране на позицията на кутията
+            box.x = canvas.width / 2 - box.size / 2;
+            box.y = canvas.height - GROUND_HEIGHT - box.size;
+
+            calculatePhysics(); // Изчислява началните стойности и рисува сцената
+            setupModal();
+
+            form.addEventListener('submit', toggleSimulation);
+
+            // Слушане за промени по input полетата, когато симулацията е спряна
+            form.addEventListener('input', () => {
+                if (!isRunning) {
+                    calculatePhysics();
+                }
+            });
+
+            // Добавяне на event listener за оразмеряване
+            window.addEventListener('resize', drawScene);
+
+            // Първоначално рисуване
+            drawScene();
+        };
+
+    </script>
+</body>
+
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>БДС Клавиатура — Тренировка</title>
+    <title>БДС Клавиатура - Тренировка</title>
     <meta name="tool-title" content="БДС Клавиатура">
     <meta name="tool-icon" content="fa-solid fa-keyboard">
     <link rel="icon" href="data:,">
@@ -15,9 +15,8 @@
         <h1>БДС Клавиатура</h1>
         <label for="bookSelect">Книга:</label>
         <select id="bookSelect"><option value="">Зареждане…</option></select>
-        <button id="newChapterBtn" type="button">↻ Нова глава</button>
+        <button id="newPageBtn" type="button">↻ Нова страница</button>
     </div>
-    <p class="bds-hint">Тренировка за научаване на клавиатурната подредба БДС 5237:1978 — препишете откъса в полето.</p>
 
     <div class="bds-stats">
         <span class="done">Прогрес: <b id="statProgress">0%</b></span>
@@ -27,8 +26,8 @@
 
     <div class="section2">
 
-        <p id="storyParagraph">Изберете книга, за да се зареди произволна глава за упражнение.</p>
-        <figcaption id="bookCaption"></figcaption>
+        <p id="storyParagraph">Изберете книга, за да се зареди произволна страница за упражнение.</p>
+        <figcaption id="bookCaption" class="book-page-indicator"></figcaption>
         <textarea id="storyTextArea" placeholder="Текстово поле"></textarea>
 
         <div class="keyboard" id="keyboard"></div>

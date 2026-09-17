@@ -115,6 +115,34 @@ body.dark-mode .course-sidebar {
   border-color: var(--card-border);
 }
 
+[data-theme="dark"] .step-item-desc,
+body.dark-mode .step-item-desc {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] #lesson-main > .accordion > .accordion-item,
+body.dark-mode #lesson-main > .accordion > .accordion-item {
+  background: #1e243a;
+  border-color: #334155;
+}
+
+[data-theme="dark"] #lesson-main > .accordion > .accordion-item > .accordion-header,
+body.dark-mode #lesson-main > .accordion > .accordion-item > .accordion-header {
+  background: #252b45;
+  border-color: #334155;
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] #lesson-main > .accordion > .accordion-item > .accordion-content,
+body.dark-mode #lesson-main > .accordion > .accordion-item > .accordion-content {
+  background: #1e243a;
+}
+
+[data-theme="dark"] #lesson-main > .accordion > .accordion-item > .accordion-content > .step-body,
+body.dark-mode #lesson-main > .accordion > .accordion-item > .accordion-content > .step-body {
+  background: #1e243a;
+}
+
 [data-theme="dark"] .card,
 [data-theme="dark"] .resource-card,
 [data-theme="dark"] .tool-card,

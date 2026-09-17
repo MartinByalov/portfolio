@@ -84,6 +84,7 @@ async function renderLessonView(courseId, lessonId) {
     : (lessonMeta.title ? (lessonMeta.title.match(/^(\d+\.\d+)/)?.[1] || (secLessonMatch ? `${secLessonMatch[1]}.${secLessonMatch[2]}` : String(lessonIndex + 1))) : (secLessonMatch ? `${secLessonMatch[1]}.${secLessonMatch[2]}` : String(lessonIndex + 1)));
 
   const lesson = await fetchLesson(lessonMeta.lessonPath);
+  document.body.classList.toggle('lesson-course-it-10', courseId === 'it-10');
   const lessonDisplayTitle = lesson.title || lessonMeta.title || 'Урок';
   Header.setTitle(lessonDisplayTitle, 'fa-solid fa-file-lines');
   document.title = `${lessonDisplayTitle} - Учебна платформа`;

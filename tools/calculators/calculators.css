@@ -310,6 +310,9 @@ main {
 }
 
 .modal-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 1.5rem;
     padding: 0 2rem;
     text-align: center;

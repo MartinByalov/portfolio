@@ -178,6 +178,24 @@
   box-shadow: 0 16px 36px rgba(37, 99, 235, 0.25);
 }
 
+.other-card.firestore-card {
+  background: linear-gradient(145deg, #064e3b 0%, #115e59 100%);
+  color: #ffffff;
+  border-color: rgba(52, 211, 153, 0.4);
+  position: relative;
+}
+
+.other-card.firestore-card:hover {
+  border-color: #34d399;
+  box-shadow: 0 16px 36px rgba(5, 150, 105, 0.25);
+}
+
+.other-card-badge.green {
+  background: rgba(5, 150, 105, 0.3);
+  border-color: rgba(52, 211, 153, 0.6);
+  color: #d1fae5;
+}
+
 .other-card-content {
   position: relative;
   z-index: 2;
@@ -347,6 +365,11 @@
 .tut-header.theme-blue {
   background: linear-gradient(135deg, #0d1b2a 0%, #1e293b 100%);
   border-bottom-color: var(--tut-blue);
+}
+
+.tut-header.theme-green {
+  background: linear-gradient(135deg, #064e3b 0%, #115e59 100%);
+  border-bottom-color: var(--tut-green);
 }
 
 .tut-header-inner {

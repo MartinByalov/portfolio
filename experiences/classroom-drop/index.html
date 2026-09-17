@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classroom Drop</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="classroom.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Без регистрации</p>
+        <h1>Classroom Drop</h1>
+        <p class="lead">Раздай файлове, събери задания и работи с клас само чрез код.</p>
+      </div>
+    </header>
+
+    <section id="start-view" class="panel">
+      <h2>Създай учителска стая</h2>
+      <p class="muted">Учителят създава временна стая. Учениците влизат с линк или QR код, без акаунт.</p>
+      <form id="create-form">
+        <label>Име на стаята<input id="room-title" maxlength="120" required placeholder="Напр. Практическо задание - електронни таблици"></label>
+        <label>Инструкции<textarea id="room-instructions" maxlength="5000" rows="5" placeholder="Какво трябва да направят учениците?"></textarea></label>
+        <button class="primary" type="submit">Създай стая</button>
+      </form>
+    </section>
+
+    <section id="room-view" class="panel hidden"></section>
+    <p id="status" class="status" role="status"></p>
+  </main>
+  <script src="classroom.js"></script>
+</body>
+</html>

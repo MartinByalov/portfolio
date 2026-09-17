@@ -24,6 +24,9 @@ export function renderOtherPage(subRoute) {
   if (subRoute === 'charts' || subRoute === 'graph-js') {
     return renderChartsTutorial();
   }
+  if (subRoute === 'firestore-classroom') {
+    return renderFirestoreClassroomTutorial();
+  }
   return renderCardsCatalog();
 }
 
@@ -109,7 +112,194 @@ function renderCardsCatalog() {
             </div>
           </div>
         </a>
+
+        <!-- КАРТА 3: FIRESTORE И CLASSROOM АРХИТЕКТУРА -->
+        <a href="#/blog/firestore-classroom" class="other-card firestore-card" id="cardFirestoreClassroom">
+          <div class="other-card-content">
+            <div class="other-card-badge-row">
+              <span class="other-card-badge green">
+                <i class="fa-solid fa-database"></i> Firebase &amp; Firestore
+              </span>
+              <span class="other-card-time">
+                <i class="fa-regular fa-clock"></i> ~25 мин
+              </span>
+            </div>
+
+            <div class="other-card-body">
+              <h2 class="other-card-title">Firestore зад classroom система</h2>
+              <p class="other-card-desc">
+                Как collection, document, cookies и Express sessions изграждат еднопосочна classroom система, в която учителят има акаунт, а учениците работят без регистрация.
+              </p>
+            </div>
+
+            <div class="other-card-footer">
+              <span class="other-card-cta">
+                Прочети <i class="fa-solid fa-arrow-right"></i>
+              </span>
+            </div>
+          </div>
+        </a>
       </div>
+    </div>
+  `;
+}
+
+// =============================================================
+// Firestore classroom architecture tutorial view
+// =============================================================
+function renderFirestoreClassroomTutorial() {
+  return `
+    <div class="tutorial-view-container">
+      <div class="tutorial-top-bar">
+        <a href="#/blog" class="tutorial-back-btn">
+          <i class="fa-solid fa-arrow-left"></i> Обратно
+        </a>
+      </div>
+
+      <header class="tut-header theme-green">
+        <div class="tut-header-inner">
+          <div class="tut-header-logo" style="color: #34d399;">
+            <i class="fa-solid fa-database"></i>
+          </div>
+          <div>
+            <div class="tut-header-meta">TUTORIAL // FIREBASE // FIRESTORE // EXPRESS SESSIONS</div>
+            <h1>Firestore зад еднопосочна classroom система</h1>
+            <p>
+              Реалният модел зад <strong>zadanie</strong>: учителят се удостоверява с Google, учениците нямат акаунти, а Firestore пази учители, настройки за задания, OAuth токени и server-side сесии.
+            </p>
+            <div class="tut-header-nav">
+              <a href="#tut-firestore-model" class="tut-header-pill">1. Collection и document</a>
+              <a href="#tut-collections" class="tut-header-pill">2. Четирите collections</a>
+              <a href="#tut-session-flow" class="tut-header-pill">3. Cookie и session</a>
+              <a href="#tut-classroom-flow" class="tut-header-pill">4. Classroom поток</a>
+              <a href="#tut-security" class="tut-header-pill">5. Сигурност</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="tut-main">
+        <div class="overview">
+          <div class="ov-card"><div class="icon">🗂️</div><h3>Collection</h3><p>Група от документи по общ смисъл, например <code>teachers</code>.</p></div>
+          <div class="ov-card"><div class="icon">📄</div><h3>Document</h3><p>Един запис с полета, например <code>teachers/{email}</code>.</p></div>
+          <div class="ov-card"><div class="icon">🍪</div><h3>Session cookie</h3><p><code>connect.sid</code> свързва браузъра със server-side session.</p></div>
+          <div class="ov-card"><div class="icon">🔐</div><h3>Учителски достъп</h3><p>Учителят има Google OAuth, ученикът използва публичен student flow.</p></div>
+        </div>
+
+        <section class="tut-section" id="tut-firestore-model">
+          <div class="section-kicker green">1 // Моделът</div>
+          <h2>Collection не е таблица, document не е ред</h2>
+          <p>Firestore е NoSQL база данни. В нея данните се организират в <strong>collections</strong>, а всяка collection съдържа <strong>documents</strong>. Document има уникален ID и полета с данни.</p>
+          <div class="schema-diagram">
+            <div class="schema-node schema-root"><strong>Firestore database</strong><span>проектът на приложението</span></div>
+            <div class="schema-arrow">↓</div>
+            <div class="schema-node schema-collection"><strong>teachers</strong><span>collection</span></div>
+            <div class="schema-arrow">↓</div>
+            <div class="schema-node schema-document"><strong>teachers/teacher@example.com</strong><span>document ID = имейл</span></div>
+            <div class="schema-arrow">↓</div>
+            <div class="schema-fields"><span>name</span><span>subject</span><span>folderID</span></div>
+          </div>
+          <div class="code-wrap">
+            <div class="code-bar"><div class="code-bar-left"><div class="code-dots"><div class="code-dot d-r"></div><div class="code-dot d-y"></div><div class="code-dot d-g"></div></div><span class="code-fname">firestore-path.js</span></div><button type="button" class="code-copy-btn" data-target="firestorePathCode">Копирай</button></div>
+            <pre class="code-body" id="firestorePathCode">const teacherRef = firestore
+  .collection('teachers')
+  .doc('teacher@example.com');
+
+const teacherSnapshot = await teacherRef.get();
+const teacher = teacherSnapshot.data();</pre>
+          </div>
+          <div class="callout-highlight-box"><span>Името на collection и document ID са част от договора между приложението и базата. Ако кодът търси <code>teachers/{email}</code>, промяна на структурата изисква промяна и в backend логиката.</span></div>
+        </section>
+
+        <section class="tut-section" id="tut-collections">
+          <div class="section-kicker blue">2 // Данните в zadanie</div>
+          <h2>Четири collections с различни роли</h2>
+          <p>В този проект collections не са четири еднакви „таблици“. Всяка има различна функция в authentication и classroom workflow-а.</p>
+          <div class="overview collection-overview">
+            <div class="ov-card"><h3><code>teachers</code></h3><p>Учителски профили и ID на папката с учебни материали.</p><code>teachers/{email}</code></div>
+            <div class="ov-card"><h3><code>students</code></h3><p>Конфигурация на upload папката за учениците, свързана с учител.</p><code>students/{teacherEmail}</code></div>
+            <div class="ov-card"><h3><code>tokens</code></h3><p>Server-side OAuth refresh token за достъп до Google Drive.</p><code>tokens/{email}</code></div>
+            <div class="ov-card"><h3><code>sessions</code></h3><p>Сесии от <code>express-session</code>, записани чрез Firestore store.</p><code>sessions/{sessionId}</code></div>
+          </div>
+          <div class="code-wrap">
+            <div class="code-bar"><div class="code-bar-left"><div class="code-dots"><div class="code-dot d-r"></div><div class="code-dot d-y"></div><div class="code-dot d-g"></div></div><span class="code-fname">collections.json</span></div><button type="button" class="code-copy-btn" data-target="collectionsCode">Копирай</button></div>
+            <pre class="code-body" id="collectionsCode">{
+  "teachers/teacher@example.com": {
+    "name": "Име на учителя",
+    "subject": "Информационни технологии",
+    "folderID": "google-drive-material-folder"
+  },
+  "students/teacher@example.com": {
+    "folderID": "google-drive-upload-folder"
+  },
+  "tokens/teacher@example.com": {
+    "refreshToken": "НЕ ПОКАЗВАЙ В КЛИЕНТА"
+  }
+}</pre>
+          </div>
+          <p class="tut-note"><strong>Методически въпрос:</strong> <code>students</code> е работещо име в текущия проект, но описва upload конфигурация, а не ученически акаунти. По-ясно име би било <code>teacherUploadFolders</code>. Съвместимостта със съществуващия код обаче също е реално ограничение.</p>
+        </section>
+
+        <section class="tut-section" id="tut-session-flow">
+          <div class="section-kicker purple">3 // Session и cookies</div>
+          <h2>Как браузърът остава разпознат</h2>
+          <p>HTTP заявките по принцип са независими. След OAuth login сървърът трябва да запомни кой е учителят. Това става чрез session.</p>
+          <div class="flow-row"><div class="flow-node">Браузър</div><div class="flow-connector">→</div><div class="flow-node"><strong>connect.sid</strong><small>cookie</small></div><div class="flow-connector">→</div><div class="flow-node"><strong>sessionId</strong><small>ключ за търсене</small></div><div class="flow-connector">→</div><div class="flow-node"><strong>sessions/{sessionId}</strong><small>Firestore document</small></div></div>
+          <div class="code-wrap">
+            <div class="code-bar"><div class="code-bar-left"><div class="code-dots"><div class="code-dot d-r"></div><div class="code-dot d-y"></div><div class="code-dot d-g"></div></div><span class="code-fname">session-options.js</span></div><button type="button" class="code-copy-btn" data-target="sessionCode">Копирай</button></div>
+            <pre class="code-body" id="sessionCode">app.use(session({
+  secret: process.env.SESSION_SECRET,
+  store: new FirestoreStore({
+    database: db,
+    collection: 'sessions'
+  }),
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    sameSite: 'lax',
+    maxAge: 24 * 60 * 60 * 1000
+  }
+}));</pre>
+          </div>
+          <ul class="ilist purple"><li><strong>Cookie:</strong> намира се в браузъра и не трябва да съдържа цялата чувствителна сесия.</li><li><strong>Session document:</strong> намира се server-side и може да съдържа teacher данни и OAuth state.</li><li><strong>httpOnly:</strong> JavaScript в страницата не може да прочете cookie-то.</li><li><strong>secure:</strong> в production cookie-то трябва да се изпраща само през HTTPS.</li></ul>
+        </section>
+
+        <section class="tut-section" id="tut-classroom-flow">
+          <div class="section-kicker orange">4 // One-sided classroom</div>
+          <h2>Учителят има акаунт, ученикът няма</h2>
+          <p>Това е „one-sided“ моделът на <strong>zadanie</strong>. Учителската страна е защитена с Google OAuth, а ученическата страна получава достъп до материали и upload workflow без регистрация.</p>
+          <ol class="ilist orange"><li>Учителят отваря <code>/teacher/login</code> и получава OAuth authorization URL.</li><li>Google връща <code>code</code> и сървърът валидира <code>state</code>.</li><li>Профилът се проверява спрямо allowlist от разрешени имейли.</li><li>Session cookie се изпраща на браузъра и teacher session се записва чрез Firestore store.</li><li>Ученикът отваря student страницата и избира учител, без да създава акаунт.</li><li>Backend чете <code>teachers</code> и <code>students</code>, за да намери съответните Google Drive папки.</li><li>Файлът минава през временен upload, после се качва в Drive. Firestore не съхранява самия бинарен файл.</li></ol>
+          <div class="flow-row flow-wide"><div class="flow-node">Teacher OAuth</div><div class="flow-connector">→</div><div class="flow-node">Express session</div><div class="flow-connector">→</div><div class="flow-node">Firestore</div><div class="flow-connector">→</div><div class="flow-node">Google Drive</div><br><div class="flow-node">Student без login</div><div class="flow-connector">→</div><div class="flow-node">teachers + students</div><div class="flow-connector">→</div><div class="flow-node">материал / upload</div></div>
+          <div class="callout-highlight-box"><span>„Без ученически акаунт“ не означава „без контрол“. Сървърът пак трябва да проверява кой teacher folder се използва и дали upload операцията е разрешена.</span></div>
+        </section>
+
+        <section class="tut-section" id="tut-security">
+          <div class="section-kicker red">5 // Security audit</div>
+          <h2>Къде са границите на доверието</h2>
+          <p>Клиентският JavaScript може да бъде променен от всеки. Затова ID-та, имейли и folder параметри от браузъра не са доказателство за право на достъп.</p>
+          <ul class="ilist red"><li>Никога не поставяй <strong>service account key</strong> или OAuth refresh token във frontend код.</li><li>Не логвай refresh token в конзолата. Той може да даде дълготраен достъп до Google API.</li><li>Проверявай server-side, че upload папката принадлежи на избрания учител.</li><li>Използвай <code>httpOnly</code>, <code>sameSite</code> и <code>secure</code> cookie настройки според средата.</li><li>Ограничи размера и типовете файлове и използвай генерирани имена при временното съхранение.</li><li>Не приемай скриването на бутон като security правило. Истинското правило е в backend middleware и Firebase/Drive permissions.</li></ul>
+          <div class="code-wrap">
+            <div class="code-bar"><div class="code-bar-left"><div class="code-dots"><div class="code-dot d-r"></div><div class="code-dot d-y"></div><div class="code-dot d-g"></div></div><span class="code-fname">security-checklist.txt</span></div><button type="button" class="code-copy-btn" data-target="securityCode">Копирай</button></div>
+            <pre class="code-body" id="securityCode">Провери преди production:
+[ ] secrets са само в environment variables
+[ ] refresh token не се връща към клиента
+[ ] session cookie е httpOnly
+[ ] production cookie е secure
+[ ] teacher access минава през middleware
+[ ] upload folder се валидира server-side
+[ ] старите sessions и файлове се почистват</pre>
+          </div>
+        </section>
+
+        <section class="tut-section tut-summary">
+          <div class="section-kicker green">Финален модел</div>
+          <h2>Една система, четири слоя</h2>
+          <p><strong>Firestore</strong> пази структурирани документи. <strong>Express session</strong> пази server-side състоянието на учителя. <strong>Cookie</strong> свързва браузъра със сесията. <strong>Google Drive</strong> пази реалните учебни файлове и задания.</p>
+          <p>Ако запомниш една схема, нека бъде:</p>
+          <div class="schema-diagram final-schema"><div class="schema-node schema-collection"><strong>teachers</strong><span>кой е учителят и къде са материалите</span></div><div class="schema-node schema-collection"><strong>students</strong><span>къде се качват заданията</span></div><div class="schema-node schema-collection"><strong>tokens</strong><span>как сървърът подновява OAuth достъпа</span></div><div class="schema-node schema-collection"><strong>sessions</strong><span>кой браузър има активен teacher login</span></div></div>
+        </section>
+      </main>
     </div>
   `;
 }

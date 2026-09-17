@@ -71,6 +71,8 @@ export function renderExperiencePage() {
                                 <a href="experiences/newfriend/index.html" target="_blank"
                                     class="badge-link"><i class="fas fa-chevron-right"></i> Олимпиада по компютърно моделиране · IV клас</a>
                                 <a href="experiences/triangle-game/index.html" target="_blank"
+                                    class="badge-link"><i class="fas fa-chevron-right"></i> Триъгълни игри</a>
+                                <a href="experiences/equal-triangles/index.html" target="_blank"
                                     class="badge-link"><i class="fas fa-chevron-right"></i> Еднакви триъгълници</a>
                                 <a href="experiences/littlePhysics/index.html" target="_blank"
                                     class="badge-link"><i class="fas fa-chevron-right"></i> Трети принцип на механиката</a>

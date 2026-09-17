@@ -155,6 +155,17 @@
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
         }
 
+        /* Keep numeric fields editable without the browser spin buttons. */
+        .input-wrapper input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        .input-wrapper input[type="number"]::-webkit-inner-spin-button,
+        .input-wrapper input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
         .input-suffix {
             position: absolute;
             right: 12px;

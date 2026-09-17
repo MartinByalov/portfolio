@@ -231,7 +231,7 @@ async function route() {
       About.initAboutAudio();
     } else if (parts[0] === 'tools') {
       // Redirect to standalone tools dashboard preserving mode
-      location.replace(`tools/index.html?mode=${newMode}`);
+      location.replace(`/tools/index.html?mode=${newMode}`);
       return;
     } else if (parts[0]?.toLowerCase() === 'pocketracer') {
       location.replace('tools/pockeTracer/index.html');
@@ -278,6 +278,9 @@ async function route() {
       } else if (sub === 'charts' || sub === 'graph-js') {
         Header.setTitle('Диаграми с Graph.js', 'fa-solid fa-chart-line');
         document.title = `Диаграми с Graph.js - ${siteSuffix}`;
+      } else if (sub === 'firestore-classroom') {
+        Header.setTitle('Firestore classroom система', 'fa-solid fa-database');
+        document.title = `Firestore classroom система - ${siteSuffix}`;
       } else {
         Header.setTitle('Блог', 'fa-solid fa-shapes');
         document.title = `Блог - ${siteSuffix}`;

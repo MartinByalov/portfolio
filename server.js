@@ -1,13 +1,96 @@
 import express from 'express';
 import path from 'path';
 import fs from 'fs';
+import fsp from 'fs/promises';
+import crypto from 'crypto';
+import { createRequire } from 'module';
 import { fileURLToPath } from 'url';
+import multer from 'multer';
 import { GoogleGenAI } from '@google/genai';
 import { buildRealisticImagePrompt, generateRealisticPromptWithGemini, STANDARD_NEGATIVE_PROMPT } from './utils/promptGenerator.js';
 import { resolveGlossaryImageUrl, getGlossaryFilename } from './utils/glossaryMedia.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const require = createRequire(import.meta.url);
+const archiver = require('archiver');
+const classroomStorageRoot = path.join(__dirname, 'uploads', 'classroom-drop');
+const classroomRooms = new Map();
+fs.mkdirSync(classroomStorageRoot, { recursive: true });
+const classroomUpload = multer({
+  dest: classroomStorageRoot,
+  limits: { fileSize: 25 * 1024 * 1024 }
+});
+
+const classroomAllowedExtensions = new Set([
+  '.doc', '.docx', '.pdf', '.xls', '.xlsx', '.ppt', '.pptx', '.csv',
+  '.txt', '.zip', '.png', '.jpg', '.jpeg', '.gif', '.webp', '.odt', '.ods', '.odp'
+]);
+
+function classroomId() {
+  return Math.random().toString(36).slice(2, 8).toUpperCase();
+}
+
+function classroomToken() {
+  return `${crypto.randomUUID()}${crypto.randomUUID()}`;
+}
+
+function classroomPublicFile(file) {
+  return {
+    id: file.id,
+    name: file.originalName,
+    ...(file.studentName ? { studentName: file.studentName } : {}),
+    size: file.size,
+    mimeType: file.mimeType,
+    uploadedAt: file.uploadedAt
+  };
+}
+
+function classroomRoomResponse(room, includeSubmissions = false) {
+  return {
+    id: room.id,
+    title: room.title,
+    instructions: room.instructions,
+    createdAt: room.createdAt,
+    expiresAt: room.expiresAt,
+    materials: room.materials.map(classroomPublicFile),
+    ...(includeSubmissions ? { submissions: room.submissions.map(classroomSubmissionResponse) } : {})
+  };
+}
+
+function classroomSubmissionResponse(file) {
+  return { ...classroomPublicFile(file), comment: file.comment || '', status: 'Предадено' };
+}
+
+function findClassroomRoom(req, res) {
+  const room = classroomRooms.get(String(req.params.roomId || '').toUpperCase());
+  if (!room || room.expiresAt < Date.now()) {
+    if (room) classroomRooms.delete(room.id);
+    res.status(404).json({ error: 'Стаята не е намерена или е изтекла.' });
+    return null;
+  }
+  return room;
+}
+
+function classroomFileAllowed(originalName) {
+  const extension = path.extname(originalName || '').toLowerCase();
+  return classroomAllowedExtensions.has(extension);
+}
+
+function classroomOriginalName(originalName) {
+  let name = String(originalName || 'file');
+  // Some multipart clients expose UTF-8 filenames decoded as Latin-1.
+  const mojibakeScore = value => (value.match(/[ÃÂÐÑ]/g) || []).length + (value.match(/�/g) || []).length * 3;
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    if (!/[ÃÂÐÑ]/.test(name)) break;
+    try {
+      const repaired = Buffer.from(name, 'latin1').toString('utf8');
+      if (repaired.includes('�') || mojibakeScore(repaired) >= mojibakeScore(name)) break;
+      name = repaired;
+    } catch { break; }
+  }
+  return name;
+}
 
 // Helper to load .env variables into process.env if present
 function loadEnv() {
@@ -121,10 +204,106 @@ app.use('/it-8-2-5', express.static(path.join(__dirname, 'lessons', 'it-8', 'it-
 app.get('/inv.html', (req, res) => {
   res.redirect('/tools/inv.html');
 });
+// Browsers request this conventional path when a page has no explicit icon.
+app.get('/favicon.ico', (req, res) => {
+  res.sendFile(path.join(__dirname, 'favicon.svg'));
+});
 app.use(express.static(__dirname, {
   extensions: ['html', 'htm'],
   index: ['index.html']
 }));
+
+// Temporary no-account classroom rooms for distributing and collecting files.
+app.post('/api/classroom/rooms', async (req, res) => {
+  const title = String(req.body?.title || '').trim().slice(0, 120);
+  const instructions = String(req.body?.instructions || '').trim().slice(0, 5000);
+  if (!title) return res.status(400).json({ error: 'Заглавието е задължително.' });
+
+  await fsp.mkdir(classroomStorageRoot, { recursive: true });
+  let id;
+  do { id = classroomId(); } while (classroomRooms.has(id));
+  const room = {
+    id,
+    teacherToken: classroomToken(),
+    title,
+    instructions,
+    createdAt: Date.now(),
+    expiresAt: Date.now() + 24 * 60 * 60 * 1000,
+    materials: [],
+    submissions: []
+  };
+  classroomRooms.set(id, room);
+  await fsp.mkdir(path.join(classroomStorageRoot, id), { recursive: true });
+  res.status(201).json({ ...classroomRoomResponse(room, true), teacherToken: room.teacherToken });
+});
+
+app.get('/api/classroom/rooms/:roomId', (req, res) => {
+  const room = findClassroomRoom(req, res);
+  if (!room) return;
+  const isTeacher = req.query.teacherToken === room.teacherToken;
+  const response = classroomRoomResponse(room, isTeacher);
+  if (!isTeacher && req.query.studentKey) {
+    response.submissions = room.submissions.filter(file => file.studentKey === String(req.query.studentKey)).map(classroomSubmissionResponse);
+  }
+  res.json({ ...response, isTeacher });
+});
+
+app.post('/api/classroom/rooms/:roomId/materials', classroomUpload.single('file'), async (req, res) => {
+  const room = findClassroomRoom(req, res);
+  if (!room) return;
+  if (req.body?.teacherToken !== room.teacherToken) {
+    if (req.file) await fsp.unlink(req.file.path).catch(() => {});
+    return res.status(403).json({ error: 'Невалиден учителски ключ.' });
+  }
+  const originalName = classroomOriginalName(req.file?.originalname);
+  if (!req.file || !classroomFileAllowed(originalName)) {
+    if (req.file) await fsp.unlink(req.file.path).catch(() => {});
+    return res.status(400).json({ error: 'Файлът е задължителен или типът му не е разрешен.' });
+  }
+  const file = { id: crypto.randomUUID(), originalName, storedPath: req.file.path, size: req.file.size, mimeType: req.file.mimetype, uploadedAt: Date.now() };
+  room.materials.push(file);
+  res.status(201).json({ file: classroomPublicFile(file) });
+});
+
+app.post('/api/classroom/rooms/:roomId/submissions', classroomUpload.single('file'), async (req, res) => {
+  const room = findClassroomRoom(req, res);
+  if (!room) return;
+  const originalName = classroomOriginalName(req.file?.originalname);
+  if (!req.file || !classroomFileAllowed(originalName)) {
+    if (req.file) await fsp.unlink(req.file.path).catch(() => {});
+    return res.status(400).json({ error: 'Файлът е задължителен или типът му не е разрешен.' });
+  }
+  const studentName = String(req.body?.studentName || '').trim().slice(0, 80);
+  const studentKey = String(req.body?.studentKey || '').trim().slice(0, 120);
+  const comment = String(req.body?.comment || '').trim().slice(0, 2000);
+  if (!studentName || !studentKey) {
+    await fsp.unlink(req.file.path).catch(() => {});
+    return res.status(400).json({ error: 'Името е задължително.' });
+  }
+  const file = { id: crypto.randomUUID(), originalName, storedPath: req.file.path, studentName, studentKey, comment, size: req.file.size, mimeType: req.file.mimetype, uploadedAt: Date.now() };
+  room.submissions.push(file);
+  res.status(201).json({ file: classroomPublicFile(file) });
+});
+
+app.get('/api/classroom/files/:fileId', async (req, res) => {
+  for (const room of classroomRooms.values()) {
+    const file = [...room.materials, ...room.submissions].find(item => item.id === req.params.fileId);
+    if (file && room.expiresAt >= Date.now()) return res.download(file.storedPath, file.originalName);
+  }
+  res.status(404).json({ error: 'Файлът не е намерен.' });
+});
+
+app.get('/api/classroom/rooms/:roomId/submissions.zip', async (req, res) => {
+  const room = findClassroomRoom(req, res);
+  if (!room) return;
+  if (req.query.teacherToken !== room.teacherToken) return res.status(403).json({ error: 'Невалиден учителски ключ.' });
+  res.attachment(`${room.id}-zadaniya.zip`);
+  const archive = archiver('zip', { zlib: { level: 9 } });
+  archive.on('error', error => { if (!res.headersSent) res.status(500).json({ error: error.message }); });
+  archive.pipe(res);
+  for (const file of room.submissions) archive.file(file.storedPath, { name: `${file.studentName} - ${file.originalName}` });
+  await archive.finalize();
+});
 
 // In-memory news cache for resilient news feed
 let newsCache = null;

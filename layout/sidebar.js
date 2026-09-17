@@ -26,14 +26,14 @@ function getNavItems(mode) {
     return [
       { icon: 'bx bx-book-reader',  label: 'Учителско Портфолио', href: '#/portfolio', 'data-nav': 'portfolio' },
       { icon: 'bx bx-home-alt',     label: 'Учебни ресурси',      href: '#/',          'data-nav': 'portfolio' },
-      { icon: 'bx bx-wrench',       label: 'Инструменти',         href: 'tools/index.html?mode=portfolio', 'data-nav': 'portfolio' },
+      { icon: 'bx bx-wrench',       label: 'Инструменти',         href: '/tools/index.html?mode=portfolio', 'data-nav': 'portfolio' },
       { icon: 'bx bx-briefcase-alt',label: 'Професионален опит',  href: '#/experience', 'data-nav': 'portfolio' }
     ];
   } else {
     return [
       { icon: 'bx bx-home-alt',    label: 'Начало',            href: '#/',           'data-nav': 'learning' },
       { icon: 'bx bx-book-reader', label: 'Учебни ресурси',   href: '#/subjects',   'data-nav': 'learning' },
-      { icon: 'bx bx-wrench',      label: 'Инструменти',       href: 'tools/index.html?mode=learning', 'data-nav': 'learning' },
+      { icon: 'bx bx-wrench',      label: 'Инструменти',       href: '/tools/index.html?mode=learning', 'data-nav': 'learning' },
       { icon: 'bx bx-calendar',    label: 'Календар',          href: '#calendar',    'data-nav': 'learning' },
       { icon: 'bx bx-calculator',  label: 'Калкулатори',       href: '/tools/calculators/calculators.html?mode=learning', 'data-nav': 'learning' },
       { icon: 'bx bx-book',        label: 'Речник',            href: '#/dictionary', 'data-nav': 'learning' },

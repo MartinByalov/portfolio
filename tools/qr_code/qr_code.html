@@ -50,6 +50,26 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
+        #generated-value {
+            display: none;
+            margin: 0 0 15px;
+            padding: 10px 12px;
+            background: #f1f5f9;
+            border: 1px solid #dee2e6;
+            border-radius: var(--border-radius);
+            color: #495057;
+            font-size: 13px;
+            line-height: 1.4;
+            overflow-wrap: anywhere;
+            text-align: left;
+        }
+
+        #copy-link {
+            display: none;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
         .controls {
             display: flex;
             gap: 10px;
@@ -97,6 +117,8 @@
 
     <div id="app-container">
         <div id="qrcode"></div>
+        <div id="generated-value" aria-live="polite"></div>
+        <button id="copy-link" type="button">Копирай линка</button>
 
         <div class="controls">
             <input type="text" id="text" placeholder="Въведи текст или линк">
@@ -108,7 +130,8 @@
     <script>
         // Initialize on DOM load
         document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('text').value = '';
+            const initialText = new URLSearchParams(window.location.search).get('text') || '';
+            document.getElementById('text').value = initialText;
             generateQRCode();
         });
 
@@ -121,6 +144,21 @@
             if (!text) {
                 text = 'Няма въведен текст';
             }
+
+            const value = document.getElementById('generated-value');
+            const copyButton = document.getElementById('copy-link');
+            value.textContent = text;
+            value.style.display = 'block';
+            copyButton.style.display = text !== 'Няма въведен текст' ? 'block' : 'none';
+            copyButton.onclick = async () => {
+                try {
+                    await navigator.clipboard.writeText(text);
+                    copyButton.textContent = 'Копирано';
+                    setTimeout(() => { copyButton.textContent = 'Копирай линка'; }, 1500);
+                } catch {
+                    value.focus();
+                }
+            };
 
             new QRCode(container, {
                 text: text,

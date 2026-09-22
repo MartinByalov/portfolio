@@ -106,7 +106,7 @@ export function render(comp) {
       <!-- App Auditing Workstation -->
       <div class="perm-workstation" style="background: #ffffff; border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; padding: 1.25rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
         ${apps.map((app, idx) => `
-          <div class="perm-app-card" id="perm-card-${app.id}" style="display: ${idx === 0 ? 'block' : 'none'};">
+          <div class="perm-app-card" id="${esc(id)}-perm-card-${app.id}" data-app-card="${app.id}" style="display: ${idx === 0 ? 'block' : 'none'};">
             
             <!-- App Header & Risk Meter -->
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid #f1f5f9;">
@@ -121,7 +121,8 @@ export function render(comp) {
                   </div>
                 </div>
                 <div style="font-size: 0.85rem; color: #475569; margin-top: 0.35rem;">${esc(app.description)}</div>
-                </div>
+              </div>
+            </div>
 
             <!-- Permission Checklist -->
             <div style="font-size: 0.88rem; font-weight: 700; color: #334155; margin-bottom: 0.75rem; text-transform: uppercase;">
@@ -145,7 +146,7 @@ export function render(comp) {
                   </div>
                   <div>
                     <label class="switch-label" style="display: inline-flex; align-items: center; cursor: pointer;">
-                      <input type="checkbox" class="perm-checkbox" data-risk="${p.risk}" data-legit="${p.legit}" ${p.defaultChecked ? 'checked' : ''} style="width: 18px; height: 18px; accent-color: #2563eb; cursor: pointer;">
+                      <input type="checkbox" class="perm-checkbox" data-risk="${p.risk}" data-legit="${p.legit}" data-permission-name="${esc(p.name)}" ${p.defaultChecked ? 'checked' : ''} style="width: 18px; height: 18px; accent-color: #2563eb; cursor: pointer;">
                     </label>
                   </div>
                 </div>
@@ -163,7 +164,7 @@ export function render(comp) {
 
       <!-- Security Sandbox Concept Callout -->
       <div style="margin-top: 1.25rem; background: #f1f5f9; border-left: 4px solid #3b82f6; border-radius: 8px; padding: 0.85rem 1rem; font-size: 0.85rem; color: #334155; line-height: 1.5;">
-        <strong><i class="fas fa-shield-halved" style="color: #3b82f6; margin-right: 0.35rem;"></i>Принцип на Пясъчника (Sandbox) в мобилните ОС:</strong> В Android и iOS всяко инсталирано приложение работи в строго изолирана защитена среда. То няма право да достъпва файлове на други приложения или хардуерни сензори (микрофон, камера, местоположение), докато потребителят изрично не потвърди диалогов прозорец за разрешение. <em>Златно правило за дигитална безопасност:</em> Ако приложение иска достъп до ресурс, който няма връзка с основната му функция (напр. фенерче, което иска контакти), незабавно откажете разрешението или го деинсталирайте!
+        <strong>Принцип на Пясъчника (Sandbox) в мобилните ОС:</strong> В Android и iOS всяко инсталирано приложение работи в строго изолирана защитена среда. То няма право да достъпва файлове на други приложения или хардуерни сензори (микрофон, камера, местоположение), докато потребителят изрично не потвърди диалогов прозорец за разрешение. <em>Златно правило за дигитална безопасност:</em> Ако приложение иска достъп до ресурс, който няма връзка с основната му функция (напр. фенерче, което иска контакти), незабавно откажете разрешението или го деинсталирайте!
       </div>
     </div>
   `;
@@ -183,14 +184,14 @@ export function init(comp) {
     const maxScore = Array.from(checkboxes).reduce((sum, checkbox) => {
       return sum + (parseInt(checkbox.getAttribute('data-risk'), 10) || 0);
     }, 0);
-    let dangerousActive = 0;
+    const activeUnjustifiedPermissions = [];
 
     checkboxes.forEach(cb => {
       if (cb.checked) {
         const r = parseInt(cb.getAttribute('data-risk'), 10) || 0;
         totalScore += r;
         const legit = cb.getAttribute('data-legit') === 'true';
-        if (!legit) dangerousActive++;
+        if (!legit) activeUnjustifiedPermissions.push(cb.getAttribute('data-permission-name') || 'неоправдано разрешение');
       }
     });
 
@@ -227,7 +228,8 @@ export function init(comp) {
         adviceBox.style.background = '#fffbeb';
         adviceBox.style.border = '1px solid #fde68a';
         adviceBox.style.color = '#92400e';
-        adviceBox.innerHTML = `<strong>Внимание:</strong> Има ${dangerousActive} активно разрешение, което не е критично за работата на програмата. Препоръчва се да го деактивирате от системните настройки.`;
+        const permissionList = activeUnjustifiedPermissions.join(', ');
+        adviceBox.innerHTML = `<strong>Внимание:</strong> Активно е ${activeUnjustifiedPermissions.length === 1 ? 'едно неоправдано разрешение' : `${activeUnjustifiedPermissions.length} неоправдани разрешения`}: ${esc(permissionList)}. Препоръчва се да го деактивирате от системните настройки.`;
       }
     } else {
       if (scoreVal) scoreVal.style.color = '#dc2626';
@@ -240,7 +242,8 @@ export function init(comp) {
         adviceBox.style.background = '#fef2f2';
         adviceBox.style.border = '1px solid #fecaca';
         adviceBox.style.color = '#991b1b';
-        adviceBox.innerHTML = `<strong>Критична заплаха:</strong> Това приложение изисква достъп до чувствителни данни (${dangerousActive} неоправдани права, включително SMS/микрофон/контакти). Риск от зловреден софтуер (Spyware)! Препоръчва се незабавно спиране на правата или пълно изтриване.`;
+        const permissionList = activeUnjustifiedPermissions.join(', ');
+        adviceBox.innerHTML = `<strong>Критична заплаха:</strong> Активни са ${activeUnjustifiedPermissions.length} неоправдани разрешения: ${esc(permissionList)}. Отнемете ги от системните настройки, а ако приложението не работи безопасно без тях, го деинсталирайте.`;
       }
     }
   }
@@ -270,9 +273,9 @@ export function init(comp) {
       btn.style.color = '#1d4ed8';
 
       appCards.forEach(card => {
-        card.style.display = card.id === `perm-card-${appId}` ? 'block' : 'none';
+        card.style.display = card.getAttribute('data-app-card') === appId ? 'block' : 'none';
       });
-      const nextCard = root.querySelector(`#perm-card-${appId}`);
+      const nextCard = root.querySelector(`.perm-app-card[data-app-card="${appId}"]`);
       if (nextCard) {
         selectedCard = nextCard;
         calculateScoreForCard(selectedCard);

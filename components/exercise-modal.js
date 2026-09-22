@@ -26,12 +26,15 @@ export function render(comp) {
     </div>
   ` : '';
 
-  const resources = (comp.resources || []).map(r => `
+  const resources = (comp.resources || []).map(r => {
+    const iconClass = /\bfa-file-word\b/.test(r.icon || '') ? ' resource-icon-word' : '';
+    return `
     <a href="${r.href}" target="_blank" class="resource-item">
-      <i class="${r.icon}"></i>
+      <i class="${r.icon}${iconClass}"></i>
       <span>${r.label}</span>
     </a>
-  `).join('');
+  `;
+  }).join('');
 
   return `
     <div id="${comp.id}" class="lesson-modal">

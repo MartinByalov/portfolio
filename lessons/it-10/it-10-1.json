@@ -336,7 +336,8 @@
                   },
                   "callout": {
                     "title": "Практически съвет:",
-                    "text": "Преди прилагане на командата **Subtotal** (раздел **Data**) таблицата задължително трябва да бъде предварително сортирана по колоната, по която ще се групират данните!"
+                    "text": "Преди прилагане на командата **Subtotal** (раздел **Data**) таблицата задължително трябва да бъде предварително сортирана по колоната, по която ще се групират данните!",
+                    "style": "text-align: left; justify-content: flex-start;"
                   }
                 },
                 {
@@ -964,7 +965,7 @@
         {
           "icon": "fas fa-file-excel",
           "label": "excel-analysis.xlsx",
-          "href": "/excel-analysis.xlsx"
+          "href": "https://docs.google.com/spreadsheets/d/1fIt9XQFsHGXiPL7KCALA5HXM4Ffl4yAq/edit?usp=drive_link&ouid=113456381966226355921&rtpof=true&sd=true"
         }
       ]
     }

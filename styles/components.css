@@ -502,6 +502,10 @@ body.dark-mode .callout-highlight-box strong { color: #fef3c7; }
   color: #2ecc71;
 }
 
+.resource-item i.resource-icon-word {
+  color: #2563eb;
+}
+
 /* --- quiz --- */
 .quiz-question {
   background: #fff;

@@ -91,7 +91,7 @@ function renderItemContent(it) {
       const bodyText = callout.text || callout.content || '';
       const boxClass = callout.boxClass || 'callout-highlight-box';
       calloutHtml = `
-        <div class="${esc(boxClass)}" style="margin: 14px 0 4px; width: 100%; box-sizing: border-box;">
+        <div class="${esc(boxClass)}" style="margin: 14px 0 4px; width: 100%; box-sizing: border-box;${callout.style ? ' ' + esc(callout.style) : ''}">
           <span><strong>${esc(title)}</strong> ${formatContent(bodyText)}</span>
         </div>
       `;

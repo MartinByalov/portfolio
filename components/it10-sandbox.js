@@ -82,8 +82,8 @@ export function render(comp) {
                 </div>
               </div>
 
-              <button type="button" class="net-simulate-fail-btn" style="width: 100%; background: #ea580c; border: 1.5px solid #c2410c; color: #ffffff; padding: 10px 14px; border-radius: 6px; font-size: 13px; cursor: pointer; font-weight: 700; display:flex; align-items:center; justify-content:center; gap:8px; transition: all 0.2s; box-shadow: 0 2px 8px rgba(234, 88, 12, 0.3);">
-                <i class="fa-solid fa-triangle-exclamation"></i> Симулирай прекъснат кабел
+              <button type="button" class="net-simulate-fail-btn" style="width: 100%; background: #ea580c; border: 1.5px solid #c2410c; color: #ffffff; padding: 10px 14px; border-radius: 6px; font-size: 13px; cursor: pointer; font-weight: 700; display:flex; align-items:center; justify-content:center; transition: all 0.2s; box-shadow: 0 2px 8px rgba(234, 88, 12, 0.3);">
+                Симулирай прекъснат кабел
               </button>
             </div>
 
@@ -452,7 +452,7 @@ export function init(comp) {
         statusBadge.textContent = 'Мрежата е активна (100%)';
       }
       if (failBtn) {
-        failBtn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Симулирай прекъснат кабел';
+        failBtn.textContent = 'Симулирай прекъснат кабел';
         failBtn.style.borderColor = '#c2410c';
         failBtn.style.color = '#ffffff';
         failBtn.style.background = '#ea580c';
@@ -465,7 +465,7 @@ export function init(comp) {
     failBtn.addEventListener('click', () => {
       isCableBroken = !isCableBroken;
       if (isCableBroken) {
-        failBtn.innerHTML = '<i class="fa-solid fa-rotate-left"></i> Възстанови кабела';
+        failBtn.textContent = 'Възстанови кабела';
         failBtn.style.borderColor = '#16a34a';
         failBtn.style.color = '#ffffff';
         failBtn.style.background = '#16a34a';
@@ -474,7 +474,7 @@ export function init(comp) {
           statusBadge.textContent = 'Открит дефект в трасето!';
         }
       } else {
-        failBtn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Симулирай прекъснат кабел';
+        failBtn.textContent = 'Симулирай прекъснат кабел';
         failBtn.style.borderColor = '#c2410c';
         failBtn.style.color = '#ffffff';
         failBtn.style.background = '#ea580c';

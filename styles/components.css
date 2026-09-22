@@ -9834,4 +9834,95 @@ input.fill-input-text:focus {
 .tm-message-box.success { background: #f0fdf4; color: #14532d; }
 .tm-message-box.success i { color: #16a34a; }
 
+/* ==========================================================================
+   LESSON 2.6 - PERIPHERAL DEVICES STYLES
+   ========================================================================== */
+.pnp-flow-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  margin: 16px 0;
+}
 
+.pnp-step-box {
+  padding: 14px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color, #e2e8f0);
+  background: var(--surface, #ffffff);
+  text-align: center;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-color, #1e293b);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.pnp-step-box:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary, #3b82f6);
+}
+
+.pnp-step-box i {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 1.15rem;
+  color: #3b82f6;
+}
+
+.lesson-styled-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 16px 0;
+  font-size: 0.92rem;
+  background: var(--surface, #ffffff);
+}
+
+.lesson-styled-table th {
+  padding: 12px 16px;
+  background: var(--table-header-bg, #f8fafc);
+  color: var(--text-color, #1e293b);
+  border-bottom: 2px solid var(--border-color, #e2e8f0);
+  font-weight: 700;
+  text-align: left;
+}
+
+.lesson-styled-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color, #e2e8f0);
+  color: var(--text-muted, #475569);
+  line-height: 1.5;
+}
+
+.lesson-styled-table tr:last-child td {
+  border-bottom: none;
+}
+
+[data-theme="dark"] .pnp-step-box,
+body.dark-mode .pnp-step-box {
+  background: #171b2d;
+  border-color: #262e4a;
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .lesson-styled-table,
+body.dark-mode .lesson-styled-table {
+  background: #171b2d;
+  border-color: #262e4a;
+}
+
+[data-theme="dark"] .lesson-styled-table th,
+body.dark-mode .lesson-styled-table th {
+  background: #111526;
+  border-color: #262e4a;
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .lesson-styled-table td,
+body.dark-mode .lesson-styled-table td {
+  border-color: #262e4a;
+  color: #cbd5e1;
+}

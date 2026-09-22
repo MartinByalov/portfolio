@@ -1,0 +1,393 @@
+{
+  "id": "it-8-2-6",
+  "title": "Урок 2.6: Правила за използване и инсталиране на периферни устройства",
+  "subtitle": "Как периферното устройство се свързва, как операционната система го разпознава, каква е ролята на драйвера и как работим безопасно с устройствата",
+  "grade": 8,
+  "subject": "Информационни технологии",
+  "goal": "Учениците разбират разликата между порт, интерфейс, контролер и драйвер, знаят предназначението на основните портове, проследяват процеса Plug and Play, умеят да прилагат алгоритъм за инсталиране, извършват диагностика в Device Manager и спазват правилата за безопасност и надеждна работа.",
+  "layout": {
+    "type": "lesson",
+    "contentWidth": "wide",
+    "planType": "accordion",
+    "accordion": {
+      "itemsAlign": "stretch",
+      "titleAlign": "left",
+      "contentInsideItem": true,
+      "singleOpen": false
+    }
+  },
+  "components": [
+    {
+      "type": "text",
+      "id": "lesson-concept-note",
+      "tone": "orange",
+      "content": "**Концепция на урока:** Как компютърът всъщност започва да работи с новото устройство? В този урок проследяваме структурата, визуалната йерархия и логиката на цялата комуникационна верига – от физическия порт на кутията, през автоматичното разпознаване (Plug and Play) и ролята на драйвера, до системната диагностика в Device Manager и златните правила за безопасност и предпазване на данните."
+    },
+    {
+      "type": "accordion",
+      "id": "lesson-plan",
+      "options": {
+        "itemsAlign": "stretch",
+        "titleAlign": "left",
+        "singleOpen": false
+      },
+      "items": [
+        {
+          "id": "section-1-device-to-os",
+          "title": "1. От устройството до операционната система",
+          "content": [
+            {
+              "type": "text",
+              "id": "intro-lead-text",
+              "content": "Началото на урока припомня какво е периферно устройство, но без да повтаря целия предишен материал. Фокусът се премества към въпроса: **„Как компютърът всъщност започва да работи с новото устройство?“**"
+            },
+            {
+              "type": "image-placeholder",
+              "id": "img-comm-chain",
+              "label": "Схема на комуникационната верига",
+              "src": "it-8-2-6/communication-chain-diagram.png",
+              "description": "Потребител → ОС → драйвер → контролер → периферно устройство",
+              "icon": "fas fa-diagram-project"
+            },
+            {
+              "type": "text",
+              "id": "key-concepts-cards",
+              "content": "<div class=\"card-grid\" style=\"display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 16px 0;\"><div class=\"mini-concept-card\" style=\"padding: 16px; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #3b82f6;\"><h4 style=\"margin: 0 0 6px 0; color: #1e293b; font-size: 1rem;\"><i class=\"fas fa-plug\" style=\"color: #3b82f6; margin-right: 6px;\"></i> Порт</h4><p style=\"margin: 0; font-size: 0.9rem; color: #64748b; line-height: 1.5;\">Физическо място (букса / конектор) на корпуса на компютъра за механично включване на кабела.</p></div><div class=\"mini-concept-card\" style=\"padding: 16px; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #10b981;\"><h4 style=\"margin: 0 0 6px 0; color: #1e293b; font-size: 1rem;\"><i class=\"fas fa-network-wired\" style=\"color: #10b981; margin-right: 6px;\"></i> Интерфейс</h4><p style=\"margin: 0; font-size: 0.9rem; color: #64748b; line-height: 1.5;\">Правила, стандарти и начин за електрически и цифров обмен на данни между устройствата.</p></div><div class=\"mini-concept-card\" style=\"padding: 16px; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #f59e0b;\"><h4 style=\"margin: 0 0 6px 0; color: #1e293b; font-size: 1rem;\"><i class=\"fas fa-microchip\" style=\"color: #f59e0b; margin-right: 6px;\"></i> Контролер</h4><p style=\"margin: 0; font-size: 0.9rem; color: #64748b; line-height: 1.5;\">Специализиран хардуерен микрочип (адаптер), управляващ физическите сигнали към порта.</p></div><div class=\"mini-concept-card\" style=\"padding: 16px; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #8b5cf6;\"><h4 style=\"margin: 0 0 6px 0; color: #1e293b; font-size: 1rem;\"><i class=\"fas fa-code\" style=\"color: #8b5cf6; margin-right: 6px;\"></i> Драйвер</h4><p style=\"margin: 0; font-size: 0.9rem; color: #64748b; line-height: 1.5;\">Системен софтуер (преводач), чрез който операционната система управлява конкретното устройство.</p></div></div>"
+            },
+            {
+              "type": "interactive-matching",
+              "id": "match-comm-roles",
+              "title": "Мини задача: „Кой каква роля има?“",
+              "description": "Свържете всяко от четирите основни понятия с неговото точно предназначение във веригата:",
+              "pairs": [
+                {
+                  "left": "Порт",
+                  "right": "Физическото гнездо (букса) на корпуса за механично включване на кабела"
+                },
+                {
+                  "left": "Интерфейс",
+                  "right": "Правилата, стандартите и протоколите за цифров и електрически обмен на данни"
+                },
+                {
+                  "left": "Контролер",
+                  "right": "Хардуерният микрочип (адаптер), управляващ физическите сигнали и обмена"
+                },
+                {
+                  "left": "Драйвер",
+                  "right": "Специализираният системен софтуер, чрез който ОС управлява конкретното устройство"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "section-2-ports-and-interfaces",
+          "title": "2. Портове и интерфейси",
+          "content": [
+            {
+              "type": "text",
+              "id": "ports-lead-text",
+              "content": "Тази секция е визуална. Вместо дълъг текст се показва панел/изображение на компютър с обозначени портове и кратки карти за най-често срещаните интерфейси."
+            },
+            {
+              "type": "image-placeholder",
+              "id": "img-ports-panel",
+              "label": "Изображение: преден и заден панел на компютър",
+              "src": "it-8-2-6/ports-hotspots-panel.png",
+              "description": "Hotspots: USB-A, USB-C, HDMI, DisplayPort, LAN, Audio",
+              "icon": "fas fa-computer"
+            },
+            {
+              "type": "text",
+              "id": "ports-summary-table",
+              "content": "<table class=\"lesson-styled-table\"><thead><tr><th>Порт</th><th>Типична употреба</th><th>Основни характеристики</th></tr></thead><tbody><tr><td><strong><i class=\"fab fa-usb\" style=\"color: #3b82f6; margin-right: 6px;\"></i> USB (USB-A / USB-C)</strong></td><td>мишка, клавиатура, принтер, памет, външен диск</td><td>Универсален сериен порт за данни и захранване. USB-C поддържа и видео.</td></tr><tr><td><strong><i class=\"fas fa-tv\" style=\"color: #f59e0b; margin-right: 6px;\"></i> HDMI / DisplayPort</strong></td><td>монитор, телевизор, проектор</td><td>Цифрово видео с висока разделителна способност и многоканален звук.</td></tr><tr><td><strong><i class=\"fas fa-network-wired\" style=\"color: #10b981; margin-right: 6px;\"></i> LAN (RJ-45)</strong></td><td>кабелна мрежа, рутер</td><td>Стабилна и бърза кабелна мрежова връзка с минимално времезакъснение.</td></tr><tr><td><strong><i class=\"fas fa-headphones\" style=\"color: #8b5cf6; margin-right: 6px;\"></i> Audio (3.5 mm жак)</strong></td><td>слушалки, микрофон, тонколони</td><td>Аналогов звуков сигнал за възпроизвеждане на аудио и звукозапис.</td></tr></tbody></table><div class=\"callout-highlight-box warn\" style=\"margin-top: 14px;\"><span><strong>Важно:</strong> еднаквият външен вид не гарантира еднакви възможности. Например USB-C описва формата на конектора, но конкретният порт може да поддържа различни скорости, видео или захранване.</span></div>"
+            },
+            {
+              "type": "category-sorter",
+              "id": "sorter-where-to-plug",
+              "title": "Задача: „Къде ще го включиш?“",
+              "instruction": "Разпределете всяко периферно устройство или кабел към правилния порт на компютъра:",
+              "categories": [
+                {
+                  "id": "cat-usb",
+                  "title": "USB порт"
+                },
+                {
+                  "id": "cat-video",
+                  "title": "HDMI / DisplayPort"
+                },
+                {
+                  "id": "cat-lan",
+                  "title": "LAN (Мрежов порт)"
+                },
+                {
+                  "id": "cat-audio",
+                  "title": "Audio (3.5 mm жак)"
+                }
+              ],
+              "items": [
+                {
+                  "id": "dev-mouse",
+                  "text": "Оптична компютърна мишка",
+                  "categoryId": "cat-usb"
+                },
+                {
+                  "id": "dev-printer",
+                  "text": "Лазерен принтер",
+                  "categoryId": "cat-usb"
+                },
+                {
+                  "id": "dev-monitor",
+                  "text": "Компютърен монитор",
+                  "categoryId": "cat-video"
+                },
+                {
+                  "id": "dev-cable",
+                  "text": "Мрежов кабел от рутера",
+                  "categoryId": "cat-lan"
+                },
+                {
+                  "id": "dev-headphones",
+                  "text": "Стерео слушалки с кабел",
+                  "categoryId": "cat-audio"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "section-3-plug-and-play",
+          "title": "3. Plug and Play и драйвери",
+          "content": [
+            {
+              "type": "text",
+              "id": "pnp-lead-text",
+              "content": "**Plug and Play** е основната идея тук: свързваме устройството и операционната система се опитва автоматично да го идентифицира, конфигурира и зареди подходящ драйвер."
+            },
+            {
+              "type": "text",
+              "id": "pnp-flow-visual",
+              "content": "<div class=\"pnp-flow-grid\"><div class=\"pnp-step-box\"><i class=\"fas fa-plug\"></i> 1. Свързване</div><div class=\"pnp-step-box\"><i class=\"fas fa-search\"></i> 2. Разпознаване</div><div class=\"pnp-step-box\"><i class=\"fas fa-file-code\"></i> 3. Търсене на драйвер</div><div class=\"pnp-step-box\"><i class=\"fas fa-download\"></i> 4. Инсталиране</div><div class=\"pnp-step-box\"><i class=\"fas fa-check-double\"></i> 5. Тестване</div></div><div style=\"display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 14px;\"><div style=\"padding: 18px; border-radius: 12px; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #22c55e;\"><h3 style=\"margin: 0 0 8px 0; color: #166534; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;\"><i class=\"fa-solid fa-circle-check\"></i> Автоматично</h3><p style=\"margin: 0; font-size: 0.9rem; color: #374151; line-height: 1.55;\">ОС разполага с подходящ драйвер или го получава чрез стандартния механизъм за актуализация. Устройството започва да работи без допълнителни действия.</p></div><div style=\"padding: 18px; border-radius: 12px; background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #3b82f6;\"><h3 style=\"margin: 0 0 8px 0; color: #1e40af; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;\"><i class=\"fa-solid fa-download\"></i> Ръчно</h3><p style=\"margin: 0; font-size: 0.9rem; color: #374151; line-height: 1.55;\">При липсващи или ограничени функции се използва драйвер от <b>официалния сайт на производителя</b>, съобразен с модела и версията на ОС.</p></div></div><div class=\"callout-highlight-box warn\" style=\"margin-top: 14px;\"><span><strong>Правило за сигурност:</strong> драйвери не се изтеглят от случайни сайтове. Неподходящ или заразен драйвер може да доведе до нестабилност или риск за сигурността.</span></div>"
+            }
+          ]
+        },
+        {
+          "id": "section-4-install-algorithm",
+          "title": "4. Инсталиране на ново периферно устройство",
+          "content": [
+            {
+              "type": "text",
+              "id": "install-lead-text",
+              "content": "Тук материалът се превръща в ясна последователност, която ученикът може да използва като практическа инструкция.<br><div style=\"display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin: 16px 0;\"><div style=\"padding: 18px; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #3b82f6;\"><h3 style=\"margin: 0 0 8px 0; color: #1e293b; font-size: 1.05rem;\">1–3. Първоначално свързване</h3><p style=\"margin: 0; font-size: 0.9rem; color: #475569; line-height: 1.55;\">Избираме правилния порт → свързваме без използване на сила → изчакваме ОС да разпознае устройството → проверяваме дали драйверът е инсталиран.</p></div><div style=\"padding: 18px; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #10b981;\"><h3 style=\"margin: 0 0 8px 0; color: #1e293b; font-size: 1.05rem;\">4–6. При необходимост</h3><p style=\"margin: 0; font-size: 0.9rem; color: #475569; line-height: 1.55;\">Изтегляме официален драйвер → рестартираме, ако е необходимо → тестваме основните функции на устройството.</p></div></div>"
+            },
+            {
+              "type": "image-placeholder",
+              "id": "img-win11-install-steps",
+              "label": "Място за серия от 4–6 малки Windows 11 изображения",
+              "src": "it-8-2-6/windows11-install-steps.png",
+              "description": "Свързване → известие → инсталация → готово устройство",
+              "icon": "fa-solid fa-images"
+            }
+          ]
+        },
+        {
+          "id": "section-5-device-manager",
+          "title": "5. Device Manager — диагностика на устройствата",
+          "content": [
+            {
+              "type": "text",
+              "id": "devmgmt-lead-text",
+              "content": "Къде проверяваме състоянието и драйвера на свързания хардуер в Windows:"
+            },
+            {
+              "type": "image-placeholder",
+              "id": "img-win11-devmgr",
+              "label": "Windows 11: Device Manager",
+              "src": "it-8-2-6/device-manager-screenshot.png",
+              "description": "Изчистен макет/скрийншот с маркирани категории и предупредителен знак",
+              "icon": "fa-brands fa-windows"
+            },
+            {
+              "type": "text",
+              "id": "devmgmt-card-and-activity",
+              "content": "<div style=\"padding: 18px; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #6366f1; margin: 16px 0;\"><h3 style=\"margin: 0 0 8px 0; color: #1e293b; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;\"><i class=\"fa-solid fa-screwdriver-wrench\"></i> Какво проверяваме?</h3><p style=\"margin: 0; font-size: 0.92rem; color: #475569; line-height: 1.6;\">Дали устройството е разпознато; има ли предупреждение или грешка; кой драйвер използва; може ли драйверът да бъде обновен; свойства и подробности за устройството.</p></div><div class=\"callout-highlight-box\" style=\"margin-top: 14px;\"><span><strong>Наблюдение:</strong> Учениците отварят Device Manager и намират мишката, клавиатурата и мрежовия адаптер. Отбелязват дали има предупредителен знак.</span></div>"
+            }
+          ]
+        },
+        {
+          "id": "section-6-safety-rules",
+          "title": "6. Безопасно използване на периферия",
+          "content": [
+            {
+              "type": "text",
+              "id": "safety-lead-text",
+              "content": "Физическа безопасност и защита на данните при ежедневната работа с хардуера:"
+            },
+            {
+              "type": "text",
+              "id": "safety-cards-grid",
+              "content": "<div style=\"display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 16px 0;\"><div style=\"padding: 16px; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #ef4444;\"><h3 style=\"margin: 0 0 6px 0; color: #1e293b; font-size: 0.98rem; display: flex; align-items: center; gap: 6px;\"><i class=\"fa-solid fa-plug-circle-xmark\"></i> Не използвай сила</h3><p style=\"margin: 0; font-size: 0.88rem; color: #64748b; line-height: 1.5;\">Ако конекторът не влиза лесно, проверяваме вида на порта и правилната посока. Насилването може да повреди порта или конектора.</p></div><div style=\"padding: 16px; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #10b981;\"><h3 style=\"margin: 0 0 6px 0; color: #1e293b; font-size: 0.98rem; display: flex; align-items: center; gap: 6px;\"><i class=\"fa-solid fa-eject\"></i> Безопасно премахване</h3><p style=\"margin: 0; font-size: 0.88rem; color: #64748b; line-height: 1.5;\">При външен носител изчакваме записването да приключи и използваме безопасно премахване, когато е необходимо.</p></div><div style=\"padding: 16px; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #f59e0b;\"><h3 style=\"margin: 0 0 6px 0; color: #1e293b; font-size: 0.98rem; display: flex; align-items: center; gap: 6px;\"><i class=\"fa-solid fa-file-circle-xmark\"></i> Не прекъсвай трансфер</h3><p style=\"margin: 0; font-size: 0.88rem; color: #64748b; line-height: 1.5;\">Изключване по време на копиране може да доведе до повредени или загубени файлове.</p></div><div style=\"padding: 16px; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #3b82f6;\"><h3 style=\"margin: 0 0 6px 0; color: #1e293b; font-size: 0.98rem; display: flex; align-items: center; gap: 6px;\"><i class=\"fa-solid fa-shield-halved\"></i> Официален софтуер</h3><p style=\"margin: 0; font-size: 0.88rem; color: #64748b; line-height: 1.5;\">Инсталатори, помощни програми и драйвери се вземат от надежден, официален източник.</p></div></div><div class=\"callout-highlight-box warn\" style=\"margin-top: 14px;\"><span><strong>Казус:</strong> „Ученик изважда USB флаш памет, докато се копира голям файл.“ Ученикът избира възможните последствия и правилното действие.</span></div>"
+            }
+          ]
+        },
+        {
+          "id": "section-7-diagnostics-cases",
+          "title": "7. Диагностика: какво бих направил?",
+          "content": [
+            {
+              "type": "text",
+              "id": "diagnostics-lead-text",
+              "content": "Кратки практически казуси вместо още теория:"
+            },
+            {
+              "type": "text",
+              "id": "diagnostics-cases-grid",
+              "content": "<div style=\"display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 16px 0;\"><div style=\"background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;\"><div><span style=\"display: inline-block; font-size: 0.75rem; font-weight: 700; color: #2563eb; background: #eff6ff; padding: 2px 8px; border-radius: 4px; margin-bottom: 8px;\">Казус 1</span><h4 style=\"margin: 0 0 6px 0; color: #1e293b; font-size: 1rem;\"><i class=\"fas fa-print\" style=\"color: #2563eb; margin-right: 6px;\"></i> Принтерът липсва</h4><p style=\"margin: 0 0 12px 0; font-size: 0.88rem; color: #64748b; line-height: 1.5;\">Къде първо проверяваме дали Windows го разпознава?</p></div><div style=\"background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; font-size: 0.84rem; color: #334155;\"><strong style=\"color: #059669;\"><i class=\"fas fa-circle-check\"></i> Решение:</strong> Проверяваме в <em>Device Manager</em> (или <em>Settings ➔ Printers & scanners</em>). Ако принтерът фигурира с жълт предупредителен знак, липсва или не е зареден правилният софтуерен драйвер.</div></div><div style=\"background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;\"><div><span style=\"display: inline-block; font-size: 0.75rem; font-weight: 700; color: #f59e0b; background: #fffbeb; padding: 2px 8px; border-radius: 4px; margin-bottom: 8px;\">Казус 2</span><h4 style=\"margin: 0 0 6px 0; color: #1e293b; font-size: 1rem;\"><i class=\"fas fa-desktop\" style=\"color: #f59e0b; margin-right: 6px;\"></i> Няма картина</h4><p style=\"margin: 0 0 12px 0; font-size: 0.88rem; color: #64748b; line-height: 1.5;\">Какво проверяваме при HDMI/DisplayPort връзка?</p></div><div style=\"background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; font-size: 0.84rem; color: #334155;\"><strong style=\"color: #059669;\"><i class=\"fas fa-circle-check\"></i> Решение:</strong> Проверяваме дали кабелът е включен в порта на дискретната видеокарта (ако има такава), дали е поставен плътно и дали от менюто на монитора е избран верният източник (Source / Input).</div></div><div style=\"background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;\"><div><span style=\"display: inline-block; font-size: 0.75rem; font-weight: 700; color: #8b5cf6; background: #f5f3ff; padding: 2px 8px; border-radius: 4px; margin-bottom: 8px;\">Казус 3</span><h4 style=\"margin: 0 0 6px 0; color: #1e293b; font-size: 1rem;\"><i class=\"fas fa-sliders\" style=\"color: #8b5cf6; margin-right: 6px;\"></i> Ограничени функции</h4><p style=\"margin: 0 0 12px 0; font-size: 0.88rem; color: #64748b; line-height: 1.5;\">Защо общият драйвер може да не е достатъчен?</p></div><div style=\"background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; font-size: 0.84rem; color: #334155;\"><strong style=\"color: #059669;\"><i class=\"fas fa-circle-check\"></i> Решение:</strong> Стандартният генеричен драйвер на ОС осигурява само базова функционалност. Специфични екстри като сканиране, следене на мастилото или допълнителни бутони изискват официалния софтуер от производителя.</div></div><div style=\"background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;\"><div><span style=\"display: inline-block; font-size: 0.75rem; font-weight: 700; color: #ef4444; background: #fef2f2; padding: 2px 8px; border-radius: 4px; margin-bottom: 8px;\">Казус 4</span><h4 style=\"margin: 0 0 6px 0; color: #1e293b; font-size: 1rem;\"><i class=\"fab fa-usb\" style=\"color: #ef4444; margin-right: 6px;\"></i> USB не влиза</h4><p style=\"margin: 0 0 12px 0; font-size: 0.88rem; color: #64748b; line-height: 1.5;\">Как действаме, без да повредим конектора?</p></div><div style=\"background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; font-size: 0.84rem; color: #334155;\"><strong style=\"color: #059669;\"><i class=\"fas fa-circle-check\"></i> Решение:</strong> Никога не натискаме с груба сила! Класическият USB-A конектор има ориентация – обръщаме го на 180 градуса или проверяваме дали не се опитваме да включим кабела в грешен порт (напр. HDMI).</div></div></div><div class=\"callout-highlight-box\"><span><strong>Идейна реализация:</strong> казусите могат да послужат за интерактивна диагностика – ситуация → избор на действие → обяснение защо решението е правилно.</span></div>"
+            }
+          ]
+        },
+        {
+          "id": "section-8-summary-quiz",
+          "title": "8. Обобщение и проверка",
+          "content": [
+            {
+              "type": "image-placeholder",
+              "id": "img-final-summary-map",
+              "label": "Финална карта на урока",
+              "src": "it-8-2-6/summary-workflow-map.png",
+              "description": "Устройство → правилен порт → Plug and Play → драйвер → Device Manager → безопасна работа",
+              "icon": "fa-solid fa-route"
+            },
+            {
+              "type": "quiz",
+              "id": "quiz-peripherals-final",
+              "title": "Бърза проверка на знанията",
+              "questions": [
+                {
+                  "question": "Кое описва физическото гнездо на компютъра за механично включване на кабела?",
+                  "options": [
+                    "Интерфейс",
+                    "Порт",
+                    "Драйвер",
+                    "Операционна система"
+                  ],
+                  "answer": 1,
+                  "explanation": "Портът е физическото гнездо (букса), докато интерфейсът определя правилата за обмен на данни, а драйверът е софтуерният посредник."
+                },
+                {
+                  "question": "Какво осигурява софтуерният драйвер на периферното устройство?",
+                  "options": [
+                    "Електрическо захранване за кабела",
+                    "Превод и комуникация между операционната система и конкретния хардуер",
+                    "Физическа защита на кутията на компютъра",
+                    "Почистване на временните интернет бисквитки"
+                  ],
+                  "answer": 1,
+                  "explanation": "Драйверът е програма, която служи като специализиран преводач между стандартните команди на ОС и уникалните хардуерни сигнали на устройството."
+                },
+                {
+                  "question": "Кой порт най-често предава видеосигнал с висока резолюция към компютърен монитор или проектор?",
+                  "options": [
+                    "LAN (RJ-45)",
+                    "3.5 mm Audio жак",
+                    "HDMI / DisplayPort",
+                    "PS/2"
+                  ],
+                  "answer": 2,
+                  "explanation": "HDMI и DisplayPort са съвременните цифрови интерфейси за предаване на видеосигнал и многоканален звук към монитори и екрани."
+                },
+                {
+                  "question": "Защо не е препоръчително драйвери да се свалят от неофициални или случайни сайтове?",
+                  "options": [
+                    "Защото драйверите винаги са платени",
+                    "Защото драйверите работят с най-високи системни права и заразен или грешен драйвер може да срине системата",
+                    "Защото мониторът веднага ще намали яркостта си",
+                    "Защото интернет връзката ще бъде спряна автоматично"
+                  ],
+                  "answer": 1,
+                  "explanation": "Драйверите работят на ядрено системно ниво. Неофициалните пакети могат да съдържат зловреден код или несъвместими файлове, причиняващи системни сривове."
+                },
+                {
+                  "question": "Какво показва жълтият предупредителен знак (триъгълник с удивителен) в Device Manager?",
+                  "options": [
+                    "Устройството работи на максимална скорост",
+                    "Хардуерът е деактивиран по желание на потребителя",
+                    "Има проблем с устройството, драйверът липсва или е повреден",
+                    "Батерията на компютъра е напълно заредена"
+                  ],
+                  "answer": 2,
+                  "explanation": "Жълтият удивителен знак в Device Manager сигнализира за хардуерно предупреждение – най-често липсващ, несъвместим или повреден драйвер."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "tag",
+      "id": "exercise-tag-devmgr",
+      "title": "Упражнение: Работа с Device Manager",
+      "subtitle": "Практически стъпки за диагностика на хардуера",
+      "targetModalId": "modal-device-manager-exercise",
+      "color": "green",
+      "icon": "fas fa-wrench"
+    },
+    {
+      "type": "exercise-modal",
+      "id": "modal-device-manager-exercise",
+      "title": "Практическо упражнение: Диагностика на периферните устройства с Device Manager",
+      "content": "В това упражнение ще се запознаете на практика с конзолата <strong>Device Manager (Диспечер на устройствата)</strong> в Windows.<br><br><strong>Стъпки за изпълнение:</strong><ol><li><strong>Стартиране:</strong> Натиснете клавишната комбинация <code>Win + X</code> и от менюто изберете <strong>Device Manager</strong> (или натиснете <code>Win + R</code>, въведете <code>devmgmt.msc</code> и потвърдете с <em>Enter</em>).</li><li><strong>Проверка на статуса:</strong> Прегледайте списъка с хардуерни категории. Има ли устройства с жълт предупредителен триъгълник ⚠️ или стрелка надолу ⬇️?</li><li><strong>Преглед на свойства:</strong> Разгънете категорията <em>Keyboards</em> или <em>Mice and other pointing devices</em>. Щракнете два пъти върху устройството и отворете раздел <strong>Driver</strong>. Проверете кой е доставчикът на драйвера и коя е датата на версията.</li><li><strong>Свързване на периферия:</strong> Включете USB флаш памет или друго USB устройство. Наблюдавайте как списъкът в Device Manager се опреснява автоматично и се появява новото устройство в категория <em>Disk drives</em> или <em>Universal Serial Bus controllers</em>.</li><li><strong>Безопасно премахване:</strong> Преди да извадите флашката, щракнете върху иконата в системната област (долу вдясно до часовника) и изберете <em>„Safely Remove Hardware and Eject Media“</em>.</li></ol>"
+    },
+    {
+      "type": "accordion",
+      "id": "lesson-glossary",
+      "items": [
+        {
+          "id": "item-glossary",
+          "title": "Речник на ключовите термини в урока",
+          "content": [
+            {
+              "type": "glossary-list",
+              "id": "glossary-terms",
+              "terms": [
+                {
+                  "term": "Периферно устройство",
+                  "definition": "Апаратно устройство, свързано към централната част на компютъра за въвеждане, извеждане или съхранение на данни."
+                },
+                {
+                  "term": "Порт",
+                  "definition": "Физическото гнездо (конектор / букса) на компютърната кутия за включване на кабела на устройството."
+                },
+                {
+                  "term": "Интерфейс",
+                  "definition": "Съвкупността от стандарти, правила и електрически характеристики, управляващи обмена на информация между компонентите."
+                },
+                {
+                  "term": "Контролер",
+                  "definition": "Електронен чип или платка, управляваща сигналите и комуникацията през конкретния физически порт."
+                },
+                {
+                  "term": "Драйвер (Device Driver)",
+                  "definition": "Специализиран системен софтуер, осигуряващ съвместимост и директно управление на дадено устройство от операционната система."
+                },
+                {
+                  "term": "Plug and Play (PnP)",
+                  "definition": "Технологичен стандарт за автоматично разпознаване, конфигуриране и активиране на включено периферно устройство."
+                },
+                {
+                  "term": "Device Manager (Диспечер на устройствата)",
+                  "definition": "Системен инструмент в Windows за визуализация, диагностика, актуализация и управление на целия инсталиран хардуер."
+                },
+                {
+                  "term": "Безопасно премахване (Safely Remove Hardware)",
+                  "definition": "Процедура за софтуерно освобождаване на външен носител и записване на всички кеширани данни в паметта преди физическо изключване."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

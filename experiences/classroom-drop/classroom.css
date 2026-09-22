@@ -7,7 +7,6 @@ body { margin:0; min-height:100vh; background:linear-gradient(135deg,#f8fafc,#ee
 h1 { margin:0; font-size:clamp(2rem,5vw,3.2rem); letter-spacing:-.04em; }
 h2 { margin:0 0 8px; font-size:1.35rem; }
 .lead,.muted { color:var(--muted); }
-.lead { margin:4px 0 0; font-size:1.05rem; }
 .back-link { color:var(--blue); font-weight:700; text-decoration:none; white-space:nowrap; }
 .panel { background:var(--surface); border:1px solid var(--line); border-radius:16px; box-shadow:0 12px 30px #1e293b0d; padding:24px; }
 .hidden { display:none !important; }
@@ -27,6 +26,15 @@ button,.button { display:inline-flex; align-items:center; justify-content:center
 .share-box { padding:14px; border:1px solid #bfdbfe; border-radius:12px; background:#eff6ff; margin-top:18px; }
 .share-box label { margin-top:0; color:#1e3a8a; }
 .share-box input { background:#fff; color:#334155; }
+.student-link-row { display:flex; align-items:center; gap:8px; margin-top:7px; }
+.student-link-row input { margin-top:0; }
+.icon-button { width:42px; height:42px; flex:none; padding:0; border:1px solid #bfdbfe; border-radius:9px; background:#fff; color:#1e3a8a; }
+.icon-button:hover { background:#dbeafe; }
+.icon-button:focus-visible { outline:3px solid #2563eb40; outline-offset:2px; }
+.icon-button svg { width:19px; height:19px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.upload-actions { display:flex; flex-wrap:wrap; align-items:center; gap:9px; margin-top:12px; }
+.upload-actions .primary { margin-top:0; }
+.student-room-badge { display:inline-block; margin-left:6px; padding:2px 8px; border-radius:999px; background:#172033; color:#fff; font-size:.76rem; letter-spacing:.1em; vertical-align:middle; }
 .columns { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:20px; }
 .subpanel { border:1px solid var(--line); border-radius:12px; padding:16px; }
 .subpanel h3 { margin:0 0 10px; font-size:1rem; }

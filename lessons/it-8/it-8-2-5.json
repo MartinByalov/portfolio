@@ -20,7 +20,7 @@
     {
       "type": "exercise-modal",
       "id": "mobile-audit-worksheet-modal",
-      "title": "Лабораторен диагностичен протокол на мобилно устройство",
+      "title": "Конфигурация на мобилно устройство",
       "skipNav": true,
       "instructions": "<div class='exercise-instructions'><p>Използвайте вашето мобилно устройство (смартфон/таблет) и попълнете следния диагностичен протокол, използвайки системното меню <strong>Настройки (Settings)</strong>.</p></div>",
       "resources": [

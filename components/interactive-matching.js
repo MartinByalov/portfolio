@@ -19,6 +19,7 @@ function shuffleArray(array) {
 export function render(comp) {
   const id = comp.id || 'interactive-matching';
   const isScattered = comp.mode === 'scattered' || comp.type === 'scattered-matching' || comp.scattered === true;
+  const immediateFeedback = comp.immediateFeedback === true;
   const rawPairs = comp.pairs || [];
   
   const pairs = rawPairs.map((p, idx) => ({
@@ -119,15 +120,17 @@ export function render(comp) {
       <div class="matching-list">
         ${rows}
       </div>
-      <div class="matching-actions">
-        <button type="button" class="btn-activity matching-submit">
-          Провери
-        </button>
-        <button type="button" class="btn-activity matching-reset" style="display:none;">
-          Нов опит
-        </button>
-      </div>
-      <div class="matching-feedback" style="display:none;"></div>
+      ${immediateFeedback ? '' : `
+        <div class="matching-actions">
+          <button type="button" class="btn-activity matching-submit">
+            Провери
+          </button>
+          <button type="button" class="btn-activity matching-reset" style="display:none;">
+            Нов опит
+          </button>
+        </div>
+        <div class="matching-feedback" style="display:none;"></div>
+      `}
     </div>
   `;
 }
@@ -281,6 +284,31 @@ export function init(comp) {
   const feedback = root.querySelector('.matching-feedback');
   const items = root.querySelectorAll('.matching-item');
   const selects = root.querySelectorAll('.matching-select');
+
+  if (comp.immediateFeedback === true) {
+    selects.forEach(sel => {
+      sel.addEventListener('change', () => {
+        const item = sel.closest('.matching-item');
+        const ico = item && item.querySelector('.matching-status-ico');
+        if (!item) return;
+
+        item.classList.remove('match-correct', 'match-incorrect');
+        if (sel.value === '') {
+          if (ico) ico.innerHTML = '';
+          return;
+        }
+
+        if (sel.value === item.getAttribute('data-correct-index')) {
+          item.classList.add('match-correct');
+          if (ico) ico.innerHTML = '<i class="fas fa-circle-check text-emerald-600"></i>';
+        } else {
+          item.classList.add('match-incorrect');
+          if (ico) ico.innerHTML = '<i class="fas fa-circle-xmark text-rose-600"></i>';
+        }
+      });
+    });
+    return;
+  }
 
   if (!submitBtn || !resetBtn || !feedback) return;
 

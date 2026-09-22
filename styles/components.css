@@ -3297,6 +3297,96 @@ body.lb-lightbox-open {
 .glossary-row-term { font-weight: 800; font-size: 0.95rem; color: #1d1b31; margin: 0; }
 .glossary-row-def { font-size: 0.88rem; color: #334155; line-height: 1.6; margin: 0; }
 
+/* Four-card concept grid with standard image placeholders */
+.concept-media-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 18px 0;
+}
+.concept-media-grid-card {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #ffffff;
+}
+.concept-media-grid-card h3 {
+  margin: 0 0 12px;
+  color: #1e293b;
+  font-size: 1.05rem;
+}
+.concept-media-grid-card .lesson-inline-media-wrap {
+  max-width: none !important;
+  margin: 0 0 14px !important;
+}
+.concept-media-grid-card .lesson-inline-media-card {
+  min-height: 180px;
+}
+.concept-media-grid-card p {
+  margin: 0;
+  color: #475569;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+@media (max-width: 700px) {
+  .concept-media-grid { grid-template-columns: 1fr; }
+}
+
+/* Semantic tone cards used by text components */
+.text-block.lb-tone-orange { background: #fff7ed !important; border-left: 4px solid #f97316 !important; }
+.text-block.lb-tone-blue { background: #eff6ff !important; border-left: 4px solid #2563eb !important; }
+.text-block.lb-tone-purple { background: #f5f3ff !important; border-left: 4px solid #8b5cf6 !important; }
+
+/* Peripheral installation route - IT 8 lesson 2.6 */
+.pil-card { margin: 18px 0; padding: 20px; border: 1px solid #e2e8f0; border-radius: 12px; background: #ffffff; }
+.pil-card h3 { margin: 0; color: #1e293b; font-size: 1.08rem; }
+.pil-desc { margin: 5px 0 16px; color: #64748b; font-size: 0.9rem; }
+.pil-devices { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+.pil-device { display: flex; align-items: center; gap: 9px; padding: 12px; border: 1px solid #cbd5e1; border-radius: 10px; background: #f8fafc; color: #334155; font: inherit; font-size: 0.86rem; cursor: pointer; text-align: left; }
+.pil-device:hover, .pil-device.active { border-color: #2563eb; background: #eff6ff; color: #1d4ed8; }
+.pil-device:focus-visible, .pil-option:focus-visible, .pil-reset:focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
+.pil-stage { display: none; margin-top: 16px; padding: 16px; border-radius: 10px; background: #f8fafc; border: 1px solid #e2e8f0; }
+.pil-stage.show { display: block; }
+.pil-progress { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 16px; }
+.pil-progress span { padding: 7px 5px; border-radius: 8px; background: #e2e8f0; color: #64748b; text-align: center; font-size: 0.72rem; font-weight: 700; }
+.pil-progress span.on { background: #dbeafe; color: #1d4ed8; }
+.pil-question { font-weight: 700; color: #1e293b; margin-bottom: 10px; }
+.pil-options { display: flex; flex-wrap: wrap; gap: 8px; }
+.pil-option { border: 1px solid #cbd5e1; background: #ffffff; border-radius: 8px; padding: 9px 12px; cursor: pointer; font: inherit; font-size: 0.82rem; color: #334155; }
+.pil-option:hover:not(:disabled) { background: #f1f5f9; border-color: #94a3b8; }
+.pil-option:disabled { cursor: default; opacity: 0.72; }
+.pil-feedback { display: none; margin-top: 12px; padding: 11px 13px; border-radius: 8px; font-size: 0.84rem; line-height: 1.5; }
+.pil-feedback.ok { display: block; background: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46; }
+.pil-feedback.bad { display: block; background: #fff1f2; border: 1px solid #fecdd3; color: #9f1239; }
+.pil-reset { display: none; margin-top: 12px; border: 0; border-radius: 8px; padding: 9px 13px; background: #1e293b; color: #ffffff; cursor: pointer; font: inherit; font-size: 0.82rem; }
+@media (max-width: 700px) { .pil-progress { grid-template-columns: 1fr 1fr; } }
+
+/* Port selection scenarios - IT 8 lesson 2.6 */
+.port-selection-challenge { margin: 18px 0; padding: 20px; border: 1px solid #e2e8f0; border-radius: 12px; background: #ffffff; }
+.psc-header h3 { margin: 0; color: #1e293b; font-size: 1.08rem; }
+.psc-header p { margin: 5px 0 16px; color: #64748b; font-size: 0.9rem; }
+.psc-scenario { min-height: 104px; padding: 16px; border: 1px solid #dbeafe; border-radius: 10px; background: #f8fbff; }
+.psc-progress { display: block; margin-bottom: 10px; color: #1d4ed8; font-size: 0.78rem; font-weight: 700; }
+.psc-device { display: flex; align-items: center; gap: 12px; color: #1e293b; }
+.psc-device > i { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 10px; background: #dbeafe; color: #1d4ed8; font-size: 1.2rem; }
+.psc-device div { display: grid; gap: 3px; }
+.psc-device span, .psc-complete span { color: #64748b; font-size: 0.88rem; }
+.psc-panel { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 14px; padding: 14px; border: 1px solid #cbd5e1; border-radius: 10px; background: #475569; }
+.psc-port { display: grid; gap: 7px; place-items: center; min-height: 88px; padding: 10px 6px; border: 1px solid #94a3b8; border-radius: 8px; background: #f8fafc; color: #334155; font: inherit; font-size: 0.8rem; font-weight: 700; cursor: pointer; }
+.psc-port i { color: #2563eb; font-size: 1.15rem; }
+.psc-port:hover:not(:disabled) { border-color: #2563eb; background: #dbeafe; }
+.psc-port:focus-visible, .psc-reset:focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
+.psc-port.correct { border-color: #16a34a; background: #dcfce7; color: #166534; }
+.psc-port.incorrect { border-color: #dc2626; background: #fef2f2; color: #991b1b; }
+.psc-feedback { display: none; margin-top: 12px; padding: 11px 13px; border-radius: 8px; font-size: 0.86rem; line-height: 1.5; }
+.psc-feedback.correct { display: block; border: 1px solid #a7f3d0; background: #ecfdf5; color: #065f46; }
+.psc-feedback.incorrect { display: block; border: 1px solid #fecaca; background: #fef2f2; color: #991b1b; }
+.psc-complete { display: grid; gap: 5px; text-align: center; color: #166534; }
+.psc-complete i { font-size: 1.6rem; }
+.psc-reset { display: none; margin-top: 14px; border: 0; border-radius: 8px; padding: 9px 13px; background: #1e293b; color: #ffffff; cursor: pointer; font: inherit; font-size: 0.82rem; }
+@media (max-width: 700px) { .psc-panel { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
 .code-gate-actions .code-gate-cancel:hover { background: #f4f4f9; }
 
 button.about-btn-primary {

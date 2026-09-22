@@ -15,6 +15,8 @@ import * as MoodAnimalGenerator from '../components/mood-animal-generator.js';
 import * as ResourceDownloadBox from '../components/resource-download-box.js';
 import * as DragAndDrop from '../components/drag-and-drop.js';
 import * as ImagePlaceholder from '../components/image-placeholder.js';
+import * as ConceptMediaGrid from '../components/concept-media-grid.js';
+import * as PortSelectionChallenge from '../components/port-selection-challenge.js';
 import * as UiHotspots from '../components/ui-hotspots.js';
 import * as SpotTheBug from '../components/spot-the-bug.js';
 import * as InteractiveChecklist from '../components/interactive-checklist.js';
@@ -78,6 +80,10 @@ import * as It10Sandbox from '../components/it10-sandbox.js';
 import * as EntryLevelQuiz from '../components/entry-level-quiz.js';
 import * as IframeViewer from '../components/iframe-viewer.js';
 
+// IT 8 — Урок 2.6
+import * as PeripheralInstallLab from '../components/peripheral-install-lab.js';
+
+
 const registry = {
   'text-group': TextGroup,
   'animated-diagram': AnimatedDiagram,
@@ -87,13 +93,16 @@ const registry = {
   'accordion': Accordion,
   'tag': Tag,
   'exit-ticket': ExitTicket,
+
   'interactive-matching': InteractiveMatching,
   'match-pairs': InteractiveMatching,
+
   'interactive-fill': InteractiveFill,
   'interactive-step-guide': InteractiveStepGuide,
   'mood-animal-generator': MoodAnimalGenerator,
   'resource-download-box': ResourceDownloadBox,
   'drag-and-drop': DragAndDrop,
+
   'ui-hotspots': UiHotspots,
   'spot-the-bug': SpotTheBug,
   'interactive-checklist': InteractiveChecklist,
@@ -106,19 +115,25 @@ const registry = {
   'category-sorter': CategorySorter,
   'image-with-instruction': ImageWithInstruction,
   'search-mission-lab': SearchMissionLab,
+
   'interactive-timeline-machine': InteractiveTimelineMachine,
   'inventor-investigation-cards': InventorInvestigationCards,
   'generation-hardware-sorter': GenerationHardwareSorter,
   'apple-vs-pravetz-comparator': AppleVsPravetzComparator,
+
   'visualization': Visualization,
   'interactive-timeline': InteractiveTimeline,
   'image-gallery': ImageGallery,
+
   'titled-image': TitledImage,
   'image': TitledImage,
+
   'timeline': Timeline,
   'infographic': Infographic,
+
   'history-detective-case': HistoryDetectiveCase,
   'investigation': HistoryDetectiveCase,
+
   'visual-hook': VisualHook,
   'interactive-evolution-map': InteractiveEvolutionMap,
   'visual-story': VisualStory,
@@ -130,22 +145,31 @@ const registry = {
   'interactive-scale': InteractiveScale,
   'scale-comparison': ScaleComparison,
   'interactive-chain': InteractiveChain,
+
   'mission': Mission,
   'adaptive-quiz': AdaptiveQuiz,
+
   'text': TextBlock,
+
   'interactive-cards': InteractiveCards,
   'interactive-diagram': InteractiveDiagram,
   'glossary-list': GlossaryList,
+
   'system-anatomy-map': SystemAnatomyMap,
   'system-builder-lab': SystemBuilderLab,
   'sequence-builder': SequenceBuilder,
   'session-reconstructor': SessionReconstructor,
+
   'image-placeholder': ImagePlaceholder,
+  'concept-media-grid': ConceptMediaGrid,
+  'port-selection-challenge': PortSelectionChallenge,
+
   'os-architecture-stack': OsArchitectureStack,
   'os-subsystems-workbench': OsSubsystemsWorkbench,
   'os-terminal-lab': OsTerminalLab,
   'os-ecosystem-matrix': OsEcosystemMatrix,
   'os-task-manager-sandbox': OsTaskManagerSandbox,
+
   'mobile-soc-anatomy': MobileSocAnatomy,
   'mobile-sensor-lab': MobileSensorLab,
   'mobile-connectivity-workbench': MobileConnectivityWorkbench,
@@ -153,30 +177,46 @@ const registry = {
   'mobile-transfer-calculator': MobileTransferCalculator,
   'mobile-permissions-auditor': MobilePermissionsAuditor,
   'mobile-battery-optimizer': MobileBatteryOptimizer,
+
   'overview': Overview,
+
   'step-header': StepHeader,
   'sh': StepHeader,
+
   'step-block': StepBlock,
+
   'it10-sandbox': It10Sandbox,
   'live-sandbox-block': It10Sandbox,
+
   'entry-level-quiz': EntryLevelQuiz,
+
   'iframe-viewer': IframeViewer,
   'sheet-embed': IframeViewer,
   'iframe': IframeViewer,
   'document-viewer': IframeViewer,
   'embed': IframeViewer,
+
+  // IT 8 — Урок 2.6
+  'peripheral-install-lab': PeripheralInstallLab,
 };
+
 
 export function renderComponent(comp) {
   const mod = registry[comp.type];
+
   if (!mod) {
     console.warn(`[renderer] Unknown component type: "${comp.type}"`);
     return `<!-- unknown component type: ${comp.type} -->`;
   }
+
   return mod.render(comp);
 }
 
+
 export function initComponent(comp) {
   const mod = registry[comp.type];
-  if (mod && typeof mod.init === 'function') mod.init(comp);
+
+  if (mod && typeof mod.init === 'function') {
+    mod.init(comp);
+  }
 }

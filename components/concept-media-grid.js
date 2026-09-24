@@ -30,7 +30,7 @@ export function render(comp) {
       <article class="concept-media-grid-card">
         <h3>${esc(item.title || '')}</h3>
         ${placeholder}
-        <p>${esc(item.description || '')}</p>
+        ${item.description ? `<p>${esc(item.description)}</p>` : ''}
       </article>
     `;
   }).join('');

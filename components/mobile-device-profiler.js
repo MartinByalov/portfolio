@@ -178,7 +178,7 @@ export function render(comp) {
       <!-- Interactive Scenario Challenge -->
       <div style="background: #ffffff; border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; padding: 1.25rem;">
         <div style="font-size: 0.95rem; font-weight: 700; color: #1e293b; margin-bottom: 0.75rem;">
-          Практически казуси за консултация: Кое устройство е най-подходящо?
+          Кое устройство е най-подходящо?
         </div>
         
         <div style="display: flex; flex-direction: column; gap: 1rem;">

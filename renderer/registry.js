@@ -84,9 +84,14 @@ import * as IframeViewer from '../components/iframe-viewer.js';
 import * as PeripheralInstallLab from '../components/peripheral-install-lab.js';
 import * as SystemTriadWorkbench from '../components/system-triad-workbench.js';
 import * as MillionaireQuiz from '../components/millionaire-quiz.js';
+import * as SystemAnalyzer from '../components/system-analyzer.js';
+import * as SystemTriadSimulator from '../components/system-triad-simulator.js';
 
 
 const registry = {
+  'system-analyzer': SystemAnalyzer,
+  'system-triad-simulator': SystemTriadSimulator,
+  'triad-simulator': SystemTriadSimulator,
   'millionaire-quiz': MillionaireQuiz,
   'system-triad-workbench': SystemTriadWorkbench,
   'text-group': TextGroup,

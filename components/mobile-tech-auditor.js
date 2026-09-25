@@ -111,23 +111,18 @@ export function render(comp) {
         }
 
         .mta-result-badge {
-          font-size: 0.76rem;
-          font-weight: 700;
-          padding: 2px 8px;
-          border-radius: 6px;
+          font-size: 1.45rem;
+          line-height: 1;
           display: inline-flex;
           align-items: center;
-          gap: 4px;
+          justify-content: center;
+          user-select: none;
+          animation: mtaPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .mta-result-badge.correct {
-          background: #dcfce7;
-          color: #166534;
-        }
-
-        .mta-result-badge.wrong {
-          background: #fee2e2;
-          color: #991b1b;
+        @keyframes mtaPop {
+          0% { transform: scale(0.4); opacity: 0; }
+          100% { transform: scale(1); opacity: 1; }
         }
 
         .mta-card-head {
@@ -262,11 +257,11 @@ export function init(comp) {
         if (isCorrect) {
           card.classList.add('answered-correct');
           badge.className = 'mta-result-badge correct';
-          badge.innerHTML = '<i class="fas fa-check"></i> Вярно';
+          badge.textContent = '😎';
         } else {
           card.classList.add('answered-wrong');
           badge.className = 'mta-result-badge wrong';
-          badge.innerHTML = '<i class="fas fa-xmark"></i> Грешно';
+          badge.textContent = '😭';
         }
 
         if (head) {

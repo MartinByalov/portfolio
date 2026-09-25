@@ -82,9 +82,13 @@ import * as IframeViewer from '../components/iframe-viewer.js';
 
 // IT 8 — Урок 2.6
 import * as PeripheralInstallLab from '../components/peripheral-install-lab.js';
+import * as SystemTriadWorkbench from '../components/system-triad-workbench.js';
+import * as MillionaireQuiz from '../components/millionaire-quiz.js';
 
 
 const registry = {
+  'millionaire-quiz': MillionaireQuiz,
+  'system-triad-workbench': SystemTriadWorkbench,
   'text-group': TextGroup,
   'animated-diagram': AnimatedDiagram,
   'activities': Activities,

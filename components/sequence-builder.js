@@ -27,14 +27,16 @@ function stepsMarkup(steps) {
 export function render(comp) {
   const steps = comp.steps || [];
   const borderCls = comp.lightBorder ? ' lb-light-border' : '';
+  const resetBtnMarkup = comp.hideReset ? '' : `<button type="button" class="btn-activity seq-reset">Нов опит</button>`;
+  const instrMarkup = comp.instruction ? `<p>${esc(comp.instruction)}</p>` : '';
   return `
     <section class="sequence-builder${borderCls}" id="${esc(comp.id)}">
-      <header class="seq-header"><h3>${esc(comp.title)}</h3><p>${esc(comp.instruction)}</p></header>
+      <header class="seq-header"><h3>${esc(comp.title)}</h3>${instrMarkup}</header>
       <ol class="seq-list">${stepsMarkup(shuffled(steps))}</ol>
       <div class="seq-actions">
         <div class="seq-buttons-row">
           <button type="button" class="btn-activity seq-check">Провери</button>
-          <button type="button" class="btn-activity seq-reset">Нов опит</button>
+          ${resetBtnMarkup}
         </div>
         <div class="seq-feedback" aria-live="polite"></div>
       </div>
@@ -58,18 +60,24 @@ export function init(comp) {
       };
     });
   }
-  root.querySelector('.seq-check').addEventListener('click', () => {
-    const actual = [...list.querySelectorAll('.seq-step')].map(item => item.dataset.stepId);
-    const correct = actual.filter((id, index) => id === expected[index]).length;
-    list.querySelectorAll('.seq-step').forEach((item, index) => item.classList.toggle('correct', item.dataset.stepId === expected[index]));
-    feedback.className = `seq-feedback ${correct === expected.length ? 'success' : 'info'}`;
-    feedback.textContent = `Резултат ${correct} от ${expected.length}`;
-  });
-  root.querySelector('.seq-reset').addEventListener('click', () => {
-    list.innerHTML = stepsMarkup(shuffled(comp.steps || []));
-    feedback.textContent = '';
-    list.querySelectorAll('.seq-step').forEach(item => item.classList.remove('correct'));
-    bindControls();
-  });
+  const checkBtn = root.querySelector('.seq-check');
+  if (checkBtn) {
+    checkBtn.addEventListener('click', () => {
+      const actual = [...list.querySelectorAll('.seq-step')].map(item => item.dataset.stepId);
+      const correct = actual.filter((id, index) => id === expected[index]).length;
+      list.querySelectorAll('.seq-step').forEach((item, index) => item.classList.toggle('correct', item.dataset.stepId === expected[index]));
+      feedback.className = `seq-feedback ${correct === expected.length ? 'success' : 'info'}`;
+      feedback.textContent = `Резултат ${correct} от ${expected.length}`;
+    });
+  }
+  const resetBtn = root.querySelector('.seq-reset');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      list.innerHTML = stepsMarkup(shuffled(comp.steps || []));
+      feedback.textContent = '';
+      list.querySelectorAll('.seq-step').forEach(item => item.classList.remove('correct'));
+      bindControls();
+    });
+  }
   bindControls();
 }

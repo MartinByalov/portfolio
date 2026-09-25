@@ -1438,6 +1438,74 @@ button.lesson-tag:hover {
   font-size: 18px;
 }
 
+.footer-wix-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+  align-items: center;
+}
+
+.wix-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background-color: #ffffff;
+  border: 1.5px solid #000000;
+  border-radius: 0px;
+  text-decoration: none !important;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: 0;
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.wix-icon-btn:hover,
+.wix-icon-btn:focus-visible {
+  background-color: #ffffff;
+  border-color: #000000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  outline: none;
+}
+
+.wix-icon-btn .wix-icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wix-icon-btn .wix-icon-wrapper svg {
+  width: 100%;
+  height: 100%;
+  fill: #000000;
+  display: block;
+}
+
+/* Button 1: Triangle/Delta shape starts at 0deg and rotates to 180deg on hover */
+.wix-icon-btn-triangle .wix-icon-wrapper {
+  transform: rotate(0deg);
+}
+
+.wix-icon-btn-triangle:hover .wix-icon-wrapper,
+.wix-icon-btn-triangle:focus-visible .wix-icon-wrapper {
+  transform: rotate(180deg);
+}
+
+/* Button 2: Stairs shape starts at 180deg and rotates to 0deg on hover */
+.wix-icon-btn-stairs .wix-icon-wrapper {
+  transform: rotate(180deg);
+}
+
+.wix-icon-btn-stairs:hover .wix-icon-wrapper,
+.wix-icon-btn-stairs:focus-visible .wix-icon-wrapper {
+  transform: rotate(0deg);
+}
+
 .map-widget {
   margin-top: 20px;
 }
@@ -2132,4 +2200,172 @@ button.lesson-tag:hover {
   border-radius: 12px;
   padding: 16px;
   background: #ffffff;
+}
+
+/* ==========================================================================
+   Tradehut View Styles (from Wix Tradehut / Trading page)
+   ========================================================================== */
+body.tradehut-mode {
+  background-color: #000000;
+  margin: 0;
+  padding: 0;
+}
+
+.tradehut-page-wrapper {
+  min-height: 100vh;
+  background-color: #000000;
+  color: #ffffff;
+  font-family: helvetica-w01-roman, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.tradehut-header {
+  background-color: #000000;
+  height: 86px;
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+.tradehut-header-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.tradehut-brand-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  letter-spacing: 0.02em;
+  font-family: helvetica-w01-bold, helvetica-w02-bold, "Helvetica Neue", Arial, sans-serif;
+  transition: opacity 0.2s ease;
+}
+
+.tradehut-brand-title:hover {
+  opacity: 0.85;
+}
+
+.tradehut-hero-section {
+  position: relative;
+  min-height: calc(100vh - 86px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.tradehut-video-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.tradehut-bg-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  inset: 0;
+}
+
+.tradehut-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 2;
+}
+
+.tradehut-cards-container {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 28px;
+  max-width: 1100px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.tradehut-analysis-card {
+  width: 308px;
+  min-height: 290px;
+  background: rgba(47, 46, 46, 0.75);
+  border: 1px solid #000000;
+  border-radius: 7px;
+  padding: 20px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+  transform-origin: 50% 50%;
+}
+
+.tradehut-analysis-card:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
+  z-index: 5;
+}
+
+.tradehut-card-header {
+  width: 100%;
+  text-align: center;
+}
+
+.tradehut-card-title {
+  font-family: helvetica-w01-bold, helvetica-w02-bold, helvetica-lt-w10-bold, sans-serif;
+  font-size: 24px;
+  line-height: 1.25;
+  color: #ffffff;
+  margin: 0;
+  font-weight: 700;
+  text-align: center;
+}
+
+.tradehut-card-line {
+  width: 203px;
+  height: 1px;
+  background-color: #ffffff;
+  margin: 14px auto 14px;
+}
+
+.tradehut-card-media {
+  width: 278px;
+  height: 168px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tradehut-card-gif {
+  width: 278px;
+  height: 168px;
+  object-fit: cover;
+  border-radius: 7px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  display: block;
+}
+
+.tradehut-card-empty-media {
+  min-height: 168px;
 }

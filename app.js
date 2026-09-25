@@ -12,6 +12,7 @@ import * as About from './layout/about.js';
 import * as Glossary from './layout/glossary.js';
 import * as Software from './layout/software.js';
 import * as Other from './layout/other.js';
+import * as Tradehut from './layout/tradehut.js';
 import { fetchLesson, buildLesson, initLesson } from './renderer/renderer.js';
 import { initScrollSpy } from './components/scroll-spy.js';
 import { initLightbox } from './components/lightbox.js';
@@ -21,6 +22,13 @@ let catalogCache = null;
 async function getCatalog() {
   if (!catalogCache) {
     const res = await fetch('data/catalog.json');
+    if (!res.ok) {
+      throw new Error('Неуспешно зареждане на каталога.');
+    }
+    const contentType = res.headers.get('content-type') || '';
+    if (contentType.includes('text/html')) {
+      throw new Error('Невалиден формат на каталога.');
+    }
     catalogCache = await res.json();
   }
   return catalogCache;
@@ -29,6 +37,10 @@ async function getCatalog() {
 async function getCourse(courseId) {
   const res = await fetch(`data/courses/${courseId}.json`);
   if (!res.ok) {
+    throw new Error(`Курсът "${courseId}" не е намерен.`);
+  }
+  const contentType = res.headers.get('content-type') || '';
+  if (contentType.includes('text/html')) {
     throw new Error(`Курсът "${courseId}" не е намерен.`);
   }
   return res.json();
@@ -187,7 +199,7 @@ async function route() {
   Sidebar.setStoredMode(newMode);
   const currentMode = body.classList.contains('portfolio-mode') ? 'portfolio' : 'learning';
 
-  body.classList.remove('about-mode', 'portfolio-mode', 'landing-mode');
+  body.classList.remove('about-mode', 'portfolio-mode', 'landing-mode', 'tradehut-mode');
   if (headerRoot) headerRoot.style.display = '';
   if (sidebarRoot) sidebarRoot.style.display = '';
   if (footerRoot) footerRoot.style.display = '';
@@ -200,7 +212,13 @@ async function route() {
   viewRoot.innerHTML = '<p class="loading-state">Зареждане…</p>';
 
   try {
-    if (parts.length === 0) {
+    if (parts[0] === 'tradehut' || parts[0] === 'trading') {
+      body.classList.add('tradehut-mode');
+      if (headerRoot) headerRoot.style.display = 'none';
+      if (sidebarRoot) sidebarRoot.style.display = 'none';
+      document.title = `Tradehut - ${siteSuffix}`;
+      viewRoot.innerHTML = Tradehut.renderTradehutPage();
+    } else if (parts.length === 0) {
       // Public landing page
       Header.setTitle('Начало', 'fa-solid fa-house');
       document.title = `Начало - ${siteSuffix}`;

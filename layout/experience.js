@@ -62,6 +62,8 @@ export function renderExperiencePage() {
                             <hr class="experience-separator">
 
                             <div class="extra-activities">
+                                <a href="https://byalovvmartin.wixsite.com/cleaning-services" target="_blank"
+                                    class="badge-link"><i class="fas fa-chevron-right"></i> Wix</a>
                                 <a href="experiences/ai-bot/ai-bot.exe" download="ai-bot.exe" class="badge-link">
                                     <i class="fas fa-download"></i> AI Bot</a>
                                 <a href="experiences/gallery/index.html" target="_blank"

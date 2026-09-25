@@ -50,14 +50,19 @@ async function loadTerms() {
 
   try {
     const catalogRes = await fetch('data/catalog.json');
+    if (!catalogRes.ok) return TERMS;
+    const catContentType = catalogRes.headers.get('content-type') || '';
+    if (catContentType.includes('text/html')) return TERMS;
     const catalog = await catalogRes.json();
-    const catalogCourseIds = catalog.grades.flatMap(g => g.courses).map(c => c.id);
+    const catalogCourseIds = (catalog.grades || []).flatMap(g => g.courses || []).map(c => c.id);
     const knownCourses = Array.from(new Set([...catalogCourseIds, 'it-8', 'it-9', 'it-10', 'kaos-12']));
 
     for (const courseId of knownCourses) {
       try {
         const courseRes = await fetch(`data/courses/${courseId}.json`);
         if (!courseRes.ok) continue;
+        const courseContentType = courseRes.headers.get('content-type') || '';
+        if (courseContentType.includes('text/html')) continue;
         const courseData = await courseRes.json();
         for (const section of courseData.sections || []) {
           for (const lessonMeta of section.lessons || []) {
@@ -65,6 +70,8 @@ async function loadTerms() {
             try {
               const res = await fetch(lessonMeta.lessonPath);
               if (!res.ok) continue;
+              const lessonContentType = res.headers.get('content-type') || '';
+              if (lessonContentType.includes('text/html')) continue;
               const lesson = await res.json();
               const lessonTags = [
                 lesson.grade ? `${lesson.grade} клас` : (courseData.title?.includes('8') ? '8 клас' : (courseData.title?.includes('10') ? '10 клас' : '')),

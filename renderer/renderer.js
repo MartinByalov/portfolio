@@ -13,6 +13,10 @@ function esc(s) {
 export async function fetchLesson(jsonPath) {
   const res = await fetch(jsonPath);
   if (!res.ok) throw new Error(`HTTP ${res.status} loading ${jsonPath}`);
+  const contentType = res.headers.get('content-type') || '';
+  if (contentType.includes('text/html')) {
+    throw new Error(`Урокът не можа да бъде намерен (${jsonPath}).`);
+  }
   return resolveLessonMedia(await res.json());
 }
 

@@ -9,7 +9,7 @@ function esc(s) {
 
 export function render(comp) {
   const id = comp.id || 'system-analyzer';
-  const title = comp.title || 'Хардуер, софтуер или данни?';
+  const title = comp.title || '';
   const items = comp.items || [];
 
   return `
@@ -202,9 +202,11 @@ export function render(comp) {
         }
       </style>
 
+      ${title ? `
       <div class="sta-header">
         <h3 class="sta-title">${esc(title)}</h3>
       </div>
+      ` : ''}
 
       <div class="sta-pool-title">
         Изберете елемент и го поставете в съответната категория:

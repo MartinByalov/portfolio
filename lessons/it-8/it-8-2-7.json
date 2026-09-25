@@ -100,11 +100,21 @@
               "src": "it-8-2-7/modern-computer-system-recap.png",
               "alt": "Схема на съвременна компютърна система с хардуер, софтуер и данни",
               "caption": "Три компонента - едно цяло: хардуерът изпълнява, софтуерът управлява, данните са съдържанието."
-            },
+            }
+          ]
+        },
+        {
+          "id": "task-system-analyzer-item",
+          "title": "Задача",
+          "tone": "blue",
+          "icon": "fas fa-list-check",
+          "variant": "task",
+          "skipNav": true,
+          "defaultOpen": false,
+          "content": [
             {
               "type": "system-analyzer",
               "id": "system-triad-sorter",
-              "title": "Хардуер, софтуер или данни?",
               "items": [
                 {
                   "id": "cpu",
@@ -410,15 +420,24 @@
             {
               "type": "titled-image",
               "id": "os-recap-image",
-              "src": "it-8-2-7/os-mediator-recap.jpg",
+              "src": "it-8-2-7/os-mediator-recap.png",
               "alt": "Операционната система като посредник между хардуер, приложения и потребител",
               "caption": "Операционната система разпределя ресурсите между всички стартирани програми едновременно."
-            },
+            }
+          ]
+        },
+        {
+          "id": "task-os-conductor-item",
+          "title": "Задача",
+          "tone": "blue",
+          "icon": "fas fa-list-check",
+          "variant": "task",
+          "skipNav": true,
+          "defaultOpen": false,
+          "content": [
             {
-              "type": "os-subsystems-workbench",
-              "id": "os-functions-match",
-              "title": "Четирите стълба на операционната система",
-              "subtitle": "Интерактивна лаборатория: изследвайте как операционната система управлява процесите, паметта, файловете и драйверите."
+              "type": "os-conductor-lab",
+              "id": "os-conductor-lab"
             }
           ]
         },
@@ -434,36 +453,14 @@
             {
               "type": "titled-image",
               "id": "mobile-recap-image",
-              "src": "it-8-2-7/mobile-connectivity-recap.jpg",
+              "src": "it-8-2-7/mobile-connectivity-recap.png",
               "alt": "Скала на безжичните технологии по обхват - NFC, Bluetooth, Wi-Fi, клетъчни мрежи",
               "caption": "От NFC до 5G - всяка безжична технология покрива различно разстояние и скорост."
             },
             {
-              "type": "true-false-swipe",
-              "id": "mobile-summary-swipe",
-              "title": "Вярно или невярно за мобилните технологии",
-              "cards": [
-                {
-                  "statement": "Буквата „G“ в 4G и 5G означава Generation (поколение).",
-                  "isTrue": true,
-                  "explanation": "Всяко ново поколение клетъчна мрежа носи по-висока скорост на предаване на данни и по-ниско закъснение."
-                },
-                {
-                  "statement": "NFC се използва за връзка на разстояние над 10 метра, колкото Wi-Fi.",
-                  "isTrue": false,
-                  "explanation": "NFC работи на само няколко сантиметра разстояние - затова се използва за безконтактни плащания."
-                },
-                {
-                  "statement": "SoC (System on Chip) обединява процесор, графичен модул и модем в един единствен чип.",
-                  "isTrue": true,
-                  "explanation": "Именно компактността на SoC прави смартфоните тънки и енергийно ефективни."
-                },
-                {
-                  "statement": "Android и iOS работят по абсолютно еднакъв начин и разликата е само в името.",
-                  "isTrue": false,
-                  "explanation": "Двете мобилни операционни системи имат различна архитектура, магазини за приложения и политики за инсталиране на софтуер."
-                }
-              ]
+              "type": "mobile-tech-auditor",
+              "id": "mobile-tech-auditor",
+              "title": "Мобилни технологии: Факт или заблуда?"
             }
           ]
         },
@@ -479,136 +476,14 @@
             {
               "type": "titled-image",
               "id": "peripherals-recap-image",
-              "src": "it-8-2-7/peripheral-ports-recap.jpg",
+              "src": "it-8-2-7/peripheral-ports-recap.png",
               "alt": "Компютър с обозначени портове и типични периферни устройства около него",
               "caption": "Всеки порт има специфично предназначение - от USB за почти всичко, до HDMI за видео и звук."
             },
             {
-              "type": "category-sorter",
-              "id": "peripherals-summary-sorter",
-              "title": "Разпределете устройствата по вид",
-              "categories": [
-                {
-                  "id": "input",
-                  "name": "Входно"
-                },
-                {
-                  "id": "output",
-                  "name": "Изходно"
-                },
-                {
-                  "id": "storage",
-                  "name": "Запомнящо"
-                },
-                {
-                  "id": "comm",
-                  "name": "Комуникационно"
-                }
-              ],
-              "items": [
-                {
-                  "text": "Скенер",
-                  "categoryId": "input"
-                },
-                {
-                  "text": "Мултимедиен прожектор",
-                  "categoryId": "output"
-                },
-                {
-                  "text": "Външен твърд диск",
-                  "categoryId": "storage"
-                },
-                {
-                  "text": "Wi-Fi рутер",
-                  "categoryId": "comm"
-                },
-                {
-                  "text": "Микрофон",
-                  "categoryId": "input"
-                },
-                {
-                  "text": "Тонколони",
-                  "categoryId": "output"
-                },
-                {
-                  "text": "USB флаш памет",
-                  "categoryId": "storage"
-                },
-                {
-                  "text": "Мрежов суич",
-                  "categoryId": "comm"
-                }
-              ]
-            },
-            {
-              "type": "interactive-matching",
-              "id": "ports-devices-match",
-              "title": "Свържете порта с типичното устройство, което се включва в него",
-              "pairs": [
-                {
-                  "left": "USB",
-                  "right": "Клавиатура, мишка, USB флаш памет"
-                },
-                {
-                  "left": "HDMI",
-                  "right": "Монитор или телевизор за цифрово видео и звук"
-                },
-                {
-                  "left": "LAN (мрежов порт)",
-                  "right": "Кабелна връзка към рутер за интернет"
-                },
-                {
-                  "left": "PS/2",
-                  "right": "По-стара клавиатура или мишка (кръгъл конектор)"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "section-module-map",
-          "title": "6. Обобщителна карта на модула",
-          "content": [
-            {
-              "type": "text",
-              "id": "module-map-text",
-              "content": "Разгледани заедно, темите изграждат една логическа верига: **историята** обяснява защо компютрите изглеждат по днешния начин, **съвременната система** показва от какво е изградена машината, **операционната система** я задвижва, **мобилните устройства** пренасят същите принципи в джоба ни, а **периферията** свързва всичко с физическия свят около нас."
-            },
-            {
-              "type": "visualization",
-              "id": "module-summary-map",
-              "title": "Обобщителна карта на модула „Компютърни системи“",
-              "nodes": [
-                {
-                  "label": "2.1 История",
-                  "description": "От абака до микропроцесора",
-                  "image": "it-8-2-7/node-history.png"
-                },
-                {
-                  "label": "2.2 Компютърна система",
-                  "description": "Хардуер + софтуер + данни",
-                  "image": "it-8-2-7/node-system.png"
-                },
-                {
-                  "label": "2.3 Операционна система",
-                  "description": "Управлява процеси, памет, файлове",
-                  "image": "it-8-2-7/node-os.png"
-                },
-                {
-                  "label": "2.4-2.5 Мобилни устройства",
-                  "description": "SoC и безжични комуникации",
-                  "image": "it-8-2-7/node-mobile.png"
-                },
-                {
-                  "label": "2.6 Периферия",
-                  "description": "Портове, драйвери, Plug-and-Play",
-                  "image": "it-8-2-7/node-peripherals.png"
-                }
-              ],
-              "diagram": {
-                "layout": "flow",
-                "flow": "История → Компютърна система → Операционна система → Мобилни устройства → Периферия"
-              }
+              "type": "peripheral-workbench",
+              "id": "peripheral-workbench",
+              "title": "Периферна работна станция: Свързване и роли"
             }
           ]
         }
@@ -631,123 +506,6 @@
       "skipNav": true,
       "instructions": "<div class='exercise-instructions'><p class='exercise-text'>Разгледайте двете конфигурации по-долу:</p><p class='exercise-text'><b>Конфигурация А:</b> CPU 3.0 GHz (4 ядра), 8 GB RAM, 1 TB HDD, вградена видеокарта.<br><b>Конфигурация Б:</b> CPU 3.5 GHz (6 ядра), 16 GB RAM, 512 GB SSD, самостоятелна видеокарта 8 GB.</p><p class='exercise-text'>1. Коя конфигурация ще се справи по-добре при видеомонтаж или игри и защо?<br>2. Коя промяна би донесла най-голямо усещане за „по-бърз компютър“ при конфигурация А - повече RAM или смяна на HDD със SSD?<br>3. Кой компонент е „тясното място“ (bottleneck), ако видеокартата е мощна, но RAM паметта е само 4 GB?</p></div>",
       "resources": []
-    },
-    {
-      "type": "accordion",
-      "id": "lesson-tasks",
-      "skipNav": true,
-      "options": {
-        "itemsAlign": "stretch",
-        "titleAlign": "left",
-        "singleOpen": false,
-        "startClosed": true
-      },
-      "items": [
-        {
-          "id": "section-tasks",
-          "title": "Задачи",
-          "tone": "blue",
-          "icon": "fas fa-list-check",
-          "variant": "task-item",
-          "skipNav": true,
-          "defaultOpen": false,
-          "content": [
-            {
-              "type": "interactive-fill",
-              "id": "cpu-parts-fill",
-              "title": "Попълнете частите на централния процесор",
-              "options": [
-                "Управляващо устройство (CU)",
-                "Аритметично-логическо устройство (ALU)",
-                "Регистри",
-                "Кеш памет"
-              ],
-              "sentences": [
-                {
-                  "text": "[blank] декодира инструкциите и координира работата на останалите блокове.",
-                  "answer": "Управляващо устройство (CU)"
-                },
-                {
-                  "text": "[blank] извършва аритметичните и логическите операции.",
-                  "answer": "Аритметично-логическо устройство (ALU)"
-                },
-                {
-                  "text": "[blank] съхраняват временно много малки количества данни, директно достъпни от процесора.",
-                  "answer": "Регистри"
-                },
-                {
-                  "text": "[blank] е свръхбърза буферна памет за най-често използваните данни.",
-                  "answer": "Кеш памет"
-                }
-              ]
-            },
-            {
-              "type": "category-sorter",
-              "id": "software-type-sorter",
-              "title": "Системен или приложен софтуер?",
-              "categories": [
-                {
-                  "id": "system",
-                  "name": "Системен софтуер"
-                },
-                {
-                  "id": "application",
-                  "name": "Приложен софтуер"
-                }
-              ],
-              "items": [
-                {
-                  "text": "Windows 11",
-                  "categoryId": "system"
-                },
-                {
-                  "text": "Драйвер за видеокарта",
-                  "categoryId": "system"
-                },
-                {
-                  "text": "BIOS/UEFI",
-                  "categoryId": "system"
-                },
-                {
-                  "text": "Microsoft Excel",
-                  "categoryId": "application"
-                },
-                {
-                  "text": "Photoshop",
-                  "categoryId": "application"
-                },
-                {
-                  "text": "Уеб браузър",
-                  "categoryId": "application"
-                }
-              ]
-            },
-            {
-              "type": "interactive-matching",
-              "id": "mobile-generations-match",
-              "title": "Свържете технологията с основната ѝ характеристика",
-              "pairs": [
-                {
-                  "left": "3G",
-                  "right": "Първи достъп до мобилен интернет с относително ниска скорост"
-                },
-                {
-                  "left": "4G / LTE",
-                  "right": "Високоскоростен интернет за видео стрийминг и видеоразговори"
-                },
-                {
-                  "left": "5G",
-                  "right": "Изключително ниско закъснение и много висока скорост, ключова за IoT"
-                },
-                {
-                  "left": "Wi-Fi",
-                  "right": "Безжична локална мрежа с по-голям обхват от Bluetooth, но не клетъчна"
-                }
-              ]
-            }
-          ]
-        }
-      ]
     },
     {
       "type": "accordion",

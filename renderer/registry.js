@@ -86,9 +86,17 @@ import * as SystemTriadWorkbench from '../components/system-triad-workbench.js';
 import * as MillionaireQuiz from '../components/millionaire-quiz.js';
 import * as SystemAnalyzer from '../components/system-analyzer.js';
 import * as SystemTriadSimulator from '../components/system-triad-simulator.js';
+import * as OsConductorLab from '../components/os-conductor-lab.js';
+import * as MobileTechAuditor from '../components/mobile-tech-auditor.js';
+import * as PeripheralFlowMatrix from '../components/peripheral-flow-matrix.js';
+import * as PeripheralWorkbench from '../components/peripheral-workbench.js';
 
 
 const registry = {
+  'peripheral-workbench': PeripheralWorkbench,
+  'mobile-tech-auditor': MobileTechAuditor,
+  'peripheral-flow-matrix': PeripheralFlowMatrix,
+  'os-conductor-lab': OsConductorLab,
   'system-analyzer': SystemAnalyzer,
   'system-triad-simulator': SystemTriadSimulator,
   'triad-simulator': SystemTriadSimulator,

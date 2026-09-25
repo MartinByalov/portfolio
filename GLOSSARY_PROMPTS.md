@@ -1,4 +1,4 @@
-# Речник на термините – Промптове за генериране на изображения
+# Речник на термините - Промптове за генериране на изображения
 
 > **Конфигурация за генериране:**
 > - **Размери:** `1200x800` px (съотношение 3:2)
@@ -61,7 +61,17 @@ A neat, bright student study desk in daylight with an open modern laptop, a stea
 
 ---
 
-### 6. Блог
+### 6. Безопасно премахване (Safely Remove Hardware)
+- **Файл:** `bezopasno-premahvane-safely-remove.png`
+- **Термин:** Безопасно премахване (Safely Remove Hardware)
+- **Prompt:**
+```text
+A sleek metallic USB flash drive inserted into the side port of a slim modern laptop on a white desk, with a minimalist notification checkmark floating above the port, clean bright daylight, soft shadows, high detail tech photography, no text, no UI windows.
+```
+
+---
+
+### 7. Блог
 - **Файл:** `blog.png`
 - **Термин:** Блог
 - **Prompt:**
@@ -71,7 +81,7 @@ A bright, aesthetically pleasing creator workspace with a modern laptop, mechani
 
 ---
 
-### 7. Блогър
+### 8. Блогър
 - **Файл:** `blogar.png`
 - **Термин:** Блогър
 - **Prompt:**
@@ -81,7 +91,7 @@ A friendly modern content creator sitting at a sunlit white desk with a studio m
 
 ---
 
-### 8. Браузър
+### 9. Браузър
 - **Файл:** `brauzar.png`
 - **Термин:** Браузър
 - **Prompt:**
@@ -91,7 +101,7 @@ A sleek modern laptop open on a clean white desk, screen displaying an abstract 
 
 ---
 
-### 9. Виртуална памет (Swap / Paging)
+### 10. Виртуална памет (Swap / Paging)
 - **Файл:** `virtualna-pamet-swap-paging-file.png`
 - **Термин:** Виртуална памет (Swap / Paging file)
 - **Prompt:**
@@ -101,7 +111,17 @@ Macro studio shot of a high-speed NVMe M.2 SSD module placed neatly next to an o
 
 ---
 
-### 10. Глобални символи (Wildcards)
+### 11. Глобален символ (Wildcard)
+- **Файл:** `globalen-simvol-wildcard.png`
+- **Термин:** Глобален символ (Wildcard: * и ?)
+- **Prompt:**
+```text
+A clean white desk with an open modern laptop, displaying an abstract search bar with illuminated golden asterisk and question mark symbols floating neatly, modern clean technology aesthetic, bright daylight, no readable letters, no words.
+```
+
+---
+
+### 12. Глобални символи (Wildcards)
 - **Файл:** `globalni-simvoli-wildcards.png`
 - **Термин:** Глобални символи (Wildcards)
 - **Prompt:**
@@ -111,7 +131,17 @@ A creative, minimalist 3D studio composition of glowing glass asterisks and ques
 
 ---
 
-### 11. Групов електронен адрес
+### 13. Грид технологии
+- **Файл:** `grid-tehnologii.png`
+- **Термин:** Грид технологии (Grid Computing)
+- **Prompt:**
+```text
+An artistic 3D visualization on a pristine white background showing multiple distributed minimalist computer towers connected by glowing fiber-optic light grid lines forming a synchronized network mesh, bright studio lighting, elegant geometric tech art, no text.
+```
+
+---
+
+### 14. Групов електронен адрес
 - **Файл:** `grupov-elektronen-adres.png`
 - **Термин:** Групов електронен адрес
 - **Prompt:**
@@ -121,7 +151,7 @@ A minimalist 3D conceptual scene with a single polished silver envelope sending 
 
 ---
 
-### 12. Данни
+### 15. Данни
 - **Файл:** `danni.png`
 - **Термин:** Данни
 - **Prompt:**
@@ -131,7 +161,7 @@ An elegant abstract 3D visual of structured translucent glass blocks and luminou
 
 ---
 
-### 13. Двоична бройна система
+### 16. Двоична бройна система
 - **Файл:** `dvoichna-broyna-sistema.png`
 - **Термин:** Двоична бройна система
 - **Prompt:**
@@ -141,7 +171,7 @@ Minimalist 3D sculptural zeros and ones made of frosted glass and brushed alumin
 
 ---
 
-### 14. Двуфакторно удостоверяване (2FA)
+### 17. Двуфакторно удостоверяване (2FA)
 - **Файл:** `dvufaktorno-udostoveryavane.png`
 - **Термин:** Двуфакторно удостоверяване
 - **Prompt:**
@@ -151,7 +181,7 @@ A modern smartphone on a white desk displaying a clean glowing green security sh
 
 ---
 
-### 15. Диспечер на задачите (Task Manager)
+### 18. Диспечер на задачите (Task Manager)
 - **Файл:** `dispecher-na-zadachite-task-manager-activity-monitor.png`
 - **Термин:** Диспечер на задачите (Task Manager / Activity Monitor)
 - **Prompt:**
@@ -161,7 +191,7 @@ A wide modern desktop monitor on a minimalist white desk showing clean hardware 
 
 ---
 
-### 16. Достоверност на източник
+### 19. Достоверност на източник
 - **Файл:** `dostovernost-na-iztochnik.png`
 - **Термин:** Достоверност на източник
 - **Prompt:**
@@ -171,7 +201,7 @@ A classic brass magnifying glass resting on an open hardcover book beside a digi
 
 ---
 
-### 17. Драйвер (Device Driver)
+### 20. Драйвер (Device Driver)
 - **Файл:** `drayver-device-driver.png`
 - **Термин:** Драйвер (Device Driver)
 - **Prompt:**
@@ -181,7 +211,17 @@ A close-up studio shot of a gold-plated hardware interface connector and microch
 
 ---
 
-### 18. Електронно обучение (E-learning)
+### 21. Екип
+- **Файл:** `ekip-team.png`
+- **Термин:** Екип (Екипна работа в ИТ проект)
+- **Prompt:**
+```text
+A diverse group of four modern high school students collaborating enthusiastically around a bright conference table with laptops and project blueprints, bright sunny modern classroom environment, authentic cheerful atmosphere, no text.
+```
+
+---
+
+### 22. Електронно обучение (E-learning)
 - **Файл:** `elektronno-obuchenie-e-learning.png`
 - **Термин:** Електронно обучение (E-learning)
 - **Prompt:**
@@ -191,7 +231,7 @@ A modern bright digital classroom desk with a tablet stylus, interactive learnin
 
 ---
 
-### 19. Етичен код
+### 23. Етичен код
 - **Файл:** `etichen-kod.png`
 - **Термин:** Етичен код
 - **Prompt:**
@@ -201,7 +241,7 @@ Two people shaking hands over a clean, sunlit collaborative white conference tab
 
 ---
 
-### 20. Ефективно търсене
+### 24. Ефективно търсене
 - **Файл:** `efektivno-tarsene.png`
 - **Термин:** Ефективно търсене
 - **Prompt:**
@@ -211,7 +251,7 @@ A glowing metallic stylized search icon lens focusing precisely on a clean trans
 
 ---
 
-### 21. Жироскоп
+### 25. Жироскоп
 - **Файл:** `zhiroskop.png`
 - **Термин:** Жироскоп
 - **Prompt:**
@@ -221,7 +261,7 @@ A precision-engineered brass and stainless steel mechanical gyroscope spinning w
 
 ---
 
-### 22. Заявка за търсене
+### 26. Заявка за търсене
 - **Файл:** `zayavka-za-tarsene.png`
 - **Термин:** Заявка за търсене
 - **Prompt:**
@@ -231,7 +271,7 @@ A clean minimalist 3D rendering of an elegant floating search bar with a gentle 
 
 ---
 
-### 23. Интернет
+### 27. Интернет
 - **Файл:** `internet.png`
 - **Термин:** Интернет
 - **Prompt:**
@@ -241,7 +281,7 @@ A luminous, intricate network globe made of glowing fiber optic light strands an
 
 ---
 
-### 24. Интернет доставчик (ISP)
+### 28. Интернет доставчик (ISP)
 - **Файл:** `internet-dostavchik-isp.png`
 - **Термин:** Интернет доставчик (ISP)
 - **Prompt:**
@@ -251,7 +291,17 @@ A pristine white telecommunications rack with illuminated optical patch cables a
 
 ---
 
-### 25. История на версиите (Version History)
+### 29. Интерфейс
+- **Файл:** `interfeys.png`
+- **Термин:** Интерфейс (Хардуерен / Софтуерен)
+- **Prompt:**
+```text
+An elegant macro photograph of a gold-plated USB-C and HDMI interface connector head on a clean white table, emphasizing precision engineering and metallic contact pins, bright soft studio light, no text.
+```
+
+---
+
+### 30. История на версиите (Version History)
 - **Файл:** `istoriya-na-versiite-version-history.png`
 - **Термин:** История на версиите (Version History)
 - **Prompt:**
@@ -261,7 +311,7 @@ A series of translucent frosted glass document pages fanned out in a chronologic
 
 ---
 
-### 26. Капацитивен сензорен дисплей
+### 31. Капацитивен сензорен дисплей
 - **Файл:** `kapatsitiven-senzoren-displey.png`
 - **Термин:** Капацитивен сензорен дисплей
 - **Prompt:**
@@ -271,7 +321,7 @@ Close-up photograph of a finger touching the glass surface of a modern smartphon
 
 ---
 
-### 27. Киберсигурност
+### 32. Киберсигурност
 - **Файл:** `kibersigurnost.png`
 - **Термин:** Киберсигурност
 - **Prompt:**
@@ -281,7 +331,7 @@ A heavy physical padlock made of polished chrome and frosted glass resting secur
 
 ---
 
-### 28. Клетъчна мрежа (Cellular Network)
+### 33. Клетъчна мрежа (Cellular Network)
 - **Файл:** `kletachna-mrezha-cellular-network.png`
 - **Термин:** Клетъчна мрежа (Cellular Network)
 - **Prompt:**
@@ -291,7 +341,7 @@ A clean white architectural landscape model with subtle glowing hexagonal cell b
 
 ---
 
-### 29. Ключови думи
+### 34. Ключови думи
 - **Файл:** `klyuchovi-dumi.png`
 - **Термин:** Ключови думи
 - **Prompt:**
@@ -301,7 +351,17 @@ Minimalist 3D magnetic wooden letter-shaped blocks highlighting bright golden pi
 
 ---
 
-### 30. Компютърна конфигурация
+### 35. Коаксиален кабел
+- **Файл:** `koaksialen-kabel.png`
+- **Термин:** Коаксиален кабел (Coaxial Cable)
+- **Prompt:**
+```text
+Macro studio shot of a cleanly stripped coaxial cable resting on a white table, clearly displaying the central solid copper core, white dielectric insulator, braided copper shielding mesh, and outer black jacket, crisp studio lighting, no text.
+```
+
+---
+
+### 36. Компютърна конфигурация
 - **Файл:** `kompyutarna-konfiguratsiya.png`
 - **Термин:** Компютърна конфигурация
 - **Prompt:**
@@ -311,7 +371,7 @@ A neatly organized flat lay arrangement of individual computer components (CPU i
 
 ---
 
-### 31. Компютърна система
+### 37. Компютърна система
 - **Файл:** `kompyutarna-sistema.png`
 - **Термин:** Компютърна система
 - **Prompt:**
@@ -321,7 +381,17 @@ A complete modern desktop workstation with an ultrawide monitor, sleek white min
 
 ---
 
-### 32. Метаданни (EXIF)
+### 38. Контролер
+- **Файл:** `kontroler.png`
+- **Термин:** Контролер (Хардуерен контролер / I/O)
+- **Prompt:**
+```text
+Close-up macro photograph of a dedicated PCI-Express I/O controller microchip on an electronic board with golden pins and circuit tracks, pure white studio background, diffused soft lighting, high-end hardware photography, no text.
+```
+
+---
+
+### 39. Метаданни (EXIF)
 - **Файл:** `metadanni-exif.png`
 - **Термин:** Метаданни (EXIF)
 - **Prompt:**
@@ -331,7 +401,7 @@ A professional mirrorless camera with its battery and SD memory card resting on 
 
 ---
 
-### 33. Микроблог
+### 40. Микроблог
 - **Файл:** `mikroblog.png`
 - **Термин:** Микроблог
 - **Prompt:**
@@ -341,87 +411,37 @@ A sleek smartphone held in hand showing a clean social feed card with avatar pla
 
 ---
 
-### 34. Мултитаскинг (Multitasking)
-- **Файл:** `multitasking-multitasking.png`
-- **Термин:** Мултитаскинг (Multitasking)
+### 41. Модем
+- **Файл:** `modem.png`
+- **Термин:** Модем (Modem)
 - **Prompt:**
 ```text
-A large high-resolution monitor displaying multiple neatly organized app windows, code editor, and media player side by side, bright sunlit creative studio desk, no readable text, no logos.
+A sleek white modern cable/DSL modem on a light birch wood table next to incoming coaxial and phone line ports, subtle glowing green connection indicators, bright soft daylight, clean consumer tech photograph, no text.
 ```
 
 ---
 
-### 35. Настройки за поверителност
-- **Файл:** `nastroyki-za-poveritelnost.png`
-- **Термин:** Настройки за поверителност
+### 42. Мрежова карта (NIC)
+- **Файл:** `mrezhova-karta-nic.png`
+- **Термин:** Мрежова карта (NIC - Network Interface Card)
 - **Prompt:**
 ```text
-A sleek minimalist toggle switch in the 'ON' position made of brushed aluminum and glowing green indicator, resting on a clean white surface next to a small security icon, bright studio lighting, no text.
+A dedicated PCIe Gigabit Ethernet network interface card with a shiny silver metal bracket and RJ-45 LAN port, placed on a pristine white background, soft ambient studio lighting, high precision hardware shot, no text.
 ```
 
 ---
 
-### 36. Нетикет
-- **Файл:** `netiket.png`
-- **Термин:** Нетикет
+### 43. Мрежова маска
+- **Файл:** `mrezhova-maska.png`
+- **Термин:** Мрежова маска (Subnet Mask)
 - **Prompt:**
 ```text
-Two modern avatars having a respectful and polite digital chat with positive smiling emoji reaction bubbles, clean minimalist bright pastel aesthetic, 3D render, no text.
+A clean conceptual 3D isometric representation of an IP network divided into subnet segments by glowing translucent acrylic barrier filters on a pure white surface, high-tech educational aesthetic, soft diffused lighting, no text, no numbers.
 ```
 
 ---
 
-### 37. Облачна услуга (Cloud Service)
-- **Файл:** `oblachna-usluga-cloud-service.png`
-- **Термин:** Облачна услуга (Cloud Service)
-- **Prompt:**
-```text
-A stylized 3D cloud sculpture crafted from smooth white ceramic and polished chrome, with subtle glowing connection lines linking it to clean micro server nodes, bright studio lighting, no text.
-```
-
----
-
-### 38. Онлайн сесия
-- **Файл:** `onlayn-sesiya.png`
-- **Термин:** Онлайн сесия
-- **Prompt:**
-```text
-A modern laptop on a white desk with a high-definition webcam mounted on top, surrounded by student notes and a coffee cup, bright daylight, authentic remote collaboration setup, no text.
-```
-
----
-
-### 39. Операционна система (ОС)
-- **Файл:** `operatsionna-sistema-os.png`
-- **Термин:** Операционна система (ОС)
-- **Prompt:**
-```text
-A conceptual 3D layered structure showing hardware circuit at the bottom, an illuminated transparent core layer in the middle, and app interface cubes on top, clean white studio background, no text.
-```
-
----
-
-### 40. Оптичен кабел
-- **Файл:** `optichen-kabel.png`
-- **Термин:** Оптичен кабел
-- **Prompt:**
-```text
-Extreme macro photograph of an unjacketed fiber optic cable bundle glowing with vibrant pure blue and gold light at the tips, resting on a clean white surface, soft bokeh, no text.
-```
-
----
-
-### 41. Отворен код (Open Source)
-- **Файл:** `otvoren-kod-open-source.png`
-- **Термин:** Отворен код (Open Source)
-- **Prompt:**
-```text
-A stylized 3D transparent acrylic padlock that is cleanly unlocked, revealing an intricate glowing golden gear mechanism inside, white studio background, bright lighting, no text.
-```
-
----
-
-### 42. Мрежов пакет
+### 44. Мрежов пакет
 - **Файл:** `paket.png`
 - **Термин:** Пакет
 - **Prompt:**
@@ -431,7 +451,87 @@ A miniature futuristic glowing glass delivery cube with high-tech microcircuit p
 
 ---
 
-### 43. Периферно устройство
+### 45. Мултитаскинг (Multitasking)
+- **Файл:** `multitasking-multitasking.png`
+- **Термин:** Мултитаскинг (Multitasking)
+- **Prompt:**
+```text
+A large high-resolution monitor displaying multiple neatly organized app windows, code editor, and media player side by side, bright sunlit creative studio desk, no readable text, no logos.
+```
+
+---
+
+### 46. Настройки за поверителност
+- **Файл:** `nastroyki-za-poveritelnost.png`
+- **Термин:** Настройки за поверителност
+- **Prompt:**
+```text
+A sleek minimalist toggle switch in the 'ON' position made of brushed aluminum and glowing green indicator, resting on a clean white surface next to a small security icon, bright studio lighting, no text.
+```
+
+---
+
+### 47. Нетикет
+- **Файл:** `netiket.png`
+- **Термин:** Нетикет
+- **Prompt:**
+```text
+Two modern avatars having a respectful and polite digital chat with positive smiling emoji reaction bubbles, clean minimalist bright pastel aesthetic, 3D render, no text.
+```
+
+---
+
+### 48. Облачна услуга (Cloud Service)
+- **Файл:** `oblachna-usluga-cloud-service.png`
+- **Термин:** Облачна услуга (Cloud Service)
+- **Prompt:**
+```text
+A stylized 3D cloud sculpture crafted from smooth white ceramic and polished chrome, with subtle glowing connection lines linking it to clean micro server nodes, bright studio lighting, no text.
+```
+
+---
+
+### 49. Онлайн сесия
+- **Файл:** `onlayn-sesiya.png`
+- **Термин:** Онлайн сесия
+- **Prompt:**
+```text
+A modern laptop on a white desk with a high-definition webcam mounted on top, surrounded by student notes and a coffee cup, bright daylight, authentic remote collaboration setup, no text.
+```
+
+---
+
+### 50. Операционна система (ОС)
+- **Файл:** `operatsionna-sistema-os.png`
+- **Термин:** Операционна система (ОС)
+- **Prompt:**
+```text
+A conceptual 3D layered structure showing hardware circuit at the bottom, an illuminated transparent core layer in the middle, and app interface cubes on top, clean white studio background, no text.
+```
+
+---
+
+### 51. Оптичен кабел
+- **Файл:** `optichen-kabel.png`
+- **Термин:** Оптичен кабел
+- **Prompt:**
+```text
+Extreme macro photograph of an unjacketed fiber optic cable bundle glowing with vibrant pure blue and gold light at the tips, resting on a clean white surface, soft bokeh, no text.
+```
+
+---
+
+### 52. Отворен код (Open Source)
+- **Файл:** `otvoren-kod-open-source.png`
+- **Термин:** Отворен код (Open Source)
+- **Prompt:**
+```text
+A stylized 3D transparent acrylic padlock that is cleanly unlocked, revealing an intricate glowing golden gear mechanism inside, white studio background, bright lighting, no text.
+```
+
+---
+
+### 53. Периферно устройство
 - **Файл:** `periferno-ustroystvo.png`
 - **Термин:** Периферно устройство
 - **Prompt:**
@@ -441,7 +541,7 @@ An elegant flat-lay arrangement of computer peripherals: an ergonomic white mous
 
 ---
 
-### 44. Перфокарта
+### 54. Перфокарта
 - **Файл:** `perfokarta.png`
 - **Термин:** Перфокарта
 - **Prompt:**
@@ -451,7 +551,7 @@ A genuine vintage computer punch card with precision-punched rectangular holes, 
 
 ---
 
-### 45. Поколение компютри
+### 55. Поколение компютри
 - **Файл:** `pokolenie-kompyutri.png`
 - **Термин:** Поколение компютри
 - **Prompt:**
@@ -461,7 +561,17 @@ Four historical electronic components lined up on a white pedestal: a vacuum tub
 
 ---
 
-### 46. Поле за търсене
+### 56. Поколение мрежа (G)
+- **Файл:** `pokolenie-mrezha-g.png`
+- **Термин:** Поколение мрежа (G - Generation)
+- **Prompt:**
+```text
+A conceptual evolution timeline displayed as 5 elegant crystalline vertical pillars of increasing heights and speeds on a pure white plane, reflecting advancing generations of wireless cellular technology, soft studio light, no text, no labels.
+```
+
+---
+
+### 57. Поле за търсене
 - **Файл:** `pole-za-tarsene.png`
 - **Термин:** Поле за търсене
 - **Prompt:**
@@ -471,7 +581,17 @@ A minimalist 3D physical representation of an elongated search pill-box with an 
 
 ---
 
-### 47. Права за достъп (Permissions)
+### 58. Порт
+- **Файл:** `port.png`
+- **Термин:** Порт (Входно-изходен порт / Конектор)
+- **Prompt:**
+```text
+Macro photograph of the clean I/O shield port cluster of a modern motherboard on a white desk, showing USB-C, USB 3.0, HDMI, and Ethernet ports in pristine condition, bright studio illumination, no text.
+```
+
+---
+
+### 59. Права за достъп (Permissions)
 - **Файл:** `prava-za-dostap-permissions.png`
 - **Термин:** Права за достъп (Permissions)
 - **Prompt:**
@@ -481,7 +601,7 @@ Three physical keys made of brass, silver, and copper resting next to correspond
 
 ---
 
-### 48. Приложен софтуер (Applications)
+### 60. Приложен софтуер (Applications)
 - **Файл:** `prilozhen-softuer-applications.png`
 - **Термин:** Приложен софтуер (Applications)
 - **Prompt:**
@@ -491,7 +611,7 @@ Clean 3D colorful geometric app icons (paint palette, document sheet, music note
 
 ---
 
-### 49. Проект
+### 61. Проект
 - **Файл:** `proekt.png`
 - **Термин:** Проект
 - **Prompt:**
@@ -501,7 +621,7 @@ A well-organized project planning desk with architectural color swatches, sticky
 
 ---
 
-### 50. Проприетарен (търговски) софтуер
+### 62. Проприетарен (търговски) софтуер
 - **Файл:** `proprietaren-targovski-softuer.png`
 - **Термин:** Проприетарен софтуер
 - **Prompt:**
@@ -511,7 +631,7 @@ A sleek metal software box with a laser holographic security seal, resting on a 
 
 ---
 
-### 51. Пясъчник (Sandbox / Sandboxing)
+### 63. Пясъчник (Sandbox / Sandboxing)
 - **Файл:** `pyasachnik-sandbox.png`
 - **Термин:** Пясъчник (Sandbox)
 - **Prompt:**
@@ -521,7 +641,7 @@ A stylized 3D conceptual miniature Zen sand garden enclosed in a clean glass cub
 
 ---
 
-### 52. Работа в споделен документ
+### 64. Работа в споделен документ
 - **Файл:** `rabota-v-spodelen-dokument.png`
 - **Термин:** Работа в споделен документ
 - **Prompt:**
@@ -531,7 +651,17 @@ A digital tablet on a clean white desk displaying a document layout with multipl
 
 ---
 
-### 53. Растерно изображение
+### 65. Разрешения за сигурност (Permissions)
+- **Файл:** `razresheniya-za-sigurnost-permissions.png`
+- **Термин:** Разрешения за сигурност (App Permissions)
+- **Prompt:**
+```text
+A modern smartphone standing upright on a minimalist white table, displaying abstract holographic green shield and camera privacy lock icons hovering gently above the glass screen, clean bright daylight, no text, no typography.
+```
+
+---
+
+### 66. Растерно изображение
 - **Файл:** `rasterno-izobrazhenie.png`
 - **Термин:** Растерно изображение
 - **Prompt:**
@@ -541,7 +671,7 @@ Extreme close-up macro of an RGB subpixel matrix on a high-density display, show
 
 ---
 
-### 54. Реле
+### 67. Реле
 - **Файл:** `rele.png`
 - **Термин:** Реле
 - **Prompt:**
@@ -551,7 +681,17 @@ A vintage electromagnetic telephone relay switch with copper wire coil and silve
 
 ---
 
-### 55. Сензор за близост (Proximity)
+### 68. Рутер (Маршрутизатор)
+- **Файл:** `ruter-marshrutizator.png`
+- **Термин:** Рутер (Маршрутизатор / Router)
+- **Prompt:**
+```text
+A premium white Wi-Fi router with four sleek adjustable antennas and glowing subtle blue LED indicators on a clean white desk next to a modern plant, bright contemporary tech interior, authentic photograph, no text.
+```
+
+---
+
+### 69. Сензор за близост (Proximity)
 - **Файл:** `senzor-za-blizost-proximity.png`
 - **Термин:** Сензор за близост (Proximity)
 - **Prompt:**
@@ -561,7 +701,7 @@ Macro studio shot of the top bezel of a modern smartphone, highlighting the invi
 
 ---
 
-### 56. Синхронно обучение
+### 70. Синхронно обучение
 - **Файл:** `sinhronno-obuchenie.png`
 - **Термин:** Синхронно обучение
 - **Prompt:**
@@ -571,7 +711,7 @@ A modern video conferencing setup on a laptop with multiple live student video f
 
 ---
 
-### 57. Системен софтуер
+### 71. Системен софтуер
 - **Файл:** `sistemen-softuer.png`
 - **Термин:** Системен софтуер
 - **Prompt:**
@@ -581,7 +721,7 @@ An intricate 3D exploded view of a computer motherboard with glowing digital fou
 
 ---
 
-### 58. Системни разрешения (Permissions)
+### 72. Системни разрешения (Permissions)
 - **Файл:** `sistemni-razresheniya-permissions.png`
 - **Термин:** Системни разрешения (Permissions)
 - **Prompt:**
@@ -591,7 +731,7 @@ A modern smartphone on a white surface with small glowing tactile toggle switche
 
 ---
 
-### 59. Софтуер
+### 73. Софтуер
 - **Файл:** `softuer.png`
 - **Термин:** Софтуер
 - **Prompt:**
@@ -601,7 +741,7 @@ An abstract 3D visual of translucent acrylic algorithmic blocks fitting together
 
 ---
 
-### 60. Социална мрежа
+### 74. Социална мрежа
 - **Файл:** `sotsialna-mrezha.png`
 - **Термин:** Социална мрежа
 - **Prompt:**
@@ -611,7 +751,17 @@ A 3D network of smooth colorful spheres connected by delicate golden pathways, r
 
 ---
 
-### 61. Споделяне (Sharing)
+### 75. Споделен ресурс
+- **Файл:** `spodelen-resurs.png`
+- **Термин:** Споделен ресурс (Shared Resource)
+- **Prompt:**
+```text
+A modern compact white wireless laser printer on an office shelf, wirelessly connected with luminous light streams to three laptops and tablets scattered on a bright communal table, daylight, clean tech photography, no text.
+```
+
+---
+
+### 76. Споделяне (Sharing)
 - **Файл:** `spodelyane-sharing.png`
 - **Термин:** Споделяне (Sharing)
 - **Prompt:**
@@ -621,7 +771,17 @@ A minimalist 3D rendering of a gleaming sharing node with light particles branch
 
 ---
 
-### 62. Суич (Switch)
+### 77. Суич (Комутатор)
+- **Файл:** `suich-komutator.png`
+- **Термин:** Суич (Комутатор / Network Switch)
+- **Prompt:**
+```text
+A sleek 16-port Gigabit desktop Ethernet switch on a white technical workbench with multiple colorful slim patch cables plugged in and green link activity lights glowing, clean professional network gear, studio lighting, no text.
+```
+
+---
+
+### 78. Суич (Switch)
 - **Файл:** `suich-switch.png`
 - **Термин:** Суич (Switch)
 - **Prompt:**
@@ -631,7 +791,17 @@ A 24-port Gigabit Ethernet switch in clean white chassis with blinking green act
 
 ---
 
-### 63. Съвместно редактиране (Co-authoring)
+### 79. Суперкомпютър
+- **Файл:** `superkompyutar.png`
+- **Термин:** Суперкомпютър (Supercomputer)
+- **Prompt:**
+```text
+A vast, impeccably clean modern data center corridor with rows of illuminated supercomputer server racks in white and deep blue, polished reflective white floor, cool futuristic ambient lighting, high quality architecture photograph, no text.
+```
+
+---
+
+### 80. Съвместно редактиране (Co-authoring)
 - **Файл:** `savmestno-redaktirane-co-authoring.png`
 - **Термин:** Съвместно редактиране (Co-authoring)
 - **Prompt:**
@@ -641,7 +811,7 @@ Two people sitting at a bright, minimalist wood table, both interacting with a l
 
 ---
 
-### 64. Сървър
+### 81. Сървър
 - **Файл:** `sarvar.png`
 - **Термин:** Сървър
 - **Prompt:**
@@ -651,7 +821,17 @@ A sleek, modern white enterprise 1U rackmount server unit with clean front venti
 
 ---
 
-### 65. Термален тротлинг (Thermal Throttling)
+### 82. Тактова честота
+- **Файл:** `taktova-chestota.png`
+- **Термин:** Тактова честота (Clock Speed / GHz)
+- **Prompt:**
+```text
+An artistic macro close-up of a desktop CPU integrated heat spreader resting on a pure white table beside a miniature quartz crystal oscillator and an oscillating sine wave laser pulse, representing processor clock cycles, bright studio shot, no text.
+```
+
+---
+
+### 83. Термален тротлинг (Thermal Throttling)
 - **Файл:** `termalen-trotling-thermal-throttling.png`
 - **Термин:** Термален тротлинг (Thermal Throttling)
 - **Prompt:**
@@ -661,17 +841,57 @@ Macro studio shot of a high-performance copper heatpipe heatsink mounted over a 
 
 ---
 
-### 66. Търсещ оператор
-- **Файл:** `tarsesht-operator.png`
-- **Термин:** Търсещ оператор
+### 84. Топология Звезда (Star)
+- **Файл:** `topologiya-zvezda-star.png`
+- **Термин:** Топология Звезда (Star)
 - **Prompt:**
 ```text
-Minimalist 3D logical symbol blocks (mathematical plus, minus, quotation brackets) made of frosted glass floating above an open digital notebook, bright studio lighting, no text.
+A clean physical 3D educational model with a central glowing switch hub and individual cable lines radiating symmetrically outwards to six desktop workstation nodes, bright white studio setting, no text.
 ```
 
 ---
 
-### 67. Търсеща машина (Търсачка)
+### 85. Топология Кръг (Ring)
+- **Файл:** `topologiya-krag-ring.png`
+- **Термин:** Топология Кръг (Ring)
+- **Prompt:**
+```text
+A circular 3D arrangement of six computer nodes linked in a closed continuous ring by a glowing luminous data path, resting on a pure white reflective surface, soft ambient studio lighting, no text.
+```
+
+---
+
+### 86. Топология Mesh (Хиперкуб)
+- **Файл:** `topologiya-mesh.png`
+- **Термин:** Топология Mesh (Пълносвързана / Хиперкуб)
+- **Prompt:**
+```text
+A minimalist physical 3D model on a white surface showing eight glowing acrylic nodes connected to each other in a complete multi-dimensional mesh network grid, bright soft studio lighting, pure white background, no text.
+```
+
+---
+
+### 87. Топология Tree (Дърво)
+- **Файл:** `topologiya-tree.png`
+- **Термин:** Топология Tree (Дърво)
+- **Prompt:**
+```text
+An elegant physical 3D model of a hierarchical tree network topology with a root node branching out to intermediate switches and end devices in white matte ceramic and glowing connections, pure white background, no text.
+```
+
+---
+
+### 88. Точка за достъп (WAP)
+- **Файл:** `tochka-za-dostap-wap.png`
+- **Термин:** Точка за достъп (WAP - Wireless Access Point)
+- **Prompt:**
+```text
+A sleek white saucer-shaped Wi-Fi 6 enterprise access point mounted cleanly on a white ceiling with a subtle soft blue circular LED ring illuminating downwards, bright contemporary architectural space, no text.
+```
+
+---
+
+### 89. Търсеща машина (Търсачка)
 - **Файл:** `tarseshta-mashina-tarsachka.png`
 - **Термин:** Търсеща машина (Търсачка)
 - **Prompt:**
@@ -681,7 +901,17 @@ An artistic 3D conceptual visual of massive organized digital index shelves with
 
 ---
 
-### 68. Уеб браузър (Клиент)
+### 90. Търсещ оператор
+- **Файл:** `tarsesht-operator.png`
+- **Термин:** Търсещ оператор
+- **Prompt:**
+```text
+Minimalist 3D logical symbol blocks (mathematical plus, minus, quotation brackets) made of frosted glass floating above an open digital notebook, bright studio lighting, no text.
+```
+
+---
+
+### 91. Уеб браузър (Клиент)
 - **Файл:** `ueb-brauzar-klient.png`
 - **Термин:** Уеб браузър (Клиент)
 - **Prompt:**
@@ -691,7 +921,27 @@ A modern slim tablet on an aluminum stand displaying a beautifully rendered, res
 
 ---
 
-### 69. Форум
+### 92. Усукана двойка (UTP)
+- **Файл:** `usukana-dvoyka-utp.png`
+- **Термин:** Усукана двойка (UTP кабел / RJ-45)
+- **Prompt:**
+```text
+Macro photograph of a cleanly stripped Category 6 Ethernet cable on a pure white surface, showing the four tightly twisted color-coded pairs of copper wires alongside a clear transparent RJ-45 modular plug, crisp studio lighting, no text.
+```
+
+---
+
+### 93. Формуляр (Form)
+- **Файл:** `formulyar-form.png`
+- **Термин:** Формуляр (Form / Дигитален формуляр)
+- **Prompt:**
+```text
+A sleek modern tablet resting on a bright wooden desk, displaying a clean digital survey form with input fields, checkboxes, and a submit button, daylight studio photography, aesthetic stationery nearby, no readable text.
+```
+
+---
+
+### 94. Форум
 - **Файл:** `forum.png`
 - **Термин:** Форум
 - **Prompt:**
@@ -701,7 +951,7 @@ An abstract 3D arrangement of speech bubble sculptures in gentle pastel hues nes
 
 ---
 
-### 70. Хардуер
+### 95. Хардуер
 - **Файл:** `harduer.png`
 - **Термин:** Хардуер
 - **Prompt:**
@@ -711,7 +961,27 @@ A clean top-down flat lay photograph of computer hardware components: green and 
 
 ---
 
-### 71. Чат
+### 96. Хъб (Концентратор)
+- **Файл:** `hab-kontsentrator.png`
+- **Термин:** Хъб (Концентратор / Network Hub)
+- **Prompt:**
+```text
+A compact classic network hub with multiple RJ-45 ports on a white technical surface, showing incoming data packets repeating broadcast signals outward to all connected cables simultaneously, clean studio lighting, no text.
+```
+
+---
+
+### 97. Циркулярно писмо
+- **Файл:** `tsirkulyarno-pismo-mail-merge.png`
+- **Термин:** Циркулярно писмо (Mail Merge)
+- **Prompt:**
+```text
+An elegant modern workstation with an open laptop showing a template letter linked to a contact data sheet, with personalized printed document envelopes fanning out neatly on the white desk, bright natural morning daylight, no text.
+```
+
+---
+
+### 98. Чат
 - **Файл:** `chat.png`
 - **Термин:** Чат
 - **Prompt:**
@@ -721,7 +991,17 @@ Two minimalist 3D glass message bubbles with gentle colorful gradients hovering 
 
 ---
 
-### 72. Шина (Bus)
+### 99. Шаблон (Template)
+- **Файл:** `shablon-template.png`
+- **Термин:** Шаблон (Template)
+- **Prompt:**
+```text
+A top-down flat lay view of a bright creative desk featuring a modern laptop with a resume/CV layout template on screen, neat drafting tools, a notebook, and a designer pen on a white surface, clean minimalist aesthetic, no readable text.
+```
+
+---
+
+### 100. Шина (Bus)
 - **Файл:** `shina-bus.png`
 - **Термин:** Шина (Bus)
 - **Prompt:**
@@ -731,7 +1011,7 @@ Macro studio photograph of parallel gold-plated circuit traces (data bus lanes) 
 
 ---
 
-### 73. Ядро (Kernel)
+### 101. Ядро (Kernel)
 - **Файл:** `yadro-kernel.png`
 - **Термин:** Ядро (Kernel)
 - **Prompt:**
@@ -741,7 +1021,7 @@ A stylized 3D conceptual sculpture of a glowing golden sphere protected at the a
 
 ---
 
-### 74. ALU (Аритметично-логическо устройство)
+### 102. ALU (Аритметично-логическо устройство)
 - **Файл:** `alu-aritmetichno-logichesko-ustroystvo.png`
 - **Термин:** ALU (Аритметично-логическо устройство)
 - **Prompt:**
@@ -751,7 +1031,7 @@ High detail macro shot of an open silicon CPU die under a microscope, revealing 
 
 ---
 
-### 75. CLI (Command Line Interface)
+### 103. CLI (Command Line Interface)
 - **Файл:** `cli-command-line-interface.png`
 - **Термин:** CLI (Command Line Interface)
 - **Prompt:**
@@ -761,9 +1041,9 @@ A retro-modern computer terminal monitor on a clean white desk, displaying a cle
 
 ---
 
-### 76. Client–Server
+### 104. Client-Server
 - **Файл:** `client-server.png`
-- **Термин:** Client–Server архитектура
+- **Термин:** Client-Server архитектура
 - **Prompt:**
 ```text
 A minimalist 3D model with a central white tower server connected via luminous light lines to miniature laptops and phones on a white pedestal, clean soft studio lighting, no text.
@@ -771,7 +1051,7 @@ A minimalist 3D model with a central white tower server connected via luminous l
 
 ---
 
-### 77. Cloud Storage
+### 105. Cloud Storage
 - **Файл:** `cloud-storage.png`
 - **Термин:** Cloud Storage
 - **Prompt:**
@@ -781,7 +1061,7 @@ A set of three solid state drive modules resting neatly below a stylized white c
 
 ---
 
-### 78. COUNTIF
+### 106. COUNTIF
 - **Файл:** `countif.png`
 - **Термин:** COUNTIF функция
 - **Prompt:**
@@ -791,7 +1071,7 @@ A spreadsheet table physical 3D grid made of frosted acrylic with specific highl
 
 ---
 
-### 79. CPU (Централен процесор)
+### 107. CPU (Централен процесор)
 - **Файл:** `cpu-tsentralen-protsesor.png`
 - **Термин:** CPU (Централен процесор)
 - **Prompt:**
@@ -801,7 +1081,7 @@ A high-end multi-core computer CPU processor resting on a pure white surface, sh
 
 ---
 
-### 80. Data Validation
+### 108. Data Validation
 - **Файл:** `data-validation.png`
 - **Термин:** Data Validation (Валидиране на данни)
 - **Prompt:**
@@ -811,7 +1091,17 @@ A 3D green checkmark seal made of polished emerald glass locking securely into a
 
 ---
 
-### 81. DNS
+### 109. DHCP
+- **Файл:** `dhcp.png`
+- **Термин:** DHCP (Dynamic Host Configuration Protocol)
+- **Prompt:**
+```text
+A modern Wi-Fi 6 router with glowing status LEDs on a clean white desk, with subtle radiant light pulses distributing dynamic numerical addresses to nearby sleek devices, bright minimalist technology photography, no text, no numbers.
+```
+
+---
+
+### 110. DNS
 - **Файл:** `dns.png`
 - **Термин:** DNS (Domain Name System)
 - **Prompt:**
@@ -821,7 +1111,7 @@ An artistic 3D visualization of a directory book made of glass transforming an a
 
 ---
 
-### 82. Firewall
+### 111. Firewall
 - **Файл:** `firewall.png`
 - **Термин:** Firewall (Защитна стена)
 - **Prompt:**
@@ -831,7 +1121,27 @@ A physical wall made of sleek white ceramic blocks with a glowing blue digital s
 
 ---
 
-### 83. GPS
+### 112. FLOPS
+- **Файл:** `flops.png`
+- **Термин:** FLOPS (Floating Point Operations Per Second)
+- **Prompt:**
+```text
+A sleek gleaming supercomputer server rack blade with liquid cooling copper pipes and pulsing emerald LEDs, set against a pristine white studio backdrop, representing ultra-high-speed floating point compute capability, clean aesthetic, no text.
+```
+
+---
+
+### 113. FTP
+- **Файл:** `ftp.png`
+- **Термин:** FTP (File Transfer Protocol)
+- **Prompt:**
+```text
+Two sleek white server towers placed diagonally on a white reflective surface, connected by a high-speed blue luminous data beam transferring floating digital document files, bright modern tech studio lighting, no text.
+```
+
+---
+
+### 114. GPS
 - **Файл:** `gps.png`
 - **Термин:** GPS (Global Positioning System)
 - **Prompt:**
@@ -841,7 +1151,7 @@ A miniature globe model on a white desk with three orbiting satellite beams inte
 
 ---
 
-### 84. GUI (Graphical User Interface)
+### 115. GUI (Graphical User Interface)
 - **Файл:** `gui-graphical-user-interface.png`
 - **Термин:** GUI (Графичен потребителски интерфейс)
 - **Prompt:**
@@ -851,7 +1161,7 @@ A modern touchscreen monitor displaying sleek pastel graphical UI cards, toggles
 
 ---
 
-### 85. Handover (Хендоувър)
+### 116. Handover (Хендоувър)
 - **Файл:** `handover-hendouvar.png`
 - **Термин:** Handover (Хендоувър)
 - **Prompt:**
@@ -861,7 +1171,7 @@ A moving smartphone smoothly transferring a continuous glowing wireless beam bet
 
 ---
 
-### 86. HDD (Hard Disk Drive)
+### 117. HDD (Hard Disk Drive)
 - **Файл:** `hdd-hard-disk-drive.png`
 - **Термин:** HDD (Твърд диск)
 - **Prompt:**
@@ -871,7 +1181,7 @@ An open hard disk drive (HDD) showing the mirror-like shiny magnetic platter and
 
 ---
 
-### 87. IP адрес
+### 118. IP адрес
 - **Файл:** `ip-adres.png`
 - **Термин:** IP адрес
 - **Prompt:**
@@ -881,7 +1191,7 @@ A high-tech digital network router on a white table with an Ethernet cable plugg
 
 ---
 
-### 88. LAN
+### 119. LAN
 - **Файл:** `lan.png`
 - **Термин:** LAN (Local Area Network)
 - **Prompt:**
@@ -891,7 +1201,7 @@ A clean yellow Ethernet network cable with a clear RJ45 connector plugged into a
 
 ---
 
-### 89. LMS (Learning Management System)
+### 120. LMS (Learning Management System)
 - **Файл:** `lms-learning-management-system.png`
 - **Термин:** LMS (Learning Management System)
 - **Prompt:**
@@ -901,7 +1211,7 @@ A student tablet and stylus pen resting on an open textbook on a bright wooden s
 
 ---
 
-### 90. LTPO AMOLED
+### 121. LTPO AMOLED
 - **Файл:** `ltpo-amoled.png`
 - **Термин:** LTPO AMOLED дисплей
 - **Prompt:**
@@ -911,7 +1221,7 @@ Macro studio shot of a smartphone screen edge displaying vibrant colors with a s
 
 ---
 
-### 91. MAN
+### 122. MAN
 - **Файл:** `man.png`
 - **Термин:** MAN (Metropolitan Area Network)
 - **Prompt:**
@@ -921,7 +1231,7 @@ A clean 3D miniature architectural model of a modern smart city with glowing fib
 
 ---
 
-### 92. MTP (Media Transfer Protocol)
+### 123. MTP (Media Transfer Protocol)
 - **Файл:** `mtp-media-transfer-protocol.png`
 - **Термин:** MTP (Media Transfer Protocol)
 - **Prompt:**
@@ -931,7 +1241,7 @@ A sleek smartphone connected via a white braided USB-C cable to a laptop on a cl
 
 ---
 
-### 93. NFC (Near Field Communication)
+### 124. NFC (Near Field Communication)
 - **Файл:** `nfc-near-field-communication.png`
 - **Термин:** NFC (Near Field Communication)
 - **Prompt:**
@@ -941,7 +1251,7 @@ A smartphone tapped gently against a white contactless payment terminal, glowing
 
 ---
 
-### 94. Peer-to-Peer (P2P)
+### 125. Peer-to-Peer (P2P)
 - **Файл:** `peer-to-peer-p2p.png`
 - **Термин:** Peer-to-Peer (P2P)
 - **Prompt:**
@@ -951,7 +1261,17 @@ Four identical laptops arranged in a circle on a white table, sharing data direc
 
 ---
 
-### 95. RAM (Оперативна памет)
+### 126. Plug and Play (PnP)
+- **Файл:** `plug-and-play-pnp.png`
+- **Термин:** Plug and Play (PnP)
+- **Prompt:**
+```text
+A hand smoothly plugging a sleek USB-C cable into a modern laptop port, instantly creating an illuminated soft cyan circular pulse indicating automatic recognition, bright daylight, clean educational tech photo, no text.
+```
+
+---
+
+### 127. RAM (Оперативна памет)
 - **Файл:** `ram-operativna-pamet.png`
 - **Термин:** RAM (Оперативна памет)
 - **Prompt:**
@@ -961,7 +1281,7 @@ Two high-speed desktop DDR5 RAM memory modules with clean white aluminium heat s
 
 ---
 
-### 96. ROM / Firmware
+### 128. ROM / Firmware
 - **Файл:** `rom-firmware.png`
 - **Термин:** ROM / Firmware
 - **Prompt:**
@@ -971,7 +1291,17 @@ Macro studio photograph of an 8-pin BIOS EEPROM microchip soldered on a motherbo
 
 ---
 
-### 97. SoC (System on a Chip)
+### 129. SMTP
+- **Файл:** `smtp.png`
+- **Термин:** SMTP (Simple Mail Transfer Protocol)
+- **Prompt:**
+```text
+A conceptual 3D composition with a glowing paper plane envelope flying across a clean network bridge towards a sleek white server tower, pure white background, soft ambient illumination, modern tech visualization, no text.
+```
+
+---
+
+### 130. SoC (System on a Chip)
 - **Файл:** `soc-system-on-a-chip.png`
 - **Термин:** SoC (System on a Chip)
 - **Prompt:**
@@ -981,7 +1311,7 @@ Close-up macro of an ultra-thin smartphone System-on-Chip (SoC) sitting beside a
 
 ---
 
-### 98. SSD (Solid State Drive)
+### 131. SSD (Solid State Drive)
 - **Файл:** `ssd-solid-state-drive.png`
 - **Термин:** SSD (Solid State Drive)
 - **Prompt:**
@@ -991,7 +1321,27 @@ An M.2 NVMe SSD module with visible black NAND flash chips and gold PCIe pins, l
 
 ---
 
-### 99. TCP/IP
+### 132. Subtotal
+- **Файл:** `subtotal.png`
+- **Термин:** Subtotal (Междинни суми в електронни таблици)
+- **Prompt:**
+```text
+A clean modern spreadsheet interface with organized alternating colored row blocks and highlighted summary totals displayed on a high-resolution laptop screen on a white wooden desk, soft natural window light, no readable words, no text.
+```
+
+---
+
+### 133. TCP
+- **Файл:** `tcp.png`
+- **Термин:** TCP (Transmission Control Protocol)
+- **Prompt:**
+```text
+A 3D physical representation of sequential numbered data packet cubes crossing a secure verified network channel on a white surface, with glowing checkmarks confirming packet receipt, clean educational tech design, no text.
+```
+
+---
+
+### 134. TCP/IP
 - **Файл:** `tcp-ip.png`
 - **Термин:** TCP/IP
 - **Prompt:**
@@ -1001,7 +1351,7 @@ A network patch panel in a clean white server cabinet with neatly organized patc
 
 ---
 
-### 100. UFS (Universal Flash Storage)
+### 135. UFS (Universal Flash Storage)
 - **Файл:** `ufs-universal-flash-storage.png`
 - **Термин:** UFS (Universal Flash Storage)
 - **Prompt:**
@@ -1011,7 +1361,7 @@ An ultra-compact BGA flash storage microchip for mobile phones resting on a clea
 
 ---
 
-### 101. WAN
+### 136. WAN
 - **Файл:** `wan.png`
 - **Термин:** WAN (Wide Area Network)
 - **Prompt:**
@@ -1021,10 +1371,22 @@ A stylized artistic 3D globe made of polished white ceramic with glowing contine
 
 ---
 
-### 102. Wi-Fi Direct (Quick Share / AirDrop)
+### 137. Wi-Fi Direct (Quick Share / AirDrop)
 - **Файл:** `wi-fi-direct-quick-share-airdrop.png`
 - **Термин:** Wi-Fi Direct (Quick Share / AirDrop)
 - **Prompt:**
 ```text
 Two modern smartphones placed side-by-side on a white oak desk, transferring an animated luminous glowing file beam directly between their screens without cables, bright daylight, no text.
 ```
+
+---
+
+### 138. WWW
+- **Файл:** `www.png`
+- **Термин:** WWW (World Wide Web)
+- **Prompt:**
+```text
+An artistic 3D sculpture of a glowing luminous web of interconnected glass spherical nodes and optical fiber links wrapping gracefully around a stylized white planet Earth, pure white studio background, high-end tech render, no text.
+```
+
+---

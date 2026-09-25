@@ -95,6 +95,41 @@ export function render(comp) {
           position: relative;
         }
 
+        .mta-card.answered-correct {
+          background: #f0fdf4 !important;
+          border-color: #86efac !important;
+        }
+
+        .mta-card.answered-wrong {
+          background: #fef2f2 !important;
+          border-color: #fca5a5 !important;
+        }
+
+        .mta-card.answered-correct .mta-actions,
+        .mta-card.answered-wrong .mta-actions {
+          display: none;
+        }
+
+        .mta-result-badge {
+          font-size: 0.76rem;
+          font-weight: 700;
+          padding: 2px 8px;
+          border-radius: 6px;
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+        }
+
+        .mta-result-badge.correct {
+          background: #dcfce7;
+          color: #166534;
+        }
+
+        .mta-result-badge.wrong {
+          background: #fee2e2;
+          color: #991b1b;
+        }
+
         .mta-card-head {
           display: flex;
           align-items: center;
@@ -126,52 +161,52 @@ export function render(comp) {
         .mta-actions {
           display: flex;
           justify-content: center;
-          gap: 14px;
+          gap: 16px;
         }
 
         .mta-btn {
-          padding: 8px 22px;
-          border-radius: 8px;
-          font-size: 0.88rem;
-          font-weight: 700;
+          padding: 8px 24px;
+          border-radius: 10px;
+          font-size: 1.35rem;
+          line-height: 1;
           cursor: pointer;
           border: 1px solid #cbd5e1;
           background: #ffffff;
-          color: #334155;
           display: inline-flex;
           align-items: center;
-          gap: 8px;
+          justify-content: center;
+          min-width: 64px;
           transition: all 0.2s ease;
+          user-select: none;
         }
 
         .mta-btn:hover:not(:disabled) {
           border-color: #2563eb;
-          color: #1d4ed8;
-          transform: translateY(-1px);
+          transform: translateY(-2px) scale(1.06);
+          box-shadow: 0 4px 10px rgba(37,99,235,0.15);
         }
 
         .mta-btn.btn-fact:hover:not(:disabled) {
           border-color: #10b981;
           background: #ecfdf5;
-          color: #047857;
         }
 
         .mta-btn.btn-myth:hover:not(:disabled) {
           border-color: #ef4444;
           background: #fef2f2;
-          color: #b91c1c;
         }
 
         .mta-btn.selected-correct {
           background: #10b981 !important;
           border-color: #059669 !important;
-          color: #ffffff !important;
+          box-shadow: 0 0 10px rgba(16, 185, 129, 0.35);
+          transform: scale(1.05);
         }
 
         .mta-btn.selected-wrong {
           background: #ef4444 !important;
           border-color: #dc2626 !important;
-          color: #ffffff !important;
+          box-shadow: 0 0 10px rgba(239, 68, 68, 0.35);
         }
       </style>
 
@@ -190,11 +225,11 @@ export function render(comp) {
             </div>
             <div class="mta-claim-text">${esc(item.claim)}</div>
             <div class="mta-actions">
-              <button type="button" class="mta-btn btn-fact" data-choice="true" title="Да">
-                <i class="fas fa-thumbs-up" aria-hidden="true"></i> Да
+              <button type="button" class="mta-btn btn-fact" data-choice="true" title="Да" aria-label="Да">
+                👍
               </button>
-              <button type="button" class="mta-btn btn-myth" data-choice="false" title="Не">
-                <i class="fas fa-thumbs-down" aria-hidden="true"></i> Не
+              <button type="button" class="mta-btn btn-myth" data-choice="false" title="Не" aria-label="Не">
+                👎
               </button>
             </div>
           </div>
@@ -221,12 +256,21 @@ export function init(comp) {
 
         btns.forEach(b => { b.disabled = true; });
 
+        const head = card.querySelector('.mta-card-head');
+        const badge = document.createElement('span');
+
         if (isCorrect) {
-          btn.classList.add('selected-correct');
+          card.classList.add('answered-correct');
+          badge.className = 'mta-result-badge correct';
+          badge.innerHTML = '<i class="fas fa-check"></i> Вярно';
         } else {
-          btn.classList.add('selected-wrong');
-          const correctBtn = card.querySelector(`.mta-btn[data-choice="${isFact}"]`);
-          if (correctBtn) correctBtn.classList.add('selected-correct');
+          card.classList.add('answered-wrong');
+          badge.className = 'mta-result-badge wrong';
+          badge.innerHTML = '<i class="fas fa-xmark"></i> Грешно';
+        }
+
+        if (head) {
+          head.appendChild(badge);
         }
       };
     });

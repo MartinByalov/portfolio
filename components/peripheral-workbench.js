@@ -162,21 +162,24 @@ export function render(comp) {
         }
 
         .pwb-btn-row {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 6px;
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 4px;
         }
 
         .pwb-select-btn {
           background: #ffffff;
           border: 1px solid #cbd5e1;
           border-radius: 6px;
-          padding: 6px 10px;
-          font-size: 0.78rem;
+          padding: 6px 2px;
+          font-size: 0.70rem;
           font-weight: 600;
           color: #334155;
           cursor: pointer;
           transition: all 0.15s ease;
+          text-align: center;
+          white-space: nowrap;
+          letter-spacing: -0.2px;
         }
 
         .pwb-select-btn:hover:not(:disabled) {

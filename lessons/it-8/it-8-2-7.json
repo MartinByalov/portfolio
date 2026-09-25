@@ -460,7 +460,7 @@
             {
               "type": "mobile-tech-auditor",
               "id": "mobile-tech-auditor",
-              "title": "Мобилни технологии: Факт или заблуда?"
+              "title": "Факт или заблуда?"
             }
           ]
         },
@@ -483,7 +483,7 @@
             {
               "type": "peripheral-workbench",
               "id": "peripheral-workbench",
-              "title": "Периферна работна станция: Свързване и роли"
+              "title": "Свързване и роли"
             }
           ]
         }
@@ -502,7 +502,7 @@
     {
       "type": "exercise-modal",
       "id": "discussionModal",
-      "title": "Дискусия: Коя конфигурация избираш?",
+      "title": "Коя конфигурация избираш?",
       "skipNav": true,
       "instructions": "<div class='exercise-instructions'><p class='exercise-text'>Разгледайте двете конфигурации по-долу:</p><p class='exercise-text'><b>Конфигурация А:</b> CPU 3.0 GHz (4 ядра), 8 GB RAM, 1 TB HDD, вградена видеокарта.<br><b>Конфигурация Б:</b> CPU 3.5 GHz (6 ядра), 16 GB RAM, 512 GB SSD, самостоятелна видеокарта 8 GB.</p><p class='exercise-text'>1. Коя конфигурация ще се справи по-добре при видеомонтаж или игри и защо?<br>2. Коя промяна би донесла най-голямо усещане за „по-бърз компютър“ при конфигурация А - повече RAM или смяна на HDD със SSD?<br>3. Кой компонент е „тясното място“ (bottleneck), ако видеокартата е мощна, но RAM паметта е само 4 GB?</p></div>",
       "resources": []

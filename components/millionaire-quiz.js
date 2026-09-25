@@ -69,23 +69,6 @@ export function render(comp) {
           margin: 0;
         }
 
-        .mq-autowin-btn {
-          background: rgba(234, 179, 8, 0.15);
-          border: 1px dashed #eab308;
-          color: #eab308;
-          padding: 4px 10px;
-          font-size: 0.76rem;
-          font-weight: 600;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: all 0.2s ease;
-        }
-
-        .mq-autowin-btn:hover {
-          background: #eab308;
-          color: #0f172a;
-        }
-
         /* Lifelines Bar */
         .mq-lifelines {
           display: flex;
@@ -375,7 +358,6 @@ export function render(comp) {
         <div class="mq-header">
           <div class="mq-title-group">
             <h3 class="mq-title">${esc(title)}</h3>
-            <button type="button" class="mq-autowin-btn" title="Преглед на победата при 1 000 000 KP">⚡ Автоматично решаване (тест)</button>
           </div>
 
           <div class="mq-lifelines">
@@ -524,7 +506,6 @@ export function init(comp) {
   const ladderItems = [...root.querySelectorAll('.mq-ladder-item')];
   const dialog = root.querySelector('.mq-dialog');
   const lifelineBtns = [...root.querySelectorAll('.mq-lifeline-btn')];
-  const autowinBtn = root.querySelector('.mq-autowin-btn');
 
   function shuffleOptions(qData) {
     const rawOpts = qData.options.map((opt, i) => ({ text: opt, isCorrect: i === qData.correctIndex }));
@@ -652,12 +633,6 @@ export function init(comp) {
         dialog.style.display = 'none';
       };
     }
-  }
-
-  if (autowinBtn) {
-    autowinBtn.onclick = () => {
-      triggerWin();
-    };
   }
 
   // Lifelines implementation

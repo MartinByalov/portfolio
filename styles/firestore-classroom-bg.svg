@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="650" viewBox="0 0 900 650" role="img" aria-labelledby="title">
+  <title id="title">Схема на документи в Firestore и връзките им с учебна среда</title>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1">
+      <stop stop-color="#0b0b0f"/>
+      <stop offset="1" stop-color="#281406"/>
+    </linearGradient>
+    <radialGradient id="glow"><stop stop-color="#ff9100" stop-opacity=".35"/><stop offset="1" stop-color="#ff9100" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M36 0H0V36" fill="none" stroke="#ffca28" stroke-opacity=".12"/></pattern>
+  </defs>
+  <rect width="900" height="650" fill="url(#bg)"/>
+  <rect width="900" height="650" fill="url(#grid)"/>
+  <circle cx="460" cy="185" r="340" fill="url(#glow)"/>
+  <g fill="none" stroke="#ffca28" stroke-width="3" stroke-opacity=".72">
+    <path d="M225 260H348M552 260h123M450 322v72"/>
+    <circle cx="225" cy="260" r="5" fill="#ffca28"/><circle cx="675" cy="260" r="5" fill="#ffca28"/>
+  </g>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <rect x="90" y="184" width="180" height="146" rx="18" fill="#20150d" stroke="#ff9100" stroke-opacity=".8" stroke-width="2"/>
+    <circle cx="180" cy="232" r="18" fill="#ff9100"/><path d="M140 295c4-28 24-40 40-40s36 12 40 40" fill="none" stroke="#ffca28" stroke-width="8" stroke-linecap="round"/>
+    <text x="180" y="316" fill="#fff4d6" font-size="16" font-weight="bold">УЧИТЕЛ</text>
+    <rect x="348" y="150" width="204" height="172" rx="20" fill="#402009" stroke="#ffca28" stroke-width="3"/>
+    <ellipse cx="450" cy="210" rx="43" ry="14" fill="#ffca28"/>
+    <path d="M407 210v52c0 19 86 19 86 0v-52M407 235c0 19 86 19 86 0" fill="none" stroke="#ff9100" stroke-width="8"/>
+    <text x="450" y="300" fill="#fff4d6" font-size="20" font-weight="bold">FIRESTORE</text>
+    <rect x="630" y="184" width="180" height="146" rx="18" fill="#20150d" stroke="#ff9100" stroke-opacity=".8" stroke-width="2"/>
+    <circle cx="720" cy="232" r="18" fill="#ff9100"/><path d="M680 295c4-28 24-40 40-40s36 12 40 40" fill="none" stroke="#ffca28" stroke-width="8" stroke-linecap="round"/>
+    <text x="720" y="316" fill="#fff4d6" font-size="16" font-weight="bold">УЧЕНИК</text>
+    <rect x="298" y="394" width="304" height="58" rx="12" fill="#24170b" stroke="#ffca28" stroke-opacity=".8" stroke-width="2"/>
+    <text x="450" y="430" fill="#fff0c2" font-size="17" font-weight="bold">teachers / students / sessions</text>
+  </g>
+</svg>

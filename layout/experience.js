@@ -15,16 +15,23 @@ export function renderExperiencePage() {
                     <h3 class="column-header"><i class="fas fa-briefcase"></i> Професионален опит</h3>
                     <div class="timeline">
                         <div class="timeline-item">
-                            <div class="timeline-date">2025 - </div>
+                            <div class="timeline-date">2025 - 2026</div>
                             <h4 class="timeline-title">Учител по информационни технологии</h4>
                             <p class="timeline-location">СПГ „Княгиня Евдокия“, гр. София</p>
-                            <p class="timeline-desc">Обучение на ученици от VIII до XII клас</p>
+                            <ul class="timeline-desc">
+                                <li>Преподаване на ИТ (VIII - X клас).</li>
+                                <li>Преподаване на професионални дисциплини и учебни практики по специалност „Икономическо информационно осигуряване“ (XI, XII клас).</li>
+                                <li>Подготовка на учениците за държавен изпит за придобиване на професионална квалификация.</li>
+                            </ul>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-date">2023 - 2024</div>
-                            <h4 class="timeline-title">Учител по информационни технологии</h4>
+                            <h4 class="timeline-title">Учител по компютърно моделиране и информационни технологии</h4>
                             <p class="timeline-location">131 СУ „Климент А. Тимирязев“, гр. София</p>
-                            <p class="timeline-desc">Преподаване на ученици от V до XI клас</p>
+                            <ul class="timeline-desc">
+                                <li>Преподаване на КМИТ (V - VII клас).</li>
+                                <li>Преподаване на ИТ в профилирана подготовка (VIII - XI клас).</li>
+                            </ul>
                             <div class="item-links">
                                 <a href="https://131su.eu/events.php?id=677" target="_blank" class="timeline-link"><i
                                         class="fas fa-link"></i> НОИТ</a>
@@ -34,10 +41,10 @@ export function renderExperiencePage() {
                             </div>
                         </div>
                         <div class="timeline-item">
-                            <div class="timeline-date">2022 - 2022</div>
+                            <div class="timeline-date">2022</div>
                             <h4 class="timeline-title">Учител по информационни технологии</h4>
                             <p class="timeline-location">2АЕГ „Томас Джеферсън“, гр. София</p>
-                            <p class="timeline-desc">Обучение на ученици от VIII до XI клас</p>
+                            <p class="timeline-desc">Преподаване на ИТ (VIII - XI клас).</p>
                             <div class="item-links">
                                 <a href="https://martinbyalov.github.io/gallery/" target="_blank"
                                     class="timeline-link"><i class="fas fa-external-link-alt"></i> Проект: Галерия</a>
@@ -51,14 +58,12 @@ export function renderExperiencePage() {
                     <h3 class="column-header"><i class="fas fa-graduation-cap"></i> Образование</h3>
                     <div class="timeline">
                         <div class="timeline-item">
-                            <div class="timeline-date">2017 - 2023</div>
-                            <h4 class="timeline-title">СУ "Св. Климент Охридски"</h4>
+                            <div class="timeline-date">2017 - 2024</div>
+                            <h4 class="timeline-title">Бакалавър по математика и информатика</h4>
+                            <p class="timeline-location">СУ „Св. Климент Охридски“, ФМИ, гр. София</p>
                             <a href="https://students.nacid.bg/graduated" target="_blank" class="timeline-link">
-                                <p class="timeline-location">Диплома Серия А-2023 СУ / № 273356</p>
+                                Диплома Серия А-2023 СУ / № 273356
                             </a>
-                            <p class="timeline-desc">Бакалавър - Педагогика на обучението по математика и информатика
-                            </p>
-
                             <hr class="experience-separator">
 
                             <div class="extra-activities">
@@ -83,6 +88,11 @@ export function renderExperiencePage() {
                                 <a href="experiences/newfriend/index.html" target="_blank"
                                     class="badge-link"><i class="fas fa-chevron-right"></i> Олимпиада по компютърно моделиране · IV клас</a>
                             </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2002 - 2014</div>
+                            <h4 class="timeline-title">Профил „География и английски език“</h4>
+                            <p class="timeline-location">ХГ „Св. св. Кирил и Методий“, гр. Добрич</p>
                         </div>
                     </div>
                 </div>

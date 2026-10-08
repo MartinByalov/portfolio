@@ -21,22 +21,22 @@ const TRAINING_TOOLS = [
   { img: 'https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/domino.png',          alt: 'Domino Pub.',       label: 'Изд. ДОМИНО',       href: 'https://ebook.domino.bg/' },
   { img: 'https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/smartDraw.png',       alt: 'SmartDraw',         label: 'SmartDraw',         href: 'https://www.smartdraw.com/' },
   { img: 'https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/sqlOnline.png',       alt: 'SQLite Online',     label: 'SQLite Online',     href: 'https://sqliteonline.com/' },
-  { img: 'https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/logicLy.png',         alt: 'Logic.ly',          label: 'Logic.ly',          href: 'https://logic.ly/demo/' }
+  { img: 'https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/logicLy.png',         alt: 'Logic.ly',          label: 'Logic.ly',          href: 'https://logic.ly/demo/' },
+  { img: 'https://cdn.jsdelivr.net/npm/devicon@2.17.0/icons/vscode/vscode-original.svg', alt: 'VS Code', label: 'VS Code', href: 'https://code.visualstudio.com/', compactIcon: true },
+  { img: 'https://cdn.jsdelivr.net/npm/devicon@2.17.0/icons/canva/canva-original.svg', alt: 'Canva', label: 'Canva', href: 'https://www.canva.com/', compactIcon: true },
+  { img: 'https://cdn.jsdelivr.net/npm/devicon@2.17.0/icons/pycharm/pycharm-original.svg', alt: 'PyCharm', label: 'PyCharm', href: 'https://www.jetbrains.com/pycharm/', compactIcon: true },
+  { img: 'https://cdn.jsdelivr.net/npm/simple-icons@15.16.0/icons/phpmyadmin.svg', alt: 'phpMyAdmin', label: 'phpMyAdmin', href: 'https://www.phpmyadmin.net/', compactIcon: true },
+  { img: 'https://cdn.jsdelivr.net/npm/devicon@2.17.0/icons/illustrator/illustrator-plain.svg', alt: 'Adobe Illustrator', label: 'Adobe Illustrator', href: 'https://www.adobe.com/products/illustrator.html', compactIcon: true },
+  { img: 'https://cdn.jsdelivr.net/npm/devicon@2.17.0/icons/photoshop/photoshop-original.svg', alt: 'Adobe Photoshop', label: 'Adobe Photoshop', href: 'https://www.adobe.com/products/photoshop.html', compactIcon: true },
+  { img: 'https://cdn.jsdelivr.net/npm/simple-icons@15.16.0/icons/render.svg', alt: 'Render', label: 'Render', href: 'https://render.com/', compactIcon: true },
+  { img: 'https://cdn.prod.website-files.com/635c4eeb78332f7971255095/6a8878772637f1f7a109128e_Frame%2012.png', alt: 'Botpress', label: 'Botpress', href: 'https://botpress.com/', compactIcon: true },
+  { img: 'https://www.gstatic.com/images/branding/product/2x/notebooklm_48dp.png', alt: 'NotebookLM', label: 'NotebookLM', href: 'https://notebooklm.google.com/', compactIcon: true }
 ];
 
 const SKILLS_PROG = [
-  { name: 'Java/C#',    level: 85 },
-  { name: 'JavaScript', level: 90 },
-  { name: 'HTML/CSS',   level: 95 },
-  { name: 'MySQL',      level: 75 },
-  { name: 'Git',        level: 80 }
-];
-
-const SKILLS_TOOLS = [
-  { name: 'Google Workspace', level: 90 },
-  { name: 'MS Office',        level: 85 },
-  { name: 'VS Code',          level: 80 },
-  { name: 'Canva',            level: 75 },
+  'Microsoft Office', 'Google Workspace', 'HTML', 'CSS', 'GitHub',
+  'JavaScript', 'Python', 'SQL', 'Node.js', 'Express', 'Firebase',
+  'Java', 'C#', 'Hugging Face', '?'
 ];
 
 function renderTrack(items, renderFn) {
@@ -55,25 +55,22 @@ function renderZadanieTool(t) {
 function renderTrainingTool(t) {
   return `
     <a href="${t.href}" class="tool-item" target="_blank" rel="noopener">
-      <span class="tool-icon-main"><img src="${t.img}" alt="${t.alt}"></span>
+      <span class="tool-icon-main"><img src="${t.img}" alt="${t.alt}"${t.compactIcon ? ' class="tool-icon-compact"' : ''}></span>
       <span class="tool-label">${t.label}</span>
     </a>`;
 }
 
-function renderBars(list) {
-  return list.map(s => `
-    <div class="skill-column">
-      <div class="bar-container"><div class="bar-fill" style="height: ${s.level}%;"></div></div>
-      <span class="skill-name">${s.name}</span>
-    </div>
-  `).join('');
+function renderSteps() {
+  return SKILLS_PROG.map((skill, index) => `
+    <div class="skill-step" style="--step: ${index};">
+      <i class="skill-step-person fas fa-person-walking" aria-hidden="true"></i>
+      <span class="skill-step-name">${skill}</span>
+    </div>`).join('');
 }
 
 export function renderPortfolioPage() {
   const zadanieTrack = renderTrack(ZADANIE_TOOLS, renderZadanieTool);
   const trainingTrack = renderTrack(TRAINING_TOOLS, renderTrainingTool);
-  const progBars = renderBars(SKILLS_PROG);
-  const toolsBars = renderBars(SKILLS_TOOLS);
 
   return `
     <div class="slider-container">
@@ -115,27 +112,23 @@ export function renderPortfolioPage() {
             <blockquote class="teacher-motto" style="color: #f5762d;">~</blockquote>
           </div>
 
-          <div class="profile-summary-row">
-            <div class="profile-square-img">
-              <img src="https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/profile.jpg" alt="Мартин Бялов" onerror="this.style.display='none'">
+          <div class="profile-overview">
+            <div class="profile-summary-row">
+              <div class="profile-square-img">
+                <img src="https://cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/other/profile.jpg" alt="Мартин Бялов" onerror="this.style.display='none'">
+              </div>
+              <div class="profile-info-text">
+                <p class="teacher-role">Учител по ИТ</p>
+                <p class="teacher-experience">Години опит: <span role="img" aria-label="2">2️⃣</span></p>
+                <div class="profile-action-btn">
+                  <a href="#/experience" class="simple-exp-btn">Професионален опит <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                </div>
+              </div>
             </div>
-            <div class="profile-info-text">
-              <p class="teacher-degree">Бакалавър по Педагогика на обучението по математика и информатика</p>
-              <p class="teacher-school">Учител по ИТ, гр. София</p>
-            </div>
-            <div class="profile-action-btn">
-              <a href="#/experience" class="simple-exp-btn">Професионален опит <i class="fas fa-arrow-right"></i></a>
-            </div>
-          </div>
-
-          <div class="dual-skills-container">
-            <div class="skills-block-dark">
-              <h4 class="skills-title">Програмиране</h4>
-              <div class="skills-grid">${progBars}</div>
-            </div>
-            <div class="skills-block-dark">
-              <h4 class="skills-title">Инструменти</h4>
-              <div class="skills-grid">${toolsBars}</div>
+            <div class="profile-steps">
+              <div class="skill-steps-scroll" role="region" aria-label="Стъпки в технологиите - превъртете хоризонтално" tabindex="0">
+                <div class="skill-steps">${renderSteps()}</div>
+              </div>
             </div>
           </div>
 

@@ -1,4 +1,8 @@
 // Home landing page with subject cards and news feed
+import { newsImageCandidates } from '../utils/newsImages.js';
+
+const ENABLE_SUBJECT_ROTATION = false;
+const LANDING_COURSE_IDS = ['it-8', 'it-9', 'it-10'];
 
 const SUBJECT_CARDS = [
   { id: 'it-8', badge: '8 клас',  icon: 'fas fa-desktop',       title: 'ИТ',                       description: 'Основи на работа с компютър и MS Office.',                                 href: '#/course/it-8' },
@@ -51,8 +55,7 @@ export function renderLandingPage(catalog) {
     grade: grade.label
   })));
 
-  const initial = [...pool.slice(0, 3)];
-  while (initial.length < 3 && pool.length) initial.push(pool[initial.length % pool.length]);
+  const initial = LANDING_COURSE_IDS.map(id => pool.find(course => course.id === id)).filter(Boolean);
 
   const expCards = initial.map((course, i) => {
     const images = [
@@ -64,12 +67,10 @@ export function renderLandingPage(catalog) {
     <div class="exp-item${i === 0 ? ' active' : ''}" data-slot="${i}" style="background-image: url('${images[i % 3]}')">
       <div class="exp-item-desc">
         <h3>${escapeHtmlLanding(course.title)}</h3>
-        <p>${course.available
-          ? escapeHtmlLanding(course.description)
-          : `${escapeHtmlLanding(course.grade)} · Предстои.`}</p>
+        <p>${escapeHtmlLanding(course.description)}</p>
         ${course.available
           ? `<a href="#/course/${course.id}" class="exp-item-link">Уроци <i class="fas fa-arrow-right"></i></a>`
-          : '<span class="exp-item-soon">Скоро</span>'}
+          : '<span class="exp-item-soon">Предстои</span>'}
       </div>
     </div>`;
   }).join('');
@@ -208,7 +209,7 @@ async function fetchFeed(feedUrl, signal) {
     link: item.link,
     source: newsSiteFromLink(item.link) || site,
     date: '',
-    image: getBestImage(item)
+    images: newsImageCandidates(item)
   })).filter(item => item.title && item.link && !isSpamNews(item));
 }
 
@@ -229,38 +230,6 @@ function newsSiteFromLink(link) {
   try {
     return new URL(link).hostname.replace(/^www\./, '') || 'Новини';
   } catch { return 'Новини'; }
-}
-
-function getBestImage(item) {
-  const sources = [
-    item.thumbnail,
-    item.enclosure && item.enclosure.link,
-    extractImageFromContent(item.content || item.summary || ''),
-    item['media:content'] && item['media:content'].url,
-    item['media:thumbnail'] && item['media:thumbnail'].url
-  ].filter(Boolean);
-  return sources.length ? upgradeImageUrl(sources[0]) : '';
-}
-
-function extractImageFromContent(content) {
-  if (!content) return '';
-  const match = content.match(/<img[^>]+src=["']([^"']+)["']/i);
-  if (match) return match[1];
-  const ogMatch = content.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i);
-  if (ogMatch) return ogMatch[1];
-  return '';
-}
-
-function upgradeImageUrl(url) {
-  if (!url) return '';
-  url = url.replace(/-\d+x\d+\.(jpg|jpeg|png|gif)/i, '.$1');
-  url = url.replace(/\/(s|w)\d+\//, '/');
-  url = url.replace(/\/p\d+x\d+\//, '/');
-  if (url.includes('youtube.com') && url.includes('default.jpg')) {
-    url = url.replace('default.jpg', 'hqdefault.jpg');
-  }
-  if (url.startsWith('//')) url = 'https:' + url;
-  return url;
 }
 
 const FALLBACK_NEWS = {
@@ -331,10 +300,39 @@ function metaSiteLine(item) {
   return `<span class="news-source"><i class="fas fa-newspaper"></i> ${escapeHtmlLanding(String(item.source || 'Новини'))}</span>`;
 }
 
+// CSS backgrounds cannot report natural dimensions or failures. Keep the large
+// category image until an article image has actually loaded at adequate size.
+function loadLargeNewsImage(element, item) {
+  if (!element || !item) return;
+  const candidates = newsImageCandidates(item).slice(0, 6);
+  let index = 0;
+  function tryNext() {
+    if (!element.isConnected || index >= candidates.length) return;
+    const image = new Image();
+    const url = candidates[index++];
+    let timeout;
+    image.onload = () => {
+      clearTimeout(timeout);
+      if (image.naturalWidth >= 800 && image.naturalHeight >= 350) {
+        if (element.isConnected) element.style.backgroundImage = `url(${JSON.stringify(url)})`;
+      } else {
+        tryNext();
+      }
+    };
+    image.onerror = () => { clearTimeout(timeout); tryNext(); };
+    timeout = setTimeout(() => {
+      image.onload = image.onerror = null;
+      tryNext();
+    }, 5000);
+    image.src = url;
+  }
+  tryNext();
+}
+
 function renderFeaturedNews(item, source) {
   const src = source || item._source || { name: 'Technologies', label: 'Технологии' };
   const badge = `<span class="news-cat news-cat-${categoryClass(src)}">${escapeHtmlLanding(src.label || 'Новини')}</span>`;
-  const bgImg = item.image || CATEGORY_DEFAULT_IMAGES[src.name] || CATEGORY_DEFAULT_IMAGES.Technologies;
+  const bgImg = CATEGORY_DEFAULT_IMAGES[src.name] || CATEGORY_DEFAULT_IMAGES.Technologies;
   return `
     <article class="trending-featured" style="background-image: url('${escapeHtmlLanding(bgImg)}')">
       ${badge}
@@ -375,7 +373,7 @@ function renderMediumNews(item, source) {
   if (!item) return '';
   const src = source || item._source || { name: 'Innovations', label: 'Иновации' };
   const badge = `<span class="news-cat news-cat-${categoryClass(src)}">${escapeHtmlLanding(src.label || 'Новини')}</span>`;
-  const bgImg = item.image || CATEGORY_DEFAULT_IMAGES[src.name] || CATEGORY_DEFAULT_IMAGES.Innovations;
+  const bgImg = CATEGORY_DEFAULT_IMAGES[src.name] || CATEGORY_DEFAULT_IMAGES.Innovations;
   return `
     <article class="trending-medium" style="background-image: url('${escapeHtmlLanding(bgImg)}')">
       ${badge}
@@ -405,7 +403,7 @@ export function initLandingPage() {
     // Rotate subject cards
     try {
       const poolData = JSON.parse(slider.dataset.pool || '[]');
-      if (Array.isArray(poolData) && poolData.length > 3) {
+      if (ENABLE_SUBJECT_ROTATION && Array.isArray(poolData) && poolData.length > 3) {
         const cards = [...slider.querySelectorAll('.exp-item')];
         const images = [
           'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80',
@@ -425,9 +423,7 @@ export function initLandingPage() {
           if (!card || !course) return;
           card.style.backgroundImage = `url('${images[(slot - 1) % 3]}')`;
           card.querySelector('h3').textContent = course.title;
-          card.querySelector('p').textContent = course.available
-            ? course.description
-            : `${course.grade} · Предстои.`;
+          card.querySelector('p').textContent = course.description;
           const link = card.querySelector('a.exp-item-link, span.exp-item-soon');
           if (course.available) {
             const a = document.createElement('a');
@@ -438,7 +434,7 @@ export function initLandingPage() {
           } else {
             const s = document.createElement('span');
             s.className = 'exp-item-soon';
-            s.textContent = 'Скоро';
+            s.textContent = 'Предстои';
             link?.replaceWith(s);
           }
         }, 5000);
@@ -499,6 +495,9 @@ export function initLandingPage() {
         renderSideNews(third, third?._source || boxes.Science?.source) +
       `</div>` +
       renderMediumNews(fourth, fourth?._source || boxes.Innovations?.source);
+
+    loadLargeNewsImage(grid.querySelector('.trending-featured'), first);
+    loadLargeNewsImage(grid.querySelector('.trending-medium'), fourth);
 
     // Ticker with fresh, non-overlapping items
     const ticker = document.getElementById('news-ticker');

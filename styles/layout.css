@@ -806,6 +806,11 @@ body.dark-mode .course-link.active {
   min-height: 64px;
 }
 
+/* Keep upcoming-only sections expandable, but visually distinguish them. */
+.course-main .course-section-pending > .accordion-header {
+  opacity: 0.48;
+}
+
 /* Reset margin to align title with expand arrow */
 .course-main .accordion-header .card-title {
   flex: 1;
@@ -1436,6 +1441,14 @@ button.lesson-tag:hover {
   justify-content: center;
   border-radius: 50%;
   font-size: 18px;
+}
+
+.footer-other {
+  margin-top: 24px;
+}
+
+.footer-other .footer-wix-buttons {
+  margin-top: 0;
 }
 
 .footer-wix-buttons {

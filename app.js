@@ -296,9 +296,9 @@ async function route() {
       } else if (sub === 'charts' || sub === 'graph-js') {
         Header.setTitle('Диаграми с Graph.js', 'fa-solid fa-chart-line');
         document.title = `Диаграми с Graph.js - ${siteSuffix}`;
-      } else if (sub === 'firestore-classroom') {
-        Header.setTitle('Firestore classroom система', 'fa-solid fa-database');
-        document.title = `Firestore classroom система - ${siteSuffix}`;
+      } else if (sub === 'firestore-collections' || sub === 'firestore-classroom') {
+        Header.setTitle('Firestore колекции', 'fa-solid fa-database');
+        document.title = `Firestore колекции - ${siteSuffix}`;
       } else {
         Header.setTitle('Блог', 'fa-solid fa-shapes');
         document.title = `Блог - ${siteSuffix}`;

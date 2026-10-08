@@ -24,8 +24,8 @@ export function renderOtherPage(subRoute) {
   if (subRoute === 'charts' || subRoute === 'graph-js') {
     return renderChartsTutorial();
   }
-  if (subRoute === 'firestore-classroom') {
-    return renderFirestoreClassroomTutorial();
+  if (subRoute === 'firestore-collections' || subRoute === 'firestore-classroom') {
+    return renderFirestoreCollectionsTutorial();
   }
   return renderCardsCatalog();
 }
@@ -49,6 +49,8 @@ export async function initOtherPage(subRoute) {
     initNftTutorialDemo();
   } else if (subRoute === 'charts' || subRoute === 'graph-js') {
     initChartsTutorialDemo();
+  } else if (subRoute === 'firestore-collections' || subRoute === 'firestore-classroom') {
+    initFirestoreCollectionsDemo();
   }
 }
 
@@ -74,7 +76,7 @@ function renderCardsCatalog() {
             <div class="other-card-body">
               <h2 class="other-card-title">Създаване на генератор на NFT</h2>
               <p class="other-card-desc">
-                Поетапно изграждане на генератор на уникални пиксел-арт образи с HTML5 Canvas, многослойна PNG композиция и претеглена рядкост (Rarity).
+                Генератор на уникални пиксел-арт образи с HTML5 Canvas, PNG слоеве и различна рядкост на чертите.
               </p>
             </div>
 
@@ -101,7 +103,7 @@ function renderCardsCatalog() {
             <div class="other-card-body">
               <h2 class="other-card-title">Видове диаграми с Graph.js</h2>
               <p class="other-card-desc">
-                Пълно практическо ръководство за линейни, стълбовидни, кръгови (Pie / Doughnut) и радарни графики с анимации и конзола за тестване на живо.
+                Създаване на диаграми с Graph.js - линейни, стълбовидни, кръгови и радарни графики.
               </p>
             </div>
 
@@ -113,8 +115,8 @@ function renderCardsCatalog() {
           </div>
         </a>
 
-        <!-- КАРТА 3: FIRESTORE И CLASSROOM АРХИТЕКТУРА -->
-        <a href="#/blog/firestore-classroom" class="other-card firestore-card" id="cardFirestoreClassroom">
+        <!-- КАРТА 3: FIRESTORE КОЛЕКЦИИ -->
+        <a href="#/blog/firestore-collections" class="other-card firestore-card" id="cardFirestoreClassroom">
           <div class="other-card-content">
             <div class="other-card-badge-row">
               <span class="other-card-badge green">
@@ -126,9 +128,9 @@ function renderCardsCatalog() {
             </div>
 
             <div class="other-card-body">
-              <h2 class="other-card-title">Firestore зад classroom система</h2>
+              <h2 class="other-card-title">Firestore колекции</h2>
               <p class="other-card-desc">
-                Как collection, document, cookies и Express sessions изграждат еднопосочна classroom система, в която учителят има акаунт, а учениците работят без регистрация.
+                Съхраняване на данни в колекции и документи в Cloud Firestore и извличане на записи със заявки.
               </p>
             </div>
 
@@ -145,163 +147,189 @@ function renderCardsCatalog() {
 }
 
 // =============================================================
-// Firestore classroom architecture tutorial view
+// Firestore collections article
 // =============================================================
-function renderFirestoreClassroomTutorial() {
+function renderFirestoreCollectionsTutorial() {
   return `
-    <div class="tutorial-view-container">
+    <div class="tutorial-view-container firestore-article">
       <div class="tutorial-top-bar">
         <a href="#/blog" class="tutorial-back-btn">
           <i class="fa-solid fa-arrow-left"></i> Обратно
         </a>
       </div>
 
-      <header class="tut-header theme-green">
+      <header class="tut-header theme-firestore">
         <div class="tut-header-inner">
-          <div class="tut-header-logo" style="color: #34d399;">
+          <div class="tut-header-logo">
             <i class="fa-solid fa-database"></i>
           </div>
           <div>
-            <div class="tut-header-meta">TUTORIAL // FIREBASE // FIRESTORE // EXPRESS SESSIONS</div>
-            <h1>Firestore зад еднопосочна classroom система</h1>
+            <div class="tut-header-meta">FIREBASE // CLOUD FIRESTORE</div>
+            <h1>Firestore колекции</h1>
             <p>
-              Реалният модел зад <strong>zadanie</strong>: учителят се удостоверява с Google, учениците нямат акаунти, а Firestore пази учители, настройки за задания, OAuth токени и server-side сесии.
+              Как се съхраняват данни в Cloud Firestore и как приложението чете, записва и търси документи.
             </p>
             <div class="tut-header-nav">
-              <a href="#tut-firestore-model" class="tut-header-pill">1. Collection и document</a>
-              <a href="#tut-collections" class="tut-header-pill">2. Четирите collections</a>
-              <a href="#tut-session-flow" class="tut-header-pill">3. Cookie и session</a>
-              <a href="#tut-classroom-flow" class="tut-header-pill">4. Classroom поток</a>
-              <a href="#tut-security" class="tut-header-pill">5. Сигурност</a>
+              <a href="#tut-firestore-intro" class="tut-header-pill">1. Firebase и Firestore</a>
+              <a href="#tut-firestore-model" class="tut-header-pill">2. Колекции и документи</a>
+              <a href="#tut-firestore-queries" class="tut-header-pill">3. Запис и заявки</a>
+              <a href="#tut-firestore-access" class="tut-header-pill">4. Достъп до данните</a>
             </div>
           </div>
         </div>
       </header>
 
       <main class="tut-main">
+        <section class="tut-section firestore-section" id="tut-firestore-intro">
+          <div class="sh"><span class="sh-badge bg-orange">01</span><h2>Какво са Firebase и Firestore?</h2><span class="line"></span></div>
+          <p><strong>Firebase</strong> е платформа на Google с услуги за разработване на приложения. Една от тези услуги е <strong>Cloud Firestore</strong> - облачна база данни, в която приложението може да съхранява информация и да прави заявки към нея.</p>
+          <p>Например каталог с книги може да запазва заглавие, автор и жанр за всяка книга. После може да извлече всички книги или само тези от определен жанр. Данните са достъпни за приложението чрез Firebase SDK, а правилата за сигурност определят кой има право да ги чете или променя.</p>
+          <div class="callout-highlight-box"><span>Firestore съхранява структурирани данни като текст, числа и полета в документи. За самите изображения и други големи файлове се използва отделна услуга, например Cloud Storage for Firebase, а в документа може да се пази препратка към файла.</span></div>
+        </section>
+
         <div class="overview">
-          <div class="ov-card"><div class="icon">🗂️</div><h3>Collection</h3><p>Група от документи по общ смисъл, например <code>teachers</code>.</p></div>
-          <div class="ov-card"><div class="icon">📄</div><h3>Document</h3><p>Един запис с полета, например <code>teachers/{email}</code>.</p></div>
-          <div class="ov-card"><div class="icon">🍪</div><h3>Session cookie</h3><p><code>connect.sid</code> свързва браузъра със server-side session.</p></div>
-          <div class="ov-card"><div class="icon">🔐</div><h3>Учителски достъп</h3><p>Учителят има Google OAuth, ученикът използва публичен student flow.</p></div>
+          <div class="ov-card"><div class="icon">🗂️</div><h3>Колекция</h3><p>Група от документи, например <code>books</code>.</p></div>
+          <div class="ov-card"><div class="icon">📄</div><h3>Документ</h3><p>Запис с уникален ID и полета, например <code>books/book-1</code>.</p></div>
+          <div class="ov-card"><div class="icon">💾</div><h3>Запис</h3><p>Добавяне или промяна на полета в документ.</p></div>
+          <div class="ov-card"><div class="icon">🔎</div><h3>Заявка</h3><p>Извличане на документи по зададено условие.</p></div>
         </div>
 
-        <section class="tut-section" id="tut-firestore-model">
-          <div class="section-kicker green">1 // Моделът</div>
-          <h2>Collection не е таблица, document не е ред</h2>
-          <p>Firestore е NoSQL база данни. В нея данните се организират в <strong>collections</strong>, а всяка collection съдържа <strong>documents</strong>. Document има уникален ID и полета с данни.</p>
+        <div class="live-sandbox-block firestore-demo" id="tut-firestore-demo">
+          <div class="sandbox-header">
+            <div class="sandbox-title"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i> Проследи операцията</div>
+            <div class="sandbox-tabs" role="group" aria-label="Избери операция с Firestore">
+              <button type="button" class="sandbox-tab-btn active" data-firestore-flow="write" aria-pressed="true">Запис</button>
+              <button type="button" class="sandbox-tab-btn" data-firestore-flow="read" aria-pressed="false">Четене</button>
+              <button type="button" class="sandbox-tab-btn" data-firestore-flow="query" aria-pressed="false">Заявка</button>
+            </div>
+          </div>
+          <p class="firestore-demo-intro">Избери операция и щракни върху стъпка, за да видиш как се използват колекцията и документите. Примерът е локален и не изпраща данни към Firebase.</p>
+          <div class="firestore-demo-grid">
+            <ol class="firestore-demo-steps" id="firestoreDemoSteps" aria-label="Стъпки на избрания поток"></ol>
+            <div class="firestore-demo-detail" aria-live="polite">
+              <div class="firestore-demo-path" id="firestoreDemoPath"></div>
+              <p id="firestoreDemoExplanation"></p>
+              <div class="code-wrap">
+                <div class="code-bar"><div class="code-bar-left"><div class="code-dots"><div class="code-dot d-r"></div><div class="code-dot d-y"></div><div class="code-dot d-g"></div></div><span class="code-fname">Пример с Firebase Web SDK</span></div><button type="button" class="code-copy-btn" data-target="firestoreDemoCode">Копирай</button></div>
+                <pre class="code-body" id="firestoreDemoCode"></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section class="tut-section firestore-section" id="tut-firestore-model">
+          <div class="sh"><span class="sh-badge bg-orange">02</span><h2>Колекции, документи и полета</h2><span class="line"></span></div>
+          <p>Cloud Firestore е документна NoSQL база данни. Колекцията събира документи по тема. Всеки документ има уникален ID в своята колекция и полета със стойности. Например колекция <code>books</code> съдържа отделен документ за всяка книга.</p>
           <div class="schema-diagram">
-            <div class="schema-node schema-root"><strong>Firestore database</strong><span>проектът на приложението</span></div>
+            <div class="schema-node schema-root"><strong>Cloud Firestore</strong><span>база данни</span></div>
             <div class="schema-arrow">↓</div>
-            <div class="schema-node schema-collection"><strong>teachers</strong><span>collection</span></div>
+            <div class="schema-node schema-collection"><strong>books</strong><span>колекция</span></div>
             <div class="schema-arrow">↓</div>
-            <div class="schema-node schema-document"><strong>teachers/teacher@example.com</strong><span>document ID = имейл</span></div>
+            <div class="schema-node schema-document"><strong>books/book-1</strong><span>документ с ID book-1</span></div>
             <div class="schema-arrow">↓</div>
-            <div class="schema-fields"><span>name</span><span>subject</span><span>folderID</span></div>
+            <div class="schema-fields"><span>title</span><span>author</span><span>genre</span></div>
           </div>
           <div class="code-wrap">
-            <div class="code-bar"><div class="code-bar-left"><div class="code-dots"><div class="code-dot d-r"></div><div class="code-dot d-y"></div><div class="code-dot d-g"></div></div><span class="code-fname">firestore-path.js</span></div><button type="button" class="code-copy-btn" data-target="firestorePathCode">Копирай</button></div>
-            <pre class="code-body" id="firestorePathCode">const teacherRef = firestore
-  .collection('teachers')
-  .doc('teacher@example.com');
-
-const teacherSnapshot = await teacherRef.get();
-const teacher = teacherSnapshot.data();</pre>
-          </div>
-          <div class="callout-highlight-box"><span>Името на collection и document ID са част от договора между приложението и базата. Ако кодът търси <code>teachers/{email}</code>, промяна на структурата изисква промяна и в backend логиката.</span></div>
-        </section>
-
-        <section class="tut-section" id="tut-collections">
-          <div class="section-kicker blue">2 // Данните в zadanie</div>
-          <h2>Четири collections с различни роли</h2>
-          <p>В този проект collections не са четири еднакви „таблици“. Всяка има различна функция в authentication и classroom workflow-а.</p>
-          <div class="overview collection-overview">
-            <div class="ov-card"><h3><code>teachers</code></h3><p>Учителски профили и ID на папката с учебни материали.</p><code>teachers/{email}</code></div>
-            <div class="ov-card"><h3><code>students</code></h3><p>Конфигурация на upload папката за учениците, свързана с учител.</p><code>students/{teacherEmail}</code></div>
-            <div class="ov-card"><h3><code>tokens</code></h3><p>Server-side OAuth refresh token за достъп до Google Drive.</p><code>tokens/{email}</code></div>
-            <div class="ov-card"><h3><code>sessions</code></h3><p>Сесии от <code>express-session</code>, записани чрез Firestore store.</p><code>sessions/{sessionId}</code></div>
-          </div>
-          <div class="code-wrap">
-            <div class="code-bar"><div class="code-bar-left"><div class="code-dots"><div class="code-dot d-r"></div><div class="code-dot d-y"></div><div class="code-dot d-g"></div></div><span class="code-fname">collections.json</span></div><button type="button" class="code-copy-btn" data-target="collectionsCode">Копирай</button></div>
-            <pre class="code-body" id="collectionsCode">{
-  "teachers/teacher@example.com": {
-    "name": "Име на учителя",
-    "subject": "Информационни технологии",
-    "folderID": "google-drive-material-folder"
-  },
-  "students/teacher@example.com": {
-    "folderID": "google-drive-upload-folder"
-  },
-  "tokens/teacher@example.com": {
-    "refreshToken": "НЕ ПОКАЗВАЙ В КЛИЕНТА"
-  }
+            <div class="code-bar"><div class="code-bar-left"><div class="code-dots"><div class="code-dot d-r"></div><div class="code-dot d-y"></div><div class="code-dot d-g"></div></div><span class="code-fname">book.json</span></div><button type="button" class="code-copy-btn" data-target="firestorePathCode">Копирай</button></div>
+            <pre class="code-body" id="firestorePathCode">{
+  "title": "Под игото",
+  "author": "Иван Вазов",
+  "genre": "Роман"
 }</pre>
           </div>
-          <p class="tut-note"><strong>Методически въпрос:</strong> <code>students</code> е работещо име в текущия проект, но описва upload конфигурация, а не ученически акаунти. По-ясно име би било <code>teacherUploadFolders</code>. Съвместимостта със съществуващия код обаче също е реално ограничение.</p>
+          <div class="callout-highlight-box"><span>Пътят <code>books/book-1</code> означава документ <code>book-1</code> в колекция <code>books</code>. Полетата са вътре в документа, а не в самата колекция.</span></div>
         </section>
 
-        <section class="tut-section" id="tut-session-flow">
-          <div class="section-kicker purple">3 // Session и cookies</div>
-          <h2>Как браузърът остава разпознат</h2>
-          <p>HTTP заявките по принцип са независими. След OAuth login сървърът трябва да запомни кой е учителят. Това става чрез session.</p>
-          <div class="flow-row"><div class="flow-node">Браузър</div><div class="flow-connector">→</div><div class="flow-node"><strong>connect.sid</strong><small>cookie</small></div><div class="flow-connector">→</div><div class="flow-node"><strong>sessionId</strong><small>ключ за търсене</small></div><div class="flow-connector">→</div><div class="flow-node"><strong>sessions/{sessionId}</strong><small>Firestore document</small></div></div>
+        <section class="tut-section firestore-section" id="tut-firestore-queries">
+          <div class="sh"><span class="sh-badge bg-firestore-yellow">03</span><h2>Запис, четене и заявки</h2><span class="line"></span></div>
+          <p>Firebase Web SDK предоставя функции за работа с Firestore. С <code>setDoc</code> записваме документ с избран ID, с <code>getDoc</code> четем един документ, а с <code>getDocs</code> извличаме резултатите от заявка. Условието <code>where</code> филтрира документите по стойност на поле.</p>
           <div class="code-wrap">
-            <div class="code-bar"><div class="code-bar-left"><div class="code-dots"><div class="code-dot d-r"></div><div class="code-dot d-y"></div><div class="code-dot d-g"></div></div><span class="code-fname">session-options.js</span></div><button type="button" class="code-copy-btn" data-target="sessionCode">Копирай</button></div>
-            <pre class="code-body" id="sessionCode">app.use(session({
-  secret: process.env.SESSION_SECRET,
-  store: new FirestoreStore({
-    database: db,
-    collection: 'sessions'
-  }),
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    httpOnly: true,
-    sameSite: 'lax',
-    maxAge: 24 * 60 * 60 * 1000
-  }
-}));</pre>
+            <div class="code-bar"><div class="code-bar-left"><div class="code-dots"><div class="code-dot d-r"></div><div class="code-dot d-y"></div><div class="code-dot d-g"></div></div><span class="code-fname">firestore-books.js</span></div><button type="button" class="code-copy-btn" data-target="collectionsCode">Копирай</button></div>
+            <pre class="code-body" id="collectionsCode">import { doc, setDoc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
+
+// db е вече инициализирана инстанция на Cloud Firestore.
+const bookRef = doc(db, 'books', 'book-1');
+await setDoc(bookRef, { title: 'Под игото', author: 'Иван Вазов', genre: 'Роман' });
+
+const book = await getDoc(bookRef);
+if (book.exists()) console.log(book.data());
+
+const novels = query(collection(db, 'books'), where('genre', '==', 'Роман'));
+const results = await getDocs(novels);
+results.forEach(result => console.log(result.id, result.data()));</pre>
           </div>
-          <ul class="ilist purple"><li><strong>Cookie:</strong> намира се в браузъра и не трябва да съдържа цялата чувствителна сесия.</li><li><strong>Session document:</strong> намира се server-side и може да съдържа teacher данни и OAuth state.</li><li><strong>httpOnly:</strong> JavaScript в страницата не може да прочете cookie-то.</li><li><strong>secure:</strong> в production cookie-то трябва да се изпраща само през HTTPS.</li></ul>
+          <p class="tut-note">Примерът показва основните операции, но не изпълнява реална заявка от тази страница. За свързване към база данни са нужни Firebase конфигурация, инициализиран <code>db</code> и подходящи правила за достъп.</p>
         </section>
 
-        <section class="tut-section" id="tut-classroom-flow">
-          <div class="section-kicker orange">4 // One-sided classroom</div>
-          <h2>Учителят има акаунт, ученикът няма</h2>
-          <p>Това е „one-sided“ моделът на <strong>zadanie</strong>. Учителската страна е защитена с Google OAuth, а ученическата страна получава достъп до материали и upload workflow без регистрация.</p>
-          <ol class="ilist orange"><li>Учителят отваря <code>/teacher/login</code> и получава OAuth authorization URL.</li><li>Google връща <code>code</code> и сървърът валидира <code>state</code>.</li><li>Профилът се проверява спрямо allowlist от разрешени имейли.</li><li>Session cookie се изпраща на браузъра и teacher session се записва чрез Firestore store.</li><li>Ученикът отваря student страницата и избира учител, без да създава акаунт.</li><li>Backend чете <code>teachers</code> и <code>students</code>, за да намери съответните Google Drive папки.</li><li>Файлът минава през временен upload, после се качва в Drive. Firestore не съхранява самия бинарен файл.</li></ol>
-          <div class="flow-row flow-wide"><div class="flow-node">Teacher OAuth</div><div class="flow-connector">→</div><div class="flow-node">Express session</div><div class="flow-connector">→</div><div class="flow-node">Firestore</div><div class="flow-connector">→</div><div class="flow-node">Google Drive</div><br><div class="flow-node">Student без login</div><div class="flow-connector">→</div><div class="flow-node">teachers + students</div><div class="flow-connector">→</div><div class="flow-node">материал / upload</div></div>
-          <div class="callout-highlight-box"><span>„Без ученически акаунт“ не означава „без контрол“. Сървърът пак трябва да проверява кой teacher folder се използва и дали upload операцията е разрешена.</span></div>
+        <section class="tut-section firestore-section" id="tut-firestore-access">
+          <div class="sh"><span class="sh-badge bg-orange">04</span><h2>Кой може да чете и записва?</h2><span class="line"></span></div>
+          <p>Приложението може да изпраща заявки към Firestore, но това не означава, че всеки трябва да има достъп до всички документи. <strong>Firestore Security Rules</strong> определят какви операции са разрешени за клиентските приложения. При нужда Firebase Authentication помага да се установи кой е потребителят.</p>
+          <div class="callout-highlight-box"><span>Заявка не заобикаля правилата за сигурност. Ако заявката може да върне документи без разрешен достъп, тя се отхвърля, вместо правилата да скрият само част от резултатите.</span></div>
         </section>
 
-        <section class="tut-section" id="tut-security">
-          <div class="section-kicker red">5 // Security audit</div>
-          <h2>Къде са границите на доверието</h2>
-          <p>Клиентският JavaScript може да бъде променен от всеки. Затова ID-та, имейли и folder параметри от браузъра не са доказателство за право на достъп.</p>
-          <ul class="ilist red"><li>Никога не поставяй <strong>service account key</strong> или OAuth refresh token във frontend код.</li><li>Не логвай refresh token в конзолата. Той може да даде дълготраен достъп до Google API.</li><li>Проверявай server-side, че upload папката принадлежи на избрания учител.</li><li>Използвай <code>httpOnly</code>, <code>sameSite</code> и <code>secure</code> cookie настройки според средата.</li><li>Ограничи размера и типовете файлове и използвай генерирани имена при временното съхранение.</li><li>Не приемай скриването на бутон като security правило. Истинското правило е в backend middleware и Firebase/Drive permissions.</li></ul>
-          <div class="code-wrap">
-            <div class="code-bar"><div class="code-bar-left"><div class="code-dots"><div class="code-dot d-r"></div><div class="code-dot d-y"></div><div class="code-dot d-g"></div></div><span class="code-fname">security-checklist.txt</span></div><button type="button" class="code-copy-btn" data-target="securityCode">Копирай</button></div>
-            <pre class="code-body" id="securityCode">Провери преди production:
-[ ] secrets са само в environment variables
-[ ] refresh token не се връща към клиента
-[ ] session cookie е httpOnly
-[ ] production cookie е secure
-[ ] teacher access минава през middleware
-[ ] upload folder се валидира server-side
-[ ] старите sessions и файлове се почистват</pre>
-          </div>
-        </section>
-
-        <section class="tut-section tut-summary">
-          <div class="section-kicker green">Финален модел</div>
-          <h2>Една система, четири слоя</h2>
-          <p><strong>Firestore</strong> пази структурирани документи. <strong>Express session</strong> пази server-side състоянието на учителя. <strong>Cookie</strong> свързва браузъра със сесията. <strong>Google Drive</strong> пази реалните учебни файлове и задания.</p>
-          <p>Ако запомниш една схема, нека бъде:</p>
-          <div class="schema-diagram final-schema"><div class="schema-node schema-collection"><strong>teachers</strong><span>кой е учителят и къде са материалите</span></div><div class="schema-node schema-collection"><strong>students</strong><span>къде се качват заданията</span></div><div class="schema-node schema-collection"><strong>tokens</strong><span>как сървърът подновява OAuth достъпа</span></div><div class="schema-node schema-collection"><strong>sessions</strong><span>кой браузър има активен teacher login</span></div></div>
+        <section class="tut-section firestore-section tut-summary">
+          <div class="sh"><span class="sh-badge bg-orange">Обобщение</span><h2>От данни към резултат</h2><span class="line"></span></div>
+          <p><strong>Firebase</strong> предоставя услугата <strong>Cloud Firestore</strong>. В нея документите се групират в колекции. Приложението може да записва и чете документи, както и да извлича подходящите записи със заявки. Достъпът се управлява с правила за сигурност.</p>
         </section>
       </main>
     </div>
   `;
+}
+
+// Static examples for the article; no credentials or network requests.
+const firestoreFlows = {
+  write: [
+    { title: 'Избор на документ', path: 'books/book-1', explanation: 'Посочваме колекция books и ID на документа book-1.', code: "const bookRef = doc(db, 'books', 'book-1');" },
+    { title: 'Запис на полета', path: 'books/book-1', explanation: 'setDoc записва полетата на документа. Ако документ с този ID вече съществува, посочените данни го заместват.', code: "await setDoc(bookRef, { title: 'Под игото', author: 'Иван Вазов', genre: 'Роман' });" }
+  ],
+  read: [
+    { title: 'Адрес на документа', path: 'books/book-1', explanation: 'ID позволява директно да се посочи точно един документ.', code: "const bookRef = doc(db, 'books', 'book-1');" },
+    { title: 'Прочитане', path: 'books/book-1', explanation: 'getDoc връща снимка на документа. Проверяваме дали той съществува, преди да използваме полетата му.', code: "const book = await getDoc(bookRef);\nif (book.exists()) console.log(book.data());" }
+  ],
+  query: [
+    { title: 'Избор на колекция', path: 'books', explanation: 'Заявката започва от колекцията, в която търсим книги.', code: "const booksRef = collection(db, 'books');" },
+    { title: 'Условие по поле', path: 'books / genre == Роман', explanation: 'where ограничава резултатите до документи, при които полето genre има стойност Роман.', code: "const novels = query(booksRef, where('genre', '==', 'Роман'));" },
+    { title: 'Получаване на резултати', path: 'books / резултати', explanation: 'getDocs връща документите, които отговарят на условието и до които приложението има достъп.', code: "const results = await getDocs(novels);\nresults.forEach(book => console.log(book.id, book.data()));" }
+  ]
+};
+
+function initFirestoreCollectionsDemo() {
+  const root = document.getElementById('tut-firestore-demo');
+  if (!root) return;
+  const tabs = [...root.querySelectorAll('[data-firestore-flow]')];
+  const steps = root.querySelector('#firestoreDemoSteps');
+  const path = root.querySelector('#firestoreDemoPath');
+  const explanation = root.querySelector('#firestoreDemoExplanation');
+  const code = root.querySelector('#firestoreDemoCode');
+  let flow = 'write';
+  let index = 0;
+
+  function render() {
+    const current = firestoreFlows[flow];
+    tabs.forEach(tab => {
+      const selected = tab.dataset.firestoreFlow === flow;
+      tab.classList.toggle('active', selected);
+      tab.setAttribute('aria-pressed', String(selected));
+    });
+    steps.innerHTML = current.map((step, i) => `<li><button type="button" class="firestore-demo-step${i === index ? ' active' : ''}" data-step="${i}" aria-current="${i === index ? 'step' : 'false'}"><span>${i + 1}</span>${esc(step.title)}</button></li>`).join('');
+    const selected = current[index];
+    path.textContent = selected.path;
+    explanation.textContent = selected.explanation;
+    code.textContent = selected.code;
+  }
+
+  tabs.forEach(tab => tab.addEventListener('click', () => {
+    flow = tab.dataset.firestoreFlow;
+    index = 0;
+    render();
+  }));
+  steps.addEventListener('click', event => {
+    const button = event.target.closest('[data-step]');
+    if (!button) return;
+    index = Number(button.dataset.step);
+    render();
+  });
+  render();
 }
 
 // =============================================================

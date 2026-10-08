@@ -179,21 +179,40 @@
 }
 
 .other-card.firestore-card {
-  background: linear-gradient(145deg, #064e3b 0%, #115e59 100%);
+  background: linear-gradient(145deg, #0b0b0f 0%, #281406 100%);
   color: #ffffff;
-  border-color: rgba(52, 211, 153, 0.4);
+  border-color: rgba(255, 145, 0, 0.5);
   position: relative;
 }
 
-.other-card.firestore-card:hover {
-  border-color: #34d399;
-  box-shadow: 0 16px 36px rgba(5, 150, 105, 0.25);
+.other-card.firestore-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(180deg, rgba(11, 11, 15, 0.12) 0%, rgba(11, 11, 15, 0.88) 65%, #0b0b0f 100%),
+    url('firestore-classroom-bg.svg');
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  z-index: 1;
 }
 
-.other-card-badge.green {
-  background: rgba(5, 150, 105, 0.3);
-  border-color: rgba(52, 211, 153, 0.6);
-  color: #d1fae5;
+.other-card.firestore-card:hover::before {
+  transform: scale(1.05);
+  filter: brightness(1.08);
+}
+
+.other-card.firestore-card:hover {
+  border-color: #ffca28;
+  box-shadow: 0 16px 36px rgba(255, 145, 0, 0.25);
+}
+
+.firestore-card .other-card-badge.green {
+  background: rgba(65, 32, 4, 0.82);
+  border-color: rgba(255, 202, 40, 0.75);
+  color: #ffe08a;
 }
 
 .other-card-content {
@@ -370,6 +389,19 @@
 .tut-header.theme-green {
   background: linear-gradient(135deg, #064e3b 0%, #115e59 100%);
   border-bottom-color: var(--tut-green);
+}
+
+.tut-header.theme-firestore {
+  background: linear-gradient(135deg, #0b0b0f 0%, #281406 100%);
+  border-bottom-color: #ff9100;
+}
+
+.theme-firestore .tut-header-logo { color: #ffca28; }
+
+.theme-firestore .tut-header-pill:hover,
+.theme-firestore .tut-header-pill:focus-visible {
+  background: rgba(255, 145, 0, 0.28);
+  border-color: #ffca28;
 }
 
 .tut-header-inner {
@@ -1015,4 +1047,112 @@
 .btn-sandbox.secondary:hover {
   background: #30363d;
   color: #ffffff;
+}
+
+/* Firestore article: local walkthrough of document operations */
+.firestore-article .bg-firestore-yellow { background: #ffca28; color: #1c1205; }
+.firestore-article .firestore-section .tut-note {
+  border-left-color: #ff9100;
+  background: #fff7e6;
+}
+.firestore-article .firestore-section .schema-node {
+  border-color: #ffd180;
+  background: #fff7e6;
+}
+.firestore-article .firestore-section .schema-root {
+  border-color: var(--tut-border2);
+  background: var(--tut-light);
+}
+.firestore-article .firestore-section .schema-document {
+  border-color: #ffb74d;
+  background: #fff0cc;
+}
+.firestore-article .firestore-section .schema-arrow { color: #c75b00; }
+.firestore-section { margin-top: 36px; }
+.firestore-section > p { font-size: 14.5px; line-height: 1.75; margin: 0 0 16px; }
+.firestore-section .sh { margin-bottom: 20px; }
+.firestore-section .sh h2 { line-height: 1.35; }
+.firestore-section .collection-overview { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+.firestore-section .collection-overview .ov-card { text-align: left; overflow-wrap: anywhere; }
+.firestore-section .collection-overview .ov-card > code { display: block; margin-top: 12px; font-size: 11px; color: var(--tut-green); }
+.firestore-section .tut-note {
+  padding: 14px 18px;
+  border-left: 4px solid var(--tut-blue);
+  background: var(--tut-blue-bg);
+  border-radius: 0 8px 8px 0;
+}
+.firestore-section .schema-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 22px;
+  margin: 18px 0;
+  border: 1px solid var(--tut-border);
+  border-radius: var(--tut-radius);
+  background: var(--tut-white);
+}
+.firestore-section .schema-node {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: min(100%, 360px);
+  box-sizing: border-box;
+  padding: 12px 16px;
+  border: 1px solid var(--tut-green-bd);
+  border-radius: 8px;
+  background: var(--tut-green-bg);
+  overflow-wrap: anywhere;
+}
+.firestore-section .schema-node span { font-size: 12px; color: #475569; }
+.firestore-section .schema-root { background: var(--tut-light); border-color: var(--tut-border2); }
+.firestore-section .schema-document { background: var(--tut-blue-bg); border-color: var(--tut-blue-bd); }
+.firestore-section .schema-arrow { color: var(--tut-green); font-weight: 800; }
+.firestore-section .schema-fields { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.firestore-section .schema-fields span {
+  padding: 4px 10px;
+  border: 1px solid var(--tut-border);
+  border-radius: 6px;
+  background: var(--tut-light);
+  font: 12px 'JetBrains Mono', monospace;
+}
+.firestore-section .callout-highlight-box {
+  padding: 14px 18px;
+  margin: 18px 0;
+  border: 1px solid #fef3c7;
+  border-left: 4px solid #f59e0b;
+  border-radius: 8px;
+  background: #fffbeb;
+  color: #92400e;
+}
+.firestore-section.tut-summary { padding-bottom: 20px; }
+.firestore-demo .sandbox-title i { color: #ffca28; }
+.firestore-demo .sandbox-tab-btn.active { background: #8a3e00; border-color: #ffca28; }
+.firestore-demo-intro { color: #cbd5e1; font-size: 14px; margin: 0 0 18px; }
+.firestore-demo-grid { display: grid; grid-template-columns: minmax(180px, 0.8fr) minmax(0, 1.6fr); gap: 16px; }
+.firestore-demo-steps { list-style: none; padding: 0; margin: 0; display: grid; align-content: start; gap: 8px; }
+.firestore-demo-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  text-align: left;
+  font: 700 13px 'Nunito', sans-serif;
+  color: #cbd5e1;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.firestore-demo-step span { background: #e2e8f0; color: #334155; border-radius: 50%; width: 24px; height: 24px; flex: 0 0 24px; display: grid; place-items: center; font-weight: 700; }
+.firestore-demo-step.active, .firestore-demo-step:hover { border-color: #ffca28; color: #ffffff; background: #4a2508; }
+.firestore-demo-step:focus-visible, .firestore-demo button:focus-visible { outline: 2px solid #ffca28; outline-offset: 2px; }
+.firestore-demo-detail { min-width: 0; background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 16px; }
+.firestore-demo-path { font: 700 13px 'JetBrains Mono', monospace; color: #ffca28; overflow-wrap: anywhere; }
+.firestore-demo-detail p { color: #e2e8f0; font-size: 14px; }
+.firestore-demo-detail .code-wrap { margin-bottom: 0; }
+
+@media (max-width: 700px) {
+  .firestore-demo-grid { grid-template-columns: 1fr; }
 }

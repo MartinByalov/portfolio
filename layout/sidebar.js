@@ -3,6 +3,7 @@
 import * as SchoolCalendar from './school-calendar.js';
 
 export const MODE_STORAGE_KEY = 'platform-mode';
+let sidebarListeners = null;
 
 export function getStoredMode() {
   try {
@@ -26,7 +27,7 @@ function getNavItems(mode) {
     return [
       { icon: 'bx bx-book-reader',  label: 'Учителско Портфолио', href: '#/portfolio', 'data-nav': 'portfolio' },
       { icon: 'bx bx-home-alt',     label: 'Учебни ресурси',      href: '#/',          'data-nav': 'portfolio' },
-      { icon: 'bx bx-wrench',       label: 'Инструменти',         href: '/tools/index.html?mode=portfolio', 'data-nav': 'portfolio' },
+      { icon: 'bx bx-wrench',       label: 'Инструменти',         href: '/tools/index.html?mode=learning', 'data-nav': 'portfolio' },
       { icon: 'bx bx-briefcase-alt',label: 'Професионален опит',  href: '#/experience', 'data-nav': 'portfolio' }
     ];
   } else {
@@ -90,6 +91,11 @@ export function render(mode = 'learning') {
 }
 
 export function init() {
+  // The router replaces the sidebar when the mode changes. Remove handlers
+  // bound to the previous sidebar before registering handlers for the new one.
+  sidebarListeners?.abort();
+  sidebarListeners = new AbortController();
+  const { signal } = sidebarListeners;
   const sidebar = document.getElementById('platform-sidebar');
   const logoutBtn = document.getElementById('bx-logout');
   const userLink = document.getElementById('menu-toggle');
@@ -103,10 +109,10 @@ export function init() {
       e?.stopPropagation?.();
       import('./nft-popup.js').then(module => module.open()).catch(err => console.error(err));
     };
-    nftTrigger.addEventListener('click', launchNft);
+    nftTrigger.addEventListener('click', launchNft, { signal });
     nftTrigger.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') launchNft(e);
-    });
+    }, { signal });
   }
 
   function open() {
@@ -121,20 +127,20 @@ export function init() {
     sidebar.classList.contains('open') ? close() : open();
   }
 
-  document.addEventListener('toggle-sidebar', toggle);
+  document.addEventListener('toggle-sidebar', toggle, { signal });
 
   logoutBtn?.addEventListener('click', () => {
     toggle();
-  });
+  }, { signal });
 
   calendarLink?.addEventListener('click', (e) => {
     e.preventDefault();
     SchoolCalendar.open();
-  });
+  }, { signal });
 
   userLink?.addEventListener('mouseenter', () => {
     if (sidebar.classList.contains('close')) toggle();
-  });
+  }, { signal });
 
   document.addEventListener('click', (e) => {
     const isInsideSidebar = sidebar?.contains(e.target);
@@ -145,7 +151,7 @@ export function init() {
       sidebar.classList.remove('open');
       sidebar.classList.add('close');
     }
-  });
+  }, { signal });
 
-  window.addEventListener('hashchange', close);
+  window.addEventListener('hashchange', close, { signal });
 }

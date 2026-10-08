@@ -9,6 +9,7 @@ import multer from 'multer';
 import { GoogleGenAI } from '@google/genai';
 import { buildRealisticImagePrompt, generateRealisticPromptWithGemini, STANDARD_NEGATIVE_PROMPT } from './utils/promptGenerator.js';
 import { resolveGlossaryImageUrl, getGlossaryFilename } from './utils/glossaryMedia.js';
+import { newsImageCandidates } from './utils/newsImages.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -352,7 +353,7 @@ async function fetchFeedSafe(url) {
         link: item.link || '#',
         source: (item.author || (data.feed && data.feed.title) || 'Новини').replace(/<[^>]*>/g, '').trim(),
         date: item.pubDate || '',
-        image: item.thumbnail || (item.enclosure && item.enclosure.link) || ''
+        images: newsImageCandidates(item)
       })).filter(item => item.title && item.link && item.link !== '#');
     }
   } catch {}

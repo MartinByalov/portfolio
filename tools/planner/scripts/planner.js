@@ -970,6 +970,8 @@ function setupEventListeners() {
     if (window.helpOverlay) {
         window.helpOverlay.addEventListener('click', toggleHelpPanel);
     }
+    window.addEventListener('resize', updateHelpBounds);
+    window.addEventListener('scroll', updateHelpBounds, { passive: true });
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && window.helpPanel && window.helpPanel.classList.contains('active')) {
             toggleHelpPanel();
@@ -1065,15 +1067,34 @@ function setupDragAndDrop() {
         dragOverTargetIndex = null;
     });
 }
+function updateHelpBounds() {
+    if (!window.helpPanel?.classList.contains('active')) return;
+    const header = document.querySelector('#header-root .main-header');
+    const footer = document.querySelector('#footer-root .main-footer');
+    const top = Math.max(0, header?.getBoundingClientRect().bottom || 0);
+    const bottom = Math.max(0, window.innerHeight - (footer?.getBoundingClientRect().top ?? window.innerHeight));
+    const safeBottom = Math.min(bottom, Math.max(0, window.innerHeight - top - 100));
+    for (const element of [window.helpPanel, window.helpOverlay]) {
+        element.style.setProperty('--planner-help-top', `${top}px`);
+        element.style.setProperty('--planner-help-bottom', `${safeBottom}px`);
+    }
+}
 function toggleHelpPanel() {
     if (window.helpPanel && window.helpOverlay) {
         const isActive = window.helpPanel.classList.contains('active');
         if (isActive) {
             window.helpPanel.classList.remove('active');
             window.helpOverlay.classList.remove('active');
+            window.helpPanel.setAttribute('aria-hidden', 'true');
+            window.helpBtn?.setAttribute('aria-expanded', 'false');
+            window.helpBtn?.focus();
         } else {
             window.helpPanel.classList.add('active');
             window.helpOverlay.classList.add('active');
+            window.helpPanel.setAttribute('aria-hidden', 'false');
+            window.helpBtn?.setAttribute('aria-expanded', 'true');
+            updateHelpBounds();
+            window.closeHelpBtn?.focus();
         }
     }
 }

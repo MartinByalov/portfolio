@@ -2,6 +2,7 @@
 
 const rootUrl = new URL('../', import.meta.url).href;
 import(`${rootUrl}scripts/clone-guard.js`).catch(() => {});
+import(`${rootUrl}scripts/accessibility-widget.js`).catch(err => console.warn('Accessibility widget unavailable:', err));
 
 const SITE_CSS = [
   `${rootUrl}styles/theme.css`,

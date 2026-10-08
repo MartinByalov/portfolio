@@ -17,10 +17,11 @@ export function render(asideHtml, mainHtml) {
 export function renderClassPicker(catalog, activeCourseId) {
   const links = (catalog?.grades || []).flatMap(grade => grade.courses).map(course => {
     const activeClass = course.id === activeCourseId ? ' active' : '';
-    const isAvailable = course.available || ['it-8', 'it-9', 'it-10', 'kaos-12'].includes(course.id);
-    const target = isAvailable ? `#/course/${course.id}` : '#';
-    const disabled = isAvailable ? '' : ' course-link-disabled';
-    return `<a href="${target}" class="course-link${activeClass}${disabled}"><i class='bx bx-chevron-right'></i> ${course.title}</a>`;
+    const isAvailable = course.available && !['it-9', 'kaos-12'].includes(course.id);
+    if (!isAvailable) {
+      return `<span class="course-link course-link-disabled" aria-disabled="true"><i class='bx bx-chevron-right'></i> ${course.title}</span>`;
+    }
+    return `<a href="#/course/${course.id}" class="course-link${activeClass}"><i class='bx bx-chevron-right'></i> ${course.title}</a>`;
   }).join('');
 
   return `

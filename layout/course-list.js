@@ -4,6 +4,8 @@ import { initAccordion } from '../components/accordion-behavior.js';
 
 export function render(course) {
   const sections = (course.sections || []).map(section => {
+    const isPending = ['it-8', 'it-10'].includes(course.id) &&
+      !section.lessons.some(lesson => lesson.lessonPath);
     const items = section.lessons.map(lesson => {
       if (lesson.lessonPath) {
         return `<li><a href="#/lesson/${course.id}/${lesson.id}">${lesson.title}</a></li>`;
@@ -12,7 +14,7 @@ export function render(course) {
     }).join('');
 
     return `
-      <div class="accordion-item">
+      <div class="accordion-item${isPending ? ' course-section-pending' : ''}">
         <div class="accordion-header">
           <span class="card-title">${section.title}</span>
           <i class="fas fa-chevron-down card-icon-mini"></i>

@@ -96,7 +96,12 @@ async function verifyGateCodeRemotely(code) {
       body: JSON.stringify({ code }),
     });
     if (res.status === 429) return 'rate-limited';
-    if (!res.ok) return 'rejected';
+    // 403 = Worker-ът отговори, че кодът е грешен. Всичко останало извън 200
+    // (503 без secret, 404/405 грешен deploy, CORS/инфраструктурна грешка)
+    // означава "не можах да проверя сървърно" -> падаме към локалния хеш,
+    // вместо да броим фалшив грешен опит.
+    if (res.status === 403) return 'rejected';
+    if (res.status !== 200) return 'unavailable';
     const data = await res.json().catch(() => ({}));
     return data && data.success ? 'accepted' : 'rejected';
   } catch (err) {

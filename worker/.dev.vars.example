@@ -1,0 +1,4 @@
+# Local development only - NEVER commit the real file.
+# Copy to `.dev.vars` (already git-ignored) for `npx wrangler dev`.
+PORTFOLIO_ACCESS_CODE=000000
+ALLOWED_ORIGINS=https://martinbyalov.github.io

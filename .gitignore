@@ -1,2 +1,8 @@
 node_modules/
 .env
+.env.example
+worker/.dev.vars
+
+# Internal project files - methodology and prompts, never published to GitHub
+AGENTS.md
+GLOSSARY_PROMPTS.md

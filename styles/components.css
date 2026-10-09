@@ -1477,14 +1477,21 @@ body.portfolio-mode .main-portfolio-content {
   min-width: 100%;
 }
 
+/* Climbing line skimming the tops of the bars - rendered above the bars.
+   Pinpoint: top-left corner of each bar. Bar i left edge x = 80i,
+   top y = 132 - 8i -> line is y = 132 - 0.1x (slope atan(0.1) ~ 5.71deg). */
 .skill-steps::before {
   content: '';
   position: absolute;
-  top: -7px;
   left: 0;
-  right: 0;
-  border-top: 3px solid #f17a3e;
+  top: 130.5px; /* center at y = 132 at x = 0 */
+  width: calc((var(--last-step) + 1) * 80px + 2px);
+  height: 3px;
+  background: #f17a3e;
   pointer-events: none;
+  transform-origin: left center;
+  transform: rotate(-5.71deg);
+  z-index: 2;
 }
 
 .skill-step {
@@ -1504,22 +1511,34 @@ body.portfolio-mode .main-portfolio-content {
   font: inherit;
 }
 
+/* Transparent hover zone above each bar so hovering the climbing line
+   (including the gaps between bars) reveals the person marker. */
+.skill-step::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  right: -4px;
+  top: -32px;
+  height: 34px;
+}
+
 .skill-step-person {
   position: absolute;
-  top: calc((var(--step) - var(--last-step)) * 8px - 29px);
+  left: 50%;
+  bottom: calc(100% + 6px); /* feet on the line: at bar centre it sits ~3.8px above the top edge */
   color: #f17a3e;
   font-size: 1.5rem;
   line-height: 1;
-  z-index: 1;
+  z-index: 3;
   opacity: 0;
-  transform: translateY(5px);
+  transform: translate(-50%, 5px);
   transition: opacity 0.2s ease, transform 0.2s ease;
   pointer-events: none;
 }
 
 .skill-step:hover .skill-step-person {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate(-50%, 0);
 }
 
 .skill-step-name {

@@ -1,0 +1,9 @@
+name = "portfolio-gate"
+main = "worker.js"
+compatibility_date = "2025-06-01"
+
+# Secrets (PORTFOLIO_ACCESS_CODE) are NOT stored here.
+# Set them via dashboard or: npx wrangler secret put PORTFOLIO_ACCESS_CODE
+# Optional plain-text variable (origins allowed to call /verify):
+# [vars]
+# ALLOWED_ORIGINS = "https://martinbyalov.github.io"

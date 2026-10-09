@@ -396,11 +396,18 @@ app.get('/api/news', async (req, res) => {
   res.json({ status: 'ok', data: result, cached: false });
 });
 
-// Verify Portfolio access code stored in .env
+// Verify Portfolio access code (used only when the Node dev server runs -
+// the public GitHub Pages build is static and verifies a SHA-256 hash in
+// layout/about.js instead). The plaintext code must never be hardcoded here:
+// set PORTFOLIO_ACCESS_CODE in the local environment.
 app.post('/api/portfolio/verify', (req, res) => {
   const { code } = req.body || {};
-  const correctCode = String(process.env.PORTFOLIO_ACCESS_CODE || '123456').trim();
+  const correctCode = String(process.env.PORTFOLIO_ACCESS_CODE || '').trim();
   const inputCode = String(code || '').trim();
+
+  if (!correctCode) {
+    return res.status(503).json({ status: 'error', success: false, message: 'Достъпът не е конфигуриран.' });
+  }
 
   if (inputCode && inputCode === correctCode) {
     return res.json({ status: 'ok', success: true });

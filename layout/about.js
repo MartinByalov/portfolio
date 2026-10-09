@@ -2,6 +2,116 @@
 
 const GATE_STORAGE_KEY = 'portfolio-unlocked';
 
+// SHA-256 hash of the 6-digit access code. The site is static (GitHub Pages,
+// no backend), so the plaintext code must never be committed to the repo -
+// only this hash is stored here. To rotate the code, run locally:
+//   node scripts/generate-portfolio-hash.js [new-code]
+// and paste the printed hash below.
+const PORTFOLIO_CODE_HASH = 'd147a8ba6e1f2d7b6354043749ef3d775fcf76e64e49ed49a543f4ae20227e4c';
+
+const GATE_ATTEMPT_KEY = 'portfolio-gate-attempts';
+const GATE_LOCK_KEY = 'portfolio-gate-locked-until';
+const GATE_MAX_ATTEMPTS = 5;
+const GATE_LOCK_MS = 5 * 60 * 1000;
+
+function getGateAttempts() {
+  try {
+    return JSON.parse(sessionStorage.getItem(GATE_ATTEMPT_KEY) || '{"count":0}');
+  } catch (err) {
+    return { count: 0 };
+  }
+}
+
+function recordFailedAttempt() {
+  try {
+    const state = getGateAttempts();
+    state.count = (state.count || 0) + 1;
+    if (state.count >= GATE_MAX_ATTEMPTS) {
+      sessionStorage.setItem(GATE_LOCK_KEY, String(Date.now() + GATE_LOCK_MS));
+      state.count = 0;
+    }
+    sessionStorage.setItem(GATE_ATTEMPT_KEY, JSON.stringify(state));
+  } catch (err) {}
+}
+
+function clearGateAttempts() {
+  try {
+    sessionStorage.removeItem(GATE_ATTEMPT_KEY);
+    sessionStorage.removeItem(GATE_LOCK_KEY);
+  } catch (err) {}
+}
+
+function gateLockRemainingMs() {
+  try {
+    const until = Number(sessionStorage.getItem(GATE_LOCK_KEY) || 0);
+    const remaining = until - Date.now();
+    return remaining > 0 ? remaining : 0;
+  } catch (err) {
+    return 0;
+  }
+}
+
+async function hashGateCode(code) {
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(code));
+  return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function unlockGate() {
+  try { sessionStorage.setItem(GATE_STORAGE_KEY, '1'); } catch (err) {}
+  clearGateAttempts();
+  closeGate();
+  location.hash = '#/portfolio';
+}
+
+function showGateError(message) {
+  const errorEl = document.getElementById('code-gate-error');
+  if (errorEl) errorEl.textContent = message;
+  const gate = gateOverlay();
+  if (gate) {
+    gate.classList.remove('shake');
+    void gate.offsetWidth;
+    gate.classList.add('shake');
+  }
+}
+
+function resetGateInputs() {
+  const digits = document.querySelectorAll('.code-gate-digit');
+  digits.forEach(d => d.value = '');
+  digits[0]?.focus();
+}
+
+// Worker endpoint that verifies the code server-side (see worker/README.md).
+// Leave empty until the Worker is deployed - the gate then falls back to
+// the local SHA-256 hash check below. This URL is public by design; the
+// secret itself lives only in Cloudflare, never in this repository.
+const PORTFOLIO_VERIFY_URL = 'https://portfolio.byalov-v-martin.workers.dev/verify';
+
+async function verifyGateCodeRemotely(code) {
+  if (!PORTFOLIO_VERIFY_URL) return 'unavailable';
+  try {
+    const res = await fetch(PORTFOLIO_VERIFY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code }),
+    });
+    if (res.status === 429) return 'rate-limited';
+    if (!res.ok) return 'rejected';
+    const data = await res.json().catch(() => ({}));
+    return data && data.success ? 'accepted' : 'rejected';
+  } catch (err) {
+    return 'unavailable';
+  }
+}
+
+function failGateCode() {
+  recordFailedAttempt();
+  const attemptsLeft = GATE_MAX_ATTEMPTS - (getGateAttempts().count || 0);
+  showGateError(attemptsLeft > 0
+    ? `Грешен код. Остават ${attemptsLeft} опита.`
+    : 'Грешен код. Достъпът е временно заключен.');
+  resetGateInputs();
+}
+
 export function isPortfolioUnlocked() {
   try {
     return sessionStorage.getItem(GATE_STORAGE_KEY) === '1';
@@ -70,45 +180,45 @@ async function tryGateCode() {
     return;
   }
 
+  // Step 1: server-side check via Cloudflare Worker when configured.
+  // Step 2: local SHA-256 fallback when the Worker is not set or unreachable.
+  // The plaintext code is never stored in the repository.
+  const lockedMs = gateLockRemainingMs();
+  if (lockedMs > 0) {
+    const minutes = Math.ceil(lockedMs / 60000);
+    showGateError(`Твърде много грешни опити. Опитайте отново след около ${minutes} мин.`);
+    resetGateInputs();
+    return;
+  }
+
+  const remote = await verifyGateCodeRemotely(code);
+  if (remote === 'accepted') {
+    unlockGate();
+    return;
+  }
+  if (remote === 'rate-limited') {
+    showGateError('Твърде много опити към сървъра. Опитайте по-късно.');
+    resetGateInputs();
+    return;
+  }
+  if (remote === 'rejected') {
+    failGateCode();
+    return;
+  }
+
   try {
-    const res = await fetch('/api/portfolio/verify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ code })
-    }).catch(() => null);
-    
-    if (res && res.ok) {
-      const data = await res.json().catch(() => ({}));
-      if (data.success) {
-        try { sessionStorage.setItem(GATE_STORAGE_KEY, '1'); } catch (err) {}
-        closeGate();
-        location.hash = '#/portfolio';
-        return;
-      }
-    } else if (code === '123456') {
-      try { sessionStorage.setItem(GATE_STORAGE_KEY, '1'); } catch (e) {}
-      closeGate();
-      location.hash = '#/portfolio';
+    const codeHash = await hashGateCode(code);
+    if (codeHash === PORTFOLIO_CODE_HASH) {
+      unlockGate();
       return;
     }
   } catch (err) {
-    if (code === '123456') {
-      try { sessionStorage.setItem(GATE_STORAGE_KEY, '1'); } catch (e) {}
-      closeGate();
-      location.hash = '#/portfolio';
-      return;
-    }
+    showGateError('Възникна грешка при проверката. Опитайте пак.');
+    resetGateInputs();
+    return;
   }
 
-  if (errorEl) errorEl.textContent = 'Грешен код. Опитай пак.';
-  const gate = gateOverlay();
-  if (gate) {
-    gate.classList.remove('shake');
-    void gate.offsetWidth;
-    gate.classList.add('shake');
-  }
-  digits.forEach(d => d.value = '');
-  digits[0]?.focus();
+  failGateCode();
 }
 
 function openPortfolioGate() {

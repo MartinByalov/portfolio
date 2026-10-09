@@ -1468,12 +1468,23 @@ body.portfolio-mode .main-portfolio-content {
 }
 
 .skill-steps {
+  position: relative;
   display: flex;
   align-items: flex-end;
   gap: 4px;
   height: 210px;
   width: max-content;
   min-width: 100%;
+}
+
+.skill-steps::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 0;
+  right: 0;
+  border-top: 3px solid #f17a3e;
+  pointer-events: none;
 }
 
 .skill-step {
@@ -1493,29 +1504,9 @@ body.portfolio-mode .main-portfolio-content {
   font: inherit;
 }
 
-.skill-step::before {
-  content: '';
-  position: absolute;
-  top: -7px;
-  left: -2px;
-  right: -6px;
-  border-top: 3px solid #f17a3e;
-  pointer-events: none;
-}
-
-.skill-step:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  top: -15px;
-  right: -6px;
-  height: 8px;
-  border-right: 3px solid #f17a3e;
-  pointer-events: none;
-}
-
 .skill-step-person {
   position: absolute;
-  bottom: calc(100% + 7px);
+  top: calc((var(--step) - var(--last-step)) * 8px - 29px);
   color: #f17a3e;
   font-size: 1.5rem;
   line-height: 1;

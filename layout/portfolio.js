@@ -127,7 +127,7 @@ export function renderPortfolioPage() {
             </div>
             <div class="profile-steps">
               <div class="skill-steps-scroll" role="region" aria-label="Стъпки в технологиите - превъртете хоризонтално" tabindex="0">
-                <div class="skill-steps">${renderSteps()}</div>
+                <div class="skill-steps" style="--last-step: ${SKILLS_PROG.length - 1};">${renderSteps()}</div>
               </div>
             </div>
           </div>

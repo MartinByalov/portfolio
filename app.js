@@ -221,7 +221,7 @@ async function route() {
     } else if (parts.length === 0) {
       // Public landing page
       Header.setTitle('Начало', 'fa-solid fa-house');
-      document.title = `Начало - ${siteSuffix}`;
+      document.title = 'Начало';
       document.body.classList.add('landing-mode');
       const catalog = await getCatalog();
       viewRoot.innerHTML = Home.renderLandingPage(catalog);

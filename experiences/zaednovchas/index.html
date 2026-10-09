@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Времева Линия</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Училище за пример</h1>
+    </header>
+    <main>
+        <section id="timeline-container">
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 СПГ "Княгиня Евдокия"</p>
+    </footer>
+
+    <div id="search-bar-container">
+        <button id="search-toggle-button" class="floating-action-button">🔍</button>
+        <button id="quick-notes-button" class="floating-action-button">📝</button>
+        <button id="gallery-button" class="floating-action-button">📸</button>
+    </div>
+
+    <div id="quick-notes-container" class="hidden">
+        <h2>Бележки</h2>
+        <textarea id="quick-notes-textarea" placeholder=">_>"></textarea>
+        <div class="notes-actions">
+            <button id="save-notes-button" class="main-action-button">Запази</button>
+            <button id="close-notes-button" class="main-action-button">Затвори</button>
+        </div>
+    </div>
+
+    <div id="gallery-container" class="hidden">
+    <div class="popup-header">
+        <button id="close-gallery-button-top" class="close-button">×</button>
+    </div>
+    <div class="gallery-content">
+        <button id="prev-image-button" class="gallery-nav-button prev-button">❮</button>
+        <div id="gallery-images" class="gallery-slides">
+            </div>
+        <button id="next-image-button" class="gallery-nav-button next-button">&#10095;</button>
+    </div>
+    <div class="gallery-footer">
+        <span id="current-image-display"></span>
+    </div>
+</div>
+
+    <div id="search-popup-container" class="hidden">
+        <h2>Търсене</h2>
+        <input type="text" id="search-input" placeholder="🔎" autofocus>
+        <div class="search-actions">
+            <button id="close-search-button" class="main-action-button">Затвори</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="day-six-highlight.js"></script>
+</body>
+
+</html>

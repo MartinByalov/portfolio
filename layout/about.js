@@ -81,16 +81,26 @@ function resetGateInputs() {
   digits[0]?.focus();
 }
 
-// Worker endpoint that verifies the code server-side (see worker/README.md).
-// Leave empty until the Worker is deployed - the gate then falls back to
-// the local SHA-256 hash check below. This URL is public by design; the
-// secret itself lives only in Cloudflare, never in this repository.
-const PORTFOLIO_VERIFY_URL = 'https://portfolio.byalov-v-martin.workers.dev/verify';
+// The public build must continue using the Cloudflare Worker. The local
+// development server has its own server-side endpoint so localhost does not
+// depend on the Worker's production CORS allowlist.
+const PORTFOLIO_WORKER_VERIFY_URL = 'https://portfolio.byalov-v-martin.workers.dev/verify';
+
+function isLocalDevelopment() {
+  return window.location.hostname === 'localhost'
+    || window.location.hostname === '127.0.0.1'
+    || window.location.hostname === '::1';
+}
+
+function portfolioVerifyUrl() {
+  return isLocalDevelopment() ? '/api/portfolio/verify' : PORTFOLIO_WORKER_VERIFY_URL;
+}
 
 async function verifyGateCodeRemotely(code) {
-  if (!PORTFOLIO_VERIFY_URL) return 'unavailable';
+  const verifyUrl = portfolioVerifyUrl();
+  if (!verifyUrl) return 'unavailable';
   try {
-    const res = await fetch(PORTFOLIO_VERIFY_URL, {
+    const res = await fetch(verifyUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ code }),

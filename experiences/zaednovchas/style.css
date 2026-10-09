@@ -1,0 +1,656 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #00c19f;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#timeline-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 0 10px;
+    margin: 0 auto;
+}
+
+/* Вертикална линия на времевата линия (десктоп) */
+#timeline-container::after {
+    content: '';
+    position: absolute;
+    left: 178px;
+    /* Позиционира линията между датата и съдържанието за десктоп */
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #ddd;
+    z-index: 1;
+}
+
+.timeline-event {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.timeline-event:last-child {
+    border-bottom: none;
+}
+
+/* Маркер между датата и съдържанието (десктоп) */
+.timeline-event::before {
+    content: '';
+    position: absolute;
+    left: 162.5px;
+    /* Коригирано спрямо предишната итерация за да е центрирано на 178px линия - 10px ширина на точката / 2 = 5px => 178-5=173px, но предвид че border-а е 2px става 173-2=171px. С 175px е леко вдясно, което изглежда по-добре. Ако искате точката да е **точно** центрирана по средата на линията, ползвайте `left: 177px;` за да се компенсира и 2px border на точката*/
+    top: 0;
+    /* Започва от горния край на събитието */
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ff585d;
+    border: 2px solid white;
+    z-index: 2;
+    /* Центрира точката вертикално на линията */
+    transform: translateY(calc(50% - 5px));
+}
+
+.timeline-date {
+    flex: 0 0 160px;
+    text-align: right;
+    padding-right: 44px;
+    font-weight: bold;
+    color: #555;
+    position: relative;
+    line-height: 1.5;
+}
+
+.timeline-content {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    border-left: 2px solid #ddd;
+    margin-left: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.timeline-content:hover {
+    transform: translateY(-5px);
+}
+
+.timeline-content h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #464ba0;
+}
+
+/* Стилове за ключовите думи */
+.event-keywords {
+    font-size: 0.8em;
+    color: #666;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+/* Статуси */
+.event-status {
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.status-предстои {
+    background-color: #f0ad4e;
+    color: white;
+}
+
+.status-в-процес {
+    background-color: #464ba0;
+    color: white;
+}
+
+.status-завършено {
+    background-color: #00c19f;
+    color: white;
+}
+
+.status-за-доработка {
+    background-color: #ff585d;
+    color: white;
+}
+
+.status-overdue {
+    background-color: #c0392b;
+    color: white;
+}
+
+/* Стилове за маркирания текст при търсене */
+mark {
+    background-color: yellow;
+    color: black;
+    padding: 0 2px;
+}
+
+.timeline-event-details {
+    margin-top: 15px;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background-color: #fefefe;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.timeline-event-details h4 {
+    color: #464ba0;
+    margin-top: 0;
+}
+
+.timeline-event-details ul {
+    list-style: none;
+    padding: 0;
+}
+
+.timeline-event-details li {
+    margin-bottom: 5px;
+}
+
+.timeline-event-details a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.timeline-event-details a:hover {
+    text-decoration: underline;
+}
+
+.main-action-button {
+    background-color: #464ba0;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.main-action-button:hover {
+    background-color: #3b4085;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    background-color: #333;
+    color: white;
+    position: relative;
+}
+
+/* --- Модифицирани/Добавени стилове за търсачка, бутони и бележки/галерия --- */
+
+#search-bar-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.floating-action-button {
+    background-color: #00c19f;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    flex-shrink: 0;
+    z-index: 1000;
+}
+
+.floating-action-button:hover {
+    background-color: #00997e;
+    transform: translateY(-3px);
+}
+
+.hidden {
+    display: none !important;
+}
+
+#quick-notes-container,
+#search-popup-container {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    padding: 15px;
+    z-index: 1002;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#quick-notes-container:not(.hidden),
+#search-popup-container:not(.hidden) {
+    display: flex;
+}
+
+#quick-notes-container h2,
+#search-popup-container h2 {
+    margin-top: 0;
+    color: #464ba0;
+    text-align: center;
+}
+
+#quick-notes-textarea {
+    width: calc(100% - 20px);
+    min-height: 150px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+#search-popup-container #search-input {
+    width: calc(100% - 20px);
+    min-height: 50px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.notes-actions,
+.search-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* --- СТИЛОВЕ ЗА ГАЛЕРИЯТА (СЛАЙДШОУ) --- */
+#gallery-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 20px;
+    z-index: 1003;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+#gallery-container h3 {
+    margin: 0;
+    color: #464ba0;
+    text-align: center;
+}
+
+.gallery-content {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+#gallery-images {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    max-height: none;
+    overflow-y: hidden;
+}
+
+.gallery-item-slide {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.gallery-item-slide img {
+    max-width: 100%;
+    max-height: 80%;
+    object-fit: contain;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item-slide p {
+    margin-top: 10px;
+    font-size: 1em;
+    color: #555;
+}
+
+.gallery-nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    color: #555;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 50%;
+    z-index: 10;
+    transition: color 0.3s ease;
+}
+
+.gallery-nav-button:hover {
+    color: #333;
+    background-color: transparent;
+}
+
+.prev-button {
+    left: 10px;
+}
+
+.next-button {
+    right: 10px;
+}
+
+.gallery-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+
+#current-image-display {
+    font-size: 0.9em;
+    color: #777;
+}
+
+#close-gallery-button-top {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff585d;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+    z-index: 1004;
+}
+
+#close-gallery-button-top:hover {
+    background-color: #e04e52;
+}
+
+
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    main {
+        padding: 10px;
+        margin: 10px auto;
+    }
+
+    /* Вертикална линия на времевата линия за мобилни */
+    #timeline-container::after {
+        left: 12px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+    }
+
+    /* Подреждане на времевата линия за мобилни устройства */
+    .timeline-event {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 30px;
+    }
+
+    /* .timeline-date (за мобилни) */
+    .timeline-date {
+        flex: none;
+        text-align: left;
+        padding-right: 0;
+        margin-bottom: 5px;
+        width: 100%;
+        padding-left: 0;
+        /* Премахваме padding-а тук, тъй като маркерът го няма */
+        box-sizing: border-box;
+        line-height: 1.2;
+    }
+
+    /* .timeline-event::before (маркер за мобилни) */
+    .timeline-event::before {
+        content: none;
+        /* Премахваме червената точка за мобилни */
+    }
+
+    /* .timeline-content (за мобилни) */
+    .timeline-content {
+        margin-left: 18px;
+        border-left: none;
+        border-top: 2px solid #ddd;
+        width: calc(100% - 18px);
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .timeline-content h3 {
+        font-size: 1.1em;
+        margin-top: 0;
+    }
+
+    .event-keywords {
+        font-size: 0.7em;
+        margin-bottom: 8px;
+    }
+
+    .event-status {
+        font-size: 0.75em;
+        padding: 2px 5px;
+    }
+
+    .timeline-event-details {
+        margin-top: 10px;
+        padding: 10px;
+    }
+
+    .timeline-event-details h4 {
+        font-size: 0.95em;
+    }
+
+    .timeline-event-details ul {
+        margin-top: 5px;
+    }
+
+    .timeline-event-details li {
+        font-size: 0.9em;
+    }
+
+    /* Мобилни стилове за плаващите бутони и попъпите */
+    #search-bar-container {
+        flex-direction: column-reverse;
+        bottom: 10px;
+        right: 10px;
+        left: 10px;
+        justify-content: flex-end;
+        align-items: flex-end;
+        gap: 8px;
+    }
+
+    .floating-action-button {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3em;
+    }
+
+    #quick-notes-container,
+    #search-popup-container {
+        bottom: 70px;
+        right: 10px;
+        left: 10px;
+        width: auto;
+        max-width: calc(100% - 20px);
+        padding: 10px;
+    }
+
+    #search-popup-container #search-input,
+    #quick-notes-textarea {
+        width: 100%;
+    }
+
+    .notes-actions,
+    .search-actions {
+        justify-content: space-around;
+    }
+
+    /* Галерия за мобилни устройства */
+    #gallery-container {
+        padding: 10px;
+    }
+
+    .gallery-nav-button {
+        font-size: 20px;
+        padding: 8px 12px;
+    }
+
+    .gallery-item-slide img {
+        max-height: 70%;
+    }
+
+    #close-gallery-button-top {
+        width: 25px;
+        height: 25px;
+        font-size: 1em;
+        top: 5px;
+        right: 5px;
+    }
+}
+
+/* Стилове за вградени изображения в детайлите на събитието */
+.event-inline-images {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    /* Позволява изображенията да се пренасят на нов ред */
+    gap: 10px;
+    /* Разстояние между изображенията */
+    justify-content: center;
+    /* Центрира изображенията */
+    align-items: flex-start;
+    /* Подравнява ги в горната част */
+}
+
+.inline-event-image {
+    max-width: 100%;
+    /* Уверете се, че изображенията не надхвърлят ширината на контейнера */
+    height: auto;
+    /* Запазва пропорциите */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    object-fit: contain;
+    /* Уверете се, че цялото изображение се вижда */
+    max-height: 300px;
+    /* Ограничава височината, за да не са твърде големи */
+}
+
+.inline-image-caption {
+    font-size: 0.9em;
+    color: #777;
+    text-align: center;
+    margin-top: 5px;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .inline-event-image {
+        max-height: 150px;
+    }
+}

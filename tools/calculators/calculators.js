@@ -1374,7 +1374,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const q = new URLSearchParams(location.search).get('mode');
             if (q === 'portfolio' || q === 'learning') {
-                const u = new URL(url, location.origin);
+                const u = new URL(url, location.href);
                 if (!u.searchParams.get('mode')) u.searchParams.set('mode', q);
                 return u.pathname + u.search + u.hash;
             }
@@ -1390,7 +1390,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const key = card.getAttribute('data-calculator');
             if (key === 'investment') {
-                window.location.href = withMode('/tools/inv.html');
+                window.location.href = withMode('inv.html');
                 return;
             }
             openCalculator(key);

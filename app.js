@@ -249,7 +249,7 @@ async function route() {
       About.initAboutAudio();
     } else if (parts[0] === 'tools') {
       // Redirect to standalone tools dashboard preserving mode
-      location.replace(`/tools/index.html?mode=${newMode}`);
+      location.replace(`tools/index.html?mode=${newMode}`);
       return;
     } else if (parts[0]?.toLowerCase() === 'pocketracer') {
       location.replace('tools/pockeTracer/index.html');

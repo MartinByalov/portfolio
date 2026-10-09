@@ -727,7 +727,7 @@ function closeLightbox() {
     lightbox.classList.remove('is-active');
 }
 function downloadTemplate() {
-    const templateUrl = '/tools/planner/templates/lesson_plan_template.xlsx';
+    const templateUrl = 'templates/lesson_plan_template.xlsx';
     try {
         const link = document.createElement('a');
         link.href = templateUrl;

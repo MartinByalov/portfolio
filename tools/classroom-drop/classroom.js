@@ -20,7 +20,7 @@ function fileList(files, canDownload = true) {
   return `<div class="file-list">${files.map(file => `<div class="file"><div class="file-info"><div class="file-name">${esc(file.studentName ? `${file.studentName} - ${file.name}` : file.name)}</div><div class="file-meta">${formatSize(file.size)} · ${formatDate(file.uploadedAt)}${file.status ? ` · ${esc(file.status)}` : ''}</div>${file.comment ? `<div class="file-meta">Коментар: ${esc(file.comment)}</div>` : ''}</div>${canDownload ? `<a class="button secondary" href="/api/classroom/files/${encodeURIComponent(file.id)}">Свали</a>` : ''}</div>`).join('')}</div>`;
 }
 function roomLink(id) { return `${location.origin}${location.pathname}?room=${encodeURIComponent(id)}`; }
-function qrLink(id) { return `/tools/qr_code/qr_code.html?text=${encodeURIComponent(roomLink(id))}`; }
+function qrLink(id) { return `../qr_code/qr_code.html?text=${encodeURIComponent(roomLink(id))}`; }
 function copyText(value) {
   if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(value);
   const input = document.createElement('textarea'); input.value = value; document.body.appendChild(input); input.select(); document.execCommand('copy'); input.remove(); return Promise.resolve();

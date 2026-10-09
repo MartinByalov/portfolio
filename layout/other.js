@@ -1039,8 +1039,9 @@ async function initNftTutorialDemo() {
 
   async function getGen() {
     if (liveGenerator) return liveGenerator;
-    const module = await import('/tools/thestonks/js/stonk-generator.js');
-    const gen = new module.StonkGenerator({ basePath: '/tools/thestonks' });
+    const base = new URL('tools/thestonks/', `${location.origin}${import.meta.url.includes('/portfolio/') ? '/portfolio/' : '/'}`).href;
+    const module = await import(`${base}js/stonk-generator.js`);
+    const gen = new module.StonkGenerator({ basePath: base.replace(/\/$/, '') });
     await gen.load();
     liveGenerator = gen;
     return gen;

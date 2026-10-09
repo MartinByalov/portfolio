@@ -61,7 +61,7 @@ function renderImagePlaceholderBlock(b) {
   const isFloat = b.float === 'right' || b.align === 'right';
 
   const { fullPath, relativePath, fileName } = getCleanMediaInfo(rawPath);
-  const displayTitle = fileName && !label.includes(fileName) ? (label + ' - ' + fileName) : label;
+  const displayTitle = label;
   const displayFile = relativePath || fileName;
 
   if (isMini) {
@@ -81,7 +81,7 @@ function renderImagePlaceholderBlock(b) {
   }
 
   return '<figure class="lb-image image-placeholder-wrapper" style="margin: 1.5rem 0; text-align: center;">'
-    + (rawPath ? '<img src="' + esc(fullPath || rawPath) + '" alt="' + esc(label) + '" loading="eager" class="lesson-placeholder-img" onload="const c = this.closest(\'.image-placeholder-wrapper\'); if(c){ c.classList.add(\'image-loaded\'); c.classList.remove(\'image-failed\'); }" onerror="const c = this.closest(\'.image-placeholder-wrapper\'); if(this.src && this.src.includes(\'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/\')){ this.src = this.src.replace(\'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/\', \'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/\'); } else if(this.src && this.src.includes(\'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/\')){ this.src = this.src.replace(\'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/\', \'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/\'); } else { if(c){ c.classList.remove(\'image-loaded\'); c.classList.add(\'image-failed\'); } }">' : '')
+    + (rawPath ? '<img src="' + esc(fullPath || rawPath) + '" alt="' + esc(label) + '" loading="eager" class="lesson-placeholder-img" onload="const c = this.closest(\'.image-placeholder-wrapper\'); if(c){ c.classList.add(\'image-loaded\'); c.classList.remove(\'image-failed\'); }" onerror="const c = this.closest(\'.image-placeholder-wrapper\'); if(this.src && this.src.includes(\'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/\')){ this.src = this.src.replace(\'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/\', \'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/\'); } else if(this.src && this.src.includes(\'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/\')){ this.src = this.src.replace(\'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets/main/assets/\', \'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets/main/assets/\'); } else { if(c){ c.classList.remove(\'image-loaded\'); c.classList.add(\'image-failed\'); } }">' : '')
     + '<div class="lesson-image-placeholder">'
     + '<div class="placeholder-badge"><i class="fas fa-camera"></i> ' + esc(stepText)
     + (fileName ? ' <span class="placeholder-filename-badge" style="margin-left: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-weight: 700; text-transform: none; color: #1e40af; background: #dbeafe; padding: 2px 8px; border-radius: 4px; border: 1px solid #bfdbfe;"><i class="fas fa-file-image" style="margin-right: 4px;"></i>' + esc(fileName) + '</span>' : '')
@@ -106,7 +106,7 @@ function renderGalleryBlock(b) {
     + (g.title ? '<figcaption>' + esc(g.title) + '</figcaption>' : '')
     + '</figure>'
   ).join('');
-  return '<div class="lb-gallery">'
+  return '<div class="lb-gallery"' + (b.id ? ' id="' + esc(b.id) + '"' : '') + '>'
     + (b.title ? '<div class="lb-gallery-title">' + esc(b.title) + '</div>' : '')
     + '<div class="lb-gallery-grid">' + figs + '</div>'
     + '</div>';

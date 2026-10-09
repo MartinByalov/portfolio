@@ -59,18 +59,20 @@ main {
 .timeline-event::before {
     content: '';
     position: absolute;
-    left: 162.5px;
-    /* Коригирано спрямо предишната итерация за да е центрирано на 178px линия - 10px ширина на точката / 2 = 5px => 178-5=173px, но предвид че border-а е 2px става 173-2=171px. С 175px е леко вдясно, което изглежда по-добре. Ако искате точката да е **точно** центрирана по средата на линията, ползвайте `left: 177px;` за да се компенсира и 2px border на точката*/
+    left: 162px;
+    /* Компенсира 10px вътрешен отстъп на контейнера. Така центърът
+       на 14px точката съвпада с центъра на 2px вертикална линия. */
     top: 0;
     /* Започва от горния край на събитието */
-    width: 10px;
-    height: 10px;
+    width: 14px;
+    height: 14px;
+    box-sizing: border-box;
     border-radius: 50%;
     background-color: #ff585d;
     border: 2px solid white;
     z-index: 2;
     /* Центрира точката вертикално на линията */
-    transform: translateY(calc(50% - 5px));
+    transform: translateY(calc(50% - 7px));
 }
 
 .timeline-date {

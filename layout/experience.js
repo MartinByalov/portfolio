@@ -128,7 +128,7 @@ export function renderExperiencePage() {
                             <div class="card-content">
                                 <a href="https://drive.google.com/file/d/1xih_isX4kz9MUh_JclJY73zVL8GiohM1/view?usp=drive_link"
                                     target="_blank" class="badge-link">Удостоверение (3 кредита)</a><br>
-                                <a href="experiences/zaednovchas/index.html" target="_blank"
+                                <a href="experiences/zaednovchas/index.html"
                                     class="badge-link">Времева линия</a>
 
                             </div>

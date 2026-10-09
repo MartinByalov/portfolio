@@ -12,12 +12,11 @@ function ensureOverlay() {
   overlay.setAttribute('aria-modal', 'true');
   overlay.setAttribute('aria-label', 'Преглед на изображението');
   overlay.innerHTML = `
-    <button type="button" class="lb-lightbox-close" aria-label="Затвори (Esc)" title="Затвори (Esc)">
-      <i class="fas fa-xmark"></i>
-    </button>
     <div class="lb-lightbox-stage">
+      <button type="button" class="lb-lightbox-close" aria-label="Затвори (Esc)" title="Затвори (Esc)">
+        <i class="fas fa-xmark"></i>
+      </button>
       <img class="lb-lightbox-img" alt="" />
-      <div class="lb-lightbox-caption" style="display: none;"></div>
     </div>
   `;
   document.body.appendChild(overlay);
@@ -41,17 +40,6 @@ export function openLightbox(src, alt) {
   img.src = src;
   img.alt = alt || '';
 
-  const cap = box.querySelector('.lb-lightbox-caption');
-  if (cap) {
-    if (alt) {
-      cap.textContent = alt;
-      cap.style.display = 'block';
-    } else {
-      cap.textContent = '';
-      cap.style.display = 'none';
-    }
-  }
-
   box.classList.add('open');
   document.body.classList.add('lb-lightbox-open');
   activeImg = img;
@@ -64,11 +52,6 @@ export function closeLightbox() {
   if (activeImg) {
     activeImg.src = '';
     activeImg = null;
-  }
-  const cap = overlay.querySelector('.lb-lightbox-caption');
-  if (cap) {
-    cap.textContent = '';
-    cap.style.display = 'none';
   }
 }
 

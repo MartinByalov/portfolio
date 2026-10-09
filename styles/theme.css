@@ -729,19 +729,6 @@ body.dark-mode .lesson-link-disabled {
   color: #64748b !important;
 }
 
-[data-theme="dark"] .course-textbook-btn,
-body.dark-mode .course-textbook-btn {
-  background: rgba(37, 99, 235, 0.18) !important;
-  border-color: #2563eb !important;
-  color: #93c5fd !important;
-}
-
-[data-theme="dark"] .course-textbook-btn:hover,
-body.dark-mode .course-textbook-btn:hover {
-  background: rgba(37, 99, 235, 0.3) !important;
-  color: #ffffff !important;
-}
-
 [data-theme="dark"] .course-header-info .page-title,
 body.dark-mode .course-header-info .page-title {
   color: #ffffff !important;
@@ -1432,19 +1419,6 @@ body.dark-mode .lb-lightbox-stage {
 [data-theme="dark"] .lb-lightbox-caption,
 body.dark-mode .lb-lightbox-caption {
   color: #f1f5f9 !important;
-}
-
-[data-theme="dark"] .flash-image-zoom-btn,
-body.dark-mode .flash-image-zoom-btn {
-  background: rgba(15, 23, 42, 0.9) !important;
-  border-color: rgba(255, 255, 255, 0.25) !important;
-  color: #ffffff !important;
-}
-
-[data-theme="dark"] .flash-image-zoom-btn:hover,
-body.dark-mode .flash-image-zoom-btn:hover {
-  background: var(--accent-orange, #f97316) !important;
-  color: #ffffff !important;
 }
 
 [data-theme="dark"] .lesson-inline-media-card,

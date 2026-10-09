@@ -1723,7 +1723,7 @@ body.portfolio-mode .main-portfolio-content {
 .timeline-item::before {
   content: "";
   position: absolute;
-  left: -41px;
+  left: -42px;
   top: 5px;
   width: 20px;
   height: 20px;
@@ -2647,6 +2647,9 @@ body.portfolio-mode .main-portfolio-content {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 14px;
 }
+#apps-gallery .lb-gallery-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
 .lb-gallery-item {
   background: #fff;
   border: 1px solid #edf2f7;
@@ -2820,9 +2823,9 @@ body.portfolio-mode .main-portfolio-content {
   pointer-events: auto;
 }
 .lb-lightbox-close {
-  position: fixed;
-  top: 18px;
-  right: 22px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -2838,7 +2841,7 @@ body.portfolio-mode .main-portfolio-content {
   transition: background 0.2s ease, transform 0.2s ease;
 }
 .lb-lightbox-close:hover {
-  background: #ef4444;
+  background: var(--accent-orange, #f97316);
   transform: scale(1.08);
 }
 .lb-lightbox-stage {
@@ -2895,6 +2898,9 @@ body.lb-lightbox-open {
     width: 46%;
   }
   .lb-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  #apps-gallery .lb-gallery-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -3639,6 +3645,12 @@ button.about-btn-primary {
   text-align: center;
   width: 100%;
 }
+.flash-back .flash-body-centered {
+  position: absolute;
+  inset: 72px 28px 56px;
+  width: auto;
+  margin: 0;
+}
 .flash-body-centered {
   flex: 1;
   width: 100%;
@@ -3725,36 +3737,6 @@ button.about-btn-primary {
 }
 .flash-image-wrapper:hover .flash-term-img {
   transform: scale(1.03);
-}
-.flash-image-zoom-btn {
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(15, 23, 42, 0.82);
-  backdrop-filter: blur(6px);
-  color: #ffffff;
-  font-size: 0.76rem;
-  font-weight: 600;
-  padding: 5px 12px;
-  border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  transition: all 0.2s ease;
-  z-index: 4;
-}
-.flash-image-zoom-btn:hover {
-  background: var(--accent-orange, #f97316);
-  border-color: rgba(255, 255, 255, 0.5);
-  transform: scale(1.06);
-  box-shadow: 0 6px 16px rgba(249, 115, 22, 0.4);
-  color: #ffffff;
-}
-.flash-image-zoom-btn i {
-  font-size: 0.82rem;
 }
 .flash-image-loading {
   font-size: 0.8rem;

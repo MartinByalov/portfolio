@@ -45,7 +45,6 @@
               "id": "img-os-layers-diagram",
               "label": "Слоевете на компютърната система",
               "src": "it-8-2-3/os-layers-diagram.png",
-              "description": "Диаграма: Човек -> Приложен софтуер -> Потребителски интерфейс -> Ядро на ОС -> Драйвери -> BIOS/UEFI -> Хардуер.",
               "icon": "fas fa-layer-group"
             },
             {
@@ -98,7 +97,6 @@
               "id": "img-gui-cli-same-task",
               "label": "Една и съща задача през GUI и CLI",
               "src": "it-8-2-3/gui-cli-comparison.png",
-              "description": "Сравнителен screenshot: една папка и нейните файлове, показани едновременно във File Explorer и в PowerShell/Terminal, така че да се вижда, че двата интерфейса управляват една и съща файлова система.",
               "icon": "fas fa-window-restore"
             },
             {
@@ -168,7 +166,6 @@
               "id": "img-kernel-subsystems-diagram",
               "label": "Ядрото (Kernel) и четирите ключови подсистеми",
               "src": "it-8-2-3/kernel-subsystems-diagram.png",
-              "description": "Схема на ядрото на операционната система и неговите четири основни подсистеми: процесорно планиране (CPU Scheduling), управление на паметта (RAM и Swap), файлова система и входно-изходни драйвери (I/O & PnP).",
               "icon": "fas fa-microchip"
             },
             {
@@ -263,7 +260,7 @@
               "id": "img-task-manager-screenshot",
               "label": "Task Manager: процеси и ресурси",
               "src": "it-8-2-3/task-manager-processes.png",
-              "description": "Screenshot на Windows Task Manager в изглед Processes с видими колони CPU и Memory и няколко потребителски приложения и фонови процеси.",
+              "hideMetadata": true,
               "icon": "fas fa-gauge-high"
             }
           ]
@@ -282,7 +279,6 @@
               "id": "img-os-families-comparison",
               "label": "Съвременни операционни среди",
               "src": "it-8-2-3/os-families-overview.png",
-              "description": "Сравнителна визуализация или screenshot strip с Windows, macOS, GNU/Linux, Android и iOS, подредени по тип устройство и типичен контекст на употреба.",
               "icon": "fas fa-display"
             },
             {

@@ -6,9 +6,8 @@ function sanitizePath(src) {
 function renderImageOrPlaceholder(src, alt = '', caption = '') {
   if (!src) return '';
   const cleanPath = sanitizePath(src);
-  const rawFileName = cleanPath.split('/').pop();
   const label = alt || caption || 'Изображение';
-  const displayTitle = rawFileName && !label.includes(rawFileName) ? `${label} - ${rawFileName}` : label;
+  const displayTitle = label;
   
   return `
     <div class="titled-img-wrapper" style="position: relative; width: 100%;">

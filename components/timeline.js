@@ -6,8 +6,7 @@ function sanitizePath(src) {
 function renderImageOrPlaceholder(src, alt = '') {
   if (!src) return '';
   const cleanPath = sanitizePath(src);
-  const rawFileName = cleanPath.split('/').pop();
-  const displayTitle = rawFileName && alt && !alt.includes(rawFileName) ? `${alt} - ${rawFileName}` : (alt || rawFileName);
+  const displayTitle = alt || 'Изображение';
   return `
     <img src="${src}" alt="${displayTitle}" data-path="${cleanPath}" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: block;" onerror="if(this.src.includes('cdn.jsdelivr.net')){this.src=this.src.replace('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/','raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/');}else{this.onerror=null;this.outerHTML='<div class=\\'image-placeholder-box\\' style=\\'background: var(--surface-alt, #f8fafc); border: 2px dashed #cbd5e1; border-radius: 12px; padding: 1.5rem 1rem; text-align: center; color: #64748b; margin: 0.5rem 0;\\'><i class=\\'fas fa-image\\' style=\\'font-size: 2rem; color: #94a3b8; margin-bottom: 0.5rem; display: block;\\'></i><strong style=\\'display: block; font-size: 0.95rem; color: #334155; margin-bottom: 0.25rem; font-family: monospace;\\'>' + this.getAttribute('data-path') + '</strong><span>' + (this.getAttribute('alt') || '') + '</span></div>';}" />
   `;
@@ -72,7 +71,7 @@ export function render(comp) {
       <button class="era-tab-btn ${active ? 'active' : ''}" data-idx="${idx}" style="flex: 1; min-width: 140px; padding: 0.85rem 0.5rem; border: none; background: ${active ? color : 'var(--surface-alt, #f1f5f9)'}; color: ${active ? '#ffffff' : '#475569'}; border-radius: 10px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.25s; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.35rem; box-shadow: ${active ? '0 4px 12px rgba(0,0,0,0.1)' : 'none'};">
         <div style="display: flex; align-items: center; gap: 0.4rem;">
           <i class="${era.icon || 'fas fa-history'}" style="font-size: 1rem;"></i>
-          <span>${era.label}</span>
+          <span>${era.tabLabel || era.label.replace(/\s+етап$/i, '')}</span>
         </div>
         <span style="font-size: 0.75rem; opacity: 0.85; font-weight: normal;">${era.range}</span>
       </button>
@@ -103,7 +102,7 @@ export function render(comp) {
           <i class="fas fa-info-circle" style="margin-right: 0.4rem;"></i> ${era.summary}
         </p>
 
-        ${renderImageOrPlaceholder(era.image, era.label)}
+        ${renderImageOrPlaceholder(era.image, era.imageCaption || era.content || era.label)}
 
         <p style="font-size: 1rem; line-height: 1.6; color: var(--text-color, #334155); margin: 1.25rem 0;">
           ${era.content}

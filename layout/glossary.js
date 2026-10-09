@@ -157,11 +157,11 @@ export function renderGlossaryPage() {
           <h2 class="page-title">Речник на термините</h2>
           <p class="page-description" id="glossary-description">Всички термини, дефиниции и понятия от уроците по Информационни технологии.</p>
           <div class="glossary-tools">
-            <input type="text" id="glossary-filter" class="glossary-filter" placeholder="Търсене на термин или понятие...">
             <div class="glossary-modes" id="glossary-modes" role="tablist" aria-label="Речник">
               <button type="button" class="glossary-mode active" data-mode="list"><i class="fas fa-list"></i> Списък</button>
               <button type="button" class="glossary-mode" data-mode="flash"><i class="fas fa-layer-group"></i> Флаш карти</button>
             </div>
+            <input type="text" id="glossary-filter" class="glossary-filter" placeholder="Търсене на термин или понятие...">
             <div class="glossary-alphabet" id="glossary-alphabet">
               <button type="button" class="glossary-letter active" data-letter="">Всички</button>
             </div>
@@ -275,14 +275,10 @@ export function initGlossaryPage() {
                      alt="${safeTerm}"
                      class="flash-term-img"
                      loading="eager"
-                     onload="this.style.opacity='1'; const spin = document.getElementById('flash-image-loading'); if(spin) spin.style.display='none'; const zb = document.getElementById('flash-zoom-btn'); if(zb) zb.style.display='inline-flex';"
-                     onerror="if(this.src.includes('cdn.jsdelivr.net')){this.src='${rawFallbackUrl}';}else{this.style.display='none'; const fb = document.getElementById('flash-fallback-icon'); if(fb) fb.style.display='flex'; const spin = document.getElementById('flash-image-loading'); if(spin) spin.style.display='none'; const zb = document.getElementById('flash-zoom-btn'); if(zb) zb.style.display='none';}"
+                     onload="this.style.opacity='1'; const spin = document.getElementById('flash-image-loading'); if(spin) spin.style.display='none';"
+                     onerror="if(this.src.includes('cdn.jsdelivr.net')){this.src='${rawFallbackUrl}';}else{this.style.display='none'; const fb = document.getElementById('flash-fallback-icon'); if(fb) fb.style.display='flex'; const spin = document.getElementById('flash-image-loading'); if(spin) spin.style.display='none';}"
                      style="opacity: 0; transition: opacity 0.25s ease;"
                      title="Кликнете за увеличение (Zoom)" />
-                <button type="button" class="flash-image-zoom-btn" id="flash-zoom-btn" aria-label="Увеличи изображението" title="Увеличи изображението" style="display: none;">
-                  <i class="fas fa-magnifying-glass-plus"></i>
-                  <span>Увеличи</span>
-                </button>
                 <div class="flash-micro-fallback" id="flash-fallback-icon" style="display: none;">
                   <i class="fas fa-layer-group"></i>
                   <span>${safeTerm}</span>
@@ -316,15 +312,14 @@ export function initGlossaryPage() {
     };
 
     overlay.querySelector('.flash-term-img')?.addEventListener('click', handleZoom);
-    overlay.querySelector('#flash-zoom-btn')?.addEventListener('click', handleZoom);
 
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) closeFlash();
     });
     document.getElementById('flash-close')?.addEventListener('click', closeFlash);
     document.getElementById('flash-inner')?.addEventListener('click', (e) => {
-      // Do not flip if clicked on the image or zoom button
-      if (e.target.closest('.flash-term-img') || e.target.closest('.flash-image-zoom-btn') || e.target.closest('#flash-zoom-btn')) {
+      // Do not flip when the image is clicked to open the lightbox
+      if (e.target.closest('.flash-term-img')) {
         return;
       }
       document.querySelector('.flash-modal')?.classList.toggle('flipped');

@@ -53,6 +53,14 @@
             if (eventText.includes('Ден 2') && eventText.includes('Видеоурок')) {
                 cleanEvent(event, ['Ивелина']);
             }
+
+            if (eventText.includes('Модул 2')) {
+                const status = event.querySelector('.event-status');
+                if (status) {
+                    status.className = 'event-status status-завършено';
+                    status.textContent = 'Завършено';
+                }
+            }
         });
     }
 

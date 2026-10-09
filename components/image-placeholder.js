@@ -42,9 +42,10 @@ export function render(comp) {
   const rawPath = comp.src || comp.path || comp.fileName || '';
   const isMini = comp.size === 'mini' || comp.variant === 'mini' || comp.size === 'compact' || comp.variant === 'compact';
   const isFloat = comp.float === 'right' || comp.align === 'right';
+  const hideMetadata = comp.hideMetadata === true;
 
   const { fullPath, relativePath, fileName } = getCleanMediaInfo(rawPath);
-  const displayTitle = fileName && !alt.includes(fileName) ? `${alt} - ${fileName}` : alt;
+  const displayTitle = alt;
   const displayFile = relativePath || fileName;
   const badgeText = comp.badge || comp.step || 'Екранна снимка (Placeholder)';
 
@@ -73,7 +74,7 @@ export function render(comp) {
 
   return `
     <div class="image-placeholder-container" ${id ? 'id="' + esc(id) + '"' : ''} style="margin: 1.5rem 0;">
-      ${rawPath ? `<img src="${esc(fullPath || rawPath)}" alt="${esc(alt)}" loading="eager" class="lesson-placeholder-img" onload="const c = this.closest('.image-placeholder-container') || this.closest('.image-placeholder-wrapper'); if(c){ c.classList.add('image-loaded'); c.classList.remove('image-failed'); }" onerror="const c = this.closest('.image-placeholder-container') || this.closest('.image-placeholder-wrapper'); if(this.src && this.src.includes('raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/')){ this.src = this.src.replace('raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/', 'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/'); } else if(this.src && this.src.includes('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/')){ this.src = this.src.replace('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/', 'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/'); } else { if(c){ c.classList.remove('image-loaded'); c.classList.add('image-failed'); } }" />` : ''}
+      ${rawPath ? `<img src="${esc(fullPath || rawPath)}" alt="${esc(alt)}" loading="eager" class="lesson-placeholder-img" onload="const c = this.closest('.image-placeholder-container') || this.closest('.image-placeholder-wrapper'); if(c){ c.classList.add('image-loaded'); c.classList.remove('image-failed'); }" onerror="const c = this.closest('.image-placeholder-container') || this.closest('.image-placeholder-wrapper'); if(this.src && this.src.includes('raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/')){ this.src = this.src.replace('raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/', 'cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/'); } else if(this.src && this.src.includes('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets@main/assets/')){ this.src = this.src.replace('cdn.jsdelivr.net/gh/MartinByalov/it-media-assets/main/assets/', 'raw.githubusercontent.com/MartinByalov/it-media-assets/main/assets/'); } else { if(c){ c.classList.remove('image-loaded'); c.classList.add('image-failed'); } }" />` : ''}
       <div class="lesson-image-placeholder image-placeholder">
         <div class="placeholder-badge">
           <i class="fas fa-camera"></i> ${esc(badgeText)}
@@ -84,8 +85,8 @@ export function render(comp) {
             <i class="${esc(comp.icon || 'fas fa-image')}"></i>
           </div>
           <div class="placeholder-text-wrap">
-            <h4 class="placeholder-heading">${esc(displayTitle)}</h4>
-            ${description ? `<p class="placeholder-desc">${formatDescriptionWithFileTag(description, fileName)}</p>` : ''}
+            ${hideMetadata ? '' : `<h4 class="placeholder-heading">${esc(displayTitle)}</h4>`}
+            ${hideMetadata || !description ? '' : `<p class="placeholder-desc">${formatDescriptionWithFileTag(description, fileName)}</p>`}
             ${displayFile ? `
               <div class="placeholder-file-path" style="margin-top: 10px; display: inline-flex; align-items: center; gap: 6px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.84rem; font-weight: 600; color: #334155; background: #e2e8f0; padding: 4px 10px; border-radius: 6px; border: 1px solid #cbd5e1;">
                 <i class="fas fa-file-image" style="color: #64748b;"></i>
@@ -97,7 +98,7 @@ export function render(comp) {
         </div>
         <div class="image-placeholder-note" style="margin-top: 12px; font-size: 0.8rem; color: #64748b;">* Очакван файл: ${esc(displayFile || alt)}</div>
       </div>
-      ${(alt || cleanDesc) ? `
+      ${!hideMetadata && (alt || cleanDesc) ? `
         <p class="image-placeholder-caption" style="margin-top: 0.6rem; font-size: 0.88rem; color: #64748b; text-align: center;">
           <strong>${esc(alt)}</strong>${cleanDesc ? ' – ' + esc(cleanDesc) : ''}
           ${fileName ? `<span class="lesson-media-file-tag" title="Очакван файл"><i class="fas fa-file-image"></i> Файл: ${esc(fileName)}</span>` : ''}

@@ -1,0 +1,10 @@
+/* Shared UserWay icon size and equal spacing from the viewport edges. */
+.uwy, #userwayAccessibilityIcon, .userway-wrapper, .uwy-btn, div[id^="userway"], #userway-accessibility-icon {
+  bottom: 8px !important;
+  right: 8px !important;
+  left: auto !important;
+  top: auto !important;
+  transform: scale(0.75) !important;
+  transform-origin: bottom right !important;
+  z-index: 99999 !important;
+}

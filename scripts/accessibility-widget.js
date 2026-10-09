@@ -1,6 +1,14 @@
 // Shared UserWay configuration for the platform and standalone tool pages.
 export function initAccessibilityWidget() {
-  if (window.top !== window.self || document.querySelector('script[src="https://cdn.userway.org/widget.js"]')) return;
+  if (window.top !== window.self) return;
+
+  if (!document.querySelector('link[href="/styles/accessibility-widget.css"]')) {
+    const style = document.createElement('link');
+    style.rel = 'stylesheet';
+    style.href = '/styles/accessibility-widget.css';
+    document.head.appendChild(style);
+  }
+  if (document.querySelector('script[src="https://cdn.userway.org/widget.js"]')) return;
 
   window.UserWayWidgetOptions = {
     account: 'tKZSBrDiyh',

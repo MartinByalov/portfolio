@@ -1493,11 +1493,33 @@ body.portfolio-mode .main-portfolio-content {
   font: inherit;
 }
 
+.skill-step::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: -2px;
+  right: -6px;
+  border-top: 3px solid #f17a3e;
+  pointer-events: none;
+}
+
+.skill-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: -15px;
+  right: -6px;
+  height: 8px;
+  border-right: 3px solid #f17a3e;
+  pointer-events: none;
+}
+
 .skill-step-person {
   position: absolute;
-  bottom: calc(100% + 5px);
+  bottom: calc(100% + 7px);
   color: #f17a3e;
   font-size: 1.5rem;
+  line-height: 1;
+  z-index: 1;
   opacity: 0;
   transform: translateY(5px);
   transition: opacity 0.2s ease, transform 0.2s ease;
@@ -7897,19 +7919,6 @@ button.about-btn-primary {
   border-radius: 4px;
   font-size: 0.8rem;
 }
-
-/* UserWay Accessibility Widget - positioned extremely close to the bottom right corner and scaled down */
-.uwy, #userwayAccessibilityIcon, .userway-wrapper, .uwy-btn, div[id^="userway"], #userway-accessibility-icon {
-  bottom: 2px !important;
-  right: 2px !important;
-  left: auto !important;
-  top: auto !important;
-  transform: scale(0.75) !important;
-  transform-origin: bottom right !important;
-  z-index: 99999 !important;
-}
-
-
 
 .accordion-content > .lb-viz:first-child,
 .accordion-content > .titled-image:first-child {

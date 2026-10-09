@@ -4,7 +4,8 @@
 // encrypted Worker secret (dashboard: Settings -> Variables and Secrets,
 // or run `npx wrangler secret put PORTFOLIO_ACCESS_CODE` inside worker/).
 //
-// API: POST /verify  with JSON body { "code": "<6-digit-code>" }
+// API: POST /verify  with JSON body { "code": "<6-character code>" }
+// (letters, digits and symbols; case-sensitive)
 //      -> 200 { "success": true }   on match
 //      -> 403 { "success": false }  on mismatch
 //      -> 429 { "success": false }  when rate-limited
@@ -115,7 +116,7 @@ export default {
       return jsonResponse({ success: false }, 400, cors);
     }
 
-    if (!/^\d{6}$/.test(code)) {
+    if (!/^\S{6}$/.test(code)) {
       return jsonResponse({ success: false }, 403, cors);
     }
 

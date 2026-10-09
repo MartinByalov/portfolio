@@ -2,7 +2,8 @@
 
 const GATE_STORAGE_KEY = 'portfolio-unlocked';
 
-// SHA-256 hash of the 6-digit access code. The site is static (GitHub Pages,
+// SHA-256 hash of the 6-character access code (letters, digits and symbols,
+// case-sensitive). The site is static (GitHub Pages,
 // no backend), so the plaintext code must never be committed to the repo -
 // only this hash is stored here. To rotate the code, run locally:
 //   node scripts/generate-portfolio-hash.js [new-code]
@@ -176,7 +177,7 @@ async function tryGateCode() {
   const code = Array.from(digits).map(d => d.value).join('');
   const errorEl = document.getElementById('code-gate-error');
   if (code.length !== 6) {
-    if (errorEl) errorEl.textContent = 'Моля въведете всички 6 цифри.';
+    if (errorEl) errorEl.textContent = 'Моля въведете всички 6 символа.';
     return;
   }
 
@@ -236,12 +237,12 @@ function openPortfolioGate() {
       <h3>Защитено портфолио</h3>
       <p>Моля въведете код за достъп</p>
       <div class="code-gate-digits">
-        <input type="text" inputmode="numeric" maxlength="1" autocomplete="off" class="code-gate-digit" data-index="0">
-        <input type="text" inputmode="numeric" maxlength="1" autocomplete="off" class="code-gate-digit" data-index="1">
-        <input type="text" inputmode="numeric" maxlength="1" autocomplete="off" class="code-gate-digit" data-index="2">
-        <input type="text" inputmode="numeric" maxlength="1" autocomplete="off" class="code-gate-digit" data-index="3">
-        <input type="text" inputmode="numeric" maxlength="1" autocomplete="off" class="code-gate-digit" data-index="4">
-        <input type="text" inputmode="numeric" maxlength="1" autocomplete="off" class="code-gate-digit" data-index="5">
+        <input type="text" inputmode="text" maxlength="1" autocomplete="off" autocapitalize="off" spellcheck="false" class="code-gate-digit" data-index="0">
+        <input type="text" inputmode="text" maxlength="1" autocomplete="off" autocapitalize="off" spellcheck="false" class="code-gate-digit" data-index="1">
+        <input type="text" inputmode="text" maxlength="1" autocomplete="off" autocapitalize="off" spellcheck="false" class="code-gate-digit" data-index="2">
+        <input type="text" inputmode="text" maxlength="1" autocomplete="off" autocapitalize="off" spellcheck="false" class="code-gate-digit" data-index="3">
+        <input type="text" inputmode="text" maxlength="1" autocomplete="off" autocapitalize="off" spellcheck="false" class="code-gate-digit" data-index="4">
+        <input type="text" inputmode="text" maxlength="1" autocomplete="off" autocapitalize="off" spellcheck="false" class="code-gate-digit" data-index="5">
       </div>
       <p class="code-gate-error" id="code-gate-error"></p>
       <div class="code-gate-actions">
@@ -258,7 +259,10 @@ function openPortfolioGate() {
   const digits = overlay.querySelectorAll('.code-gate-digit');
   digits.forEach((digit, i) => {
     digit.addEventListener('input', () => {
-      digit.value = digit.value.replace(/\D/g, '');
+      // Letters, digits and symbols are allowed - only whitespace is stripped.
+      // Case is preserved: the code is case-sensitive.
+      const cleaned = digit.value.replace(/\s/g, '').slice(-1);
+      digit.value = cleaned;
       if (digit.value && i < 5) digits[i + 1].focus();
       if (digits[5].value) tryGateCode();
     });

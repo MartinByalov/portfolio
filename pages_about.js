@@ -98,7 +98,7 @@ async function verifyGateCodeRemotely(code) {
     if (res.status === 429) return 'rate-limited';
     // 403 = Worker-ът отговори, че кодът е грешен. Всичко останало извън 200
     // (503 без secret, 404/405 грешен deploy, CORS/инфраструктурна грешка)
-    // означава "не можах да проверя" - сайтът пада към локалния хеш.
+    // означава "не можах да проверя сървърно" -> падаме към локалния хеш,
     // вместо да броим фалшив грешен опит.
     if (res.status === 403) return 'rejected';
     if (res.status !== 200) return 'unavailable';
@@ -273,18 +273,6 @@ function openPortfolioGate() {
     });
     digit.addEventListener('keydown', (e) => {
       if (e.key === 'Backspace' && !digit.value && i > 0) digits[i - 1].focus();
-    });
-    // Pasting the whole 6-character code fills all boxes at once.
-    digit.addEventListener('paste', (e) => {
-      const text = ((e.clipboardData || window.clipboardData || {}).getData('text') || '')
-        .replace(/\s/g, '');
-      if (!text) return;
-      e.preventDefault();
-      const chars = text.slice(0, 6).split('');
-      digits.forEach((d, j) => { d.value = chars[j] || ''; });
-      const filled = chars.length >= 6 ? digits[5] : digits[Math.min(chars.length, 5)];
-      filled.focus();
-      if (chars.length >= 6) tryGateCode();
     });
   });
   setTimeout(() => digits[0]?.focus(), 80);
